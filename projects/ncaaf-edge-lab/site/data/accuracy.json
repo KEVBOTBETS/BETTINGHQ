@@ -1,7 +1,7 @@
 {
  "schema": 3,
  "game_only": true,
- "generated_at": "2026-09-19T18:38:17.417029+00:00",
+ "generated_at": "2026-09-19T19:01:16.994337+00:00",
  "label": "NCAAF prediction accuracy",
  "scope": {
   "season": 2026,
@@ -13,15 +13,15 @@
  "method": "One frozen pregame projection per game. Winner, spread direction, totals direction and error are graded from final scores. No wagers, prices, stake units or ledger records are stored in this history.",
  "games": {
   "logged": 233,
-  "graded": 91,
-  "pending": 142,
+  "graded": 92,
+  "pending": 141,
   "winner": {
-   "n": 91,
-   "correct": 65,
-   "accuracy": 0.71429,
+   "n": 92,
+   "correct": 66,
+   "accuracy": 0.71739,
    "interval95": [
-    0.61427,
-    0.79694
+    0.61811,
+    0.79924
    ]
   },
   "ats": {
@@ -52,12 +52,12 @@
    "model_mae": 10.968,
    "market_mae": 10.7
   },
-  "margin_mae": 20.44088,
-  "total_mae": 11.65495,
-  "brier": 0.16811
+  "margin_mae": 20.25837,
+  "total_mae": 11.75435,
+  "brier": 0.16671
  },
  "validation": {
-  "n": 91,
+  "n": 92,
   "probability_target": "home team win",
   "calibration": [
    {
@@ -102,16 +102,16 @@
    },
    {
     "bucket": "80\u2013100%",
-    "n": 27,
-    "predicted": 0.9177,
+    "n": 28,
+    "predicted": 0.91355,
     "actual": 1.0,
     "interval95": [
-     0.87544,
+     0.87936,
      1
     ]
    }
   ],
-  "brier": 0.16811,
+  "brier": 0.16671,
   "status": "limited sample",
   "note": "Only frozen forecasts from this season. Intervals show sampling uncertainty; neither a small sample nor market agreement proves an edge."
  },
@@ -2667,10 +2667,15 @@
    "market_total": null,
    "id": "game:NCAAF:401869940:::",
    "captured_at": "2026-09-09T00:39:05.245544+00:00",
-   "result": "Pending",
+   "result": "Graded",
    "version": "2026-09-06-ev2",
    "season": 2026,
-   "season_type": 2
+   "season_type": 2,
+   "actual_margin": 8.0,
+   "actual_total": 36.0,
+   "final_home": 22.0,
+   "final_away": 14.0,
+   "graded_at": "2026-09-19T19:01:16.992147+00:00"
   },
   {
    "kind": "game",
