@@ -11,9 +11,9 @@ machine-readable outcomes are included in the download's `validation` folder.
   build runner and browser-engine simulation replay.
 - All three sports: existing ledger and shared-sync tests. They use fixtures;
   no real wager or Google Sheet was written.
-- Hub: existing sync, ticket, alerts, history and Today tests, plus Moneyling
+- Hub: existing sync, ticket, alerts, history and Today tests, plus Moneyline
   and weekly research-view tests.
-- Chromium browser checks: Moneyling at 320/393/1440 pixels; weekly football at
+- Chromium browser checks: Moneyline at 320/393/1440 pixels; weekly football at
   393/1440, including a nested repository URL, lower research threshold,
   qualified-only behavior, stale/failed feeds and page-width checks.
 - Portable site checks: eight board targets resolve, only the recovered sports

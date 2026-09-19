@@ -28,12 +28,12 @@ for repo in ['nfl-edge-lab','ncaaf-edge-lab','mlb-edge']:
     for file in ['test_ledger.mjs','test_sync.mjs','test_staking.mjs','test_matchups.js','test_simulator.js','test_schedule.mjs','test_sim_gate.mjs']:
         if (ROOT/'projects'/repo/'tests'/file).exists():run(repo,['node','tests/'+file])
 run('mlb-edge',['node','tests/test_sim.mjs','docs/data'])
-for file in ['test_betsync.mjs','test_server.mjs','test_alerts_app.mjs','test_recovery_history.mjs','test_tickets.mjs','test_today.mjs','test_moneyling.mjs','test_football.mjs']:
+for file in ['test_betsync.mjs','test_server.mjs','test_alerts_app.mjs','test_recovery_history.mjs','test_tickets.mjs','test_today.mjs','test_moneyline.mjs','test_football.mjs']:
     run('bet-ledger-hq',['node','tests/'+file])
 run('',[sys.executable,'tools/build_site.py'])
 run('',[sys.executable,'-m','unittest','discover','-s','tests'])
 if args.browser:
-    run('bet-ledger-hq',['node','tests/test_moneyling_browser.mjs'])
+    run('bet-ledger-hq',['node','tests/test_moneyline_browser.mjs'])
     run('bet-ledger-hq',['node','tests/test_today_browser.mjs'])
     run('bet-ledger-hq',['node','tests/test_weekly_browser.mjs'])
 print(f'PASS: {len(checks)} release checks')

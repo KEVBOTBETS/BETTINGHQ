@@ -1,7 +1,7 @@
 # KEVBOTBETS — one page for every board
 
 Open **https://chillychilly14.github.io/bet-ledger-hq/** and use the navigation
-for Today, Ledger, Moneyling, MLB, NFL, NCAAF, Props and Ladder. The selected board opens inside
+for Today, Ledger, Moneyline, MLB, NFL, NCAAF, Props and Ladder. The selected board opens inside
 the workspace, without a new browser tab. On phones the navigation stays at
 the bottom; on desktop it sits on the left.
 
@@ -10,16 +10,16 @@ filters, simulator inputs and scroll position stay intact. Links such as
 `#mlb`, `#nfl` and `#props` open a particular board, and browser Back/Forward
 works between selections. Reload board affects only the selected board.
 
-## Moneyling: pick the winners
+## Moneyline: pick the winners
 
-Open **Moneyling** (`#moneyling`) for NFL, college football and MLB winner-only
+Open **Moneyline** (`#moneyline`) for NFL, college football and MLB winner-only
 cards. Filter by Toronto game date and sport, choose either team, or fill the
 card with the predicted winners. Selections save in this browser and lock when
 the game starts; Print card prints the selected winners. No wager or stake is
 created. This is a separate winner view of the existing forecasts, independent
 of the value-bet tiers. Unavailable or stale forecasts cannot suggest picks.
 
-Run `npm run test:moneyling` for adapter and browser checks. See
+Run `npm run test:moneyline` for adapter and browser checks. See
 [the accuracy review](docs/accuracy-review-2026-09-19.md) for the confirmed MLB
 tracking defect, its companion fix, source roles and validation limits.
 

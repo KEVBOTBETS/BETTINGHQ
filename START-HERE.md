@@ -50,7 +50,7 @@ included data pipelines. Upstream public feeds still need to be available.
 
 - **Weekly football:** choose the seven-day window and NFL or College football.
   The default view includes research leans; **Model-qualified games** narrows it.
-- **Moneyling:** choose a date, then select winners or use the predicted winners.
+- **Moneyline:** choose a date, then select winners or use the predicted winners.
   Choices are saved in that browser and lock at game start.
 - **NFL / NCAAF / MLB:** full model detail, simulator, source health and existing
   qualification rules.

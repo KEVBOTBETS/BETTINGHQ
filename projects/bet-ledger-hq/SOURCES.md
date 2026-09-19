@@ -5,7 +5,7 @@ Reviewed 2026-09-14. An accessible webpage is not a permission grant or a guaran
 2026-09-19 follow-up: keep ESPN for existing odds/schedules. TeamRankings and
 Sports Reference are statistics research references, not replacement odds feeds.
 Verified NFL/CFB points-per-game and MLB runs-per-game pages are linked from
-Moneyling. TeamRankings' copying/storage restrictions mean no background
+Moneyline. TeamRankings' copying/storage restrictions mean no background
 importer was added (https://www.teamrankings.com/terms-of-service/). Reference
 site requests could not be verified here. OddsPortal/BetExplorer homepages alone
 do not establish a usable historical or closing-odds API. Details and model

@@ -1,6 +1,6 @@
 (() => {
   'use strict';
-  const C=window.Moneyling,W=window.WeeklyFootball,$=s=>document.querySelector(s);
+  const C=window.Moneyline,W=window.WeeklyFootball,$=s=>document.querySelector(s);
   const labels={nfl:'NFL',ncaaf:'College football'};
   const esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
   const time=v=>new Intl.DateTimeFormat('en-CA',{timeZone:'America/Toronto',month:'short',day:'numeric',hour:'numeric',minute:'2-digit'}).format(new Date(v));

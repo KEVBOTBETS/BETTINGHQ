@@ -27,7 +27,7 @@ jobs:
       - run: node tests/test_today.mjs
       - run: npm install --ignore-scripts
       - run: npx playwright install --with-deps chromium webkit
-      - run: npm run test:moneyling
+      - run: npm run test:moneyline
       - run: npm run test:browser
       - run: node tests/test_mobile_layout.mjs
       - uses: actions/upload-artifact@v4

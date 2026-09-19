@@ -1,4 +1,4 @@
-(function(root,factory){const api=factory(typeof module==='object'?require('./moneyling-core.js'):root.Moneyling);if(typeof module==='object')module.exports=api;else root.WeeklyFootball=api;})(typeof self!=='undefined'?self:this,function(C){
+(function(root,factory){const api=factory(typeof module==='object'?require('./moneyline-core.js'):root.Moneyline);if(typeof module==='object')module.exports=api;else root.WeeklyFootball=api;})(typeof self!=='undefined'?self:this,function(C){
   'use strict';
   function addDays(day,n){const d=new Date(day+'T12:00:00Z');d.setUTCDate(d.getUTCDate()+n);return d.toISOString().slice(0,10);}
   function candidate(row,now,floor){

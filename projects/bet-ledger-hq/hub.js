@@ -5,7 +5,7 @@
   const configs = {
     today:{title:"Today",description:"Your daily board, data health and shared exposure.",url:"today.html"},
     football:{title:"Weekly football",description:"NFL and college football forecasts, qualified plays and research leans.",url:"football.html"},
-    moneyling:{title:"Moneyling",description:"NFL, college football and MLB. Just pick the winners.",url:"moneyling.html"},
+    moneyline:{title:"Moneyline",description:"NFL, college football and MLB. Just pick the winners.",url:"moneyline.html"},
     archive:{title:"Ticket archive",description:"Published picks, original prices and verified results.",url:"archive.html"},
     ledger:{title:"Shared ledger",description:"Your bets, bankroll and results across every board.",url:"ledger.html"},
     mlb:{title:"MLB Edge",description:"Baseball matchups, best bets and your game simulator.",url:"../mlb-edge/"},
@@ -33,7 +33,7 @@
       }
     }catch(_){}
   }
-  function requested(){const key=location.hash.slice(1).toLowerCase();return Object.prototype.hasOwnProperty.call(configs,key)?key:"today";}
+  function requested(){let key=location.hash.slice(1).toLowerCase();if(key==="moneyling")key="moneyline";return Object.prototype.hasOwnProperty.call(configs,key)?key:"today";}
   function create(key){
     const config=configs[key], panel=document.createElement("section"), frame=document.createElement("iframe");
     panel.className="board-panel";panel.setAttribute("aria-label",config.title);panel.hidden=true;

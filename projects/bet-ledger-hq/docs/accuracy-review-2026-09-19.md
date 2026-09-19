@@ -1,4 +1,4 @@
-# Accuracy review and Moneyling
+# Accuracy review and Moneyline
 
 Reviewed 2026-09-19. The shared ChatGPT conversation was not readable, so this
 review uses the actual repositories and their stored prediction history.
@@ -35,9 +35,9 @@ betting-pick records, which include spreads and totals. Neither sample warrants
 new coefficients selected to improve the displayed percentage. Existing football
 pregame game-history freezing and season scope remain in place.
 
-## Moneyling
+## Moneyline
 
-`#moneyling` uses the existing game forecasts, independently of betting tiers,
+`#moneyline` uses the existing game forecasts, independently of betting tiers,
 edge filters or suggested stakes. MLB uses the published final home probability;
 NFL uses the game-detail probability conditional on no tie. College football uses
 the published projected margin to choose the side, matching its symmetric winner
@@ -65,7 +65,7 @@ The following public statistical pages were verified as research references:
 TeamRankings' terms restrict copying/storing its content without consent:
 https://www.teamrankings.com/terms-of-service/ . No background importer or
 redistributed statistics table was added. Sports Reference requests returned
-access errors in this session; no restriction was bypassed. Moneyling links
+access errors in this session; no restriction was bypassed. Moneyline links
 these sites for statistics research without presenting them as active inputs.
 
 OddsPortal and BetExplorer public homepages were readable, but a stable,
@@ -75,7 +75,7 @@ libraries does not establish that contract. No odds source was silently replaced
 
 ## Validation
 
-- Moneyling pure-function tests cover winner-vs-value separation, missing inputs,
+- Moneyline pure-function tests cover winner-vs-value separation, missing inputs,
   duplicate games, Toronto dates, stale/future timestamps and start locks.
 - Chromium tests cover 320px, 393px and desktop layouts, selection persistence,
   sport filters, source failures, no horizontal overflow, and no ledger writes.

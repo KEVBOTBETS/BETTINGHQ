@@ -1,6 +1,6 @@
 # KEVBOTBETS portable recovery
 
-One repository contains the recovered hub, Moneyling, NFL, college football,
+One repository contains the recovered hub, Moneyline, NFL, college football,
 and MLB projects. Start with **START-HERE.md**. The initial page opens Weekly
 football; the existing sport dashboards and shared ledger remain available.
 
@@ -16,7 +16,7 @@ football; the existing sport dashboards and shared ledger remain available.
   Missing prices, negative EV, stale quotes, hard stops, held bets and started
   games cannot be promoted by this control. Multiple markets on one game are
   alternatives, not independent recommended wagers.
-- Moneyling retains winner-only cards and browser-saved selections.
+- Moneyline retains winner-only cards and browser-saved selections.
 - MLB accuracy/calibration excludes snapshots changed after first pitch.
 - NFL calibration now uses raw pre-calibration snapshots, one canonical side
   per event/market, and a distinct-game minimum. Its symmetric correction keeps
