@@ -8,6 +8,7 @@ on:
       - 'projects/**/state/**'
       - 'projects/mlb-edge/data/**'
       - 'projects/bet-ledger-hq/data/**'
+      - 'projects/props-edge/site/data/**'
   pull_request:
   workflow_dispatch:
     inputs:
@@ -56,6 +57,8 @@ jobs:
           EVENT_SCHEDULE: ${{ github.event.schedule }}
           MLB_SEASON: ${{ vars.MLB_SEASON || '2026' }}
           MLB_BANKROLL: ${{ vars.MLB_BANKROLL || '250' }}
+          ODDS_API_IO_KEY: ${{ secrets.ODDS_API_IO_KEY }}
+          THE_ODDS_API_KEY: ${{ secrets.THE_ODDS_API_KEY }}
         run: |
           sport="$REQUESTED_SPORT"
           if [ "$EVENT_SCHEDULE" = '53 15-23 * * 0,4,5,6' ]; then sport=football; fi

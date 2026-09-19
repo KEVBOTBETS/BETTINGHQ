@@ -7,6 +7,7 @@ patterns=[
     'projects/mlb-edge/docs/data/*.json',
     'projects/mlb-edge/data/predictions.json',
     'projects/mlb-edge/data/shadow.json',
+    'projects/props-edge/site/data/*.json',
 ]
 for repo in ['nfl-edge-lab','ncaaf-edge-lab']:
     patterns += [f'projects/{repo}/site/data/*.json']

@@ -23,7 +23,7 @@ def main():
     for name in ['assets', 'data/tickets']:
         if (hub / name).exists(): shutil.copytree(hub / name, target / name)
     subprocess.run([sys.executable, 'tools/prepare_public_site.py'], cwd=PROJECTS/'nfl-edge-lab', check=True)
-    for repo, folder in [('nfl-edge-lab','_public_site'),('ncaaf-edge-lab','site'),('mlb-edge','docs')]:
+    for repo, folder in [('nfl-edge-lab','_public_site'),('ncaaf-edge-lab','site'),('mlb-edge','docs'),('props-edge','site')]:
         dest=OUT/repo
         shutil.copytree(PROJECTS/repo/folder, dest,
                         ignore=shutil.ignore_patterns('__pycache__','.DS_Store'))

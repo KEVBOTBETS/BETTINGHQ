@@ -13,6 +13,11 @@ repos=['nfl-edge-lab','ncaaf-edge-lab'] if args.sport=='football' else ['mlb-edg
 for repo in repos:
     command=['bash','scripts/run_build.sh'] if repo=='mlb-edge' else [sys.executable,'-m','pipeline.build']
     subprocess.run(command,cwd=ROOT/'projects'/repo,check=True,timeout=2400)
+if args.sport in ('all','football'):
+    # Props uses optional odds-provider secrets and falls back to ESPN projections.
+    # A props outage keeps its previous data instead of blocking every board.
+    props=subprocess.run([sys.executable,'-m','pipeline.build'],cwd=ROOT/'projects/props-edge',timeout=1800)
+    if props.returncode: print('::warning::Props refresh failed; previous props data kept.')
 subprocess.run([sys.executable,'tools/build_site.py'],cwd=ROOT,check=True)
 env={**os.environ,'LOCAL_SITE_ROOT':str(ROOT/'_site')}
 # The archive records the files from this build, never a different account's

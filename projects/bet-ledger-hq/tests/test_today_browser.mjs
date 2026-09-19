@@ -75,7 +75,7 @@ try{
     await frame.getByRole("heading",{name:"Predictions, not your bet record"}).waitFor({state:"visible"});
     await frame.getByRole("button",{name:"Exposure",exact:true}).click();
     await frame.getByText("Connect and sync in Ledger").waitFor();
-    assert.equal(await page.locator(".board-link").count(),8);
+    assert.equal(await page.locator(".board-link").count(),9);
     assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth));
     const child=page.frames().find(f=>f.url().endsWith("today.html"));
     assert.ok(await child.evaluate(()=>document.documentElement.scrollWidth<=innerWidth));

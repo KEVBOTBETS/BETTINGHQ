@@ -11,6 +11,7 @@
     mlb:{title:"MLB Edge",description:"Baseball matchups, best bets and your game simulator.",url:"../mlb-edge/"},
     nfl:{title:"NFL Edge Lab",description:"NFL matchups, predictions and your season record.",url:"../nfl-edge-lab/"},
     ncaaf:{title:"NCAAF Edge Lab",description:"College football schedules, edges and simulations.",url:"../ncaaf-edge-lab/"},
+    props:{title:"Props Edge",description:"NFL, college, MLB and WNBA player props, projections and your props ledger.",url:"../props-edge/"},
   };
   const links=[...document.querySelectorAll(".board-link")];
   const workspace=document.querySelector("#workspace"), frames=new Map();
