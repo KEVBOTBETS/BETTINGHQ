@@ -1,24 +1,82 @@
 {
   "schema": 1,
-  "checked_at": "2026-09-19T17:07:43.561Z",
+  "checked_at": "2026-09-19T17:27:04.410Z",
   "coverage": {
-    "ncaaf": {
-      "status": "unavailable",
-      "reports": 0,
-      "checked_at": "2026-09-19T17:07:43.561Z"
-    },
     "nfl": {
       "status": "unavailable",
       "reports": 0,
-      "checked_at": "2026-09-19T17:07:43.561Z"
+      "checked_at": "2026-09-19T17:27:04.410Z"
     },
     "mlb": {
       "status": "unavailable",
       "reports": 0,
-      "checked_at": "2026-09-19T17:07:43.561Z"
+      "checked_at": "2026-09-19T17:27:04.410Z"
+    },
+    "ncaaf": {
+      "status": "unavailable",
+      "reports": 0,
+      "checked_at": "2026-09-19T17:27:04.410Z"
     }
   },
   "events": [
+    {
+      "id": "odds|mlb|822921|2026-09-19T20:10:00Z|RL||home|DraftKings|2026-09-19T17:27:04.410Z",
+      "kind": "odds",
+      "observed_at": "2026-09-19T17:27:04.410Z",
+      "sport": "mlb",
+      "event": "BOS @ TB",
+      "start": "2026-09-19T20:10:00Z",
+      "pick": "TB -1.5",
+      "title": "Published odds changed",
+      "before": "+144 · line -1.5",
+      "after": "+149 · line -1.5",
+      "book": "DraftKings",
+      "source_quote_at": "2026-09-19T17:23:58.472262+00:00",
+      "source": "Existing MLB board",
+      "note": "Your ticket keeps its original odds. Recheck the live book before placing a new wager."
+    },
+    {
+      "id": "odds|mlb|824304|2026-09-20T00:10:00Z|ML||home|DraftKings|2026-09-19T17:27:04.410Z",
+      "kind": "odds",
+      "observed_at": "2026-09-19T17:27:04.410Z",
+      "sport": "mlb",
+      "event": "SEA @ COL",
+      "start": "2026-09-20T00:10:00Z",
+      "pick": "COL ML",
+      "title": "Published odds changed",
+      "before": "+128",
+      "after": "+124",
+      "book": "DraftKings",
+      "source_quote_at": "2026-09-19T17:23:58.472262+00:00",
+      "source": "Existing MLB board",
+      "note": "Your ticket keeps its original odds. Recheck the live book before placing a new wager."
+    },
+    {
+      "id": "lineup|822921|2026-09-19T17:27:04.410Z",
+      "kind": "lineup",
+      "observed_at": "2026-09-19T17:27:04.410Z",
+      "sport": "mlb",
+      "event": "BOS @ TB",
+      "start": "2026-09-19T20:10:00Z",
+      "title": "Batting orders confirmed",
+      "before": "Projected batting orders",
+      "after": "Confirmed batting orders",
+      "source_quote_at": "2026-09-19T17:25:36+00:00",
+      "source": "MLB board"
+    },
+    {
+      "id": "starter|823899away|2026-09-19T17:27:04.410Z",
+      "kind": "starter",
+      "observed_at": "2026-09-19T17:27:04.410Z",
+      "sport": "mlb",
+      "event": "SF @ LAD",
+      "start": "2026-09-20T01:10:00Z",
+      "title": "Probable starting pitcher changed",
+      "before": "TBA",
+      "after": "Yunior Marte",
+      "source_quote_at": "2026-09-19T17:25:36+00:00",
+      "source": "MLB board"
+    },
     {
       "id": "odds|ncaaf|401866422|2026-09-19T20:00Z|ATS||away|Draft Kings|2026-09-19T16:40:18.954Z",
       "kind": "odds",
@@ -3021,70 +3079,6 @@
       "book": "Fanatics Sportsbook",
       "source_quote_at": "2026-09-16T20:10:53.007079+00:00",
       "source": "Existing Props board",
-      "note": "Your ticket keeps its original odds. Recheck the live book before placing a new wager."
-    },
-    {
-      "id": "odds|props|401872943|2026-09-20T20:25Z|Passing yards|Jacoby Brissett|over|Fanatics Sportsbook|2026-09-16T20:22:02.986Z",
-      "kind": "odds",
-      "observed_at": "2026-09-16T20:22:02.986Z",
-      "sport": "props",
-      "event": "Seattle Seahawks @ Arizona Cardinals",
-      "start": "2026-09-20T20:25Z",
-      "pick": "Jacoby Brissett — Over 210.5 Passing yards",
-      "title": "Published odds changed",
-      "before": "-115 · line 215.5",
-      "after": "-120 · line 210.5",
-      "book": "Fanatics Sportsbook",
-      "source_quote_at": "2026-09-16T20:10:53.007079+00:00",
-      "source": "Existing Props board",
-      "note": "Your ticket keeps its original odds. Recheck the live book before placing a new wager."
-    },
-    {
-      "id": "odds|ncaaf|401856797|2026-09-19T19:30Z|TOTAL||over|DraftKings|2026-09-16T18:49:27.992Z",
-      "kind": "odds",
-      "observed_at": "2026-09-16T18:49:27.992Z",
-      "sport": "ncaaf",
-      "event": "M-OH @ CIN",
-      "start": "2026-09-19T19:30Z",
-      "pick": "Over 49.5",
-      "title": "Published odds changed",
-      "before": "-108 · line 49.5",
-      "after": "-105 · line 49.5",
-      "book": "DraftKings",
-      "source_quote_at": "2026-09-16T18:32:42.200689+00:00",
-      "source": "Existing NCAAF board",
-      "note": "Your ticket keeps its original odds. Recheck the live book before placing a new wager."
-    },
-    {
-      "id": "odds|ncaaf|401861963|2026-09-19T23:00Z|ML||home|DraftKings|2026-09-16T18:49:27.992Z",
-      "kind": "odds",
-      "observed_at": "2026-09-16T18:49:27.992Z",
-      "sport": "ncaaf",
-      "event": "CONN @ USM",
-      "start": "2026-09-19T23:00Z",
-      "pick": "USM ML",
-      "title": "Published odds changed",
-      "before": "+130",
-      "after": "+136",
-      "book": "DraftKings",
-      "source_quote_at": "2026-09-16T18:32:42.200689+00:00",
-      "source": "Existing NCAAF board",
-      "note": "Your ticket keeps its original odds. Recheck the live book before placing a new wager."
-    },
-    {
-      "id": "odds|ncaaf|401856686|2026-09-19T16:00Z|ATS||home|DraftKings|2026-09-16T18:49:27.992Z",
-      "kind": "odds",
-      "observed_at": "2026-09-16T18:49:27.992Z",
-      "sport": "ncaaf",
-      "event": "UGA @ ARK",
-      "start": "2026-09-19T16:00Z",
-      "pick": "ARK +24.5",
-      "title": "Published odds changed",
-      "before": "-108 · line 24.5",
-      "after": "-105 · line 24.5",
-      "book": "DraftKings",
-      "source_quote_at": "2026-09-16T18:32:40.360429+00:00",
-      "source": "Existing NCAAF board",
       "note": "Your ticket keeps its original odds. Recheck the live book before placing a new wager."
     }
   ]
