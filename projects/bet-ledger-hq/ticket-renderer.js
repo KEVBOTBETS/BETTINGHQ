@@ -1,10 +1,13 @@
 /* Native canvas keeps names, odds and result letters exact. Artwork is reused unchanged. */
 (function(root){
-  const styles={classic:'Classic ticket',baseball:'Beaver at the ballpark',hockey:'Beaver on the ice',football:'Beaver on the sideline'};
+  const NEW={gridiron:'Gridiron Gold',ballpark:'Ballpark Stubs',scoreboard:'Jumbotron',northern:'True North',slip:'Sportsbook Slip (printer friendly)'};
+  const styles={...NEW,classic:'Classic ticket',baseball:'Beaver at the ballpark',hockey:'Beaver on the ice',football:'Beaver on the sideline'};
   const load=src=>new Promise((resolve,reject)=>{const img=new Image();img.onload=()=>resolve(img);img.onerror=()=>reject(Error('Artwork unavailable. Choose Classic ticket or retry.'));img.src=src;});
   const odds=v=>v==null?'—':(v>0?'+':'')+v;
   function fit(ctx,value,width){let s=String(value||'');if(ctx.measureText(s).width<=width)return s;while(s&&ctx.measureText(s+'…').width>width)s=s.slice(0,-1);return s+'…';}
-  async function draw(canvas,ticket,{style='classic',results=null}={}){
+  async function draw(canvas,ticket,{style='gridiron',results=null}={}){
+    if(NEW[style]&&root.MoneylineCard)return root.MoneylineCard.drawTicket(canvas,ticket,{style,results,outcomeKey:r=>root.KevTickets.outcomeKey(r)});
+    if(NEW[style])style='classic';
     const rows=ticket.picks||[],ctx=canvas.getContext('2d'),art=style!=='classic';canvas.width=1080;canvas.height=1350;
     ctx.fillStyle='#09121c';ctx.fillRect(0,0,1080,1350);ctx.fillStyle='#da1524';ctx.fillRect(0,0,1080,16);
     const logo=await load('kevbot-logo.jpg');ctx.drawImage(logo,48,38,100,100);

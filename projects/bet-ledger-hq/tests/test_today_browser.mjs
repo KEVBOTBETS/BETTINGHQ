@@ -64,6 +64,12 @@ try{
     await frame.locator('#ticket-style').selectOption('baseball');
     await frame.locator('#ticket-preview').evaluate((img,old)=>new Promise(resolve=>{const timer=setInterval(()=>{if(img.src!==old){clearInterval(timer);resolve();}},25);}),classicSrc);
     await frame.locator('#ticket-preview').evaluate(img=>img.decode());
+    for(const style of ['gridiron','ballpark','scoreboard','northern','slip']){
+      const before=await frame.locator('#ticket-preview').getAttribute('src');
+      await frame.locator('#ticket-style').selectOption(style);
+      await frame.locator('#ticket-preview').evaluate((img,old)=>new Promise(resolve=>{const timer=setInterval(()=>{if(img.src!==old){clearInterval(timer);resolve();}},25);}),before);
+      assert.ok(await frame.locator('#ticket-preview').evaluate(async img=>{await img.decode();return img.naturalWidth===1080&&img.naturalHeight>=1350;}),style+' ticket renders');
+    }
     await frame.getByRole("button",{name:"Close image preview"}).click();
     await frame.getByRole("button",{name:"Accuracy",exact:true}).click();
     await frame.getByRole("heading",{name:"Predictions, not your bet record"}).waitFor({state:"visible"});
