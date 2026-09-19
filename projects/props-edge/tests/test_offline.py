@@ -290,3 +290,31 @@ class SecurityTests(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class EspnDateRangeFallbackTests(unittest.TestCase):
+    def test_scoreboard_falls_back_to_single_days_when_ranges_are_rejected(self):
+        import datetime as dt
+        from pipeline.http import ProviderError
+        from pipeline.providers.espn import EspnProjectionProvider
+
+        calls = []
+
+        class FakeClient:
+            def get(self, path, params, retries=2):
+                calls.append(params["dates"])
+                if "-" in params["dates"]:
+                    raise ProviderError("ESPN public statistics request failed (HTTP 400)")
+                return {"events": [{"id": params["dates"]}, {"id": "shared"}]}
+
+        provider = EspnProjectionProvider({"sports": {}, "fetch": {}})
+        provider.client = FakeClient()
+        board = provider._scoreboard("football/nfl", dt.date(2026, 9, 17), dt.date(2026, 9, 19))
+        self.assertEqual(sorted(e["id"] for e in board["events"]), ["20260917", "20260918", "20260919", "shared"])
+        self.assertEqual(calls[0], "20260917-20260919")
+
+    def test_gzip_error_bodies_are_readable(self):
+        import gzip
+        from pipeline.http import _unzip
+        self.assertEqual(_unzip(gzip.compress(b'{"code":400}')), b'{"code":400}')
+        self.assertEqual(_unzip(b"plain"), b"plain")

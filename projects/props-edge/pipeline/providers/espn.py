@@ -7,7 +7,7 @@ from collections import defaultdict
 from concurrent.futures import ThreadPoolExecutor
 from typing import Any
 
-from ..http import JsonClient
+from ..http import JsonClient, ProviderError
 from ..schema import Projection, as_float
 
 
@@ -295,20 +295,38 @@ class EspnProjectionProvider:
         self.settings = settings
         self.client = JsonClient(self.name, ESPN_URL, timeout=18)
 
+    def _scoreboard(self, path: str, start: dt.date, end: dt.date) -> dict[str, Any]:
+        """ESPN now rejects multi-day ``dates`` ranges (HTTP 400), so fall back to one request per day."""
+        try:
+            return self.client.get(f"/{path}/scoreboard", {"dates": _date_range(start, end), "limit": 500}, retries=0)
+        except ProviderError:
+            pass
+        days = [start + dt.timedelta(days=offset) for offset in range((end - start).days + 1)]
+
+        def one(day: dt.date) -> list[dict[str, Any]] | None:
+            try:
+                return self.client.get(f"/{path}/scoreboard", {"dates": f"{day:%Y%m%d}", "limit": 500}, retries=1).get("events") or []
+            except ProviderError:
+                return None
+
+        with ThreadPoolExecutor(max_workers=6) as pool:
+            results = list(pool.map(one, days))
+        if all(result is None for result in results):
+            raise ProviderError(f"{self.name} request failed (scoreboard unavailable)")
+        events: dict[str, dict[str, Any]] = {}
+        for result in results:
+            for event in result or []:
+                events[str(event.get("id"))] = event
+        return {"events": list(events.values())}
+
     def fetch(self, sport: str) -> list[Projection]:
         cfg = self.settings["sports"][sport]
         path = cfg["espn_path"]
         today = dt.datetime.now(dt.timezone.utc).date()
         lookback = int(self.settings["fetch"]["espn_lookback_days"])
         lookahead = int(self.settings["fetch"]["lookahead_days"])
-        recent = self.client.get(
-            f"/{path}/scoreboard",
-            {"dates": _date_range(today - dt.timedelta(days=lookback), today), "limit": 500},
-        )
-        upcoming = self.client.get(
-            f"/{path}/scoreboard",
-            {"dates": _date_range(today, today + dt.timedelta(days=lookahead)), "limit": 500},
-        )
+        recent = self._scoreboard(path, today - dt.timedelta(days=lookback), today)
+        upcoming = self._scoreboard(path, today, today + dt.timedelta(days=lookahead))
         completed = [
             event
             for event in recent.get("events") or []

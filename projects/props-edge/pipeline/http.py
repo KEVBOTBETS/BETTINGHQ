@@ -1,11 +1,17 @@
 from __future__ import annotations
 
+import gzip
 import json
 import time
 import urllib.error
 import urllib.parse
 import urllib.request
 from typing import Any
+
+
+def _unzip(raw: bytes) -> bytes:
+    """Some public feeds send gzip even when it was not requested."""
+    return gzip.decompress(raw) if raw[:2] == b"\x1f\x8b" else raw
 
 
 class ProviderError(RuntimeError):
@@ -33,11 +39,11 @@ class JsonClient:
         for attempt in range(retries + 1):
             try:
                 with urllib.request.urlopen(request, timeout=self.timeout) as response:
-                    return json.loads(response.read().decode("utf-8"))
+                    return json.loads(_unzip(response.read()).decode("utf-8"))
             except urllib.error.HTTPError as exc:
                 body = ""
                 try:
-                    body = exc.read().decode("utf-8", errors="replace")[:240]
+                    body = _unzip(exc.read()).decode("utf-8", errors="replace")[:240]
                     for secret in secrets:
                         body = body.replace(secret, "[REDACTED]")
                 except Exception:

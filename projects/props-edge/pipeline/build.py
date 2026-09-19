@@ -99,6 +99,10 @@ def build() -> dict[str, Any]:
             "errors": errors,
         }
 
+    if not quotes and not projections and any(info["errors"] for info in source_by_sport.values()):
+        # Every source failed: keep the last published files instead of blanking the board.
+        raise SystemExit("Props Edge: no source returned data; previous files kept. " + "; ".join(
+            f"{sport}: {info['errors'][0]}" for sport, info in source_by_sport.items() if info["errors"]))
     board = merge_boards(
         evaluate_quotes(quotes, settings),
         evaluate_quotes_against_projections(quotes, projections, settings),
@@ -127,7 +131,7 @@ def build() -> dict[str, Any]:
         },
         "source_by_sport": source_by_sport,
         "workflow_url": (
-            f"https://github.com/{repository}/actions/workflows/refresh.yml" if repository else ""
+            f"https://github.com/{repository}/actions/workflows/release.yml" if repository else ""
         ),
         "notes": [
             "API credentials are optional and are read only from GitHub Actions secrets.",
