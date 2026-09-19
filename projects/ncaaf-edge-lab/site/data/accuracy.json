@@ -1,7 +1,7 @@
 {
  "schema": 3,
  "game_only": true,
- "generated_at": "2026-09-19T19:01:16.994337+00:00",
+ "generated_at": "2026-09-19T20:01:42.512533+00:00",
  "label": "NCAAF prediction accuracy",
  "scope": {
   "season": 2026,
@@ -13,15 +13,15 @@
  "method": "One frozen pregame projection per game. Winner, spread direction, totals direction and error are graded from final scores. No wagers, prices, stake units or ledger records are stored in this history.",
  "games": {
   "logged": 233,
-  "graded": 92,
-  "pending": 141,
+  "graded": 103,
+  "pending": 130,
   "winner": {
-   "n": 92,
-   "correct": 66,
-   "accuracy": 0.71739,
+   "n": 103,
+   "correct": 77,
+   "accuracy": 0.74757,
    "interval95": [
-    0.61811,
-    0.79924
+    0.65582,
+    0.82152
    ]
   },
   "ats": {
@@ -52,22 +52,22 @@
    "model_mae": 10.968,
    "market_mae": 10.7
   },
-  "margin_mae": 20.25837,
-  "total_mae": 11.75435,
-  "brier": 0.16671
+  "margin_mae": 19.58718,
+  "total_mae": 11.61748,
+  "brier": 0.15488
  },
  "validation": {
-  "n": 92,
+  "n": 103,
   "probability_target": "home team win",
   "calibration": [
    {
     "bucket": "0\u201320%",
-    "n": 5,
-    "predicted": 0.10448,
-    "actual": 0.4,
+    "n": 6,
+    "predicted": 0.1139,
+    "actual": 0.3333333333333333,
     "interval95": [
-     0.11762,
-     0.76928
+     0.09677,
+     0.70001
     ]
    },
    {
@@ -82,37 +82,37 @@
    },
    {
     "bucket": "40\u201360%",
-    "n": 18,
-    "predicted": 0.49717,
-    "actual": 0.6111111111111112,
+    "n": 19,
+    "predicted": 0.49383,
+    "actual": 0.5789473684210527,
     "interval95": [
-     0.38619,
-     0.79695
+     0.36276,
+     0.76858
     ]
    },
    {
     "bucket": "60\u201380%",
-    "n": 26,
-    "predicted": 0.72883,
-    "actual": 0.8076923076923077,
+    "n": 29,
+    "predicted": 0.72114,
+    "actual": 0.8275862068965517,
     "interval95": [
-     0.62124,
-     0.91493
+     0.65452,
+     0.92402
     ]
    },
    {
     "bucket": "80\u2013100%",
-    "n": 28,
-    "predicted": 0.91355,
+    "n": 34,
+    "predicted": 0.9177,
     "actual": 1.0,
     "interval95": [
-     0.87936,
-     1
+     0.89849,
+     1.0
     ]
    }
   ],
-  "brier": 0.16671,
-  "status": "limited sample",
+  "brier": 0.15488,
+  "status": "review calibration",
   "note": "Only frozen forecasts from this season. Intervals show sampling uncertainty; neither a small sample nor market agreement proves an edge."
  },
  "records": [
@@ -2433,10 +2433,15 @@
    "market_total": null,
    "id": "game:NCAAF:401864508:::",
    "captured_at": "2026-09-09T00:39:05.245544+00:00",
-   "result": "Pending",
+   "result": "Graded",
    "version": "2026-09-06-ev2",
    "season": 2026,
-   "season_type": 2
+   "season_type": 2,
+   "actual_margin": 14.0,
+   "actual_total": 34.0,
+   "final_home": 24.0,
+   "final_away": 10.0,
+   "graded_at": "2026-09-19T20:01:42.508855+00:00"
   },
   {
    "kind": "game",
@@ -2469,10 +2474,15 @@
    "market_total": null,
    "id": "game:NCAAF:401858460:::",
    "captured_at": "2026-09-09T00:39:05.245544+00:00",
-   "result": "Pending",
+   "result": "Graded",
    "version": "2026-09-06-ev2",
    "season": 2026,
-   "season_type": 2
+   "season_type": 2,
+   "actual_margin": 44.0,
+   "actual_total": 64.0,
+   "final_home": 54.0,
+   "final_away": 10.0,
+   "graded_at": "2026-09-19T20:01:42.508855+00:00"
   },
   {
    "kind": "game",
@@ -2487,10 +2497,15 @@
    "market_total": null,
    "id": "game:NCAAF:401860889:::",
    "captured_at": "2026-09-09T00:39:05.245544+00:00",
-   "result": "Pending",
+   "result": "Graded",
    "version": "2026-09-06-ev2",
    "season": 2026,
-   "season_type": 2
+   "season_type": 2,
+   "actual_margin": 14.0,
+   "actual_total": 84.0,
+   "final_home": 49.0,
+   "final_away": 35.0,
+   "graded_at": "2026-09-19T20:01:42.508855+00:00"
   },
   {
    "kind": "game",
@@ -2505,10 +2520,15 @@
    "market_total": null,
    "id": "game:NCAAF:401858456:::",
    "captured_at": "2026-09-09T00:39:05.245544+00:00",
-   "result": "Pending",
+   "result": "Graded",
    "version": "2026-09-06-ev2",
    "season": 2026,
-   "season_type": 2
+   "season_type": 2,
+   "actual_margin": 42.0,
+   "actual_total": 68.0,
+   "final_home": 55.0,
+   "final_away": 13.0,
+   "graded_at": "2026-09-19T20:01:42.508855+00:00"
   },
   {
    "kind": "game",
@@ -2523,10 +2543,15 @@
    "market_total": null,
    "id": "game:NCAAF:401858454:::",
    "captured_at": "2026-09-09T00:39:05.245544+00:00",
-   "result": "Pending",
+   "result": "Graded",
    "version": "2026-09-06-ev2",
    "season": 2026,
-   "season_type": 2
+   "season_type": 2,
+   "actual_margin": 56.0,
+   "actual_total": 62.0,
+   "final_home": 59.0,
+   "final_away": 3.0,
+   "graded_at": "2026-09-19T20:01:42.508855+00:00"
   },
   {
    "kind": "game",
@@ -2541,10 +2566,15 @@
    "market_total": null,
    "id": "game:NCAAF:401858451:::",
    "captured_at": "2026-09-09T00:39:05.245544+00:00",
-   "result": "Pending",
+   "result": "Graded",
    "version": "2026-09-06-ev2",
    "season": 2026,
-   "season_type": 2
+   "season_type": 2,
+   "actual_margin": 34.0,
+   "actual_total": 48.0,
+   "final_home": 41.0,
+   "final_away": 7.0,
+   "graded_at": "2026-09-19T20:01:42.508855+00:00"
   },
   {
    "kind": "game",
@@ -2577,10 +2607,15 @@
    "market_total": null,
    "id": "game:NCAAF:401858228:::",
    "captured_at": "2026-09-09T00:39:05.245544+00:00",
-   "result": "Pending",
+   "result": "Graded",
    "version": "2026-09-06-ev2",
    "season": 2026,
-   "season_type": 2
+   "season_type": 2,
+   "actual_margin": 33.0,
+   "actual_total": 55.0,
+   "final_home": 44.0,
+   "final_away": 11.0,
+   "graded_at": "2026-09-19T20:01:42.508855+00:00"
   },
   {
    "kind": "game",
@@ -2595,10 +2630,15 @@
    "market_total": null,
    "id": "game:NCAAF:401856812:::",
    "captured_at": "2026-09-09T00:39:05.245544+00:00",
-   "result": "Pending",
+   "result": "Graded",
    "version": "2026-09-06-ev2",
    "season": 2026,
-   "season_type": 2
+   "season_type": 2,
+   "actual_margin": -7.0,
+   "actual_total": 41.0,
+   "final_home": 17.0,
+   "final_away": 24.0,
+   "graded_at": "2026-09-19T20:01:42.508855+00:00"
   },
   {
    "kind": "game",
@@ -2613,10 +2653,15 @@
    "market_total": null,
    "id": "game:NCAAF:401856798:::",
    "captured_at": "2026-09-09T00:39:05.245544+00:00",
-   "result": "Pending",
+   "result": "Graded",
    "version": "2026-09-06-ev2",
    "season": 2026,
-   "season_type": 2
+   "season_type": 2,
+   "actual_margin": 48.0,
+   "actual_total": 62.0,
+   "final_home": 55.0,
+   "final_away": 7.0,
+   "graded_at": "2026-09-19T20:01:42.508855+00:00"
   },
   {
    "kind": "game",
@@ -2631,10 +2676,15 @@
    "market_total": null,
    "id": "game:NCAAF:401856792:::",
    "captured_at": "2026-09-09T00:39:05.245544+00:00",
-   "result": "Pending",
+   "result": "Graded",
    "version": "2026-09-06-ev2",
    "season": 2026,
-   "season_type": 2
+   "season_type": 2,
+   "actual_margin": 11.0,
+   "actual_total": 51.0,
+   "final_home": 31.0,
+   "final_away": 20.0,
+   "graded_at": "2026-09-19T20:01:42.508855+00:00"
   },
   {
    "kind": "game",
@@ -2649,10 +2699,15 @@
    "market_total": null,
    "id": "game:NCAAF:401856686:::",
    "captured_at": "2026-09-09T00:39:05.245544+00:00",
-   "result": "Pending",
+   "result": "Graded",
    "version": "2026-09-06-ev2",
    "season": 2026,
-   "season_type": 2
+   "season_type": 2,
+   "actual_margin": -28.0,
+   "actual_total": 62.0,
+   "final_home": 17.0,
+   "final_away": 45.0,
+   "graded_at": "2026-09-19T20:01:42.508855+00:00"
   },
   {
    "kind": "game",
