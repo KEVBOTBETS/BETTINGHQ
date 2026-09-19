@@ -1,0 +1,104 @@
+name: Check, refresh and publish
+on:
+  push:
+    branches: [main]
+    paths-ignore:
+      - 'projects/**/site/data/**'
+      - 'projects/**/docs/data/**'
+      - 'projects/**/state/**'
+      - 'projects/mlb-edge/data/**'
+      - 'projects/bet-ledger-hq/data/**'
+  pull_request:
+  workflow_dispatch:
+    inputs:
+      sport:
+        description: Models to refresh
+        type: choice
+        options: [all, football, mlb]
+        default: all
+  schedule:
+    - cron: '23 */3 * * *'
+    - cron: '53 15-23 * * 0,4,5,6'
+
+permissions:
+  contents: read
+concurrency:
+  group: kevbot-release
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 55
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: pip
+          cache-dependency-path: requirements-lock.txt
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: pip install -r requirements-lock.txt
+      - run: npm ci --ignore-scripts
+        working-directory: projects/bet-ledger-hq
+      - run: npx playwright install --with-deps chromium
+        working-directory: projects/bet-ledger-hq
+      - name: Offline release checks
+        run: python tools/verify.py --browser
+      - name: Refresh real data
+        if: github.event_name != 'pull_request'
+        env:
+          REQUESTED_SPORT: ${{ inputs.sport || 'all' }}
+          EVENT_SCHEDULE: ${{ github.event.schedule }}
+          MLB_SEASON: ${{ vars.MLB_SEASON || '2026' }}
+          MLB_BANKROLL: ${{ vars.MLB_BANKROLL || '250' }}
+        run: |
+          sport="$REQUESTED_SPORT"
+          if [ "$EVENT_SCHEDULE" = '53 15-23 * * 0,4,5,6' ]; then sport=football; fi
+          python tools/refresh.py --sport "$sport"
+          node projects/mlb-edge/tests/test_sim.mjs projects/mlb-edge/docs/data
+          python -m unittest discover -s tests
+      - name: Save public model history
+        if: github.event_name != 'pull_request'
+        run: |
+          git fetch origin main
+          if [ "$(git rev-parse origin/main)" != "$(git rev-parse HEAD)" ]; then
+            echo 'Source changed during this build. The newer queued run will publish.'
+            exit 1
+          fi
+          git config user.name 'kevbot-model[bot]'
+          git config user.email 'actions@users.noreply.github.com'
+          python tools/stage_history.py
+          if ! git diff --staged --quiet; then
+            git commit -m 'Refresh public model data and frozen forecasts'
+            git push origin HEAD:main
+          fi
+      - uses: actions/upload-pages-artifact@v3
+        if: github.event_name != 'pull_request'
+        with:
+          path: _site
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: validation
+          path: |
+            validation.json
+            projects/bet-ledger-hq/test-results/
+  publish:
+    if: github.event_name != 'pull_request'
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deploy.outputs.page_url }}
+    steps:
+      - uses: actions/configure-pages@v5
+      - uses: actions/deploy-pages@v4
+        id: deploy

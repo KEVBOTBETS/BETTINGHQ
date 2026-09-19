@@ -1,0 +1,37 @@
+name: Tests
+
+on:
+  push:
+    branches: [main]
+    paths-ignore: ["data/tickets/**"]
+  pull_request:
+  workflow_dispatch:
+
+# Sync/server tests use an in-memory sheet. Browser checks use local fixtures;
+# no test contacts a live spreadsheet or writes actual wagers.
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+      - run: node tests/test_betsync.mjs
+      - run: node tests/test_server.mjs
+      - run: node tests/test_alerts_app.mjs
+      - run: node tests/test_recovery_history.mjs
+      - run: for file in *.js scripts/*.mjs; do node --check "$file"; done
+
+      - run: node tests/test_tickets.mjs
+      - run: node tests/test_today.mjs
+      - run: npm install --ignore-scripts
+      - run: npx playwright install --with-deps chromium webkit
+      - run: npm run test:moneyling
+      - run: npm run test:browser
+      - run: node tests/test_mobile_layout.mjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: today-browser-checks
+          path: test-results/
