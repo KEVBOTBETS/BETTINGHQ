@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#0a0f16"><meta name="color-scheme" content="dark">
+<meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><meta name="apple-mobile-web-app-title" content="KEVBOTBETS">
+<meta name="description" content="Your MLB, NFL, college football and shared bet ledger in one workspace.">
+<title>KEVBOTBETS · Your betting workspace</title>
+<link rel="icon" href="icon.svg" type="image/svg+xml"><link rel="manifest" href="manifest.webmanifest"><link rel="stylesheet" href="hub.css"><link rel="stylesheet" href="hub-extras.css"><script src="hub.js" defer></script><script src="pwa.js" defer></script>
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+</head><body>
+<a class="skip" href="#workspace">Skip to the selected board</a>
+<div class="shell">
+<a class="brand" href="#today" aria-label="KEVBOTBETS Today"><span class="brand-mark" aria-hidden="true">K</span><span class="wordmark">KEVBOTBETS<small>YOUR BETTING WORKSPACE</small></span></a>
+<header class="topbar">
+<div class="page-heading"><h1 id="board-title">Today</h1><p id="board-description">Your daily board, data health and shared exposure.</p></div>
+<div class="tools">
+<button class="tool" id="install-app" type="button" aria-label="Install KEVBOT BETS" title="Install KEVBOT BETS">＋<span>Install app</span></button>
+<button class="tool" id="reload-board" type="button" aria-label="Reload selected board" title="Reload selected board"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 7v5h-5M4 17v-5h5M6.2 6.2A8 8 0 0 1 20 12M4 12a8 8 0 0 0 13.8 5.8"/></svg><span>Reload board</span></button>
+<button class="tool" id="help" type="button" aria-label="Hub help and sync setup" title="Hub help"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M9.5 9a2.5 2.5 0 0 1 5 .5c0 2-2.5 2-2.5 4M12 17h.01"/></svg><span>Help</span></button>
+</div></header>
+<aside class="sidebar"><p class="nav-label">Your boards</p><nav class="boards" aria-label="Betting boards"><a class="board-link" href="#today" aria-current="page"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m3 11 9-8 9 8M5 10v11h5v-7h4v7h5V10"/></svg><span>Today</span></a><a class="board-link" href="#ledger"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="3" width="16" height="18" rx="3"/><path d="M8 8h8M8 12h3M8 16h3M15 12h1M15 16h1"/></svg><span>Ledger</span></a>
+<a class="board-link" href="#football"><span>Weekly football</span></a>
+<a class="board-link" href="#moneyling"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="3"/><path d="m7 12 3 3 7-7"/></svg><span>Moneyling</span></a>
+<a class="board-link" href="#mlb"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M6 5c5 4 5 10 0 14M18 5c-5 4-5 10 0 14M7 7l3-1M8 11h3M7 16l3 1M14 6l3 1M13 11h3M14 17l3-1"/></svg><span>MLB</span></a>
+
+<a class="board-link" href="#nfl"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 15C3 6 9 3 18 3c2 0 3 1 3 3 0 9-3 15-12 15-4 0-6-2-6-6ZM8 16l8-8M9 10l5 5M12 7l5 5M6 13l5 5"/></svg><span>NFL</span></a>
+<a class="board-link" href="#ncaaf"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m3 9 9-5 9 5-9 5-9-5ZM6 11v6c4 3 8 3 12 0v-6M21 9v8"/></svg><span>NCAAF</span></a>
+
+<a class="board-link" href="#archive"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="3" width="16" height="18" rx="2"/><path d="M8 8h8M8 12h8M8 16h5"/></svg><span>Tickets & results</span></a></nav><button class="ticket-tool" id="top-ten-ticket" type="button"><strong>TOP PICKS</strong><span>Make daily ticket</span></button><div class="side-note"><b>Later this season</b>NBA · NHL · NCAAB<br>Pick feeds will open after validation.</div><div class="side-note"><b>One place. Every board.</b>Switch sports here.<br>Your workspace stays open.</div></aside>
+<main class="workspace" id="workspace" aria-label="Selected betting board"></main></div>
+<p class="sr-only" id="announcement" role="status" aria-live="polite"></p>
+<div class="app-notices"><p id="offline-notice" role="status" hidden>Offline · Live prices, results and ledger sync are unavailable.</p><button id="app-update" class="tool" hidden>Update ready · Save your edits, then reload</button></div>
+<dialog id="install-dialog" aria-labelledby="install-title"><h2 id="install-title">Keep KEVBOT BETS handy</h2><p><strong>iPhone or iPad:</strong> open this page in Safari, tap Share, then Add to Home Screen.</p><p><strong>Android or desktop:</strong> use your browser’s Install app or Add to Home Screen menu when available.</p><p id="install-note">Saved ticket originals can be viewed offline. Prices, scores and ledger changes require internet access.</p><button class="tool" id="close-install">Got it</button></dialog>
+<dialog id="help-dialog" aria-labelledby="help-title">
+<h2 id="help-title">Your boards, together.</h2>
+<p>Use the navigation to switch between Today, Ledger, Weekly football, Moneyling, MLB, NFL and NCAAF. Each board keeps its own filters, simulator and ledger controls.</p>
+<p><strong>One bookmark:</strong> save this page. On iPhone, use Safari’s Share menu → Add to Home Screen for one KEVBOTBETS icon.</p>
+<p><strong>Shared ledger:</strong> complete the <a href="SETUP-SYNC.md" target="_blank" rel="noopener">Google Sheet setup</a>, then connect in the Ledger tab. Sync settings are shared by these boards in the same browser. Connect each device to keep them in step.</p>
+<p>Boards continue to receive their scheduled updates. Use Reload board if you need to reload the current view.</p><button class="tool" id="close-help" type="button">Got it</button>
+</dialog>
+<noscript><h1>KEVBOTBETS</h1><p>Turn on JavaScript to use all six boards inside this page.</p><ul><li><a href="ledger.html">Shared ledger</a></li><li><a href="../mlb-edge/">MLB</a></li><li><a href="../nfl-edge-lab/">NFL</a></li><li><a href="../ncaaf-edge-lab/">NCAAF</a></li></ul></noscript>
+</body></html>

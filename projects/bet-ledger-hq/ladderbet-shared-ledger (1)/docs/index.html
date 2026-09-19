@@ -1,0 +1,773 @@
+<!doctype html><html lang=en><head><meta charset=utf-8><meta name=viewport content='width=device-width,initial-scale=1'><title>Ladder — rung 4</title><style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#0b0f14; --panel:#131a23; --line:#1e2936; --ink:#e6edf3;
+  --dim:#7d8da1; --gold:#f0b429; --win:#2ecc71; --loss:#e74c3c;
+  --cool:#4aa3ff;
+}
+body{background:var(--bg);color:var(--ink);
+  font:15px/1.55 ui-sans-serif,-apple-system,"Segoe UI",Inter,sans-serif;
+  padding:20px 16px 60px;max-width:820px;margin:0 auto}
+h1{font-size:19px;letter-spacing:.02em;font-weight:650}
+.sub{color:var(--dim);font-size:12.5px;margin-top:3px}
+.hero{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;margin:18px 0 4px}
+.rungnum{font-size:54px;font-weight:750;line-height:1;
+  background:linear-gradient(180deg,var(--gold),#b9791a);
+  -webkit-background-clip:text;background-clip:text;color:transparent}
+.of{color:var(--dim);font-size:15px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));
+  gap:10px;margin:16px 0}
+.card{background:var(--panel);border:1px solid var(--line);
+  border-radius:12px;padding:12px 14px}
+.k{color:var(--dim);font-size:11px;text-transform:uppercase;letter-spacing:.07em}
+.v{font-size:21px;font-weight:640;margin-top:4px;font-variant-numeric:tabular-nums}
+.pos{color:var(--win)} .neg{color:var(--loss)} .gold{color:var(--gold)}
+section{margin-top:26px}
+h2{font-size:12px;text-transform:uppercase;letter-spacing:.09em;
+  color:var(--dim);font-weight:620;margin-bottom:10px}
+.pill{display:inline-block;padding:2px 9px;border-radius:99px;
+  font-size:11px;font-weight:620;letter-spacing:.03em}
+.pill.win{background:rgba(46,204,113,.15);color:var(--win)}
+.pill.loss{background:rgba(231,76,60,.15);color:var(--loss)}
+.pill.push{background:rgba(125,141,161,.15);color:var(--dim)}
+.pill.live{background:rgba(240,180,41,.15);color:var(--gold)}
+table{width:100%;border-collapse:collapse;font-size:13px}
+th{text-align:left;color:var(--dim);font-weight:600;font-size:11px;
+  text-transform:uppercase;letter-spacing:.06em;padding:6px 8px;
+  border-bottom:1px solid var(--line)}
+td{padding:8px;border-bottom:1px solid var(--line);
+  font-variant-numeric:tabular-nums}
+tr:last-child td{border-bottom:none}
+.bet{background:var(--panel);border:1px solid var(--line);border-radius:12px;
+  padding:13px 15px;margin-bottom:9px}
+.bet.top{border-color:rgba(240,180,41,.45);
+  box-shadow:0 0 0 1px rgba(240,180,41,.12),0 6px 22px -12px rgba(240,180,41,.5)}
+.betrow{display:flex;justify-content:space-between;align-items:baseline;gap:10px}
+.pick{font-weight:640;font-size:15px}
+.price{font-variant-numeric:tabular-nums;font-weight:640;color:var(--gold)}
+.meta{color:var(--dim);font-size:12px;margin-top:3px}
+.bar{height:5px;background:var(--line);border-radius:99px;margin-top:9px;
+  overflow:hidden}
+.bar>i{display:block;height:100%;background:linear-gradient(90deg,#b9791a,var(--gold))}
+.odds{display:flex;gap:8px;align-items:flex-end;margin:10px 0 6px;flex-wrap:wrap}
+.odds label{display:flex;flex-direction:column;gap:3px;font-size:10px;
+  color:var(--dim);text-transform:uppercase;letter-spacing:.07em}
+.odds input{background:var(--bg);border:1px solid var(--line);color:var(--ink);
+  border-radius:7px;padding:7px 9px;font-size:14px;width:96px;
+  font-variant-numeric:tabular-nums;font-family:ui-monospace,monospace}
+.odds input:focus{outline:none;border-color:var(--gold)}
+.mini{background:var(--line);border:none;color:var(--dim);border-radius:7px;
+  padding:8px 11px;font-size:11px;cursor:pointer}
+.mini:hover{color:var(--ink)}
+.cmdbox{background:var(--panel);border:1px solid rgba(240,180,41,.35);
+  border-radius:12px;padding:13px 15px;margin-top:12px}
+.cmdpick{font-weight:640;font-size:15px;margin:4px 0 9px;color:var(--gold)}
+.cmdrow{display:flex;gap:8px;align-items:center}
+.cmdrow code{flex:1;background:var(--bg);border:1px solid var(--line);
+  border-radius:7px;padding:9px 11px;font-size:12px;overflow-x:auto;
+  white-space:nowrap;font-family:ui-monospace,monospace;color:var(--cool)}
+.scroll{overflow-x:auto;-webkit-overflow-scrolling:touch}
+.scroll table{min-width:640px}
+.lgr{margin-top:26px}
+.lgr .row{background:var(--panel);border:1px solid var(--line);border-radius:12px;
+  padding:11px 13px;margin-bottom:8px}
+.lgr .row.pend{border-color:rgba(240,180,41,.4)}
+.lgr .top{display:flex;justify-content:space-between;gap:10px;align-items:baseline}
+.lgr .nm{font-weight:640;font-size:14px}
+.lgr .sub2{color:var(--dim);font-size:12px;margin-top:2px}
+.lgr .line{display:flex;align-items:center;gap:8px;margin-top:8px;flex-wrap:wrap;
+  font-size:12.5px}
+.lgr input.stk{background:var(--bg);border:1px solid var(--line);color:var(--ink);
+  border-radius:6px;padding:5px 8px;width:84px;font-size:13px;
+  font-family:ui-monospace,monospace;font-variant-numeric:tabular-nums}
+.lgr input.stk:focus{outline:none;border-color:var(--gold)}
+.lgr .x{background:none;border:1px solid var(--line);color:var(--dim);
+  border-radius:6px;padding:5px 9px;font-size:11px;cursor:pointer}
+.lgr .x:hover{color:var(--loss);border-color:var(--loss)}
+.addbtn{background:rgba(240,180,41,.12);border:1px solid rgba(240,180,41,.45);
+  color:var(--gold);border-radius:7px;padding:8px 12px;font-size:12px;
+  cursor:pointer;font-weight:600}
+.addbtn:hover{background:rgba(240,180,41,.22)}
+.addbtn.on{background:rgba(46,204,113,.15);border-color:rgba(46,204,113,.5);
+  color:var(--win)}
+.tools{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+.exp{background:var(--bg);border:1px solid var(--line);border-radius:8px;
+  padding:10px;margin-top:10px;font-size:11px;font-family:ui-monospace,monospace;
+  color:var(--dim);max-height:170px;overflow:auto;white-space:pre-wrap;
+  word-break:break-all}
+.empty{background:var(--panel);border:1px dashed var(--line);border-radius:12px;
+  padding:18px;text-align:center;color:var(--dim);font-size:13.5px}
+.foot{margin-top:34px;padding-top:14px;border-top:1px solid var(--line);
+  color:var(--dim);font-size:11.5px;line-height:1.7}
+.warn{background:rgba(231,76,60,.07);border:1px solid rgba(231,76,60,.25);
+  border-radius:10px;padding:11px 13px;color:#f0a79f;font-size:12.5px;
+  margin-top:16px}
+</style></head><body><h1>Ladder</h1><div class=sub>2026-09-13 14:13 UTC · favourite window 1.40–1.667 decimal (-250 to -150) · up to 10 choices · CAD</div><div class=hero><span class=rungnum>4</span><span class=of>of 10 rungs</span></div><div class=grid><div class=card><div class=k>Next stake</div><div class='v gold'>$27.66</div></div><div class=card><div class=k>New money at risk</div><div class=v>$5.00</div></div><div class=card><div class=k>Banked ladder net</div><div class='v '>+0.00</div></div><div class=card><div class=k>Cashed / busted</div><div class=v>0 / 0</div></div></div><section><h2>Progress</h2><div class=sub style='margin:-4px 0 10px'>Projected at <b>1.488</b> (-205) — today&#x27;s top candidate. Every rung compounds the price you actually get, so a shorter price shrinks the whole ladder.</div><div id=stair><svg viewBox="0 0 760 379" width="100%" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Ladder progress: rung 4 of 10"><defs><linearGradient id="won" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#1d7a45"/><stop offset="1" stop-color="#2ecc71"/></linearGradient><linearGradient id="live" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#8a5a12"/><stop offset="1" stop-color="#f0b429"/></linearGradient><filter id="glow" x="-30%" y="-120%" width="160%" height="340%"><feGaussianBlur stdDeviation="5" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs><rect x="46" y="341" width="58.0" height="30" rx="7" fill="url(#won)"/><text x="14" y="360.5" font-size="12" font-family="ui-monospace,monospace" fill="#5f7085">R0</text><text x="114.0" y="360.5" font-size="12.5" font-family="ui-monospace,monospace" fill="#7d8da1">$5.00 → $7.99</text><rect x="46" y="304" width="58.0" height="30" rx="7" fill="url(#won)"/><text x="14" y="323.5" font-size="12" font-family="ui-monospace,monospace" fill="#5f7085">R1</text><text x="114.0" y="323.5" font-size="12.5" font-family="ui-monospace,monospace" fill="#7d8da1">$7.99 → $12.66</text><rect x="46" y="267" width="58.0" height="30" rx="7" fill="url(#won)"/><text x="14" y="286.5" font-size="12" font-family="ui-monospace,monospace" fill="#5f7085">R2</text><text x="114.0" y="286.5" font-size="12.5" font-family="ui-monospace,monospace" fill="#7d8da1">$12.66 → $19.15</text><rect x="46" y="230" width="58.0" height="30" rx="7" fill="url(#won)"/><text x="14" y="249.5" font-size="12" font-family="ui-monospace,monospace" fill="#5f7085">R3</text><text x="114.0" y="249.5" font-size="12.5" font-family="ui-monospace,monospace" fill="#7d8da1">$19.15 → $27.66</text><rect x="46" y="193" width="58.0" height="30" rx="7" fill="url(#live)" filter="url(#glow)"/><text x="14" y="212.5" font-size="12" font-family="ui-monospace,monospace" fill="#f0b429">R4</text><text x="114.0" y="212.5" font-size="12.5" font-family="ui-monospace,monospace" fill="#7d8da1">$27.66 → $41.15</text><rect x="46" y="156" width="78.2" height="30" rx="7" fill="#182231"/><text x="14" y="175.5" font-size="12" font-family="ui-monospace,monospace" fill="#5f7085">R5</text><text x="134.2" y="175.5" font-size="12.5" font-family="ui-monospace,monospace" fill="#7d8da1">$41.15 → $61.22</text><rect x="46" y="119" width="116.3" height="30" rx="7" fill="#182231"/><text x="14" y="138.5" font-size="12" font-family="ui-monospace,monospace" fill="#5f7085">R6</text><text x="172.3" y="138.5" font-size="12.5" font-family="ui-monospace,monospace" fill="#7d8da1">$61.22 → $91.08</text><rect x="46" y="82" width="173.1" height="30" rx="7" fill="#182231"/><text x="14" y="101.5" font-size="12" font-family="ui-monospace,monospace" fill="#5f7085">R7</text><text x="229.1" y="101.5" font-size="12.5" font-family="ui-monospace,monospace" fill="#7d8da1">$91.08 → $135.51</text><rect x="46" y="45" width="257.5" height="30" rx="7" fill="#182231"/><text x="14" y="64.5" font-size="12" font-family="ui-monospace,monospace" fill="#5f7085">R8</text><text x="58" y="64.5" font-size="12.5" font-family="ui-monospace,monospace" fill="#5f7085" font-weight="600">$135.51 → $201.61</text><rect x="46" y="8" width="383.1" height="30" rx="7" fill="#182231"/><text x="14" y="27.5" font-size="12" font-family="ui-monospace,monospace" fill="#5f7085">R9</text><text x="58" y="27.5" font-size="12.5" font-family="ui-monospace,monospace" fill="#5f7085" font-weight="600">$201.61 → $299.96</text></svg></div><div class=sub id=cashout style='margin-top:8px'></div></section><section><h2>Today's candidates</h2><div class='bet top' id='card0'><div class=betrow><span class=pick><span style='color:var(--dim);font-weight:600'>1.</span> Cincinnati Bengals</span><span class=price id='edge0'></span></div><div class=meta>NFL · Tampa Bay Buccaneers @ Cincinnati Bengals · in 2.8h</div><div class=odds><label>American<input id='am0' type='number' step='1' value='-205' inputmode='numeric'></label><label>Decimal<input id='de0' type='number' step='0.001' value='1.4878' inputmode='decimal'></label><button class=mini id='reset0' type=button>reset</button><button class=addbtn id='add0' type=button>Select bet</button></div><div class=meta style='color:var(--ink)' id='ret0'>stake $27.66 &rarr; <b>$41.15</b></div><div class=meta>win prob <b>64.5%</b> · break-even <span id='be0'></span> · hold 4.25% · line barely moved</div><div class=bar><i style='width:64.5%'></i></div></div><div class='bet' id='card1'><div class=betrow><span class=pick><span style='color:var(--dim);font-weight:600'>2.</span> Milwaukee Brewers</span><span class=price id='edge1'></span></div><div class=meta>MLB · Cincinnati Reds @ Milwaukee Brewers · in 4.0h</div><div class=odds><label>American<input id='am1' type='number' step='1' value='-199' inputmode='numeric'></label><label>Decimal<input id='de1' type='number' step='0.001' value='1.5025' inputmode='decimal'></label><button class=mini id='reset1' type=button>reset</button><button class=addbtn id='add1' type=button>Select bet</button></div><div class=meta style='color:var(--ink)' id='ret1'>stake $27.66 &rarr; <b>$41.56</b></div><div class=meta>win prob <b>63.6%</b> · break-even <span id='be1'></span> · hold 4.58% · line barely moved</div><div class=bar><i style='width:63.6%'></i></div></div><div class='bet' id='card2'><div class=betrow><span class=pick><span style='color:var(--dim);font-weight:600'>3.</span> Boston Red Sox</span><span class=price id='edge2'></span></div><div class=meta>MLB · Kansas City Royals @ Boston Red Sox · in 4.9h</div><div class=odds><label>American<input id='am2' type='number' step='1' value='-187' inputmode='numeric'></label><label>Decimal<input id='de2' type='number' step='0.001' value='1.5348' inputmode='decimal'></label><button class=mini id='reset2' type=button>reset</button><button class=addbtn id='add2' type=button>Select bet</button></div><div class=meta style='color:var(--ink)' id='ret2'>stake $27.66 &rarr; <b>$42.45</b></div><div class=meta>win prob <b>62.2%</b> · break-even <span id='be2'></span> · hold 4.68% · line barely moved</div><div class=bar><i style='width:62.2%'></i></div></div><div class='bet' id='card3'><div class=betrow><span class=pick><span style='color:var(--dim);font-weight:600'>4.</span> New York Yankees</span><span class=price id='edge3'></span></div><div class=meta>MLB · New York Mets @ New York Yankees · in 3.4h</div><div class=odds><label>American<input id='am3' type='number' step='1' value='-186' inputmode='numeric'></label><label>Decimal<input id='de3' type='number' step='0.001' value='1.5376' inputmode='decimal'></label><button class=mini id='reset3' type=button>reset</button><button class=addbtn id='add3' type=button>Select bet</button></div><div class=meta style='color:var(--ink)' id='ret3'>stake $27.66 &rarr; <b>$42.53</b></div><div class=meta>win prob <b>62.2%</b> · break-even <span id='be3'></span> · hold 4.56% · line barely moved</div><div class=bar><i style='width:62.2%'></i></div></div><div class='bet' id='card4'><div class=betrow><span class=pick><span style='color:var(--dim);font-weight:600'>5.</span> Baltimore Ravens</span><span class=price id='edge4'></span></div><div class=meta>NFL · Baltimore Ravens @ Indianapolis Colts · in 2.8h</div><div class=odds><label>American<input id='am4' type='number' step='1' value='-175' inputmode='numeric'></label><label>Decimal<input id='de4' type='number' step='0.001' value='1.5714' inputmode='decimal'></label><button class=mini id='reset4' type=button>reset</button><button class=addbtn id='add4' type=button>Select bet</button></div><div class=meta style='color:var(--ink)' id='ret4'>stake $27.66 &rarr; <b>$43.46</b></div><div class=meta>win prob <b>60.9%</b> · break-even <span id='be4'></span> · hold 4.45% · line barely moved</div><div class=bar><i style='width:60.9%'></i></div></div><div class='bet' id='card5'><div class=betrow><span class=pick><span style='color:var(--dim);font-weight:600'>6.</span> Chicago Bears</span><span class=price id='edge5'></span></div><div class=meta>NFL · Chicago Bears @ Carolina Panthers · in 2.8h</div><div class=odds><label>American<input id='am5' type='number' step='1' value='-175' inputmode='numeric'></label><label>Decimal<input id='de5' type='number' step='0.001' value='1.5714' inputmode='decimal'></label><button class=mini id='reset5' type=button>reset</button><button class=addbtn id='add5' type=button>Select bet</button></div><div class=meta style='color:var(--ink)' id='ret5'>stake $27.66 &rarr; <b>$43.46</b></div><div class=meta>win prob <b>60.9%</b> · break-even <span id='be5'></span> · hold 4.45% · shortened — money came in on this side</div><div class=bar><i style='width:60.9%'></i></div></div><div class='bet' id='card6'><div class=betrow><span class=pick><span style='color:var(--dim);font-weight:600'>7.</span> Detroit Tigers</span><span class=price id='edge6'></span></div><div class=meta>MLB · Colorado Rockies @ Detroit Tigers · in 1.9h</div><div class=odds><label>American<input id='am6' type='number' step='1' value='-174' inputmode='numeric'></label><label>Decimal<input id='de6' type='number' step='0.001' value='1.5747' inputmode='decimal'></label><button class=mini id='reset6' type=button>reset</button><button class=addbtn id='add6' type=button>Select bet</button></div><div class=meta style='color:var(--ink)' id='ret6'>stake $27.66 &rarr; <b>$43.56</b></div><div class=meta>win prob <b>60.7%</b> · break-even <span id='be6'></span> · hold 4.66% · shortened — money came in on this side</div><div class=bar><i style='width:60.7%'></i></div></div><div class='bet' id='card7'><div class=betrow><span class=pick><span style='color:var(--dim);font-weight:600'>8.</span> Las Vegas Raiders</span><span class=price id='edge7'></span></div><div class=meta>NFL · Miami Dolphins @ Las Vegas Raiders · in 6.2h</div><div class=odds><label>American<input id='am7' type='number' step='1' value='-170' inputmode='numeric'></label><label>Decimal<input id='de7' type='number' step='0.001' value='1.5882' inputmode='decimal'></label><button class=mini id='reset7' type=button>reset</button><button class=addbtn id='add7' type=button>Select bet</button></div><div class=meta style='color:var(--ink)' id='ret7'>stake $27.66 &rarr; <b>$43.93</b></div><div class=meta>win prob <b>60.4%</b> · break-even <span id='be7'></span> · hold 4.29% · line barely moved</div><div class=bar><i style='width:60.4%'></i></div></div><div class='bet' id='card8'><div class=betrow><span class=pick><span style='color:var(--dim);font-weight:600'>9.</span> Dallas Cowboys</span><span class=price id='edge8'></span></div><div class=meta>NFL · Dallas Cowboys @ New York Giants · in 10.1h</div><div class=odds><label>American<input id='am8' type='number' step='1' value='-166' inputmode='numeric'></label><label>Decimal<input id='de8' type='number' step='0.001' value='1.6024' inputmode='decimal'></label><button class=mini id='reset8' type=button>reset</button><button class=addbtn id='add8' type=button>Select bet</button></div><div class=meta style='color:var(--ink)' id='ret8'>stake $27.66 &rarr; <b>$44.32</b></div><div class=meta>win prob <b>60.0%</b> · break-even <span id='be8'></span> · hold 4.07% · shortened — money came in on this side</div><div class=bar><i style='width:60.0%'></i></div></div><div class='bet' id='card9'><div class=betrow><span class=pick><span style='color:var(--dim);font-weight:600'>10.</span> Chicago Cubs</span><span class=price id='edge9'></span></div><div class=meta>MLB · Pittsburgh Pirates @ Chicago Cubs · in 4.1h</div><div class=odds><label>American<input id='am9' type='number' step='1' value='-161' inputmode='numeric'></label><label>Decimal<input id='de9' type='number' step='0.001' value='1.6211' inputmode='decimal'></label><button class=mini id='reset9' type=button>reset</button><button class=addbtn id='add9' type=button>Select bet</button></div><div class=meta style='color:var(--ink)' id='ret9'>stake $27.66 &rarr; <b>$44.84</b></div><div class=meta>win prob <b>59.0%</b> · break-even <span id='be9'></span> · hold 4.60% · shortened — money came in on this side</div><div class=bar><i style='width:59.0%'></i></div></div><div class=cmdbox><div class=k>Preview — tap a card to change</div><div class=cmdpick id=cmdpick></div><div class=cmdrow><code id=cmd></code><button class=mini id=copy type=button>copy</button></div><div class=k style='margin-top:8px;text-transform:none;letter-spacing:0'>Use <b>Select bet</b> to put one option in your ladder, or run the command to commit it to the repo.</div></div></section><section><h2>Record</h2><div class=grid><div class=card><div class=k>Right / wrong</div><div class='v gold'>4 / 0</div></div><div class=card><div class=k>Accuracy</div><div class='v pos'>100.0%</div></div><div class=card><div class=k>Bet profit / loss</div><div class='v pos'>+22.66</div></div><div class=card><div class=k>Break-even needed</div><div class=v>60.0%</div></div><div class=card><div class=k>Best streak</div><div class='v gold'>4</div></div></div><div class=grid><div class=card><div class=k>Avg slippage</div><div class='v pos'>+0.0000</div><div class=k style='margin-top:4px'>screened vs taken</div></div><div class=card><div class=k>Total staked</div><div class=v>$44.80</div></div></div><div style='margin-top:8px'><svg viewBox="0 0 760 54" width="100%" height="54" xmlns="http://www.w3.org/2000/svg" aria-label="Net over time"><line x1="0" y1="50.0" x2="760" y2="50.0" stroke="#1e2936" stroke-dasharray="3 4"/><polyline points="0.0,50.0 253.3,50.0 506.7,50.0 760.0,50.0" fill="none" stroke="#7d8da1" stroke-width="2" stroke-linejoin="round"/></svg></div></section><section><h2>Bet history — 4 settled</h2><div class=scroll><table><tr><th>Date</th><th>Pick</th><th>R</th><th>Price</th><th>Stake</th><th>Return</th><th>P/L</th><th>Total</th><th></th></tr><tr><td>2026-09-05</td><td>Los Angeles Dodgers<div class=k style='text-transform:none;letter-spacing:0'>MLB Washington Nationals @ Los Angeles Dodgers</div></td><td>3</td><td>1.444</td><td>$19.15</td><td>$27.66</td><td class=pos>+8.51</td><td class=pos>+22.66</td><td><span class='pill win'>win</span></td></tr><tr><td>2026-09-04</td><td>Liverpool<div class=k style='text-transform:none;letter-spacing:0'>EPL Liverpool @ Ipswich Town</div></td><td>2</td><td>1.513</td><td>$12.66</td><td>$19.15</td><td class=pos>+6.49</td><td class=pos>+14.15</td><td><span class='pill win'>win</span></td></tr><tr><td>2026-09-03</td><td>Pittsburgh Pirates<div class=k style='text-transform:none;letter-spacing:0'>MLB San Francisco Giants @ Pittsburgh Pirates</div></td><td>1</td><td>1.585</td><td>$7.99</td><td>$12.66</td><td class=pos>+4.67</td><td class=pos>+7.66</td><td><span class='pill win'>win</span></td></tr><tr><td>2026-09-02</td><td>New York Yankees<div class=k style='text-transform:none;letter-spacing:0'>MLB New York Yankees @ Los Angeles Angels</div></td><td>0</td><td>1.599</td><td>$5.00</td><td>$7.99</td><td class=pos>+2.99</td><td class=pos>+2.99</td><td><span class='pill win'>win</span></td></tr></table></div></section><div class=warn><b>Feed notes</b><br>ncaaf: no events returned<br>wnba: no events returned<br>nba: no events returned<br>nhl: no events returned<br>epl: 3 events, none qualified<br>mls: 3 events, none qualified</div><div class=foot>Odds: ESPN public scoreboard (DraftKings, US line — your provincial book will differ slightly). Each $5 run is worth <b>5 × (p × d)<sup>n</sup></b>; since p × d &lt; 1 after the hold, every extra rung lowers expected value. The $5 cap on new money per run is the good part of this design, not an edge.<br>19+ (18+ AB/MB/QC). ConnexOntario 1-866-531-2600 · Canada Safer Gambling 1-833-353-3234.</div><script type="application/json" id="ladder-data">{"state": {"rung": 4, "max_rung": 10, "base_stake": 5.0, "stake": 27.66, "stake_increment": 0.01}, "candidates": [{"pick": "Cincinnati Bengals", "decimal": 1.4878, "american": -205.0, "fair_prob": 0.6447, "event_id": "401872925", "side": "home", "league": "nfl", "matchup": "Tampa Bay Buccaneers @ Cincinnati Bengals", "start_utc": "2026-09-13T17:00Z"}, {"pick": "Milwaukee Brewers", "decimal": 1.5025, "american": -199.0, "fair_prob": 0.6364, "event_id": "401816927", "side": "home", "league": "mlb", "matchup": "Cincinnati Reds @ Milwaukee Brewers", "start_utc": "2026-09-13T18:10Z"}, {"pick": "Boston Red Sox", "decimal": 1.5348, "american": -187.0, "fair_prob": 0.6224, "event_id": "401816922", "side": "home", "league": "mlb", "matchup": "Kansas City Royals @ Boston Red Sox", "start_utc": "2026-09-13T19:05Z"}, {"pick": "New York Yankees", "decimal": 1.5376, "american": -186.0, "fair_prob": 0.622, "event_id": "401816924", "side": "home", "league": "mlb", "matchup": "New York Mets @ New York Yankees", "start_utc": "2026-09-13T17:35Z"}, {"pick": "Baltimore Ravens", "decimal": 1.5714, "american": -175.0, "fair_prob": 0.6092, "event_id": "401872659", "side": "away", "league": "nfl", "matchup": "Baltimore Ravens @ Indianapolis Colts", "start_utc": "2026-09-13T17:00Z"}, {"pick": "Chicago Bears", "decimal": 1.5714, "american": -175.0, "fair_prob": 0.6092, "event_id": "401872661", "side": "away", "league": "nfl", "matchup": "Chicago Bears @ Carolina Panthers", "start_utc": "2026-09-13T17:00Z"}, {"pick": "Detroit Tigers", "decimal": 1.5747, "american": -174.0, "fair_prob": 0.6068, "event_id": "401816920", "side": "home", "league": "mlb", "matchup": "Colorado Rockies @ Detroit Tigers", "start_utc": "2026-09-13T16:10Z"}, {"pick": "Las Vegas Raiders", "decimal": 1.5882, "american": -170.0, "fair_prob": 0.6038, "event_id": "401872928", "side": "home", "league": "nfl", "matchup": "Miami Dolphins @ Las Vegas Raiders", "start_utc": "2026-09-13T20:25Z"}, {"pick": "Dallas Cowboys", "decimal": 1.6024, "american": -166.0, "fair_prob": 0.5996, "event_id": "401872930", "side": "away", "league": "nfl", "matchup": "Dallas Cowboys @ New York Giants", "start_utc": "2026-09-14T00:20Z"}, {"pick": "Chicago Cubs", "decimal": 1.6211, "american": -161.0, "fair_prob": 0.5897, "event_id": "401816929", "side": "home", "league": "mlb", "matchup": "Pittsburgh Pirates @ Chicago Cubs", "start_utc": "2026-09-13T18:20Z"}], "history": [{"id": "repo_2026-09-02T18:00:00_New York Yan", "added": "2026-09-02T18:00:00+00:00", "settled_at": "2026-09-02T23:30:00+00:00", "event_id": "", "side": "", "league": "mlb", "matchup": "New York Yankees @ Los Angeles Angels", "start_utc": "", "score": "", "pick": "New York Yankees", "decimal": 1.5988, "american": -167.0, "stake": 5.0, "stake_edited": true, "result": "win"}, {"id": "repo_2026-09-03T16:00:00_Pittsburgh P", "added": "2026-09-03T16:00:00+00:00", "settled_at": "2026-09-03T19:30:00+00:00", "event_id": "401816789", "side": "home", "league": "mlb", "matchup": "San Francisco Giants @ Pittsburgh Pirates", "start_utc": "2026-09-03T16:35:00Z", "score": "SF 2 @ PIT 5", "pick": "Pittsburgh Pirates", "decimal": 1.5848, "american": -171.0, "stake": 7.99, "stake_edited": true, "result": "win"}, {"id": "repo_2026-09-04T18:45:00_Liverpool", "added": "2026-09-04T18:45:00+00:00", "settled_at": "2026-09-04T21:00:00+00:00", "event_id": "401879288", "side": "away", "league": "epl", "matchup": "Liverpool @ Ipswich Town", "start_utc": "2026-09-04T19:00:00Z", "score": "LIV 2 @ IPS 0", "pick": "Liverpool", "decimal": 1.5128, "american": -195.0, "stake": 12.66, "stake_edited": true, "result": "win"}, {"id": "repo_2026-09-05T02:10:00_Los Angeles ", "added": "2026-09-05T02:10:00+00:00", "settled_at": "2026-09-05T05:30:00+00:00", "event_id": "", "side": "home", "league": "mlb", "matchup": "Washington Nationals @ Los Angeles Dodgers", "start_utc": "2026-09-05T02:10:00Z", "score": "WSH 3 @ LAD 5", "pick": "Los Angeles Dodgers", "decimal": 1.4444, "american": -225.0, "stake": 19.15, "stake_edited": true, "result": "win"}]}</script>
+<section class=lgr>
+  <h2>My ladder <span id=lgr-count style="color:var(--dim);font-weight:400"></span></h2>
+  <div class=sub style="margin:-4px 0 12px">Choose one bet at a time. Mark it
+    Win, Loss or Push yourself, or leave the page open and it will check the
+    official result every minute. Win advances; loss restarts at rung 0.</div>
+  <div class=sync id=lgr-sync><span id=lgr-sync-text>Checking results…</span>
+    <button class=mini id=lgr-check type=button>Check now</button></div>
+  <div class=grid id=lgr-stats></div>
+  <div id=lgr-rows></div>
+  <div class=manual>
+    <h3>Use a different bet</h3>
+    <div class=sub>For a pick from your sportsbook that is not on the option board.</div>
+    <div class=fields>
+      <label>Selection<input class=pickin id=lgr-custom-pick placeholder="Team or selection"></label>
+      <label>American odds<input id=lgr-custom-am type=number step=1 placeholder="-171"></label>
+      <label>Stake<input id=lgr-custom-stake type=number step=.01 min=.01></label>
+      <button class=addbtn id=lgr-custom type=button>Select custom bet</button>
+    </div>
+  </div>
+  <div class=tools>
+    <button class=mini id=lgr-json type=button>Export JSON</button>
+    <button class=mini id=lgr-csv type=button>Export CSV</button>
+    <button class=mini id=lgr-imp type=button>Import</button>
+    <button class=mini id=lgr-seed type=button>Load repo history</button>
+    <button class=mini id=lgr-clear type=button>Clear</button>
+  </div>
+  <div class=exp id=lgr-out style="display:none"></div>
+  <div class=k style="margin-top:10px;text-transform:none;letter-spacing:0">
+    Stored in this browser only, per device. Nothing leaves the page. Export to
+    move it or to survive a cleared browser.
+  </div>
+</section>
+
+<script>
+(function(){
+  var D = JSON.parse(document.getElementById('ladder-data').textContent);
+  var cands = D.candidates, st = D.state;
+  var sel = 0, prices = cands.map(function(c){ return c.decimal; });
+
+  function a2d(a){ a=parseFloat(a); if(!a||Math.abs(a)<100) return null;
+    return a>=100 ? 1+a/100 : 1+100/Math.abs(a); }
+  function d2a(d){ return d>=2 ? (d-1)*100 : -100/(d-1); }
+  function money(v){ return '$'+v.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g,','); }
+
+  function stakes(dec){
+    var out=[], s = st.rung===0 ? st.base_stake : st.stake, inc = st.stake_increment||0.01;
+    for(var i=st.rung;i<st.max_rung;i++){
+      s = Math.floor(s/inc+1e-9)*inc;
+      out.push({rung:i, stake:s, ret:s*dec});
+      s = s*dec;
+    }
+    return out;
+  }
+
+  function drawLadder(dec){
+    var rows = stakes(dec), host = document.getElementById('stair');
+    if(!rows.length){ host.innerHTML=''; return; }
+    var top = rows[rows.length-1].ret, RH=30, GAP=7, W=760;
+    var H = 16 + rows.length*(RH+GAP) - GAP;
+    var svg = '<svg viewBox="0 0 '+W+' '+H+'" width="100%" xmlns="http://www.w3.org/2000/svg">';
+    rows.forEach(function(r,i){
+      var y = 8 + (rows.length-1-i)*(RH+GAP);
+      var w = Math.max(58, (r.stake/top)*(W-190));
+      var live = (r.rung===st.rung);
+      svg += '<rect x="46" y="'+y+'" width="'+w.toFixed(1)+'" height="'+RH+'" rx="7" fill="'+(live?'#f0b429':'#182231')+'"/>';
+      svg += '<text x="14" y="'+(y+RH/2+4.5)+'" font-size="12" font-family="ui-monospace,monospace" fill="'+(live?'#f0b429':'#5f7085')+'">R'+r.rung+'</text>';
+      var lbl = money(r.stake)+' \u2192 '+money(r.ret);
+      if(w>210){ svg += '<text x="58" y="'+(y+RH/2+4.5)+'" font-size="12.5" font-family="ui-monospace,monospace" fill="'+(live?'#1a1205':'#5f7085')+'" font-weight="600">'+lbl+'</text>'; }
+      else { svg += '<text x="'+(46+w+10).toFixed(1)+'" y="'+(y+RH/2+4.5)+'" font-size="12.5" font-family="ui-monospace,monospace" fill="#7d8da1">'+lbl+'</text>'; }
+    });
+    svg += '</svg>';
+    host.innerHTML = svg;
+    var last = rows[rows.length-1];
+    document.getElementById('cashout').textContent =
+      'Ride all ' + rows.length + ' remaining rungs and rung ' + last.rung +
+      ' pays ' + money(last.ret) + '. Risk stays ' + money(st.base_stake) + ' of new money.';
+  }
+
+  function refresh(){
+    cands.forEach(function(c,i){
+      var dec = prices[i];
+      var stake = st.rung===0 ? st.base_stake : st.stake;
+      var inc = st.stake_increment||0.01;
+      stake = Math.floor(stake/inc+1e-9)*inc;
+      var ret = stake*dec;
+      document.getElementById('ret'+i).innerHTML =
+        'stake '+money(stake)+' &rarr; <b>'+money(ret)+'</b> '+
+        '<span style="color:var(--dim)">(profit '+money(ret-stake)+')</span>';
+      document.getElementById('be'+i).textContent = (100/dec).toFixed(1)+'%';
+      var edge = (c.fair_prob*dec-1)*100;
+      var el = document.getElementById('edge'+i);
+      el.textContent = (edge>=0?'+':'')+edge.toFixed(2)+'%';
+      el.style.color = edge>=0 ? 'var(--win)' : 'var(--dim)';
+      document.getElementById('card'+i).className = 'bet'+(i===sel?' top':'');
+    });
+    drawLadder(prices[sel]);
+    var c = cands[sel];
+    var cmd = 'python -m ladder place '+(sel+1)+' --price '+prices[sel].toFixed(4);
+    document.getElementById('cmd').textContent = cmd;
+    document.getElementById('cmdpick').textContent =
+      c.pick+'  '+(d2a(prices[sel])>=0?'+':'')+d2a(prices[sel]).toFixed(0);
+  }
+
+  cands.forEach(function(c,i){
+    var am = document.getElementById('am'+i), de = document.getElementById('de'+i);
+    am.addEventListener('input', function(){
+      var d = a2d(am.value); if(!d) return;
+      prices[i]=d; de.value=d.toFixed(4); refresh();
+    });
+    de.addEventListener('input', function(){
+      var d = parseFloat(de.value); if(!d || d<=1) return;
+      prices[i]=d; am.value=d2a(d).toFixed(0); refresh();
+    });
+    document.getElementById('card'+i).addEventListener('click', function(e){
+      if(e.target.tagName==='INPUT') return;
+      sel=i; refresh();
+    });
+    var add = document.getElementById('add'+i);
+    if(add) add.addEventListener('click', function(e){
+      e.stopPropagation();
+      if(window.ladderAdd) window.ladderAdd(i, prices[i]);
+    });
+    document.getElementById('reset'+i).addEventListener('click', function(e){
+      e.stopPropagation();
+      prices[i]=c.decimal; am.value=c.american.toFixed(0);
+      de.value=c.decimal.toFixed(4); refresh();
+    });
+  });
+
+  var btn = document.getElementById('copy');
+  if(btn) btn.addEventListener('click', function(){
+    var t = document.getElementById('cmd').textContent;
+    if(navigator.clipboard) navigator.clipboard.writeText(t);
+    btn.textContent='copied'; setTimeout(function(){btn.textContent='copy';},1200);
+  });
+
+  refresh();
+})();
+</script>
+
+<script>
+(function(){
+  var KEY='ladder.ledger.v1', D=null, RESULTS={}, POLL_MS=60000;
+  var ESPN_PATH={nfl:'football/nfl',ncaaf:'football/college-football',
+    mlb:'baseball/mlb',nba:'basketball/nba',wnba:'basketball/wnba',
+    ncaab:'basketball/mens-college-basketball',nhl:'hockey/nhl',
+    mls:'soccer/usa.1',epl:'soccer/eng.1',ucl:'soccer/uefa.champions'};
+  try{ D=JSON.parse(document.getElementById('ladder-data').textContent); }catch(e){ return; }
+  var CFG=D.state, CANDS=D.candidates;
+
+  function load(){ try{ return JSON.parse(localStorage.getItem(KEY))||[]; }catch(e){ return []; } }
+  function save(e){ try{ localStorage.setItem(KEY, JSON.stringify(e)); }catch(err){} }
+  var entries = load();
+
+  function money(v){ return '$'+(v||0).toFixed(2); }
+  function d2a(d){ return d>=2 ? (d-1)*100 : -100/(d-1); }
+  function esc(s){ return String(s==null?'':s).replace(/[&<>"]/g,function(c){
+    return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]; }); }
+
+  // A ladder is sequential: recompute the whole chain whenever anything changes.
+  function reflow(){
+    entries.sort(function(a,b){ return (a.added||'').localeCompare(b.added||''); });
+    var rung=0, stake=CFG.base_stake, inc=CFG.stake_increment||0.01;
+    var net=0, runningPL=0, runPL=0, cashed=0, bust=0;
+    entries.forEach(function(e){
+      var want = Math.floor(stake/inc+1e-9)*inc;
+      if(!e.stake_edited) e.stake = want;
+      e.rung = rung;
+      // Round the payout to cents BEFORE compounding — a book pays whole cents,
+      // and carrying full float precision drifts from the Python ladder.
+      e.to_return = Math.round(e.stake * e.decimal * 100) / 100;
+      if(e.result==='win'){
+        e.returned = e.to_return;
+        stake = e.to_return; rung += 1;
+        if(rung >= CFG.max_rung){ cashed++;
+          e.cashed_out = stake; rung=0; stake=CFG.base_stake; }
+        else { e.cashed_out = null; }
+      } else if(e.result==='loss'){
+        e.returned = 0; bust++;
+        rung=0; stake=CFG.base_stake; e.cashed_out=null;
+      } else if(e.result==='push'){
+        e.returned = e.stake; stake = e.stake; e.cashed_out=null;
+      } else {
+        e.returned = null; e.cashed_out=null;
+      }
+      var pl = e.result==='win' ? e.returned-e.stake
+             : e.result==='loss' ? -e.stake : 0;
+      e.profit_loss = Math.round(pl*100)/100;
+      runningPL += pl; runPL += pl;
+      if(e.result==='loss' || e.cashed_out){ net += runPL; runPL=0; }
+      e.running_net = Math.round(net*100)/100;
+      e.running_profit_loss = Math.round(runningPL*100)/100;
+    });
+    return {rung:rung, stake:Math.floor(stake/inc+1e-9)*inc, net:net,
+            profitLoss:Math.round(runningPL*100)/100, cashed:cashed, bust:bust};
+  }
+
+  function settleFrom(e,r){
+    var league=String(e.league || r.league || '').toLowerCase();
+    var threeWay=['mls','epl','ucl'].indexOf(league)!==-1;
+    if(r.winner==='draw' && e.side!=='draw' && !league) return {pick:e.pick,result:null};
+    var res = r.winner===e.side ? 'win'
+            : r.winner==='draw' && !threeWay ? 'push' : 'loss';
+    e.result = res; e.settled_at = r.date || new Date().toISOString().slice(0,10);
+    e.score = r.score || '';
+    return {pick:e.pick,result:res};
+  }
+
+  // Self-settlement, same shape as the CLI's grade step.
+  function autoSettle(){
+    var settled=[];
+    entries.forEach(function(e){
+      if(e.result || !e.event_id) return;
+      var r = RESULTS[e.event_id];
+      if(!r || !r.completed) return;
+      settled.push(settleFrom(e,r));
+    });
+    if(settled.length) save(entries);
+    return settled;
+  }
+
+  function resultFromESPN(payload,e){
+    var ev=(payload.events||[]).find(function(x){ return String(x.id)===String(e.event_id); });
+    if(!ev) return null;
+    var comp=(ev.competitions||[])[0]||{};
+    var typ=((comp.status||{}).type)||((ev.status||{}).type)||{};
+    if(!typ.completed && typ.state!=='post') return null;
+    var home=null, away=null;
+    (comp.competitors||[]).forEach(function(c){
+      if(c.homeAway==='home') home=c; else if(c.homeAway==='away') away=c; });
+    if(!home || !away) return null;
+    var winner=home.winner?'home':away.winner?'away':null;
+    if(!winner && Number(home.score)===Number(away.score)) winner='draw';
+    if(!winner) return null;
+    var ha=((home.team||{}).abbreviation)||'HOME';
+    var aa=((away.team||{}).abbreviation)||'AWAY';
+    return {completed:true,winner:winner,date:(ev.date||'').slice(0,10),
+      league:e.league,score:aa+' '+away.score+' @ '+ha+' '+home.score};
+  }
+
+  // Browser selections live only on this device, so check their event directly.
+  // The published results file remains a fallback if ESPN blocks a browser call.
+  function checkPendingAtESPN(){
+    var e=pending(), path=e&&ESPN_PATH[e.league];
+    if(!e || !e.event_id || !path) return Promise.resolve([]);
+    var date=(e.start_utc||e.added||'').slice(0,10).replace(/-/g,'');
+    var url='https://site.api.espn.com/apis/site/v2/sports/'+path+'/scoreboard';
+    if(date) url+='?dates='+date;
+    return fetch(url,{cache:'no-store'}).then(function(r){
+      if(!r.ok) throw new Error('scoreboard '+r.status); return r.json();
+    }).then(function(j){
+      var result=resultFromESPN(j,e);
+      if(result) RESULTS[e.event_id]=result;
+      return autoSettle();
+    });
+  }
+
+  function syncMessage(settled){
+    var box=document.getElementById('lgr-sync');
+    var label=document.getElementById('lgr-sync-text');
+    var st=reflow(), active=pending();
+    box.className='sync';
+    if(settled.length){
+      var x=settled[settled.length-1];
+      if(x.result==='win'){
+        box.className='sync win';
+        label.textContent=x.pick+' won — advanced to rung '+st.rung+
+          '. Next stake '+money(st.stake)+'.';
+      } else if(x.result==='loss'){
+        box.className='sync loss';
+        label.textContent=x.pick+' lost — ladder restarted at rung 0. Next stake '+
+          money(CFG.base_stake)+'.';
+      } else label.textContent=x.pick+' was void — rung unchanged.';
+    } else if(active){
+      label.textContent='Auto-settlement active — checking '+active.pick+
+        ' every minute. Last check '+new Date().toLocaleTimeString()+'.';
+    } else {
+      label.textContent='No bet pending — select the next rung at '+money(st.stake)+'.';
+    }
+  }
+
+  function refreshResults(){
+    var label=document.getElementById('lgr-sync-text');
+    label.textContent='Checking official results…';
+    return fetch('data/results.json?t='+Date.now(),{cache:'no-store'})
+      .then(function(r){ return r.ok ? r.json() : {}; })
+      .catch(function(){ return {}; })
+      .then(function(j){
+        RESULTS=j.games||RESULTS;
+        var settled=autoSettle();
+        if(settled.length) return settled;
+        return checkPendingAtESPN().catch(function(){ return []; });
+      }).then(function(settled){
+        draw(); syncButtons(); syncMessage(settled); return settled;
+      }).catch(function(){
+        draw(); syncButtons();
+        label.textContent='Could not reach the score feed. Use Check now or settle manually.';
+      });
+  }
+
+  function draw(){
+    var st = reflow();
+    var host = document.getElementById('lgr-rows');
+    document.getElementById('lgr-count').textContent =
+      entries.length ? '— '+entries.length+' bet'+(entries.length>1?'s':'') : '';
+
+    var done = entries.filter(function(e){ return e.result==='win'||e.result==='loss'; });
+    var w = done.filter(function(e){ return e.result==='win'; }).length;
+    var accuracy = done.length ? (w/done.length*100).toFixed(1)+'%' : '—';
+    var stats = document.getElementById('lgr-stats');
+    stats.innerHTML =
+      card('Rung', st.rung+' / '+CFG.max_rung, 'gold') +
+      card('Next stake', money(st.stake), '') +
+      card('Right / wrong', done.length? w+' / '+(done.length-w) : '—', '') +
+      card('Accuracy', accuracy, '') +
+      card('Profit / loss', (st.profitLoss>=0?'+':'')+money(st.profitLoss),
+           st.profitLoss>0?'pos':st.profitLoss<0?'neg':'');
+
+    var customStake=document.getElementById('lgr-custom-stake');
+    if(customStake && document.activeElement!==customStake) customStake.value=st.stake.toFixed(2);
+
+    if(!entries.length){
+      host.innerHTML='<div class=empty>No bets yet. Tap <b>Select bet</b> on a '+
+        'candidate above to start the ladder.</div>';
+      return;
+    }
+    host.innerHTML = entries.slice().reverse().map(function(e,i){
+      var idx = entries.length-1-i;
+      var pill = e.result ? '<span class="pill '+e.result+'">'+e.result+'</span>'
+                          : '<span class="pill live">pending</span>';
+      var settle = e.result ? '' : '<div class=settle><span class=sub2>Settle:</span>'+
+        '<button class="result win" data-result="win" data-i="'+idx+'" type=button>Win</button>'+
+        '<button class="result loss" data-result="loss" data-i="'+idx+'" type=button>Loss</button>'+
+        '<button class="result push" data-result="push" data-i="'+idx+'" type=button>Push / void</button></div>';
+      var pl=e.profit_loss||0;
+      return '<div class="row'+(e.result?'':' pend')+'">'+
+        '<div class=top><span class=nm>R'+e.rung+' &middot; '+esc(e.pick)+'</span>'+
+        '<span class=price>'+(e.american>=0?'+':'')+Math.round(e.american)+'</span></div>'+
+        '<div class=sub2>'+esc((e.league||'').toUpperCase())+' '+esc(e.matchup||'')+
+        (e.score?' &middot; '+esc(e.score):'')+'</div>'+
+        '<div class=line>'+
+          '<span style="color:var(--dim)">stake</span>'+
+          '<input class=stk type=number step=0.01 value="'+e.stake.toFixed(2)+
+          '" data-i="'+idx+'">'+
+          '<span>&rarr; <b>'+money(e.to_return)+'</b></span>'+
+          pill+
+          '<button class=x data-del="'+idx+'" type=button>remove</button>'+
+          '<span style="margin-left:auto;color:var(--dim)">P/L '+
+          (pl>=0?'+':'')+money(pl)+' &middot; total '+
+          (e.running_profit_loss>=0?'+':'')+money(e.running_profit_loss)+'</span>'+
+        '</div>'+settle+'</div>';
+    }).join('');
+
+    host.querySelectorAll('input.stk').forEach(function(el){
+      el.addEventListener('change', function(){
+        var v=parseFloat(el.value); if(!v||v<=0) return;
+        var e=entries[+el.dataset.i]; e.stake=v; e.stake_edited=true;
+        save(entries); draw(); syncButtons();
+      });
+    });
+    host.querySelectorAll('button[data-del]').forEach(function(el){
+      el.addEventListener('click', function(){
+        entries.splice(+el.dataset.del,1); save(entries); draw(); syncButtons();
+      });
+    });
+    host.querySelectorAll('button[data-result]').forEach(function(el){
+      el.addEventListener('click', function(){
+        var e=entries[+el.dataset.i]; if(!e || e.result) return;
+        e.result=el.dataset.result; e.settled_at=new Date().toISOString();
+        save(entries); draw(); syncButtons();
+        syncMessage([{pick:e.pick,result:e.result}]);
+      });
+    });
+  }
+
+  function card(k,v,cls){
+    return '<div class=card><div class=k>'+k+'</div>'+
+           '<div class="v '+cls+'">'+v+'</div></div>';
+  }
+
+  function has(c){ return entries.some(function(e){
+    return e.event_id ? (!e.result && e.event_id===c.event_id && e.side===c.side)
+                      : (e.pick===c.pick && !e.result); }); }
+
+  function pending(){ return entries.find(function(e){ return !e.result; }); }
+
+  function syncButtons(){
+    CANDS.forEach(function(c,i){
+      var b=document.getElementById('add'+i); if(!b) return;
+      var on=has(c), busy=!!pending();
+      var finished=!!(c.event_id && RESULTS[c.event_id] && RESULTS[c.event_id].completed);
+      b.className='addbtn'+(on?' on':'');
+      b.disabled=finished || (busy&&!on);
+      b.textContent = finished ? 'Finished' : on ? 'Selected'
+                    : busy ? 'Settle current first' : 'Select bet';
+    });
+  }
+
+  window.ladderAdd = function(i, decimal){
+    var c=CANDS[i];
+    if(has(c)){
+      entries = entries.filter(function(e){
+        return !(e.event_id===c.event_id && e.side===c.side && !e.result); });
+    } else {
+      var active=pending();
+      if(active){ alert('Settle or remove '+active.pick+' before selecting another bet.'); return; }
+      entries.push({id:'b'+Date.now()+'_'+i, added:new Date().toISOString(),
+        event_id:c.event_id||'', league:c.league||'', matchup:c.matchup||'',
+        start_utc:c.start_utc||'', pick:c.pick, side:c.side||'',
+        decimal:decimal, american:d2a(decimal),
+        stake:0, stake_edited:false, result:null});
+    }
+    save(entries); draw(); syncButtons(); syncMessage([]);
+  };
+
+  function toCSV(){
+    var cols=['added','settled_at','league','matchup','pick','rung','decimal',
+              'american','stake','to_return','result','returned','profit_loss',
+              'running_profit_loss','running_net'];
+    var out=[cols.join(',')];
+    entries.forEach(function(e){
+      out.push(cols.map(function(k){
+        var v=e[k]==null?'':e[k];
+        return /[",\n]/.test(String(v)) ? '"'+String(v).replace(/"/g,'""')+'"' : v;
+      }).join(','));
+    });
+    return out.join('\n');
+  }
+
+  function show(text, name, mime){
+    var box=document.getElementById('lgr-out');
+    box.style.display='block'; box.textContent=text;
+    try{
+      var b=new Blob([text],{type:mime}), u=URL.createObjectURL(b);
+      var a=document.createElement('a'); a.href=u; a.download=name; a.click();
+      setTimeout(function(){ URL.revokeObjectURL(u); },2000);
+    }catch(err){}   // embedded viewers block downloads; the text above still works
+  }
+
+  document.getElementById('lgr-json').onclick=function(){
+    show(JSON.stringify(entries,null,1),'ladder-ledger.json','application/json'); };
+  document.getElementById('lgr-csv').onclick=function(){
+    show(toCSV(),'ladder-ledger.csv','text/csv'); };
+  document.getElementById('lgr-clear').onclick=function(){
+    if(confirm('Delete all '+entries.length+' ledger entries on this device?')){
+      entries=[]; save(entries); draw(); syncButtons(); } };
+
+  document.getElementById('lgr-custom').onclick=function(){
+    var active=pending();
+    if(active){ alert('Settle or remove '+active.pick+' before selecting another bet.'); return; }
+    var pick=document.getElementById('lgr-custom-pick').value.trim();
+    var am=parseFloat(document.getElementById('lgr-custom-am').value);
+    var stake=parseFloat(document.getElementById('lgr-custom-stake').value);
+    if(!pick){ alert('Enter the team or selection.'); return; }
+    if(!am || Math.abs(am)<100){ alert('Enter American odds such as -171.'); return; }
+    var dec=am>0 ? 1+am/100 : 1+100/Math.abs(am);
+    entries.push({id:'custom_'+Date.now(),added:new Date().toISOString(),event_id:'',
+      league:'manual',matchup:'',pick:pick,side:'',decimal:dec,american:am,
+      stake:stake>0?stake:0,stake_edited:stake>0,result:null});
+    document.getElementById('lgr-custom-pick').value='';
+    document.getElementById('lgr-custom-am').value='';
+    save(entries); draw(); syncButtons(); syncMessage([]);
+  };
+
+  function signature(e){ return [(e.added||e.placed_at||'').slice(0,10),
+    (e.pick||'').toLowerCase(),Number(e.stake||0).toFixed(2)].join('|'); }
+  function eventKey(e){ return e.event_id ? String(e.event_id)+'|'+(e.side||'') : ''; }
+  function mergeRepoHistory(){
+    var ids={}, sigs={}, events={}; entries.forEach(function(e){
+      ids[e.id]=e; sigs[signature(e)]=e; if(eventKey(e)) events[eventKey(e)]=e; });
+    var added=0, updated=0;
+    (D.history||[]).forEach(function(h){
+      var local=ids[h.id] || events[eventKey(h)] || sigs[signature(h)];
+      if(local){
+        if(h.result && !local.result){
+          var keepId=local.id;
+          Object.keys(h).forEach(function(k){ local[k]=h[k]; });
+          local.id=keepId||h.id; updated++;
+        }
+      } else {
+        entries.push(h); ids[h.id]=h; sigs[signature(h)]=h;
+        if(eventKey(h)) events[eventKey(h)]=h; added++;
+      }
+    });
+    if(added||updated) save(entries);
+    return {added:added,updated:updated};
+  }
+  // Pull the committed state/ladder.json history into this browser, merging by
+  // id so nothing duplicates. This is how a new device catches up.
+  document.getElementById('lgr-seed').onclick=function(){
+    var hist=(D.history||[]);
+    if(!hist.length){ alert('No settled bets in the repo state yet.'); return; }
+    var merged=mergeRepoHistory();
+    save(entries); draw(); syncButtons();
+    alert('Added '+merged.added+' and updated '+merged.updated+
+          ' from the repo; '+(hist.length-merged.added-merged.updated)+' already current.');
+  };
+
+  document.getElementById('lgr-imp').onclick=function(){
+    var t=prompt('Paste exported ledger JSON'); if(!t) return;
+    var inc; try{ inc=JSON.parse(t); }catch(e){ alert('That is not valid JSON'); return; }
+    if(!Array.isArray(inc)){ alert('Expected a JSON array'); return; }
+    var seen={}; entries.forEach(function(e){ seen[e.id]=1; });
+    var added=0;
+    inc.forEach(function(e){ if(e && e.id && !seen[e.id]){ entries.push(e); added++; } });
+    save(entries); draw(); syncButtons();
+    alert('Merged '+added+' new '+(added===1?'entry':'entries')+
+          ', skipped '+(inc.length-added)+' already here.');
+  };
+
+  // The shared ledger's adapter lives outside this closure. Hand it the chain,
+  // a way to replace it, and a repaint - reflow works the numbers out again
+  // from there, so nothing derived ever has to travel.
+  window.LadderLedger = {
+    STORAGE_KEY: KEY,
+    get: function(){ return entries; },
+    set: function(rows){ entries = rows; save(entries); draw(); syncButtons(); }
+  };
+
+  // The committed record is authoritative and is merged on every load. Local
+  // entries remain available, while the same real bet is never duplicated.
+  mergeRepoHistory();
+  draw(); syncButtons();
+  document.getElementById('lgr-check').onclick=refreshResults;
+  refreshResults();
+  setInterval(refreshResults,POLL_MS);
+})();
+</script>
+<section id="accuracy"><div data-model-accuracy></div></section><script src="model-accuracy.js"></script>
+<script>
+/* ladder-ui-sync-v1 */
+(function(){
+  var KEY='ladder.ledger.v1';
+  var dataEl=document.getElementById('ladder-data');
+  if(!dataEl) return;
+  var D;
+  try{ D=JSON.parse(dataEl.textContent); }catch(e){ return; }
+  var CFG=D.state||{}, CANDS=D.candidates||[];
+
+  function money(v){ return '$'+Number(v||0).toFixed(2); }
+  function entries(){
+    try{ var x=JSON.parse(localStorage.getItem(KEY)); return Array.isArray(x)?x:[]; }
+    catch(e){ return []; }
+  }
+  function roundCents(v){ return Math.round(Number(v||0)*100)/100; }
+  function floorStake(v,inc){ return Math.floor(Number(v||0)/inc+1e-9)*inc; }
+
+  function state(){
+    var arr=entries().slice().sort(function(a,b){
+      return String(a.added||a.placed_at||'').localeCompare(String(b.added||b.placed_at||''));
+    });
+    if(!arr.length){
+      var rr=Number(CFG.rung||0), bb=Number(CFG.base_stake||5);
+      return {rung:rr, stake:rr===0?bb:Number(CFG.stake||bb), run:[]};
+    }
+    var base=Number(CFG.base_stake||5), max=Number(CFG.max_rung||10);
+    var inc=Number(CFG.stake_increment||.01), rung=0, stake=base, run=[];
+    arr.forEach(function(e){
+      var want=floorStake(stake,inc);
+      var actual=(e.stake_edited && Number(e.stake)>0)?Number(e.stake):want;
+      var res=String(e.result||'').toLowerCase();
+      if(res==='win'){
+        var ret=roundCents(actual*Number(e.decimal||1));
+        run.push({rung:rung,stake:actual,ret:ret});
+        stake=ret; rung+=1;
+        if(rung>=max){ rung=0; stake=base; run=[]; }
+      } else if(res==='loss'){
+        rung=0; stake=base; run=[];
+      } else if(res==='push'){
+        // Same rung and same available stake.
+      }
+    });
+    return {rung:rung,stake:floorStake(stake,inc),run:run.slice(-rung)};
+  }
+
+  function activeDecimal(){
+    var top=document.querySelector("section .bet.top input[id^='de']");
+    if(top && Number(top.value)>1) return Number(top.value);
+    var d0=document.getElementById('de0');
+    if(d0 && Number(d0.value)>1) return Number(d0.value);
+    return CANDS.length?Number(CANDS[0].decimal||1.5):1.5;
+  }
+
+  function drawStair(st,dec){
+    var host=document.getElementById('stair');
+    if(!host) return;
+    var max=Number(CFG.max_rung||10), base=Number(CFG.base_stake||5);
+    var inc=Number(CFG.stake_increment||.01), stakes=[], rets=[];
+    var s=base;
+    for(var i=0;i<max;i++){
+      if(i<st.rung && st.run[i]) s=Number(st.run[i].stake);
+      else if(i===st.rung) s=Number(st.stake||base);
+      else if(i>st.rung) s=floorStake(rets[i-1],inc);
+      stakes[i]=s;
+      rets[i]=(i<st.rung && st.run[i])?Number(st.run[i].ret):roundCents(s*dec);
+    }
+    var W=760,RH=30,GAP=7,PAD=8,H=16+max*(RH+GAP)-GAP;
+    var top=Math.max.apply(null,rets.concat([1]));
+    var out='<svg viewBox="0 0 '+W+' '+H+'" width="100%" preserveAspectRatio="xMidYMid meet" '+
+      'xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Live ladder progress">';
+    for(var j=0;j<max;j++){
+      var y=PAD+(max-1-j)*(RH+GAP), w=Math.max(58,(stakes[j]/top)*(W-190));
+      var fill=j<st.rung?'#2ecc71':j===st.rung?'#f0b429':'#182231';
+      var tc=j===st.rung?'#1a1205':j<st.rung?'#eafff2':'#5f7085';
+      out+='<rect x="46" y="'+y+'" width="'+w.toFixed(1)+'" height="'+RH+'" rx="7" fill="'+fill+'"/>';
+      out+='<text x="14" y="'+(y+19.5)+'" font-size="12" font-family="ui-monospace,monospace" fill="'+
+        (j===st.rung?'#f0b429':'#5f7085')+'">R'+j+'</text>';
+      var label=money(stakes[j])+' → '+money(rets[j]);
+      var tx=w>210?58:(46+w+10), anchor=w>210?tc:'#7d8da1';
+      out+='<text x="'+tx.toFixed(1)+'" y="'+(y+19.5)+'" font-size="12.5" font-family="ui-monospace,monospace" fill="'+anchor+'">'+label+'</text>';
+    }
+    out+='</svg>';
+    host.innerHTML=out;
+    var cash=document.getElementById('cashout');
+    if(cash){
+      var next=roundCents(st.stake*dec);
+      cash.textContent='Live ladder: rung '+st.rung+' · next stake '+money(st.stake)+
+        '. A win at the selected price moves to rung '+Math.min(st.rung+1,max)+
+        ' with '+money(next)+'. A loss restarts at rung 0 with '+money(base)+'.';
+    }
+  }
+
+  function sync(){
+    var st=state(), base=Number(CFG.base_stake||5), max=Number(CFG.max_rung||10);
+    var rung=document.querySelector('.hero .rungnum'); if(rung) rung.textContent=st.rung;
+    var of=document.querySelector('.hero .of'); if(of) of.textContent='of '+max+' rungs · live';
+    document.title='Ladder — rung '+st.rung;
+
+    var firstGrid=document.querySelector('.hero + .grid');
+    if(firstGrid){
+      firstGrid.querySelectorAll('.card').forEach(function(card){
+        var k=card.querySelector('.k'),v=card.querySelector('.v');
+        if(k&&v&&k.textContent.trim()==='Next stake') v.textContent=money(st.stake);
+      });
+      var note=document.getElementById('ladder-auto-state');
+      if(!note){
+        note=document.createElement('div'); note.id='ladder-auto-state'; note.className='sync';
+        firstGrid.insertAdjacentElement('afterend',note);
+      }
+      note.textContent='AUTO LADDER · rung '+st.rung+' · next '+money(st.stake)+
+        ' · WIN → advance · LOSS → restart at '+money(base);
+    }
+
+    CANDS.forEach(function(c,i){
+      var de=document.getElementById('de'+i), dec=de&&Number(de.value)>1?Number(de.value):Number(c.decimal||1.5);
+      var ret=roundCents(st.stake*dec), el=document.getElementById('ret'+i);
+      if(el) el.innerHTML='stake '+money(st.stake)+' &rarr; <b>'+money(ret)+'</b> '+
+        '<span style="color:var(--dim)">(profit '+money(ret-st.stake)+')</span>';
+    });
+    drawStair(st,activeDecimal());
+  }
+
+  var scheduled=false;
+  function soon(){
+    if(scheduled) return; scheduled=true;
+    setTimeout(function(){ scheduled=false; sync(); },0);
+  }
+  var stats=document.getElementById('lgr-stats');
+  if(stats && window.MutationObserver) new MutationObserver(soon).observe(stats,{childList:true,subtree:true});
+  document.querySelectorAll("input[id^='de'],input[id^='am']").forEach(function(x){ x.addEventListener('input',soon); });
+  document.querySelectorAll("section .bet[id^='card']").forEach(function(x){ x.addEventListener('click',soon); });
+  window.addEventListener('storage',soon);
+  sync();
+  setInterval(sync,5000);
+})();
+</script>
+
+<!-- Shared ledger: keeps this board in step with the same bets on every other device. Endpoint and token live in this browser only. --><script src="betsync.js"></script><script src="sync-adapter.js"></script><script src="betsync-ui.js"></script></body></html>

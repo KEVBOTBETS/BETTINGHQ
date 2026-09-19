@@ -1,0 +1,12 @@
+.ticket-tool {
+  display: flex; align-items: center; gap: 10px; margin: 16px 8px 0; padding: 11px 12px;
+  border: 1px solid #ef3d4366; border-radius: 11px; background: linear-gradient(135deg, #d71920, #850c12);
+  color: #fff; text-align: left; box-shadow: 0 10px 25px #0005;
+}
+.ticket-tool strong { font-size: 15px; font-weight: 950; }
+.ticket-tool span { font-size: 10px; font-weight: 750; line-height: 1.2; text-transform: uppercase; letter-spacing: .5px; }
+.ticket-tool:hover { border-color: #ff8589; }
+@media (max-width: 760px) { .ticket-tool { display:flex;flex-direction:column;justify-content:center;gap:3px;min-height:52px;width:70px;margin:0 3px;padding:6px 4px;box-shadow:none; } .ticket-tool strong{font-size:11px}.ticket-tool span{font-size:8px} }
+.app-notices{position:fixed;z-index:30;bottom:12px;right:12px;max-width:min(440px,calc(100% - 24px));font-size:12px}
+.app-notices p{padding:12px;border:1px solid #ffc857;background:#19202a;border-radius:9px;color:#ffe39e}
+@media(max-width:760px){.app-notices{bottom:calc(74px + env(safe-area-inset-bottom))}}
