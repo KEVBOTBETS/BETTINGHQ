@@ -12,7 +12,13 @@ const registry=JSON.parse(await fs.readFile(path.join(root,'sports.json'),'utf8'
 await fs.mkdir(dir,{recursive:true});
 async function read(file,fallback){try{return JSON.parse(await fs.readFile(path.join(dir,file),'utf8'));}catch(e){if(e.code==='ENOENT')return fallback;throw e;}}
 async function write(file,value){const dest=path.join(dir,file);await fs.mkdir(path.dirname(dest),{recursive:true});await fs.writeFile(dest+'.tmp',JSON.stringify(value,null,2)+'\n');await fs.rename(dest+'.tmp',dest);}
-async function get(url){if(String(url).startsWith('file:'))return JSON.parse(await fs.readFile(new URL(url),'utf8'));const response=await fetch(url,{signal:AbortSignal.timeout(15000),headers:{'User-Agent':'KEVBOT-public-ticket-archive/1.0'}});if(!response.ok)throw Error('HTTP '+response.status);return response.json();}
+async function get(url){if(String(url).startsWith('file:'))return JSON.parse(await fs.readFile(new URL(url),'utf8'));
+  // Public feeds (especially live-game summaries) fail transiently; retry with backoff before giving up.
+  let last;for(let attempt=0;attempt<3;attempt++){
+    if(attempt)await new Promise(r=>setTimeout(r,1500*attempt));
+    try{const response=await fetch(url,{signal:AbortSignal.timeout(20000),headers:{'User-Agent':'KEVBOT-public-ticket-archive/1.0'}});if(!response.ok)throw Error('HTTP '+response.status);return await response.json();}catch(e){last=e;}
+  }
+  throw last;}
 const index=await read('index.json',{schema:1,started_at:stamp,tickets:[]});
 const state=await read('results.json',{schema:1,entries:{}}),cache=await read('feeds.json',{}),health={checked_at:stamp,feeds:{},result_failures:[]};
 const bundles={};
@@ -77,7 +83,7 @@ async function worker(){while(work.length){const task=work.shift(),r=task.r;let 
     if(status){if(e.result.status!==status){e.history.push({at:stamp,from:e.result.status,to:status,source:url});e.result={status,verified_at:stamp,source:url,score:game?.completed?game.away+'–'+game.home:null};}}
     else if(game?.completed)e.review='Final score available; selection/stat needs verification. Pending until verified.';
   }
-  }catch(e){health.result_failures.push({sport:r.key,event_id:r.eventId,error:'Official result feed unavailable'});}
+  }catch(e){health.result_failures.push({sport:r.key,event_id:r.eventId,error:'Official result feed unavailable'});console.error('result feed unavailable: '+r.key+' '+r.eventId+' ('+(e?.message||e)+')');}
 }}
 await Promise.all(Array.from({length:4},worker));
 const injuryPaths={mlb:'baseball/mlb',nfl:'football/nfl',ncaaf:'football/college-football'};
@@ -97,4 +103,8 @@ for(const b of Object.values(cache)){
 }
 await write('index.json',index);await write('results.json',state);await write('feeds.json',cache);await write('health.json',health);
 console.log(JSON.stringify({snapshots:index.tickets.length,unique_picks:Object.keys(state.entries).length,feeds:health.feeds,result_failures:health.result_failures.length}));
-if(Object.values(health.feeds).some(f=>f.failed_fields.some(x=>x!=='accuracy'))||health.result_failures.length){process.exitCode=2;}
+// Model-feed failures block publication. A result lookup that fails (e.g. a live game's summary
+// hiccups) only leaves that pick Pending; it is recorded in health.json, shown on the archive page,
+// and retried on the next scheduled run instead of blocking the whole site.
+if(Object.values(health.feeds).some(f=>f.failed_fields.some(x=>x!=='accuracy'))){process.exitCode=2;}
+else if(health.result_failures.length){console.warn('::warning::'+health.result_failures.length+' result lookup(s) failed; picks stay Pending until the next run.');}
