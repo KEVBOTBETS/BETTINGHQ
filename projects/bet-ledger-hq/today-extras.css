@@ -1,0 +1,32 @@
+.ticker {
+  position: sticky; top: 0; z-index: 20; display: grid;
+  grid-template-columns: auto minmax(0, 1fr) 42px; align-items: center;
+  height: 42px; background: #060a0f; border-bottom: 1px solid var(--border); overflow: hidden;
+}
+.ticker-label { height: 100%; display: flex; align-items: center; padding: 0 14px; background: #d71920; color: #fff; font-size: 10px; font-weight: 900; letter-spacing: 1.4px; }
+.ticker-window { overflow: hidden; white-space: nowrap; mask-image: linear-gradient(90deg, transparent, #000 3%, #000 97%, transparent); }
+.ticker-track { display: inline-flex; width: max-content; align-items: center; gap: 28px; padding-left: 100%; font-size: 12px; font-weight: 650; animation: ticker-scroll 85s linear infinite; }
+.ticker-track:hover { animation-play-state: paused; }
+.ticker-item { display: inline-flex; align-items: center; gap: 8px; }
+.ticker-league { color: var(--accent); font-size: 9px; letter-spacing: 1px; }
+.ticker-news { color: var(--muted); }
+#ticker-refresh { min-height: 42px; height: 42px; border: 0; border-left: 1px solid var(--border); border-radius: 0; padding: 0; background: #0b1119; }
+@keyframes ticker-scroll { to { transform: translateX(-100%); } }
+#ticket-dialog { width: min(720px, calc(100% - 24px)); max-height: calc(100dvh - 24px); overflow: auto; background: #0b1119; color: var(--ink); border: 1px solid var(--border); border-radius: 18px; padding: 18px; }
+#ticket-dialog::backdrop { background: #030609dd; }
+.ticket-dialog-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 15px; }
+.ticket-dialog-head h2, .ticket-dialog-head p { margin: 0; }
+.ticket-dialog-head p { margin-bottom: 4px; }
+.ticket-dialog-head button { font-size: 24px; padding: 3px 12px; }
+#ticket-preview { display: block; width: 100%; height: auto; margin: 15px 0; border-radius: 12px; background: #101925; }
+.ticket-actions { display: flex; gap: 9px; }
+.ticket-actions button { flex: 1; }
+.ticket-actions button:last-child { color: var(--accent); border-color: #7be7bd66; }
+@media (max-width: 760px) {
+  .ticker { grid-template-columns: auto minmax(0, 1fr) 38px; height: 38px; }
+  .ticker-label { padding: 0 9px; font-size: 8px; }
+  .ticker-track { font-size: 10px; gap: 20px; animation-duration: 65s; }
+  #ticker-refresh { height: 38px; min-height: 38px; }
+  .page { padding-top: 16px; }
+}
+@media (prefers-reduced-motion: reduce) { .ticker-track { animation: none; padding-left: 12px; } .ticker-window { overflow: auto; } }

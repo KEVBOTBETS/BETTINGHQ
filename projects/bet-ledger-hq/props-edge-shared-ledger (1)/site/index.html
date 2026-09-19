@@ -1,0 +1,278 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#071019" />
+    <meta name="description" content="NFL-only player prop projections, live prices, no-vig market comparisons, and a manual wager ledger." />
+    <title>NFL Props Edge</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&amp;family=IBM+Plex+Sans:wght@400;500;600;700&amp;display=swap" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <div class="shell topbar-inner">
+        <a class="brand" href="#" aria-label="NFL Props Edge home">
+          <span class="brand-mark">PE</span>
+          <span><strong>NFL PROPS</strong><small>EDGE LAB</small></span>
+        </a>
+        <nav class="nav-tabs" aria-label="Primary navigation">
+          <button class="active" data-view="best">Best Bets</button>
+          <button data-view="parlays">Daily Parlays</button>
+          <button data-view="board">Full Board</button>
+          <button data-view="projections">Projections</button>
+          <button data-view="simulator">Matchup Lab</button>
+          <button data-view="accuracy">Accuracy</button>
+          <button data-view="ledger">My Ledger</button>
+          <button data-view="settings">Bankroll &amp; Stakes</button>
+          <button data-view="model">Model &amp; Sources</button>
+        </nav>
+      </div>
+    </header>
+
+    <main class="shell">
+      <section class="masthead">
+        <div class="masthead-copy">
+          <p class="eyebrow">NFL PLAYER PROP COMMAND DESK · 2026</p>
+          <h1>Sharper props.<br /><span>Stricter decisions.</span></h1>
+          <p class="lede">The best returned Ontario-regulated price meets complete no-vig markets, conservative regular-season form, and market-specific probability checks. No posted price means no wager—never a made-up edge.</p>
+          <div class="coverage-chips" aria-label="Core NFL prop markets">
+            <span>Touchdowns</span><span>Passing</span><span>Rushing</span><span>Receiving</span><span>Field goals</span>
+          </div>
+        </div>
+        <aside class="readiness-panel" aria-label="Market readiness">
+          <div class="readiness-top"><span>MARKET READINESS</span><strong id="readinessState">CHECKING</strong></div>
+          <div id="stageForm" class="readiness-step waiting"><i>01</i><div><strong>Player form</strong><small>Regular-season samples</small></div><b>WAIT</b></div>
+          <div id="stagePrices" class="readiness-step waiting"><i>02</i><div><strong>Book prices</strong><small>Complete Ontario market</small></div><b>WAIT</b></div>
+          <div id="stageQualify" class="readiness-step locked"><i>03</i><div><strong>Qualification</strong><small>Edge + value + safety gates</small></div><b>LOCKED</b></div>
+          <div class="feed-stamp"><span class="pulse"></span><div><strong id="feedState">LOADING</strong><small id="lastUpdated">Waiting for data</small></div></div>
+        </aside>
+      </section>
+
+      <section id="statusBanner" class="status-banner loading" aria-live="polite">Loading the latest NFL prop board…</section>
+
+      <section class="kpi-strip" aria-label="NFL props summary">
+        <article><span>Qualified</span><strong id="metricQualified">—</strong><small>Best + Good + Lean</small></article>
+        <article><span>Live price rows</span><strong id="metricPriced">—</strong><small>Current provider pull</small></article>
+        <article><span>Projections</span><strong id="metricProjection">—</strong><small>Regular season only</small></article>
+        <article><span>My bankroll</span><strong id="metricBankroll">C$500.00</strong><small>Browser-local ledger</small></article>
+        <article><span>Open exposure</span><strong id="metricExposure">C$0.00</strong><small id="metricExposurePct">0.0% of bankroll</small></article>
+        <article><span>My P/L</span><strong id="metricPnl">C$0.00</strong><small id="metricRoi">0.0% ROI</small></article>
+      </section>
+
+      <section class="filterbar panel">
+        <label><span>Game date</span><select id="dateSelect"><option value="ALL">All upcoming dates</option></select></label>
+        <label class="search-field"><span>Find player or market</span><input id="searchInput" type="search" placeholder="e.g. passing yards" /></label>
+        <div class="market-filter" id="marketTabs" role="tablist" aria-label="NFL prop market">
+          <button class="active" data-market="ALL">All</button>
+          <button data-market="TOUCHDOWNS">TDs</button>
+          <button data-market="PASSING">Passing</button>
+          <button data-market="RUSHING">Rushing</button>
+          <button data-market="RECEIVING">Receiving</button>
+          <button data-market="TARGETS">Targets</button>
+          <button data-market="DEFENSE">Defense</button>
+          <button data-market="KICKING">Kicking</button>
+        </div>
+      </section>
+
+      <section id="view-best" class="view active">
+        <div class="section-title">
+          <div><p class="eyebrow gold">TOP OF THE BOARD</p><h2>Best Bets</h2></div>
+          <p>Requires the strongest edge, price value, sample size, confidence, external no-vig confirmation, and an acceptable price.</p>
+        </div>
+        <div id="bestBoard" class="card-grid"></div>
+
+        <div class="section-title compact">
+          <div><p class="eyebrow green">MODEL QUALIFIED</p><h2>Good Plays</h2></div>
+          <p>Strong value with more uncertainty than a Best Bet.</p>
+        </div>
+        <div id="goodBoard" class="card-grid"></div>
+
+        <div class="section-title compact">
+          <div><p class="eyebrow blue">SMALLER ADVANTAGE</p><h2>Leans</h2></div>
+          <p>Passed every safety gate, but carries a smaller modeled advantage.</p>
+        </div>
+        <div id="leanBoard" class="card-grid"></div>
+        <details><summary>Other qualified options</summary><p>These pass the model checks but fall outside the suggested portfolio because of exposure or correlation limits. Review them as alternatives.</p><div id="otherBoard" class="card-grid"></div></details>
+      </section>
+
+      <section id="view-parlays" class="view">
+        <div class="section-title parlay-title">
+          <div><p class="eyebrow gold">THE DAILY PICK CARD</p><h2>Singles, touchdowns & long shots</h2></div>
+          <p>Three mixed-market targets—roughly +1000, +5000, and +10000—plus a dedicated touchdown ticket. Each uses 3–4 supported legs from one book. Cards wait when suitable prices are unavailable.</p>
+        </div>
+        <div class="parlay-safety panel">
+          <strong>High variance · no automatic stake</strong>
+          <span>These are educated long-shot combinations, separate from Best Bets and Kelly staking. Odds are estimated from posted legs; verify the available combination and final payout at the named sportsbook.</span>
+        </div>
+        <div id="parlayBoard" class="parlay-board" aria-live="polite"></div>
+      </section>
+
+      <section id="view-board" class="view">
+        <div class="section-title">
+          <div><p class="eyebrow">EVERY LIVE TARGET PRICE</p><h2>Full NFL Prop Board</h2></div>
+          <p>Qualified rows and watch rows stay visible so a missing bet has an exact reason.</p>
+        </div>
+        <div class="table-wrap panel">
+          <table class="data-table board-table">
+            <thead>
+              <tr><th>Tier</th><th>Player / Pick</th><th>Game</th><th>Book</th><th class="num">Price</th><th class="num">Model</th><th class="num">No-vig</th><th class="num">Push</th><th class="num">Edge</th><th class="num">Price value</th><th>Data</th><th>Decision</th></tr>
+            </thead>
+            <tbody id="boardBody"></tbody>
+          </table>
+        </div>
+      </section>
+
+      <section id="view-projections" class="view">
+        <div class="section-title">
+          <div><p class="eyebrow">NO PRICE, NO BET</p><h2>NFL Projection Board</h2></div>
+          <p>These are regular-season form estimates, not recommendations. A current sportsbook line must pass every model gate first.</p>
+        </div>
+        <div id="projectionBoard" class="projection-grid"></div>
+      </section>
+
+      <section id="view-simulator" class="view">
+        <div class="section-title">
+          <div><p class="eyebrow blue">PLAYER VS DEFENSE</p><h2>10,000-Run Matchup Lab</h2></div>
+          <p>Select an upcoming player and market, adjust the scenario line, and compare recent player form with the opponent's position-level production allowed.</p>
+        </div>
+        <div class="simulator-shell">
+          <aside class="simulator-controls panel">
+            <div class="simulator-control-head"><span>SCENARIO INPUTS</span><strong id="simDataState">LIVE DATA</strong></div>
+            <label><span>Matchup</span><select id="simGame"></select></label>
+            <label><span>Player</span><select id="simPlayer"></select></label>
+            <label><span>Prop market</span><select id="simMarket"></select></label>
+            <div class="sim-control-row">
+              <label><span>Scenario line</span><input id="simLine" type="number" min="0" step="0.5" inputmode="decimal" /></label>
+              <label><span>View side</span><select id="simSide"><option value="over">Over</option><option value="under">Under</option></select></label>
+            </div>
+            <button id="runSimulator" class="sim-run">Run 10,000 simulations</button>
+            <p class="sim-disclaimer">A simulation is not a qualified bet. A wager still requires a complete current market from an eligible Ontario book and every edge, confidence, price, and exposure gate.</p>
+          </aside>
+
+          <div id="simulatorEmpty" class="empty-state panel" hidden><strong>No matchup simulation is ready</strong><span>Regular-season player and opponent samples will appear automatically after the scheduled refresh.</span></div>
+
+          <div id="simulatorResults" class="simulator-results">
+            <article class="sim-hero panel">
+              <div class="sim-hero-top">
+                <div><p class="eyebrow" id="simMarketLabel">PROP MARKET</p><h3 id="simPlayerLabel">Select a player</h3><p id="simMatchupLabel" class="game-line"></p></div>
+                <span id="simMatchupBadge" class="matchup-badge neutral">NEUTRAL</span>
+              </div>
+              <div class="sim-main-result">
+                <div id="simProbabilityRing" class="probability-ring" role="img" aria-label="Simulation hit probability"><div><strong id="simHitProbability">—</strong><span id="simSideLabel">OVER</span></div></div>
+                <div class="sim-call">
+                  <span>SIMULATED OUTCOME</span>
+                  <strong id="simOutcomeCall">Waiting for inputs</strong>
+                  <p id="simOutcomeDetail">The result will update from 10,000 deterministic trials.</p>
+                </div>
+              </div>
+              <div class="sim-stat-grid">
+                <div><span>Form baseline</span><strong id="simBaseProjection">—</strong></div>
+                <div><span>Matchup projection</span><strong id="simAdjustedProjection">—</strong></div>
+                <div><span>Sim average</span><strong id="simAverage">—</strong></div>
+                <div><span>Middle 80%</span><strong id="simRange">—</strong></div>
+                <div><span>Fair odds</span><strong id="simFairOdds">—</strong></div>
+                <div><span>Best live price</span><strong id="simLivePrice">NOT POSTED</strong></div>
+              </div>
+            </article>
+
+            <article class="defense-card panel">
+              <div class="defense-card-head"><div><span>OPPONENT MATCHUP</span><h3 id="simOpponentLabel">Opponent defense</h3></div><strong id="simDefenseRank">—</strong></div>
+              <div class="rank-track" aria-hidden="true"><i id="simRankBar"></i></div>
+              <div class="rank-scale"><span>TOUGHEST</span><span>LEAGUE MEDIAN</span><span>EASIEST</span></div>
+              <div class="defense-compare">
+                <div><span>Opponent allows</span><strong id="simDefenseAverage">—</strong><small id="simDefenseSamples">No sample</small></div>
+                <div><span>League median</span><strong id="simLeagueAverage">—</strong><small>Same position + market</small></div>
+                <div><span>Projection change</span><strong id="simAdjustment">—</strong><small>Capped at ±12%</small></div>
+              </div>
+            </article>
+
+            <article class="sim-evidence panel">
+              <div><span>RECENT PLAYER RESULTS</span><strong id="simSampleLabel">—</strong></div>
+              <div id="simRecentResults" class="recent-result-strip"></div>
+            </article>
+
+            <article class="sim-evidence panel">
+              <div><span>MODEL CHECKS</span><strong>Fail-closed safeguards</strong></div>
+              <div id="simRiskFlags" class="risk-flags"></div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section id="view-accuracy" class="view"><div data-model-accuracy></div></section>
+      <section id="view-ledger" class="view">
+        <div class="section-title ledger-title">
+          <div><p class="eyebrow">MANUAL CONFIRMATION ONLY</p><h2>My Ledger</h2><p>Nothing enters here automatically. Add a card only after checking and placing the current price.</p></div>
+          <div class="ledger-actions">
+            <label>Starting bankroll <input id="bankrollInput" type="number" min="1" step="25" value="500" /></label>
+            <button id="exportCsv" class="button">Export CSV</button>
+            <button id="exportJson" class="button">Backup JSON</button>
+            <button id="importJson" class="button">Restore JSON</button>
+            <input id="ledgerFile" type="file" accept=".json,application/json" hidden />
+            <button id="clearLedger" class="button danger">Clear</button>
+          </div>
+        </div>
+        <div id="ledgerSummary" class="ledger-summary"></div>
+        <div class="table-wrap panel">
+          <table class="data-table ledger-table">
+            <thead>
+              <tr><th>Date</th><th>Tier</th><th>Pick</th><th>Book</th><th class="num">Edge</th><th class="num">Stake</th><th>Result</th><th>Closing</th><th class="num">CLV</th><th class="num">P/L</th><th>Notes</th><th></th></tr>
+            </thead>
+            <tbody id="ledgerBody"></tbody>
+          </table>
+        </div>
+      </section>
+
+      <section id="view-settings" class="view">
+        <div class="section-title">
+          <div><p class="eyebrow green">BROWSER-LOCAL CONTROLS</p><h2>Bankroll &amp; Stakes</h2></div>
+          <p>Change how qualified straight props are sized on this device. These settings never alter model probability, edge, tier, or any Daily Parlay.</p>
+        </div>
+        <div id="stakingSettings" class="staking-settings panel"></div>
+      </section>
+
+      <section id="view-model" class="view">
+        <div class="section-title">
+          <div><p class="eyebrow">AUDITABLE BY DESIGN</p><h2>Model &amp; Data Sources</h2></div>
+          <p>The board separates projection disagreement, no-vig market probability, offered-price value, and wager sizing.</p>
+        </div>
+        <div class="method-grid">
+          <article class="panel"><span class="step">01</span><h3>Real NFL data only</h3><p>Live prop prices come from the configured odds providers. ESPN supplies completed regular-season box scores. Preseason is excluded.</p></article>
+          <article class="panel"><span class="step">02</span><h3>Early-season restraint</h3><p>Up to eight recent games feed a recency-weighted, median-stabilized projection. Prior-season influence is reduced until four current-season games exist.</p></article>
+          <article class="panel"><span class="step">03</span><h3>Power-method no-vig</h3><p>Complete Over/Under or Yes/No prices are de-vigged. Other eligible books form the comparison; the best offered Ontario price is published.</p></article>
+          <article class="panel"><span class="step">04</span><h3>Market-specific probability</h3><p>Yardage uses a continuous distribution; touchdowns, field goals, interceptions and sacks use count-stat handling with explicit push probability.</p></article>
+          <article class="panel"><span class="step">05</span><h3>Fail-closed gates</h3><p>Thin samples, low confidence, incomplete prices, excessive disagreement, extreme odds, correlated alternates, and exposure excess remain passes.</p></article>
+          <article class="panel"><span class="step">06</span><h3>Conservative staking</h3><p>Suggested stakes use 0.15 Kelly, then scale for confidence and data maturity. PASS rows always receive C$0.</p></article>
+          <article class="panel"><span class="step">07</span><h3>Opponent defense adjustment</h3><p>Each player market is compared with position-level production allowed by the upcoming opponent and the league median. The adjustment is reliability-shrunk and capped at ±12%.</p></article>
+          <article class="panel"><span class="step">08</span><h3>10,000-run matchup lab</h3><p>The simulator blends the adjusted distribution with recent empirical results. It reports scenario probabilities and fair odds, but cannot qualify a wager without a current complete eligible-book market.</p></article>
+          <article class="panel"><span class="step">09</span><h3>Risk-adjusted parlays</h3><p>Daily cards combine 3–4 supported props at one book, require multiple market groups, avoid repeating a player, and haircut same-game probability. Unsupported payout bands remain blank.</p></article>
+        </div>
+        <div class="source-grid">
+          <article class="panel"><h3>Feed health</h3><div id="sourceHealth"></div></article>
+          <article class="panel"><h3>Current model status</h3><p id="modelStatus">Loading…</p><ul id="modelNotes"></ul></article>
+          <article class="panel"><h3>Prop market coverage</h3><ul id="marketCoverage"></ul></article>
+          <article class="panel"><h3>Important limit</h3><p>Public data cannot fully observe late injury news, snap restrictions, weather changes, or a sportsbook line move after refresh. Verify each card before placing it.</p></article>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <div class="shell">NFL Props Edge · Informational use only · Verify the live line, player availability, and limits before wagering.</div>
+    </footer>
+    <script src="ledger.js" defer></script>
+    <script src="simulator.js" defer></script>
+    <script src="staking.js" defer></script>
+    <script src="eligibility.js"></script>
+<script src="app.js" defer></script>
+  <script src="model-accuracy.js"></script>
+<!-- Shared ledger: keeps this board in step with the same bets on every
+     other device. Endpoint and token live in this browser only. -->
+<script src="betsync.js" defer></script>
+<script src="sync-adapter.js" defer></script>
+<script src="betsync-ui.js" defer></script>
+
+</body>
+</html>
