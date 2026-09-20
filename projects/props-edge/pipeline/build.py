@@ -73,8 +73,12 @@ def build() -> dict[str, Any]:
                 errors.append(str(exc))
         source = espn.name if sport_projections else "No source available"
 
+        # Only games that have not kicked off yet decide the odds window.
+        stamp_now = now.isoformat()
         kickoffs = sorted(
-            stamp for stamp in (str(row.start_time or "") for row in sport_projections) if stamp
+            stamp
+            for stamp in (str(row.start_time or "") for row in sport_projections)
+            if stamp and stamp > stamp_now
         )
         next_kickoff = kickoffs[0] if kickoffs else None
         hours_away = None
