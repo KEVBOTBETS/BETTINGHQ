@@ -19,6 +19,7 @@
   const prob=v=>{const n=Number(v);return v!=null&&v!==''&&Number.isFinite(n)&&n>=0&&n<=1?n:null;};
   const images={};
   function image(src){
+    src=(root.MoneylineCard&&root.MoneylineCard.base?root.MoneylineCard.base:'')+src;
     if(!images[src])images[src]=new Promise(resolve=>{const img=new Image();img.onload=()=>resolve(img);img.onerror=()=>resolve(null);img.src=src;});
     return images[src];
   }
@@ -306,8 +307,9 @@
   async function draw(canvas,picks,{style='gridiron',day}={}){
     const card=moneylineCard(picks,day||picks[0]?.day||'');await render(canvas,card,style);return {canvas,meta:card.meta};
   }
-  async function drawTicket(canvas,ticket,{style='gridiron',results=null,outcomeKey}={}){
-    const card=ticketCard(ticket,results,outcomeKey||(r=>root.KevTickets?.outcomeKey(r)));await render(canvas,card,style);return canvas;
+  async function drawTicket(canvas,ticket,{style='gridiron',results=null,outcomeKey,override=null}={}){
+    const card={...ticketCard(ticket,results,outcomeKey||(r=>root.KevTickets?.outcomeKey(r))),...(override||{})};
+    await render(canvas,card,style);return canvas;
   }
-  root.MoneylineCard={styles:STYLES,draw,drawTicket};
+  root.MoneylineCard={styles:STYLES,draw,drawTicket,base:''};
 })(window);

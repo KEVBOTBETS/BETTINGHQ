@@ -318,3 +318,96 @@ class EspnDateRangeFallbackTests(unittest.TestCase):
         from pipeline.http import _unzip
         self.assertEqual(_unzip(gzip.compress(b'{"code":400}')), b'{"code":400}')
         self.assertEqual(_unzip(b"plain"), b"plain")
+
+
+class LegAndParlayTests(unittest.TestCase):
+    def setUp(self):
+        import json as _json
+        from pathlib import Path
+        self.settings = _json.loads((Path(__file__).resolve().parents[1] / "config" / "settings.json").read_text())
+
+    def _projections(self):
+        from pipeline.schema import Projection
+        import datetime as _dt
+        start = (_dt.datetime.now(_dt.timezone.utc) + _dt.timedelta(hours=18)).isoformat()
+        rows = []
+        for game, (away, home) in enumerate([("BUF", "HOU"), ("DAL", "NYG"), ("NO", "DET"), ("PHI", "WAS")]):
+            for team in (away, home):
+                for index in range(5):
+                    for market, base, deviation in [
+                        ("Passing yards", 245, 45), ("Receiving yards", 61, 22), ("Receptions", 5, 2),
+                        ("Rushing yards", 58, 20), ("Rush attempts", 13, 4), ("Anytime touchdown", 0.6, 0.5),
+                    ]:
+                        # Vary each player so the fixture has a realistic spread of prices.
+                        scale = 0.55 + 0.22 * index + 0.08 * game
+                        base = base * scale
+                        recent = [round(base * (0.7 + 0.12 * ((step + index) % 6)), 1) for step in range(6)]
+                        rows.append(Projection(
+                            sport="NFL", player=f"{team} P{index}", team=team, matchup=f"{away} @ {home}",
+                            market=market, projection=base, samples=6, confidence=0.6,
+                            standard_deviation=deviation, recent=recent, trend=0.4, start_time=start))
+        return rows
+
+    def test_only_nfl_is_configured(self):
+        self.assertEqual(list(self.settings["sports"]), ["NFL"])
+
+    def test_model_legs_carry_price_probability_and_a_reason(self):
+        from pipeline.legs import build_legs
+        legs = build_legs([], self._projections(), self.settings)
+        self.assertTrue(legs)
+        for leg in legs:
+            self.assertEqual(leg["sport"], "NFL")
+            self.assertEqual(leg["price_source"], "model")
+            self.assertTrue(leg["reason"])
+            self.assertGreaterEqual(leg["model_prob"], self.settings["legs"]["min_model_prob"])
+            self.assertLessEqual(leg["model_prob"], self.settings["legs"]["max_model_prob"])
+        self.assertTrue(any(leg["market"] == "Anytime touchdown" for leg in legs))
+
+    def test_estimated_price_keeps_the_book_margin(self):
+        from pipeline.legs import estimated_price
+        decimal, american = estimated_price(0.5, 0.045)
+        self.assertLess(decimal, 2.0, "an estimated price must sit below the fair price")
+        self.assertLess(american, 0)
+
+    def test_parlays_hit_every_target_in_each_scope(self):
+        from pipeline.legs import build_legs
+        from pipeline.parlays import build_parlays
+        result = build_parlays(build_legs([], self._projections(), self.settings), self.settings)
+        self.assertTrue(result["tickets"])
+        for scope in ("slate", "game"):
+            targets = {ticket["target"] for ticket in result["tickets"] if ticket["scope"] == scope}
+            self.assertEqual(targets, set(self.settings["parlays"]["targets"]), scope)
+        tolerance = float(self.settings["parlays"]["tolerance"])
+        for ticket in result["tickets"]:
+            target_decimal = 1 + ticket["target"] / 100
+            span = tolerance * (2 if ticket["off_target"] else 1)
+            self.assertGreaterEqual(ticket["price_decimal"], target_decimal * (1 - span) - 1e-9)
+            self.assertLessEqual(ticket["price_decimal"], target_decimal * (1 + span) + 1e-9)
+            self.assertGreaterEqual(ticket["leg_count"], 2)
+            self.assertGreater(ticket["model_prob"], 0)
+            self.assertLess(ticket["model_prob"], 1)
+            players = [(leg["player"], leg["market"]) for leg in ticket["legs"]]
+            self.assertEqual(len(players), len(set(players)), "a ticket must not repeat a player's market")
+            self.assertFalse(any(key.startswith("_") for leg in ticket["legs"] for key in leg))
+
+    def test_bigger_targets_cost_win_chance(self):
+        from pipeline.legs import build_legs
+        from pipeline.parlays import build_parlays
+        result = build_parlays(build_legs([], self._projections(), self.settings), self.settings)
+        best = {}
+        for ticket in result["tickets"]:
+            if ticket["scope"] != "slate":
+                continue
+            best[ticket["target"]] = max(best.get(ticket["target"], 0), ticket["model_prob"])
+        ordered = [best[target] for target in sorted(best)]
+        self.assertEqual(ordered, sorted(ordered, reverse=True))
+
+    def test_same_game_legs_are_correlated_but_capped(self):
+        from pipeline.parlays import joint_probability
+        cfg = self.settings["parlays"]["correlation"]
+        qb = {"event_id": "g1", "team": "BUF", "player": "QB", "market": "Passing yards", "side": "over", "model_prob": 0.5}
+        wr = {"event_id": "g1", "team": "BUF", "player": "WR", "market": "Receiving yards", "side": "over", "model_prob": 0.5}
+        other = {"event_id": "g2", "team": "DAL", "player": "RB", "market": "Rushing yards", "side": "over", "model_prob": 0.5}
+        self.assertGreater(joint_probability([qb, wr], cfg), 0.25)
+        self.assertAlmostEqual(joint_probability([qb, other], cfg), 0.25, places=6)
+        self.assertLessEqual(joint_probability([qb, wr], cfg), 0.25 * float(cfg["cap"]) + 1e-9)

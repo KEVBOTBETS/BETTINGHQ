@@ -9,6 +9,8 @@ from pathlib import Path
 from typing import Any
 
 from .http import ProviderError
+from .legs import build_legs
+from .parlays import build_parlays
 from .model import evaluate_quotes, evaluate_quotes_against_projections, merge_boards
 from .providers.espn import EspnProjectionProvider
 from .providers.odds_api_io import OddsApiIoProvider
@@ -103,6 +105,15 @@ def build() -> dict[str, Any]:
         # Every source failed: keep the last published files instead of blanking the board.
         raise SystemExit("Props Edge: no source returned data; previous files kept. " + "; ".join(
             f"{sport}: {info['errors'][0]}" for sport, info in source_by_sport.items() if info["errors"]))
+    legs = build_legs(
+        merge_boards(
+            evaluate_quotes(quotes, settings),
+            evaluate_quotes_against_projections(quotes, projections, settings),
+        ),
+        projections,
+        settings,
+    )
+    parlays = build_parlays(legs, settings)
     board = merge_boards(
         evaluate_quotes(quotes, settings),
         evaluate_quotes_against_projections(quotes, projections, settings),
@@ -139,6 +150,12 @@ def build() -> dict[str, Any]:
             "Action Network and OddsShark are not scraped because automated extraction is blocked or prohibited.",
         ],
     }
+    meta["counts"]["legs"] = len(legs)
+    meta["counts"]["book_priced_legs"] = sum(leg["price_source"] == "book" for leg in legs)
+    meta["counts"]["parlays"] = len(parlays["tickets"])
+    meta["estimated_prices"] = not meta["counts"]["book_priced_legs"]
+    _write_json("legs.json", legs)
+    _write_json("parlays.json", parlays)
     _write_json("board.json", board)
     _write_json("projections.json", projection_rows)
     _write_json("meta.json", meta)
@@ -151,6 +168,7 @@ def main() -> None:
     counts = meta["counts"]
     print(
         f"Props Edge refreshed: {counts['actionable']} priced plays, "
+        f"{counts.get('legs', 0)} legs, {counts.get('parlays', 0)} parlays, "
         f"{counts['projections']} ESPN projections"
     )
 

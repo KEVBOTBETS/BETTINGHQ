@@ -1,39 +1,32 @@
 {
   "bookmakers": {
     "target": "DraftKings",
-    "primary_consensus": ["DraftKings", "FanDuel"],
-    "secondary_consensus": ["draftkings", "fanduel", "betmgm", "williamhill_us"]
+    "primary_consensus": [
+      "DraftKings",
+      "FanDuel"
+    ],
+    "secondary_consensus": [
+      "draftkings",
+      "fanduel",
+      "betmgm",
+      "williamhill_us"
+    ]
   },
   "sports": {
     "NFL": {
       "primary_sport": "american-football",
-      "league_aliases": ["nfl", "national-football-league"],
+      "league_aliases": [
+        "nfl",
+        "national-football-league"
+      ],
       "secondary_sport": "americanfootball_nfl",
       "espn_path": "football/nfl"
-    },
-    "NCAAF": {
-      "primary_sport": "american-football",
-      "league_aliases": ["ncaaf", "ncaa", "college-football"],
-      "secondary_sport": "americanfootball_ncaaf",
-      "espn_path": "football/college-football"
-    },
-    "MLB": {
-      "primary_sport": "baseball",
-      "league_aliases": ["mlb", "major-league-baseball"],
-      "secondary_sport": "baseball_mlb",
-      "espn_path": "baseball/mlb"
-    },
-    "WNBA": {
-      "primary_sport": "basketball",
-      "league_aliases": ["wnba", "womens-national-basketball-association"],
-      "secondary_sport": "basketball_wnba",
-      "espn_path": "basketball/wnba"
     }
   },
   "projection_model": {
     "minimum_samples": 2,
     "maximum_samples": 8,
-    "maximum_rows_per_sport": 120,
+    "maximum_rows_per_sport": 400,
     "min_consensus_books": 2,
     "probability_shrink": 0.88,
     "lean_edge": 0.02,
@@ -51,7 +44,62 @@
     "lookahead_days": 7,
     "primary_event_limit": 500,
     "secondary_max_markets_per_event": 24,
-    "espn_lookback_days": 21,
-    "espn_max_completed_games": 18
+    "espn_lookback_days": 28,
+    "espn_max_completed_games": 48
+  },
+  "legs": {
+    "hold_per_side": 0.045,
+    "min_model_prob": 0.15,
+    "max_model_prob": 0.93,
+    "min_samples": 2,
+    "max_per_player": 4,
+    "line_offsets": [
+      -0.35,
+      -0.15,
+      0.0,
+      0.2,
+      0.45
+    ],
+    "anytime_td_min_prob": 0.1
+  },
+  "parlays": {
+    "targets": [
+      1000,
+      5000,
+      10000,
+      30000,
+      50000
+    ],
+    "tolerance": 0.2,
+    "max_legs": 9,
+    "min_legs": 2,
+    "beam_width": 45,
+    "per_target": 2,
+    "max_legs_per_game": 2,
+    "sgp_max_legs": 8,
+    "sgp_targets": [
+      1000,
+      5000,
+      10000,
+      30000,
+      50000
+    ],
+    "correlation": {
+      "qb_to_pass_catcher": 1.14,
+      "qb_td_to_anytime": 1.12,
+      "same_player_stack": 1.1,
+      "same_team_same_market": 0.94,
+      "shootout": 1.04,
+      "cap": 1.35
+    },
+    "branch": 9,
+    "min_legs_by_target": {
+      "1000": 3,
+      "5000": 4,
+      "10000": 5,
+      "30000": 5,
+      "50000": 6
+    },
+    "sgp_min_legs": 3
   }
 }

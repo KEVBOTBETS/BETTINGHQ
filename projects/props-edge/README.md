@@ -1,23 +1,45 @@
-# Props Edge
+# Props Edge — NFL only
 
-Props Edge is a static GitHub Pages dashboard for NFL, NCAAF, MLB, and WNBA player props. It follows a secure hybrid data model:
+Props Edge is the NFL player-prop board inside KEVBOTBETS. It covers touchdowns,
+passing, rushing, receiving, kicking and defensive markets, and it has four tabs:
+
+- **Parlay lab** — parlays built to a payout target (+1,000 / +5,000 / +10,000 /
+  +30,000 / +50,000) for the full slate, for one day, or as a same-game parlay.
+  Every ticket shows the model's own win chance, the 1-in-N hit rate, what $10
+  returns, and the expected value at that price. Same-game tickets show the
+  correlation multiplier that was applied.
+- **Cheat sheets** — one market at a time, ranked by model probability, with the
+  stat behind each number. It exports as a KEVBOT card image.
+- **Prop board** — every leg the model will use, searchable, with its projection,
+  recent form and price.
+- **My ledger** — singles and parlays saved in that browser, with stake, result,
+  bankroll and CSV export.
+
+## Where the prices come from
 
 1. Odds-API.io, when its GitHub Actions secret is configured.
-2. The Odds API, when its GitHub Actions secret is configured and the primary feed has no props.
-3. ESPN public schedules and box scores as a keyless projection-only fallback.
+2. The Odds API, when its secret is configured and the primary feed has no props.
+3. ESPN public schedules and box scores, always available and keyless.
 
-Sportsbook odds produce model-ranked **Best**, **Good**, and **Lean** rows. ESPN has player statistics but no sportsbook prices, so its fallback rows are clearly labeled **Projections**, not bets. Current sportsbook lines can also be imported as a CSV and evaluated locally in the browser.
+With no odds secret there is no live sportsbook price, so each leg is priced from
+the model's own probability with a normal two-way hold applied. Those legs are
+labelled **EST** everywhere they appear and the parlay payouts built from them are
+estimates, not a quote. Import today's real prices with **Import book lines** (the
+CSV template button fills in the players and markets), or add an odds key to the
+repository secrets, and the board switches to real prices automatically.
 
-Qualified plays are displayed in three separate Best, Good, and Lean areas. Every qualified card has an **Add to ledger** button. The ledger stores the selection, line, odds, edge, editable stake, result status, and calculated profit/loss. It can be exported to CSV.
+## Parlay rules
 
-## NFL Pro upgrade
-
-- A dedicated NFL Prop Command Center appears when the NFL tab is selected.
-- NFL filters include touchdowns, passing, rushing, receiving, targets, defense, and kicking.
-- Supported NFL projections and normalized odds markets include passing yards, completions, attempts, touchdowns and interceptions; rushing yards, carries and touchdowns; receiving yards, receptions, targets and touchdowns; anytime touchdowns; longest-play props; field goals, kicking points, tackles plus assists, and sacks when the source publishes them.
-- Anytime-touchdown Yes/No prices are evaluated with a conservative touchdown-frequency model instead of being treated as a normal over/under line.
-- The default NFL bankroll is $500, quarter-Kelly staking is used, and a single recommendation is capped at $50.
-- The NFL dashboard shows starting bankroll, open exposure, available bankroll, settled profit/loss and ROI.
+- One market per player per ticket, and no leg that contradicts another.
+- Slate and day tickets take at most two legs from any one game; same-game
+  tickets allow up to eight legs from that game.
+- A leg needs at least two recent games of player history before the model will
+  price it.
+- Same-game legs get a correlation adjustment (quarterback with his own pass
+  catcher, touchdown stacks), capped so a ticket can never claim a large edge
+  from correlation alone.
+- Bigger targets always mean a lower model chance. The card shows both so the
+  trade is explicit; none of these tickets is a recommendation.
 
 ## Fast GitHub setup
 

@@ -37,4 +37,5 @@ if args.browser:
     run('bet-ledger-hq',['node','tests/test_moneyline_browser.mjs'])
     run('bet-ledger-hq',['node','tests/test_today_browser.mjs'])
     run('bet-ledger-hq',['node','tests/test_weekly_browser.mjs'])
+    run('bet-ledger-hq',['node','tests/test_props_browser.mjs'])
 print(f'PASS: {len(checks)} release checks')
