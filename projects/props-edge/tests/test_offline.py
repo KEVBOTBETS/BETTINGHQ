@@ -499,3 +499,29 @@ class EspnPropLineTests(unittest.TestCase):
         self.assertTrue(receptions)
         self.assertTrue(all(leg.get("line_source") for leg in receptions), "invented lines give way to the book's")
         self.assertEqual({leg["line"] for leg in receptions}, {5.5})
+
+
+class NameMatchingTests(unittest.TestCase):
+    def test_a_suffix_does_not_break_the_match(self):
+        from pipeline.legs import _name_key
+        self.assertEqual(_name_key("Patrick Mahomes II"), _name_key("Patrick Mahomes"))
+        self.assertEqual(_name_key("Marvin Harrison Jr."), _name_key("Marvin Harrison"))
+        self.assertEqual(_name_key("De'Von Achane"), "dachane")
+        self.assertNotEqual(_name_key("Josh Allen"), _name_key("Keenan Allen"))
+
+    def test_the_book_line_finds_a_player_listed_with_a_suffix(self):
+        from pipeline.legs import legs_from_lines
+        from pipeline.schema import Projection
+        import json as _json
+        from pathlib import Path
+        settings = _json.loads((Path(__file__).resolve().parents[1] / "config" / "settings.json").read_text())
+        projection = Projection(
+            sport="NFL", player="Patrick Mahomes II", team="KC", matchup="IND @ KC", market="Passing yards",
+            projection=268.0, samples=6, confidence=0.6, standard_deviation=42.0,
+            recent=[240, 310, 255, 288, 201, 314], trend=0.2, start_time="2026-12-20T18:00:00Z")
+        rows = [{"player": "Patrick Mahomes", "market": "Passing yards", "line": 274.5, "book": "DraftKings",
+                 "line_source": "DraftKings line via ESPN", "event_id": "1", "matchup": "IND @ KC",
+                 "start_time": "2026-12-20T18:00:00Z"}]
+        legs = legs_from_lines(rows, [projection], settings)
+        self.assertTrue(legs, "the suffix must not stop the book line from being scored")
+        self.assertEqual({leg["line"] for leg in legs}, {274.5})

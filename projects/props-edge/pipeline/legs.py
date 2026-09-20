@@ -78,6 +78,15 @@ def _norm(value: str) -> str:
     return re.sub(r"[^a-z0-9]+", "", (value or "").casefold())
 
 
+def _name_key(value: str) -> str:
+    """First initial plus surname, so "Patrick Mahomes II" and "Patrick Mahomes" match."""
+    parts = [part for part in re.split(r"[^A-Za-z]+", str(value or "")) if part]
+    parts = [part for part in parts if part.casefold() not in {"jr", "sr", "ii", "iii", "iv", "v"}]
+    if not parts:
+        return ""
+    return (parts[0][:1] + parts[-1]).casefold()
+
+
 def _normal_cdf(value: float) -> float:
     return 0.5 * (1 + math.erf(value / math.sqrt(2)))
 
@@ -237,16 +246,19 @@ def legs_from_lines(
     cfg = settings["legs"]
     hold = float(cfg["hold_per_side"])
     low, high = float(cfg["min_model_prob"]), float(cfg["max_model_prob"])
-    index = {
-        (_norm(row.player), _norm(row.market)): row
-        for row in projections
+    usable = [
+        row for row in projections
         if row.sport == "NFL" and int(row.samples) >= int(cfg["min_samples"])
-    }
+    ]
+    index = {(_norm(row.player), _norm(row.market)): row for row in usable}
+    loose = {(_name_key(row.player), _norm(row.market)): row for row in usable}
     out: list[dict[str, Any]] = []
     seen: set[tuple[str, str, str, Any]] = set()
     for row in lines:
         market = str(row.get("market") or "")
-        projection = index.get((_norm(str(row.get("player"))), _norm(market)))
+        projection = index.get((_norm(str(row.get("player"))), _norm(market))) or loose.get(
+            (_name_key(str(row.get("player"))), _norm(market))
+        )
         if projection is None:
             continue
         line = row.get("line")
@@ -273,7 +285,7 @@ def legs_from_lines(
                 _leg(
                     sport="NFL",
                     event_id=str(row.get("event_id") or ""),
-                    matchup=row.get("matchup") or projection.matchup,
+                    matchup=projection.matchup or row.get("matchup") or "",
                     start_time=row.get("start_time") or projection.start_time,
                     player=row["player"],
                     team=row.get("team") or projection.team,
