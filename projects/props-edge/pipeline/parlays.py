@@ -81,6 +81,9 @@ def _allowed(leg: dict[str, Any], chosen: list[dict[str, Any]], limits: dict[str
     per_game = sum(leg["event_id"] == row["event_id"] for row in chosen)
     if per_game >= int(limits["max_legs_per_game"]):
         return False
+    per_market = sum(leg["market"] == row["market"] for row in chosen)
+    if per_market >= int(limits.get("max_legs_per_market", 3)):
+        return False
     return True
 
 
@@ -223,13 +226,19 @@ def _pool(legs: Iterable[dict[str, Any]], settings: dict[str, Any]) -> list[dict
                 row["_log_p"] = math.log(probability)
                 # Probability kept per unit of payout bought: the best legs to build on.
                 row["_efficiency"] = row["_log_p"] / row["_log_dec"] if row["_log_dec"] > 0 else -99
+                # Prefer the legs a bettor would actually take: a real sample behind
+                # the number, and the skill-position markets books price deepest.
+                samples = int(leg.get("samples") or 0)
+                quality = min(0.10, 0.035 * max(0, samples - 1))
+                quality += {"touchdown": 0.06, "receiving": 0.05, "rushing": 0.04, "passing": 0.04}.get(leg.get("group"), 0.0)
+                row["_rank"] = row["_efficiency"] + quality
                 graded[index].append(row)
                 break
     pool: list[dict[str, Any]] = []
     for index in graded:
-        rows = sorted(graded[index], key=lambda leg: (-(leg["price_source"] == "book"), -leg["_efficiency"]))
+        rows = sorted(graded[index], key=lambda leg: (-(leg["price_source"] == "book"), -leg["_rank"]))
         pool.extend(rows[:40])
-    return sorted(pool, key=lambda leg: (-(leg["price_source"] == "book"), -leg["_efficiency"]))
+    return sorted(pool, key=lambda leg: (-(leg["price_source"] == "book"), -leg["_rank"]))
 
 
 def build_parlays(legs: list[dict[str, Any]], settings: dict[str, Any], now: dt.datetime | None = None) -> dict[str, Any]:
