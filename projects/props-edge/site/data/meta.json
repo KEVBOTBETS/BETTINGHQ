@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-20T18:59:52.683237+00:00",
+  "generated_at": "2026-09-20T19:20:56.177506+00:00",
   "provider_priority": [
     "Odds-API.io",
     "The Odds API",
@@ -19,31 +19,16 @@
     "best": 0,
     "good": 0,
     "leans": 0,
-    "projections": 5515
+    "projections": 1797,
+    "legs": 3953,
+    "book_priced_legs": 0,
+    "parlays": 229
   },
   "source_by_sport": {
     "NFL": {
       "source": "ESPN public statistics",
       "priced_quotes": 0,
-      "projections": 168,
-      "errors": []
-    },
-    "NCAAF": {
-      "source": "ESPN public statistics",
-      "priced_quotes": 0,
-      "projections": 0,
-      "errors": []
-    },
-    "MLB": {
-      "source": "ESPN public statistics",
-      "priced_quotes": 0,
-      "projections": 3217,
-      "errors": []
-    },
-    "WNBA": {
-      "source": "ESPN public statistics",
-      "priced_quotes": 0,
-      "projections": 2130,
+      "projections": 1797,
       "errors": []
     }
   },
@@ -52,5 +37,6 @@
     "API credentials are optional and are read only from GitHub Actions secrets.",
     "If both odds providers are unavailable, ESPN schedules and box-score statistics produce projection-only rows.",
     "Action Network and OddsShark are not scraped because automated extraction is blocked or prohibited."
-  ]
+  ],
+  "estimated_prices": true
 }
