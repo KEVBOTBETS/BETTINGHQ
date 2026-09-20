@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-20T20:00:45.335553+00:00",
+  "generated_at": "2026-09-20T20:52:41.532634+00:00",
   "provider_priority": [
     "Odds-API.io",
     "The Odds API",
@@ -19,16 +19,16 @@
     "best": 0,
     "good": 0,
     "leans": 0,
-    "projections": 2039,
-    "legs": 1704,
+    "projections": 2242,
+    "legs": 2206,
     "book_priced_legs": 0,
-    "parlays": 138
+    "parlays": 142
   },
   "source_by_sport": {
     "NFL": {
       "source": "ESPN public statistics",
       "priced_quotes": 0,
-      "projections": 2039,
+      "projections": 2242,
       "errors": []
     }
   },
@@ -38,5 +38,24 @@
     "If both odds providers are unavailable, ESPN schedules and box-score statistics produce projection-only rows.",
     "Action Network and OddsShark are not scraped because automated extraction is blocked or prohibited."
   ],
+  "odds_feed": {
+    "window": {
+      "NFL": {
+        "next_kickoff": "2026-09-20T17:00Z",
+        "hours_to_kickoff": -3.9,
+        "window_hours": 36.0,
+        "inside_window": true
+      }
+    },
+    "markets": [
+      "player_anytime_td",
+      "player_pass_yds",
+      "player_pass_tds",
+      "player_rush_yds",
+      "player_reception_yds",
+      "player_receptions"
+    ],
+    "quota": {}
+  },
   "estimated_prices": true
 }
