@@ -319,6 +319,13 @@ class EspnProjectionProvider:
                 events[str(event.get("id"))] = event
         return {"events": list(events.values())}
 
+    def upcoming_events(self, sport: str) -> list[dict[str, Any]]:
+        """Scoreboard events from today through the lookahead window."""
+        path = self.settings["sports"][sport]["espn_path"]
+        today = dt.datetime.now(dt.timezone.utc).date()
+        lookahead = int(self.settings["fetch"]["lookahead_days"])
+        return self._scoreboard(path, today, today + dt.timedelta(days=lookahead)).get("events") or []
+
     def fetch(self, sport: str) -> list[Projection]:
         cfg = self.settings["sports"][sport]
         path = cfg["espn_path"]

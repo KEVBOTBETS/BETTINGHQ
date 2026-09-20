@@ -13,6 +13,7 @@ from .legs import build_legs
 from .parlays import build_parlays
 from .model import evaluate_quotes, evaluate_quotes_against_projections, merge_boards
 from .providers.espn import EspnProjectionProvider
+from .providers.espn_props import EspnPropLines
 from .providers.odds_api_io import OddsApiIoProvider
 from .providers.the_odds_api import TheOddsApiProvider
 
@@ -115,6 +116,14 @@ def build() -> dict[str, Any]:
             "errors": errors,
         }
 
+    # Keyless sportsbook lines: real numbers to score, even with no odds key.
+    book_lines: list[dict[str, Any]] = []
+    if settings.get("line_feed", {}).get("enabled", True):
+        try:
+            book_lines = EspnPropLines(settings).fetch(espn.upcoming_events("NFL"))
+        except ProviderError as exc:
+            for info in source_by_sport.values():
+                info["errors"].append(str(exc))
     legs = build_legs(
         merge_boards(
             evaluate_quotes(quotes, settings),
@@ -122,6 +131,7 @@ def build() -> dict[str, Any]:
         ),
         projections,
         settings,
+        book_lines,
     )
     parlays = build_parlays(legs, settings)
     board = merge_boards(
@@ -164,7 +174,10 @@ def build() -> dict[str, Any]:
         "window": odds_windows,
         "markets": list(feed.get("markets") or []),
         "quota": (getattr(secondary, "quota", None) or {}) if secondary else {},
+        "line_source": "DraftKings lines via ESPN" if book_lines else None,
     }
+    meta["counts"]["book_lines"] = len(book_lines)
+    meta["counts"]["legs_on_book_lines"] = sum(bool(leg.get("line_source")) for leg in legs)
     meta["counts"]["legs"] = len(legs)
     meta["counts"]["book_priced_legs"] = sum(leg["price_source"] == "book" for leg in legs)
     meta["counts"]["parlays"] = len(parlays["tickets"])

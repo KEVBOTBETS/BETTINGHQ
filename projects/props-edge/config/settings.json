@@ -115,5 +115,11 @@
     "use_market_catalogue": false,
     "window_hours": 36,
     "note": "The free Odds API tier is 500 credits a month and each market on each game costs one credit, so only the core markets are requested and only inside the window before kickoff."
+  },
+  "line_feed": {
+    "enabled": true,
+    "max_events": 16,
+    "max_pages": 8,
+    "note": "DraftKings prop lines from ESPN's public feed. No key, no scraping: prices are not published there, so they stay model estimates until a price feed or a pasted line arrives."
   }
 }

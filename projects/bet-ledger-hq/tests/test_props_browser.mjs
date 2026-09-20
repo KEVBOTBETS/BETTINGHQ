@@ -27,7 +27,8 @@ const leg = (player, market, side, line, price, probability, matchup) => ({
   sport: 'NFL', event_id: matchup, matchup, start_time: start, player, team: matchup.split(' ')[0],
   market, side, line, pick: `${player} ${side} ${line ?? ''} ${market.toLowerCase()}`.trim(),
   price_american: price, price_decimal: price > 0 ? 1 + price / 100 : 1 + 100 / Math.abs(price),
-  price_source: 'model', book: 'Model estimate', model_prob: probability, samples: 6,
+  price_source: 'model', book: 'DraftKings line · model price', line_source: 'DraftKings line via ESPN',
+  model_prob: probability, samples: 6,
   projection: 60, recent: [55, 62, 71], confidence: 0.6, group: market === 'Anytime touchdown' ? 'touchdown' : 'receiving',
   reason: `${player} reason line for ${market}.`,
 });
@@ -57,7 +58,9 @@ const parlays = {
   ],
 };
 const meta = {
-  generated_at: start, counts: {legs: legs.length, parlays: parlays.tickets.length, book_priced_legs: 0, projections: 40},
+  generated_at: start,
+  counts: {legs: legs.length, parlays: parlays.tickets.length, book_priced_legs: 0, legs_on_book_lines: legs.length, projections: 40},
+  odds_feed: {line_source: 'DraftKings lines via ESPN', quota: {}, window: {NFL: {hours_to_kickoff: 12, inside_window: true, window_hours: 36}}},
   estimated_prices: true, source_by_sport: {NFL: {source: 'ESPN public statistics', projections: 40, errors: []}},
 };
 
@@ -77,7 +80,8 @@ try {
     await page.locator('.ticket').first().waitFor();
     assert.equal(await page.locator('.ticket').count(), 1, 'the first target shows its tickets');
     assert.match(await page.locator('#price-banner').textContent(), /model estimate/i, 'estimated prices are disclosed');
-    assert.equal(await page.locator('.est').first().textContent(), 'EST PRICE');
+    assert.match(await page.locator('#price-banner').textContent(), /real DraftKings numbers/i, 'real lines are credited');
+    assert.equal(await page.locator('.est').first().textContent(), 'EST PRICE · REAL LINE');
 
     await page.locator('.target[data-target="5000"]').click();
     assert.match(await page.locator('.ticket .ticket-top').first().textContent(), /target \+5,000/i);

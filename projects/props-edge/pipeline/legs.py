@@ -230,6 +230,79 @@ def legs_from_projections(
     return sorted(out, key=lambda row: (-row["model_prob"], row["player"]))
 
 
+def legs_from_lines(
+    lines: list[dict[str, Any]], projections: list[Projection], settings: dict[str, Any]
+) -> list[dict[str, Any]]:
+    """Score the sportsbook's own line with the model. The number is real; the price is still an estimate."""
+    cfg = settings["legs"]
+    hold = float(cfg["hold_per_side"])
+    low, high = float(cfg["min_model_prob"]), float(cfg["max_model_prob"])
+    index = {
+        (_norm(row.player), _norm(row.market)): row
+        for row in projections
+        if row.sport == "NFL" and int(row.samples) >= int(cfg["min_samples"])
+    }
+    out: list[dict[str, Any]] = []
+    seen: set[tuple[str, str, str, Any]] = set()
+    for row in lines:
+        market = str(row.get("market") or "")
+        projection = index.get((_norm(str(row.get("player"))), _norm(market)))
+        if projection is None:
+            continue
+        line = row.get("line")
+        sides: list[tuple[str, float]] = []
+        if market == "Anytime touchdown":
+            sides.append(("yes", touchdown_probability(projection)))
+        elif line is not None:
+            over = over_probability(projection, float(line))
+            sides.append(("over", over))
+            sides.append(("under", 1 - over))
+        for side, probability in sides:
+            key = (str(row.get("event_id")), _norm(str(row.get("player"))), market + side, line)
+            if key in seen or not (low <= probability <= high):
+                continue
+            seen.add(key)
+            decimal, american = estimated_price(probability, hold)
+            pick = (
+                f"{row['player']} anytime touchdown"
+                if market == "Anytime touchdown"
+                else f"{row['player']} {side} {float(line):g} {market.casefold()}"
+            )
+            reason = _reason(projection, market, side, float(line or 0), probability)
+            out.append(
+                _leg(
+                    sport="NFL",
+                    event_id=str(row.get("event_id") or ""),
+                    matchup=row.get("matchup") or projection.matchup,
+                    start_time=row.get("start_time") or projection.start_time,
+                    player=row["player"],
+                    team=row.get("team") or projection.team,
+                    market=market,
+                    side=side,
+                    line=None if market == "Anytime touchdown" else float(line),
+                    pick=pick,
+                    price_american=american,
+                    price_decimal=round(decimal, 4),
+                    price_source="model",
+                    line_source=row.get("line_source") or "Sportsbook line",
+                    book=f"{row.get('book', 'DraftKings')} line · model price",
+                    model_prob=round(probability, 4),
+                    fair_american=decimal_to_american(1 / probability),
+                    edge=None,
+                    samples=int(projection.samples),
+                    projection=round(float(projection.projection), 2),
+                    recent=[round(float(value), 1) for value in (projection.recent or [])],
+                    confidence=round(float(projection.confidence), 2),
+                    reason=(
+                        f"{row.get('book', 'DraftKings')} posts {float(line):g}. " + reason
+                        if line is not None
+                        else reason
+                    ),
+                )
+            )
+    return sorted(out, key=lambda leg: (-leg["model_prob"], leg["player"]))
+
+
 def legs_from_board(board: list[dict[str, Any]], settings: dict[str, Any]) -> list[dict[str, Any]]:
     """Real sportsbook prices become legs directly, keeping the board's model numbers."""
     cfg = settings["legs"]
@@ -275,9 +348,18 @@ def legs_from_board(board: list[dict[str, Any]], settings: dict[str, Any]) -> li
 
 
 def build_legs(
-    board: list[dict[str, Any]], projections: list[Projection], settings: dict[str, Any]
+    board: list[dict[str, Any]],
+    projections: list[Projection],
+    settings: dict[str, Any],
+    lines: list[dict[str, Any]] | None = None,
 ) -> list[dict[str, Any]]:
+    """Priced legs first, then the book's own lines, then the model's own lines."""
     priced = legs_from_board(board, settings)
-    priced_keys = {("NFL", _norm(row["player"]), _norm(row["market"])) for row in priced}
-    modelled = legs_from_projections(projections, settings, priced_keys)
-    return priced + modelled
+    covered = {("NFL", _norm(row["player"]), _norm(row["market"])) for row in priced}
+    booked = [
+        leg for leg in legs_from_lines(lines or [], projections, settings)
+        if ("NFL", _norm(leg["player"]), _norm(leg["market"])) not in covered
+    ]
+    covered |= {("NFL", _norm(leg["player"]), _norm(leg["market"])) for leg in booked}
+    modelled = legs_from_projections(projections, settings, covered)
+    return priced + booked + modelled

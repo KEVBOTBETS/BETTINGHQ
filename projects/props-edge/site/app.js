@@ -118,15 +118,20 @@
     const quota = (meta.odds_feed && meta.odds_feed.quota) || {};
     const credits = quota['x-requests-remaining'];
     const window = (meta.odds_feed && meta.odds_feed.window && meta.odds_feed.window.NFL) || {};
-    $('#sources').textContent = `Source: ${source}. Prices marked EST are the model's own estimate, not a live sportsbook price.`
+    const lineSource = (meta.odds_feed && meta.odds_feed.line_source) || null;
+    $('#sources').textContent = `Source: ${source}${lineSource ? ' · lines: ' + lineSource : ''}. Prices marked EST are the model's own estimate, not a live sportsbook price.`
       + (credits ? ` Odds key: ${credits} credits left.` : '')
       + (window.hours_to_kickoff != null ? ` Next kickoff in ${window.hours_to_kickoff}h${window.inside_window === false ? ' — paid odds are only pulled inside ' + window.window_hours + 'h of kickoff.' : '.'}` : '');
     const banner = $('#price-banner');
     const estimated = meta.estimated_prices !== false && !(meta.counts && meta.counts.book_priced_legs);
     const imported = Object.keys(state.imported).length;
+    const onBookLines = (meta.counts && meta.counts.legs_on_book_lines) || 0;
     if (estimated) {
       banner.hidden = false;
-      banner.innerHTML = `No sportsbook feed is configured, so every price below is a <b>model estimate</b> with a normal hold applied. ${imported ? `${imported} imported line${imported === 1 ? '' : 's'} are in use.` : 'Use <b>Paste odds</b> to drop in today’s real prices from any sportsbook, or add an odds-provider key to the repository secrets.'}`;
+      banner.innerHTML = (onBookLines
+        ? `<b>${onBookLines.toLocaleString('en-CA')} legs sit on the real DraftKings numbers</b>, pulled keyless from ESPN's public feed — that feed publishes the line but not the price, so each price below is a <b>model estimate</b> with a normal hold applied. `
+        : 'No price feed is configured, so every price below is a <b>model estimate</b> with a normal hold applied. ')
+        + (imported ? `${imported} of your own price${imported === 1 ? '' : 's'} are in use.` : 'Use <b>Paste odds</b> to drop your book\u2019s real prices on top.');
     } else banner.hidden = true;
   }
 
@@ -158,9 +163,9 @@
     const tone = chance >= 0.6 ? '' : chance >= 0.35 ? ' mid' : ' low';
     const market = leg.market === 'Anytime touchdown' ? 'Anytime touchdown scorer' : `${leg.side === 'over' ? 'Over' : leg.side === 'under' ? 'Under' : leg.side} ${leg.line ?? ''} ${leg.market.toLowerCase()}`;
     return `<li><span class="pip"></span><div class="leg-main"><b>${esc(leg.player)}</b><span class="market">${esc(market)}</span>
-      <span class="meta">${esc(leg.matchup)} · ${esc(clock(leg.start_time))} · ${esc(leg.book)}${leg.imported ? ' · imported' : ''}</span>
+      <span class="meta">${esc(leg.matchup)} · ${esc(clock(leg.start_time))} · ${esc(leg.book)}${leg.imported ? ' · your price' : ''}</span>
       ${leg.reason ? `<p class="why">${esc(leg.reason)}</p>` : ''}</div>
-      <div class="leg-right"><span class="leg-odds">${odds(leg.price_american)}</span><span class="hit${tone}">${pct(leg.model_prob)} model</span>${leg.price_source === 'model' ? '<span class="est">EST PRICE</span>' : ''}</div></li>`;
+      <div class="leg-right"><span class="leg-odds">${odds(leg.price_american)}</span><span class="hit${tone}">${pct(leg.model_prob)} model</span>${leg.price_source === 'model' ? `<span class="est">EST PRICE${leg.line_source ? ' · REAL LINE' : ''}</span>` : ''}</div></li>`;
   }
 
   function ticketCard(ticket) {
@@ -256,7 +261,7 @@
       && (!search || norm(leg.player + leg.market).includes(search)))
       .sort((a, b) => b.model_prob - a.model_prob).slice(0, 300);
     $('#board').innerHTML = rows.length ? rows.map((leg) => `<article class="board-row">
-      <div><b>${esc(leg.pick)}</b><div class="meta">${esc(leg.matchup)} · ${esc(clock(leg.start_time))} · ${esc(leg.book)} · ${leg.samples || 0} game sample</div><div class="why">${esc(leg.reason)}</div></div>
+      <div><b>${esc(leg.pick)}</b><div class="meta">${esc(leg.matchup)} · ${esc(clock(leg.start_time))} · ${esc(leg.line_source || leg.book)} · ${leg.samples || 0} game sample</div><div class="why">${esc(leg.reason)}</div></div>
       <div class="num">${odds(leg.price_american)}<small>${leg.price_source === 'model' ? 'EST' : 'PRICE'}</small></div>
       <div class="num" style="color:var(--teal)">${pct(leg.model_prob)}<small>MODEL</small></div>
       <div><button data-action="single" data-id="${esc(leg.id)}">Add</button></div>

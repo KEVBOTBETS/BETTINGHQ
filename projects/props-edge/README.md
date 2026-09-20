@@ -15,20 +15,27 @@ passing, rushing, receiving, kicking and defensive markets, and it has four tabs
 - **My ledger** — singles and parlays saved in that browser, with stake, result,
   bankroll and CSV export.
 
-## Where the prices come from
+## Where the lines and prices come from
 
-1. Odds-API.io, when its GitHub Actions secret is configured.
-2. The Odds API, when its secret is configured. Only the six core prop markets are
-   requested, only for the games inside the kickoff window, because that provider
-   charges one credit per market per game and the free tier is 500 a month. The
-   credits left on the key are published in `meta.json` and shown on the page.
-3. ESPN public schedules and box scores, always available and keyless. This gives
-   projections, not prices.
+**Lines (the numbers), keyless.** ESPN publishes the DraftKings prop board on its
+own public feed — player, market and the posted number — for every NFL game. Props
+Edge reads it on every refresh, with no key and no scraping, and scores those exact
+numbers. That means the board shows the line that will be on your bet slip instead
+of one the model made up.
 
-With no odds secret there is no live sportsbook price, so each leg is priced from
-the model's own probability with a normal two-way hold applied. Those legs are
-labelled **EST** everywhere they appear and the parlay payouts built from them are
-estimates, not a quote.
+**Prices (the odds).** ESPN's feed does not include them. So each leg's price is the
+model's own probability with a normal two-way hold applied, labelled **EST**
+everywhere it appears. Three ways to get real prices:
+
+1. Paste them (below) — no account, no key.
+2. Odds-API.io, when its GitHub Actions secret is configured.
+3. The Odds API, when its secret is configured. Only the six core prop markets are
+   requested, only for games inside the kickoff window, because that provider charges
+   one credit per market per game and the free tier is 500 a month. The credits left
+   on the key are published in `meta.json` and shown on the page.
+
+ESPN box scores also supply the player history the model projects from; that part
+never needed a key either.
 
 ### Getting real prices in without a key
 

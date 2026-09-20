@@ -411,3 +411,91 @@ class LegAndParlayTests(unittest.TestCase):
         self.assertGreater(joint_probability([qb, wr], cfg), 0.25)
         self.assertAlmostEqual(joint_probability([qb, other], cfg), 0.25, places=6)
         self.assertLessEqual(joint_probability([qb, wr], cfg), 0.25 * float(cfg["cap"]) + 1e-9)
+
+
+class EspnPropLineTests(unittest.TestCase):
+    """The keyless DraftKings line feed ESPN publishes (numbers, not prices)."""
+
+    def setUp(self):
+        import json as _json
+        from pathlib import Path
+        self.settings = _json.loads((Path(__file__).resolve().parents[1] / "config" / "settings.json").read_text())
+        self.names = {
+            "3139477": {"name": "Patrick Mahomes", "team": "Kansas City Chiefs"},
+            "4362628": {"name": "Rashee Rice", "team": "Kansas City Chiefs"},
+        }
+        core = "http://sports.core.api.espn.com/v2/sports/football/leagues/nfl"
+        self.items = [
+            {"athlete": {"$ref": f"{core}/seasons/2026/athletes/3139477?lang=en"},
+             "type": {"id": "8", "name": "Total Passing Yards (incl. overtime)"},
+             "current": {"target": {"value": 274.5}}, "lastUpdated": "2026-09-20T20:03Z"},
+            {"athlete": {"$ref": f"{core}/seasons/2026/athletes/4362628?lang=en"},
+             "type": {"id": "31", "name": "Anytime Touchdown Scorer"}, "current": {}},
+            {"athlete": {"$ref": f"{core}/seasons/2026/athletes/4362628?lang=en"},
+             "type": {"id": "9", "name": "Total Receptions (incl. overtime)"},
+             "current": {"target": {"value": 5.5}}},
+            {"athlete": {"$ref": f"{core}/seasons/2026/athletes/999999?lang=en"},
+             "type": {"id": "8", "name": "Total Passing Yards (incl. overtime)"},
+             "current": {"target": {"value": 210.5}}},
+            {"athlete": {"$ref": f"{core}/seasons/2026/athletes/3139477?lang=en"},
+             "type": {"id": "77", "name": "Player to score 3 or more touchdowns"},
+             "current": {"target": {"value": 1.5}}},
+            {"athlete": {"$ref": f"{core}/seasons/2026/athletes/3139477?lang=en"},
+             "type": {"id": "8", "name": "Total Passing Yards (incl. overtime)"}, "current": {}},
+        ]
+
+    def test_market_names_are_mapped_and_unknown_ones_are_dropped(self):
+        from pipeline.providers.espn_props import canonical_market
+        self.assertEqual(canonical_market("Total Receiving Yards (incl. overtime)"), "Receiving yards")
+        self.assertEqual(canonical_market("Anytime Touchdown Scorer"), "Anytime touchdown")
+        self.assertEqual(canonical_market("Total Tackles Plus Assists (incl. overtime)"), "Tackles + assists")
+        self.assertIsNone(canonical_market("Player to score 3 or more touchdowns"))
+
+    def test_prop_items_become_player_market_line_rows(self):
+        from pipeline.providers.espn_props import parse_prop_items
+        rows = parse_prop_items(self.items, self.names)
+        self.assertEqual(len(rows), 3, "unknown players, unknown markets and missing lines are skipped")
+        passing = next(row for row in rows if row["market"] == "Passing yards")
+        self.assertEqual(passing["player"], "Patrick Mahomes")
+        self.assertEqual(passing["line"], 274.5)
+        self.assertEqual(passing["book"], "DraftKings")
+        touchdown = next(row for row in rows if row["market"] == "Anytime touchdown")
+        self.assertIsNone(touchdown["line"], "a touchdown scorer has no number")
+
+    def test_the_books_line_is_kept_and_scored(self):
+        from pipeline.legs import legs_from_lines
+        from pipeline.schema import Projection
+        projection = Projection(
+            sport="NFL", player="Rashee Rice", team="KC", matchup="KC @ BUF", market="Receptions",
+            projection=6.4, samples=6, confidence=0.6, standard_deviation=1.6,
+            recent=[5, 7, 8, 6, 4, 9], trend=0.3, start_time="2026-12-20T18:00:00Z")
+        rows = [{"player": "Rashee Rice", "market": "Receptions", "line": 5.5, "book": "DraftKings",
+                 "line_source": "DraftKings line via ESPN", "event_id": "1", "matchup": "KC @ BUF",
+                 "start_time": "2026-12-20T18:00:00Z"}]
+        legs = legs_from_lines(rows, [projection], self.settings)
+        self.assertTrue(legs)
+        for leg in legs:
+            self.assertEqual(leg["line"], 5.5, "the model must not move the book's number")
+            self.assertEqual(leg["line_source"], "DraftKings line via ESPN")
+            self.assertEqual(leg["price_source"], "model", "no price is published with the line")
+            self.assertIn("DraftKings posts 5.5", leg["reason"])
+        self.assertEqual({leg["side"] for leg in legs}, {"over", "under"})
+        over = next(leg for leg in legs if leg["side"] == "over")
+        under = next(leg for leg in legs if leg["side"] == "under")
+        self.assertAlmostEqual(over["model_prob"] + under["model_prob"], 1.0, places=3)
+
+    def test_a_book_line_replaces_the_models_own_line_for_that_market(self):
+        from pipeline.legs import build_legs
+        from pipeline.schema import Projection
+        projection = Projection(
+            sport="NFL", player="Rashee Rice", team="KC", matchup="KC @ BUF", market="Receptions",
+            projection=6.4, samples=6, confidence=0.6, standard_deviation=1.6,
+            recent=[5, 7, 8, 6, 4, 9], trend=0.3, start_time="2026-12-20T18:00:00Z")
+        rows = [{"player": "Rashee Rice", "market": "Receptions", "line": 5.5, "book": "DraftKings",
+                 "line_source": "DraftKings line via ESPN", "event_id": "1", "matchup": "KC @ BUF",
+                 "start_time": "2026-12-20T18:00:00Z"}]
+        legs = build_legs([], [projection], self.settings, rows)
+        receptions = [leg for leg in legs if leg["market"] == "Receptions"]
+        self.assertTrue(receptions)
+        self.assertTrue(all(leg.get("line_source") for leg in receptions), "invented lines give way to the book's")
+        self.assertEqual({leg["line"] for leg in receptions}, {5.5})
