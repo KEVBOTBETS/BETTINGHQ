@@ -46,6 +46,29 @@ GROUP = {
 }
 PASS_CATCHER_MARKETS = {"Receiving yards", "Receptions", "Targets", "Receiving touchdowns", "Longest reception"}
 
+# Sportsbooks only post a prop once a player's number is big enough to matter.
+# Without these floors the board fills up with lines no book would offer
+# ("under 0.5 tackles"), which would be useless on a real bet slip.
+MARKET_RULES = {
+    "Passing yards": {"min_line": 99.5, "min_projection": 120},
+    "Pass attempts": {"min_line": 14.5, "min_projection": 18},
+    "Pass completions": {"min_line": 9.5, "min_projection": 12},
+    "Rushing yards": {"min_line": 9.5, "min_projection": 14},
+    "Rush attempts": {"min_line": 3.5, "min_projection": 5},
+    "Receiving yards": {"min_line": 9.5, "min_projection": 14},
+    "Receptions": {"min_line": 1.5, "min_projection": 2.2},
+    "Targets": {"min_line": 2.5, "min_projection": 3.2},
+    "Longest pass": {"min_line": 19.5, "min_projection": 24},
+    "Longest rush": {"min_line": 5.5, "min_projection": 8},
+    "Longest reception": {"min_line": 9.5, "min_projection": 12},
+    "Kicking points": {"min_line": 4.5, "min_projection": 5.5},
+    "Field goals made": {"min_line": 0.5, "min_projection": 1.0},
+    "Extra points made": {"min_line": 1.5, "min_projection": 2.0},
+    "Tackles + assists": {"min_line": 2.5, "min_projection": 3.5},
+    "Sacks": {"min_line": 0.5, "min_projection": 0.6},
+    "Anytime touchdown": {"min_line": 0, "min_projection": 0.12},
+}
+
 
 def market_group(market: str) -> str:
     return GROUP.get(market, "other")
@@ -144,16 +167,19 @@ def legs_from_projections(
         if priced_keys and (projection.sport, _norm(projection.player), _norm(market)) in priced_keys:
             continue
         candidates: list[tuple[str, float, float]] = []  # side, line, probability
+        rules = MARKET_RULES.get(market)
+        if rules is None or float(projection.projection) < float(rules["min_projection"]):
+            continue
         if market == "Anytime touchdown":
             probability = touchdown_probability(projection)
             if probability >= float(cfg["anytime_td_min_prob"]):
                 candidates.append(("yes", 0.5, probability))
         elif market in YARDAGE_MARKETS or market in COUNTING_MARKETS:
-            if projection.projection <= 0:
+            if projection.projection < float(rules["min_projection"]):
                 continue
             for offset in cfg["line_offsets"]:
                 line = _half_point(projection.projection * (1 + float(offset)))
-                if line <= 0:
+                if line < float(rules["min_line"]):
                     continue
                 probability = over_probability(projection, line)
                 candidates.append(("over", line, probability))

@@ -380,7 +380,7 @@
     if (name === 'board') renderBoard();
     if (name === 'ledger') renderLedger();
     if (name === 'parlays') renderParlays();
-    try { location.hash = name; } catch (_) {}
+    try { history.replaceState(null, '', '#' + name); } catch (_) {}
   }
 
   function wire() {
