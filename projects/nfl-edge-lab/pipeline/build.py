@@ -318,6 +318,7 @@ def price_game(g: dict, proj: dict, cfg: dict, conf: float, stale: bool,
         "season_type": g.get("season_type"),
         "matchup": f'{g["away"]["abbr"]} @ {g["home"]["abbr"]}',
         "book": o.get("book"),
+        "odds_observed_at": o.get("observed_at"),
         "confidence": conf,
     }
 

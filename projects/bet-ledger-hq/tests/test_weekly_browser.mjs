@@ -19,11 +19,11 @@ try{
   page.on('pageerror',e=>errors.push(e.message));
   await page.clock.install({time:new Date('2026-09-19T12:00:00Z')});
   await page.route('https://**/*',route=>route.abort());
-  let failed=false;
+  let failed=false,metaRequests=0;
   await page.route('**/data/**',route=>{
    if(failed)return route.fulfill({status:503,body:'Unavailable'});
    const u=route.request().url();let data=[];
-   if(u.endsWith('meta.json'))data={generated_at:'2026-09-19T11:00:00Z'};
+   if(u.endsWith('meta.json')){metaRequests++;data={generated_at:'2026-09-19T11:00:00Z'};}
    if(u.endsWith('games.json'))data=[{game_id:'1',date:'2026-09-20T17:00:00Z',season_type:2,home:'KC',away:'BUF',projection:{mu:3,ratings_known:true,score_home:24,score_away:21}}];
    if(u.endsWith('games_detail.json'))data=[{game_id:'1',projection:{mu:3,ratings_known:true,score_home:24,score_away:21},p_home:.6}];
    if(u.endsWith('board.json'))data=[{game_id:'1',market:'ATS',pick:'KC -2.5',price:-110,ev:.03,action_edge:.01,tier:'PASS',book:'Example',odds_observed_at:'2026-09-19T11:00:00Z'}];
@@ -33,6 +33,21 @@ try{
   const frame=page.frameLocator('#frame-football');
   await frame.locator('#status').filter({hasText:'Forecasts checked'}).waitFor();
   assert.equal(await frame.locator('.match-card').count(),2);
+  assert.equal(await frame.locator('.research').count(),2);
+  await frame.locator('#date').fill('');
+  await frame.locator('#date').dispatchEvent('change');
+  await page.clock.fastForward(16000);
+  assert.equal(await frame.locator('.match-card').count(),0);
+  assert.match(await frame.locator('#cards').innerText(),/Choose a start date/);
+  await frame.locator('#date').fill('2026-09-19');
+  await frame.locator('#date').dispatchEvent('change');
+  const requestsBefore=metaRequests;
+  await Promise.all([
+    page.waitForResponse(r=>r.url().endsWith('ncaaf-edge-lab/data/meta.json')),
+    page.clock.fastForward(5*60*1000)
+  ]);
+  await frame.locator('#status').filter({hasText:'Forecasts checked'}).waitFor();
+  assert.ok(metaRequests>requestsBefore,'Open weekly view must fetch newer published data automatically');
   assert.equal(await frame.locator('.research').count(),2);
   await frame.locator('#floor').fill('2');await frame.locator('#floor').dispatchEvent('change');
   assert.equal(await frame.locator('.research').count(),0);

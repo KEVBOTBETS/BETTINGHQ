@@ -471,6 +471,10 @@ def fetch_range(start: dt.date, end: dt.date, odds_priority: list[str],
         for ev in data.get("events") or []:
             g = parse_event(ev, odds_priority)
             if g and g["game_id"] not in seen:
+                # Observation time belongs to the fetched odds, not the build.
+                # Cached odds retain this timestamp when a later fetch fails.
+                if g.get("odds"):
+                    g["odds"]["observed_at"] = dt.datetime.now(dt.timezone.utc).isoformat()
                 seen.add(g["game_id"])
                 out.append(g)
         day = hi + dt.timedelta(days=1)

@@ -5,8 +5,10 @@
   const esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
   const time=v=>new Intl.DateTimeFormat('en-CA',{timeZone:'America/Toronto',month:'short',day:'numeric',hour:'numeric',minute:'2-digit'}).format(new Date(v));
   const pct=v=>C.number(v)===null?'Unavailable':(v*100).toFixed(1)+'%';
-  let bundles={},busy=false;
+  let bundles={},busy=false,lastChecked=0;
+  const refreshEvery=5*60*1000;
   function render(){
+    if(!$('#date').value){$('#cards').innerHTML='<div class="empty">Choose a start date to see the seven-day slate.</div>';return;}
     const floor=Math.max(0,Math.min(.1,(C.number($('#floor').value)??.5)/100));
     const cards=Object.entries(bundles).filter(([sport])=>$('#sport').value==='all'||sport===$('#sport').value)
       .flatMap(([sport,b])=>W.slate(sport,b,$('#date').value,Date.now(),floor))
@@ -17,8 +19,11 @@
   async function get(path){const r=await fetch(path,{cache:'no-store',signal:AbortSignal.timeout(20000)});if(!r.ok)throw Error('Feed unavailable');return r.json();}
   async function refresh(){if(busy)return;busy=true;bundles={};$('#refresh').disabled=true;$('#status').textContent='Checking forecasts…';render();
     await Promise.all(Object.keys(labels).map(async sport=>{const base='../'+(sport==='nfl'?'nfl-edge-lab':'ncaaf-edge-lab')+'/data/';try{const names=sport==='nfl'?['meta','games','board','games_detail']:['meta','games','board'];const data=await Promise.all(names.map(n=>get(base+n+'.json')));bundles[sport]=Object.fromEntries(names.map((n,i)=>[n==='games_detail'?'details':n,data[i]]));}catch(_){bundles[sport]={error:true};}}));
-    busy=false;$('#refresh').disabled=false;$('#status').textContent='Forecasts checked '+time(new Date().toISOString())+'. Research minimum does not alter betting tiers.';render();
+    busy=false;lastChecked=Date.now();$('#refresh').disabled=false;$('#status').textContent='Forecasts checked '+time(new Date().toISOString())+'. Rechecks published data every five minutes while open.';render();
   }
-  $('#date').value=C.day(Date.now());for(const id of ['date','sport','view','floor'])$('#'+id).addEventListener('change',()=>{if($('#date').value)render();});$('#refresh').addEventListener('click',refresh);
-  window.addEventListener('message',e=>{if(e.origin===location.origin&&e.data?.type==='kevbotbets:activate')refresh();});setInterval(render,15000);refresh();
+  $('#date').value=C.day(Date.now());for(const id of ['date','sport','view','floor'])$('#'+id).addEventListener('change',render);$('#refresh').addEventListener('click',refresh);
+  function tick(){if(document.hidden)return;render();if(Date.now()-lastChecked>=refreshEvery)refresh();}
+  window.addEventListener('online',refresh);
+  document.addEventListener('visibilitychange',tick);
+  window.addEventListener('message',e=>{if(e.origin===location.origin&&e.data?.type==='kevbotbets:activate')refresh();});setInterval(tick,15000);refresh();
 })();

@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import {createRequire} from 'node:module';
 const require=createRequire(import.meta.url),W=require('../football-core.js');
 const now=Date.parse('2026-09-19T12:00:00Z');
-const row={price:-110,ev:.04,action_edge:.01,tier:'PASS',market:'ATS'};
+const row={price:-110,ev:.04,action_edge:.01,tier:'PASS',market:'ATS',odds_observed_at:'2026-09-19T11:00:00Z'};
 assert.equal(W.candidate(row,now,.005).display_tier,'RESEARCH LEAN');
 assert.equal(W.candidate(row,now,.015),null);
 assert.equal(W.candidate({...row,ev:-.01},now,0),null);
@@ -11,9 +11,20 @@ assert.equal(W.candidate({...row,filtered:'outside the top 6 plays for this week
 assert.equal(W.candidate({...row,odds_observed_at:'2026-09-18T12:00:00Z'},now,0),null);
 assert.equal(W.candidate({...row,held:true},now,0),null);
 assert.equal(W.candidate({...row,tier:'LEAN'},now,.005).research,false);
+for(const quote of [undefined,null,'','bad','2026-09-19T11:00:00','2026-09-19T12:06:00Z']){
+  assert.equal(W.candidate({...row,odds_observed_at:quote,updated_at:row.odds_observed_at},now,0),null,'A build timestamp cannot replace a valid quote observation');
+}
+for(const price of [0,1,-99,99,null,true,Infinity])assert.equal(W.candidate({...row,price},now,0),null);
+for(const price of [100,-100])assert.ok(W.candidate({...row,price},now,0));
+assert.ok(W.candidate({...row,odds_observed_at:'2026-09-19T08:00:00Z'},now,0));
+assert.equal(W.candidate({...row,odds_observed_at:'2026-09-19T07:59:59Z'},now,0),null);
 const bundle={meta:{generated_at:'2026-09-19T11:00:00Z'},games:[{game_id:'1',date:'2026-09-20T17:00:00Z',season_type:2,home:'A',away:'B',projection:{mu:3,ratings_known:true}}],board:[{...row,game_id:'1'}]};
 assert.equal(W.slate('ncaaf',bundle,'2026-09-19',now)[0].suggestions.length,1);
 assert.equal(W.slate('ncaaf',bundle,'2026-09-19',now+5*3600000)[0].suggestions.length,0);
 assert.equal(W.slate('ncaaf',bundle,'2026-09-21',now).length,0);
 assert.equal(W.addDays('2026-12-29',7),'2027-01-05');
+for(const day of ['',undefined,'invalid','2026-99-99'])assert.deepEqual(W.slate('ncaaf',bundle,day,now),[]);
+const freshForecastOldPrice={...bundle,meta:{generated_at:'2026-09-19T11:59:00Z'},board:[{...bundle.board[0],odds_observed_at:'2026-09-18T11:00:00Z'}]};
+assert.equal(W.slate('ncaaf',freshForecastOldPrice,'2026-09-19',now)[0].suggestions.length,0);
+assert.equal(W.slate('ncaaf',freshForecastOldPrice,'2026-09-19',now)[0].predicted,'home','Price freshness does not erase the winner forecast');
 console.log('Weekly football: lower research threshold, data/price guards, stale-feed rejection, and date window passed');
