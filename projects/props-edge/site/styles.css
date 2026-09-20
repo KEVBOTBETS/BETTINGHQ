@@ -122,6 +122,15 @@ main{padding:0 clamp(14px,3vw,34px) 60px}
 footer{padding:22px clamp(14px,3vw,34px) 40px;border-top:1px solid var(--line-soft);color:var(--muted);font-size:11.5px;line-height:1.7}
 footer p{margin:0 0 6px;max-width:100ch}
 
+#paste-dialog{border:1px solid var(--line);border-radius:14px;background:var(--panel);color:var(--ink);padding:0;width:min(760px,calc(100vw - 20px))}
+#paste-dialog::backdrop{background:rgba(3,6,10,.8)}
+.paste-shell{display:grid;gap:12px;padding:20px}
+.paste-shell textarea{width:100%;border:1px solid var(--line);border-radius:10px;background:#0c141d;color:var(--ink);padding:12px;font:13px/1.6 'Share Tech Mono',ui-monospace,monospace;resize:vertical}
+.paste-actions{display:flex;gap:8px;flex-wrap:wrap}
+.paste-links{border-top:1px solid var(--line-soft);padding-top:10px;font-size:12px}
+.paste-links summary{cursor:pointer;color:var(--teal);font-weight:700}
+.paste-links ul{margin:10px 0 0;padding-left:18px;line-height:1.9;color:var(--muted)}
+.paste-links a{color:var(--blue)}
 #card-dialog{border:1px solid var(--line);border-radius:14px;background:var(--panel);color:var(--ink);padding:0;width:min(980px,calc(100vw - 20px));max-height:calc(100vh - 20px)}
 #card-dialog::backdrop{background:rgba(3,6,10,.8)}
 .card-shell{display:grid;grid-template-columns:250px 1fr;grid-template-areas:'head head' 'styles preview' 'actions preview';gap:14px 20px;padding:20px}

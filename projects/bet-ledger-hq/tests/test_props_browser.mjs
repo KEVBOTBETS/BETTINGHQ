@@ -89,6 +89,28 @@ try {
     assert.equal(await page.locator('.ticket').count(), 1, 'same-game scope has its own tickets');
     assert.match(await page.locator('.corr').first().textContent(), /CORRELATION/);
 
+    // Pasted odds replace the estimates, re-score a different line and re-price the ticket.
+    await page.locator('[data-tab="parlays"]').click();
+    await page.locator('[data-scope="slate"]').click();
+    const beforePrice = await page.locator('.ticket .price').first().textContent();
+    await page.locator('#paste-lines').click();
+    await page.locator('#paste-box').fill('Alpha Player anytime touchdown +240\nBravo Player over 49.5 receiving yards -105\nnonsense row');
+    await page.locator('#paste-apply').click();
+    assert.match(await page.locator('#paste-status').textContent(), /Read 2 lines, 1 matched/);
+    await page.locator('#paste-close').click();
+    assert.notEqual(await page.locator('.ticket .price').first().textContent(), beforePrice, 'a pasted price changes the ticket');
+    assert.match(await page.locator('.ticket-top small').first().textContent(), /WITH YOUR LINES/);
+    const estTags = await page.locator('.ticket').first().locator('.est').count();
+    const legCount = await page.locator('.ticket').first().locator('.legs li').count();
+    assert.ok(estTags < legCount, 'the pasted leg drops its estimate tag while the rest keep theirs');
+    assert.equal(await page.locator('.ticket').first().locator('.legs li', {hasText: 'Alpha Player'}).locator('.est').count(), 0);
+    await page.locator('[data-tab="board"]').click();
+    assert.match(await page.locator('.board-row', {hasText: 'Bravo'}).first().textContent(), /49\.5/, 'the board follows the pasted line');
+    await page.locator('[data-tab="parlays"]').click();
+    await page.locator('#paste-lines').click();
+    await page.locator('#paste-clear').click();
+    await page.locator('#paste-close').click();
+
     await page.locator('[data-tab="sheet"]').click();
     await page.locator('.sheet-row').first().waitFor();
     assert.equal(await page.locator('.sheet-row').count(), 2, 'touchdown sheet lists only touchdown legs');

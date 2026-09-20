@@ -23,6 +23,7 @@ class JsonClient:
         self.service = service
         self.base_url = base_url.rstrip("/")
         self.timeout = timeout
+        self.quota: dict[str, str] = {}
 
     def get(self, path: str, params: dict[str, Any] | None = None, retries: int = 2) -> Any:
         clean = {k: v for k, v in (params or {}).items() if v is not None and v != ""}
@@ -39,6 +40,10 @@ class JsonClient:
         for attempt in range(retries + 1):
             try:
                 with urllib.request.urlopen(request, timeout=self.timeout) as response:
+                    for header in ("x-requests-remaining", "x-requests-used", "x-requests-last"):
+                        value = response.headers.get(header)
+                        if value is not None:
+                            self.quota[header] = str(value)
                     return json.loads(_unzip(response.read()).decode("utf-8"))
             except urllib.error.HTTPError as exc:
                 body = ""

@@ -85,38 +85,53 @@ class TheOddsApiProvider:
         self.client = JsonClient(self.name, SECONDARY_URL)
 
     def fetch(self, sport: str) -> list[PropQuote]:
+        """Query only the configured markets, so a free-tier key is not burned in one run.
+
+        The Odds API charges one credit per market per game, so the catalogue call is
+        skipped and the market list is capped by config rather than by what a book offers.
+        """
+        feed = self.settings.get("odds_feed", {})
         sport_key = self.settings["sports"][sport]["secondary_sport"]
         books = ",".join(self.settings["bookmakers"]["secondary_consensus"])
         events = self.client.get(f"/sports/{sport_key}/events", {"apiKey": self.api_key})
         quotes: list[PropQuote] = []
-        for event in events:
+        for event in (events or [])[: int(feed.get("max_events", 16))]:
             event_id = event.get("id")
             if not event_id:
                 continue
-            catalogue = self.client.get(
-                f"/sports/{sport_key}/events/{event_id}/markets",
-                {"apiKey": self.api_key, "bookmakers": books},
-            )
-            market_keys: list[str] = []
-            for bookmaker in catalogue.get("bookmakers") or []:
-                for market in bookmaker.get("markets") or []:
-                    key = str(market.get("key") or "")
-                    if key.startswith(PROP_PREFIXES) and key not in market_keys:
-                        market_keys.append(key)
-            if not market_keys:
-                continue
+            market_keys = list(feed.get("markets") or NFL_MARKETS)
+            if feed.get("use_market_catalogue"):
+                catalogue = self.client.get(
+                    f"/sports/{sport_key}/events/{event_id}/markets",
+                    {"apiKey": self.api_key, "bookmakers": books},
+                )
+                offered: list[str] = []
+                for bookmaker in catalogue.get("bookmakers") or []:
+                    for market in bookmaker.get("markets") or []:
+                        key = str(market.get("key") or "")
+                        if key.startswith(PROP_PREFIXES) and key not in offered:
+                            offered.append(key)
+                market_keys = [key for key in market_keys if key in offered] or offered
             if sport in ("NFL", "NCAAF"):
                 market_keys.sort(key=lambda key: NFL_MARKET_PRIORITY.get(key, len(NFL_MARKET_PRIORITY)))
-            limit = int(self.settings["fetch"]["secondary_max_markets_per_event"])
+            limit = int(feed.get("max_markets_per_event") or self.settings["fetch"]["secondary_max_markets_per_event"])
+            market_keys = market_keys[:limit]
+            if not market_keys:
+                continue
             response = self.client.get(
                 f"/sports/{sport_key}/events/{event_id}/odds",
                 {
                     "apiKey": self.api_key,
                     "bookmakers": books,
-                    "markets": ",".join(market_keys[:limit]),
+                    "markets": ",".join(market_keys),
                     "oddsFormat": "american",
                     "dateFormat": "iso",
                 },
             )
             quotes.extend(parse_event(response, sport))
         return quotes
+
+    @property
+    def quota(self) -> dict[str, str]:
+        """Credits left on the key, as reported by the provider."""
+        return dict(self.client.quota)

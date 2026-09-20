@@ -23,7 +23,8 @@
   <div class="masthead-side">
     <p id="freshness" class="freshness">Loading the board…</p>
     <div class="masthead-actions">
-      <button id="import-lines" class="ghost" type="button">Import book lines</button>
+      <button id="paste-lines" class="ghost" type="button">Paste odds</button>
+      <button id="import-lines" class="ghost" type="button">Import CSV</button>
       <button id="template" class="ghost" type="button">CSV template</button>
     </div>
   </div>
@@ -109,6 +110,27 @@
     <div class="style-picker" id="card-styles" role="radiogroup" aria-label="Card style"></div>
     <div class="card-preview"><canvas id="card-canvas" width="1080" height="1350" aria-label="Card preview"></canvas><p id="card-status" role="status" aria-live="polite"></p></div>
     <div class="card-actions"><button id="card-download" class="primary" type="button">Download PNG</button><button id="card-share" class="ghost" type="button">Share</button></div>
+  </div>
+</dialog>
+
+<dialog id="paste-dialog" aria-labelledby="paste-title">
+  <div class="paste-shell">
+    <header class="card-head">
+      <div><p class="eyebrow">KEVBOTBETS / REAL PRICES</p><h2 id="paste-title">Paste today&rsquo;s odds</h2></div>
+      <button id="paste-close" class="ghost" type="button" aria-label="Close paste odds">✕</button>
+    </header>
+    <p class="lede">Copy the lines from your sportsbook or an odds screen and paste them here, one per line. The board, the cheat sheets and every parlay payout switch to your prices and lose the EST tag. Nothing is uploaded — it stays in this browser.</p>
+    <textarea id="paste-box" rows="9" spellcheck="false" placeholder="Josh Allen anytime touchdown +120&#10;Tee Higgins over 58.5 receiving yards -115&#10;Jahmyr Gibbs Over 4.5 Receptions +105"></textarea>
+    <p id="paste-status" role="status" aria-live="polite" class="muted"></p>
+    <div class="paste-actions"><button id="paste-apply" class="primary" type="button">Use these prices</button><button id="paste-clear" class="ghost" type="button">Clear saved prices</button></div>
+    <details class="paste-links"><summary>Where to get the lines</summary>
+      <p class="muted">Open the market, copy the player, the line and the price. KEVBOTBETS never scrapes these sites — their terms do not allow it, so the paste box (or an odds-provider key) is how real prices get in.</p>
+      <ul>
+        <li><b>Sportsbooks:</b> <a href="https://sportsbook.draftkings.com/leagues/football/nfl" target="_blank" rel="noopener">DraftKings</a> · <a href="https://sportsbook.fanduel.com/navigation/nfl" target="_blank" rel="noopener">FanDuel</a> · <a href="https://sports.betmgm.com/en/sports/football-11/betting/usa-9/nfl-35" target="_blank" rel="noopener">BetMGM</a> · <a href="https://www.bet365.com" target="_blank" rel="noopener">bet365</a> · <a href="https://sportsbook.caesars.com/us/bet/americanfootball" target="_blank" rel="noopener">Caesars</a> · <a href="https://on.thescore.bet" target="_blank" rel="noopener">theScore Bet</a> · <a href="https://www.pinnacle.com/en/football/nfl/matchups/" target="_blank" rel="noopener">Pinnacle</a></li>
+        <li><b>Comparison screens:</b> <a href="https://oddsjam.com/nfl/odds/player-props" target="_blank" rel="noopener">OddsJam</a> · <a href="https://www.bettingpros.com/nfl/props/" target="_blank" rel="noopener">BettingPros</a> · <a href="https://www.actionnetwork.com/nfl/props" target="_blank" rel="noopener">Action Network</a> · <a href="https://www.covers.com/nfl/props" target="_blank" rel="noopener">Covers</a> · <a href="https://www.vegasinsider.com/nfl/odds/player-props/" target="_blank" rel="noopener">VegasInsider</a> · <a href="https://www.oddsshark.com/nfl/props" target="_blank" rel="noopener">OddsShark</a> · <a href="https://props.cash" target="_blank" rel="noopener">Props.cash</a></li>
+        <li><b>Automatic instead:</b> a free <a href="https://the-odds-api.com" target="_blank" rel="noopener">The Odds API</a> key in the repository secrets fills these prices in on every refresh.</li>
+      </ul>
+    </details>
   </div>
 </dialog>
 

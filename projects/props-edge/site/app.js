@@ -32,16 +32,68 @@
 
   /* ---------- imported book lines ---------- */
   const importKey = (leg) => `${norm(leg.player)}|${norm(leg.market)}|${leg.side}|${leg.line ?? ''}`;
+  const sideKey = (leg) => `${norm(leg.player)}|${norm(leg.market)}|${leg.side}`;
+
+  /* The same blend the pipeline uses, so a pasted line at a different number is
+     re-scored rather than silently keeping the model's own line. */
+  function modelOverProbability(leg, line) {
+    const recent = (leg.recent || []).map(Number).filter(Number.isFinite);
+    const projection = Number(leg.projection);
+    if (!recent.length || !Number.isFinite(projection)) return null;
+    const mean = recent.reduce((total, value) => total + value, 0) / recent.length;
+    const variance = recent.reduce((total, value) => total + (value - mean) ** 2, 0) / Math.max(1, recent.length - 1);
+    const deviation = Math.max(Math.sqrt(variance) || 0, 0.75, 0.22 * Math.max(projection, 1));
+    const z = (line - projection) / deviation;
+    const normalOver = 1 - (0.5 * (1 + erf(z / Math.SQRT2)));
+    const hits = recent.filter((value) => value > line).length;
+    const empirical = (hits + 1) / (recent.length + 2);
+    const raw = (normalOver + empirical) / 2;
+    const confidence = Math.max(0.25, Math.min(0.75, Number(leg.confidence) || 0.5));
+    return 0.5 + (raw - 0.5) * (0.55 + 0.45 * confidence);
+  }
+  function erf(x) {
+    const sign = x < 0 ? -1 : 1; x = Math.abs(x);
+    const t = 1 / (1 + 0.3275911 * x);
+    const y = 1 - ((((1.061405429 * t - 1.453152027) * t + 1.421413741) * t - 0.284496736) * t + 0.254829592) * t * Math.exp(-x * x);
+    return sign * y;
+  }
+
   function pricedLeg(leg) {
-    const found = state.imported[importKey(leg)];
-    if (!found) return leg;
-    return { ...leg, price_american: found.price, price_decimal: decimalOf(found.price), price_source: 'book', book: found.book || 'Imported line', imported: true };
+    let found = state.imported[importKey(leg)];
+    let line = leg.line;
+    let probability = leg.model_prob;
+    if (!found) {
+      // The book may post a different number than the model picked. Take the
+      // closest one for the same player, market and side, and re-score it.
+      const candidates = Object.entries(state.imported)
+        .filter(([key]) => key.startsWith(sideKey(leg) + '|'))
+        .map(([key, value]) => ({ line: Number(key.split('|')[3]), value }))
+        .filter((row) => Number.isFinite(row.line));
+      if (!candidates.length) return leg;
+      candidates.sort((a, b) => Math.abs(a.line - Number(leg.line)) - Math.abs(b.line - Number(leg.line)));
+      const best = candidates[0];
+      const scored = modelOverProbability(leg, best.line);
+      if (scored == null) return leg;
+      found = best.value; line = best.line;
+      probability = leg.side === 'under' ? 1 - scored : scored;
+    }
+    return {
+      ...leg, line, model_prob: probability,
+      pick: leg.market === 'Anytime touchdown' ? leg.pick : `${leg.player} ${leg.side} ${line} ${leg.market.toLowerCase()}`,
+      price_american: found.price, price_decimal: decimalOf(found.price),
+      price_source: 'book', book: found.book || 'Imported line', imported: true,
+    };
   }
   function ticketPrice(ticket) {
     const legs = ticket.legs.map(pricedLeg);
     const decimal = legs.reduce((total, leg) => total * Number(leg.price_decimal), 1);
     const changed = legs.some((leg) => leg.imported);
-    return { legs, decimal, american: americanOf(decimal), changed };
+    // Re-score the ticket only when a leg actually changed, keeping the build's correlation factor.
+    const independent = legs.reduce((total, leg) => total * Number(leg.model_prob), 1);
+    const probability = changed
+      ? Math.min(0.97, independent * Number(ticket.correlation_applied || 1))
+      : Number(ticket.model_prob);
+    return { legs, decimal, american: americanOf(decimal), changed, probability };
   }
 
   /* ---------- loading ---------- */
@@ -63,13 +115,18 @@
     $('#freshness').textContent = when
       ? `${state.legs.length} legs · ${(state.parlays.tickets || []).length} parlays · built ${clock(meta.generated_at)} (${age < 1 ? 'under an hour' : Math.round(age) + 'h'} old) · ${source}`
       : 'Model files could not be read.';
-    $('#sources').textContent = `Source: ${source}. Prices marked EST are the model's own estimate, not a live sportsbook price.`;
+    const quota = (meta.odds_feed && meta.odds_feed.quota) || {};
+    const credits = quota['x-requests-remaining'];
+    const window = (meta.odds_feed && meta.odds_feed.window && meta.odds_feed.window.NFL) || {};
+    $('#sources').textContent = `Source: ${source}. Prices marked EST are the model's own estimate, not a live sportsbook price.`
+      + (credits ? ` Odds key: ${credits} credits left.` : '')
+      + (window.hours_to_kickoff != null ? ` Next kickoff in ${window.hours_to_kickoff}h${window.inside_window === false ? ' — paid odds are only pulled inside ' + window.window_hours + 'h of kickoff.' : '.'}` : '');
     const banner = $('#price-banner');
     const estimated = meta.estimated_prices !== false && !(meta.counts && meta.counts.book_priced_legs);
     const imported = Object.keys(state.imported).length;
     if (estimated) {
       banner.hidden = false;
-      banner.innerHTML = `No sportsbook feed is configured, so every price below is a <b>model estimate</b> with a normal hold applied. ${imported ? `${imported} imported line${imported === 1 ? '' : 's'} are in use.` : 'Use <b>Import book lines</b> to paste today’s real prices, or add an odds-provider key to the repository secrets.'}`;
+      banner.innerHTML = `No sportsbook feed is configured, so every price below is a <b>model estimate</b> with a normal hold applied. ${imported ? `${imported} imported line${imported === 1 ? '' : 's'} are in use.` : 'Use <b>Paste odds</b> to drop in today’s real prices from any sportsbook, or add an odds-provider key to the repository secrets.'}`;
     } else banner.hidden = true;
   }
 
@@ -107,8 +164,7 @@
   }
 
   function ticketCard(ticket) {
-    const { legs, decimal, american, changed } = ticketPrice(ticket);
-    const probability = Number(ticket.model_prob);
+    const { legs, decimal, american, changed, probability } = ticketPrice(ticket);
     const payout = 10 * decimal;
     const ev = probability * payout - 10;
     const correlation = Number(ticket.correlation_applied || 1);
@@ -119,7 +175,7 @@
       </div>
       <div class="ticket-stats">
         <div><b>${pct(probability)}</b><span>Model chance</span></div>
-        <div><b>1 in ${ticket.one_in ?? '—'}</b><span>Hit rate</span></div>
+        <div><b>1 in ${probability > 0 ? Math.round(1 / probability) : '—'}</b><span>Hit rate</span></div>
         <div><b>${money(payout)}</b><span>Pays on $10</span></div>
         <div><b>${money(ev)}</b><span>Model EV</span></div>
       </div>
@@ -296,6 +352,73 @@
     setTimeout(() => URL.revokeObjectURL(link.href), 4000);
   }
 
+
+  /* ---------- pasted odds (any sportsbook or odds screen) ---------- */
+  const MARKET_WORDS = [
+    [/anytime|any time|\batd\b|touchdown scorer|to score/i, 'Anytime touchdown'],
+    [/pass(ing)?\s*(yards|yds)/i, 'Passing yards'],
+    [/pass(ing)?\s*(tds?|touchdowns?)/i, 'Passing touchdowns'],
+    [/pass(ing)?\s*attempts/i, 'Pass attempts'],
+    [/completions/i, 'Pass completions'],
+    [/interceptions/i, 'Pass interceptions'],
+    [/rush(ing)?\s*(yards|yds)/i, 'Rushing yards'],
+    [/rush(ing)?\s*(attempts|carries)/i, 'Rush attempts'],
+    [/rush(ing)?\s*(tds?|touchdowns?)/i, 'Rushing touchdowns'],
+    [/receiv(ing)?\s*(yards|yds)/i, 'Receiving yards'],
+    [/receptions|catches/i, 'Receptions'],
+    [/targets/i, 'Targets'],
+    [/longest\s*(pass|completion)/i, 'Longest pass'],
+    [/longest\s*rush/i, 'Longest rush'],
+    [/longest\s*reception/i, 'Longest reception'],
+    [/kicking\s*points/i, 'Kicking points'],
+    [/field\s*goals?/i, 'Field goals made'],
+    [/extra\s*points?/i, 'Extra points made'],
+    [/tackles/i, 'Tackles + assists'],
+    [/sacks/i, 'Sacks'],
+  ];
+
+  function parsePastedLine(raw) {
+    const text = String(raw).replace(/\s+/g, ' ').trim();
+    if (!text || text.length < 6) return null;
+    const price = text.match(/(?:^|[\s(,:])([+-]\d{2,5})(?!\.?\d*\s*(?:yards|yds|receptions|targets))/);
+    if (!price) return null;
+    const market = (MARKET_WORDS.find(([pattern]) => pattern.test(text)) || [])[1];
+    if (!market) return null;
+    const anytime = market === 'Anytime touchdown';
+    const side = anytime ? 'yes' : /\bunder\b|\bu\s?\d/i.test(text) ? 'under' : 'over';
+    const lineMatch = anytime ? null : text.match(/(?:over|under|o|u)\s*([0-9]+(?:\.[05])?)|\b([0-9]+\.5)\b/i);
+    const line = anytime ? null : Number((lineMatch && (lineMatch[1] || lineMatch[2])) ?? NaN);
+    if (!anytime && !Number.isFinite(line)) return null;
+    // The player is what is left once the market words, the line and the price are removed.
+    const NOISE = /\b(anytime|any ?time|touchdowns?|tds?|scorer|to score|passing|pass|rushing|rush|receiving|reception|receptions|catches|targets|attempts|carries|completions|interceptions|longest|field|goals?|extra|points|kicking|tackles|assists|sacks|yards|yds|over|under|o|u|yes|no|alt|line|odds|prop|a|an|the|to)\b/ig;
+    const player = text
+      .slice(0, price.index === undefined ? text.length : price.index)
+      .replace(NOISE, ' ')
+      .replace(/[0-9]+(?:\.[05])?/g, ' ')
+      .replace(/[|,:;()\-–—+]+/g, ' ')
+      .replace(/\s+/g, ' ')
+      .trim();
+    if (player.split(' ').length < 2) return null;
+    return { key: `${norm(player)}|${norm(market)}|${side}|${anytime ? '' : line}`, price: Number(price[1]), player, market, side, line };
+  }
+
+  function applyPasted(text) {
+    const rows = String(text).split(/\r?\n/);
+    const found = {}; let parsed = 0; const missed = [];
+    for (const row of rows) {
+      if (!row.trim()) continue;
+      const line = parsePastedLine(row);
+      if (!line) { missed.push(row.trim()); continue; }
+      parsed++;
+      found[line.key] = { price: line.price, book: 'Pasted' };
+    }
+    const known = new Set(state.legs.map(importKey));
+    const matched = Object.keys(found).filter((key) => known.has(key)).length;
+    state.imported = { ...state.imported, ...found };
+    writeStore(IMPORT_KEY, state.imported);
+    return { parsed, matched, missed };
+  }
+
   /* ---------- share card ---------- */
   const SWATCH = { gridiron: 'linear-gradient(135deg,#ffd772,#8a5a12 55%,#111)', ballpark: 'linear-gradient(135deg,#f6ecd6 50%,#0c1a2e 50%)', scoreboard: 'radial-gradient(circle,#ffb000 30%,#050608 32%)', northern: 'linear-gradient(90deg,#c8102e 28%,#fff 28% 72%,#c8102e 72%)', slip: 'repeating-linear-gradient(0deg,#fff 0 4px,#ddd 4px 6px)' };
   let cardStyle = 'gridiron', cardPayload = null, drawing = 0;
@@ -415,16 +538,16 @@
       const button = event.target.closest('[data-action]'); if (!button) return;
       const id = button.closest('.ticket').dataset.id;
       const ticket = (state.parlays.tickets || []).find((row) => row.id === id); if (!ticket) return;
-      const { legs, american } = ticketPrice(ticket);
+      const { legs, american, probability } = ticketPrice(ticket);
       const text = legs.map((leg) => `${leg.player} — ${leg.market === 'Anytime touchdown' ? 'anytime TD' : `${leg.side} ${leg.line ?? ''} ${leg.market.toLowerCase()}`} (${odds(leg.price_american)}${leg.price_source === 'model' ? ' est' : ''}) · ${leg.matchup}`);
       if (button.dataset.action === 'copy') {
-        const payload = `KEVBOT ${ticket.leg_count}-leg parlay ${odds(american)} · model ${pct(ticket.model_prob)}\n` + text.map((row, index) => `${index + 1}. ${row}`).join('\n');
+        const payload = `KEVBOT ${ticket.leg_count}-leg parlay ${odds(american)} · model ${pct(probability)}\n` + text.map((row, index) => `${index + 1}. ${row}`).join('\n');
         try { await navigator.clipboard.writeText(payload); button.textContent = 'Copied ✓'; }
         catch (_) { button.textContent = 'Copy failed'; }
         setTimeout(() => { button.textContent = 'Copy legs'; }, 1600);
       }
       if (button.dataset.action === 'ledger') {
-        addEntry({ title: `${ticket.leg_count}-leg parlay · ${ticket.scope === 'game' ? ticket.label : ticket.scope}`, price_american: american, legs: text, model_prob: ticket.model_prob, kind: 'parlay' });
+        addEntry({ title: `${ticket.leg_count}-leg parlay · ${ticket.scope === 'game' ? ticket.label : ticket.scope}`, price_american: american, legs: text, model_prob: probability, kind: 'parlay' });
         button.textContent = 'Added ✓'; setTimeout(() => { button.textContent = 'Add to ledger'; }, 1600);
       }
       if (button.dataset.action === 'card') openCard(parlayCardPayload(ticket));
@@ -445,6 +568,25 @@
       state.bank = { bankroll: Number($('#bankroll').value) || 0, maxBet: Number($('#max-bet').value) || 0 };
       writeStore(BANK_KEY, state.bank); renderLedger();
     }));
+    $('#paste-lines').addEventListener('click', () => {
+      const dialog = $('#paste-dialog');
+      $('#paste-status').textContent = Object.keys(state.imported).length ? `${Object.keys(state.imported).length} price${Object.keys(state.imported).length === 1 ? '' : 's'} saved in this browser.` : '';
+      if (dialog.showModal) dialog.showModal(); else dialog.setAttribute('open', '');
+      $('#paste-box').focus();
+    });
+    $('#paste-close').addEventListener('click', () => $('#paste-dialog').close && $('#paste-dialog').close());
+    $('#paste-apply').addEventListener('click', () => {
+      const { parsed, matched, missed } = applyPasted($('#paste-box').value);
+      $('#paste-status').textContent = parsed
+        ? `Read ${parsed} line${parsed === 1 ? '' : 's'}, ${matched} matched a leg on the board.${missed.length ? ` Skipped ${missed.length}: ${missed.slice(0, 2).join(' / ')}` : ''}`
+        : 'Nothing read. Each line needs a player, the market, the line and the price — "Tee Higgins over 58.5 receiving yards -115".';
+      freshness(); renderParlays(); renderSheet(); renderBoard();
+    });
+    $('#paste-clear').addEventListener('click', () => {
+      state.imported = {}; writeStore(IMPORT_KEY, {});
+      $('#paste-status').textContent = 'Saved prices cleared. The board is back on model estimates.';
+      freshness(); renderParlays(); renderSheet(); renderBoard();
+    });
     $('#export-ledger').addEventListener('click', exportLedger);
     $('#template').addEventListener('click', downloadTemplate);
     $('#import-lines').addEventListener('click', () => $('#csv-input').click());

@@ -18,15 +18,39 @@ passing, rushing, receiving, kicking and defensive markets, and it has four tabs
 ## Where the prices come from
 
 1. Odds-API.io, when its GitHub Actions secret is configured.
-2. The Odds API, when its secret is configured and the primary feed has no props.
-3. ESPN public schedules and box scores, always available and keyless.
+2. The Odds API, when its secret is configured. Only the six core prop markets are
+   requested, only for the games inside the kickoff window, because that provider
+   charges one credit per market per game and the free tier is 500 a month. The
+   credits left on the key are published in `meta.json` and shown on the page.
+3. ESPN public schedules and box scores, always available and keyless. This gives
+   projections, not prices.
 
 With no odds secret there is no live sportsbook price, so each leg is priced from
 the model's own probability with a normal two-way hold applied. Those legs are
 labelled **EST** everywhere they appear and the parlay payouts built from them are
-estimates, not a quote. Import today's real prices with **Import book lines** (the
-CSV template button fills in the players and markets), or add an odds key to the
-repository secrets, and the board switches to real prices automatically.
+estimates, not a quote.
+
+### Getting real prices in without a key
+
+Use **Paste odds** on the page. Copy lines from any sportsbook or odds screen —
+DraftKings, FanDuel, BetMGM, bet365, Caesars, theScore Bet, Pinnacle, OddsJam,
+BettingPros, Action Network, Covers, VegasInsider, OddsShark, Props.cash — and
+paste them one per line:
+
+```
+Josh Allen anytime touchdown +120
+Tee Higgins over 58.5 receiving yards -115
+Jahmyr Gibbs Over 4.5 Receptions +105
+```
+
+The page reads the player, market, side, line and price, and re-prices the board,
+the cheat sheets and every parlay. If the book's line differs from the model's, the
+leg is re-scored at the book's number instead of being ignored. Pasted prices stay
+in that browser; nothing is uploaded. **Import CSV** does the same from a file.
+
+These sites are never scraped by the pipeline. Their terms do not allow automated
+extraction, so prices arrive either from a licensed odds API key or from this paste
+box.
 
 ## Parlay rules
 

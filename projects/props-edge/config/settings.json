@@ -101,5 +101,19 @@
       "50000": 6
     },
     "sgp_min_legs": 3
+  },
+  "odds_feed": {
+    "markets": [
+      "player_anytime_td",
+      "player_pass_yds",
+      "player_pass_tds",
+      "player_rush_yds",
+      "player_reception_yds",
+      "player_receptions"
+    ],
+    "max_events": 16,
+    "use_market_catalogue": false,
+    "window_hours": 36,
+    "note": "The free Odds API tier is 500 credits a month and each market on each game costs one credit, so only the core markets are requested and only inside the window before kickoff."
   }
 }

@@ -38,7 +38,7 @@ def build() -> dict[str, Any]:
     secondary = TheOddsApiProvider(secondary_key, settings) if secondary_key else None
     espn = EspnProjectionProvider(settings)
     espn_prefetch: dict[str, tuple[list[Any], str | None]] = {}
-    if not primary and not secondary:
+    if True:
         def fetch_keyless(sport_name: str) -> tuple[str, list[Any], str | None]:
             try:
                 return sport_name, espn.fetch(sport_name), None
@@ -51,47 +51,57 @@ def build() -> dict[str, Any]:
     quotes = []
     projections = []
     source_by_sport: dict[str, dict[str, Any]] = {}
+    feed = settings.get("odds_feed", {})
+    window_hours = float(feed.get("window_hours") or 0)
+    now = dt.datetime.now(dt.timezone.utc)
+    odds_windows: dict[str, Any] = {}
     for sport in settings["sports"]:
         errors: list[str] = []
         sport_quotes = []
         sport_projections = []
         source = None
-        if primary:
-            try:
-                sport_quotes = primary.fetch(sport)
-                if sport_quotes:
-                    source = primary.name
-            except ProviderError as exc:
-                errors.append(str(exc))
-        if not sport_quotes and secondary:
-            try:
-                sport_quotes = secondary.fetch(sport)
-                if sport_quotes:
-                    source = secondary.name
-            except ProviderError as exc:
-                errors.append(str(exc))
-        if not sport_quotes:
-            if sport in espn_prefetch:
-                sport_projections, prefetch_error = espn_prefetch[sport]
-                if prefetch_error:
-                    errors.append(prefetch_error)
-                    source = "No source available"
-                else:
-                    source = espn.name
-            else:
-                try:
-                    sport_projections = espn.fetch(sport)
-                    source = espn.name
-                except ProviderError as exc:
-                    errors.append(str(exc))
-                    source = "No source available"
-        # Priced props also get the ESPN-stat projection model (NFL Pro upgrade),
-        # so a DraftKings line can qualify even without a second book's consensus.
-        if sport_quotes and not sport_projections:
+        # ESPN first: it is keyless, it is needed for the model anyway, and its
+        # kickoff times decide whether spending paid odds credits is worth it.
+        if sport in espn_prefetch:
+            sport_projections, prefetch_error = espn_prefetch[sport]
+            if prefetch_error:
+                errors.append(prefetch_error)
+        else:
             try:
                 sport_projections = espn.fetch(sport)
             except ProviderError as exc:
                 errors.append(str(exc))
+        source = espn.name if sport_projections else "No source available"
+
+        kickoffs = sorted(
+            stamp for stamp in (str(row.start_time or "") for row in sport_projections) if stamp
+        )
+        next_kickoff = kickoffs[0] if kickoffs else None
+        hours_away = None
+        if next_kickoff:
+            try:
+                hours_away = (dt.datetime.fromisoformat(next_kickoff) - now).total_seconds() / 3600
+            except ValueError:
+                hours_away = None
+        # A paid key is only spent close to kickoff, when the prices are the ones
+        # that will actually be available to bet.
+        inside_window = window_hours <= 0 or hours_away is None or hours_away <= window_hours
+        odds_windows[sport] = {
+            "next_kickoff": next_kickoff,
+            "hours_to_kickoff": None if hours_away is None else round(hours_away, 1),
+            "window_hours": window_hours,
+            "inside_window": bool(inside_window),
+        }
+        if inside_window:
+            for provider in (primary, secondary):
+                if not provider or sport_quotes:
+                    continue
+                try:
+                    sport_quotes = provider.fetch(sport)
+                    if sport_quotes:
+                        source = provider.name
+                except ProviderError as exc:
+                    errors.append(str(exc))
         quotes.extend(sport_quotes)
         projections.extend(sport_projections)
         source_by_sport[sport] = {
@@ -101,10 +111,6 @@ def build() -> dict[str, Any]:
             "errors": errors,
         }
 
-    if not quotes and not projections and any(info["errors"] for info in source_by_sport.values()):
-        # Every source failed: keep the last published files instead of blanking the board.
-        raise SystemExit("Props Edge: no source returned data; previous files kept. " + "; ".join(
-            f"{sport}: {info['errors'][0]}" for sport, info in source_by_sport.items() if info["errors"]))
     legs = build_legs(
         merge_boards(
             evaluate_quotes(quotes, settings),
@@ -149,6 +155,11 @@ def build() -> dict[str, Any]:
             "If both odds providers are unavailable, ESPN schedules and box-score statistics produce projection-only rows.",
             "Action Network and OddsShark are not scraped because automated extraction is blocked or prohibited.",
         ],
+    }
+    meta["odds_feed"] = {
+        "window": odds_windows,
+        "markets": list(feed.get("markets") or []),
+        "quota": (getattr(secondary, "quota", None) or {}) if secondary else {},
     }
     meta["counts"]["legs"] = len(legs)
     meta["counts"]["book_priced_legs"] = sum(leg["price_source"] == "book" for leg in legs)
