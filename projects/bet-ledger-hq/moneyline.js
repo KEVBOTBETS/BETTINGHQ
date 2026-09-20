@@ -4,16 +4,24 @@
   const LABEL={nfl:'NFL',ncaaf:'College football',mlb:'MLB'};
   const esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
   const time=v=>new Intl.DateTimeFormat('en-CA',{timeZone:'America/Toronto',month:'short',day:'numeric',hour:'numeric',minute:'2-digit'}).format(new Date(v));
-  let saved={},bundles={},loading=false,request=0;
+  let saved={},bundles={},loading=false,request=0,pendingSport=null;
   try{const value=JSON.parse(localStorage.getItem(KEY)||localStorage.getItem('kevbot-moneyling-v1')||'{}');if(value&&typeof value==='object'&&!Array.isArray(value))saved=Object.fromEntries(Object.entries(value).filter(([k,v])=>v&&v.key===k&&C.instant(v.start)!==null&&['home','away'].includes(v.side)&&LABEL[v.sport]));}
   catch(_){$('#storage-status').textContent='Saved selections could not be read. New picks will remain on this page until saving succeeds.';}
   const save=()=>{try{localStorage.setItem(KEY,JSON.stringify(saved));$('#storage-status').textContent='Selections saved in this browser.';}catch(_){$('#storage-status').textContent='Browser storage is unavailable. Keep this page open or print your card to preserve these picks.';}};
-  const allCards=()=>Object.entries(bundles).flatMap(([k,b])=>C.cards(k,b)).filter(c=>c.day===$('#date').value).sort((a,b)=>a.when-b.when||a.key.localeCompare(b.key));
+  const forecastCards=()=>Object.entries(bundles).flatMap(([k,b])=>C.cards(k,b));
+  const allCards=()=>forecastCards().filter(c=>c.day===$('#date').value).sort((a,b)=>a.when-b.when||a.key.localeCompare(b.key));
   const visible=()=>allCards().filter(c=>$('#sport').value==='all'||c.sport===$('#sport').value);
+  const nextDay=sport=>forecastCards().filter(c=>c.sport===sport&&!c.locked&&c.day>=C.day(Date.now())).sort((a,b)=>a.when-b.when)[0]?.day;
+  const dateLabel=day=>new Intl.DateTimeFormat('en-CA',{timeZone:'UTC',weekday:'long',month:'short',day:'numeric'}).format(new Date(day+'T12:00:00Z'));
   const isLocked=c=>c.locked||(saved[c.key]&&C.instant(saved[c.key].start)<=Date.now());
   async function get(url){const response=await fetch(url,{cache:'no-store',signal:AbortSignal.timeout(20000)});if(!response.ok)throw new Error('Feed unavailable');return response.json();}
   function render(){
     const rows=visible();
+    const nflDay=nextDay('nfl'),selectedDay=$('#date').value;
+    $('#next-nfl').disabled=loading||!nflDay;
+    $('#slate-note').textContent=nflDay&&['all','nfl'].includes($('#sport').value)&&!allCards().some(c=>c.sport==='nfl')
+      ?'No NFL games on '+(selectedDay?dateLabel(selectedDay):'the selected date')+'. Next NFL game day: '+dateLabel(nflDay)+'. Use “Next NFL picks” to see the model’s winners.'
+      :$('#sport').value==='nfl'&&rows.length?'NFL winner predictions for '+dateLabel(selectedDay)+'. These picks do not require a qualifying bet or sportsbook price.':'';
     $('#cards').innerHTML=rows.length?rows.map((c,i)=>{
       const locked=isLocked(c),chosen=saved[c.key];
       return '<article class="match-card"><div class="card-top"><b>'+String(i+1).padStart(2,'0')+' / '+esc(LABEL[c.sport])+'</b><span>'+esc(time(c.start))+'</span></div><h2>'+esc(c.away+' at '+c.home)+'</h2><div class="team-options">'+['away','home'].map(side=>'<button class="team-option" data-key="'+esc(c.key)+'" data-side="'+side+'" aria-label="Pick '+esc(c[side+'Name'])+'" aria-pressed="'+(chosen?.side===side)+'" '+(loading||!c.selectable||locked?'disabled':'')+'><strong>'+esc(c[side])+'</strong><small>'+esc(c[side+'Name'])+'</small>'+(c.predicted===side?'<span class="pick-label">PREDICTED WINNER</span>':'')+'</button>').join('')+'</div><div class="card-bottom">'+(c.predicted?'<strong>'+esc(c[c.predicted])+' to win</strong>'+(c.probability!==null?' · '+Math.round(c.probability*100)+'% model estimate':''):esc(c.reason||'No prediction'))+(locked&&c.predicted?' · Locked':'')+(c.notes?'<small>'+esc(c.notes)+'</small>':'')+'</div></article>';
@@ -33,6 +41,8 @@
     await Promise.all(Object.entries(paths).map(async([sport,files])=>{try{const entries=await Promise.all(Object.entries(files).map(async([key,url])=>[key,await get(url)]));if(token===request)bundles[sport]=Object.fromEntries(entries);}catch(_){if(token===request)bundles[sport]={error:true};}}));
     if(token!==request)return;
     loading=false;$('#refresh').disabled=false;$('#status').textContent='Forecasts checked '+time(new Date().toISOString())+'. Only fresh pregame picks can be selected.';render();
+    const jump=pendingSport;pendingSport=null;
+    if(jump&&jump===$('#sport').value&&!visible().length&&nextDay(jump))openNextDay(jump);
   }
   $('#cards').addEventListener('click',event=>{const b=event.target.closest('[data-key]');if(!b||loading)return;const c=visible().find(c=>c.key===b.dataset.key);if(c){saved=C.choose(saved,c,b.dataset.side);save();render();}});
   $('#use-picks').addEventListener('click',()=>{if(loading)return;for(const c of visible())if(c.predicted)saved=C.choose(saved,c,c.predicted);save();render();});
@@ -66,7 +76,14 @@
   $('#card-share').addEventListener('click',async()=>{try{const b=await blob();await navigator.share({files:[new File([b],fileName(),{type:'image/png'})],title:'KEVBOT Moneyline card'});}catch(_){}});
   $('#card-print').addEventListener('click',()=>{$('#print-img').src=$('#card-canvas').toDataURL('image/png');document.body.classList.add('print-card');$('#card-dialog').close?.();setTimeout(()=>{window.print();},60);});
   window.addEventListener('afterprint',()=>document.body.classList.remove('print-card'));
-  $('#date').value=C.day(Date.now());$('#date').addEventListener('change',refresh);$('#sport').addEventListener('change',render);$('#refresh').addEventListener('click',refresh);$('#print').addEventListener('click',()=>window.print());
+  function openNextDay(sport){const day=nextDay(sport);if(!day)return;$('#sport').value=sport;$('#date').value=day;refresh();}
+  $('#next-nfl').addEventListener('click',()=>openNextDay('nfl'));
+  $('#date').value=C.day(Date.now());$('#date').addEventListener('change',()=>{pendingSport=null;refresh();});$('#sport').addEventListener('change',()=>{
+    const sport=$('#sport').value;
+    pendingSport=loading&&['nfl','ncaaf'].includes(sport)?sport:null;
+    if(!loading&&['nfl','ncaaf'].includes(sport)&&!visible().length&&nextDay(sport))openNextDay(sport);
+    else render();
+  });$('#refresh').addEventListener('click',refresh);$('#print').addEventListener('click',()=>window.print());
   window.addEventListener('message',e=>{if(e.origin===location.origin&&e.data?.type==='kevbotbets:activate')refresh();});
   window.addEventListener('online',refresh);document.addEventListener('visibilitychange',()=>{if(!document.hidden)render();});
   setInterval(render,15000);refresh();

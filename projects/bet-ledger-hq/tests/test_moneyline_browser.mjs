@@ -21,7 +21,7 @@ try{
     const page=await context.newPage(),errors=[],requests=[];
     page.on('pageerror',e=>errors.push(e.message));page.on('request',r=>requests.push(r.url()));
     await page.clock.install({time:new Date('2026-09-19T16:00:00Z')});
-    let failMlb=false;
+    let failMlb=false,nflNextDay=false;
     await page.route('https://**/*',r=>r.abort());
     await page.route('**/data/**',route=>{
       const u=route.request().url();let data={generated_at:stamp};
@@ -29,8 +29,8 @@ try{
         if(failMlb)return route.fulfill({status:503,body:'Unavailable'});
         data={generated_at:stamp,games:[{gamePk:3,date:'2026-09-19',start,home:'NYY',away:'TOR',home_name:'New York Yankees',away_name:'Toronto Blue Jays',gameType:'R',status:'Scheduled',sim:{p_home_final:.35},lineups_confirmed:true}]};
       }
-      if(u.includes('/nfl-edge-lab/data/games.json'))data=[{game_id:'1',date:start,home:'KC',away:'BUF',home_name:'Kansas City Chiefs',away_name:'Buffalo Bills',season_type:2,status:'Scheduled'}];
-      if(u.includes('/nfl-edge-lab/data/games_detail.json'))data=[{game_id:'1',projection:{mu:4,ratings_known:true},p_home:.65}];
+      if(u.includes('/nfl-edge-lab/data/games.json'))data=[{game_id:'1',date:nflNextDay?'2026-09-20T17:00:00Z':start,home:'KC',away:'BUF',home_name:'Kansas City Chiefs',away_name:'Buffalo Bills',season_type:2,status:'Scheduled'}];
+      if(u.includes('/nfl-edge-lab/data/games_detail.json'))data=[{game_id:'1',projection:{mu:4,ratings_known:true},...(nflNextDay?{}:{p_home:.65})}];
       if(u.includes('/ncaaf-edge-lab/data/games.json'))data=[{game_id:'2',date:start,home:'ALA',away:'UGA',home_name:'Alabama Crimson Tide',away_name:'Georgia Bulldogs',season_type:2,projection:{mu:-3,ratings_known:true}}];
       return route.fulfill({contentType:'application/json',body:JSON.stringify(data)});
     });
@@ -67,6 +67,22 @@ try{
     await page.clock.fastForward(3*3600000+1000);
     assert.equal(await frame.locator('.team-option:enabled').count(),0,'All picks lock at start');
     assert.equal(await frame.getByRole('button',{name:'Clear open picks',exact:true}).isDisabled(),true);
+    nflNextDay=true;
+    await frame.getByRole('button',{name:'Refresh forecasts',exact:true}).click();
+    await frame.locator('#status').filter({hasText:'Forecasts checked'}).waitFor();
+    assert.match(await frame.locator('#slate-note').textContent(),/Next NFL game day: Sunday/);
+    await frame.locator('#sport').selectOption('nfl');
+    await frame.locator('#status').filter({hasText:'Forecasts checked'}).waitFor();
+    assert.equal(await frame.locator('#date').inputValue(),'2026-09-20','NFL opens its next game day when today has no NFL games');
+    assert.equal(await frame.locator('.pick-label').count(),1,'NFL winner appears with no sportsbook odds or exported win probability');
+    await frame.locator('#date').fill('2026-09-19');
+    await frame.locator('#date').dispatchEvent('change');
+    await frame.locator('#status').filter({hasText:'Forecasts checked'}).waitFor();
+    assert.equal(await frame.locator('.match-card').count(),0,'An explicitly selected empty date is respected');
+    await frame.getByRole('button',{name:'Next NFL picks',exact:true}).click();
+    await frame.locator('#status').filter({hasText:'Forecasts checked'}).waitFor();
+    assert.equal(await frame.locator('#date').inputValue(),'2026-09-20');
+    assert.equal(await frame.locator('.pick-label').count(),1);
     assert.deepEqual(errors,[]);assert.ok(!requests.some(u=>u.includes('script.google.com')),'Winner selections never write to the wager ledger');
     await context.close();
   }
