@@ -29,6 +29,7 @@ from __future__ import annotations
 import datetime as dt
 import re
 import time
+from concurrent.futures import ThreadPoolExecutor
 from typing import Any, Iterable
 
 import requests
@@ -59,6 +60,10 @@ def _get(url: str, params: dict | None = None, tries: int = 4, timeout: int = 30
             if r.status_code == 200:
                 return r.json()
             last = f"HTTP {r.status_code}"
+            if r.status_code == 400:
+                # Retrying an unsupported query cannot repair it. The
+                # scoreboard caller can retry using individual dates instead.
+                raise EspnError(f"GET {url} failed: {last}")
         except requests.RequestException as exc:  # network blip
             last = str(exc)
         except ValueError as exc:                 # not JSON
@@ -81,9 +86,33 @@ def _try(fn, default, label: str):
 # --------------------------------------------------------------------------- #
 
 def scoreboard(start: dt.date, end: dt.date | None = None, limit: int = 200) -> dict:
-    """Games in a date range, inclusive. One request covers a full NFL week."""
-    span = start.strftime("%Y%m%d") if end is None else f'{start:%Y%m%d}-{end:%Y%m%d}'
-    return _get(f"{SITE}/scoreboard", {"dates": span, "limit": limit})
+    """Games in a range, with daily fallback when ESPN rejects range queries."""
+    if end is None or end == start:
+        return _get(f"{SITE}/scoreboard", {"dates": f'{start:%Y%m%d}', "limit": limit})
+    try:
+        return _get(f"{SITE}/scoreboard", {"dates": f'{start:%Y%m%d}-{end:%Y%m%d}', "limit": limit})
+    except EspnError as exc:
+        if 'HTTP 400' not in str(exc):
+            raise
+    print(f"   scoreboard {start}..{end}: range rejected; fetching individual dates")
+    days = [start + dt.timedelta(days=i) for i in range((end - start).days + 1)]
+
+    def one_day(day):
+        try:
+            return scoreboard(day, limit=limit).get('events') or []
+        except EspnError as exc:
+            # Keep successful days; missing days retain their old observation
+            # timestamps when merged with cached games.
+            print(f"  ! scoreboard {day}: {exc}")
+            return []
+
+    events = {}
+    with ThreadPoolExecutor(max_workers=4) as pool:
+        for batch in pool.map(one_day, days):
+            for event in batch:
+                if event.get('id') is not None:
+                    events[str(event['id'])] = event
+    return {'events': list(events.values())}
 
 
 def summary(event_id: str) -> dict:
