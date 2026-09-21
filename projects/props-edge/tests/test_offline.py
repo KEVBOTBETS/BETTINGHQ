@@ -525,3 +525,225 @@ class NameMatchingTests(unittest.TestCase):
         legs = legs_from_lines(rows, [projection], settings)
         self.assertTrue(legs, "the suffix must not stop the book line from being scored")
         self.assertEqual({leg["line"] for leg in legs}, {274.5})
+
+
+class InjuryAndMovementTests(unittest.TestCase):
+    def setUp(self):
+        import json as _json
+        from pathlib import Path
+        from pipeline.schema import Projection
+        self.settings = _json.loads((Path(__file__).resolve().parents[1] / "config" / "settings.json").read_text())
+        self.projections = [
+            Projection(sport="NFL", player=name, team="KC", matchup="IND @ KC", market="Receiving yards",
+                       projection=58.0, samples=6, confidence=0.6, standard_deviation=18.0,
+                       recent=[40, 62, 71, 55, 48, 66], trend=0.2, start_time="2026-12-20T18:00:00Z")
+            for name in ("Rashee Rice", "Travis Kelce")
+        ]
+        self.lines = [
+            {"player": "Rashee Rice", "market": "Receiving yards", "line": 54.5, "open_line": 49.5,
+             "book": "DraftKings", "line_source": "DraftKings line via ESPN", "event_id": "1",
+             "matchup": "IND @ KC", "start_time": "2026-12-20T18:00:00Z"},
+            {"player": "Travis Kelce", "market": "Receiving yards", "line": 60.5, "open_line": 60.5,
+             "book": "DraftKings", "line_source": "DraftKings line via ESPN", "event_id": "1",
+             "matchup": "IND @ KC", "start_time": "2026-12-20T18:00:00Z"},
+        ]
+
+    def test_the_report_is_read_and_the_worst_status_wins(self):
+        from pipeline.providers.espn_injuries import parse_report
+        report = parse_report({"injuries": [{"displayName": "Kansas City Chiefs", "injuries": [
+            {"status": "Questionable", "athlete": {"displayName": "Rashee Rice"}, "type": {"description": "Hamstring"}},
+            {"status": "Out", "athlete": {"displayName": "Rashee Rice"}, "type": {"description": "Hamstring"}},
+            {"status": "Questionable", "athlete": {"displayName": "Travis Kelce"}},
+        ]}]})
+        self.assertEqual(report["rrice"]["blocking"], "yes", "Out must override an earlier Questionable")
+        self.assertEqual(report["tkelce"]["blocking"], "no")
+
+    def test_a_player_who_is_out_never_reaches_the_board(self):
+        from pipeline.legs import legs_from_lines
+        injuries = {"rrice": {"player": "Rashee Rice", "status": "Out", "blocking": "yes", "detail": "Hamstring"}}
+        legs = legs_from_lines(self.lines, self.projections, self.settings, injuries)
+        self.assertTrue(legs)
+        self.assertFalse(any(leg["player"] == "Rashee Rice" for leg in legs))
+
+    def test_a_questionable_player_stays_but_is_flagged(self):
+        from pipeline.legs import legs_from_lines
+        injuries = {"tkelce": {"player": "Travis Kelce", "status": "Questionable", "blocking": "no", "detail": "Knee"}}
+        legs = [leg for leg in legs_from_lines(self.lines, self.projections, self.settings, injuries)
+                if leg["player"] == "Travis Kelce"]
+        self.assertTrue(legs)
+        for leg in legs:
+            self.assertEqual(leg["status"], "Questionable")
+            self.assertIn("Questionable", leg["reason"])
+
+    def test_line_movement_is_reported_when_the_number_moved(self):
+        from pipeline.legs import legs_from_lines
+        legs = legs_from_lines(self.lines, self.projections, self.settings)
+        moved = [leg for leg in legs if leg["player"] == "Rashee Rice"]
+        still = [leg for leg in legs if leg["player"] == "Travis Kelce"]
+        self.assertTrue(moved and still)
+        self.assertIn("Line moved up from 49.5", moved[0]["reason"])
+        self.assertEqual(moved[0]["open_line"], 49.5)
+        self.assertNotIn("Line moved", still[0]["reason"])
+
+
+class GradingTests(unittest.TestCase):
+    def _summary(self):
+        return {"boxscore": {"players": [{"statistics": [
+            {"name": "passing", "keys": ["completions/passingAttempts", "passingYards", "passingTouchdowns"],
+             "athletes": [{"athlete": {"displayName": "Patrick Mahomes II"}, "stats": ["24/33", "287", "2"]}]},
+            {"name": "receiving", "keys": ["receptions", "receivingYards", "receivingTouchdowns"],
+             "athletes": [
+                 {"athlete": {"displayName": "Rashee Rice"}, "stats": ["6", "72", "1"]},
+                 {"athlete": {"displayName": "Travis Kelce"}, "stats": ["4", "41", "0"]}]},
+        ]}]}}
+
+    def test_box_score_values_cover_every_market_we_price(self):
+        from pipeline.grade import market_values
+        values = market_values(self._summary())
+        self.assertEqual(values[("pmahomes", "Pass completions")], 24)
+        self.assertEqual(values[("pmahomes", "Pass attempts")], 33)
+        self.assertEqual(values[("pmahomes", "Passing yards")], 287)
+        self.assertEqual(values[("rrice", "Receptions")], 6)
+        self.assertEqual(values[("rrice", "Anytime touchdown")], 1)
+        self.assertEqual(values[("tkelce", "Anytime touchdown")], 0)
+
+    def test_legs_are_graded_win_loss_and_push(self):
+        from pipeline.grade import grade_leg, market_values
+        values = market_values(self._summary())
+        over = {"player": "Rashee Rice", "market": "Receiving yards", "side": "over", "line": 58.5}
+        under = {"player": "Rashee Rice", "market": "Receiving yards", "side": "under", "line": 58.5}
+        push = {"player": "Travis Kelce", "market": "Receptions", "side": "over", "line": 4.0}
+        touchdown = {"player": "Travis Kelce", "market": "Anytime touchdown", "side": "yes", "line": None}
+        missing = {"player": "Nobody Here", "market": "Receptions", "side": "over", "line": 2.5}
+        self.assertEqual(grade_leg(over, values)[0], "Win")
+        self.assertEqual(grade_leg(under, values)[0], "Loss")
+        self.assertEqual(grade_leg(push, values)[0], "Push")
+        self.assertEqual(grade_leg(touchdown, values)[0], "Loss")
+        self.assertIsNone(grade_leg(missing, values), "a player who did not appear stays ungraded")
+
+    def test_accuracy_reports_record_buckets_and_a_shrink(self):
+        from pipeline.grade import accuracy_from
+        # A model that says 70% but only hits 50% must be told to shrink.
+        rows = [{"market": "Receptions", "model_prob": 0.7, "result": "Win" if index % 2 else "Loss"}
+                for index in range(300)]
+        accuracy = accuracy_from(rows)
+        self.assertEqual(accuracy["settled"], 300)
+        self.assertTrue(accuracy["calibration_active"])
+        self.assertLess(accuracy["calibration_shrink"], 1.0)
+        self.assertAlmostEqual(accuracy["hit_rate"], 0.5, places=2)
+        self.assertTrue(any(bucket["legs"] for bucket in accuracy["buckets"]))
+        self.assertIn("Receptions", accuracy["by_market"])
+
+    def test_a_short_record_never_moves_the_model(self):
+        from pipeline.grade import accuracy_from
+        rows = [{"market": "Receptions", "model_prob": 0.7, "result": "Loss"} for _ in range(20)]
+        accuracy = accuracy_from(rows)
+        self.assertFalse(accuracy["calibration_active"])
+        self.assertEqual(accuracy["calibration_shrink"], 1.0)
+
+    def test_calibration_pulls_probabilities_toward_a_coin_flip(self):
+        from pipeline.legs import calibrated
+        self.assertEqual(calibrated(0.8, 1.0), 0.8)
+        self.assertAlmostEqual(calibrated(0.8, 0.5), 0.65, places=3)
+        self.assertAlmostEqual(calibrated(0.2, 0.5), 0.35, places=3)
+
+    def test_a_snapshot_is_written_and_graded_once_the_game_is_final(self):
+        import json as _json, tempfile
+        from pathlib import Path
+        from pipeline.grade import Grader
+        with tempfile.TemporaryDirectory() as folder:
+            root = Path(folder)
+            grader = Grader(root, {})
+            legs = [{"id": "leg-1", "event_id": "401", "player": "Rashee Rice", "market": "Receiving yards",
+                     "side": "over", "line": 58.5, "model_prob": 0.56, "price_american": -115,
+                     "start_time": "2020-01-01T00:00:00Z", "matchup": "IND @ KC", "line_source": "DK"}]
+            path = grader.snapshot(legs, "2026-09-20")
+            self.assertTrue(path.exists())
+            saved = _json.loads(path.read_text())
+            self.assertEqual(saved["legs"][0]["player"], "Rashee Rice")
+
+            grader.client = type("Stub", (), {"get": lambda self, *a, **k: {
+                "header": {"competitions": [{"status": {"type": {"completed": True}}}]},
+                "boxscore": {"players": [{"statistics": [{"name": "receiving", "keys": ["receptions", "receivingYards"],
+                    "athletes": [{"athlete": {"displayName": "Rashee Rice"}, "stats": ["6", "72"]}]}]}]}}})()
+            accuracy = grader.run()
+            graded = _json.loads(grader.graded_path.read_text())
+            self.assertEqual(len(graded), 1)
+            self.assertEqual(graded[0]["result"], "Win")
+            self.assertEqual(graded[0]["actual"], 72)
+            self.assertEqual(accuracy["record"], "1-0")
+            grader.run()
+            self.assertEqual(len(_json.loads(grader.graded_path.read_text())), 1, "a leg is graded once")
+
+
+class PostedLineParlayTests(unittest.TestCase):
+    """Every leg on a parlay card has to be a number a sportsbook actually posts.
+
+    The model can invent a line to score a player, which is useful on the board but
+    useless on a bet slip, so once enough real lines are in hand the parlay builder
+    uses nothing else.
+    """
+
+    def setUp(self):
+        import json as _json
+        from pathlib import Path
+        self.settings = _json.loads((Path(__file__).resolve().parents[1] / "config" / "settings.json").read_text())
+
+    def _fixture(self, posted_players: int):
+        """Projections for 24 players plus book lines for the first ``posted_players``."""
+        from pipeline.schema import Projection
+        import datetime as _dt
+        start = (_dt.datetime.now(_dt.timezone.utc) + _dt.timedelta(hours=18)).isoformat()
+        markets = [("Passing yards", 250.0, 46.0), ("Receiving yards", 62.0, 23.0),
+                   ("Receptions", 5.0, 2.0), ("Rushing yards", 60.0, 21.0)]
+        projections: list[Projection] = []
+        lines: list[dict[str, object]] = []
+        seat = 0
+        for game, (away, home) in enumerate([("BUF", "HOU"), ("DAL", "NYG"), ("NO", "DET")]):
+            for team in (away, home):
+                for index in range(4):
+                    player = f"{team} P{index}"
+                    market, base, deviation = markets[(index + game) % len(markets)]
+                    scale = 0.6 + 0.2 * index + 0.1 * game
+                    projection = base * scale
+                    recent = [round(projection * (0.7 + 0.12 * ((step + index) % 6)), 1) for step in range(6)]
+                    projections.append(Projection(
+                        sport="NFL", player=player, team=team, matchup=f"{away} @ {home}", market=market,
+                        projection=projection, samples=6, confidence=0.6, standard_deviation=deviation,
+                        recent=recent, trend=0.3, start_time=start))
+                    if seat < posted_players:
+                        step = 0.5 if market == "Receptions" else 0.5
+                        lines.append({
+                            "player": player, "market": market,
+                            "line": round(projection * 2) / 2 + step, "book": "DraftKings",
+                            "line_source": "DraftKings line via ESPN", "event_id": f"g{game}",
+                            "matchup": f"{away} @ {home}", "start_time": start,
+                        })
+                    seat += 1
+        return projections, lines
+
+    def test_a_parlay_only_uses_lines_the_book_posts(self):
+        from pipeline.legs import build_legs
+        from pipeline.parlays import build_parlays, posted
+        projections, lines = self._fixture(posted_players=18)
+        legs = build_legs([], projections, self.settings, lines)
+        self.assertTrue(any(not posted(leg) for leg in legs), "the board still carries model-only lines")
+        result = build_parlays(legs, self.settings)
+        self.assertTrue(result["tickets"])
+        for ticket in result["tickets"]:
+            self.assertTrue(ticket["all_posted"], ticket["id"])
+            for leg in ticket["legs"]:
+                self.assertTrue(posted(leg), f"{leg['pick']} is not a number the book posts")
+
+    def test_a_thin_book_feed_falls_back_to_the_whole_board(self):
+        from pipeline.legs import build_legs
+        from pipeline.parlays import build_parlays
+        projections, lines = self._fixture(posted_players=2)
+        result = build_parlays(build_legs([], projections, self.settings, lines), self.settings)
+        self.assertTrue(result["tickets"], "a near-empty line feed must not empty the parlay lab")
+
+    def test_posted_recognises_a_real_price_as_well_as_a_real_line(self):
+        from pipeline.parlays import posted
+        self.assertTrue(posted({"line_source": "DraftKings line via ESPN", "price_source": "model"}))
+        self.assertTrue(posted({"price_source": "book"}))
+        self.assertFalse(posted({"price_source": "model"}))
