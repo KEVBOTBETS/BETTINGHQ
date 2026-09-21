@@ -65,6 +65,7 @@ def parse_prop_items(items: list[dict[str, Any]], names: dict[str, dict[str, str
         if not who:
             continue
         target = ((item.get("current") or {}).get("target") or {}).get("value")
+        opened = ((item.get("open") or {}).get("target") or {}).get("value")
         if market != "Anytime touchdown" and target is None:
             continue
         rows.append({
@@ -72,6 +73,7 @@ def parse_prop_items(items: list[dict[str, Any]], names: dict[str, dict[str, str
             "team": who.get("team", ""),
             "market": market,
             "line": None if market == "Anytime touchdown" else float(target),
+            "open_line": None if opened is None or market == "Anytime touchdown" else float(opened),
             "book": "DraftKings",
             "line_source": "DraftKings line via ESPN",
             "updated_at": item.get("lastUpdated"),
