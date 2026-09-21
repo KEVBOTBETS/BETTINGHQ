@@ -203,10 +203,31 @@ def _ticket(
         "expected_value_on_10": round(probability * payout - 10, 2),
         "one_in": round(1 / probability) if probability > 0 else None,
         "estimated_prices": estimated,
+        "all_posted": all(posted(leg) for leg in legs),
         "off_target": abs(decimal - (1 + target / 100)) > (1 + target / 100) * float(settings["parlays"]["tolerance"]),
         "games": sorted({leg["matchup"] for leg in legs}),
         "start_time": min((leg.get("start_time") or "" for leg in legs), default=""),
     }
+
+
+def posted(leg: dict[str, Any]) -> bool:
+    """True when a sportsbook is actually offering this exact number."""
+    return bool(leg.get("line_source")) or leg.get("price_source") == "book"
+
+
+def placeable_only(legs: list[dict[str, Any]], settings: dict[str, Any]) -> list[dict[str, Any]]:
+    """Drop the model's invented lines once the book's own numbers are available.
+
+    A card is worthless if its legs cannot be found on a bet slip, so this decision is
+    taken once for the whole board rather than per scope: otherwise a single game with a
+    thin line feed would quietly fall back to invented numbers and produce a same-game
+    parlay nobody can place.
+    """
+    cfg = settings.get("parlays", {})
+    if not cfg.get("book_lines_only", True):
+        return legs
+    on_book = [leg for leg in legs if posted(leg)]
+    return on_book if len(on_book) >= int(cfg.get("min_book_pool", 12)) else legs
 
 
 def _pool(legs: Iterable[dict[str, Any]], settings: dict[str, Any]) -> list[dict[str, Any]]:
@@ -245,6 +266,8 @@ def build_parlays(legs: list[dict[str, Any]], settings: dict[str, Any], now: dt.
     cfg = settings["parlays"]
     now = now or dt.datetime.now(dt.timezone.utc)
     upcoming = [leg for leg in legs if (leg.get("start_time") or "9999") > now.isoformat()]
+    upcoming = placeable_only(upcoming, settings)
+    book_only = bool(upcoming) and all(posted(leg) for leg in upcoming)
     tickets: list[dict[str, Any]] = []
 
     slate_limits = {"max_legs": int(cfg["max_legs"]), "max_legs_per_game": int(cfg["max_legs_per_game"]), "max_legs_per_player": 1}
@@ -306,5 +329,6 @@ def build_parlays(legs: list[dict[str, Any]], settings: dict[str, Any], now: dt.
             scope: sum(ticket["scope"] == scope for ticket in tickets) for scope in ("slate", "day", "game")
         },
         "estimated_prices": any(ticket["estimated_prices"] for ticket in tickets),
+        "book_lines_only": book_only,
         "tickets": tickets,
     }

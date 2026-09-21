@@ -14,6 +14,8 @@ from .parlays import build_parlays
 from .model import evaluate_quotes, evaluate_quotes_against_projections, merge_boards
 from .providers.espn import EspnProjectionProvider
 from .providers.espn_props import EspnPropLines
+from .providers.espn_injuries import EspnInjuries
+from .grade import Grader
 from .providers.odds_api_io import OddsApiIoProvider
 from .providers.the_odds_api import TheOddsApiProvider
 
@@ -124,6 +126,9 @@ def build() -> dict[str, Any]:
         except ProviderError as exc:
             for info in source_by_sport.values():
                 info["errors"].append(str(exc))
+    injuries = EspnInjuries(settings).fetch()
+    grader = Grader(ROOT, settings)
+    accuracy = grader.run()
     legs = build_legs(
         merge_boards(
             evaluate_quotes(quotes, settings),
@@ -132,8 +137,15 @@ def build() -> dict[str, Any]:
         projections,
         settings,
         book_lines,
+        injuries,
+        grader.calibration(),
     )
     parlays = build_parlays(legs, settings)
+    # Snapshot exactly what is published, so the record is of real shown legs.
+    shown = {leg["id"]: leg for ticket in parlays["tickets"] for leg in ticket["legs"]}
+    for leg in sorted(legs, key=lambda row: -float(row["model_prob"]))[:400]:
+        shown.setdefault(leg["id"], leg)
+    grader.snapshot(list(shown.values()), dt.datetime.now(dt.timezone.utc).date().isoformat())
     board = merge_boards(
         evaluate_quotes(quotes, settings),
         evaluate_quotes_against_projections(quotes, projections, settings),
@@ -176,6 +188,9 @@ def build() -> dict[str, Any]:
         "quota": (getattr(secondary, "quota", None) or {}) if secondary else {},
         "line_source": "DraftKings lines via ESPN" if book_lines else None,
     }
+    meta["accuracy"] = accuracy
+    meta["counts"]["injury_report"] = len(injuries)
+    meta["counts"]["ruled_out"] = sum(row.get("blocking") == "yes" for row in injuries.values())
     meta["counts"]["book_lines"] = len(book_lines)
     meta["counts"]["legs_on_book_lines"] = sum(bool(leg.get("line_source")) for leg in legs)
     meta["counts"]["legs"] = len(legs)

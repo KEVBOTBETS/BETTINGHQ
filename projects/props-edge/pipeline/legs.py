@@ -96,6 +96,13 @@ def _half_point(value: float) -> float:
     return math.floor(value) + 0.5 if value >= 1 else 0.5
 
 
+def calibrated(probability: float, shrink: float) -> float:
+    """Pull a probability back toward a coin flip by whatever the graded record says."""
+    if shrink >= 0.999:
+        return probability
+    return max(0.02, min(0.98, 0.5 + (probability - 0.5) * float(shrink)))
+
+
 def estimated_price(probability: float, hold: float) -> tuple[float, int]:
     """A fair price with a normal two-way hold applied, as a book would quote it."""
     priced = max(0.01, min(0.985, probability * (1 + hold)))
@@ -161,7 +168,11 @@ def _leg(**fields: Any) -> dict[str, Any]:
 
 
 def legs_from_projections(
-    projections: list[Projection], settings: dict[str, Any], priced_keys: set[tuple[str, str, str]] | None = None
+    projections: list[Projection],
+    settings: dict[str, Any],
+    priced_keys: set[tuple[str, str, str]] | None = None,
+    injuries: dict[str, dict[str, str]] | None = None,
+    shrink: float = 1.0,
 ) -> list[dict[str, Any]]:
     cfg = settings["legs"]
     hold = float(cfg["hold_per_side"])
@@ -172,6 +183,9 @@ def legs_from_projections(
             continue
         if int(projection.samples) < int(cfg["min_samples"]):
             continue
+        hurt = _injury(projection.player, injuries)
+        if hurt and hurt.get("blocking") == "yes":
+            continue
         market = projection.market
         if priced_keys and (projection.sport, _norm(projection.player), _norm(market)) in priced_keys:
             continue
@@ -180,7 +194,7 @@ def legs_from_projections(
         if rules is None or float(projection.projection) < float(rules["min_projection"]):
             continue
         if market == "Anytime touchdown":
-            probability = touchdown_probability(projection)
+            probability = calibrated(touchdown_probability(projection), shrink)
             if probability >= float(cfg["anytime_td_min_prob"]):
                 candidates.append(("yes", 0.5, probability))
         elif market in YARDAGE_MARKETS or market in COUNTING_MARKETS:
@@ -190,7 +204,7 @@ def legs_from_projections(
                 line = _half_point(projection.projection * (1 + float(offset)))
                 if line < float(rules["min_line"]):
                     continue
-                probability = over_probability(projection, line)
+                probability = calibrated(over_probability(projection, line), shrink)
                 candidates.append(("over", line, probability))
                 candidates.append(("under", line, 1 - probability))
         else:
@@ -233,14 +247,32 @@ def legs_from_projections(
                     projection=round(float(projection.projection), 2),
                     recent=[round(float(value), 1) for value in (projection.recent or [])],
                     confidence=round(float(projection.confidence), 2),
-                    reason=_reason(projection, market, side, line, probability),
+                    status=(hurt or {}).get("status"),
+                    reason=_reason(projection, market, side, line, probability)
+                    + (f" Listed {hurt['status']} on the injury report." if hurt else ""),
                 )
             )
     return sorted(out, key=lambda row: (-row["model_prob"], row["player"]))
 
 
+def _injury(player: str, injuries: dict[str, dict[str, str]] | None) -> dict[str, str] | None:
+    return (injuries or {}).get(_name_key(player))
+
+
+def _movement(line: float | None, opened: float | None) -> str:
+    """ESPN publishes the opening number beside the current one, so the move is free to show."""
+    if line is None or opened is None or abs(float(line) - float(opened)) < 0.05:
+        return ""
+    direction = "up" if float(line) > float(opened) else "down"
+    return f"Line moved {direction} from {float(opened):g} since it opened."
+
+
 def legs_from_lines(
-    lines: list[dict[str, Any]], projections: list[Projection], settings: dict[str, Any]
+    lines: list[dict[str, Any]],
+    projections: list[Projection],
+    settings: dict[str, Any],
+    injuries: dict[str, dict[str, str]] | None = None,
+    shrink: float = 1.0,
 ) -> list[dict[str, Any]]:
     """Score the sportsbook's own line with the model. The number is real; the price is still an estimate."""
     cfg = settings["legs"]
@@ -256,6 +288,9 @@ def legs_from_lines(
     seen: set[tuple[str, str, str, Any]] = set()
     for row in lines:
         market = str(row.get("market") or "")
+        hurt = _injury(str(row.get("player") or ""), injuries)
+        if hurt and hurt.get("blocking") == "yes":
+            continue
         projection = index.get((_norm(str(row.get("player"))), _norm(market))) or loose.get(
             (_name_key(str(row.get("player"))), _norm(market))
         )
@@ -264,9 +299,9 @@ def legs_from_lines(
         line = row.get("line")
         sides: list[tuple[str, float]] = []
         if market == "Anytime touchdown":
-            sides.append(("yes", touchdown_probability(projection)))
+            sides.append(("yes", calibrated(touchdown_probability(projection), shrink)))
         elif line is not None:
-            over = over_probability(projection, float(line))
+            over = calibrated(over_probability(projection, float(line)), shrink)
             sides.append(("over", over))
             sides.append(("under", 1 - over))
         for side, probability in sides:
@@ -305,10 +340,17 @@ def legs_from_lines(
                     projection=round(float(projection.projection), 2),
                     recent=[round(float(value), 1) for value in (projection.recent or [])],
                     confidence=round(float(projection.confidence), 2),
-                    reason=(
-                        f"{row.get('book', 'DraftKings')} posts {float(line):g}. " + reason
-                        if line is not None
-                        else reason
+                    open_line=row.get("open_line"),
+                    status=(hurt or {}).get("status"),
+                    reason=" ".join(
+                        part
+                        for part in (
+                            f"{row.get('book', 'DraftKings')} posts {float(line):g}." if line is not None else "",
+                            _movement(line, row.get("open_line")),
+                            reason,
+                            f"Listed {hurt['status']} on the injury report." if hurt else "",
+                        )
+                        if part
                     ),
                 )
             )
@@ -364,14 +406,16 @@ def build_legs(
     projections: list[Projection],
     settings: dict[str, Any],
     lines: list[dict[str, Any]] | None = None,
+    injuries: dict[str, dict[str, str]] | None = None,
+    shrink: float = 1.0,
 ) -> list[dict[str, Any]]:
     """Priced legs first, then the book's own lines, then the model's own lines."""
     priced = legs_from_board(board, settings)
     covered = {("NFL", _norm(row["player"]), _norm(row["market"])) for row in priced}
     booked = [
-        leg for leg in legs_from_lines(lines or [], projections, settings)
+        leg for leg in legs_from_lines(lines or [], projections, settings, injuries, shrink)
         if ("NFL", _norm(leg["player"]), _norm(leg["market"])) not in covered
     ]
     covered |= {("NFL", _norm(leg["player"]), _norm(leg["market"])) for leg in booked}
-    modelled = legs_from_projections(projections, settings, covered)
+    modelled = legs_from_projections(projections, settings, covered, injuries, shrink)
     return priced + booked + modelled
