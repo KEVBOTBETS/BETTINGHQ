@@ -36,6 +36,7 @@
   <button class="tab" role="tab" data-tab="parlays" aria-selected="true">Parlay lab</button>
   <button class="tab" role="tab" data-tab="sheet" aria-selected="false">Cheat sheets</button>
   <button class="tab" role="tab" data-tab="board" aria-selected="false">Prop board</button>
+  <button class="tab" role="tab" data-tab="record" aria-selected="false">Model record</button>
   <button class="tab" role="tab" data-tab="ledger" aria-selected="false">My ledger</button>
 </nav>
 
@@ -79,9 +80,25 @@
         <label>Market <select id="board-group"><option value="all">All markets</option></select></label>
         <label>Game <select id="board-game"><option value="all">Every game</option></select></label>
         <label>Search <input id="board-search" type="search" placeholder="Player or market"></label>
+        <label class="check"><input id="real-only" type="checkbox" checked> Only lines the book posts</label>
       </div>
     </div>
     <div id="board" class="board"></div>
+  </section>
+
+  <section id="tab-record" class="panel" role="tabpanel" aria-label="Model record" hidden>
+    <div class="panel-head">
+      <div>
+        <h2>Model record</h2>
+        <p class="lede">Every leg the site publishes is graded against the box score once its game is final. This is the model marking its own homework in public, and the calibration it applies to itself as a result.</p>
+      </div>
+    </div>
+    <div id="record-kpis" class="kpis"></div>
+    <p id="record-cal" class="muted"></p>
+    <h3 class="section-title">Predicted versus actual</h3>
+    <div id="record-buckets" class="board"></div>
+    <h3 class="section-title">By market</h3>
+    <div id="record-markets" class="board"></div>
   </section>
 
   <section id="tab-ledger" class="panel" role="tabpanel" aria-label="My ledger" hidden>

@@ -24,7 +24,7 @@
   const americanOf = (decimal) => (decimal >= 2 ? Math.round((decimal - 1) * 100) : -Math.round(100 / (decimal - 1)));
   const norm = (value) => String(value ?? '').toLowerCase().replace(/[^a-z0-9]+/g, '');
 
-  const state = { meta: null, legs: [], parlays: { tickets: [] }, imported: {}, scope: 'slate', target: null, sheetMarket: 'Anytime touchdown', ledger: [], bank: { bankroll: 500, maxBet: 50 } };
+  const state = { meta: null, legs: [], parlays: { tickets: [] }, imported: {}, scope: 'slate', target: null, sheetMarket: 'Anytime touchdown', realLinesOnly: true, ledger: [], bank: { bankroll: 500, maxBet: 50 } };
 
   /* ---------- storage ---------- */
   const readStore = (key, fallback) => { try { const raw = localStorage.getItem(key); return raw ? JSON.parse(raw) : fallback; } catch (_) { return fallback; } };
@@ -158,11 +158,22 @@
     keep($('#parlay-day'), days.map((day) => [day, dayLabel(day)]), 'Every day');
   }
 
+  /* Injury status and line movement, shown wherever a leg is. */
+  function legTags(leg) {
+    const tags = [];
+    if (leg.status) tags.push(`<span class="tag">${esc(String(leg.status).toUpperCase())}</span>`);
+    if (leg.open_line != null && leg.line != null && Math.abs(Number(leg.open_line) - Number(leg.line)) >= 0.05) {
+      const up = Number(leg.line) > Number(leg.open_line);
+      tags.push(`<span class="tag move">${up ? '↑' : '↓'} FROM ${Number(leg.open_line)}</span>`);
+    }
+    return tags.length ? ' ' + tags.join(' ') : '';
+  }
+
   function legRow(leg) {
     const chance = Number(leg.model_prob);
     const tone = chance >= 0.6 ? '' : chance >= 0.35 ? ' mid' : ' low';
     const market = leg.market === 'Anytime touchdown' ? 'Anytime touchdown scorer' : `${leg.side === 'over' ? 'Over' : leg.side === 'under' ? 'Under' : leg.side} ${leg.line ?? ''} ${leg.market.toLowerCase()}`;
-    return `<li><span class="pip"></span><div class="leg-main"><b>${esc(leg.player)}</b><span class="market">${esc(market)}</span>
+    return `<li><span class="pip"></span><div class="leg-main"><b>${esc(leg.player)}</b>${legTags(leg)}<span class="market">${esc(market)}</span>
       <span class="meta">${esc(leg.matchup)} · ${esc(clock(leg.start_time))} · ${esc(leg.book)}${leg.imported ? ' · your price' : ''}</span>
       ${leg.reason ? `<p class="why">${esc(leg.reason)}</p>` : ''}</div>
       <div class="leg-right"><span class="leg-odds">${odds(leg.price_american)}</span><span class="hit${tone}">${pct(leg.model_prob)} model</span>${leg.price_source === 'model' ? `<span class="est">EST PRICE${leg.line_source ? ' · REAL LINE' : ''}</span>` : ''}</div></li>`;
@@ -173,11 +184,16 @@
     const payout = 10 * decimal;
     const ev = probability * payout - 10;
     const correlation = Number(ticket.correlation_applied || 1);
+    const offBoard = legs.filter((leg) => !isReal(leg)).length;
+    const placeable = offBoard === 0
+      ? '<p class="placeable ok">EVERY LEG IS A NUMBER THE BOOK POSTS · BUILD IT AS A PARLAY</p>'
+      : `<p class="placeable warn">${offBoard} of ${legs.length} leg${offBoard === 1 ? '' : 's'} use a model line the book may not offer — swap or shop the closest number.</p>`;
     return `<article class="ticket" data-id="${esc(ticket.id)}">
       <div class="ticket-top">
         <div><h3>${ticket.leg_count} leg parlay</h3><span class="scope">${esc(ticket.scope === 'game' ? ticket.label : ticket.scope === 'day' ? dayLabel(ticket.label) : 'Full slate')} · target +${ticket.target.toLocaleString('en-CA')}</span></div>
         <div><span class="price">${odds(american)}</span><small>${changed ? 'WITH YOUR LINES' : 'MODEL BOARD'}</small></div>
       </div>
+      ${placeable}
       <div class="ticket-stats">
         <div><b>${pct(probability)}</b><span>Model chance</span></div>
         <div><b>1 in ${probability > 0 ? Math.round(1 / probability) : '—'}</b><span>Hit rate</span></div>
@@ -201,7 +217,8 @@
       ticket.scope === state.scope && ticket.target === state.target
       && (game === 'all' || ticket.games.includes(game))
       && (day === 'all' || String(ticket.start_time || '').slice(0, 10) === day));
-    $('#parlay-count').textContent = `${tickets.length} ticket${tickets.length === 1 ? '' : 's'} at this target`;
+    $('#parlay-count').textContent = `${tickets.length} ticket${tickets.length === 1 ? '' : 's'} at this target`
+      + (state.parlays.book_lines_only ? ' · every leg is a line the book posts' : '');
     $('#parlays').innerHTML = tickets.length
       ? tickets.map(ticketCard).join('')
       : `<div class="empty">No parlay reached +${Number(state.target).toLocaleString('en-CA')} for this filter.<br>Try another target or scope. Parlays need enough legs with a recent player sample, so an empty board usually means the slate has not been built yet.</div>`;
@@ -216,9 +233,13 @@
     $('#sheet-markets').innerHTML = markets.map((market) => `<button class="chip" role="radio" data-market="${esc(market)}" aria-checked="${market === state.sheetMarket}">${esc(market)}</button>`).join('');
   }
 
+  const realOnly = () => state.realLinesOnly && state.legs.some((leg) => leg.line_source || leg.price_source === 'book');
+  const isReal = (leg) => Boolean(leg.line_source) || leg.price_source === 'book' || leg.imported;
+
   function sheetRows() {
     return state.legs
       .filter((leg) => leg.market === state.sheetMarket && leg.side !== 'under')
+      .filter((leg) => !realOnly() || isReal(leg))
       .map(pricedLeg)
       .sort((a, b) => b.model_prob - a.model_prob)
       .slice(0, 24);
@@ -232,7 +253,7 @@
     $('#sheet').innerHTML = rows.length ? rows.map((leg, index) => `<article class="sheet-row">
       <span class="rank">${String(index + 1).padStart(2, '0')}</span>
       <div><h3>${esc(leg.player)}<span>${esc(leg.team)}</span></h3>
-        <p class="match">${esc(leg.matchup)} · ${esc(clock(leg.start_time))}</p>
+        <p class="match">${esc(leg.matchup)} · ${esc(clock(leg.start_time))}${legTags(leg)}</p>
         <p class="why">${esc(leg.reason)}</p></div>
       <div class="sheet-odds"><b>${odds(leg.price_american)}</b><span>${leg.price_source === 'model' ? 'EST ODDS' : 'ODDS'}</span></div>
       <div class="sheet-prob">${pct(leg.model_prob)}</div>
@@ -256,16 +277,55 @@
     boardFilters();
     const group = $('#board-group').value, game = $('#board-game').value, search = norm($('#board-search').value);
     const rows = state.legs.map(pricedLeg).filter((leg) =>
-      (group === 'all' || leg.group === group)
+      (!realOnly() || isReal(leg))
+      && (group === 'all' || leg.group === group)
       && (game === 'all' || leg.matchup === game)
       && (!search || norm(leg.player + leg.market).includes(search)))
       .sort((a, b) => b.model_prob - a.model_prob).slice(0, 300);
     $('#board').innerHTML = rows.length ? rows.map((leg) => `<article class="board-row">
-      <div><b>${esc(leg.pick)}</b><div class="meta">${esc(leg.matchup)} · ${esc(clock(leg.start_time))} · ${esc(leg.line_source || leg.book)} · ${leg.samples || 0} game sample</div><div class="why">${esc(leg.reason)}</div></div>
+      <div><b>${esc(leg.pick)}</b>${legTags(leg)}<div class="meta">${esc(leg.matchup)} · ${esc(clock(leg.start_time))} · ${esc(leg.line_source || leg.book)} · ${leg.samples || 0} game sample</div><div class="why">${esc(leg.reason)}</div></div>
       <div class="num">${odds(leg.price_american)}<small>${leg.price_source === 'model' ? 'EST' : 'PRICE'}</small></div>
       <div class="num" style="color:var(--teal)">${pct(leg.model_prob)}<small>MODEL</small></div>
       <div><button data-action="single" data-id="${esc(leg.id)}">Add</button></div>
     </article>`).join('') : '<div class="empty">No legs match this filter.</div>';
+  }
+
+  /* ---------- model record ---------- */
+  function renderRecord() {
+    const accuracy = (state.meta && state.meta.accuracy) || {};
+    const settled = Number(accuracy.settled || 0);
+    $('#record-kpis').innerHTML = [
+      [accuracy.record || '—', 'Record'],
+      [accuracy.hit_rate == null ? '—' : pct(accuracy.hit_rate), 'Hit rate'],
+      [accuracy.average_predicted == null ? '—' : pct(accuracy.average_predicted), 'Model said'],
+      [accuracy.brier == null ? '—' : Number(accuracy.brier).toFixed(3), 'Brier score'],
+      [String(accuracy.legs || 0), 'Legs graded'],
+    ].map(([value, label]) => `<div class="kpi"><b>${esc(value)}</b><span>${esc(label)}</span></div>`).join('');
+    $('#record-cal').textContent = accuracy.calibration_active
+      ? `Calibration is on: the record says the model is overconfident, so every probability is pulled ${Math.round((1 - Number(accuracy.calibration_shrink)) * 100)}% of the way back toward a coin flip before it is shown.`
+      : `Calibration switches on at 200 graded legs; ${settled} so far. Until then the model's raw numbers are shown as they are.`;
+    const bucketRow = (bucket) => {
+      const gap = Number(bucket.actual) - Number(bucket.predicted);
+      return `<article class="board-row">
+        <div><b>${Math.round(bucket.from * 100)}–${Math.round(Math.min(bucket.to, 1) * 100)}% legs</b>
+          <div class="meta">${bucket.legs} graded · model said ${pct(bucket.predicted)}, they landed ${pct(bucket.actual)}</div>
+          <div class="bar"><i style="width:${Math.max(2, Math.min(100, Number(bucket.actual) * 100))}%"></i></div></div>
+        <div class="num">${pct(bucket.predicted)}<small>SAID</small></div>
+        <div class="num" style="color:${Math.abs(gap) <= 0.05 ? 'var(--teal)' : gap > 0 ? 'var(--blue)' : '#ff8e8e'}">${pct(bucket.actual)}<small>ACTUAL</small></div>
+      </article>`;
+    };
+    const buckets = accuracy.buckets || [];
+    $('#record-buckets').innerHTML = buckets.length
+      ? buckets.map(bucketRow).join('')
+      : '<div class="empty">Nothing graded yet. Legs are graded from the box score after their game goes final, so the first numbers land the day after a slate.</div>';
+    const markets = Object.entries(accuracy.by_market || {}).sort((a, b) => b[1].legs - a[1].legs);
+    $('#record-markets').innerHTML = markets.length
+      ? markets.map(([market, entry]) => `<article class="board-row">
+          <div><b>${esc(market)}</b><div class="meta">${entry.legs} graded · model said ${pct(entry.predicted)}</div></div>
+          <div class="num">${entry.wins}-${entry.legs - entry.wins}<small>RECORD</small></div>
+          <div class="num" style="color:var(--teal)">${pct(entry.hit_rate)}<small>HIT RATE</small></div>
+        </article>`).join('')
+      : '<div class="empty">No market has a graded leg yet.</div>';
   }
 
   /* ---------- ledger ---------- */
@@ -506,6 +566,7 @@
     $$('.panel').forEach((panel) => { panel.hidden = panel.id !== `tab-${name}`; });
     if (name === 'sheet') renderSheet();
     if (name === 'board') renderBoard();
+    if (name === 'record') renderRecord();
     if (name === 'ledger') renderLedger();
     if (name === 'parlays') renderParlays();
     try { history.replaceState(null, '', '#' + name); } catch (_) {}
@@ -531,6 +592,10 @@
     });
     $('#sheet-card').addEventListener('click', () => openCard(sheetCardPayload()));
     ['#board-group', '#board-game'].forEach((selector) => $(selector).addEventListener('change', renderBoard));
+    $('#real-only').addEventListener('change', (event) => {
+      state.realLinesOnly = event.target.checked;
+      renderBoard(); renderSheet();
+    });
     $('#board-search').addEventListener('input', renderBoard);
     $('#board').addEventListener('click', (event) => {
       const button = event.target.closest('[data-action=single]'); if (!button) return;
@@ -632,7 +697,7 @@
       await load();
       freshness();
       const tab = (location.hash || '#parlays').slice(1);
-      showTab(['parlays', 'sheet', 'board', 'ledger'].includes(tab) ? tab : 'parlays');
+      showTab(['parlays', 'sheet', 'board', 'record', 'ledger'].includes(tab) ? tab : 'parlays');
     } catch (error) {
       $('#freshness').textContent = 'The model files could not be loaded. The last build may still be running.';
       $('#parlays').innerHTML = `<div class="empty">${esc(error.message)}</div>`;
