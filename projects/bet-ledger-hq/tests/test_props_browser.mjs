@@ -38,6 +38,14 @@ const legs = [
   leg('Charlie Player', 'Receptions', 'over', 4.5, 110, 0.48, 'DAL @ NYG'),
   leg('Delta Player', 'Anytime touchdown', 'yes', null, 260, 0.3, 'DAL @ NYG'),
 ];
+// The book moved this one and the player is a game-time call: both must show on the leg.
+legs[1].open_line = 49.5;
+legs[1].status = 'questionable';
+// A line the model invented: it belongs on the board but never on a parlay.
+const modelOnly = leg('Echo Player', 'Rushing yards', 'over', 42.5, -110, 0.52, 'NO @ DET');
+delete modelOnly.line_source;
+modelOnly.book = 'Model line · model price';
+legs.push(modelOnly);
 const ticket = (id, scope, label, target, rows) => {
   const decimal = rows.reduce((total, row) => total * row.price_decimal, 1);
   return {
@@ -45,12 +53,13 @@ const ticket = (id, scope, label, target, rows) => {
     price_decimal: decimal, price_american: Math.round((decimal - 1) * 100),
     payout_on_10: 10 * decimal, model_prob: 0.12, independent_prob: 0.1, correlation_applied: 1.2,
     fair_american: 700, expected_value_on_10: 1.2, one_in: 8, estimated_prices: true, off_target: false,
+    all_posted: rows.every(row => Boolean(row.line_source)),
     games: [...new Set(rows.map(row => row.matchup))], start_time: start,
   };
 };
 const parlays = {
   generated_at: start, targets: [1000, 5000, 10000, 30000, 50000],
-  counts: {slate: 2, day: 0, game: 1}, estimated_prices: true,
+  counts: {slate: 2, day: 0, game: 1}, estimated_prices: true, book_lines_only: true,
   tickets: [
     ticket('slate-1000-a', 'slate', 'Full slate', 1000, [legs[0], legs[2], legs[3]]),
     ticket('slate-5000-a', 'slate', 'Full slate', 5000, [legs[0], legs[2], legs[3], legs[1]]),
@@ -62,6 +71,19 @@ const meta = {
   counts: {legs: legs.length, parlays: parlays.tickets.length, book_priced_legs: 0, legs_on_book_lines: legs.length, projections: 40},
   odds_feed: {line_source: 'DraftKings lines via ESPN', quota: {}, window: {NFL: {hours_to_kickoff: 12, inside_window: true, window_hours: 36}}},
   estimated_prices: true, source_by_sport: {NFL: {source: 'ESPN public statistics', projections: 40, errors: []}},
+  accuracy: {
+    record: '38-27', legs: 65, settled: 65, hit_rate: 0.5846, average_predicted: 0.61, brier: 0.219,
+    calibration_shrink: 1.0, calibration_active: false,
+    buckets: [
+      {from: 0.3, to: 0.45, legs: 18, predicted: 0.38, actual: 0.33},
+      {from: 0.45, to: 0.6, legs: 26, predicted: 0.52, actual: 0.54},
+      {from: 0.6, to: 0.8, legs: 21, predicted: 0.68, actual: 0.62},
+    ],
+    by_market: {
+      'Receiving yards': {legs: 24, predicted: 0.55, actual: 0.54, record: '13-11'},
+      'Anytime touchdown': {legs: 19, predicted: 0.44, actual: 0.42, record: '8-11'},
+    },
+  },
 };
 
 const browser = await chromium.launch({headless: true});
@@ -82,9 +104,16 @@ try {
     assert.match(await page.locator('#price-banner').textContent(), /model estimate/i, 'estimated prices are disclosed');
     assert.match(await page.locator('#price-banner').textContent(), /real DraftKings numbers/i, 'real lines are credited');
     assert.equal(await page.locator('.est').first().textContent(), 'EST PRICE · REAL LINE');
+    assert.match(await page.locator('.ticket .placeable').first().textContent(), /EVERY LEG IS A NUMBER THE BOOK POSTS/,
+      'a parlay says outright that it can be placed');
+    assert.equal(await page.locator('.ticket .placeable.warn').count(), 0, 'no card is built on an invented line');
+    assert.match(await page.locator('#parlay-count').textContent(), /every leg is a line the book posts/);
 
     await page.locator('.target[data-target="5000"]').click();
     assert.match(await page.locator('.ticket .ticket-top').first().textContent(), /target \+5,000/i);
+    const flagged = await page.locator('.legs li', {hasText: 'Bravo Player'}).first().textContent();
+    assert.match(flagged, /QUESTIONABLE/, 'an injury flag travels with the leg');
+    assert.match(flagged, /FROM 49\.5/, 'a moved line shows where it opened');
     await page.locator('.target[data-target="30000"]').click();
     assert.match(await page.locator('#parlays .empty').textContent(), /No parlay reached/i, 'an empty target explains itself');
 
@@ -123,10 +152,19 @@ try {
     assert.equal(await page.locator('.sheet-row').count(), 1);
 
     await page.locator('[data-tab="board"]').click();
-    assert.equal(await page.locator('.board-row').count(), legs.length);
+    assert.equal(await page.locator('.board-row').count(), legs.length - 1, 'the invented line is hidden by default');
+    await page.locator('#real-only').uncheck();
+    assert.equal(await page.locator('.board-row').count(), legs.length, 'unticking the filter shows the model lines too');
+    await page.locator('#real-only').check();
     await page.locator('#board-search').fill('charlie');
     assert.equal(await page.locator('.board-row').count(), 1, 'search filters the board');
     await page.locator('.board-row button').click();
+
+    await page.locator('[data-tab="record"]').click();
+    assert.match(await page.locator('#record-kpis').textContent(), /38-27/, 'the graded record is published');
+    assert.equal(await page.locator('#record-buckets .board-row').count(), 3, 'predicted versus actual is broken out');
+    assert.equal(await page.locator('#record-markets .board-row').count(), 2, 'the record is split by market');
+    assert.match(await page.locator('#record-cal').textContent(), /200 graded legs/, 'the calibration threshold is explained');
 
     await page.locator('[data-tab="ledger"]').click();
     assert.equal(await page.locator('.ledger-row').count(), 1, 'a single lands in the ledger');
