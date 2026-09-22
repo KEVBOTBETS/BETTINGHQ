@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-22T00:46:36.568016+00:00",
+  "generated_at": "2026-09-22T03:39:56.507554+00:00",
   "provider_priority": [
     "Odds-API.io",
     "The Odds API",
@@ -19,12 +19,12 @@
     "best": 0,
     "good": 0,
     "leans": 0,
-    "projections": 5661,
+    "projections": 5783,
     "injury_report": 765,
-    "ruled_out": 117,
+    "ruled_out": 121,
     "book_lines": 119,
     "legs_on_book_lines": 83,
-    "legs": 5376,
+    "legs": 5509,
     "book_priced_legs": 0,
     "parlays": 21
   },
@@ -32,7 +32,7 @@
     "NFL": {
       "source": "ESPN public statistics",
       "priced_quotes": 0,
-      "projections": 5661,
+      "projections": 5783,
       "errors": []
     }
   },
@@ -46,7 +46,7 @@
     "window": {
       "NFL": {
         "next_kickoff": "2026-09-25T00:15Z",
-        "hours_to_kickoff": 71.5,
+        "hours_to_kickoff": 68.6,
         "window_hours": 36.0,
         "inside_window": false
       }
@@ -63,17 +63,97 @@
     "line_source": "DraftKings lines via ESPN"
   },
   "accuracy": {
-    "legs": 0,
-    "settled": 0,
-    "record": "0-0",
-    "hit_rate": null,
-    "average_predicted": null,
-    "brier": null,
-    "buckets": [],
-    "by_market": {},
+    "legs": 17,
+    "settled": 17,
+    "record": "7-10",
+    "hit_rate": 0.4118,
+    "average_predicted": 0.5342,
+    "brier": 0.4525,
+    "buckets": [
+      {
+        "from": 0.0,
+        "to": 0.35,
+        "legs": 4,
+        "predicted": 0.2466,
+        "actual": 1.0
+      },
+      {
+        "from": 0.35,
+        "to": 0.45,
+        "legs": 2,
+        "predicted": 0.3594,
+        "actual": 0.5
+      },
+      {
+        "from": 0.45,
+        "to": 0.55,
+        "legs": 3,
+        "predicted": 0.5097,
+        "actual": 0.3333
+      },
+      {
+        "from": 0.55,
+        "to": 0.65,
+        "legs": 2,
+        "predicted": 0.6406,
+        "actual": 0.5
+      },
+      {
+        "from": 0.65,
+        "to": 0.75,
+        "legs": 1,
+        "predicted": 0.7275,
+        "actual": 0.0
+      },
+      {
+        "from": 0.75,
+        "to": 1.01,
+        "legs": 5,
+        "predicted": 0.7676,
+        "actual": 0.0
+      }
+    ],
+    "by_market": {
+      "Receiving yards": {
+        "legs": 3,
+        "wins": 1,
+        "predicted": 0.5918,
+        "hit_rate": 0.3333
+      },
+      "Anytime touchdown": {
+        "legs": 2,
+        "wins": 1,
+        "predicted": 0.4137,
+        "hit_rate": 0.5
+      },
+      "Rushing yards": {
+        "legs": 1,
+        "wins": 0,
+        "predicted": 0.7504,
+        "hit_rate": 0.0
+      },
+      "Receptions": {
+        "legs": 1,
+        "wins": 0,
+        "predicted": 0.7275,
+        "hit_rate": 0.0
+      },
+      "Tackles + assists": {
+        "legs": 6,
+        "wins": 3,
+        "predicted": 0.5,
+        "hit_rate": 0.5
+      },
+      "Sacks": {
+        "legs": 4,
+        "wins": 2,
+        "predicted": 0.5,
+        "hit_rate": 0.5
+      }
+    },
     "calibration_shrink": 1.0,
     "calibration_active": false,
-    "updated_at": "2026-09-22T00:46:34.392958+00:00"
+    "updated_at": "2026-09-22T03:39:54.943544+00:00"
   },
   "estimated_prices": true
 }
