@@ -1,24 +1,56 @@
 {
   "schema": 1,
-  "checked_at": "2026-09-24T19:02:21.087Z",
+  "checked_at": "2026-09-24T20:00:17.843Z",
   "coverage": {
     "mlb": {
       "status": "unavailable",
       "reports": 0,
-      "checked_at": "2026-09-24T19:02:21.087Z"
+      "checked_at": "2026-09-24T20:00:17.843Z"
     },
     "nfl": {
       "status": "unavailable",
       "reports": 0,
-      "checked_at": "2026-09-24T19:02:21.087Z"
+      "checked_at": "2026-09-24T20:00:17.843Z"
     },
     "ncaaf": {
       "status": "unavailable",
       "reports": 0,
-      "checked_at": "2026-09-24T19:02:21.087Z"
+      "checked_at": "2026-09-24T20:00:17.843Z"
     }
   },
   "events": [
+    {
+      "id": "odds|nfl|401872955|2026-09-27T17:00Z|ML||home|DraftKings|2026-09-24T20:00:17.843Z",
+      "kind": "odds",
+      "observed_at": "2026-09-24T20:00:17.843Z",
+      "sport": "nfl",
+      "event": "SEA @ WSH",
+      "start": "2026-09-27T17:00Z",
+      "pick": "WSH ML",
+      "title": "Published odds changed",
+      "before": "+280",
+      "after": "+275",
+      "book": "DraftKings",
+      "source_quote_at": "2026-09-24T19:59:40.163599+00:00",
+      "source": "Existing NFL board",
+      "note": "Your ticket keeps its original odds. Recheck the live book before placing a new wager."
+    },
+    {
+      "id": "odds|ncaaf|401856806|2026-09-26T20:00Z|ATS||home|DraftKings|2026-09-24T20:00:17.843Z",
+      "kind": "odds",
+      "observed_at": "2026-09-24T20:00:17.843Z",
+      "sport": "ncaaf",
+      "event": "HOU @ GASO",
+      "start": "2026-09-26T20:00Z",
+      "pick": "GASO +17.5",
+      "title": "Published odds changed",
+      "before": "-112 · line 18.5",
+      "after": "-105 · line 17.5",
+      "book": "DraftKings",
+      "source_quote_at": "2026-09-24T20:00:01.447584+00:00",
+      "source": "Existing NCAAF board",
+      "note": "Your ticket keeps its original odds. Recheck the live book before placing a new wager."
+    },
     {
       "id": "odds|nfl|401872952|2026-09-27T17:00Z|ATS||home|DraftKings|2026-09-24T19:02:21.087Z",
       "kind": "odds",
@@ -3057,35 +3089,6 @@
       "source_quote_at": "2026-09-22T00:40:49.618152+00:00",
       "source": "Existing NFL board",
       "note": "Your ticket keeps its original odds. Recheck the live book before placing a new wager."
-    },
-    {
-      "id": "odds|ncaaf|401860895|2026-09-27T01:00Z|ML||home|DraftKings|2026-09-22T00:46:36.987Z",
-      "kind": "odds",
-      "observed_at": "2026-09-22T00:46:36.987Z",
-      "sport": "ncaaf",
-      "event": "ORST @ UTEP",
-      "start": "2026-09-27T01:00Z",
-      "pick": "UTEP ML",
-      "title": "Published odds changed",
-      "before": "+330",
-      "after": "+340",
-      "book": "DraftKings",
-      "source_quote_at": "2026-09-22T00:41:00.459523+00:00",
-      "source": "Existing NCAAF board",
-      "note": "Your ticket keeps its original odds. Recheck the live book before placing a new wager."
-    },
-    {
-      "id": "lineup|823169|2026-09-22T00:46:36.987Z",
-      "kind": "lineup",
-      "observed_at": "2026-09-22T00:46:36.987Z",
-      "sport": "mlb",
-      "event": "MIN @ SF",
-      "start": "2026-09-22T01:45:00Z",
-      "title": "Batting orders confirmed",
-      "before": "Projected batting orders",
-      "after": "Confirmed batting orders",
-      "source_quote_at": "2026-09-22T00:43:29+00:00",
-      "source": "MLB board"
     }
   ]
 }
