@@ -1,52 +1,56 @@
 {
-  "generated_at": "2026-09-25T00:46:01.364815+00:00",
+  "generated_at": "2026-09-25T00:59:43.491448+00:00",
   "provider_priority": [
-    "Odds-API.io",
-    "The Odds API",
-    "ESPN public statistics"
+    "Covers public comparison (no key)",
+    "Optional odds providers",
+    "ESPN regular-season statistics"
   ],
   "target_book": "DraftKings",
   "keyless_fallback": true,
   "configured": {
     "odds_api_io": false,
     "the_odds_api": false,
-    "espn_keyless": true
+    "espn_keyless": true,
+    "covers_keyless": true
   },
   "counts": {
-    "priced_quotes": 0,
-    "board": 0,
-    "actionable": 0,
+    "priced_quotes": 355,
+    "eligible_priced_quotes": 355,
+    "qualified_options": 31,
+    "held_options": 23,
+    "board": 161,
+    "actionable": 8,
     "best": 0,
     "good": 0,
-    "leans": 0,
-    "projections": 5407,
-    "injury_report": 767,
+    "leans": 31,
+    "projections": 7084,
+    "injury_report": 766,
     "ruled_out": 61,
-    "book_lines": 1822,
-    "legs_on_book_lines": 1014,
-    "legs": 5005,
-    "book_priced_legs": 0,
-    "parlays": 161
+    "book_lines": 1829,
+    "legs_on_book_lines": 1164,
+    "legs": 4507,
+    "book_priced_legs": 159,
+    "parlays": 174
   },
   "source_by_sport": {
     "NFL": {
-      "source": "ESPN public statistics",
-      "priced_quotes": 0,
-      "projections": 5407,
+      "source": "Covers public comparison + ESPN regular-season projections",
+      "priced_quotes": 355,
+      "projections": 7084,
       "errors": []
     }
   },
   "workflow_url": "https://github.com/KEVBOTBETS/BETTINGHQ/actions/workflows/release.yml",
   "notes": [
     "API credentials are optional and are read only from GitHub Actions secrets.",
-    "If both odds providers are unavailable, ESPN schedules and box-score statistics produce projection-only rows.",
+    "If verified keyless prices are unavailable, keep model-price scenarios labeled research. Optional API keys are never required.",
     "Action Network and OddsShark are not scraped because automated extraction is blocked or prohibited."
   ],
   "odds_feed": {
     "window": {
       "NFL": {
         "next_kickoff": "2026-09-27T17:00Z",
-        "hours_to_kickoff": 64.2,
+        "hours_to_kickoff": 64.0,
         "window_hours": 36.0,
         "inside_window": false
       }
@@ -63,97 +67,25 @@
     "line_source": "DraftKings lines via ESPN"
   },
   "accuracy": {
-    "legs": 17,
-    "settled": 17,
-    "record": "7-10",
-    "hit_rate": 0.4118,
-    "average_predicted": 0.5342,
-    "brier": 0.4525,
-    "buckets": [
-      {
-        "from": 0.0,
-        "to": 0.35,
-        "legs": 4,
-        "predicted": 0.2466,
-        "actual": 1.0
-      },
-      {
-        "from": 0.35,
-        "to": 0.45,
-        "legs": 2,
-        "predicted": 0.3594,
-        "actual": 0.5
-      },
-      {
-        "from": 0.45,
-        "to": 0.55,
-        "legs": 3,
-        "predicted": 0.5097,
-        "actual": 0.3333
-      },
-      {
-        "from": 0.55,
-        "to": 0.65,
-        "legs": 2,
-        "predicted": 0.6406,
-        "actual": 0.5
-      },
-      {
-        "from": 0.65,
-        "to": 0.75,
-        "legs": 1,
-        "predicted": 0.7275,
-        "actual": 0.0
-      },
-      {
-        "from": 0.75,
-        "to": 1.01,
-        "legs": 5,
-        "predicted": 0.7676,
-        "actual": 0.0
-      }
-    ],
-    "by_market": {
-      "Receiving yards": {
-        "legs": 3,
-        "wins": 1,
-        "predicted": 0.5918,
-        "hit_rate": 0.3333
-      },
-      "Anytime touchdown": {
-        "legs": 2,
-        "wins": 1,
-        "predicted": 0.4137,
-        "hit_rate": 0.5
-      },
-      "Rushing yards": {
-        "legs": 1,
-        "wins": 0,
-        "predicted": 0.7504,
-        "hit_rate": 0.0
-      },
-      "Receptions": {
-        "legs": 1,
-        "wins": 0,
-        "predicted": 0.7275,
-        "hit_rate": 0.0
-      },
-      "Tackles + assists": {
-        "legs": 6,
-        "wins": 3,
-        "predicted": 0.5,
-        "hit_rate": 0.5
-      },
-      "Sacks": {
-        "legs": 4,
-        "wins": 2,
-        "predicted": 0.5,
-        "hit_rate": 0.5
-      }
-    },
+    "legs": 1627,
+    "settled": 0,
+    "record": "0-0",
+    "hit_rate": null,
+    "average_predicted": null,
+    "brier": null,
+    "buckets": [],
+    "by_market": {},
     "calibration_shrink": 1.0,
     "calibration_active": false,
-    "updated_at": "2026-09-25T00:45:53.588610+00:00"
+    "updated_at": "2026-09-25T00:59:40.447335+00:00",
+    "calibration_note": "Calibration is diagnostic only; no automatic refit.",
+    "total_logged": 6288,
+    "pending": 1627,
+    "independent_events": 17,
+    "legacy_excluded": 17,
+    "method": "One first pregame preferred leg per event/player/market. Full side/line audit retained separately. No wager ROI at estimated prices."
   },
-  "estimated_prices": true
+  "max_odds_age_hours": 12,
+  "price_source_status": "available",
+  "estimated_prices": false
 }
