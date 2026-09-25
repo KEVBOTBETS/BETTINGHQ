@@ -1,48 +1,48 @@
 {
-  "checked_at": "2026-09-25T21:39:19.984Z",
+  "checked_at": "2026-09-25T21:46:46.683Z",
   "feeds": {
     "mlb": {
       "status": "recent",
       "failed_fields": [],
       "published_at": "2026-09-25T21:38:44+00:00",
-      "last_good_at": "2026-09-25T21:39:19.984Z",
-      "warnings": []
-    },
-    "wnba": {
-      "status": "review",
-      "failed_fields": [],
-      "published_at": "2026-09-25T21:39:13+00:00",
-      "last_good_at": "2026-09-25T21:39:19.984Z",
-      "warnings": [
-        "Some games have no usable prices; those games cannot qualify."
-      ]
-    },
-    "ladder": {
-      "status": "recent",
-      "failed_fields": [],
-      "published_at": "2026-09-25T21:39:17.669656+00:00",
-      "last_good_at": "2026-09-25T21:39:19.984Z",
+      "last_good_at": "2026-09-25T21:46:46.683Z",
       "warnings": []
     },
     "nfl": {
       "status": "recent",
       "failed_fields": [],
       "published_at": "2026-09-25T21:36:16+00:00",
-      "last_good_at": "2026-09-25T21:39:19.984Z",
+      "last_good_at": "2026-09-25T21:46:46.683Z",
       "warnings": []
+    },
+    "ladder": {
+      "status": "recent",
+      "failed_fields": [],
+      "published_at": "2026-09-25T21:39:17.669656+00:00",
+      "last_good_at": "2026-09-25T21:46:46.683Z",
+      "warnings": []
+    },
+    "wnba": {
+      "status": "review",
+      "failed_fields": [],
+      "published_at": "2026-09-25T21:39:13+00:00",
+      "last_good_at": "2026-09-25T21:46:46.683Z",
+      "warnings": [
+        "Some games have no usable prices; those games cannot qualify."
+      ]
     },
     "props": {
       "status": "recent",
       "failed_fields": [],
       "published_at": "2026-09-25T21:39:10.299555+00:00",
-      "last_good_at": "2026-09-25T21:39:19.984Z",
+      "last_good_at": "2026-09-25T21:46:46.683Z",
       "warnings": []
     },
     "ncaaf": {
       "status": "review",
       "failed_fields": [],
       "published_at": "2026-09-25T21:36:22+00:00",
-      "last_good_at": "2026-09-25T21:39:19.984Z",
+      "last_good_at": "2026-09-25T21:46:46.683Z",
       "warnings": [
         "Availability reports missing or incomplete; verify team news.",
         "No multi-book comparison in this refresh."
@@ -50,6 +50,11 @@
     }
   },
   "result_failures": [
+    {
+      "sport": "ncaaf",
+      "event_id": "401856797",
+      "error": "Official result feed unavailable"
+    },
     {
       "sport": "ncaaf",
       "event_id": "401871047",
@@ -67,17 +72,12 @@
     },
     {
       "sport": "ncaaf",
-      "event_id": "401856797",
+      "event_id": "401864507",
       "error": "Official result feed unavailable"
     },
     {
       "sport": "ncaaf",
       "event_id": "401856795",
-      "error": "Official result feed unavailable"
-    },
-    {
-      "sport": "ncaaf",
-      "event_id": "401864507",
       "error": "Official result feed unavailable"
     },
     {
@@ -92,17 +92,12 @@
     },
     {
       "sport": "ncaaf",
-      "event_id": "401858451",
-      "error": "Official result feed unavailable"
-    },
-    {
-      "sport": "nfl",
-      "event_id": "401872938",
+      "event_id": "401858454",
       "error": "Official result feed unavailable"
     },
     {
       "sport": "ncaaf",
-      "event_id": "401858454",
+      "event_id": "401858451",
       "error": "Official result feed unavailable"
     },
     {
@@ -112,12 +107,17 @@
     },
     {
       "sport": "nfl",
-      "event_id": "401872944",
+      "event_id": "401872938",
       "error": "Official result feed unavailable"
     },
     {
       "sport": "nfl",
       "event_id": "401872941",
+      "error": "Official result feed unavailable"
+    },
+    {
+      "sport": "nfl",
+      "event_id": "401872944",
       "error": "Official result feed unavailable"
     },
     {
@@ -141,13 +141,13 @@
       "error": "Official result feed unavailable"
     },
     {
-      "sport": "props",
-      "event_id": "401872934",
+      "sport": "ncaaf",
+      "event_id": "401858457",
       "error": "Official result feed unavailable"
     },
     {
-      "sport": "ncaaf",
-      "event_id": "401858457",
+      "sport": "props",
+      "event_id": "401872934",
       "error": "Official result feed unavailable"
     },
     {
@@ -171,13 +171,13 @@
       "error": "Official result feed unavailable"
     },
     {
-      "sport": "nfl",
-      "event_id": "401872948",
+      "sport": "ncaaf",
+      "event_id": "401858450",
       "error": "Official result feed unavailable"
     },
     {
-      "sport": "ncaaf",
-      "event_id": "401858450",
+      "sport": "nfl",
+      "event_id": "401872948",
       "error": "Official result feed unavailable"
     },
     {
