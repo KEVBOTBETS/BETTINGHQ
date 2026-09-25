@@ -1,0 +1,74 @@
+name: Refresh and deploy WNBA Edge Lab
+
+on:
+  push:
+    branches: [main]
+    # Source changes rebuild immediately. The refresh bot writes only state/
+    # and site/data/, so those commits cannot trigger this workflow again.
+    paths:
+      - ".github/workflows/deploy.yml"
+      - "config/**"
+      - "pipeline/**"
+      - "tests/**"
+      - "site/*.html"
+      - "site/*.js"
+      - "site/*.css"
+      - "requirements.txt"
+  schedule:
+    - cron: "17 4,8,12,16,20,23 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+concurrency:
+  group: wnba-edge-lab-pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+      - name: Install model dependencies
+        run: python -m pip install -r requirements.txt
+      - name: Test calculations
+        run: python -m unittest discover -s tests -v
+      - name: Test manual browser ledger
+        run: |
+          node tests/test_ledger.mjs
+          node tests/test_eligibility.mjs
+          node tests/test_sync.mjs
+          node tests/test_feed.mjs
+          node tests/test_refresh.mjs
+      - name: Refresh live model data
+        run: python -m pipeline.build
+      - name: Preserve refreshed real-data state
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add state site/data
+          if ! git diff --cached --quiet; then
+            git commit -m "chore: refresh live WNBA data"
+            git push
+          fi
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: site
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

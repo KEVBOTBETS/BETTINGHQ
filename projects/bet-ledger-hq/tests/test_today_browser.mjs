@@ -44,6 +44,7 @@ try{
       assert.ok(!/^0 qualified/.test(await frame.locator('#ticket-note').textContent()),'Cold sidebar launch must wait for delayed published feeds');
       await frame.getByRole('button',{name:'Close image preview'}).click();
     }else await page.getByRole('link',{name:'Today',exact:true}).click();
+    await frame.locator('section[aria-labelledby="alerts-title"] details').evaluate(d=>{d.open=true;});
     await frame.getByRole('heading',{name:'Published odds changed',exact:true}).waitFor();
     await frame.locator('#alerts-read').click();assert.equal(await frame.locator('#alerts-count').textContent(),'0 unread');
     await frame.locator("#refresh-status").filter({hasText:"Published files checked"}).waitFor();
@@ -72,10 +73,10 @@ try{
     }
     await frame.getByRole("button",{name:"Close image preview"}).click();
     await frame.getByRole("button",{name:"Accuracy",exact:true}).click();
-    await frame.getByRole("heading",{name:"Predictions, not your bet record"}).waitFor({state:"visible"});
+    await frame.getByRole("heading",{name:"Prediction accuracy across every board"}).waitFor({state:"visible"});
     await frame.getByRole("button",{name:"Exposure",exact:true}).click();
     await frame.getByText("Connect and sync in Ledger").waitFor();
-    assert.equal(await page.locator(".board-link").count(),9);
+    assert.equal(await page.locator(".board-link").count(),12);
     assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth));
     const child=page.frames().find(f=>f.url().endsWith("today.html"));
     assert.ok(await child.evaluate(()=>document.documentElement.scrollWidth<=innerWidth));

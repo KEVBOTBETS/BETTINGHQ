@@ -1,7 +1,7 @@
 # KEVBOTBETS portable recovery
 
 One repository contains the recovered hub, Moneyline, NFL, college football,
-and MLB projects. Start with **START-HERE.md**. The initial page opens Weekly
+MLB, WNBA, Props and Ladder projects. Start with **START-HERE.md**. The initial page opens Weekly
 football; the existing sport dashboards and shared ledger remain available.
 
 ## What changed
@@ -27,12 +27,10 @@ football; the existing sport dashboards and shared ledger remain available.
 
 ## Recovered scope
 
-Complete local source copies exist for `bet-ledger-hq`, `nfl-edge-lab`,
-`ncaaf-edge-lab`, and `mlb-edge`. Their saved model history is included.
-Full WNBA, Props, and Ladder projects were not available locally when the account
-became inaccessible. Their navigation/feed entries are disabled in this release.
-Historical tickets and partial shared-ledger integration folders are preserved;
-those fragments are not substitutes for the missing complete projects.
+All seven complete source projects are included: `bet-ledger-hq`, `nfl-edge-lab`,
+`ncaaf-edge-lab`, `mlb-edge`, `wnba-edge-lab`, `props-edge`, and `ladderbet`.
+Their saved forecast history is preserved. See **RESTORATION-2026-09-23.md** for
+the repaired quote, parlay, accuracy and shared-ledger behavior.
 
 Personal browser-local wagers, passwords, tokens and Google Sheet contents are
 not contained in a GitHub source backup. Reconnect the existing Sheet from the
@@ -59,7 +57,9 @@ Open `http://localhost:8000/`. Serving files is required; opening HTML directly
 from Finder will not load the feeds correctly.
 
 For current data, run `python tools/refresh.py --sport all` while online.
-`--sport football` refreshes NFL and CFB; `--sport mlb` refreshes MLB.
+`--sport football` refreshes NFL, CFB and Props. Individual `mlb`, `wnba`,
+`props`, and `ladder` refreshes are supported; `archive` collects tickets/alerts
+from saved model feeds without repeating upstream requests.
 Recovered feed timestamps are preserved until an actual successful refresh.
 Old snapshots may therefore show **stale**, with actionable suggestions withheld.
 

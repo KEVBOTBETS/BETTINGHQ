@@ -24,7 +24,7 @@ const origin = 'http://127.0.0.1:' + server.address().port;
 const start = '2026-12-20T18:00:00Z';
 const leg = (player, market, side, line, price, probability, matchup) => ({
   id: `${player}-${market}-${side}-${line}`.toLowerCase().replace(/\s+/g, '_'),
-  sport: 'NFL', event_id: matchup, matchup, start_time: start, player, team: matchup.split(' ')[0],
+  sport: 'NFL', event_id: String(['BUF @ HOU','DAL @ NYG','NO @ DET'].indexOf(matchup)+401), matchup, start_time: start, player, team: matchup.split(' ')[0],
   market, side, line, pick: `${player} ${side} ${line ?? ''} ${market.toLowerCase()}`.trim(),
   price_american: price, price_decimal: price > 0 ? 1 + price / 100 : 1 + 100 / Math.abs(price),
   price_source: 'model', book: 'DraftKings line · model price', line_source: 'DraftKings line via ESPN',
@@ -104,9 +104,9 @@ try {
     assert.match(await page.locator('#price-banner').textContent(), /model estimate/i, 'estimated prices are disclosed');
     assert.match(await page.locator('#price-banner').textContent(), /real DraftKings numbers/i, 'real lines are credited');
     assert.equal(await page.locator('.est').first().textContent(), 'EST PRICE · REAL LINE');
-    assert.match(await page.locator('.ticket .placeable').first().textContent(), /EVERY LEG IS A NUMBER THE BOOK POSTS/,
-      'a parlay says outright that it can be placed');
-    assert.equal(await page.locator('.ticket .placeable.warn').count(), 0, 'no card is built on an invented line');
+    assert.match(await page.locator('.ticket .placeable').first().textContent(), /RESEARCH/,
+      'a scenario does not claim a verified combined price');
+    assert.equal(await page.locator('.ticket .placeable.warn').count(), 1, 'scenario qualification is explicit');
     assert.match(await page.locator('#parlay-count').textContent(), /every leg is a line the book posts/);
 
     await page.locator('.target[data-target="5000"]').click();
@@ -120,13 +120,15 @@ try {
     await page.locator('[data-scope="game"]').click();
     await page.locator('.target[data-target="1000"]').click();
     assert.equal(await page.locator('.ticket').count(), 1, 'same-game scope has its own tickets');
-    assert.match(await page.locator('.corr').first().textContent(), /CORRELATION/);
+    assert.equal(await page.locator('.corr').count(), 0, 'unvalidated correlation boosts are removed');
 
     // Pasted odds replace the estimates, re-score a different line and re-price the ticket.
     await page.locator('[data-tab="parlays"]').click();
     await page.locator('[data-scope="slate"]').click();
     const beforePrice = await page.locator('.ticket .price').first().textContent();
     await page.locator('#paste-lines').click();
+    await page.locator('#paste-game').selectOption('401');
+    await page.locator('#paste-book').fill('Test Book');
     await page.locator('#paste-box').fill('Alpha Player anytime touchdown +240\nBravo Player over 49.5 receiving yards -105\nnonsense row');
     await page.locator('#paste-apply').click();
     assert.match(await page.locator('#paste-status').textContent(), /Read 2 lines, 1 matched/);
@@ -138,7 +140,7 @@ try {
     assert.ok(estTags < legCount, 'the pasted leg drops its estimate tag while the rest keep theirs');
     assert.equal(await page.locator('.ticket').first().locator('.legs li', {hasText: 'Alpha Player'}).locator('.est').count(), 0);
     await page.locator('[data-tab="board"]').click();
-    assert.match(await page.locator('.board-row', {hasText: 'Bravo'}).first().textContent(), /49\.5/, 'the board follows the pasted line');
+    assert.match(await page.locator('.board-row', {hasText: 'Bravo'}).first().textContent(), /58\.5/, 'a different unpublished line is not silently substituted');
     await page.locator('[data-tab="parlays"]').click();
     await page.locator('#paste-lines').click();
     await page.locator('#paste-clear').click();
@@ -159,12 +161,16 @@ try {
     await page.locator('#board-search').fill('charlie');
     assert.equal(await page.locator('.board-row').count(), 1, 'search filters the board');
     await page.locator('.board-row button').click();
+    await page.locator('#wager-price').fill('110');
+    await page.locator('#wager-book').fill('Test Book');
+    await page.locator('#wager-stake').fill('10');
+    await page.getByRole('button',{name:'Save actual bet'}).click();
 
     await page.locator('[data-tab="record"]').click();
     assert.match(await page.locator('#record-kpis').textContent(), /38-27/, 'the graded record is published');
     assert.equal(await page.locator('#record-buckets .board-row').count(), 3, 'predicted versus actual is broken out');
     assert.equal(await page.locator('#record-markets .board-row').count(), 2, 'the record is split by market');
-    assert.match(await page.locator('#record-cal').textContent(), /200 graded legs/, 'the calibration threshold is explained');
+    assert.match(await page.locator('#record-cal').textContent(), /Calibration is diagnostic/, 'the calibration threshold is explained');
 
     await page.locator('[data-tab="ledger"]').click();
     assert.equal(await page.locator('.ledger-row').count(), 1, 'a single lands in the ledger');

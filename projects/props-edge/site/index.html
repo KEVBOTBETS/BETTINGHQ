@@ -9,7 +9,11 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Barlow+Condensed:ital,wght@0,600;0,700;0,800;0,900;1,800;1,900&family=DM+Sans:wght@400;500;600;700&family=Share+Tech+Mono&display=swap">
 <link rel="stylesheet" href="styles.css">
 <script src="../bet-ledger-hq/moneyline-card.js" defer></script>
-<script src="app.js" defer></script>
+<script src="quote-integrity.js" defer></script>
+<script src="betsync.js" defer></script><script src="betsync-ui.js" defer></script>
+<script src="simulator.js" defer></script><script src="staking.js" defer></script>
+<script src="app.js" defer></script><script src="sync-adapter.js" defer></script>
+<script src="restored-features.js" defer></script><script src="model-accuracy.js" defer></script>
 </head>
 <body>
 <header class="masthead">
@@ -33,11 +37,16 @@
 <p id="price-banner" class="banner" hidden></p>
 
 <nav class="tabs" role="tablist" aria-label="Props sections">
+  <button class="tab" role="tab" data-tab="best" aria-selected="false">Best Bets</button>
   <button class="tab" role="tab" data-tab="parlays" aria-selected="true">Parlay lab</button>
   <button class="tab" role="tab" data-tab="sheet" aria-selected="false">Cheat sheets</button>
   <button class="tab" role="tab" data-tab="board" aria-selected="false">Prop board</button>
   <button class="tab" role="tab" data-tab="record" aria-selected="false">Model record</button>
   <button class="tab" role="tab" data-tab="ledger" aria-selected="false">My ledger</button>
+  <button class="tab" role="tab" data-tab="projections" aria-selected="false">Projections</button>
+  <button class="tab" role="tab" data-tab="simulator" aria-selected="false">Matchup Lab</button>
+  <button class="tab" role="tab" data-tab="accuracy" aria-selected="false">Accuracy</button>
+  <button class="tab" role="tab" data-tab="sources" aria-selected="false">Model &amp; sources</button>
 </nav>
 
 <main>
@@ -45,7 +54,7 @@
     <div class="panel-head">
       <div>
         <h2>Parlay lab</h2>
-        <p class="lede">Built from the model board, aimed at a payout you choose. Longer odds always cost win chance — every card shows what the model thinks it is really worth.</p>
+        <p class="lede">Research combinations aimed at a payout you choose. Prices may be estimated; same-game win probabilities are unavailable until a joint model is validated. Confirm the combined price in your book.</p>
       </div>
       <div class="scope-picker" role="radiogroup" aria-label="Parlay scope">
         <button class="chip" role="radio" data-scope="slate" aria-checked="true">Full slate</button>
@@ -90,7 +99,7 @@
     <div class="panel-head">
       <div>
         <h2>Model record</h2>
-        <p class="lede">Every leg the site publishes is graded against the box score once its game is final. This is the model marking its own homework in public, and the calibration it applies to itself as a result.</p>
+        <p class="lede">Pregame legs are frozen and graded from final box scores whether or not you wager. One preferred side per player and market drives the headline record. Open Accuracy for the complete player projection history.</p>
       </div>
     </div>
     <div id="record-kpis" class="kpis"></div>
@@ -105,14 +114,15 @@
     <div class="panel-head">
       <div>
         <h2>My ledger</h2>
-        <p class="lede">Saved in this browser only. Singles and parlays, with stake, result and running bankroll.</p>
+        <p class="lede">Manually logged bets, with actual price, stake and result. Connect Sync to share your ledger and bankroll with the other boards.</p>
       </div>
       <div class="board-filters">
-        <label>Bankroll <input id="bankroll" type="number" min="0" step="10" value="500"></label>
-        <label>Max bet <input id="max-bet" type="number" min="1" step="5" value="50"></label>
+        <label>Bankroll <input id="bankroll" type="number" min="0" step="10" value="0"></label>
+        <label>Max bet <input id="max-bet" type="number" min="1" step="5" value="10"></label>
         <button id="export-ledger" class="ghost" type="button">Export CSV</button>
       </div>
     </div>
+    <p id="legacy-ledger-note" class="banner" hidden><b id="legacy-ledger-count"></b> existing entries need review before sharing. Check their actual price and stake below, then <button id="review-ledger" type="button">Review for shared ledger</button>. Original entries remain in this browser.</p>
     <div id="ledger-kpis" class="kpis"></div>
     <div id="ledger" class="ledger"></div>
   </section>
@@ -137,11 +147,13 @@
       <button id="paste-close" class="ghost" type="button" aria-label="Close paste odds">✕</button>
     </header>
     <p class="lede">Copy the lines from your sportsbook or an odds screen and paste them here, one per line. The board, the cheat sheets and every parlay payout switch to your prices and lose the EST tag. Nothing is uploaded — it stays in this browser.</p>
+    <div class="board-filters"><label>Game <select id="paste-game"></select></label><label>Sportsbook <input id="paste-book" placeholder="Book shown on your odds screen" required></label></div>
+    <p class="muted">Quotes attach to this event and exact line, expire after the configured quote window, and stop applying at kickoff. CSV also needs event_id, book and observed_at (ISO timestamp with timezone). Templates leave prices blank.</p>
     <textarea id="paste-box" rows="9" spellcheck="false" placeholder="Josh Allen anytime touchdown +120&#10;Tee Higgins over 58.5 receiving yards -115&#10;Jahmyr Gibbs Over 4.5 Receptions +105"></textarea>
     <p id="paste-status" role="status" aria-live="polite" class="muted"></p>
     <div class="paste-actions"><button id="paste-apply" class="primary" type="button">Use these prices</button><button id="paste-clear" class="ghost" type="button">Clear saved prices</button></div>
     <details class="paste-links"><summary>Where to get the lines</summary>
-      <p class="muted">Open the market, copy the player, the line and the price. KEVBOTBETS never scrapes these sites — their terms do not allow it, so the paste box (or an odds-provider key) is how real prices get in.</p>
+      <p class="muted">Open the market, copy the player, the line and the price. The automatic feed uses public comparison data where available. Paste prices to supply a current quote for the selected game.</p>
       <ul>
         <li><b>Sportsbooks:</b> <a href="https://sportsbook.draftkings.com/leagues/football/nfl" target="_blank" rel="noopener">DraftKings</a> · <a href="https://sportsbook.fanduel.com/navigation/nfl" target="_blank" rel="noopener">FanDuel</a> · <a href="https://sports.betmgm.com/en/sports/football-11/betting/usa-9/nfl-35" target="_blank" rel="noopener">BetMGM</a> · <a href="https://www.bet365.com" target="_blank" rel="noopener">bet365</a> · <a href="https://sportsbook.caesars.com/us/bet/americanfootball" target="_blank" rel="noopener">Caesars</a> · <a href="https://on.thescore.bet" target="_blank" rel="noopener">theScore Bet</a> · <a href="https://www.pinnacle.com/en/football/nfl/matchups/" target="_blank" rel="noopener">Pinnacle</a></li>
         <li><b>Comparison screens:</b> <a href="https://oddsjam.com/nfl/odds/player-props" target="_blank" rel="noopener">OddsJam</a> · <a href="https://www.bettingpros.com/nfl/props/" target="_blank" rel="noopener">BettingPros</a> · <a href="https://www.actionnetwork.com/nfl/props" target="_blank" rel="noopener">Action Network</a> · <a href="https://www.covers.com/nfl/props" target="_blank" rel="noopener">Covers</a> · <a href="https://www.vegasinsider.com/nfl/odds/player-props/" target="_blank" rel="noopener">VegasInsider</a> · <a href="https://www.oddsshark.com/nfl/props" target="_blank" rel="noopener">OddsShark</a> · <a href="https://props.cash" target="_blank" rel="noopener">Props.cash</a></li>
@@ -151,6 +163,7 @@
   </div>
 </dialog>
 
+<dialog id="wager-dialog" aria-labelledby="wager-title"><form id="wager-form" class="paste-shell"><h2 id="wager-title">Log actual bet</h2><p>Enter the price and stake you actually accepted. The scenario price is not a sportsbook offer.</p><div class="board-filters"><label>Sportsbook <input id="wager-book" required></label><label>Actual American odds <input id="wager-price" type="number" required></label><label>Stake <input id="wager-stake" type="number" min="0.01" step="0.01" required></label></div><p id="wager-error" role="status"></p><button class="primary" type="submit">Save actual bet</button> <button type="button" onclick="this.closest('dialog').close()">Cancel</button></form></dialog>
 <input id="csv-input" type="file" accept=".csv,text/csv" hidden>
 
 <footer>

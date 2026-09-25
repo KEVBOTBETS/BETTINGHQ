@@ -19,6 +19,7 @@ import datetime as dt
 import hashlib
 import math
 import re
+from zoneinfo import ZoneInfo
 from typing import Any, Iterable
 
 from .legs import PASS_CATCHER_MARKETS, market_group
@@ -55,16 +56,8 @@ def pair_correlation(a: dict[str, Any], b: dict[str, Any], cfg: dict[str, Any]) 
 
 
 def joint_probability(legs: list[dict[str, Any]], cfg: dict[str, Any]) -> float:
-    """Independent product, then a correlation adjustment for same-game pairs."""
-    probability = 1.0
-    for leg in legs:
-        probability *= float(leg["model_prob"])
-    factor = 1.0
-    for i, a in enumerate(legs):
-        for b in legs[i + 1 :]:
-            factor *= pair_correlation(a, b, cfg)
-    factor = max(1 / float(cfg["cap"]), min(float(cfg["cap"]), factor))
-    return max(1e-9, min(0.97, probability * factor))
+    """Independence baseline only; same-game dependence is not calibrated."""
+    return math.prod(float(leg["model_prob"]) for leg in legs)
 
 
 def _allowed(leg: dict[str, Any], chosen: list[dict[str, Any]], limits: dict[str, Any]) -> bool:
@@ -88,13 +81,7 @@ def _allowed(leg: dict[str, Any], chosen: list[dict[str, Any]], limits: dict[str
 
 
 def _corr_log(leg: dict[str, Any], chosen: list[dict[str, Any]], cfg: dict[str, Any]) -> float:
-    total = 0.0
-    for row in chosen:
-        factor = pair_correlation(leg, row, cfg)
-        if factor != 1.0:
-            # Each extra correlated pair counts a little less than the one before it.
-            total += math.log(1 + (factor - 1) * 0.75)
-    return total
+    return 0.0  # No evidence supports the previous fixed correlation boosts.
 
 
 def _search(
@@ -196,12 +183,18 @@ def _ticket(
         "price_decimal": round(decimal, 4),
         "price_american": american,
         "payout_on_10": payout,
-        "model_prob": round(probability, 6),
+        "model_prob": None if len({leg["event_id"] for leg in legs}) < len(legs) else round(probability, 6),
         "independent_prob": round(independent, 6),
         "correlation_applied": round(probability / independent, 3) if independent else 1.0,
-        "fair_american": _american(1 / probability),
-        "expected_value_on_10": round(probability * payout - 10, 2),
-        "one_in": round(1 / probability) if probability > 0 else None,
+        "fair_american": None if len({leg["event_id"] for leg in legs}) < len(legs) else _american(1 / probability),
+        "expected_value_on_10": None,
+        "status": "research",
+        "actionable": False,
+        "combined_quote_verified": False,
+        "probability_method": "independence baseline; same-game probability unavailable",
+        "same_game": len({leg["event_id"] for leg in legs}) < len(legs),
+        "qualification": "Confirm the combined price and terms at your book. Estimated prices and unvalidated joint probabilities do not establish an edge.",
+        "one_in": round(1 / probability) if probability > 0 and len({leg["event_id"] for leg in legs}) == len(legs) else None,
         "estimated_prices": estimated,
         "all_posted": all(posted(leg) for leg in legs),
         "off_target": abs(decimal - (1 + target / 100)) > (1 + target / 100) * float(settings["parlays"]["tolerance"]),
@@ -227,7 +220,7 @@ def placeable_only(legs: list[dict[str, Any]], settings: dict[str, Any]) -> list
     if not cfg.get("book_lines_only", True):
         return legs
     on_book = [leg for leg in legs if posted(leg)]
-    return on_book if len(on_book) >= int(cfg.get("min_book_pool", 12)) else legs
+    return on_book
 
 
 def _pool(legs: Iterable[dict[str, Any]], settings: dict[str, Any]) -> list[dict[str, Any]]:
@@ -265,7 +258,13 @@ def _pool(legs: Iterable[dict[str, Any]], settings: dict[str, Any]) -> list[dict
 def build_parlays(legs: list[dict[str, Any]], settings: dict[str, Any], now: dt.datetime | None = None) -> dict[str, Any]:
     cfg = settings["parlays"]
     now = now or dt.datetime.now(dt.timezone.utc)
-    upcoming = [leg for leg in legs if (leg.get("start_time") or "9999") > now.isoformat()]
+    def starts_later(leg):
+        try:
+            start = dt.datetime.fromisoformat(str(leg.get("start_time", "")).replace("Z", "+00:00"))
+            return start.tzinfo is not None and start > now and bool(leg.get("event_id"))
+        except (ValueError, TypeError):
+            return False
+    upcoming = [leg for leg in legs if starts_later(leg)]
     upcoming = placeable_only(upcoming, settings)
     book_only = bool(upcoming) and all(posted(leg) for leg in upcoming)
     tickets: list[dict[str, Any]] = []
@@ -288,7 +287,7 @@ def build_parlays(legs: list[dict[str, Any]], settings: dict[str, Any], now: dt.
 
     by_day: dict[str, list[dict[str, Any]]] = {}
     for leg in upcoming:
-        day = str(leg.get("start_time") or "")[:10]
+        day = dt.datetime.fromisoformat(leg["start_time"].replace("Z", "+00:00")).astimezone(ZoneInfo("America/Toronto")).date().isoformat()
         if day:
             by_day.setdefault(day, []).append(leg)
     for day in sorted(by_day)[:4]:
@@ -321,7 +320,7 @@ def build_parlays(legs: list[dict[str, Any]], settings: dict[str, Any], now: dt.
                     continue
                 tickets.append(_ticket(ticket_legs, "game", label, int(target), settings))
 
-    tickets.sort(key=lambda ticket: (ticket["scope"], ticket["target"], -ticket["model_prob"]))
+    tickets.sort(key=lambda ticket: (ticket["scope"], ticket["target"], -ticket["independent_prob"]))
     return {
         "generated_at": now.isoformat(),
         "targets": list(cfg["targets"]),

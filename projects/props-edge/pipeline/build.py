@@ -11,7 +11,10 @@ from typing import Any
 from .http import ProviderError
 from .legs import build_legs
 from .parlays import build_parlays
-from .model import evaluate_quotes, evaluate_quotes_against_projections, merge_boards
+from .qualified import evaluate_quotes, evaluate_quotes_against_projections, merge_boards, select_portfolio, eligible_book_key
+from .providers.covers import CoversProvider
+from .providers.espn_recovered import EspnProjectionProvider as RecoveredProjectionProvider
+from . import accuracy as projection_accuracy
 from .providers.espn import EspnProjectionProvider
 from .providers.espn_props import EspnPropLines
 from .providers.espn_injuries import EspnInjuries
@@ -27,29 +30,38 @@ def load_settings() -> dict[str, Any]:
     return json.loads((ROOT / "config" / "settings.json").read_text())
 
 
+def load_qualification_settings():
+    config = json.loads((ROOT / "config/qualification.json").read_text())
+    config["fetch"]["lookahead_days"] = load_settings()["fetch"]["lookahead_days"]
+    return config
+
+
 def _write_json(name: str, value: Any) -> None:
     destination = ROOT / "site" / "data" / name
     destination.parent.mkdir(parents=True, exist_ok=True)
-    destination.write_text(json.dumps(value, indent=2, sort_keys=False) + "\n")
+    temporary = destination.with_suffix(".json.tmp")
+    temporary.write_text(json.dumps(value, indent=2, sort_keys=False, allow_nan=False) + "\n")
+    temporary.replace(destination)
 
 
 def build() -> dict[str, Any]:
     settings = load_settings()
+    qualification = load_qualification_settings()
     primary_key = os.getenv("ODDS_API_IO_KEY", "").strip()
     secondary_key = os.getenv("THE_ODDS_API_KEY", "").strip()
     primary = OddsApiIoProvider(primary_key, settings) if primary_key else None
     secondary = TheOddsApiProvider(secondary_key, settings) if secondary_key else None
     espn = EspnProjectionProvider(settings)
+    projections_provider = RecoveredProjectionProvider(qualification)
     espn_prefetch: dict[str, tuple[list[Any], str | None]] = {}
-    if True:
-        def fetch_keyless(sport_name: str) -> tuple[str, list[Any], str | None]:
-            try:
-                return sport_name, espn.fetch(sport_name), None
-            except ProviderError as exc:
-                return sport_name, [], str(exc)
-        with ThreadPoolExecutor(max_workers=2) as pool:
-            for sport_name, rows, error in pool.map(fetch_keyless, settings["sports"]):
-                espn_prefetch[sport_name] = (rows, error)
+    def fetch_keyless(sport_name: str) -> tuple[str, list[Any], str | None]:
+        try:
+            return sport_name, projections_provider.fetch(sport_name), None
+        except ProviderError as exc:
+            return sport_name, [], str(exc)
+    with ThreadPoolExecutor(max_workers=2) as pool:
+        for sport_name, rows, error in pool.map(fetch_keyless, settings["sports"]):
+            espn_prefetch[sport_name] = (rows, error)
 
     quotes = []
     projections = []
@@ -71,10 +83,16 @@ def build() -> dict[str, Any]:
                 errors.append(prefetch_error)
         else:
             try:
-                sport_projections = espn.fetch(sport)
+                sport_projections = projections_provider.fetch(sport)
             except ProviderError as exc:
                 errors.append(str(exc))
-        source = espn.name if sport_projections else "No source available"
+        source = projections_provider.name if sport_projections else "No source available"
+        if sport_projections:
+            try:
+                sport_quotes = CoversProvider(qualification).fetch(sport, sport_projections)
+                if sport_quotes: source = "Covers public comparison + ESPN regular-season projections"
+            except ProviderError as exc:
+                errors.append(str(exc))
 
         # Only games that have not kicked off yet decide the odds window.
         stamp_now = now.isoformat()
@@ -118,6 +136,13 @@ def build() -> dict[str, Any]:
             "errors": errors,
         }
 
+    if not projections and any(info["errors"] for info in source_by_sport.values()):
+        raise ProviderError("Projection refresh failed; previous published data retained")
+    quotes = [q for q in quotes if eligible_book_key(q.book, qualification)]
+    board = select_portfolio(merge_boards(
+        evaluate_quotes(quotes, qualification),
+        evaluate_quotes_against_projections(quotes, projections, qualification),
+    ), qualification)
     # Keyless sportsbook lines: real numbers to score, even with no odds key.
     book_lines: list[dict[str, Any]] = []
     if settings.get("line_feed", {}).get("enabled", True):
@@ -128,12 +153,8 @@ def build() -> dict[str, Any]:
                 info["errors"].append(str(exc))
     injuries = EspnInjuries(settings).fetch()
     grader = Grader(ROOT, settings)
-    accuracy = grader.run()
     legs = build_legs(
-        merge_boards(
-            evaluate_quotes(quotes, settings),
-            evaluate_quotes_against_projections(quotes, projections, settings),
-        ),
+        board,
         projections,
         settings,
         book_lines,
@@ -141,32 +162,36 @@ def build() -> dict[str, Any]:
         grader.calibration(),
     )
     parlays = build_parlays(legs, settings)
-    # Snapshot exactly what is published, so the record is of real shown legs.
-    shown = {leg["id"]: leg for ticket in parlays["tickets"] for leg in ticket["legs"]}
-    for leg in sorted(legs, key=lambda row: -float(row["model_prob"]))[:400]:
-        shown.setdefault(leg["id"], leg)
-    grader.snapshot(list(shown.values()), dt.datetime.now(dt.timezone.utc).date().isoformat())
-    board = merge_boards(
-        evaluate_quotes(quotes, settings),
-        evaluate_quotes_against_projections(quotes, projections, settings),
-    )
+    # Every published leg is frozen, including unpriced research. Projections
+    # and actual priced calls retain separate error/return metrics.
+    grader.snapshot(legs)
+    accuracy = grader.run()
+    history_errors = []
+    projection_accuracy.update(ROOT, board, projections, history_errors,
+                               max_odds_age_hours=qualification["projection_model"]["max_odds_age_hours"])
+    if history_errors:
+        source_by_sport.setdefault("NFL", {}).setdefault("errors", []).extend(history_errors)
     projection_rows = [row.to_dict() for row in projections]
     now = dt.datetime.now(dt.timezone.utc).isoformat()
     repository = os.getenv("GITHUB_REPOSITORY", "").strip()
     meta = {
         "generated_at": now,
-        "provider_priority": ["Odds-API.io", "The Odds API", "ESPN public statistics"],
+        "provider_priority": ["Covers public comparison (no key)", "Optional odds providers", "ESPN regular-season statistics"],
         "target_book": settings["bookmakers"]["target"],
         "keyless_fallback": True,
         "configured": {
             "odds_api_io": bool(primary_key),
             "the_odds_api": bool(secondary_key),
-            "espn_keyless": True
+            "espn_keyless": True,
+            "covers_keyless": True
         },
         "counts": {
             "priced_quotes": len(quotes),
+            "eligible_priced_quotes": len(quotes),
+            "qualified_options": sum(row["tier"] != "PASS" for row in board),
+            "held_options": sum(bool(row.get("held")) for row in board),
             "board": len(board),
-            "actionable": sum(row["tier"] != "PASS" for row in board),
+            "actionable": sum(row["tier"] != "PASS" and not row.get("held") for row in board),
             "best": sum(row["tier"] == "BEST" for row in board),
             "good": sum(row["tier"] == "GOOD" for row in board),
             "leans": sum(row["tier"] == "LEAN" for row in board),
@@ -178,7 +203,7 @@ def build() -> dict[str, Any]:
         ),
         "notes": [
             "API credentials are optional and are read only from GitHub Actions secrets.",
-            "If both odds providers are unavailable, ESPN schedules and box-score statistics produce projection-only rows.",
+            "If verified keyless prices are unavailable, keep model-price scenarios labeled research. Optional API keys are never required.",
             "Action Network and OddsShark are not scraped because automated extraction is blocked or prohibited.",
         ],
     }
@@ -189,6 +214,8 @@ def build() -> dict[str, Any]:
         "line_source": "DraftKings lines via ESPN" if book_lines else None,
     }
     meta["accuracy"] = accuracy
+    meta["max_odds_age_hours"] = qualification["projection_model"]["max_odds_age_hours"]
+    meta["price_source_status"] = "available" if quotes else "unavailable"
     meta["counts"]["injury_report"] = len(injuries)
     meta["counts"]["ruled_out"] = sum(row.get("blocking") == "yes" for row in injuries.values())
     meta["counts"]["book_lines"] = len(book_lines)

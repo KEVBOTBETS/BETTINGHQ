@@ -3,6 +3,9 @@
   "use strict";
   const C=window.KevToday, BS=window.BetSync, $=s=>document.querySelector(s);
   const sources={
+    wnba:{meta:"../wnba-edge-lab/data/meta.json",board:"../wnba-edge-lab/data/board.json",accuracy:"../wnba-edge-lab/data/accuracy.json"},
+    props:{meta:"../props-edge/data/meta.json",board:"../props-edge/data/board.json",accuracy:"../props-edge/data/accuracy-summary.json"},
+    ladder:{accuracy:"../ladderbet/data/accuracy.json"},
     mlb:{meta:"../mlb-edge/data/index.json",slate:"../mlb-edge/data/latest.json",accuracy:"../mlb-edge/data/predictions.json"},
     nfl:{meta:"../nfl-edge-lab/data/meta.json",board:"../nfl-edge-lab/data/board.json",accuracy:"../nfl-edge-lab/data/accuracy.json"},
     ncaaf:{meta:"../ncaaf-edge-lab/data/meta.json",board:"../ncaaf-edge-lab/data/board.json",accuracy:"../ncaaf-edge-lab/data/accuracy.json"}
@@ -167,5 +170,6 @@
   setInterval(()=>{if(document.visibilityState==="visible"&&S.active)render();},60000);
   setInterval(()=>{if(document.visibilityState==="visible"&&S.active)refresh();},300000);
   setInterval(()=>{if(document.visibilityState==="visible"&&S.active)refreshTicker();},180000);
+  if(new URLSearchParams(location.search).get("view")==="accuracy")document.querySelector('[data-view="accuracy"]').click();
   refresh();refreshTicker();
 })();

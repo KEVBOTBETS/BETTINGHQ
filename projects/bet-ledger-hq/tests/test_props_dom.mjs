@@ -1,0 +1,46 @@
+/* DOM integration with deterministic fixtures; no browser or network. */
+import assert from 'node:assert/strict';
+import {readFile} from 'node:fs/promises';
+import path from 'node:path';
+import {JSDOM} from 'jsdom';
+const dir=path.resolve('../props-edge/site');
+const dom=new JSDOM(await readFile(path.join(dir,'index.html'),'utf8'),{url:'https://example.test/BETTINGHQ/props-edge/',runScripts:'outside-only',pretendToBeVisual:true});
+const w=dom.window,errors=[];
+w.addEventListener('error',ev=>errors.push(ev.error?.message||ev.message));
+w.alert=()=>{};w.confirm=()=>false;
+w.HTMLDialogElement.prototype.showModal=function(){this.setAttribute('open','');};
+w.HTMLDialogElement.prototype.close=function(){this.removeAttribute('open');};
+w.Date.now=()=>Date.parse('2026-09-23T02:00:00Z');
+const one={id:'a',event_id:'991',player:'Test Player',sport:'NFL',team:'A',market:'Receptions',side:'over',line:4.5,start_time:'2026-09-25T00:15:00Z',price_american:-110,price_decimal:1+100/110,price_source:'model',model_prob:.6,matchup:'A @ B',pick:'Test Player over 4.5 receptions',book:'Estimate',group:'receiving',projection:6,recent:[4,5,6,7,6,8],samples:6,confidence:.6};
+const legs=[one,{...one,id:'b',event_id:'992'},{...one,id:'c',event_id:'993'}];
+const board=[{...one,price_source:'book',book:'Test Book',updated_at:'2026-09-23T01:00:00Z',tier:'GOOD',action_edge:.05,recommended_stake:3,held:false}];
+const ticket={id:'fixture',legs,scope:'slate',target:1000,label:'Full slate',games:['A @ B'],leg_count:3,start_time:one.start_time};
+const files={'legs.json':legs,'parlays.json':{tickets:[ticket],targets:[1000]},'meta.json':{generated_at:'2026-09-23T01:00:00Z',counts:{projections:1,priced_quotes:2},price_source_status:'available',source_by_sport:{NFL:{source:'Fixture',errors:[]}},accuracy:{}},'board.json':board,'projections.json':[one],'accuracy.json':{overall:{},games:{},props:{Receptions:{logged:1,graded:1,mae:1,bias:1}},records:[]}};
+w.fetch=async url=>{const key=String(url).split('?')[0].replace(/^.*data\//,'');return {ok:key in files,json:async()=>files[key]};};
+w.BetSync={touch(){},register(){},start(){}};
+for(const file of ['quote-integrity.js','simulator.js','staking.js','app.js','sync-adapter.js','restored-features.js','model-accuracy.js'])w.eval(await readFile(path.join(dir,file),'utf8'));
+const wait=async predicate=>{for(let i=0;i<100;i++){if(predicate())return;await new Promise(resolve=>setTimeout(resolve,20));}throw Error('DOM state not reached');};
+const $=s=>w.document.querySelector(s),click=s=>$(s).click();
+try{
+  await wait(()=>$('#parlays .ticket'));assert.match($('#parlays').textContent,/RESEARCH/);assert.equal($('.corr'),null);
+  click('[data-tab="best"]');await wait(()=>$('#stake-system'));assert.equal(w.document.querySelectorAll('[data-qualified-bet]').length,1);
+  click('[data-tab="projections"]');await wait(()=>$('#projection-count')?.textContent.includes('1 of 1'));
+  click('[data-tab="simulator"]');await wait(()=>$('#sim-run'));click('#sim-run');assert.match($('#sim-output').textContent,/10,000 runs/);
+  click('[data-tab="accuracy"]');await wait(()=>$('#restored-accuracy .ma-grid'));assert.match($('#restored-accuracy').textContent,/Player projections/);
+  click('[data-tab="sources"]');assert.match($('#restored-sources').textContent,/Fixture/);
+  w.PropsApp.addEntry({title:'DOM fixture actual bet',kind:'single',legs:['fixture'],model_prob:.6});
+  $('#wager-dialog').close();assert.equal(w.PropsApp.state.ledger.length,0);
+  w.PropsApp.addEntry({title:'DOM fixture actual bet',kind:'single',legs:['fixture'],model_prob:.6});
+  $('#wager-price').value='200';$('#wager-stake').value='10';$('#wager-book').value='Test Book';
+  $('#wager-form').dispatchEvent(new w.Event('submit',{bubbles:true,cancelable:true}));
+  assert.equal(w.PropsApp.state.ledger.length,1);assert.equal(w.PropsApp.state.ledger[0].confirmed_actual,true);
+  w.PropsApp.state.ledger[0].result='Win';w.PropsApp.applySharedBank({current:120,available:110});
+  assert.ok([...w.document.querySelectorAll('#ledger-kpis .kpi')].find(el=>el.textContent.includes('Available')).textContent.includes('$110.00'),'shared bankroll is not credited local profit twice');
+  w.PropsApp.state.imported=Object.fromEntries(legs.map(l=>[w.PropsQuotes.key(l),{...l,price:200,book:'Test Book',observed_at:'2026-09-23T01:00:00Z'}]));
+  const payload=w.PropsApp.parlayCardPayload(ticket);
+  assert.equal(payload.day,'2026-09-24');assert.equal(payload.override.stamp,'RESEARCH');
+  assert.ok(payload.override.stats.some(([label,value])=>label==='PRICE'&&value==='+2600'));
+  assert.ok(payload.override.stats.some(([label,value])=>label==='PAYS $10'&&value==='$270.00'));
+  assert.deepEqual(errors,[]);
+  console.log('Props DOM: restored panels, simulator, history, manual wager, shared bankroll and repriced card passed');
+}finally{dom.window.close();}

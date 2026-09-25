@@ -3,7 +3,7 @@
   const supported=new Set(['mlb','nfl','ncaaf']);
   let data=null,error='',busy=false,read=new Set();try{read=new Set(JSON.parse(localStorage.getItem('kevbot.alerts-read.v1')||'[]'));}catch(_){}
   function render(){const host=$('#alerts-list');if(!host)return;const sport=$('#alerts-sport').value,kind=$('#alerts-kind').value;
-    const stale=!data||Date.now()-Date.parse(data.checked_at)>2*3600000,offline=navigator.onLine===false;
+    const stale=!data||Date.now()-Date.parse(data.checked_at)>4*3600000,offline=navigator.onLine===false;
     $('#alerts-status').textContent=error||(data?'Checked '+new Date(data.checked_at).toLocaleString()+(stale?' · Alert collection is delayed.':' · Scheduled observations; not a live injury wire.'):'Loading alerts…');
     const rows=(data?.events||[]).filter(e=>supported.has(e.sport)&&(sport==='all'||e.sport===sport)&&(kind==='all'||(kind==='availability'?e.kind!=='odds':e.kind===kind)));
     $('#alerts-count').textContent=(data?.events||[]).filter(e=>supported.has(e.sport)&&!read.has(e.id)).length+' unread';

@@ -3,6 +3,9 @@
 (() => {
   "use strict";
   const configs = {
+    accuracy:{title:"Accuracy",description:"Every forecast, including predictions you did not bet.",url:"accuracy.html"},
+    wnba:{title:"WNBA Edge Lab",description:"WNBA matchups, best bets and forecast accuracy.",url:"../wnba-edge-lab/"},
+    ladder:{title:"Ladder",description:"Ladder options, simulation and your shared ledger.",url:"../ladderbet/"},
     today:{title:"Today",description:"Your daily board, data health and shared exposure.",url:"today.html"},
     football:{title:"Weekly football",description:"NFL and college football forecasts, qualified plays and research leans.",url:"football.html"},
     moneyline:{title:"Moneyline",description:"NFL, college football and MLB. Just pick the winners.",url:"moneyline.html"},

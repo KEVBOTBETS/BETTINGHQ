@@ -345,7 +345,7 @@ class LegAndParlayTests(unittest.TestCase):
                         rows.append(Projection(
                             sport="NFL", player=f"{team} P{index}", team=team, matchup=f"{away} @ {home}",
                             market=market, projection=base, samples=6, confidence=0.6,
-                            standard_deviation=deviation, recent=recent, trend=0.4, start_time=start))
+                            standard_deviation=deviation, recent=recent, trend=0.4, start_time=start, event_id=str(100+game)))
         return rows
 
     def test_only_nfl_is_configured(self):
@@ -384,8 +384,9 @@ class LegAndParlayTests(unittest.TestCase):
             self.assertGreaterEqual(ticket["price_decimal"], target_decimal * (1 - span) - 1e-9)
             self.assertLessEqual(ticket["price_decimal"], target_decimal * (1 + span) + 1e-9)
             self.assertGreaterEqual(ticket["leg_count"], 2)
-            self.assertGreater(ticket["model_prob"], 0)
-            self.assertLess(ticket["model_prob"], 1)
+            self.assertGreater(ticket["independent_prob"], 0)
+            self.assertLess(ticket["independent_prob"], 1)
+            if ticket["same_game"]: self.assertIsNone(ticket["model_prob"])
             players = [(leg["player"], leg["market"]) for leg in ticket["legs"]]
             self.assertEqual(len(players), len(set(players)), "a ticket must not repeat a player's market")
             self.assertFalse(any(key.startswith("_") for leg in ticket["legs"] for key in leg))
@@ -398,17 +399,17 @@ class LegAndParlayTests(unittest.TestCase):
         for ticket in result["tickets"]:
             if ticket["scope"] != "slate":
                 continue
-            best[ticket["target"]] = max(best.get(ticket["target"], 0), ticket["model_prob"])
+            best[ticket["target"]] = max(best.get(ticket["target"], 0), ticket["independent_prob"])
         ordered = [best[target] for target in sorted(best)]
         self.assertEqual(ordered, sorted(ordered, reverse=True))
 
-    def test_same_game_legs_are_correlated_but_capped(self):
+    def test_same_game_baseline_is_not_boosted_without_evidence(self):
         from pipeline.parlays import joint_probability
         cfg = self.settings["parlays"]["correlation"]
         qb = {"event_id": "g1", "team": "BUF", "player": "QB", "market": "Passing yards", "side": "over", "model_prob": 0.5}
         wr = {"event_id": "g1", "team": "BUF", "player": "WR", "market": "Receiving yards", "side": "over", "model_prob": 0.5}
         other = {"event_id": "g2", "team": "DAL", "player": "RB", "market": "Rushing yards", "side": "over", "model_prob": 0.5}
-        self.assertGreater(joint_probability([qb, wr], cfg), 0.25)
+        self.assertEqual(joint_probability([qb, wr], cfg), 0.25)
         self.assertAlmostEqual(joint_probability([qb, other], cfg), 0.25, places=6)
         self.assertLessEqual(joint_probability([qb, wr], cfg), 0.25 * float(cfg["cap"]) + 1e-9)
 
@@ -468,7 +469,7 @@ class EspnPropLineTests(unittest.TestCase):
         projection = Projection(
             sport="NFL", player="Rashee Rice", team="KC", matchup="KC @ BUF", market="Receptions",
             projection=6.4, samples=6, confidence=0.6, standard_deviation=1.6,
-            recent=[5, 7, 8, 6, 4, 9], trend=0.3, start_time="2026-12-20T18:00:00Z")
+            recent=[5, 7, 8, 6, 4, 9], trend=0.3, start_time="2026-12-20T18:00:00Z", event_id="1")
         rows = [{"player": "Rashee Rice", "market": "Receptions", "line": 5.5, "book": "DraftKings",
                  "line_source": "DraftKings line via ESPN", "event_id": "1", "matchup": "KC @ BUF",
                  "start_time": "2026-12-20T18:00:00Z"}]
@@ -490,7 +491,7 @@ class EspnPropLineTests(unittest.TestCase):
         projection = Projection(
             sport="NFL", player="Rashee Rice", team="KC", matchup="KC @ BUF", market="Receptions",
             projection=6.4, samples=6, confidence=0.6, standard_deviation=1.6,
-            recent=[5, 7, 8, 6, 4, 9], trend=0.3, start_time="2026-12-20T18:00:00Z")
+            recent=[5, 7, 8, 6, 4, 9], trend=0.3, start_time="2026-12-20T18:00:00Z", event_id="1")
         rows = [{"player": "Rashee Rice", "market": "Receptions", "line": 5.5, "book": "DraftKings",
                  "line_source": "DraftKings line via ESPN", "event_id": "1", "matchup": "KC @ BUF",
                  "start_time": "2026-12-20T18:00:00Z"}]
@@ -518,7 +519,7 @@ class NameMatchingTests(unittest.TestCase):
         projection = Projection(
             sport="NFL", player="Patrick Mahomes II", team="KC", matchup="IND @ KC", market="Passing yards",
             projection=268.0, samples=6, confidence=0.6, standard_deviation=42.0,
-            recent=[240, 310, 255, 288, 201, 314], trend=0.2, start_time="2026-12-20T18:00:00Z")
+            recent=[240, 310, 255, 288, 201, 314], trend=0.2, start_time="2026-12-20T18:00:00Z", event_id="1")
         rows = [{"player": "Patrick Mahomes", "market": "Passing yards", "line": 274.5, "book": "DraftKings",
                  "line_source": "DraftKings line via ESPN", "event_id": "1", "matchup": "IND @ KC",
                  "start_time": "2026-12-20T18:00:00Z"}]
@@ -536,7 +537,7 @@ class InjuryAndMovementTests(unittest.TestCase):
         self.projections = [
             Projection(sport="NFL", player=name, team="KC", matchup="IND @ KC", market="Receiving yards",
                        projection=58.0, samples=6, confidence=0.6, standard_deviation=18.0,
-                       recent=[40, 62, 71, 55, 48, 66], trend=0.2, start_time="2026-12-20T18:00:00Z")
+                       recent=[40, 62, 71, 55, 48, 66], trend=0.2, start_time="2026-12-20T18:00:00Z", event_id="1")
             for name in ("Rashee Rice", "Travis Kelce")
         ]
         self.lines = [
@@ -657,10 +658,10 @@ class GradingTests(unittest.TestCase):
             legs = [{"id": "leg-1", "event_id": "401", "player": "Rashee Rice", "market": "Receiving yards",
                      "side": "over", "line": 58.5, "model_prob": 0.56, "price_american": -115,
                      "start_time": "2020-01-01T00:00:00Z", "matchup": "IND @ KC", "line_source": "DK"}]
-            path = grader.snapshot(legs, "2026-09-20")
+            path = grader.snapshot(legs, now="2019-12-31T18:00:00Z")
             self.assertTrue(path.exists())
             saved = _json.loads(path.read_text())
-            self.assertEqual(saved["legs"][0]["player"], "Rashee Rice")
+            self.assertEqual(next(iter(saved["records"].values()))["player"], "Rashee Rice")
 
             grader.client = type("Stub", (), {"get": lambda self, *a, **k: {
                 "header": {"competitions": [{"status": {"type": {"completed": True}}}]},
@@ -710,19 +711,20 @@ class PostedLineParlayTests(unittest.TestCase):
                     projections.append(Projection(
                         sport="NFL", player=player, team=team, matchup=f"{away} @ {home}", market=market,
                         projection=projection, samples=6, confidence=0.6, standard_deviation=deviation,
-                        recent=recent, trend=0.3, start_time=start))
+                        recent=recent, trend=0.3, start_time=start, event_id=str(100+game)))
                     if seat < posted_players:
                         step = 0.5 if market == "Receptions" else 0.5
                         lines.append({
                             "player": player, "market": market,
                             "line": round(projection * 2) / 2 + step, "book": "DraftKings",
-                            "line_source": "DraftKings line via ESPN", "event_id": f"g{game}",
+                            "line_source": "DraftKings line via ESPN", "event_id": str(100+game),
                             "matchup": f"{away} @ {home}", "start_time": start,
                         })
                     seat += 1
         return projections, lines
 
     def test_a_parlay_only_uses_lines_the_book_posts(self):
+        self.settings["parlays"]["book_lines_only"] = True
         from pipeline.legs import build_legs
         from pipeline.parlays import build_parlays, posted
         projections, lines = self._fixture(posted_players=18)
@@ -735,12 +737,16 @@ class PostedLineParlayTests(unittest.TestCase):
             for leg in ticket["legs"]:
                 self.assertTrue(posted(leg), f"{leg['pick']} is not a number the book posts")
 
-    def test_a_thin_book_feed_falls_back_to_the_whole_board(self):
+    def test_thin_book_feed_never_silently_uses_unposted_lines(self):
         from pipeline.legs import build_legs
-        from pipeline.parlays import build_parlays
+        from pipeline.parlays import placeable_only, posted
+        self.settings["parlays"]["book_lines_only"] = True
         projections, lines = self._fixture(posted_players=2)
-        result = build_parlays(build_legs([], projections, self.settings, lines), self.settings)
-        self.assertTrue(result["tickets"], "a near-empty line feed must not empty the parlay lab")
+        legs = build_legs([], projections, self.settings, lines)
+        pool = placeable_only(legs, self.settings)
+        self.assertTrue(pool)
+        self.assertTrue(all(posted(leg) for leg in pool))
+        self.assertLess(len(pool), len(legs))
 
     def test_posted_recognises_a_real_price_as_well_as_a_real_line(self):
         from pipeline.parlays import posted

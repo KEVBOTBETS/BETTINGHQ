@@ -184,3 +184,12 @@ footer p{margin:0 0 6px;max-width:100ch}
   .tabs,.masthead-actions,.ticket-actions,.sheet-actions,.board-filters,#card-dialog{display:none}
   .panel,.ticket,.sheet-row{border-color:#999;background:#fff;color:#000}
 }
+/* Recovered panels share the current card language and remain usable on phones. */
+.board-row>div,.board-filters label{min-width:0}
+.board-row .meta,.board-row .why{overflow-wrap:anywhere}
+.board-filters select,.board-filters input{max-width:100%}
+#sim-game,#sim-player{max-width:min(420px,100%)}
+#legacy-ledger-note{margin:12px 0;border:1px solid var(--line);border-radius:9px}
+#restored-best details{margin:20px 0}
+#restored-best summary{cursor:pointer;margin-bottom:12px}
+#wager-dialog{width:min(600px,calc(100vw - 24px));color:var(--ink);background:var(--panel);border:1px solid var(--line);border-radius:14px}

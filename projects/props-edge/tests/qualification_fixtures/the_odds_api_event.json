@@ -1,0 +1,35 @@
+{
+  "id": "nfl-example-1",
+  "commence_time": "2026-09-13T17:00:00Z",
+  "home_team": "Kansas City Chiefs",
+  "away_team": "Buffalo Bills",
+  "bookmakers": [
+    {
+      "key": "draftkings",
+      "title": "DraftKings",
+      "last_update": "2026-09-12T18:00:00Z",
+      "markets": [
+        {
+          "key": "player_pass_yds",
+          "outcomes": [
+            {"name": "Over", "description": "Jordan Example", "price": 110, "point": 275.5},
+            {"name": "Under", "description": "Jordan Example", "price": -130, "point": 275.5}
+          ]
+        }
+      ]
+    },
+    {
+      "key": "fanduel",
+      "title": "FanDuel",
+      "markets": [
+        {
+          "key": "player_pass_yds",
+          "outcomes": [
+            {"name": "Over", "description": "Jordan Example", "price": -110, "point": 275.5},
+            {"name": "Under", "description": "Jordan Example", "price": -110, "point": 275.5}
+          ]
+        }
+      ]
+    }
+  ]
+}

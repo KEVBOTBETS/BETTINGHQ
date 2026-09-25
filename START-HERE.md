@@ -3,8 +3,8 @@
 ## 1. Keep the recovery archive
 
 Extract the download. Keep an untouched copy. Use the **repository** folder as
-the new repository root. The accompanying **original-sources.zip** is a separate
-backup; do not upload that archive as your website.
+the new repository root. The included patch and validation files are for review; the complete
+**repository** folder is the uploadable project.
 
 The package is account-independent. GitHub access and any account suspension
 must be resolved with GitHub; importing source does not itself reinstate access.
@@ -52,26 +52,30 @@ included data pipelines. Upstream public feeds still need to be available.
   The default view includes research leans; **Model-qualified games** narrows it.
 - **Moneyline:** choose a date, then select winners or use the predicted winners.
   Choices are saved in that browser and lock at game start.
+- **Accuracy:** compare every saved forecast, including unbet predictions.
+- **WNBA / Props / Ladder:** restored boards and shared-ledger controls. Props
+  includes Best Bets, full projections, Matchup Lab and detailed accuracy.
 - **NFL / NCAAF / MLB:** full model detail, simulator, source health and existing
   qualification rules.
 - **Ledger:** reconnect your existing Google Sheet using its existing setup.
   A different account/domain has different browser storage. Do not clear the
   old browser's saved data before exporting or recovering anything you need.
 
-The all-model schedule runs every three hours. Football gets extra hourly
+Ticket/alert collection runs twice each hour. The all-model schedule runs every three hours. Football gets extra hourly
 refreshes at :53 during 15:00–23:59 UTC on Thursday through Sunday. GitHub cron
 is best-effort; this is not a live in-game betting feed. Manually refresh before
 using a slate if the source status is stale.
 
 ## 5. Check the installation
 
-Confirm that all eight hub tabs open, each recovered sport has a recent source
+Confirm that all twelve hub tabs open, each recovered sport has a recent source
 timestamp, and the date matches the games you want. Check at least one matchup
 against ESPN and your actual sportsbook's current price. A current winner
 prediction is not a claim that any offered moneyline has positive value.
 
-If a build fails, open its first failing step. It deliberately stops before
-publishing unverified replacement data. The previous successful site remains.
+If a release check fails, publication stops. A failed upstream model refresh
+retains its saved data and original timestamp; inspect the warning and source
+health before using that board.
 If a source commit lands during a long build, that older build stops and the
 newer queued run publishes, preventing old code from replacing new code.
 

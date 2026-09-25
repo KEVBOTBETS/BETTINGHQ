@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import gzip
+import io
 import json
 import time
 import urllib.error
@@ -16,6 +17,19 @@ def _unzip(raw: bytes) -> bytes:
 
 class ProviderError(RuntimeError):
     """A provider failed without leaking credentials into the error message."""
+
+
+def response_text(response: Any, limit: int = 16_000_000) -> str:
+    """urllib does not decompress gzip responses, including ESPN error bodies."""
+    payload = response.read(limit + 1)
+    if len(payload) > limit:
+        raise ProviderError("Provider response exceeded the size limit")
+    if payload.startswith(b"\x1f\x8b"):
+        with gzip.GzipFile(fileobj=io.BytesIO(payload)) as stream:
+            payload = stream.read(limit + 1)
+        if len(payload) > limit:
+            raise ProviderError("Decoded provider response exceeded the size limit")
+    return payload.decode("utf-8")
 
 
 class JsonClient:
@@ -44,7 +58,7 @@ class JsonClient:
                         value = response.headers.get(header)
                         if value is not None:
                             self.quota[header] = str(value)
-                    return json.loads(_unzip(response.read()).decode("utf-8"))
+                    return json.loads(response_text(response))
             except urllib.error.HTTPError as exc:
                 body = ""
                 try:

@@ -10,28 +10,7 @@ SECONDARY_URL = "https://api.the-odds-api.com/v4"
 PROP_PREFIXES = ("player_", "batter_", "pitcher_")
 
 
-NFL_MARKETS = {
-    "player_pass_yds": "Passing yards",
-    "player_pass_tds": "Passing touchdowns",
-    "player_pass_attempts": "Pass attempts",
-    "player_pass_completions": "Pass completions",
-    "player_pass_interceptions": "Pass interceptions",
-    "player_rush_yds": "Rushing yards",
-    "player_rush_attempts": "Rush attempts",
-    "player_rush_tds": "Rushing touchdowns",
-    "player_receptions": "Receptions",
-    "player_reception_yds": "Receiving yards",
-    "player_reception_tds": "Receiving touchdowns",
-    "player_targets": "Targets",
-    "player_anytime_td": "Anytime touchdown",
-    "player_longest_pass_completion": "Longest pass",
-    "player_longest_rush": "Longest rush",
-    "player_longest_reception": "Longest reception",
-    "player_field_goals": "Field goals made",
-    "player_kicking_points": "Kicking points",
-    "player_tackles_assists": "Tackles + assists",
-    "player_sacks": "Sacks",
-}
+NFL_MARKETS = {'player_pass_yds': 'Passing yards', 'player_pass_tds': 'Passing touchdowns', 'player_pass_attempts': 'Pass attempts', 'player_pass_completions': 'Pass completions', 'player_pass_interceptions': 'Pass interceptions', 'player_rush_yds': 'Rushing yards', 'player_rush_attempts': 'Rush attempts', 'player_rush_tds': 'Rushing touchdowns', 'player_pass_rush_yds': 'Pass + rush yards', 'player_receptions': 'Receptions', 'player_reception_yds': 'Receiving yards', 'player_reception_tds': 'Receiving touchdowns', 'player_rush_reception_yds': 'Rush + receiving yards', 'player_pass_rush_reception_yds': 'Pass + rush + receiving yards', 'player_rush_reception_tds': 'Rush + receiving touchdowns', 'player_pass_rush_reception_tds': 'Pass + rush + receiving touchdowns', 'player_targets': 'Targets', 'player_tds_over': 'Touchdowns scored', 'player_anytime_td': 'Anytime touchdown', 'player_pass_longest_completion': 'Longest pass', 'player_longest_pass_completion': 'Longest pass', 'player_rush_longest': 'Longest rush', 'player_longest_rush': 'Longest rush', 'player_reception_longest': 'Longest reception', 'player_longest_reception': 'Longest reception', 'player_field_goals': 'Field goals made', 'player_pats': 'Extra points made', 'player_kicking_points': 'Kicking points', 'player_solo_tackles': 'Solo tackles', 'player_tackles_assists': 'Tackles + assists', 'player_sacks': 'Sacks'}
 NFL_MARKET_PRIORITY = {market: index for index, market in enumerate(NFL_MARKETS)}
 
 

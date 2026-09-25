@@ -1,0 +1,179 @@
+{
+  "bookmakers": {
+    "mode": "best_ontario_regulated",
+    "ontario_verified_as_of": "2026-09-01",
+    "ontario_registry": "https://igamingontario.ca/en/player/regulated-igaming-market",
+    "ontario_regulated": {
+      "BET99": [
+        "BET99",
+        "BET99 (CA - ON)",
+        "bet99_ca_on"
+      ],
+      "Betano": [
+        "Betano",
+        "Betano (CA - ON)",
+        "betano_ca_on"
+      ],
+      "BetMGM": [
+        "BetMGM",
+        "BetMGM (CA - ON)",
+        "betmgm_ca_on"
+      ],
+      "BetRivers": [
+        "BetRivers",
+        "BetRivers (CA - ON)",
+        "betrivers_ca_on"
+      ],
+      "DraftKings": [
+        "DraftKings",
+        "DraftKings (CA - ON)"
+      ],
+      "FanDuel": [
+        "FanDuel",
+        "FanDuel (CA - ON)"
+      ],
+      "PointsBet": [
+        "PointsBet",
+        "PointsBet (CA - ON)",
+        "pointsbetca"
+      ],
+      "PROLINE": [
+        "PROLINE",
+        "PROLINE (CA - ON)",
+        "proline_ca_on"
+      ],
+      "Sports Interaction": [
+        "Sports Interaction",
+        "Sports Interaction (CA - ON)",
+        "sportsinteraction_ca_on"
+      ],
+      "bet365": [
+        "bet365",
+        "Bet365",
+        "bet365 (CA - ON)"
+      ],
+      "Caesars": [
+        "Caesars",
+        "Caesars Sportsbook",
+        "Caesars (CA - ON)"
+      ],
+      "Fanatics Sportsbook": [
+        "Fanatics Sportsbook",
+        "Fanatics",
+        "Fanatics (CA - ON)"
+      ],
+      "Hard Rock Bet": [
+        "Hard Rock Bet",
+        "Hard Rock Bet (CA - ON)"
+      ],
+      "theScore Bet": [
+        "theScore Bet",
+        "TheScore Bet",
+        "theScore Bet (CA - ON)"
+      ],
+      "TonyBet": [
+        "TonyBet",
+        "TonyBet (CA - ON)"
+      ],
+      "ToonieBet": [
+        "ToonieBet",
+        "Tooniebet",
+        "ToonieBet (CA - ON)"
+      ]
+    },
+    "primary_consensus": [
+      "DraftKings",
+      "FanDuel",
+      "BetMGM"
+    ],
+    "secondary_consensus": [
+      "bet99_ca_on",
+      "betano_ca_on",
+      "betmgm_ca_on",
+      "betrivers_ca_on",
+      "pointsbetca",
+      "proline_ca_on",
+      "sportsinteraction_ca_on"
+    ]
+  },
+  "sports": {
+    "NFL": {
+      "primary_sport": "american-football",
+      "league_aliases": [
+        "nfl",
+        "national-football-league"
+      ],
+      "secondary_sport": "americanfootball_nfl",
+      "espn_path": "football/nfl"
+    }
+  },
+  "projection_model": {
+    "max_odds_age_hours": 12,
+    "minimum_samples": 4,
+    "good_minimum_samples": 5,
+    "best_minimum_samples": 7,
+    "full_sample_size": 8,
+    "maximum_samples": 8,
+    "maximum_rows": 1600,
+    "maximum_projection_rows": 7500,
+    "min_external_books": 1,
+    "minimum_confidence": 0.45,
+    "good_minimum_confidence": 0.52,
+    "best_minimum_confidence": 0.62,
+    "maximum_projection_weight": 0.55,
+    "prior_season_weight": 0.65,
+    "current_season_full_weight_games": 4,
+    "defense_weight": 0.4,
+    "defense_max_adjustment": 0.12,
+    "defense_prior_season_weight": 0.55,
+    "defense_current_season_full_weight_games": 4,
+    "volatile_market_weight": 0.78,
+    "longest_market_weight": 0.7,
+    "volatile_minimum_samples": 6,
+    "soft_raw_market_gap": 0.18,
+    "max_raw_market_gap": 0.25,
+    "raw_gap_stake_multiplier": 0.5,
+    "lean_edge": 0.025,
+    "good_edge": 0.05,
+    "best_edge": 0.08,
+    "lean_price_ev": 0.015,
+    "good_price_ev": 0.03,
+    "best_price_ev": 0.055,
+    "edge_ceiling": 0.1,
+    "price_ev_ceiling": 0.12,
+    "min_price": -175,
+    "max_price": 300,
+    "nfl_touchdown_max_price": 450,
+    "best_min_price": -160,
+    "best_max_price": 200,
+    "bankroll": 500,
+    "kelly_fraction": 0.15,
+    "minimum_stake": 1,
+    "max_stake": 50,
+    "max_open_exposure": 0.35,
+    "max_plays_per_slate": 8,
+    "max_props_per_player": 2,
+    "single_side_edge_reserve": 0.015
+  },
+  "daily_parlays": {
+    "timezone": "America/Toronto",
+    "minimum_samples": 6,
+    "minimum_confidence": 0.52,
+    "minimum_model_probability": 0.22,
+    "minimum_value_ratio": 0.9,
+    "maximum_projection_gap": 0.25,
+    "maximum_candidate_legs": 28,
+    "maximum_legs_per_game": 4,
+    "minimum_market_groups": 2,
+    "maximum_legs_per_market_group": 2,
+    "minimum_parlay_value_ratio": 0.75,
+    "same_game_pair_haircut": 0.9
+  },
+  "fetch": {
+    "lookahead_days": 21,
+    "primary_event_limit": 500,
+    "secondary_max_markets_per_event": 32,
+    "espn_games_per_team": 8,
+    "espn_max_completed_games": 144
+  }
+}

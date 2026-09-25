@@ -1,0 +1,10 @@
+import assert from 'node:assert/strict';
+import {createRequire} from 'node:module';
+const require=createRequire(import.meta.url),A=require('../site/sync-adapter.js'),BS=require('../site/betsync.js'),L=require('../site/ledger.js');
+const entry=L.entryFrom({game_id:'1',market:'ATS',side:'away',pick:'SEA +3',line:3,price:-110,date:'2026-09-17',model_prob:.55,stake:2,matchup:'SEA @ LV'});
+const row=BS.canonical(A.toCanonical(entry));assert.equal(row.app,'wnba-lab');assert.equal(row.status,'Pending');assert.equal(row.id,'wnba-lab:1|ATS|away');
+const settled={...row,status:'Win',pnl:null,stake:5,closing_price:-120};const native=A.fromCanonical(settled,BS.impliedPnl(settled));assert.equal(native.result,'Win');assert.equal(native.stake,5);assert.equal(native.profit,4.55);assert.equal(native.closing_price,-120);
+assert.equal(A.toCanonical(native).pnl,4.55);assert.equal(A.fromCanonical({...row,native:null},null).game_id,'1');
+assert.equal(BS.bankroll([settled,{id:'other',app:'mlb-edge',status:'Loss',pnl:-10,stake:10,price:-110}],100).current,94.55);
+assert.equal(A.fromCanonical({...settled,status:'Void'},0).result,'Void');
+console.log('WNBA manual wager mapping and shared bankroll checks passed.');

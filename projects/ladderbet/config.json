@@ -1,0 +1,38 @@
+{
+  "source": {
+    "provider": "ESPN public scoreboard (no API key)",
+    "note": "Undocumented and unsupported. Can change without warning."
+  },
+  "selection": {
+    "min_decimal": 1.4,
+    "max_decimal": 1.667,
+    "_comment_odds": "1.40 = -250, 1.667 = -150. This wider favourite-only window produces more selectable ladder options without dropping below -150.",
+    "horizon_hours": 48,
+    "max_hold": 0.08,
+    "leagues": [
+      "mlb",
+      "nfl",
+      "ncaaf",
+      "wnba",
+      "nba",
+      "nhl",
+      "epl",
+      "mls"
+    ],
+    "_comment_leagues": "Any of: nfl ncaaf mlb nba wnba ncaab nhl mls epl ucl atp wta. Tennis odds on ESPN are sparse; golf is outrights only, so neither reliably produces a -150/-200 moneyline."
+  },
+  "ladder": {
+    "base_stake": 5.0,
+    "max_rung": 10,
+    "currency": "CAD",
+    "_comment_max_rung": "Cash out after this many straight wins. At 10 rungs and ~1.55 odds the final stake is around $400, so max_stake is set as a backstop.",
+    "stake_increment": 0.01,
+    "max_stake": 400,
+    "_comment_stake": "stake_increment rounds stakes DOWN so you never overstake. 0.01 keeps compounding exact; 0.25 or 1.00 gives tidier numbers but leaks value at every rung.",
+    "one_bet_per_day": false,
+    "stop_loss_busts": 8,
+    "stop_loss_days": 30,
+    "timezone": "America/Toronto",
+    "_comment_guards": "Multiple rungs may be played in one day, but only one bet may be pending at a time. stop_loss_busts halts the ladder after N busted runs in stop_loss_days; `ladder resume` restarts it deliberately."
+  }
+}

@@ -1,15 +1,13 @@
-"""Grade published prop legs against the real box score, then measure the model.
+"""Freeze every published pregame prop leg and grade final box-score outcomes.
 
-Every refresh writes a snapshot of the legs the site actually showed (the parlay
-legs and the top of each cheat sheet). Once those games are final this module
-reads ESPN's box score, marks each leg win/loss/push, and turns the record into a
-calibration number: if legs the model calls 60% only land 48%, the model is told
-to stop claiming 60%.
+Exact-line audits and one preferred side per event/player/market stay separate.
+Calibration is diagnostic; research prices never produce wager returns.
 """
 from __future__ import annotations
 
 import datetime as dt
 import json
+import hashlib
 import re
 from pathlib import Path
 from typing import Any
@@ -38,7 +36,7 @@ def market_values(summary: dict[str, Any]) -> dict[tuple[str, str], float]:
             names = stat_group.get("keys") or stat_group.get("names") or stat_group.get("labels") or []
             for athlete_row in stat_group.get("athletes") or []:
                 player = str((athlete_row.get("athlete") or {}).get("displayName") or "")
-                if not player:
+                if not player or athlete_row.get("didNotPlay") or athlete_row.get("inactive"):
                     continue
                 key = name_key(player)
                 for name, raw in zip(names, athlete_row.get("stats") or []):
@@ -67,7 +65,7 @@ def grade_leg(leg: dict[str, Any], values: dict[tuple[str, str], float]) -> tupl
     actual = float(values[key])
     side = str(leg.get("side"))
     if str(leg.get("market")) == "Anytime touchdown":
-        return ("Win" if actual >= 1 else "Loss"), actual
+        return ("Win" if (actual >= 1) == (side != "no") else "Loss"), actual
     line = leg.get("line")
     if line is None:
         return None
@@ -141,80 +139,116 @@ def accuracy_from(rows: list[dict[str, Any]]) -> dict[str, Any]:
     }
 
 
+def instant(value):
+    try:
+        parsed = dt.datetime.fromisoformat(str(value).replace("Z", "+00:00"))
+        return parsed.astimezone(dt.timezone.utc) if parsed.tzinfo else None
+    except (ValueError, TypeError):
+        return None
+
+
+def identity(leg):
+    """One immutable outcome per event/player/market/side/exact line."""
+    fields = [str(leg.get(k) or "") for k in ("event_id", "player", "market", "side")]
+    line = leg.get("line")
+    fields.append(format(float(line), ".12g") if isinstance(line, (int, float)) else str(line))
+    return hashlib.sha256("|".join(fields).encode()).hexdigest()[:24]
+
+
 class Grader:
     def __init__(self, root: Path, settings: dict[str, Any]) -> None:
-        self.root = Path(root)
-        self.settings = settings
+        self.root, self.settings = Path(root), settings
         self.client = JsonClient("ESPN box score", SITE_URL, timeout=20)
-        self.history = self.root / "site" / "data" / "history"
-        self.graded_path = self.root / "site" / "data" / "graded.json"
-        self.accuracy_path = self.root / "site" / "data" / "accuracy.json"
+        self.history = self.root / "site/data/history"
+        self.graded_path = self.root / "site/data/graded.json"
+        self.accuracy_path = self.root / "site/data/leg-accuracy.json"
+        self.state_path = self.root / "state/leg_history.json"
 
-    def snapshot(self, legs: list[dict[str, Any]], day: str) -> Path:
-        """Record what the site is showing, so it can be graded later."""
-        self.history.mkdir(parents=True, exist_ok=True)
-        keep = [
-            {
-                "id": leg.get("id"), "event_id": leg.get("event_id"), "player": leg.get("player"),
-                "market": leg.get("market"), "side": leg.get("side"), "line": leg.get("line"),
-                "model_prob": leg.get("model_prob"), "price_american": leg.get("price_american"),
-                "line_source": leg.get("line_source"), "start_time": leg.get("start_time"),
-                "matchup": leg.get("matchup"),
-            }
-            for leg in legs
-        ]
-        path = self.history / f"{day}.json"
-        path.write_text(json.dumps({"day": day, "legs": keep}, indent=1) + "\n")
-        return path
+    def _read(self, path, fallback):
+        # Corrupt history must stop a refresh, not silently reset its accuracy.
+        return json.loads(path.read_text()) if path.exists() else fallback
 
-    def _read(self, path: Path, fallback: Any) -> Any:
-        try:
-            return json.loads(path.read_text())
-        except (OSError, json.JSONDecodeError):
-            return fallback
+    def _save(self, path, value):
+        path.parent.mkdir(parents=True, exist_ok=True)
+        temporary = path.with_suffix(path.suffix + ".tmp")
+        temporary.write_text(json.dumps(value, indent=1, allow_nan=False) + "\n")
+        temporary.replace(path)
 
-    def run(self, max_days: int = 21) -> dict[str, Any]:
-        """Grade any snapshot leg whose game has finished, then refresh the accuracy file."""
-        graded: list[dict[str, Any]] = self._read(self.graded_path, [])
-        done = {(row.get("day"), row.get("id")) for row in graded}
-        summaries: dict[str, dict[tuple[str, str], float] | None] = {}
-        days = sorted(path for path in self.history.glob("*.json"))[-max_days:]
-        now = dt.datetime.now(dt.timezone.utc).isoformat()
-        for path in days:
-            snapshot = self._read(path, {})
-            day = str(snapshot.get("day") or path.stem)
-            for leg in snapshot.get("legs") or []:
-                if (day, leg.get("id")) in done:
-                    continue
-                if str(leg.get("start_time") or "") > now:
-                    continue
-                event_id = str(leg.get("event_id") or "")
-                if not event_id.isdigit():
-                    continue
-                if event_id not in summaries:
-                    try:
-                        summary = self.client.get("/summary", {"event": event_id}, retries=1)
-                    except ProviderError:
-                        summary = None
-                    status = (((summary or {}).get("header") or {}).get("competitions") or [{}])[0]
-                    completed = bool(((status.get("status") or {}).get("type") or {}).get("completed"))
-                    summaries[event_id] = market_values(summary) if (summary and completed) else None
-                values = summaries[event_id]
-                if not values:
-                    continue
+    def _state(self):
+        state = self._read(self.state_path, {"schema": 2, "records": {}, "legacy_excluded": 0})
+        if not state.get("legacy_checked"):
+            # Daily legacy files lack a trustworthy capture time. Keep original
+            # files untouched and disclose exclusion instead of inventing one.
+            old = self._read(self.graded_path, [])
+            state["legacy_excluded"] = len(old)
+            if old:
+                archive = self.root / "state/legacy_leg_results.json"
+                if not archive.exists(): self._save(archive, old)
+            state["legacy_checked"] = True
+        return state
+
+    def snapshot(self, legs, day=None, now=None):
+        now = instant(now) if now is not None else dt.datetime.now(dt.timezone.utc)
+        if now is None: raise ValueError("Snapshot time must include a timezone")
+        state = self._state()
+        chosen = {(r["event_id"], r["player"], r["market"]) for r in state["records"].values() if r.get("selected")}
+        valid = [r for r in legs if isinstance(r.get("model_prob"), (int, float)) and 0 <= r["model_prob"] <= 1]
+        for leg in sorted(valid, key=lambda r: -r["model_prob"]):
+            start, captured = instant(leg.get("start_time")), now
+            probability = leg.get("model_prob")
+            event = str(leg.get("result_event_id") or leg.get("event_id") or "")
+            if not start or start <= captured or not event.isdigit(): continue
+            if not isinstance(probability, (int, float)) or not 0 <= probability <= 1: continue
+            row = {k: leg.get(k) for k in ("player", "team", "market", "side", "line", "model_prob", "price_american", "price_source", "line_source", "book", "start_time", "matchup", "tier", "projection", "samples", "confidence", "updated_at")}
+            row.update(event_id=event)
+            key = identity(row)
+            if key in state["records"]: continue
+            group = (event, row["player"], row["market"])
+            row.update(id=key, captured_at=captured.isoformat(), version="2026-09-23-frozen-v1", result="Pending", selected=group not in chosen)
+            chosen.add(group)
+            state["records"][key] = row
+        self._save(self.state_path, state)
+        return self.state_path
+
+    def run(self, max_days=None, now=None):
+        now = instant(now) if now is not None else dt.datetime.now(dt.timezone.utc)
+        state = self._state()
+        summaries = {}
+        for leg in state["records"].values():
+            if leg.get("result") != "Pending": continue
+            start, captured = instant(leg.get("start_time")), instant(leg.get("captured_at"))
+            if not start or not captured or captured >= start or captured > now or start > now: continue
+            event = leg["event_id"]
+            if event not in summaries:
+                try:
+                    summary = self.client.get("/summary", {"event": event}, retries=1)
+                    comp = ((summary.get("header") or {}).get("competitions") or [{}])[0]
+                    status = (comp.get("status") or {}).get("type") or {}
+                    summaries[event] = "VOID" if "CANCEL" in str(status.get("name", "")).upper() else market_values(summary) if status.get("completed") else None
+                except ProviderError:
+                    summaries[event] = None
+            values = summaries[event]
+            if values == "VOID":
+                leg.update(result="Void", graded_at=now.isoformat())
+            elif values:
                 outcome = grade_leg(leg, values)
-                if not outcome:
-                    continue
-                result, actual = outcome
-                graded.append({**leg, "day": day, "result": result, "actual": actual, "graded_at": now})
-                done.add((day, leg.get("id")))
-        accuracy = accuracy_from(graded)
-        self.graded_path.write_text(json.dumps(graded[-5000:], indent=1) + "\n")
-        self.accuracy_path.write_text(json.dumps(accuracy, indent=1) + "\n")
+                if outcome: leg.update(result=outcome[0], actual=outcome[1], graded_at=now.isoformat())
+        rows = list(state["records"].values())
+        preferred = [r for r in rows if r.get("selected")]
+        accuracy = accuracy_from(preferred)
+        # No online feedback fitted on repeatedly corrected outputs. Keep
+        # calibration diagnostic until a held-out, versioned fit is validated.
+        accuracy.update(calibration_active=False, calibration_shrink=1.0,
+                        calibration_note="Calibration is diagnostic only; no automatic refit.",
+                        total_logged=len(rows), pending=sum(r["result"] == "Pending" for r in preferred),
+                        independent_events=len({r["event_id"] for r in preferred}),
+                        legacy_excluded=state.get("legacy_excluded", 0),
+                        method="One first pregame preferred leg per event/player/market. Full side/line audit retained separately. No wager ROI at estimated prices.")
+        self._save(self.state_path, state)
+        self._save(self.graded_path, [r for r in rows if r["result"] != "Pending"])
+        self._save(self.root / "site/data/leg-history.json", {"schema": 2, "records": rows})
+        self._save(self.accuracy_path, accuracy)
         return accuracy
 
-    def calibration(self) -> float:
-        accuracy = self._read(self.accuracy_path, {})
-        if not accuracy.get("calibration_active"):
-            return 1.0
-        return float(accuracy.get("calibration_shrink") or 1.0)
+    def calibration(self):
+        return 1.0

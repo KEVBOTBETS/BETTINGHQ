@@ -15,10 +15,11 @@ on:
       sport:
         description: Models to refresh
         type: choice
-        options: [all, football, mlb]
+        options: [all, football, mlb, wnba, props, ladder, archive]
         default: all
   schedule:
     - cron: '23 */3 * * *'
+    - cron: '7,37 * * * *'
     - cron: '53 15-23 * * 0,4,5,6'
 
 permissions:
@@ -62,6 +63,7 @@ jobs:
         run: |
           sport="$REQUESTED_SPORT"
           if [ "$EVENT_SCHEDULE" = '53 15-23 * * 0,4,5,6' ]; then sport=football; fi
+          if [ "$EVENT_SCHEDULE" = '7,37 * * * *' ]; then sport=archive; fi
           python tools/refresh.py --sport "$sport"
           node projects/mlb-edge/tests/test_sim.mjs projects/mlb-edge/docs/data
           python -m unittest discover -s tests

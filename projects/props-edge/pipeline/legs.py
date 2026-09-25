@@ -187,7 +187,7 @@ def legs_from_projections(
         if hurt and hurt.get("blocking") == "yes":
             continue
         market = projection.market
-        if priced_keys and (projection.sport, _norm(projection.player), _norm(market)) in priced_keys:
+        if priced_keys and (str(projection.event_id), _norm(projection.player), _norm(market)) in priced_keys:
             continue
         candidates: list[tuple[str, float, float]] = []  # side, line, probability
         rules = MARKET_RULES.get(market)
@@ -227,7 +227,7 @@ def legs_from_projections(
             out.append(
                 _leg(
                     sport="NFL",
-                    event_id=str(projection.start_time or "") + "|" + _norm(projection.matchup),
+                    event_id=str(projection.event_id or ""),
                     matchup=projection.matchup,
                     start_time=projection.start_time,
                     player=projection.player,
@@ -282,8 +282,8 @@ def legs_from_lines(
         row for row in projections
         if row.sport == "NFL" and int(row.samples) >= int(cfg["min_samples"])
     ]
-    index = {(_norm(row.player), _norm(row.market)): row for row in usable}
-    loose = {(_name_key(row.player), _norm(row.market)): row for row in usable}
+    index = {(str(row.event_id), _norm(row.player), _norm(row.market)): row for row in usable}
+    loose = {(str(row.event_id), _name_key(row.player), _norm(row.market)): row for row in usable}
     out: list[dict[str, Any]] = []
     seen: set[tuple[str, str, str, Any]] = set()
     for row in lines:
@@ -291,8 +291,8 @@ def legs_from_lines(
         hurt = _injury(str(row.get("player") or ""), injuries)
         if hurt and hurt.get("blocking") == "yes":
             continue
-        projection = index.get((_norm(str(row.get("player"))), _norm(market))) or loose.get(
-            (_name_key(str(row.get("player"))), _norm(market))
+        projection = index.get((str(row.get("event_id")), _norm(str(row.get("player"))), _norm(market))) or loose.get(
+            (str(row.get("event_id")), _name_key(str(row.get("player"))), _norm(market))
         )
         if projection is None:
             continue
@@ -319,7 +319,7 @@ def legs_from_lines(
             out.append(
                 _leg(
                     sport="NFL",
-                    event_id=str(row.get("event_id") or ""),
+                    event_id=str(row.get("result_event_id") or row.get("event_id") or ""),
                     matchup=projection.matchup or row.get("matchup") or "",
                     start_time=row.get("start_time") or projection.start_time,
                     player=row["player"],
@@ -371,11 +371,11 @@ def legs_from_board(board: list[dict[str, Any]], settings: dict[str, Any]) -> li
         out.append(
             _leg(
                 sport="NFL",
-                event_id=str(row.get("event_id") or ""),
+                event_id=str(row.get("result_event_id") or row.get("event_id") or ""),
                 matchup=row.get("matchup") or "",
                 start_time=row.get("start_time") or "",
                 player=row.get("player") or "",
-                team=row.get("team") or "",
+                team=row.get("result_team") or row.get("team") or "",
                 market=row.get("market") or "",
                 side=row.get("side") or "",
                 line=row.get("line"),
@@ -387,6 +387,9 @@ def legs_from_board(board: list[dict[str, Any]], settings: dict[str, Any]) -> li
                 model_prob=round(float(probability), 4),
                 fair_american=decimal_to_american(1 / float(probability)),
                 edge=row.get("edge"),
+                action_edge=row.get("action_edge"),
+                updated_at=row.get("updated_at"),
+                held=bool(row.get("held")),
                 samples=int(row.get("projection_samples") or 0),
                 projection=row.get("projection"),
                 recent=[],
@@ -411,11 +414,11 @@ def build_legs(
 ) -> list[dict[str, Any]]:
     """Priced legs first, then the book's own lines, then the model's own lines."""
     priced = legs_from_board(board, settings)
-    covered = {("NFL", _norm(row["player"]), _norm(row["market"])) for row in priced}
+    covered = {(str(row["event_id"]), _norm(row["player"]), _norm(row["market"])) for row in priced}
     booked = [
         leg for leg in legs_from_lines(lines or [], projections, settings, injuries, shrink)
-        if ("NFL", _norm(leg["player"]), _norm(leg["market"])) not in covered
+        if (str(leg["event_id"]), _norm(leg["player"]), _norm(leg["market"])) not in covered
     ]
-    covered |= {("NFL", _norm(leg["player"]), _norm(leg["market"])) for leg in booked}
+    covered |= {(str(leg["event_id"]), _norm(leg["player"]), _norm(leg["market"])) for leg in booked}
     modelled = legs_from_projections(projections, settings, covered, injuries, shrink)
     return priced + booked + modelled

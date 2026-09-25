@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="robots" content="noindex,nofollow">
+  <title>WNBA Edge Desk</title>
+  <meta name="description" content="Automatic WNBA betting model with calibrated projections, live prices, edges, simulator, ledger and model accuracy tracking.">
+  <meta property="og:title" content="WNBA Edge Lab">
+  <meta property="og:description" content="Calibrated WNBA projections, live market prices, conservative edges, simulator and ledger.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="../wnba-edge-lab/og.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="wrap">
+    <header class="top">
+      <div class="brand">
+        <h1>WNBA EDGE DESK</h1>
+        <span class="sub">2026 · CALIBRATED MODEL</span>
+      </div>
+      <div class="datenav">
+        <button id="prevDate" type="button" title="Previous slate">◀</button>
+        <span class="cur" id="curDate">—</span>
+        <button id="nextDate" type="button" title="Next slate">▶</button>
+        <button id="today" type="button">Today</button>
+        <button id="theme" type="button" title="Toggle theme" aria-label="Toggle colour theme">◐</button>
+      </div>
+      <div class="stamp" id="stamp">loading…</div>
+    </header>
+
+    <div class="health" id="health" role="status" aria-live="polite" hidden></div>
+    <div class="kpis" id="kpis"></div>
+    <div class="week" id="week" aria-label="Available slate dates"></div>
+    <nav class="tabs" id="tabs" aria-label="WNBA model views"></nav>
+    <main id="view"><div class="empty">Loading WNBA slate…</div></main>
+
+    <footer>
+      Walk-forward calibrated on completed 2026 games. Data: ESPN schedule, box scores,
+      matchup context and injuries; DraftKings prices through ESPN. Model output only —
+      not advice, and nothing here is a guarantee.
+    </footer>
+  </div>
+  <script src="ledger.js"></script>
+  <script src="eligibility.js"></script>
+  <script src="feed.js"></script>
+<script src="app.js"></script>
+<script src="model-accuracy.js"></script>
+<script src="betsync.js"></script>
+<script src="sync-adapter.js"></script>
+<script src="betsync-ui.js"></script>
+</body>
+</html>

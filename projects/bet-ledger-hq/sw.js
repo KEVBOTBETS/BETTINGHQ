@@ -1,5 +1,5 @@
 /* Only static code and artwork are cached. Live and private data always use the network. */
-const CACHE='kevbot-shell-portable-20260919-4',BASE=new URL('./',self.location.href);
+const CACHE='kevbot-shell-restored-20260923-1',BASE=new URL('./',self.location.href);
 const FILES=['./','index.html','hub.css','hub-extras.css','hub.js','pwa.js','offline.html','manifest.webmanifest','icon.svg','icon-192.png','icon-512.png','apple-touch-icon.png','kevbot-logo.jpg','football.html','football-core.js','football.js','moneyline.html','moneyline.css','moneyline-core.js','moneyline.js','moneyline-card.js','today.html','today.css','today-extras.css','today-core.js','today.js','ticket-core.js','ticket-renderer.js','ticket-store.js','betsync.js','archive.html','archive.js','alerts-core.js','alerts-view.js','ledger.html','hq.js','ledger-details.js'];
 const ALLOWED=new Set(FILES.map(f=>new URL(f,BASE).href));
 for(const file of ['pick-history-view.js','ledger-recovery.js','ledger-recovery-view.js']){FILES.push(file);ALLOWED.add(new URL(file,BASE).href);}

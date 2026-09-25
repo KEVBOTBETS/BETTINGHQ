@@ -23,7 +23,7 @@ def main():
     for name in ['assets', 'data/tickets']:
         if (hub / name).exists(): shutil.copytree(hub / name, target / name)
     subprocess.run([sys.executable, 'tools/prepare_public_site.py'], cwd=PROJECTS/'nfl-edge-lab', check=True)
-    for repo, folder in [('nfl-edge-lab','_public_site'),('ncaaf-edge-lab','site'),('mlb-edge','docs'),('props-edge','site')]:
+    for repo, folder in [('nfl-edge-lab','_public_site'),('ncaaf-edge-lab','site'),('mlb-edge','docs'),('props-edge','site'),('wnba-edge-lab','site'),('ladderbet','docs')]:
         dest=OUT/repo
         shutil.copytree(PROJECTS/repo/folder, dest,
                         ignore=shutil.ignore_patterns('__pycache__','.DS_Store'))
@@ -34,6 +34,7 @@ def main():
         if (data/'summary.json').exists():
             (data/'summary.json').write_text(json.dumps(dict(starting_bankroll=None,
                 current_bankroll=None,wins=0,losses=0,pushes=0,settled=0,pending=0,roi=None,pnl=None))+'\n')
+    subprocess.run([sys.executable, 'tools/public_dashboard.py', str(OUT/'ladderbet/index.html')], cwd=PROJECTS/'ladderbet', check=True)
     (OUT/'.nojekyll').touch()
     (OUT/'index.html').write_text('''<!doctype html><html lang="en"><meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1"><title>KEVBOTBETS</title>

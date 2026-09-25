@@ -20,7 +20,12 @@ def run(project,command):
 run('nfl-edge-lab',[sys.executable,'-m','unittest','discover','-s','tests'])
 run('ncaaf-edge-lab',[sys.executable,'-m','tests.test_offline'])
 run('ncaaf-edge-lab',[sys.executable,'-m','unittest','tests.test_accuracy','tests.test_schedule','tests.test_context','tests.test_privacy'])
-run('props-edge',[sys.executable,'-m','unittest','tests.test_offline'])
+run('props-edge',[sys.executable,'-m','unittest','discover','-s','tests'])
+run('wnba-edge-lab',[sys.executable,'-m','unittest','discover','-s','tests'])
+run('ladderbet',[sys.executable,'-m','pytest','-q','tests'])
+for repo in ['props-edge','wnba-edge-lab','ladderbet']:
+    for test in sorted((ROOT/'projects'/repo/'tests').glob('test_*.mjs')):
+        run(repo,['node','tests/'+test.name])
 run('mlb-edge',[sys.executable,'-m','tests.test_pipeline'])
 run('mlb-edge',[sys.executable,'-m','unittest','tests.test_prediction_freeze'])
 run('mlb-edge',[sys.executable,'-m','tests.test_config'])
@@ -29,7 +34,7 @@ for repo in ['nfl-edge-lab','ncaaf-edge-lab','mlb-edge']:
     for file in ['test_ledger.mjs','test_sync.mjs','test_staking.mjs','test_matchups.js','test_simulator.js','test_schedule.mjs','test_sim_gate.mjs']:
         if (ROOT/'projects'/repo/'tests'/file).exists():run(repo,['node','tests/'+file])
 run('mlb-edge',['node','tests/test_sim.mjs','docs/data'])
-for file in ['test_betsync.mjs','test_server.mjs','test_alerts_app.mjs','test_recovery_history.mjs','test_tickets.mjs','test_today.mjs','test_moneyline.mjs','test_football.mjs']:
+for file in ['test_betsync.mjs','test_server.mjs','test_alerts_app.mjs','test_recovery_history.mjs','test_tickets.mjs','test_today.mjs','test_moneyline.mjs','test_football.mjs','test_props_dom.mjs']:
     run('bet-ledger-hq',['node','tests/'+file])
 run('',[sys.executable,'tools/build_site.py'])
 run('',[sys.executable,'-m','unittest','discover','-s','tests'])
