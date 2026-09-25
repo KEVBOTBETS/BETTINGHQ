@@ -1,18 +1,140 @@
 {
- "legs": 1627,
- "settled": 0,
- "record": "0-0",
- "hit_rate": null,
- "average_predicted": null,
- "brier": null,
- "buckets": [],
- "by_market": {},
+ "legs": 1628,
+ "settled": 63,
+ "record": "34-29",
+ "hit_rate": 0.5397,
+ "average_predicted": 0.6205,
+ "brier": 0.2453,
+ "buckets": [
+  {
+   "from": 0.0,
+   "to": 0.35,
+   "legs": 3,
+   "predicted": 0.1916,
+   "actual": 0.3333
+  },
+  {
+   "from": 0.35,
+   "to": 0.45,
+   "legs": 1,
+   "predicted": 0.3505,
+   "actual": 0.0
+  },
+  {
+   "from": 0.45,
+   "to": 0.55,
+   "legs": 13,
+   "predicted": 0.5213,
+   "actual": 0.5385
+  },
+  {
+   "from": 0.55,
+   "to": 0.65,
+   "legs": 17,
+   "predicted": 0.5901,
+   "actual": 0.4118
+  },
+  {
+   "from": 0.65,
+   "to": 0.75,
+   "legs": 18,
+   "predicted": 0.704,
+   "actual": 0.6667
+  },
+  {
+   "from": 0.75,
+   "to": 1.01,
+   "legs": 11,
+   "predicted": 0.7899,
+   "actual": 0.6364
+  }
+ ],
+ "by_market": {
+  "Tackles + assists": {
+   "legs": 16,
+   "wins": 13,
+   "predicted": 0.7365,
+   "hit_rate": 0.8125
+  },
+  "Receptions": {
+   "legs": 8,
+   "wins": 1,
+   "predicted": 0.6449,
+   "hit_rate": 0.125
+  },
+  "Targets": {
+   "legs": 7,
+   "wins": 5,
+   "predicted": 0.716,
+   "hit_rate": 0.7143
+  },
+  "Rush attempts": {
+   "legs": 3,
+   "wins": 1,
+   "predicted": 0.6791,
+   "hit_rate": 0.3333
+  },
+  "Receiving yards": {
+   "legs": 11,
+   "wins": 6,
+   "predicted": 0.5889,
+   "hit_rate": 0.5455
+  },
+  "Rushing yards": {
+   "legs": 5,
+   "wins": 2,
+   "predicted": 0.5451,
+   "hit_rate": 0.4
+  },
+  "Passing touchdowns": {
+   "legs": 1,
+   "wins": 1,
+   "predicted": 0.5975,
+   "hit_rate": 1.0
+  },
+  "Pass completions": {
+   "legs": 1,
+   "wins": 0,
+   "predicted": 0.5774,
+   "hit_rate": 0.0
+  },
+  "Sacks": {
+   "legs": 2,
+   "wins": 0,
+   "predicted": 0.5533,
+   "hit_rate": 0.0
+  },
+  "Anytime touchdown": {
+   "legs": 6,
+   "wins": 3,
+   "predicted": 0.3341,
+   "hit_rate": 0.5
+  },
+  "Pass attempts": {
+   "legs": 1,
+   "wins": 0,
+   "predicted": 0.5501,
+   "hit_rate": 0.0
+  },
+  "Passing yards": {
+   "legs": 1,
+   "wins": 1,
+   "predicted": 0.546,
+   "hit_rate": 1.0
+  },
+  "Pass interceptions": {
+   "legs": 1,
+   "wins": 1,
+   "predicted": 0.5162,
+   "hit_rate": 1.0
+  }
+ },
  "calibration_shrink": 1.0,
  "calibration_active": false,
- "updated_at": "2026-09-25T01:16:21.533356+00:00",
+ "updated_at": "2026-09-25T03:40:32.593150+00:00",
  "calibration_note": "Calibration is diagnostic only; no automatic refit.",
- "total_logged": 6294,
- "pending": 1627,
+ "total_logged": 6383,
+ "pending": 1565,
  "independent_events": 17,
  "legacy_excluded": 17,
  "method": "One first pregame preferred leg per event/player/market. Full side/line audit retained separately. No wager ROI at estimated prices."
