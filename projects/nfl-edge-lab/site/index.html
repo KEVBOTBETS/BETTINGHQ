@@ -300,6 +300,7 @@ footer b{color:var(--ink-2)}
 
 <script src="ledger.js"></script>
 <script src="staking.js"></script>
+<script src="edge-visuals.js"></script>
 <script>
 "use strict";
 
@@ -362,6 +363,17 @@ const myLedgerSummary = () => L ? L.summarise(S.myLedger||[],ledgerStart()) : {s
 const stakeBankroll = () => Number(myLedgerSummary().current_bankroll||0);
 const suggestedStake = row => STAKING ? STAKING.suggestedStake(row,stakingSettings(),stakeBankroll(),(((S.meta||{}).settings||{}).model||{}).max_model_prob) : 0;
 const isTracked = row => L && (S.myLedger||[]).some(entry=>L.keyOf(entry)===L.keyOf(row));
+const EV = window.EdgeVisuals;
+/* Team objects (abbr, name, logo, colour) for any game id, from the richest feed available. */
+function teamsFor(gameId){
+  const d=(S.games_detail||[]).find(x=>String(x.game_id)===String(gameId));
+  if(d&&d.home&&d.away)return {away:d.away,home:d.home,neutral:d.neutral};
+  const g=(S.games||[]).find(x=>String(x.game_id)===String(gameId));
+  if(!g)return null;
+  return {away:{abbr:g.away,name:g.away_name,logo:g.away_logo,color:g.away_color},
+          home:{abbr:g.home,name:g.home_name,logo:g.home_logo,color:g.home_color},neutral:g.neutral};
+}
+const logoPair = gameId => { const t=EV&&teamsFor(gameId); return t?EV.pair(t.away,t.home):""; };
 
 function fmtDate(iso, opts){
   if(!iso) return "—";
@@ -477,7 +489,9 @@ function renderKPIs(){
     ["Bankroll", cur(s.current_bankroll), "from "+cur(s.starting_bankroll), posneg((s.current_bankroll||0)-(s.starting_bankroll||0))],
     ["Settled", s.settled||0, (s.pending||0)+" pending", ""],
     ["ROI", s.roi==null?"—":pct(s.roi), (s.settled||0)?cur(s.pnl)+" realized":"0-0-0", posneg(s.pnl)],
-    ["Edge ceiling", pct(maxEdge,1), "large raw gaps are compressed", "pos"],
+    (() => { const e=(m.early_plays||{}); return e.closed
+      ? ["Beat the close", pct(e.beat_close_pct,0), `${e.closed} locked plays closed · avg ${sgn(e.avg_clv_points,2)} pts`, e.beat_close_pct>=.5?"pos":"neg"]
+      : ["Edge ceiling", pct(maxEdge,1), "large raw gaps are compressed", "pos"]; })(),
   ];
   $("#kpis").innerHTML = k.map(([a,b,c,cls]) =>
     `<div class="kpi"><div class="k">${esc(a)}</div><div class="v ${cls||""}">${esc(b)}</div><div class="m">${esc(c)}</div></div>`
@@ -591,16 +605,24 @@ function gameCard(g, cand, plannedStake){
   const factorSum = (g.factors||[]).reduce((a,f)=>a+(f.points||0),0);
   const totalSum  = (g.total_factors||[]).reduce((a,f)=>a+(f.points||0),0);
 
-  const head = `<div class="card-top">
+  const head = EV ? `${EV.matchup(g.away, g.home, fmtDate(g.date,{weekday:"short",month:undefined,day:undefined}), {neutral:g.neutral})}
+    <div class="card-top" style="align-items:center">
+      <small style="color:var(--ink-3);font-size:11.5px;line-height:1.4">${esc(fmtDate(g.date))}${g.broadcast?" · "+esc(g.broadcast):""}${g.venue?" · "+esc(g.venue):""}</small>
+      ${tierChip(tier)}
+    </div>` : `<div class="card-top">
       <h3>${esc(g.matchup)}<small>${esc(fmtDate(g.date))}${g.broadcast?" · "+esc(g.broadcast):""}${g.venue?" · "+esc(g.venue):""}</small></h3>
       ${tierChip(tier)}
     </div>`;
+  const visuals = EV ? `<div class="ev-vis">
+      ${EV.winBar(g.away, g.home, g.p_home, {caption:"Model win chance, ties excluded"})}
+      ${EV.gauges(g.away, g.home, p)}</div>` : "";
 
   const pickBlock = cand ? `<div>
       <div class="bigpick">${esc(cand.pick)}<span>${price(cand.price)}</span></div>
       ${winChanceNote(cand)}
       ${cand.tier_note?`<div class="note" style="margin:8px 0 0;padding:8px 10px;font-size:12px">Why this tier: ${esc(cand.tier_note)}</div>`:""}
       ${cand.held?`<div class="note" style="margin:8px 0 0;padding:8px 10px;font-size:12px;border-left-color:var(--flag)">Priced, not staked yet — ${esc(cand.hold_note||"")}.</div>`:""}
+      ${(cand.risk_flags||[]).length?`<div class="note" style="margin:8px 0 0;padding:8px 10px;font-size:12px;border-left-color:var(--flag)">${esc(cand.risk_flags.join(" · "))}</div>`:""}
     </div>` : `<div class="bigpick" style="color:var(--ink-3);font-size:15px">No qualified play</div>`;
 
   const proj = `<div class="scoreline">
@@ -641,7 +663,7 @@ function gameCard(g, cand, plannedStake){
         const t = inj[side]||{}; const abbr = g[side].abbr;
         const items = (t.items||[]).map(i =>
           `<tr><td>${esc(i.name)} <span class="pill">${esc(i.position)}</span>${i.starter_qb?' <span class="pill" style="color:var(--flag);border-color:var(--flag)">QB1</span>':""}
-            <span class="fnote">${esc(i.status)}${i.detail?" · "+esc(i.detail):""}</span></td>
+            <span class="fnote">${esc(i.status)}${i.detail?" · "+esc(i.detail):""}${i.qb_basis?" · valued "+esc(i.qb_basis):""}</span></td>
             <td class="pts neg">−${num(i.points,2)}</td></tr>`).join("");
         return `<div class="why" style="border-top:none;padding-top:4px"><b>${esc(abbr)}</b> — ${t.count_listed||0} listed,
           ${t.count_out||0} out, costing ${num(t.points,1)} pts${t.capped?" (capped)":""}${t.qb_confident===false?" · depth chart unavailable, QB weighting reduced":""}</div>
@@ -657,7 +679,7 @@ function gameCard(g, cand, plannedStake){
       </div></div></details>` : ""}`;
 
   const card = el("div", `card tier-${tierClass(tier)}`);
-  card.innerHTML = head + pickBlock + proj + stats4 + why + (cand?.qualification ? `<p class="why">${esc(cand.qualification)}</p>` : "") + ledgerControl(cand, plannedStake) + detail;
+  card.innerHTML = head + pickBlock + proj + visuals + stats4 + why + (cand?.qualification ? `<p class="why">${esc(cand.qualification)}</p>` : "") + ledgerControl(cand, plannedStake) + detail;
   return card;
 }
 
@@ -689,7 +711,7 @@ function renderBest(){
       const width=Math.max(3,Math.min(100,shown/0.055*100));
       return `<div class="play-row">
         <span>${tierChip(c.tier)}</span>
-        <strong class="pick">${esc(c.pick)} <small>${price(c.price)}</small></strong>
+        <strong class="pick">${logoPair(c.game_id)}${esc(c.pick)} <small>${price(c.price)}</small></strong>
         <span class="play-meta">${esc(c.matchup)} · ${esc(fmtDate(c.game_date))}</span>
         <span class="edge-meter"><i style="width:${width.toFixed(0)}%"></i></span>
         <strong class="num ${posneg(shown)}" title="Risk-adjusted expected return (after the selection and confidence reserves). Raw value: ${pct(c.edge)}">${pct(shown)} edge</strong>
@@ -806,7 +828,7 @@ function renderBoard(){
     `<th class="sortable ${["price","model_prob","breakeven","edge","edge_raw","line_gap","confidence","ev"].includes(k)?"r":""}" data-k="${k}">${esc(l)}</th>`).join("")}<th>Track</th></tr></thead>
     <tbody>${rows.map(r => `<tr>
       <td class="stripe s-${tierClass(r.tier)}">${tierChip(r.tier)}</td>
-      <td class="matchup">${esc(r.matchup)}<small>${esc(fmtDate(r.game_date,{hour:undefined,minute:undefined}))}${r.book?" · "+esc(r.book):""}</small></td>
+      <td class="matchup">${logoPair(r.game_id)}${esc(r.matchup)}<small>${esc(fmtDate(r.game_date,{hour:undefined,minute:undefined}))}${r.book?" · "+esc(r.book):""}</small></td>
       <td><span class="pill">${esc(r.market)}</span></td>
       <td class="pick">${esc(r.pick)}</td>
       <td class="r num">${price(r.price)}</td>
@@ -890,7 +912,7 @@ function renderGames(){
           `${(!p.has_injuries&&!p.has_weather)?'<span class="pill">line only</span>':""}`;
         return `<tr>
           <td class="num" style="white-space:nowrap">${esc(fmtDate(g.date))}</td>
-          <td class="matchup">${esc(g.away)} @ ${esc(g.home)}<small>${esc(g.away_name)} at ${esc(g.home_name)}${g.neutral?" · neutral":""}${g.broadcast?" · "+esc(g.broadcast):""}</small></td>
+          <td class="matchup">${logoPair(g.game_id)}${esc(g.away)} @ ${esc(g.home)}<small>${esc(g.away_name)} at ${esc(g.home_name)}${g.neutral?" · neutral":""}${g.broadcast?" · "+esc(g.broadcast):""}</small></td>
           <td class="r num">${o.spread_home==null?"—":esc(g.home)+" "+sgn(o.spread_home)}</td>
           <td class="r num">${!p||p.model_spread==null?"—":esc(g.home)+" "+sgn(p.model_spread)}</td>
           <td class="r num ${p&&Math.abs(p.gap||0)>=1?posneg(p.gap):""}">${!p||p.gap==null?"—":sgn(p.gap)}</td>
@@ -1568,6 +1590,7 @@ function renderLedger(){
     ["ROI", pct(s.roi)], ["Win rate", pct(s.win_rate)],
     ["Settled", s.settled||0], ["Pending", s.pending||0],
   ];
+  if (EV){ const c=EV.ledgerClvSummary(S.myLedger,S.games); kpis.push(["Beat the close", c.n?`${c.beat}/${c.beat+c.worse}`:"—"]); }
   const kw = el("div","kpis"); kw.style.padding="0"; kw.style.margin="0 0 18px";
   kw.innerHTML = kpis.map(([k,v]) => `<div class="kpi"><div class="k">${esc(k)}</div><div class="v">${esc(v)}</div></div>`).join("");
   host.appendChild(kw);
@@ -1594,15 +1617,16 @@ function renderLedger(){
   const w = el("div","tablewrap");
   w.innerHTML = rows.length ? `<table><thead><tr>
       <th>Placed</th><th>Game</th><th>Pick</th><th class="r">Price</th><th class="r">Stake</th>
-      <th class="r">Edge</th><th>Tier</th><th>Result</th><th class="r">P/L</th><th></th></tr></thead>
+      <th class="r">Edge</th><th>Tier</th><th class="r" title="Closing-line value: your number versus the last pregame line">CLV</th><th>Result</th><th class="r">P/L</th><th></th></tr></thead>
       <tbody>${rows.map(b => `<tr>
         <td class="num" style="white-space:nowrap;font-size:12px">${esc(fmtDate(b.game_date,{hour:undefined,minute:undefined}))}</td>
         <td class="matchup">${esc(b.matchup)}${b.final_score?`<small>${esc(b.final_score)}</small>`:""}</td>
         <td class="pick">${esc(b.pick)}</td>
-        <td class="r num">${price(b.price)}</td>
+        <td class="r num">${price(b.price)}${b.board_price!=null&&Number(b.board_price)!==Number(b.price)?`<br><small style="color:var(--ink-3)">board ${price(b.board_price)}</small>`:""}</td>
         <td class="r num">${cur(b.stake)}</td>
         <td class="r num">${pct(b.edge)}</td>
         <td>${tierChip(b.tier)}</td>
+        <td class="r">${EV?EV.clvCell(EV.betClv(b,(S.games||[]).find(g=>String(g.game_id)===String(b.game_id)))):"—"}</td>
         <td><span class="res ${esc(b.result||"Pending")}">${esc(b.result||"Pending")}</span></td>
         <td class="r num ${posneg(b.pnl)}">${b.pnl==null?"—":cur(b.pnl)}</td>
         <td><button type="button" class="removebet" data-remove="${esc(b.id)}">Remove</button></td>
@@ -1660,6 +1684,8 @@ function bindLedgerActions(){
     const id=button.dataset.add;const cand=(S.board||[]).find(row=>`${row.game_id}:${row.market}:${row.side}`===id);
     if(!cand||isTracked(cand))return;const input=[...document.querySelectorAll("[data-stake]")].find(node=>node.dataset.stake===id);const stake=Number(input?input.value:button.dataset.defaultStake);
     if(!isFinite(stake)||stake<=0){window.alert("Enter the stake you actually placed.");return;}
+    if(EV){EV.openBetDialog({row:cand,stake,settings:(S.meta||{}).settings,currency:((S.meta||{}).settings||{}).currency_symbol,
+      onConfirm:(taken,amount)=>{S.myLedger.push(L.entryFrom(taken,amount));saveMyLedger();render();}});return;}
     S.myLedger.push(L.entryFrom(cand,stake));saveMyLedger();render();
   });
   document.querySelectorAll("[data-remove]").forEach(button=>button.onclick=()=>{if(window.confirm("Remove this wager from My Ledger?")){S.myLedger=S.myLedger.filter(row=>row.id!==button.dataset.remove);saveMyLedger();render();}});
