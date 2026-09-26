@@ -22,7 +22,7 @@ import os
 import sys
 from zoneinfo import ZoneInfo
 
-from . import espn, model as M, ratings as R, store, game_context, quotes, fpi_audit
+from . import espn, model as M, ratings as R, store, game_context, quotes, fpi_audit, early
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SITE_DATA = os.path.join(ROOT, "site", "data")
@@ -984,7 +984,7 @@ def main() -> int:
     context_cache = store.load("context_cache.json", {})
     context_health = game_context.enrich(games, cfg, context_cache)
     store.save("context_cache.json", context_cache)
-    print("-- checking additional complete sportsbook quotes")
+    print("-- confirming the DraftKings quote for each game")
     quote_cache = store.load("quote_cache.json", {})
     quote_health = quotes.enrich(games, cfg, quote_cache)
     store.save("quote_cache.json", quote_cache)
@@ -1090,19 +1090,7 @@ def main() -> int:
         # confidence under the 0.35 floor in tier_for(), pinning the thresholds at
         # their harshest setting for reasons that had nothing to do with the model.
         conf = min(conf, snapshot_confidence(store.line_move(lines, g["game_id"]).get("snapshots", 0)))
-        required_books = max(
-            1, int(cfg["model"].get("min_books_for_full_confidence", 1))
-        )
-        observed_books = len({
-            "".join(ch for ch in str(q.get("book") or "").casefold() if ch.isalnum())
-            for q in (g.get("odds_quotes") or [])
-            if q.get("book")
-        })
-        if not observed_books and has_odds:
-            observed_books = 1
-        # A single posted market is still a real price, but it is not a
-        # consensus. Treat book depth as an independent confidence ceiling.
-        conf = min(conf, min(1.0, observed_books / required_books))
+        # One DraftKings price is the market; book count never caps confidence.
         context = g.get("context") or {}
         if ((context.get("availability") or {}).get("status") != "complete"
                 or (context.get("weather") or {}).get("status") == "unavailable"):
@@ -1131,7 +1119,14 @@ def main() -> int:
             c["season"] = g.get("season", season)
             c["season_type"] = g.get("season_type", 2)
         board.extend(cands)
-    board = weekly_cap(correlation_guard(board, cfg), cfg)
+    # Early-week timing: a GOOD/BEST label belongs to the price that earned it.
+    # See pipeline/early.py for the walk-forward evidence behind the window.
+    board = weekly_cap(correlation_guard(early.timing_gate(board, cfg), cfg), cfg)
+    early_state = store.load("early_plays.json", {})
+    early_summary = early.track(early_state, board, games, lines, cfg)
+    store.save("early_plays.json", early_state)
+    print(f"   early plays: {early_summary['locked']} locked | record {early_summary['record']} | "
+          f"avg CLV {early_summary['avg_clv_points']} pts")
     board.sort(key=lambda c: (M.TIER_RANK[c["tier"]],
                               -c.get("action_edge", c["edge"])))
     print(f"   priced {len(upcoming)} upcoming games -> {len(board)} market lines")
@@ -1185,6 +1180,7 @@ def main() -> int:
         "model_health": model_health(board, rat, cfg, odds_health),
         "slate_debias": scale_fit,
         "board_diagnosis": board_diagnosis,
+        "early_plays": early_summary,
         "data_repair": {
             "unverified_line_snapshots_removed": removed_lines,
             "unverified_pending_bets_removed": removed_bets,
@@ -1197,6 +1193,8 @@ def main() -> int:
             json.dump(payload, fh, separators=(",", ":"), default=str)
 
     write("meta.json", meta)
+    write("early_plays.json", sorted(early_state.get("locks", {}).values(),
+                                     key=lambda l: l.get("locked_at") or "", reverse=True))
     write("board.json", [{**c, "line_move": store.line_move(lines, c["game_id"])} for c in board])
     write("ledger.json", [])
     write("summary.json", summary)

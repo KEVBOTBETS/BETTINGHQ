@@ -324,7 +324,7 @@ def build(path: str) -> str:
         ("Recency half-life (games)", cfg.get("ratings", {}).get("recency_halflife_games"), "Measured in team-games; multiply by 7 for days."),
         ("Solved Home Field (pts)", meta.get("home_field_advantage"), "Estimated from this season's results, shrunk toward the configured prior."),
         ("League avg points", meta.get("league_avg_points"), "Per team per game, used as the baseline for the totals model."),
-        ("Odds source", ", ".join(cfg.get("data", {}).get("odds_provider_priority", [])[:3]), "ESPN's public feed. Free, keyless, single-book — no line shopping and no multi-book consensus."),
+        ("Odds source", cfg.get("data", {}).get("odds_book", "DraftKings"), "ESPN's public feed. Free, keyless — every play is priced off the one DraftKings line."),
     ]
     _table(ws, 4, ["Setting", "Value", "What it does"],
            [[k, v, d] for k, v, d in flat], [34, 16, 92])

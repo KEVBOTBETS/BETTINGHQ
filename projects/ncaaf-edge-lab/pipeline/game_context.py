@@ -59,8 +59,9 @@ def parse_availability(payload, season, now, max_hours=72):
 def availability_review_flags(health, reports):
     """Return review flags without treating silence as confirmed availability."""
     flags = []
-    if health.get('status') == 'unavailable':
-        flags.append('QB/player availability feed unavailable — verify roster status')
+    # An empty feed is the normal state for college football (ESPN publishes
+    # almost no CFB injury rows). It lowers confidence elsewhere, but it is not
+    # evidence about this game, so it must not cap every play at LEAN.
     if any(r.get('position') == 'QB' for rows in reports.values() for r in rows):
         flags.append('Recent QB report — starter availability needs review')
     return flags

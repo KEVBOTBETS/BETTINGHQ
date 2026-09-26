@@ -47,30 +47,47 @@ def enrich(games, cfg, cache, now=None):
             return gid, {'checked_at': now.isoformat(), 'quotes': [], 'status': 'unavailable'}
     with ThreadPoolExecutor(max_workers=4) as pool:
         cache.update(pool.map(fetch, selected))
-    books = set()
+    book = str((cfg.get('data') or {}).get('odds_book') or 'DraftKings')
+    book_key = _key(book)
+    books, on_book = set(), 0
     for g in eligible:
         qs = merge_quotes([*(g.get('odds_quotes') or []), g.get('odds') or {},
                            *((cache.get(g['game_id']) or {}).get('quotes') or [])], now)
-        g['odds_quotes'] = qs
-        books.update(q['book'] for q in qs)
-        if qs:
-            priority = cfg['data']['odds_provider_priority']
-            qs.sort(key=lambda q: (-len(q['verified_markets']),
-                                  priority.index(q['book']) if q['book'] in priority else len(priority)))
-            g['odds'] = qs[0]
+        pick = pick_quote(qs, book_key, cfg)
+        # One price per game: the DraftKings line. Other providers ESPN happens
+        # to expose are never priced separately and never required.
+        g['odds_quotes'] = [pick] if pick else []
+        if pick:
+            g['odds'] = pick
+            books.add(pick['book'])
+            on_book += _key(pick['book']) == book_key
     live_ids = {g['game_id'] for g in eligible}
     for gid in list(cache):
         if gid not in live_ids:
             del cache[gid]
-    multiple = sum(len(g.get('odds_quotes') or []) > 1 for g in eligible)
     return {'provider_checks': len(selected), 'books': sorted(books),
-            'games_multiple_books': multiple,
-            'status': 'multi-book' if multiple else 'single-book',
-            'note': ('Independent book comparison available'
-                     if multiple else
-                     'Only one sportsbook source is available; confidence and stake are reduced'),
+            'odds_book': book, 'games_on_book': on_book,
+            'games_priced': sum(bool(g.get('odds_quotes')) for g in eligible),
+            'status': 'single-book',
+            'note': f'Priced off the {book} line only; one book is all the model needs.',
             'max_quote_age_hours': 3, 'checked_at': now.isoformat()}
 
+
+def _key(name):
+    return ''.join(c for c in str(name or '').casefold() if c.isalnum())
+
+
+def pick_quote(qs, book_key, cfg):
+    """The DraftKings quote when ESPN has one; otherwise the single best posted line."""
+    if not qs:
+        return None
+    for q in qs:
+        if _key(q.get('book')) == book_key:
+            return q
+    priority = [_key(b) for b in (cfg.get('data') or {}).get('odds_provider_priority') or []]
+    return sorted(qs, key=lambda q: (-len(q.get('verified_markets') or []),
+                                     priority.index(_key(q.get('book'))) if _key(q.get('book')) in priority
+                                     else len(priority)))[0]
 
 def shortlist(candidates, rank):
     """One best eligible quote per game/market/side, before correlation caps."""
@@ -103,25 +120,4 @@ def gate(candidates, g, cfg, now=None):
             c['risk_flags'] = list(dict.fromkeys([*(c.get('risk_flags') or []), *applicable]))
             c['warning'] = '; '.join(c['risk_flags'])
 
-        required_books = max(
-            0, int((cfg.get('model') or {}).get('min_books_for_full_confidence', 0))
-        )
-        observed_books = len({
-            ''.join(ch for ch in str(q.get('book') or '').casefold() if ch.isalnum())
-            for q in (g.get('odds_quotes') or [])
-            if q.get('book')
-        })
-        if not observed_books and (g.get('odds') or {}).get('book'):
-            observed_books = 1
-        c['market_books_observed'] = observed_books
-        c['market_books_required'] = required_books
-        if required_books and observed_books < required_books and c['tier'] != 'PASS':
-            flag = (
-                f'Single-book market ({observed_books}/{required_books}) — '
-                'verify the line elsewhere'
-            )
-            c['tier'] = 'LEAN'
-            c['stake_multiplier'] = min(c.get('stake_multiplier', 1), .65)
-            c['risk_flags'] = list(dict.fromkeys([*(c.get('risk_flags') or []), flag]))
-            c['warning'] = '; '.join(c['risk_flags'])
     return candidates
