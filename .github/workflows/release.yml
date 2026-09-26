@@ -20,7 +20,11 @@ on:
   schedule:
     - cron: '23 */3 * * *'
     - cron: '7,37 * * * *'
-    - cron: '53 15-23 * * 0,4,5,6'
+    # Game-day football refreshes. Inactives post ~90 min before kickoff, so
+    # a :53 run lands ~67 min before a :00 kickoff. Sunday starts at 12 UTC to
+    # catch London games (9:30 ET); Monday is included for Monday Night.
+    - cron: '53 12-23 * * 0'
+    - cron: '53 15-23 * * 1,4,5,6'
 
 permissions:
   contents: read
@@ -62,7 +66,7 @@ jobs:
           THE_ODDS_API_KEY: ${{ secrets.THE_ODDS_API_KEY }}
         run: |
           sport="$REQUESTED_SPORT"
-          if [ "$EVENT_SCHEDULE" = '53 15-23 * * 0,4,5,6' ]; then sport=football; fi
+          if [ "$EVENT_SCHEDULE" = '53 12-23 * * 0' ] || [ "$EVENT_SCHEDULE" = '53 15-23 * * 1,4,5,6' ]; then sport=football; fi
           if [ "$EVENT_SCHEDULE" = '7,37 * * * *' ]; then sport=archive; fi
           python tools/refresh.py --sport "$sport"
           node projects/mlb-edge/tests/test_sim.mjs projects/mlb-edge/docs/data

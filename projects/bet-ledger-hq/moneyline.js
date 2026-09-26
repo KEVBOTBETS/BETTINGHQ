@@ -10,7 +10,10 @@
   const save=()=>{try{localStorage.setItem(KEY,JSON.stringify(saved));$('#storage-status').textContent='Selections saved in this browser.';}catch(_){$('#storage-status').textContent='Browser storage is unavailable. Keep this page open or print your card to preserve these picks.';}};
   const forecastCards=()=>Object.entries(bundles).flatMap(([k,b])=>C.cards(k,b));
   const allCards=()=>forecastCards().filter(c=>c.day===$('#date').value).sort((a,b)=>a.when-b.when||a.key.localeCompare(b.key));
-  const visible=()=>allCards().filter(c=>$('#sport').value==='all'||c.sport===$('#sport').value);
+  // Open games first, started/locked games after them; each group in kickoff order.
+  const visible=()=>allCards().filter(c=>$('#sport').value==='all'||c.sport===$('#sport').value).sort((a,b)=>(isLocked(a)-isLocked(b))||a.when-b.when||a.key.localeCompare(b.key));
+  const TV=window.TeamVisuals,tc=TV.color,badge=(c,side)=>TV.badge(c,side),winBar=TV.winBar;
+  const marginNote=c=>c.margin==null||!c.predicted?'':' · projected margin '+Math.abs(c.margin).toFixed(1)+' pts';
   const nextDay=sport=>forecastCards().filter(c=>c.sport===sport&&!c.locked&&c.day>=C.day(Date.now())).sort((a,b)=>a.when-b.when)[0]?.day;
   const dateLabel=day=>new Intl.DateTimeFormat('en-CA',{timeZone:'UTC',weekday:'long',month:'short',day:'numeric'}).format(new Date(day+'T12:00:00Z'));
   const isLocked=c=>c.locked||(saved[c.key]&&C.instant(saved[c.key].start)<=Date.now());
@@ -22,9 +25,12 @@
     $('#slate-note').textContent=nflDay&&['all','nfl'].includes($('#sport').value)&&!allCards().some(c=>c.sport==='nfl')
       ?'No NFL games on '+(selectedDay?dateLabel(selectedDay):'the selected date')+'. Next NFL game day: '+dateLabel(nflDay)+'. Use “Next NFL picks” to see the model’s winners.'
       :$('#sport').value==='nfl'&&rows.length?'NFL winner predictions for '+dateLabel(selectedDay)+'. These picks do not require a qualifying bet or sportsbook price.':'';
+    const open=rows.filter(c=>!isLocked(c)).length;
+    $('#slate-count').innerHTML=rows.length?'<b>'+open+'</b> open · '+(rows.length-open)+' started or locked':'';
     $('#cards').innerHTML=rows.length?rows.map((c,i)=>{
       const locked=isLocked(c),chosen=saved[c.key];
-      return '<article class="match-card"><div class="card-top"><b>'+String(i+1).padStart(2,'0')+' / '+esc(LABEL[c.sport])+'</b><span>'+esc(time(c.start))+'</span></div><h2>'+esc(c.away+' at '+c.home)+'</h2><div class="team-options">'+['away','home'].map(side=>'<button class="team-option" data-key="'+esc(c.key)+'" data-side="'+side+'" aria-label="Pick '+esc(c[side+'Name'])+'" aria-pressed="'+(chosen?.side===side)+'" '+(loading||!c.selectable||locked?'disabled':'')+'><strong>'+esc(c[side])+'</strong><small>'+esc(c[side+'Name'])+'</small>'+(c.predicted===side?'<span class="pick-label">PREDICTED WINNER</span>':'')+'</button>').join('')+'</div><div class="card-bottom">'+(c.predicted?'<strong>'+esc(c[c.predicted])+' to win</strong>'+(c.probability!==null?' · '+Math.round(c.probability*100)+'% model estimate':''):esc(c.reason||'No prediction'))+(locked&&c.predicted?' · Locked':'')+(c.notes?'<small>'+esc(c.notes)+'</small>':'')+'</div></article>';
+      const rank=side=>c[side+'Rank']&&c[side+'Rank']<26?'<em>#'+c[side+'Rank']+'</em> ':'';
+      return '<article class="match-card sport-'+esc(c.sport)+(locked?' is-locked':'')+(chosen?' is-chosen':'')+'" style="--ta:'+esc(tc(c,'away'))+';--th:'+esc(tc(c,'home'))+'"><div class="card-top"><b><span class="sport-dot"></span>'+String(i+1).padStart(2,'0')+' / '+esc(LABEL[c.sport])+'</b><span>'+esc(time(c.start))+'</span></div><h2>'+esc(c.away+' at '+c.home)+(c.broadcast?'<span>'+esc(c.broadcast)+'</span>':'')+'</h2><div class="team-options">'+['away','home'].map(side=>'<button class="team-option'+(c.predicted===side?' is-predicted':'')+'" style="--tc:'+esc(tc(c,side))+'" data-key="'+esc(c.key)+'" data-side="'+side+'" aria-label="Pick '+esc(c[side+'Name'])+'" aria-pressed="'+(chosen?.side===side)+'" '+(loading||!c.selectable||locked?'disabled':'')+'>'+badge(c,side)+'<strong>'+rank(side)+esc(c[side])+'</strong><small>'+esc(c[side+'Name'])+'</small>'+(c.predicted===side?'<span class="pick-label">PREDICTED WINNER</span>':'')+'</button>').join('')+'</div>'+winBar(c)+'<div class="card-bottom">'+(c.predicted?'<strong>'+esc(c[c.predicted])+' to win</strong>'+(c.probability!==null?' · '+Math.round(c.probability*100)+'% model estimate':marginNote(c)):esc(c.reason||'No prediction'))+(locked&&c.predicted?' · Locked':'')+(c.notes?'<small>'+esc(c.notes)+'</small>':'')+'</div></article>';
     }).join(''):'<div class="empty">'+(loading?'Loading the published games…':'No games available for this date and sport. Check the source status above or choose another date.')+'</div>';
     const picks=Object.values(saved).filter(r=>r.day===$('#date').value&&($('#sport').value==='all'||r.sport===$('#sport').value)).sort((a,b)=>a.start.localeCompare(b.start));
     $('#selection-count').textContent=picks.length+' pick'+(picks.length===1?'':'s')+' selected';

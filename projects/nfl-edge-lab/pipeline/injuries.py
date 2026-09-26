@@ -92,11 +92,15 @@ def position_points(pos: str, cfg: dict, is_starting_qb: bool = False,
 
 
 def team_impact(rows: list[dict], cfg: dict, starting_qb_id: str | None,
-                qb_known: bool = True) -> dict:
+                qb_known: bool = True, qb_value: dict | None = None,
+                qb_info: dict | None = None) -> dict:
     """
     Points of team strength lost, plus the itemised list behind the number.
 
-    `rows` is one team's slice of ESPN's injury feed.
+    `rows` is one team's slice of ESPN's injury feed. `qb_value`, when given,
+    is pipeline.qb_value.starter_value(): the measured cost of this team's
+    usual starter sitting for the QB who would replace him. It replaces the
+    flat QB_starter number for that one player.
     """
     inj_cfg = cfg.get("injuries") or {}
     cap = float(inj_cfg.get("max_team_points", 7.0))
@@ -110,8 +114,10 @@ def team_impact(rows: list[dict], cfg: dict, starting_qb_id: str | None,
             continue
         pos = (r.get("position") or "").upper()
         group = _GROUP.get(pos, pos)
-        is_qb1 = bool(group == "QB" and starting_qb_id and r.get("athlete_id") == starting_qb_id)
+        is_qb1 = bool(group == "QB" and starting_qb_id and str(r.get("athlete_id")) == str(starting_qb_id))
         base = position_points(pos, cfg, is_starting_qb=is_qb1, qb_known=qb_known)
+        if is_qb1 and qb_value:
+            base = float(qb_value["points"])
         pts = round(base * w, 2)
         if pts <= 0:
             continue
@@ -125,6 +131,7 @@ def team_impact(rows: list[dict], cfg: dict, starting_qb_id: str | None,
             "detail": r.get("detail") or r.get("type"),
             "points": pts,
             "starter_qb": is_qb1,
+            "qb_basis": (qb_value or {}).get("basis") if is_qb1 else None,
             "comment": r.get("comment"),
         })
 
@@ -139,8 +146,9 @@ def team_impact(rows: list[dict], cfg: dict, starting_qb_id: str | None,
         "offense_points": round(offense_total * scale, 2),
         "count_out": sum(1 for i in items if status_weight(i["status"], cfg) >= 1.0),
         "count_listed": len(rows or []),
-        "qb_out": any(i["starter_qb"] for i in items),
+        "qb_out": any(i["starter_qb"] and status_weight(i["status"], cfg) >= 1.0 for i in items),
         "qb_confident": qb_known,
+        "qb": {**(qb_info or {}), "value": qb_value} if (qb_info or qb_value) else None,
         "items": items[:12],
     }
 
