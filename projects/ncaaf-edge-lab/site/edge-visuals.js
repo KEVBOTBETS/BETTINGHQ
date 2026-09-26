@@ -336,7 +336,26 @@
         ${tile(`Early (${p.early_hours || 96}h+ before kickoff)`, pct(e.beat_close_pct, 0), `beat the close · ${e.closed || 0} closed · ${esc(e.record || "0-0-0")}`, tone(e.beat_close_pct, .5))}
         ${tile("Late", pct(l.beat_close_pct, 0), `beat the close · ${l.closed || 0} closed · ${esc(l.record || "0-0-0")}`, tone(l.beat_close_pct, .5))}
       </div>` : ""}
+      ${gateBlock(p.gate)}
     </section>`;
+  }
+
+  /* Closing-line gate: which tiers each market group has earned so far. */
+  function gateBlock(gate) {
+    if (!gate) return "";
+    const label = { sides: "Spreads & moneylines", totals: "Totals" };
+    const say = (k, g) => {
+      const need = `${g.closed || 0}/${g.need || 100} closed`, beat = fin(g.beat_close_pct) ? ` · ${pct(g.beat_close_pct, 0)} beat the close` : "";
+      if (g.status === "off") return ["Gate off", "tiers as priced", ""];
+      if (g.status === "proven") return ["All tiers", `proven${beat}`, "pos"];
+      if (g.status === "failing") return ["LEAN only", `market ahead of the model${beat} · half stakes`, "neg"];
+      if (g.untiered) return ["Research only", `not tiered until proven · ${need}${beat}`, ""];
+      return ["Up to GOOD", `BEST BET unlocks at ${pct(g.unlock_pct || .53, 0)} · ${need}${beat}`, ""];
+    };
+    const tiles = ["sides", "totals"].filter(k => gate[k]).map(k => { const [v, m, c] = say(k, gate[k]); return tile(label[k], esc(v), m, c); }).join("");
+    return tiles ? `<h3 style="margin-top:16px;font-size:14px">Tier gate — earned by beating the close</h3>
+      <p>The 15-season backtest found no reliable edge against the <b>closing</b> line, so tiers are earned by taking numbers before they move. BEST BET stays locked, and totals stay research-only, until 100 tracked plays in that group have closed and at least ${pct((gate.sides || {}).unlock_pct || .53, 0)} beat the closing line.</p>
+      <div class="ev-tiles" style="margin-bottom:0">${tiles}</div>` : "";
   }
 
   function seasonBars(seasons) {
@@ -373,16 +392,19 @@
     if (!bt || !bt.games) return "";
     const sc = bt.scores || {}, sel = bt.selected || {};
     const verdict = m => { const s = sc[m]; if (!s) return "—"; return s.logloss_edge > 0 ? "Model" : "Market"; };
-    const mk = bt.by_market || {};
+    const mk = bt.by_market || {}, rs = (bt.research || {}).all;
+    const mTile = m => (m === "TOTAL" && !(mk.TOTAL || {}).n && rs && rs.n)
+      ? tile("Totals (research only)", spct(rs.roi), `${rs.record} at model tier · not bet · more accurate: ${verdict(m)}`, tone(rs.roi, 0))
+      : tile(`${m === "ATS" ? "Spreads" : m === "TOTAL" ? "Totals" : "Moneyline"}`, spct((mk[m] || {}).roi), `${(mk[m] || {}).record || "—"} · more accurate: ${verdict(m)}`, tone((mk[m] || {}).roi, 0));
     return `<section class="ev-panel"><h3>15-season backtest — ${esc(bt.seasons[0])}–${esc(bt.seasons[1])}, ${esc(bt.games.toLocaleString())} games</h3>
       <p>Every week replayed with only the information available before it, priced against the <b>closing</b> line from nflverse's free historical data. ${esc(bt.limits || "")}</p>
       <div class="ev-tiles">
         ${tile("Selected plays", esc(sel.record || "—"), `${sel.n || 0} plays · ${pct(sel.win_pct)} wins`)}
         ${tile("Return per play", spct(sel.roi), "flat stakes at closing prices", tone(sel.roi, 0))}
-        ${["ATS", "TOTAL", "ML"].map(m => tile(`${m === "ATS" ? "Spreads" : m === "TOTAL" ? "Totals" : "Moneyline"}`, spct((mk[m] || {}).roi), `${(mk[m] || {}).record || "—"} · more accurate: ${verdict(m)}`, tone((mk[m] || {}).roi, 0))).join("")}
+        ${["ATS", "TOTAL", "ML"].map(mTile).join("")}
       </div>
       <div class="ev-two">${seasonBars(bt.by_season)}${calibrationPlot(bt.calibration_all_home_sides)}</div>
-      <p style="margin-top:12px;font-size:12px;color:var(--ink-3)">What it means: against the sharpest number of the week, results-based power ratings alone did not beat the market. The live board adds FPI, injuries, weather and earlier prices — which is exactly what the closing-line tracking above measures. Moneylines longer than +120 are no longer tiered because their edges ran backwards here.</p>
+      <p style="margin-top:12px;font-size:12px;color:var(--ink-3)">What it means: against the sharpest number of the week, results-based power ratings alone did not beat the market. The live board adds FPI, injuries, weather and earlier prices — which is exactly what the closing-line tracking above measures. Moneylines longer than +120 are no longer tiered because their edges ran backwards here${rs && rs.n ? `; totals are research-only — at their model tiers they went ${esc(rs.record)} (${spct(rs.roi)} a play)` : ""}. The model's record also faded as the market sharpened — compare the early and recent seasons above — which is why tiers now have to be earned by beating the close.</p>
     </section>`;
   }
   function mountBacktest(host, url) {
