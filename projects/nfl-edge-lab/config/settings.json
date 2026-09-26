@@ -16,10 +16,10 @@
     "_size_off_note": "'settled' sizes off the bankroll implied by settled bets only, so a stake never depends on the outcome of the bet it is sizing. 'starting' always sizes off the starting bankroll, like the workbook did."
   },
   "tiers": {
-    "_note": "Tier input is compressed expected return per unit at the offered price, capped by no-vig model value, minus selection and confidence reserves, AND a floor in probability points (min_prob_edge). Version 2026-09-26-anchored; historical tiers stay frozen.",
-    "best_bet": 0.02,
-    "good": 0.012,
-    "lean": 0.004,
+    "_note": "Tier input is compressed expected return per unit at the offered price, capped by no-vig model value, minus selection and confidence reserves, AND a floor in probability points (min_prob_edge). Version 2026-09-27-clv-gate; historical tiers stay frozen.",
+    "best_bet": 0.035,
+    "good": 0.025,
+    "lean": 0.02,
     "_nfl_note": "Far lower than the college thresholds, because the NFL market is the sharpest in North American sport: 32 teams, enormous handle, every book pricing the same 16 games all week. Real NFL edges live between 1% and 4%. A model reporting a 12% edge on a Sunday side has found a bug, not an opportunity.",
     "lock_rules": {
       "_note": "Extra conditions a play must ALSO satisfy to be called BEST BET. The label is reserved for the rare spot where the model, the market and the data all point the same way -- everything else tops out at GOOD no matter how big the raw number looks.",
@@ -45,7 +45,7 @@
       "lean": 0.01
     },
     "_min_prob_edge_note": "Model win probability minus break-even, in probability points, that each tier also needs. Expected return on long odds turns 1 point of probability into a 5-7% 'return' on a +455 dog; that 1 point is well inside the model's error. This keeps long-odds noise from topping the board.",
-    "_threshold_note": "Re-set 2026-09-26 for the market-anchored model. The old 4.0/2.8/1.5% bars were set when raw edges ran to 40%; after anchoring, the top 5% of priced sides show about 3.7% raw return and the top 1% about 5%, so with the 2.3% selection+confidence reserve on top, GOOD sat in the top 1% and BEST BET was unreachable -- two safety layers fighting, the same failure the NCAAF board had. These bars are on the adjusted number (after reserves): at Week-3 confidence GOOD needs ~3.5% raw return (about 54.2% at -110) and BEST BET ~4.5% (about 54.8% at -110, plus 2.25 pts of probability, plus every lock rule)."
+    "_threshold_note": "Re-set 2026-09-27 from the 2011-2025 nflverse backtest (python -m pipeline.history_backtest). At 2.0/1.2/0.4% BEST BET was 76% of all selected plays and lost 2.75% a play, and the lowest-edge plays lost most (LEAN -16% to -17%). At 3.5/2.5/2.0% with totals research-only and three plays a week, BEST BET is about a third of plays and the whole slate ran -0.2% a play over 701 plays, against -4.0% for the old bars with totals removed. Read that honestly: it is less exposure to a model that roughly ties the closing line (+5-7% in 2011-2015, flat 2016-2020, -6 to -10% in 2021-2025 as the market sharpened), not a found edge. BEST BET is also gated on beating the close -- see clv_gate. These bars are on the adjusted number (after selection and confidence reserves)."
   },
   "model": {
     "projection_blend": 0.55,
@@ -213,8 +213,8 @@
     "skip_if_no_odds": true,
     "max_bets_per_game": 1,
     "_max_bets_per_game_note": "Correlation guard. A team's moneyline and its spread are close to the same bet, so taking both is one position at double the variance Kelly assumed.",
-    "max_plays_per_week": 6,
-    "_max_plays_per_week_note": "Hard cap on how many bets one NFL week can produce, best edges first. A 16-game slate with a 2.5% threshold will happily qualify twenty plays; that is a spray, not a staking plan.",
+    "max_plays_per_week": 3,
+    "_max_plays_per_week_note": "Cut from 6 to 3 on 2026-09-27 when totals became research-only: with totals out, six slots filled with weaker spread plays (-4.4% a play over 15 backtest seasons); three keeps the volume the spreads had before and ran -0.9%. Fewer plays is the honest response to a model that has not yet shown it beats the close.",
     "bet_within_days": 8,
     "_bet_within_days_note": "Games further out than this are priced and displayed but not staked. Seeing an edge three weeks early is useful; betting into a market that thin is not, and the number will move several times before kickoff. The card shows the date the play opens.",
     "bet_preseason": false,
@@ -227,6 +227,17 @@
     "track_early_hours": 96,
     "late_stake_multiplier": 0.6,
     "_note": "Every bettable LEAN-or-better play is locked at the first line and price it was published at, then compared with DraftKings' last pregame number (closing-line value) and graded at the locked price. Locks made 96h+ before kickoff (by Wednesday for a Sunday game) count as 'early'. The college board found early prices far better (54% ATS at 120h+ vs 44-48% inside 72h); the NFL is sharper, so the gate that caps late plays at LEAN stays OFF (0) until the early/late split on the Accuracy tab shows the same gap here. To turn it on, set full_tier_min_hours to 96."
+  },
+  "clv_gate": {
+    "enabled": true,
+    "min_closed": 100,
+    "unlock_pct": 0.53,
+    "fail_pct": 0.47,
+    "failing_stake_multiplier": 0.5,
+    "untiered_until_proven": [
+      "totals"
+    ],
+    "_note": "Tiers are earned by beating the closing line, not by the size of the edge. The 2011-2025 nflverse backtest found the model's disagreement with the CLOSE carries no reliable signal (log loss a hair worse than the market in every market; win rate flat across edge buckets; totals -5% a play), so any real edge has to come from taking numbers before they move -- which the locked-play CLV record measures. Until 100 tracked plays in a group (sides = spreads + moneylines, totals) have reached kickoff: BEST BET is capped at GOOD, and totals are priced and shown but not tiered (still locked as research plays so they can earn their way back). At 53%+ beat-the-close the group is 'proven' and tiers apply as priced; below 47% it is 'failing' and every play is capped at LEAN at half stake. See pipeline/early.py."
   },
   "data": {
     "odds_provider_priority": [
