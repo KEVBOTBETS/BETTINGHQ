@@ -148,3 +148,45 @@ def line_move(lines: dict, game_id: str) -> dict:
         "opened_spread": o.get("spread_home"),
         "opened_total": o.get("total"),
     }
+
+
+def line_move_in_window(lines: dict, game_id: str, game_date: str | None,
+                        window_days: float) -> dict:
+    """
+    How far the number has moved since the BET WINDOW opened, not since August.
+
+    The full-season odds sweep records every game's opener in August, so
+    line_move() measures six weeks of offseason news -- a quarterback signing,
+    a Week 1 blowout -- as if it had happened after we formed an opinion. For
+    the "market has moved against us" rule that turned every total that had
+    drifted 2+ points since the summer into a held-back play. The reference
+    here is the line in force when the game entered the bet window
+    (kickoff - window_days); moves before that are the market pricing news the
+    model's inputs have also had time to see.
+    """
+    import datetime as _dt
+    h = lines.get(str(game_id)) or []
+    if not h:
+        return {}
+    ref = h[0]
+    try:
+        kick = _dt.datetime.fromisoformat((game_date or "").replace("Z", "+00:00"))
+        if kick.tzinfo is None:
+            kick = kick.replace(tzinfo=_dt.timezone.utc)
+        start = kick - _dt.timedelta(days=float(window_days))
+        for snap in h:
+            ts = _dt.datetime.fromisoformat(str(snap.get("ts")).replace("Z", "+00:00"))
+            if ts.tzinfo is None:
+                ts = ts.replace(tzinfo=_dt.timezone.utc)
+            if ts <= start:
+                ref = snap
+            else:
+                break
+    except (ValueError, TypeError):
+        pass
+    c = h[-1]
+    def diff(k):
+        a, b = ref.get(k), c.get(k)
+        return None if (a is None or b is None) else round(b - a, 2)
+    return {"spread": diff("spread_home"), "total": diff("total"), "ml_home": diff("ml_home"),
+            "since": ref.get("ts")}

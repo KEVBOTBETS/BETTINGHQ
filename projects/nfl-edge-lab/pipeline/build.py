@@ -222,8 +222,9 @@ def project(g: dict, rat: dict, hfa: float, score_rat: dict, league: float,
     # ---- total ---- #
     so_h = score_rat.get(h) or {"off": 0.0, "def": 0.0}
     so_a = score_rat.get(a) or {"off": 0.0, "def": 0.0}
-    pts_home = league + so_h["off"] - so_a["def"] + (0.0 if g.get("neutral") else home_bump)
-    pts_away = league + so_a["off"] - so_h["def"]
+    half = 0.0 if g.get("neutral") else home_bump / 2.0
+    pts_home = league + so_h["off"] - so_a["def"] + half
+    pts_away = league + so_a["off"] - so_h["def"] - half
     base_total = pts_home + pts_away
 
     wx = wx_by_game.get(g["game_id"]) or {}
@@ -299,6 +300,9 @@ def adverse_move(move: dict, market: str, side: str) -> float | None:
     return None
 
 
+TIER_VERSION = "2026-09-26-anchored"
+
+
 def price_game(g: dict, proj: dict, cfg: dict, conf: float, stale: bool,
                calib: dict | None = None, move: dict | None = None) -> list[dict]:
     """Every market on one game, priced against the book."""
@@ -346,7 +350,7 @@ def price_game(g: dict, proj: dict, cfg: dict, conf: float, stale: bool,
         row["edge_real_raw"] = row["ev"]
         row["edge_price"] = row["edge_real"] - row["edge"]
         row["edge_unit"] = "expected_return"
-        row["tier_version"] = "2026-09-06-ev2"
+        row["tier_version"] = TIER_VERSION
         row["action_edge"] = M.risk_adjusted_edge(min(row["edge"], row["edge_real"]), cfg, conf)
         row["qualification"] = (f"Adjusted expected return {row['action_edge']:.2%}; "
                                 f"GOOD needs {float(cfg['tiers']['good']):.2%}, "
@@ -354,9 +358,20 @@ def price_game(g: dict, proj: dict, cfg: dict, conf: float, stale: bool,
                                 f"Confidence {conf:.0%}; raw offered-price EV {row['ev']:.2%}.")
         row["line_gap"] = line_gap
         row["adverse_move"] = adverse_move(move or {}, row["market"], row["side"])
+        if row["market"] == "TOTAL" and row["adverse_move"] is not None:
+            # Totals move roughly twice as far as spreads on the same news
+            # (weather, a quarterback), so they get their own allowance,
+            # expressed here in spread-equivalent points.
+            rules = cfg["tiers"].get("lock_rules") or {}
+            spread_lim = float(rules.get("max_adverse_line_move", 1.0) or 1.0)
+            total_lim = float(rules.get("max_adverse_total_move", 2 * spread_lim) or 2 * spread_lim)
+            row["adverse_move_points"] = row["adverse_move"]
+            row["adverse_move"] = round(row["adverse_move"] * spread_lim / total_lim, 2)
         tier, why = M.tier_for(min(row["edge"], row["edge_real"]), cfg, conf, line_gap=line_gap,
                                price=row["price"], stale=stale,
-                               adverse=row["adverse_move"])
+                               adverse=row["adverse_move"],
+                               model_prob=row["model_prob"],
+                               prob_edge=row["probability_edge"])
         row["model_tier"] = tier
         row["tier"] = tier
         if why:
@@ -369,12 +384,23 @@ def price_game(g: dict, proj: dict, cfg: dict, conf: float, stale: bool,
         raw_a = 1.0 - raw_h - p_tie
         be_h = M.american_to_prob(float(o["ml_home"]))
         be_a = M.american_to_prob(float(o["ml_away"]))
-        fair_h, fair_a = M.devig(be_h, be_a)
+        fair_h, fair_a = M.devig_power(be_h, be_a)
         # Renormalise the model onto the non-tie space so it is comparable to a
         # de-vigged two-way market, then put the tie back as push probability.
         denom = raw_h + raw_a
         nh = raw_h / denom if denom else 0.5
-        p_h = (1 - blend) * nh + blend * fair_h
+        mkt_mu = proj.get("market_mu")
+        if mkt_mu is None and o.get("spread_home") is not None:
+            mkt_mu = -float(o["spread_home"])
+        if mkt_mu is not None:
+            # Market-anchored: only the model's disagreement with the spread
+            # moves the number away from the market's own moneyline.
+            mh, mt = M.moneyline_probability(float(mkt_mu), sd_m, keys, ties_push)
+            m_den = mh + (1.0 - mh - mt)
+            nh_mkt = mh / m_den if m_den else 0.5
+            p_h = M.market_anchored_prob(fair_h, nh, nh_mkt, 1 - blend)
+        else:
+            p_h = (1 - blend) * nh + blend * fair_h
         gap = proj.get("gap")
         for side, p, be, fair, price, label in (
             ("home", p_h, be_h, fair_h, float(o["ml_home"]), f'{g["home"]["abbr"]} ML'),
@@ -401,7 +427,11 @@ def price_game(g: dict, proj: dict, cfg: dict, conf: float, stale: bool,
         pa_price = float(o["spread_price_away"])
         be_h, be_a = M.american_to_prob(ph_price), M.american_to_prob(pa_price)
         fair_h, fair_a = M.devig(be_h, be_a)
-        p_h = (1 - blend) * raw_h + blend * fair_h
+        # Market-anchored: at the market's own number the key-number curve is
+        # not 50/50 (it gives the favourite ~44% at -7.5), so price the shift.
+        mw, mp, ml = M.cover_probability(-sp, sd_m, sp, keys)
+        raw_h_mkt = mw / (mw + ml) if (mw + ml) else 0.5
+        p_h = M.market_anchored_prob(fair_h, raw_h, raw_h_mkt, 1 - blend)
         gap = proj.get("gap")
         fmt = lambda x: f"{x:+g}"
         for side, p, be, fair, price, label in (
@@ -428,7 +458,9 @@ def price_game(g: dict, proj: dict, cfg: dict, conf: float, stale: bool,
         up = float(o["under_price"])
         be_o, be_u = M.american_to_prob(op), M.american_to_prob(up)
         fair_o, fair_u = M.devig(be_o, be_u)
-        p_o = (1 - blend) * raw_o + blend * fair_o
+        mo, mpp, mu_ = M.over_probability(tot, tot, sd_t)
+        raw_o_mkt = mo / (mo + mu_) if (mo + mu_) else 0.5
+        p_o = M.market_anchored_prob(fair_o, raw_o, raw_o_mkt, 1 - blend)
         tgap = proj.get("total_gap")
         for side, p, be, fair, price, label in (
             ("over", p_o, be_o, fair_o, op, f"Over {tot:g}"),
@@ -666,7 +698,7 @@ def main() -> int:
         print(f"   no regular-season results yet — ratings are the preseason prior ({prior_note})")
     team_hfa = R.per_team_home_field(games, hfa, cfg)
     divisions = load_divisions()
-    score_rat, league_pts, home_bump = R.solve_scoring_ratings(games + prior_games, cfg)
+    score_rat, league_pts, home_bump = R.solve_scoring_ratings(games, cfg, prior_games=prior_games)
     played = played_counts
     form = R.ats_form(games)
     rests = rest_days(games)
@@ -786,7 +818,8 @@ def main() -> int:
             conf = min(conf, 0.4)
         snaps = len(lines.get(g["game_id"]) or [])
         stale = snaps == 0
-        move = store.line_move(lines, g["game_id"])
+        move = store.line_move_in_window(lines, g["game_id"], g.get("date_utc"),
+                                         float(cfg["filters"].get("bet_within_days") or 8))
         cands = apply_filters(price_game(g, proj, cfg, conf, stale, calib, move), cfg, g, today)
         for c in cands:
             c["projection"] = {k: v for k, v in proj.items() if k != "parts"}
@@ -840,7 +873,9 @@ def main() -> int:
                                       played.get(g["away"]["abbr"], 0), True, cfg,
                                       int(g.get("season_type") or 2))
             cands = price_game(g, proj, cfg, conf, stale=False, calib=calib,
-                               move=store.line_move(lines, g["game_id"]))
+                               move=store.line_move_in_window(
+                                   lines, g["game_id"], g.get("date_utc"),
+                                   float(cfg["filters"].get("bet_within_days") or 8)))
             best = min((c for c in cands if c["tier"] != "PASS"),
                        key=lambda c: (M.TIER_RANK[c["tier"]], -c["edge"]), default=None)
             o = g.get("odds") or {}

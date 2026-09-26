@@ -223,6 +223,10 @@ def narrative(g: dict, proj: dict, ev: dict, cand: dict | None) -> str:
         bits.append(f'Best angle: {cand["pick"]} at {cand["price"]:+.0f} — '
                     f'{cand["model_prob"]*100:.1f}% to win against a break-even of '
                     f'{cand["breakeven"]*100:.1f}%, an edge of {cand["edge"]*100:.1f}%.')
+        if cand["model_prob"] < 0.5:
+            bits.append('This is a value play, not a prediction that this side wins: '
+                        'the model still expects it to lose more often than not, and '
+                        'the price is what makes it worth a bet over many weeks.')
     return " ".join(bits)
 
 

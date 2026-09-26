@@ -12,7 +12,7 @@ from collections import defaultdict
 from datetime import datetime, timezone
 from pathlib import Path
 
-VERSION = "2026-09-06-ev2"
+VERSION = "2026-09-26-anchored"
 
 
 def instant(value):

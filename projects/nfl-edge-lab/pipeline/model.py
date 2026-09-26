@@ -106,6 +106,55 @@ def devig(p_a: float, p_b: float) -> tuple[float, float]:
     return p_a / tot, p_b / tot
 
 
+def devig_power(p_a: float, p_b: float) -> tuple[float, float]:
+    """
+    Strip the vig with the power method: find k so that p_a**k + p_b**k == 1.
+
+    Used for moneylines. Books load more of their margin onto the longshot
+    (the favourite-longshot bias), and proportional de-vigging hands that extra
+    margin back to the underdog as fake probability. On -600/+455 the
+    proportional method calls the dog 17.4%; the power method calls it 16.8%.
+    That half-point is the whole "edge" on a lot of big-dog moneylines. On
+    near-even two-way markets the two methods agree to within a hair.
+    """
+    if p_a <= 0 or p_b <= 0:
+        return devig(p_a, p_b)
+    if p_a + p_b <= 1.0:
+        return devig(p_a, p_b)
+    lo, hi = 1.0, 10.0
+    for _ in range(60):
+        k = (lo + hi) / 2
+        if p_a ** k + p_b ** k > 1.0:
+            lo = k
+        else:
+            hi = k
+    k = (lo + hi) / 2
+    a, b = p_a ** k, p_b ** k
+    return a / (a + b), b / (a + b)
+
+
+def market_anchored_prob(fair: float, f_model: float, f_market: float,
+                         keep: float) -> float:
+    """
+    The model's probability, expressed as a SHIFT from the market's fair price.
+
+        p = fair + keep * (F(model projection) - F(market projection))
+
+    F is this model's own projection -> probability curve. Using it only for
+    the difference, never for the level, is what stops the curve's shape from
+    manufacturing edges. The key-number margin distribution is a good tool for
+    "how much is one more point worth here", but its absolute level is biased
+    toward underdogs: at the market's own number it gives a 7.5-point home
+    favourite 44% to cover and a 10-point favourite 76% to win, where the
+    market (correctly, historically) says 50% and ~83%. Priced directly, that
+    bias handed every underdog on the board a free 5-7% "edge" before the model
+    had expressed any opinion at all. Anchored this way, a model that agrees
+    with the market line prices every side at exactly the market's fair number.
+    """
+    p = fair + keep * (f_model - f_market)
+    return min(0.99, max(0.01, p))
+
+
 # --------------------------------------------------------------------------- #
 # Anchoring the projection to the market
 # --------------------------------------------------------------------------- #
@@ -328,7 +377,9 @@ def risk_adjusted_edge(edge: float, cfg: dict, confidence: float) -> float:
 
 def tier_for(edge: float, cfg: dict, confidence: float,
              line_gap: float | None = None, price: float | None = None,
-             stale: bool = False, adverse: float | None = None) -> tuple[str, str | None]:
+             stale: bool = False, adverse: float | None = None,
+             model_prob: float | None = None,
+             prob_edge: float | None = None) -> tuple[str, str | None]:
     """
     Map a compressed edge to BEST BET / GOOD / LEAN / PASS, and say why.
 
@@ -361,10 +412,49 @@ def tier_for(edge: float, cfg: dict, confidence: float,
     else:
         return "PASS", None
 
-    if candidate != "BEST BET":
-        return candidate, None
+    # Probability-point floor. Expected return on long odds multiplies a tiny
+    # probability difference into a big-looking number: 1.3 points of win
+    # probability on a +455 dog is a "7% return", and 1.3 points is well inside
+    # this model's error. The tier also has to clear a floor measured in
+    # probability points, which is where the model's real uncertainty lives.
+    note = None
+    floors = t.get("min_prob_edge") or {}
+    if prob_edge is not None and floors:
+        order = ["BEST BET", "GOOD", "LEAN"]
+        keys = {"BEST BET": "best_bet", "GOOD": "good", "LEAN": "lean"}
+        start = order.index(candidate)
+        for tier_name in order[start:]:
+            floor = floors.get(keys[tier_name])
+            if floor is None or prob_edge >= float(floor):
+                if tier_name != candidate:
+                    note = (f"only {prob_edge*100:.1f} pts of win probability over break-even — "
+                            f"capped at {tier_name}")
+                candidate = tier_name
+                break
+        else:
+            return "PASS", (f"only {prob_edge*100:.1f} pts of win probability over break-even; "
+                            f"the return looks big only because the odds are long")
 
     rules = t.get("lock_rules") or {}
+    # A market that has run hard against the side (a total down 7, a spread
+    # through two key numbers) almost always knows something the feed does
+    # not yet -- a quarterback, a forecast. Beyond twice the BEST BET limit the
+    # play is held to LEAN whatever its size.
+    limit = rules.get("max_adverse_line_move")
+    if (limit is not None and adverse is not None and adverse >= 2 * float(limit)
+            and candidate in ("BEST BET", "GOOD")):
+        return "LEAN", ("the market has moved hard against this side inside the bet window — "
+                        "held to LEAN until the reason (injury, weather) is known")
+
+    if candidate != "BEST BET":
+        return candidate, note
+    # A BEST BET is meant to be a near-lock. A side the model itself expects to
+    # LOSE more often than not can be a value bet, but it is never a lock.
+    if model_prob is not None and model_prob < float(rules.get("min_win_prob", 0)):
+        return "GOOD", (f"value play, not a lock: the model gives this side only "
+                        f"{model_prob:.0%} to win")
+    if price is not None and price > float(rules.get("max_price", 100000)):
+        return "GOOD", f"price {price:+.0f} is too long to call a lock"
     if confidence < float(rules.get("min_confidence", 0)):
         return "GOOD", f"not enough data yet (confidence {confidence:.2f})"
     if price is not None and price < float(rules.get("min_price", -10000)):

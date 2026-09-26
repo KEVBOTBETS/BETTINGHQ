@@ -70,7 +70,7 @@ def run(season: int, cfg: dict) -> dict:
         history = [g for g in played if week_key(g) < wk]
         rat, hfa = R.solve_margin_ratings(history, cfg, prior=preseason) if history \
             else (preseason, float(cfg["model"]["home_field_fallback"]))
-        score_rat, league, bump = R.solve_scoring_ratings(history + prior, cfg)
+        score_rat, league, bump = R.solve_scoring_ratings(history, cfg, prior_games=prior)
         n_played = R.games_played(history)
         rests = B.rest_days(history + [g for g in played if week_key(g) == wk])
 

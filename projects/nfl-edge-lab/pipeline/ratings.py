@@ -232,26 +232,32 @@ def solve_margin_ratings(games: list[dict], cfg: dict,
     hfa_col = len(teams)
     n_params = len(teams) + 1
 
+    # Solve for each team's DEVIATION from its preseason prior, and let the ridge
+    # penalty shrink that deviation toward zero -- i.e. shrink the rating toward
+    # the prior, which is what the penalty is supposed to mean.
+    #
+    # The 2026-09 version shrank the ratings themselves toward ZERO (lambda 14)
+    # and added the prior as a weak pseudo-observation (weight ~1.8). The penalty
+    # outweighed the prior roughly 8:1, so every team was squashed toward
+    # average: in Week 3 the solved spread of team strength was 1.1 points
+    # against 2.8 for the prior and 3.8 for ESPN FPI, KC-MIA came out as a
+    # 3.6-point game the market priced at 10, and every big underdog on the
+    # board looked like a moneyline bargain. The Bayesian form below keeps the
+    # prior's spread intact and moves each team only as far as its results say.
+    base = {t: float((prior or {}).get(t, 0.0)) for t in teams}
     ws = _weights(played, halflife)
     rows: list[tuple[dict[int, float], float, float]] = []
     for g, w in zip(played, ws):
+        h, a = g["home"]["abbr"], g["away"]["abbr"]
         margin = max(-cap, min(cap, g["home_score"] - g["away_score"]))
-        coefs = {idx[g["home"]["abbr"]]: 1.0, idx[g["away"]["abbr"]]: -1.0}
+        coefs = {idx[h]: 1.0, idx[a]: -1.0}
         if not g.get("neutral"):
             coefs[hfa_col] = 1.0
-        rows.append((coefs, float(margin), float(w)))
-
-    # Anchor each rating to its preseason prior rather than to zero. Early in the
-    # year that is the difference between "we know nothing" and "we know what the
-    # market knew in August", which is most of what there is to know.
-    if prior:
-        n_weeks = max(1.0, len(played) / 16.0)
-        prior_w = float(r["prior_season_weight"]) * max(1.0, 16.0 / n_weeks) * 0.5
-        for t, p in prior.items():
-            if t in idx:
-                rows.append(({idx[t]: 1.0}, float(p), prior_w))
+        rows.append((coefs, float(margin) - (base[h] - base[a]), float(w)))
 
     beta = _ridge_solve(rows, n_params, lam, unpenalised=(hfa_col,))
+    for t in teams:
+        beta[idx[t]] += base[t]
 
     # Shrink the solved home-field number toward the configured fallback in
     # proportion to how many non-neutral games it came from. In Week 2 a raw
@@ -306,47 +312,94 @@ def per_team_home_field(games: list[dict], league_hfa: float, cfg: dict) -> dict
     return out
 
 
-def solve_scoring_ratings(games: list[dict], cfg: dict) -> tuple[dict[str, dict], float, float]:
+def solve_scoring_ratings(games: list[dict], cfg: dict,
+                          prior_games: list[dict] | None = None,
+                          ) -> tuple[dict[str, dict], float, float]:
     """
     Offence / defence ratings for the totals model.
 
         points_for(t vs o)  ~=  league_avg + off[t] - def[o] + home_bump*(home?)
 
     Returns ({team: {"off": x, "def": y}}, league_avg_points, home_scoring_bump).
+
+    With `prior_games` (last season), the ratings are solved in two stages, the
+    same way the margin ratings are: last season's full-year offence/defence,
+    regressed by `prior_regression`, becomes the prior, and this season's
+    results move each team away from it, shrunk by ridge_lambda.
+
+    The 2026-09 version instead threw last season's games into the same solve
+    with a 56-day recency half-life -- so a whole 2025 season counted as less
+    than one 2026 game -- and ridge-shrank everything toward league average.
+    Projected totals came out with a spread of 1.7 points across the slate
+    against the market's 3.4 (slope 0.25), so the board called Under on every
+    high total and Over on every low one. That is regression to the mean
+    wearing an edge's clothing, not a read on the game.
     """
     r = cfg["ratings"]
     lam = float(r["ridge_lambda"])
     halflife = float(r["recency_halflife_games"])
 
     played = _played(games)
-    if not played:
+    prior_played = _played(prior_games or [])
+    if not played and not prior_played:
         return ({}, 22.6, 0.9)
 
-    pts = [g["home_score"] for g in played] + [g["away_score"] for g in played]
-    league = float(np.mean(pts))
+    pts = ([g["home_score"] for g in played] + [g["away_score"] for g in played])
+    prior_pts = ([g["home_score"] for g in prior_played] + [g["away_score"] for g in prior_played])
+    # League scoring level: this season's once it has a real sample, blended
+    # with last season's before that.
+    n_now = len(pts)
+    if prior_pts:
+        w_now = n_now / (n_now + 128.0)
+        league = (w_now * (float(np.mean(pts)) if pts else 0.0)
+                  + (1 - w_now) * float(np.mean(prior_pts)))
+    else:
+        league = float(np.mean(pts))
 
-    teams = sorted({g["home"]["abbr"] for g in played} | {g["away"]["abbr"] for g in played})
-    off = {t: i for i, t in enumerate(teams)}
-    dfn = {t: i + len(teams) for i, t in enumerate(teams)}
-    home_col = 2 * len(teams)
-    n_params = home_col + 1
+    def solve(sample, base, lam_, halflife_):
+        teams = sorted({g["home"]["abbr"] for g in sample} | {g["away"]["abbr"] for g in sample}
+                       | set(base))
+        off = {t: i for i, t in enumerate(teams)}
+        dfn = {t: i + len(teams) for i, t in enumerate(teams)}
+        home_col = 2 * len(teams)
+        lg = float(np.mean([g["home_score"] for g in sample] + [g["away_score"] for g in sample])) \
+            if sample else league
+        b0 = lambda t: base.get(t) or {"off": 0.0, "def": 0.0}
+        ws = _weights(sample, halflife_)
+        rows: list[tuple[dict[int, float], float, float]] = []
+        for g, w in zip(sample, ws):
+            h, a = g["home"]["abbr"], g["away"]["abbr"]
+            # The home edge is split +half / -half so league_avg stays the true
+            # per-team average and the bump is the home-minus-away difference.
+            rows.append(({off[h]: 1.0, dfn[a]: -1.0, home_col: 0.5},
+                         float(g["home_score"]) - lg - (b0(h)["off"] - b0(a)["def"]), float(w)))
+            rows.append(({off[a]: 1.0, dfn[h]: -1.0, home_col: -0.5},
+                         float(g["away_score"]) - lg - (b0(a)["off"] - b0(h)["def"]), float(w)))
+        beta = _ridge_solve(rows, home_col + 1, lam_, unpenalised=(home_col,))
+        bump = float(beta[home_col])
+        return ({t: {"off": float(beta[off[t]]) + b0(t)["off"],
+                     "def": float(beta[dfn[t]]) + b0(t)["def"]} for t in teams}, bump)
 
-    ws = _weights(played, halflife)
-    rows: list[tuple[dict[int, float], float, float]] = []
-    for g, w in zip(played, ws):
-        h, a = g["home"]["abbr"], g["away"]["abbr"]
-        rows.append(({off[h]: 1.0, dfn[a]: -1.0, home_col: 1.0},
-                     float(g["home_score"]) - league, float(w)))
-        rows.append(({off[a]: 1.0, dfn[h]: -1.0},
-                     float(g["away_score"]) - league, float(w)))
-
-    beta = _ridge_solve(rows, n_params, lam, unpenalised=(home_col,))
-    bump = float(beta[home_col])
+    base: dict[str, dict] = {}
+    bump_prior = None
+    if prior_played:
+        # A full season, no recency decay: all 17 games say something about
+        # the team, and the regression below handles the offseason.
+        last, bump_prior = solve(prior_played, {}, lam, 0.0)
+        keep = float(r.get("prior_regression", 0.55))
+        base = {t: {"off": v["off"] * keep, "def": v["def"] * keep} for t, v in last.items()}
+    if played:
+        out, bump = solve(played, base, lam, halflife)
+        if bump_prior is not None:
+            # Two weeks of scores cannot measure home scoring; a season can.
+            k = 150.0
+            n = float(len(played))
+            bump = (n * bump + k * bump_prior) / (n + k)
+    else:
+        out, bump = base, (bump_prior if bump_prior is not None else 0.9)
     if not (-2.5 <= bump <= 4.0):
         bump = 0.9
-
-    return ({t: {"off": float(beta[off[t]]), "def": float(beta[dfn[t]])} for t in teams},
-            league, bump)
+    return out, league, bump
 
 
 def regress_to_prior(last_season: dict[str, float], factor: float) -> dict[str, float]:
