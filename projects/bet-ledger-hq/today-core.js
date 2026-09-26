@@ -38,7 +38,6 @@
     if(key==="wnba"&&meta.odds_health?.status==="partial")warnings.push("Some games have no usable prices; those games cannot qualify.");
     if(key==="ncaaf"){
       if(meta.context_health?.availability?.status!=="available")warnings.push("Availability reports missing or incomplete; verify team news.");
-      if(meta.quote_coverage?.games_multiple_books===0)warnings.push("No multi-book comparison in this refresh.");
     }
     if(meta.odds_health?.healthy===false||["failed","unavailable","error"].includes(meta.odds_health?.status))warnings.push("Odds coverage needs attention.");
     return {key,label:LABELS[key],stamp:stamp||null,age,status:bundle.error?"unavailable":age.status==="stale"?"stale":warnings.length?"review":"recent",warnings};
