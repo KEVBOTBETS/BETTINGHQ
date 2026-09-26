@@ -16,10 +16,10 @@
     "_size_off_note": "'settled' sizes off the bankroll implied by settled bets only, so a stake never depends on the outcome of the bet it is sizing. 'starting' always sizes off the starting bankroll, like the workbook did."
   },
   "tiers": {
-    "_note": "Tier input is compressed expected return per unit at the offered price, capped by no-vig model value, minus selection and confidence reserves. Probability edge is published separately. Version 2026-09-06-ev2; historical tiers stay frozen.",
-    "best_bet": 0.04,
-    "good": 0.028,
-    "lean": 0.015,
+    "_note": "Tier input is compressed expected return per unit at the offered price, capped by no-vig model value, minus selection and confidence reserves, AND a floor in probability points (min_prob_edge). Version 2026-09-26-anchored; historical tiers stay frozen.",
+    "best_bet": 0.02,
+    "good": 0.012,
+    "lean": 0.004,
     "_nfl_note": "Far lower than the college thresholds, because the NFL market is the sharpest in North American sport: 32 teams, enormous handle, every book pricing the same 16 games all week. Real NFL edges live between 1% and 4%. A model reporting a 12% edge on a Sunday side has found a bug, not an opportunity.",
     "lock_rules": {
       "_note": "Extra conditions a play must ALSO satisfy to be called BEST BET. The label is reserved for the rare spot where the model, the market and the data all point the same way -- everything else tops out at GOOD no matter how big the raw number looks.",
@@ -31,9 +31,21 @@
       "min_price": -250,
       "require_no_stale_odds": true,
       "max_adverse_line_move": 1.0,
-      "_adverse_move_note": "Points the market may move AGAINST our side since we first saw the line before BEST BET is withdrawn. The market moving away from you after you form an opinion is the clearest signal available that the opinion is the stale one."
+      "_adverse_move_note": "Points the market may move AGAINST our side since the bet window opened (not since the August opener) before BEST BET is withdrawn; totals get max_adverse_total_move. At twice the limit the play is held to LEAN. The market moving away from you inside the window usually means news the model has not seen yet.",
+      "min_win_prob": 0.5,
+      "_min_win_prob_note": "BEST BET means near-lock: the model must expect this side to win more often than it loses. Underdogs can still be GOOD value plays.",
+      "max_price": 150,
+      "_max_price_note": "Longest price a BEST BET may carry. A +300 moneyline is a value punt, never a lock.",
+      "max_adverse_total_move": 2.0
     },
-    "_best_reachability_note": "4% clears the 5.5% compression ceiling minus the 1% selection reserve at mature confidence. The previous 4.5% threshold equalled the unattainable asymptote. Existing BEST data/price/movement locks also apply."
+    "_best_reachability_note": "4% clears the 5.5% compression ceiling minus the 1% selection reserve at mature confidence. The previous 4.5% threshold equalled the unattainable asymptote. Existing BEST data/price/movement locks also apply.",
+    "min_prob_edge": {
+      "best_bet": 0.0225,
+      "good": 0.015,
+      "lean": 0.01
+    },
+    "_min_prob_edge_note": "Model win probability minus break-even, in probability points, that each tier also needs. Expected return on long odds turns 1 point of probability into a 5-7% 'return' on a +455 dog; that 1 point is well inside the model's error. This keeps long-odds noise from topping the board.",
+    "_threshold_note": "Re-set 2026-09-26 for the market-anchored model. The old 4.0/2.8/1.5% bars were set when raw edges ran to 40%; after anchoring, the top 5% of priced sides show about 3.7% raw return and the top 1% about 5%, so with the 2.3% selection+confidence reserve on top, GOOD sat in the top 1% and BEST BET was unreachable -- two safety layers fighting, the same failure the NCAAF board had. These bars are on the adjusted number (after reserves): at Week-3 confidence GOOD needs ~3.5% raw return (about 54.2% at -110) and BEST BET ~4.5% (about 54.8% at -110, plus 2.25 pts of probability, plus every lock rule)."
   },
   "model": {
     "projection_blend": 0.55,
@@ -47,7 +59,8 @@
     "max_model_prob": 0.85,
     "margin_sd": 13.2,
     "_margin_sd_note": "Standard deviation of NFL final margins. The workbook used 13.5; the modern-era number is closer to 13.2 and it barely matters, but it is measurable so it should be measured.",
-    "total_sd": 10.2,
+    "total_sd": 13.5,
+    "_total_sd_note": "Spread of final combined scores around the projected total. Was 10.2, which made the model roughly 30% too sure of every over/under: 2025 regular-season totals had a standard deviation of 13.8 points and 2026 finals landed 15.0 points (SD) from the closing total. 13.5 is the long-run NFL figure.",
     "use_key_numbers": true,
     "ties_are_push": true,
     "_ties_note": "NFL regular-season games can end tied (~0.2% of games) and a moneyline tie is graded as a PUSH, not a loss. The workbook priced ties as impossible and the college model splits them; here they are priced and graded as pushes.",
@@ -98,7 +111,8 @@
     "market_spread_prior_weight": 0.35,
     "_market_spread_prior_weight_note": "Maximum preseason weight on ratings solved from current point spreads. It fades to zero as results arrive and stays below 50% so the model cannot erase every edge by copying the same market it evaluates.",
     "_market_spread_ratings_note": "Solve a power rating per team from the posted point spreads and use it as the early-season prior, fading it out as each team plays. In Week 2 the market's opinion -- which has already priced the draft, free agency and the quarterback's ankle, with real money behind it -- is worth more than the model's own one-game sample.",
-    "_win_totals_note": "Blend the preseason prior with the market's own 2026 win totals from config/win_totals.json. The market's preseason opinion is better than last season's results alone, which is exactly why the workbook seeded ratings from win totals in the first place."
+    "_win_totals_note": "Blend the preseason prior with the market's own 2026 win totals from config/win_totals.json. The market's preseason opinion is better than last season's results alone, which is exactly why the workbook seeded ratings from win totals in the first place.",
+    "_prior_season_weight_note": "No longer used by the in-season solve (2026-09-26): ratings are now solved as deviations from the preseason prior, shrunk by ridge_lambda. ridge_lambda ~14 means a team needs about 14 games of evidence before its results carry as much weight as its prior."
   },
   "injuries": {
     "enabled": true,
@@ -185,7 +199,7 @@
   "filters": {
     "_note": "Bets that fail these are still shown with the reason. No model pick is auto-logged: My Ledger contains only wagers the user explicitly adds in the browser.",
     "min_price": -350,
-    "max_price": 550,
+    "max_price": 300,
     "skip_if_no_odds": true,
     "max_bets_per_game": 1,
     "_max_bets_per_game_note": "Correlation guard. A team's moneyline and its spread are close to the same bet, so taking both is one position at double the variance Kelly assumed.",
@@ -195,7 +209,8 @@
     "_bet_within_days_note": "Games further out than this are priced and displayed but not staked. Seeing an edge three weeks early is useful; betting into a market that thin is not, and the number will move several times before kickoff. The card shows the date the play opens.",
     "bet_preseason": false,
     "_bet_preseason_note": "Preseason games are priced and displayed but never tiered as a play. Starter snap counts, not team strength, decide preseason games, and no rating model sees the coach's snap plan.",
-    "bet_postseason": true
+    "bet_postseason": true,
+    "_max_price_note": "Longest price the board will stake at all. Beyond +300 the de-vig, the favourite-longshot bias and the model's own error are all bigger than any edge it can claim."
   },
   "data": {
     "odds_provider_priority": [
