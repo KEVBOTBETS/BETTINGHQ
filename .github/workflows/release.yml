@@ -101,12 +101,17 @@ jobs:
           publish=true
           for attempt in 1 2 3; do
             git fetch origin main
-            [ "$(git rev-parse origin/main)" != "$built" ] && publish=false
-            [ "$saved" = true ] && break
-            if ! git rebase origin/main; then
-              git rebase --abort
-              echo "::warning::Refreshed data conflicted with a newer commit on main and was not saved; the next run refreshes it again."
-              break
+            [ "$saved" = true ] && { [ "$(git rev-parse origin/main)" != "$built" ] && publish=false; break; }
+            # Only replay when main actually moved. The refresh leaves files it
+            # deliberately does not commit (the blank public ledger, _site), so
+            # --autostash keeps those out of the way of the rebase.
+            if ! git merge-base --is-ancestor origin/main HEAD; then
+              publish=false
+              if ! git rebase --autostash origin/main; then
+                git rebase --abort
+                echo "::warning::Refreshed data conflicted with a newer commit on main and was not saved; the next run refreshes it again."
+                break
+              fi
             fi
             if git push origin HEAD:main; then saved=true; break; fi
             if [ "$attempt" = 3 ]; then echo "::error::Could not save refreshed data after 3 attempts."; exit 1; fi
