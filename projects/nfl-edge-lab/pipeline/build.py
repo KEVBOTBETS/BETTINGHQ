@@ -26,8 +26,8 @@ import math
 import os
 import sys
 
-from . import calibrate, espn, explain, forecast, injuries as INJ, ledger
-from . import market as MKT, model as M
+from . import calibrate, clv as CLV, early, espn, explain, forecast, injuries as INJ, ledger
+from . import market as MKT, model as M, qb_value as QBV
 from . import ratings as R, stats as ST, store, tracker, weather as WX
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -506,6 +506,13 @@ def apply_filters(cands: list[dict], cfg: dict, g: dict, today: dt.date | None =
         if not (float(f["min_price"]) <= c["price"] <= float(f["max_price"])):
             c["tier"] = "PASS"
             c["filtered"] = f'price {c["price"]:+.0f} outside the allowed range'
+        elif (c.get("market") == "ML" and f.get("ml_max_price") is not None
+              and c["price"] > float(f["ml_max_price"]) and c["tier"] != "PASS"):
+            # 15-season backtest (pipeline/history_backtest.py): the bigger the
+            # model's edge on a moneyline underdog, the worse it did.
+            c["tier"] = "PASS"
+            c["filtered"] = (f'moneyline {c["price"]:+.0f} is longer than {float(f["ml_max_price"]):+.0f} — '
+                             "long underdog edges lost money in 15 seasons of backtesting")
         elif c["ev"] <= 0 and c["tier"] != "PASS":
             c["tier"] = "PASS"
             c["filtered"] = "negative expected value at this price"
@@ -517,6 +524,51 @@ def apply_filters(cands: list[dict], cfg: dict, g: dict, today: dt.date | None =
             c["opens_in_days"] = out_days - hold
             c["hold_note"] = (f"priced early — {out_days} days out; bets open "
                               f"{hold} days before kickoff")
+    return cands
+
+
+def qb_status_hold(cands: list[dict], inj: dict | None, g: dict, cfg: dict,
+                   now: dt.datetime | None = None) -> list[dict]:
+    """
+    Hold every market on a game whose usual starting QB is Questionable or
+    Doubtful, until inactives are announced (~90 minutes before kickoff).
+
+    A questionable starter is either a ~5-point swing or nothing, and the
+    model can only charge a fraction of it. Betting before the answer is known
+    means betting the coin flip, and the market reprices within minutes of the
+    inactive list. After the release time, a player still listed Questionable
+    is treated as active (that is how the designation usually resolves) and
+    the card says to confirm.
+    """
+    rules = cfg.get("injuries") or {}
+    if not rules.get("hold_questionable_qb", True) or not inj:
+        return cands
+    flagged = [(side, (inj.get(side) or {}).get("qb") or {}) for side in ("home", "away")]
+    flagged = [(side, q) for side, q in flagged if q.get("questionable")]
+    if not flagged:
+        return cands
+    now = now or dt.datetime.now(dt.timezone.utc)
+    try:
+        ko = dt.datetime.fromisoformat((g.get("date_utc") or "").replace("Z", "+00:00"))
+        ko = ko if ko.tzinfo else ko.replace(tzinfo=dt.timezone.utc)
+        mins = (ko - now).total_seconds() / 60.0
+    except ValueError:
+        mins = None
+    release = float(rules.get("qb_hold_release_minutes", 90))
+    who = " & ".join(f'{g[side]["abbr"]} QB {q.get("name") or "starter"} ({q.get("status")})'
+                     for side, q in flagged)
+    for c in cands:
+        c["qb_uncertain"] = who
+        if c["tier"] == "PASS":
+            continue
+        if mins is not None and mins <= release:
+            c.setdefault("risk_flags", [])
+            c["risk_flags"] = list(dict.fromkeys([*c["risk_flags"],
+                                   f"{who} at inactives time — assumed active; confirm before betting"]))
+            continue
+        c["held"] = True
+        c["hold_note"] = (f"{who} — held until inactives (~{release:.0f} min before kickoff); "
+                          "the line jumps either way once the answer is out")
     return cands
 
 
@@ -731,29 +783,46 @@ def main() -> int:
                 else espn._try(espn.injuries, {}, "injuries")
             depth_ok = bool((cfg.get("injuries") or {}).get("depth_chart_enabled", True)) \
                 and not args.offline
-            qb_cache: dict[str, tuple[str | None, bool]] = {}
+            qb_cache: dict[str, tuple[list[str], bool]] = {}
             offline_qb = (feeds.get("starting_qb") or {}) if args.offline else {}
+            offline_depth = (feeds.get("depth_qbs") or {}) if args.offline else {}
 
-            def qb_for(team_id: str) -> tuple[str | None, bool]:
+            def qbs_for(team_id: str) -> tuple[list[str], bool]:
+                """Depth-chart QBs in order, and whether the chart was available."""
                 if args.offline:
-                    return offline_qb.get(team_id), bool(offline_qb)
+                    depth = offline_depth.get(team_id) or \
+                        ([offline_qb[team_id]] if offline_qb.get(team_id) else [])
+                    return depth, bool(offline_qb or offline_depth)
                 if team_id in qb_cache:
                     return qb_cache[team_id]
                 if not depth_ok or not team_id:
-                    qb_cache[team_id] = (None, False)
+                    qb_cache[team_id] = ([], False)
                     return qb_cache[team_id]
                 depth = espn._try(lambda: espn.depth_chart(team_id, season), None,
                                   f"depth chart {team_id}")
-                qb_cache[team_id] = (INJ.starting_qb(depth), depth is not None)
+                qb_cache[team_id] = (list((depth or {}).get("QB") or []), depth is not None)
                 return qb_cache[team_id]
+
+            # Measured QB value (starter vs the man who would replace him),
+            # from nflverse's free player stats. See pipeline/qb_value.py.
+            qb_table = store.load("qb_quality.json", {})
+            if (cfg.get("injuries") or {}).get("measured_qb_value", True) and not args.offline:
+                qb_table = QBV.refresh(qb_table, season)
+                store.save("qb_quality.json", qb_table)
+            sw = lambda status: INJ.status_weight(status, cfg)
 
             for g in upcoming:
                 per_side = {}
                 for side in ("home", "away"):
                     t = g[side]
                     rows = INJ.resolve_team_rows(inj_feed, t["id"], t["name"])
-                    qb_id, known = qb_for(t["id"])
-                    per_side[side] = INJ.team_impact(rows, cfg, qb_id, qb_known=known)
+                    depth, known = qbs_for(t["id"])
+                    info = QBV.team_qb(qb_table, t["abbr"], depth, rows, sw) if qb_table else \
+                        {"usual": depth[0] if depth else None}
+                    value = QBV.starter_value(qb_table, info.get("usual"), info.get("replacement"), cfg) \
+                        if qb_table else None
+                    per_side[side] = INJ.team_impact(rows, cfg, info.get("usual"), qb_known=known,
+                                                     qb_value=value, qb_info=info)
                 inj_by_game[g["game_id"]] = INJ.game_adjustment(per_side["home"], per_side["away"], cfg)
             print(f"   injuries: {sum(len(v) for k, v in inj_feed.items() if not k.startswith('name:'))} "
                   f"listed league-wide, applied to {len(inj_by_game)} games")
@@ -821,6 +890,7 @@ def main() -> int:
         move = store.line_move_in_window(lines, g["game_id"], g.get("date_utc"),
                                          float(cfg["filters"].get("bet_within_days") or 8))
         cands = apply_filters(price_game(g, proj, cfg, conf, stale, calib, move), cfg, g, today)
+        cands = qb_status_hold(cands, inj_by_game.get(g["game_id"]), g, cfg)
         for c in cands:
             c["projection"] = {k: v for k, v in proj.items() if k != "parts"}
         board.extend(cands)
@@ -907,8 +977,16 @@ def main() -> int:
         print(f"   outlook: {len(outlook)} future games with a posted line, "
               f"across {weeks_covered} weeks")
 
-    board = weekly_cap(correlation_guard(board, cfg), cfg)
+    # Timing gate (off by default for NFL -- see pipeline/early.py), then the
+    # correlation and weekly caps, then lock every bettable play at its first
+    # price so closing-line value and early-vs-late results can be measured.
+    board = weekly_cap(correlation_guard(early.timing_gate(board, cfg), cfg), cfg)
     board.sort(key=lambda c: (M.TIER_RANK[c["tier"]], -c["edge"]))
+    early_state = store.load("early_plays.json", {})
+    early_summary = early.track(early_state, board, games, lines, cfg)
+    store.save("early_plays.json", early_state)
+    print(f"   tracked plays: {early_summary['locked']} locked | record {early_summary['record']} | "
+          f"avg CLV {early_summary['avg_clv_points']} pts | beat close {early_summary['beat_close_pct']}")
     availability = board_availability(board)
     no_line = sum(1 for g in upcoming
                   if (g.get("odds") or {}).get("spread_home") is None
@@ -924,10 +1002,20 @@ def main() -> int:
     for card in game_cards:
         ph, pt = M.moneyline_probability(card["projection"]["mu"], float(cfg["model"]["margin_sd"]), bool(cfg["model"]["use_key_numbers"]), True)
         card["p_home"] = ph / (1-pt) if pt < 1 else .5
-    game_history.update(os.path.join(store.STATE_DIR, "model_accuracy.json"),
-                        os.path.join(SITE_DATA, "accuracy.json"), board, game_cards,
-                        games, "NFL", historical=store.load("shadow.json", {}).values(),
-                        old_forecasts=store.load("forecasts.json", {}), season=season)
+    accuracy = game_history.update(os.path.join(store.STATE_DIR, "model_accuracy.json"),
+                                   os.path.join(SITE_DATA, "accuracy.json"), board, game_cards,
+                                   games, "NFL", historical=store.load("shadow.json", {}).values(),
+                                   old_forecasts=store.load("forecasts.json", {}), season=season)
+    # Closing-line value: every frozen game forecast (whole season) and every
+    # locked play. Both read only stored line snapshots; nothing is refetched.
+    accuracy["clv"] = {
+        "forecasts": CLV.forecast_clv(store.load("model_accuracy.json", {}).get("records") or {}, lines),
+        "plays": early_summary,
+    }
+    with open(os.path.join(SITE_DATA, "accuracy.json"), "w", encoding="utf-8") as fh:
+        json.dump(accuracy, fh, separators=(",", ":"), default=str)
+    print(f"   closing-line value: forecasts toward model {accuracy['clv']['forecasts']['spread']['toward_pct']} "
+          f"(n={accuracy['clv']['forecasts']['spread']['n']})")
 
     # 9. Forecast log: what the model said about each game, bet or no bet.
     fc_log = store.load("forecasts.json", {})
@@ -1025,6 +1113,7 @@ def main() -> int:
         "horizon_days": int(cfg["data"]["lookahead_days"]),
         "weather_forecast_days": int((cfg.get("weather") or {}).get("forecast_days", 16)),
         "bet_within_days": int(cfg["filters"].get("bet_within_days") or 0),
+        "early_plays": early_summary,
     })
     # Everything the in-browser simulator needs to price an arbitrary matchup
     # with exactly the same maths the board uses.
@@ -1054,6 +1143,8 @@ def main() -> int:
                   for t in sorted(rat)},
     })
     write("outlook.json", outlook)
+    write("early_plays.json", sorted(early_state.get("locks", {}).values(),
+                                     key=lambda l: l.get("locked_at") or "", reverse=True))
     write("board.json", [{**c, "line_move": store.line_move(lines, c["game_id"])} for c in board])
     write("games_detail.json", game_cards)
     write("ledger.json", sorted(ledg.values(), key=lambda b: (b.get("game_date") or ""), reverse=True))
@@ -1073,6 +1164,7 @@ def main() -> int:
         "away": g["away"]["abbr"], "home": g["home"]["abbr"],
         "away_name": g["away"]["name"], "home_name": g["home"]["name"],
         "away_logo": g["away"].get("logo"), "home_logo": g["home"].get("logo"),
+        "away_color": g["away"].get("color"), "home_color": g["home"].get("color"),
         "away_score": g.get("away_score"), "home_score": g.get("home_score"),
         "completed": g.get("completed"), "neutral": g.get("neutral"),
         "venue": g.get("venue"), "broadcast": g.get("broadcast"),
