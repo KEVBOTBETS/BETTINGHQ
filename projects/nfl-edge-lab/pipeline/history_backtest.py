@@ -45,7 +45,7 @@ import sys
 import time
 from collections import defaultdict
 
-from . import build as B, market as MKT, model as M, ratings as R, weather as WX
+from . import build as B, early as E, market as MKT, model as M, ratings as R, weather as WX
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 CSV_PATH = os.path.join(ROOT, "state", "nflverse_games.csv")
@@ -191,6 +191,10 @@ def _settle(c: dict, g: dict) -> str | None:
     return "Win" if (total > float(c["line"])) == (c["side"] == "over") else "Loss"
 
 
+BACKTEST_GATE = {"sides": {"status": "proven", "closed": 0, "need": 0},
+                 "totals": {"status": "unproven", "closed": 0, "need": 0}}
+
+
 def price_all(ctx: list[dict], cfg: dict) -> list[dict]:
     rows: list[dict] = []
     for x in ctx:
@@ -206,6 +210,11 @@ def price_all(ctx: list[dict], cfg: dict) -> list[dict]:
             c["gap"] = proj.get("gap")
             c["total_gap"] = proj.get("total_gap")
         rows.extend(cands)
+    # The closing-line gate, as the live board applies it with no locked plays
+    # on file: totals are research-only. The BEST BET cap is left off here so
+    # the tier thresholds themselves can still be judged -- there is no CLV
+    # record to gate on in a backtest priced at the close.
+    E.clv_gate(rows, cfg, BACKTEST_GATE)
     # Same guards as the live board, per real week.
     by_week: dict = defaultdict(list)
     for r in rows:
@@ -277,6 +286,10 @@ def summarise(rows: list[dict]) -> dict:
         "selected": _block(sel),
         "by_tier": {t: _block([r for r in sel if r["tier"] == t]) for t in ("BEST BET", "GOOD", "LEAN")},
         "by_market": {m: _block([r for r in sel if r["market"] == m]) for m in ("ML", "ATS", "TOTAL")},
+        # What the untiered totals would have done at their model tier.
+        "research": {"all": _block([r for r in rows if r.get("research")]),
+                     **{t: _block([r for r in rows if r.get("research") and r.get("research_tier") == t])
+                        for t in ("BEST BET", "GOOD", "LEAN")}},
         "by_season": [{"season": s, **_block([r for r in sel if r["season"] == s]),
                        "scores": scores([r for r in rows if r["season"] == s])} for s in seasons],
         "calibration_selected": calibration(sel),
