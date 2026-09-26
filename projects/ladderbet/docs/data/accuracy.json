@@ -1,85 +1,85 @@
 {
  "schema": 1,
- "generated_at": "2026-09-25T21:39:17.669656+00:00",
+ "generated_at": "2026-09-26T00:45:19.728786+00:00",
  "label": "Ladder screened-option accuracy",
  "method": "Every screened option is saved before the event, whether or not you choose it. Probabilities here are de-vigged market estimates, not an independent sports model. First pre-event snapshot, frozen line and price. All model picks, including PASS/AVOID and unstaked picks. One preferred side per event/market in pick statistics; the complete priced-side audit is separate. One hypothetical unit per pick; no actual wagers are created. Missing results remain pending.",
  "overall": {
-  "logged": 129,
-  "wins": 45,
+  "logged": 131,
+  "wins": 46,
   "losses": 25,
   "pushes": 0,
   "voids": 0,
-  "settled": 70,
-  "pending": 59,
-  "win_rate": 0.6428571428571429,
-  "units": -0.456,
-  "roi": -0.00651154285714286,
-  "brier": 0.2308
+  "settled": 71,
+  "pending": 60,
+  "win_rate": 0.647887323943662,
+  "units": 0.189,
+  "roi": 0.0026669436619718287,
+  "brier": 0.23
  },
  "all_calls": {
-  "logged": 129,
-  "wins": 45,
+  "logged": 131,
+  "wins": 46,
   "losses": 25,
   "pushes": 0,
   "voids": 0,
-  "settled": 70,
-  "pending": 59,
-  "win_rate": 0.6428571428571429,
-  "units": -0.456,
-  "roi": -0.00651154285714286,
-  "brier": 0.2308
+  "settled": 71,
+  "pending": 60,
+  "win_rate": 0.647887323943662,
+  "units": 0.189,
+  "roi": 0.0026669436619718287,
+  "brier": 0.23
  },
  "by_tier": {
   "SCREENED": {
-   "logged": 129,
-   "wins": 45,
+   "logged": 131,
+   "wins": 46,
    "losses": 25,
    "pushes": 0,
    "voids": 0,
-   "settled": 70,
-   "pending": 59,
-   "win_rate": 0.6428571428571429,
-   "units": -0.456,
-   "roi": -0.00651154285714286,
-   "brier": 0.2308
+   "settled": 71,
+   "pending": 60,
+   "win_rate": 0.647887323943662,
+   "units": 0.189,
+   "roi": 0.0026669436619718287,
+   "brier": 0.23
   }
  },
  "by_market": {
   "ML": {
-   "logged": 129,
-   "wins": 45,
+   "logged": 131,
+   "wins": 46,
    "losses": 25,
    "pushes": 0,
    "voids": 0,
-   "settled": 70,
-   "pending": 59,
-   "win_rate": 0.6428571428571429,
-   "units": -0.456,
-   "roi": -0.00651154285714286,
-   "brier": 0.2308
+   "settled": 71,
+   "pending": 60,
+   "win_rate": 0.647887323943662,
+   "units": 0.189,
+   "roi": 0.0026669436619718287,
+   "brier": 0.23
   }
  },
  "by_version": {
   "2026-09-06-ev2": {
-   "logged": 129,
-   "wins": 45,
+   "logged": 131,
+   "wins": 46,
    "losses": 25,
    "pushes": 0,
    "voids": 0,
-   "settled": 70,
-   "pending": 59,
-   "win_rate": 0.6428571428571429,
-   "units": -0.456,
-   "roi": -0.00651154285714286,
-   "brier": 0.2308
+   "settled": 71,
+   "pending": 60,
+   "win_rate": 0.647887323943662,
+   "units": 0.189,
+   "roi": 0.0026669436619718287,
+   "brier": 0.23
   }
  },
  "calibration": [
   {
    "bucket": "50\u201360%",
-   "n": 24,
-   "predicted": 0.5859,
-   "actual": 0.54167
+   "n": 25,
+   "predicted": 0.58579,
+   "actual": 0.56
   },
   {
    "bucket": "60\u201370%",
@@ -183,6 +183,27 @@
    "selected": true,
    "id": "call:wnba:401918015::ML:home",
    "captured_at": "2026-09-25T21:39:15.858603+00:00",
+   "result": "Pending",
+   "version": "2026-09-06-ev2"
+  },
+  {
+   "kind": "call",
+   "league": "wnba",
+   "event_id": "401918014",
+   "start": "2026-09-27T18:00Z",
+   "matchup": "New York Liberty @ Minnesota Lynx",
+   "pick": "Minnesota Lynx",
+   "market": "ML",
+   "side": "home",
+   "price": -245.0,
+   "probability": 0.6806,
+   "tier": "SCREENED",
+   "edge": 0,
+   "book": "DraftKings",
+   "three_way": false,
+   "selected": true,
+   "id": "call:wnba:401918014::ML:home",
+   "captured_at": "2026-09-26T00:45:14.464328+00:00",
    "result": "Pending",
    "version": "2026-09-06-ev2"
   },
@@ -608,6 +629,27 @@
   },
   {
    "kind": "call",
+   "league": "mlb",
+   "event_id": "401817090",
+   "start": "2026-09-26T19:07Z",
+   "matchup": "Cincinnati Reds @ Toronto Blue Jays",
+   "pick": "Toronto Blue Jays",
+   "market": "ML",
+   "side": "home",
+   "price": -156.0,
+   "probability": 0.5825,
+   "tier": "SCREENED",
+   "edge": 0,
+   "book": "DraftKings",
+   "three_way": false,
+   "selected": true,
+   "id": "call:mlb:401817090::ML:home",
+   "captured_at": "2026-09-26T00:45:14.464328+00:00",
+   "result": "Pending",
+   "version": "2026-09-06-ev2"
+  },
+  {
+   "kind": "call",
    "league": "ncaaf",
    "event_id": "401864510",
    "start": "2026-09-26T19:00Z",
@@ -813,8 +855,13 @@
    "selected": true,
    "id": "call:ncaaf:401862779::ML:away",
    "captured_at": "2026-09-25T00:59:50.799575+00:00",
-   "result": "Pending",
-   "version": "2026-09-06-ev2"
+   "result": "Win",
+   "version": "2026-09-06-ev2",
+   "units": 0.645161,
+   "actual": null,
+   "final_home": 17.0,
+   "final_away": 21.0,
+   "graded_at": "2026-09-26T00:45:19.727032+00:00"
   },
   {
    "kind": "call",
