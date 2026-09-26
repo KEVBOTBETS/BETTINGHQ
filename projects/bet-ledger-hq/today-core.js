@@ -20,6 +20,27 @@
     if(hours<-.0833)return {status:"unknown",hours:null};
     return {status:hours>limitHours?"stale":"recent",hours:Math.max(0,hours)};
   }
+  function implied(v){const n=american(v);return n==null?null:n>0?100/(n+100):-n/(-n+100);}
+  function toAmerican(d){if(!(d>1))return null;const a=d>=2?(d-1)*100:-100/(d-1);return Math.ceil(a-1e-9);}
+  function fairPrice(p){p=number(p);return p==null||p<=0||p>=1?null:toAmerican(1/p);}
+  /* Worst price that still returns `margin` per unit on the model's probability.
+     Rounded toward the bettor-friendly side so it never overstates the room. */
+  function worstPrice(p,margin){p=number(p);margin=number(margin)??0.02;return p==null||p<=0||p>=1?null:toAmerican((1+margin)/p);}
+  /* Market movement from the pick's side. toward>0 means the number moved
+     toward this pick (the market agrees); <0 means it moved against it. */
+  function movement(key,r,side,line,price){
+    const m=r.line_move||{};
+    if(["ncaaf","nfl"].includes(key)&&m&&Object.keys(m).length){
+      if(r.market==="ATS"&&number(m.opened_spread)!=null&&line!=null){const o=side==="away"?-m.opened_spread:Number(m.opened_spread);return {kind:"line",market:"ATS",opened:o,now:line,toward:+(o-line).toFixed(2),since:m.opened_at||null};}
+      if(r.market==="TOTAL"&&number(m.opened_total)!=null&&line!=null){const o=Number(m.opened_total);return {kind:"line",market:"TOTAL",opened:o,now:line,toward:+((side==="under"?o-line:line-o)).toFixed(2),since:m.opened_at||null};}
+      if(r.market==="ML"){const o=american(side==="home"?m.opened_ml_home:m.opened_ml_away);if(o!=null&&price!=null)return {kind:"price",market:"ML",opened:o,now:price,toward:+(implied(price)-implied(o)).toFixed(4),since:m.opened_at||null};}
+      return null;
+    }
+    const ol=number(r.open_line),op=american(r.open_price);
+    if(["ATS","TOTAL"].includes(r.market)&&ol!=null&&line!=null&&ol!==line)return {kind:"line",market:r.market,opened:ol,now:line,toward:+((r.market==="TOTAL"?(side==="under"?ol-line:line-ol):ol-line)).toFixed(2),since:null};
+    if(op!=null&&price!=null)return {kind:"price",market:r.market,opened:op,now:price,toward:+(implied(price)-implied(op)).toFixed(4),since:null};
+    return null;
+  }
   function health(key,bundle,now=Date.now()){
     const meta=bundle.meta||bundle.slate||{};
     const stamp=meta.generated_at||meta.generated||bundle.accuracy?.generated_at;
@@ -67,19 +88,23 @@
       const selection=String(r.selection||"").toLowerCase();
       const side=r.side||(game?(selection===String(game.home).toLowerCase()?"home":selection===String(game.away).toLowerCase()?"away":["over","under"].includes(selection)?selection:""):"");
       const rawLine=number(r.line),line=rawLine!=null&&["nfl","ncaaf","mlb"].includes(key)&&["ATS","RL"].includes(r.market)&&side==="away"?-rawLine:rawLine;
+      const probability=number(r.model_prob??r.p_final),minReturn=number(meta.settings?.tiers?.lean)??0.02;
+      const worst=worstPrice(probability,minReturn);
       rows.push({key,app:APP[key],sport:key==="props"?"NFL":LABELS[key],event,
         eventId:String(r.result_event_id||r.game_id||r.event_id||game?.gamePk||""),
         player:r.player||"",playerId:String(r.player_id||""),side,home:r.home||game?.home||"",away:r.away||game?.away||"",version:String(r.model_version||meta.model_version||meta.version||"unversioned"),start,when,day:day(start),pick:r.pick||r.label||r.selection||"",
         market:r.market||"",line,sourceLine:rawLine,price,book:r.book||"Unspecified book",
         tier:t,score:number(r.action_edge??r.edge_real??r.edge),quote:quote||null,
-        review,probability:number(r.model_prob??r.p_final),source:LABELS[key]});
+        review,probability,fair:fairPrice(probability),worst,minReturn,
+        worstReached:worst!=null&&implied(price)>implied(worst),
+        move:movement(key,r,side,line,price),source:LABELS[key]});
     }
     if(key==="mlb")(bundle.slate?.games||[]).forEach(g=>(g.bets||[]).forEach(r=>add(r,g)));
     else (Array.isArray(bundle.board)?bundle.board:[]).forEach(r=>add(r));
     const seen=new Set();
     return rows.filter(r=>{const id=[r.key,r.eventId,r.start,r.market,r.pick,r.line].join("|");if(seen.has(id))return false;seen.add(id);return true;});
   }
-  function sortPlays(rows,mode="time"){
+  function sortPlays(rows,mode="tier"){
     const order={"BEST BET":0,GOOD:1,LEAN:2};
     return rows.slice().sort((a,b)=>mode==="tier"?(order[a.tier]-order[b.tier]||a.when-b.when||a.key.localeCompare(b.key)):a.when-b.when||order[a.tier]-order[b.tier]||a.key.localeCompare(b.key));
   }
@@ -118,6 +143,7 @@
     return {key,label:LABELS[key]+" game predictions",scope:[a.scope?.season,a.scope?.season_type_label].filter(Boolean).join(" "),
       n:g.winner?.n||0,wins:g.winner?.correct??null,winRate:g.winner?.accuracy??null,
       ats:g.ats||{},totals:g.totals||{},margin:g.margin_comparison||{},total:g.total_comparison||{},
+      clv:a.clv||null,
       notes:["Only the current-season accuracy feed is used; legacy mixed-season exports are excluded.","Small samples do not establish a betting edge."]};
   }
   const NFL_TEAMS={"arizona cardinals":"ari","atlanta falcons":"atl","baltimore ravens":"bal","buffalo bills":"buf","carolina panthers":"car","chicago bears":"chi","cincinnati bengals":"cin","cleveland browns":"cle","dallas cowboys":"dal","denver broncos":"den","detroit lions":"det","green bay packers":"gb","houston texans":"hou","indianapolis colts":"ind","jacksonville jaguars":"jax","kansas city chiefs":"kc","las vegas raiders":"lv","los angeles chargers":"lac","los angeles rams":"lar","miami dolphins":"mia","minnesota vikings":"min","new england patriots":"ne","new orleans saints":"no","new york giants":"nyg","new york jets":"nyj","philadelphia eagles":"phi","pittsburgh steelers":"pit","san francisco 49ers":"sf","seattle seahawks":"sea","tampa bay buccaneers":"tb","tennessee titans":"ten","washington commanders":"wsh","was":"wsh","jac":"jax"};
@@ -149,5 +175,5 @@
     }
     return {max,current:peak-equity,note:"Reconstructed from settlement/update order; edits can change the historical curve."};
   }
-  return {number,instant,day,american,tier,freshness,health,plays,sortPlays,topPlays,accuracy,eventKey,exposure,drawdown,LABELS};
+  return {number,instant,day,american,implied,fairPrice,worstPrice,movement,tier,freshness,health,plays,sortPlays,topPlays,accuracy,eventKey,exposure,drawdown,LABELS};
 });

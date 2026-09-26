@@ -70,12 +70,27 @@
     const rows=S.sheet.rows.filter(r=>!r.deleted),b=BS.bankroll(rows,S.sheet.settings.starting_bankroll);
     $("#bank").innerHTML='<div class="kpis">'+[["Bankroll",b.current],["Available",b.available],["Open exposure",b.exposure],["Profit / loss",b.pnl]].map(([label,v])=>'<div class="kpi"><small>'+label+'</small><strong>'+money(v)+'</strong></div>').join("")+'</div><p class="note">Sheet '+(S.sheetBusy?"syncing…":"last read "+elapsed(S.sheetAt))+'. '+b.pending+' open bet(s). Sheet sync is separate from odds freshness.</p>'+(S.sheetError?'<p class="warning">Sheet read failed. The figures above are the last successful read; reconnect in Ledger.</p>':"");
   }
+  const lineText=(v,market)=>v==null?"—":market==="TOTAL"?num(v,1).replace(/\.0$/,""):(v>0?"+":"")+String(+Number(v).toFixed(1));
+  function numbers(r){
+    const worst=r.worst==null?"—":r.worstReached?"at limit":odds(r.worst);
+    return '<dl class="play-numbers"><dt>Price</dt><dd><b>'+odds(r.price)+'</b></dd>'+
+      '<dt>Model win chance</dt><dd>'+pct(r.probability)+'</dd>'+
+      '<dt>Fair price</dt><dd>'+odds(r.fair)+'</dd>'+
+      '<dt title="Lowest price that still gives the model at least '+esc(pct(r.minReturn))+' expected return'+(r.market==="ATS"||r.market==="TOTAL"?" at this line":"")+'">Worst price to bet</dt><dd>'+worst+'</dd></dl>';
+  }
+  function moveLine(r){
+    const m=r.move;if(!m)return "";
+    const show=v=>m.kind==="price"?odds(v):lineText(v,m.market);
+    const dir=m.toward>0?"toward":m.toward<0?"against":"flat";
+    const words={toward:"moving toward this pick",against:"moving against this pick",flat:"unchanged since open"}[dir];
+    return '<p class="move '+dir+'"><span>'+(m.kind==="price"?"Price":"Line")+': opened '+esc(show(m.opened))+' → now '+esc(show(m.now))+'</span><small>'+(dir==="toward"?"▲ ":dir==="against"?"▼ ":"")+esc(words)+'</small></p>';
+  }
   function renderPlays(){
     const rows=C.sortPlays(chosen(),$("#sort").value),risk=S.sheet?C.exposure(S.sheet.rows):null;
     $("#play-count").textContent=rows.length+" available";
     $("#plays").innerHTML=rows.length?rows.map(r=>{
       const group=risk?.groups.find(g=>g.key===C.eventKey({sport:r.sport,event:r.event,start:r.start}));
-      return '<article class="card"><span class="tag">'+esc(r.source)+'</span><span class="tag '+(r.review.length?"review":"recent")+'">'+esc(r.tier)+'</span><h3>'+esc(r.pick)+'</h3><p>'+esc(r.event)+'<br><small>'+esc(time(r.start))+' ET</small></p><dl><dt>Offered price</dt><dd>'+odds(r.price)+'</dd><dt>Book</dt><dd>'+esc(r.book)+'</dd><dt>Quote observed</dt><dd>'+esc(r.quote?elapsed(r.quote):"Not supplied")+'</dd></dl>'+r.review.map(t=>'<p class="warning">'+esc(t)+'</p>').join("")+(group?'<p class="warning">Already exposed to this game: '+money(group.stake)+' across '+group.rows.length+' bet(s).</p>':"")+link(r.key,"Review odds and stake")+'</article>';
+      return '<article class="card"><span class="tag">'+esc(r.source)+'</span><span class="tag '+(r.review.length?"review":"recent")+'">'+esc(r.tier)+'</span><h3>'+esc(r.pick)+'</h3><p>'+esc(r.event)+'<br><small>'+esc(time(r.start))+' ET</small></p>'+numbers(r)+moveLine(r)+'<p class="quote-line"><small>'+esc(r.book)+' · quote '+esc(r.quote?elapsed(r.quote):"time not supplied")+'</small></p>'+r.review.map(t=>'<p class="warning">'+esc(t)+'</p>').join("")+(group?'<p class="warning">Already exposed to this game: '+money(group.stake)+' across '+group.rows.length+' bet(s).</p>':"")+link(r.key,"Review odds and stake")+'</article>';
     }).join(""):empty(S.busy?"Loading board-qualified plays…":"No current qualified plays for this date and filter. This may mean no edge, no prices, or stale/unavailable data—see Data health below.");
   }
   function renderHealth(){
@@ -86,6 +101,21 @@
     }).join("");
   }
   function metric(label,value){return '<p><span>'+esc(label)+'</span><b>'+esc(value)+'</b></p>';}
+  const signed=(v,d=1)=>C.number(v)==null?"—":(v>0?"+":"")+Number(v).toFixed(d);
+  function clvBlock(c){
+    const f=c.forecasts||{},p=c.plays||{},big=f.spread_big||{};
+    const row=(label,x)=>'<tr><td>'+esc(label)+'</td><td>'+(x&&x.n?pct(x.toward_pct):"—")+'</td><td>'+(x&&x.n?signed(x.avg_points,2):"—")+'</td><td>'+(x?.n||0)+'</td></tr>';
+    const g=p.by_tier?.good_or_better||{},lean=p.by_tier?.lean||{};
+    return '</div><h4 class="clv-title">Beat the closing line?</h4>'+
+      '<div class="table-scroll"><table class="clv-table"><thead><tr><th>Model forecasts</th><th>Moved toward</th><th>Avg pts</th><th>n</th></tr></thead><tbody>'+
+      row("Spreads",f.spread)+row("Spreads, "+(big.min_gap||2)+"+ pt gap",big)+row("Totals",f.total)+'</tbody></table></div>'+
+      '<div class="metrics">'+
+      metric("Tracked plays beat the close",p.closed?pct(p.beat_close_pct)+" ("+p.beat_close+"–"+p.worse_than_close+"–"+p.same_as_close+")":"none closed yet")+
+      metric("Avg line value",p.avg_clv_points==null?"—":signed(p.avg_clv_points,2)+" pts")+
+      metric("Record at locked price",p.record?p.record+(p.pending?" · "+p.pending+" open":""):"—")+
+      metric("GOOD+ / LEAN beat close",(g.closed?pct(g.beat_close_pct):"—")+" / "+(lean.closed?pct(lean.beat_close_pct):"—"))+
+      '</div><p class="note">Closing line = DraftKings’ last pregame number. Near 50% means the market already knew what the model knew; steadily above ~55% is the first real sign of an edge, long before win rate. Beat-the-close counts are better–worse–same.'+(p.since?' Play tracking started '+esc(time(p.since))+' ET.':'')+'</p><div class="metrics">';
+  }
   function renderAccuracy(){
     $("#accuracy").innerHTML=Object.keys(sources).map(key=>{
       const b=S.feeds[key]||{},a=C.accuracy(key,b);
@@ -100,6 +130,7 @@
         if(key==="mlb")body+=metric("Matched games",a.marketN)+metric("Model / market winners",a.modelCorrect+" / "+a.marketCorrect)+metric("Probability error: model / market",num(a.modelBrier,3)+" / "+num(a.marketBrier,3));
         if(a.ats)body+=metric("Spread direction",pct(a.ats.accuracy)+" · n="+(a.ats.n||0))+metric("Total direction",pct(a.totals.accuracy)+" · n="+(a.totals.n||0))+metric("Margin error: model / market",num(a.margin.model_mae)+" / "+num(a.margin.market_mae)+" · n="+(a.margin.n||0))+metric("Total error: model / market",num(a.total.model_mae)+" / "+num(a.total.market_mae)+" · n="+(a.total.n||0));
         if(key==="ladder")body+=metric("Voids",a.voids)+metric("Hypothetical one-unit ROI",pct(a.roi));
+        if(a.clv)body+=clvBlock(a.clv);
         body+='</div><p class="note">Lower prediction error is better. A high winner rate alone does not prove value at the offered odds.</p>';
       }
       return '<article class="card"><h3>'+esc(a.label)+'</h3><p><small>'+esc(a.scope)+'</small></p>'+body+a.notes.map(x=>'<p class="note">'+esc(x)+'</p>').join("")+link(key,"Full board accuracy")+'</article>';

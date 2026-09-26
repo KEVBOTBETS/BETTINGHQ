@@ -30,3 +30,10 @@
   .page { padding-top: 16px; }
 }
 @media (prefers-reduced-motion: reduce) { .ticker-track { animation: none; padding-left: 12px; } .ticker-window { overflow: auto; } }
+
+.card dl.play-numbers{grid-template-columns:1fr auto;row-gap:6px;margin:12px 0 4px;font-variant-numeric:tabular-nums}.card dl.play-numbers dd b{font-size:15px}
+.card p.move{display:flex;flex-direction:column;gap:2px;margin:10px 0 0;padding:8px 10px;border-radius:10px;border:1px solid var(--border);font-variant-numeric:tabular-nums}.card p.move small{font-size:12px}
+.card p.move.toward{border-color:#7be7bd55;background:#7be7bd0d}.card p.move.toward small{color:var(--accent)}
+.card p.move.against{border-color:#ffd18a55;background:#ffd18a0d}.card p.move.against small{color:var(--warn)}
+.card p.quote-line{margin:6px 0 0}.clv-title{font-size:14px;margin:18px 0 4px;color:var(--accent)}
+.clv-table th,.clv-table td{padding:7px 6px}.clv-table td:not(:first-child),.clv-table th:not(:first-child){text-align:right}
