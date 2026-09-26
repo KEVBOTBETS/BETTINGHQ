@@ -1,24 +1,108 @@
 {
   "schema": 1,
-  "checked_at": "2026-09-26T21:00:38.249Z",
+  "checked_at": "2026-09-26T21:09:47.260Z",
   "coverage": {
-    "nfl": {
-      "status": "unavailable",
-      "reports": 0,
-      "checked_at": "2026-09-26T21:00:38.249Z"
-    },
     "mlb": {
       "status": "unavailable",
       "reports": 0,
-      "checked_at": "2026-09-26T21:00:38.249Z"
+      "checked_at": "2026-09-26T21:09:47.260Z"
     },
     "ncaaf": {
       "status": "unavailable",
       "reports": 0,
-      "checked_at": "2026-09-26T21:00:38.249Z"
+      "checked_at": "2026-09-26T21:09:47.260Z"
+    },
+    "nfl": {
+      "status": "unavailable",
+      "reports": 0,
+      "checked_at": "2026-09-26T21:09:47.260Z"
     }
   },
   "events": [
+    {
+      "id": "odds|mlb|824057|2026-09-26T23:10:00Z|ML||home|DraftKings|2026-09-26T21:09:47.260Z",
+      "kind": "odds",
+      "observed_at": "2026-09-26T21:09:47.260Z",
+      "sport": "mlb",
+      "event": "CLE @ KC",
+      "start": "2026-09-26T23:10:00Z",
+      "pick": "KC ML",
+      "title": "Published odds changed",
+      "before": "-105",
+      "after": "-108",
+      "book": "DraftKings",
+      "source_quote_at": "2026-09-26T21:07:39.628570+00:00",
+      "source": "Existing MLB board",
+      "note": "Your ticket keeps its original odds. Recheck the live book before placing a new wager."
+    },
+    {
+      "id": "odds|props|401872950|2026-09-27T17:00Z|Receiving yards|Mike Gesicki|over|Fanatics Sportsbook|2026-09-26T21:09:47.260Z",
+      "kind": "odds",
+      "observed_at": "2026-09-26T21:09:47.260Z",
+      "sport": "props",
+      "event": "Cincinnati Bengals @ Pittsburgh Steelers",
+      "start": "2026-09-27T17:00Z",
+      "pick": "Mike Gesicki — Over 25.5 Receiving yards",
+      "title": "Published odds changed",
+      "before": "+100 · line 25.5",
+      "after": "-105 · line 25.5",
+      "book": "Fanatics Sportsbook",
+      "source_quote_at": "2026-09-26T21:09:19.687794+00:00",
+      "source": "Existing Props board",
+      "note": "Your ticket keeps its original odds. Recheck the live book before placing a new wager."
+    },
+    {
+      "id": "lineup|823407|2026-09-26T21:09:47.260Z",
+      "kind": "lineup",
+      "observed_at": "2026-09-26T21:09:47.260Z",
+      "sport": "mlb",
+      "event": "TB @ PHI",
+      "start": "2026-09-26T23:15:00Z",
+      "title": "Batting orders confirmed",
+      "before": "Projected batting orders",
+      "after": "Confirmed batting orders",
+      "source_quote_at": "2026-09-26T21:08:18+00:00",
+      "source": "MLB board"
+    },
+    {
+      "id": "starter|823407home|2026-09-26T21:09:47.260Z",
+      "kind": "starter",
+      "observed_at": "2026-09-26T21:09:47.260Z",
+      "sport": "mlb",
+      "event": "TB @ PHI",
+      "start": "2026-09-26T23:15:00Z",
+      "title": "Probable starting pitcher changed",
+      "before": "TBA",
+      "after": "Aaron Nola",
+      "source_quote_at": "2026-09-26T21:08:18+00:00",
+      "source": "MLB board"
+    },
+    {
+      "id": "lineup|823733|2026-09-26T21:09:47.260Z",
+      "kind": "lineup",
+      "observed_at": "2026-09-26T21:09:47.260Z",
+      "sport": "mlb",
+      "event": "STL @ MIL",
+      "start": "2026-09-26T23:10:00Z",
+      "title": "Batting orders confirmed",
+      "before": "Projected batting orders",
+      "after": "Confirmed batting orders",
+      "source_quote_at": "2026-09-26T21:08:18+00:00",
+      "source": "MLB board"
+    },
+    {
+      "id": "lineup|824057|2026-09-26T21:09:47.260Z",
+      "kind": "lineup",
+      "observed_at": "2026-09-26T21:09:47.260Z",
+      "sport": "mlb",
+      "event": "CLE @ KC",
+      "start": "2026-09-26T23:10:00Z",
+      "title": "Batting orders confirmed",
+      "before": "Projected batting orders",
+      "after": "Confirmed batting orders",
+      "source_quote_at": "2026-09-26T21:08:18+00:00",
+      "source": "MLB board"
+    },
     {
       "id": "odds|nfl|401872950|2026-09-27T17:00Z|ML||home|DraftKings|2026-09-26T21:00:38.249Z",
       "kind": "odds",
@@ -3046,93 +3130,6 @@
       "book": "DraftKings",
       "source_quote_at": "2026-09-25T15:36:13.060110+00:00",
       "source": "Existing NCAAF board",
-      "note": "Your ticket keeps its original odds. Recheck the live book before placing a new wager."
-    },
-    {
-      "id": "starter|823489away|2026-09-25T15:39:49.712Z",
-      "kind": "starter",
-      "observed_at": "2026-09-25T15:39:49.712Z",
-      "sport": "mlb",
-      "event": "BAL @ NYY",
-      "start": "2026-09-25T20:10:00Z",
-      "title": "Probable starting pitcher changed",
-      "before": "Trevor Rogers",
-      "after": "Brandon Young",
-      "source_quote_at": "2026-09-25T15:38:31+00:00",
-      "source": "MLB board"
-    },
-    {
-      "id": "starter|823491away|2026-09-25T15:39:49.712Z",
-      "kind": "starter",
-      "observed_at": "2026-09-25T15:39:49.712Z",
-      "sport": "mlb",
-      "event": "BAL @ NYY",
-      "start": "2026-09-25T20:05:00Z",
-      "title": "Probable starting pitcher changed",
-      "before": "Brandon Young",
-      "after": "Trevor Rogers",
-      "source_quote_at": "2026-09-25T15:38:31+00:00",
-      "source": "MLB board"
-    },
-    {
-      "id": "lineup|824703|2026-09-25T15:39:49.712Z",
-      "kind": "lineup",
-      "observed_at": "2026-09-25T15:39:49.712Z",
-      "sport": "mlb",
-      "event": "CHC @ BOS",
-      "start": "2026-09-25T17:05:00Z",
-      "title": "Batting orders confirmed",
-      "before": "Projected batting orders",
-      "after": "Confirmed batting orders",
-      "source_quote_at": "2026-09-25T15:38:31+00:00",
-      "source": "MLB board"
-    },
-    {
-      "id": "odds|mlb|824706|2026-09-25T22:05:00Z|TOTAL||over|DraftKings|2026-09-25T12:46:02.379Z",
-      "kind": "odds",
-      "observed_at": "2026-09-25T12:46:02.379Z",
-      "sport": "mlb",
-      "event": "CHC @ BOS",
-      "start": "2026-09-25T22:05:00Z",
-      "pick": "Over 6.5",
-      "title": "Published odds changed",
-      "before": "-105 · line 6.5",
-      "after": "-108 · line 6.5",
-      "book": "DraftKings",
-      "source_quote_at": "2026-09-25T12:43:26.532121+00:00",
-      "source": "Existing MLB board",
-      "note": "Your ticket keeps its original odds. Recheck the live book before placing a new wager."
-    },
-    {
-      "id": "odds|mlb|824544|2026-09-25T23:40:00Z|ML||away|DraftKings|2026-09-25T12:46:02.379Z",
-      "kind": "odds",
-      "observed_at": "2026-09-25T12:46:02.379Z",
-      "sport": "mlb",
-      "event": "COL @ CWS",
-      "start": "2026-09-25T23:40:00Z",
-      "pick": "COL ML",
-      "title": "Published odds changed",
-      "before": "+187",
-      "after": "+189",
-      "book": "DraftKings",
-      "source_quote_at": "2026-09-25T12:43:26.532121+00:00",
-      "source": "Existing MLB board",
-      "note": "Your ticket keeps its original odds. Recheck the live book before placing a new wager."
-    },
-    {
-      "id": "odds|mlb|823652|2026-09-26T00:10:00Z|TOTAL||under|DraftKings|2026-09-25T12:46:02.379Z",
-      "kind": "odds",
-      "observed_at": "2026-09-25T12:46:02.379Z",
-      "sport": "mlb",
-      "event": "TEX @ MIN",
-      "start": "2026-09-26T00:10:00Z",
-      "pick": "Under 7.5",
-      "title": "Published odds changed",
-      "before": "-105 · line 7.5",
-      "after": "+100 · line 7",
-      "book": "DraftKings",
-      "source_quote_at": "2026-09-25T12:43:26.532121+00:00",
-      "source": "Existing MLB board",
       "note": "Your ticket keeps its original odds. Recheck the live book before placing a new wager."
     }
   ]
