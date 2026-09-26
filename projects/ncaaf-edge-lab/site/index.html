@@ -275,6 +275,7 @@ footer b{color:var(--ink-2)}
 <script src="ledger.js"></script>
 <script src="sim.js"></script>
 <script src="staking.js"></script>
+<script src="edge-visuals.js"></script>
 <script src="matchups.js"></script>
 <script>
 "use strict";
@@ -325,6 +326,15 @@ const myLedgerSummary = () => LEDGER
   : {starting_bankroll:localBankroll(),current_bankroll:localBankroll(),pnl:0,pending:0,settled:0,at_risk:0};
 const stakeBankroll = () => Number(myLedgerSummary().current_bankroll||0);
 const isTracked = row => LEDGER && (S.myLedger||[]).some(entry => LEDGER.keyOf(entry) === LEDGER.keyOf(row));
+const EV = window.EdgeVisuals;
+function teamsFor(gameId){
+  const g=(S.games||[]).find(x=>String(x.game_id)===String(gameId));
+  if(!g)return null;
+  return {away:{abbr:g.away,name:g.away_name,logo:g.away_logo,color:g.away_color,rank:g.away_rank},
+          home:{abbr:g.home,name:g.home_name,logo:g.home_logo,color:g.home_color,rank:g.home_rank},neutral:g.neutral};
+}
+const logoPair = gameId => { const t=EV&&teamsFor(gameId); return t?EV.pair(t.away,t.home):""; };
+const rowVisual = b => { const t=EV&&teamsFor(b.game_id); return t?EV.strip(t.away,t.home,b.projection,(cfg().model||{}).margin_sd):""; };
 const sym = () => (cfg().currency_symbol || "$");
 const pct = (v,d=1) => v === null || v === undefined || isNaN(v) ? "—" : (v*100).toFixed(d) + "%";
 const sgn = (v,d=1) => v === null || v === undefined || isNaN(v) ? "—" : (v>=0?"+":"") + (v*100).toFixed(d) + "%";
@@ -433,7 +443,9 @@ function renderKpis(){
     ["Bankroll", money(ledger.current_bankroll), "saved on this device", ""],
     ["Settled", String(ledger.settled||0), `${rec} · ${ledger.pending||0} pending`, ""],
     ["ROI", sgn(ledger.roi), ledger.roi==null?"no settled bets":`${money(ledger.pnl)} P/L`, cls(ledger.roi)],
-    ["Model scale", String((S.meta.model_health||{}).status||"—").toUpperCase(), `max edge ${pct((S.meta.model_health||{}).max_displayed_edge)}`, (S.meta.model_health||{}).status==="healthy"?"pos":""],
+    (() => { const e=S.meta.early_plays||{}; return e.closed
+      ? ["Beat the close", pct(e.beat_close_pct,0), `${e.closed} locked plays · avg ${e.avg_clv_points==null?"—":(e.avg_clv_points>0?"+":"")+e.avg_clv_points} pts`, e.beat_close_pct>=.5?"pos":"neg"]
+      : ["Model scale", String((S.meta.model_health||{}).status||"—").toUpperCase(), `max edge ${pct((S.meta.model_health||{}).max_displayed_edge)}`, (S.meta.model_health||{}).status==="healthy"?"pos":""]; })(),
   ];
   document.getElementById("kpis").innerHTML = k.map(([a,b,c,cl]) =>
     `<div class="kpi"><div class="k">${esc(a)}</div><div class="v ${cl}">${esc(b)}</div><div class="m">${esc(c)}</div></div>`).join("");
@@ -577,14 +589,14 @@ function renderBest(){
       const meter = Math.max(3,Math.min(100,Math.abs(actionEdge(b))*1000));
       return `<div class="play-row">
         <span class="tier ${tc}">${esc(tierLabel(b.tier))}</span>
-        <b class="play-pick">${esc(b.pick)} <small>${esc(price(b.price))}</small></b>
+        <b class="play-pick">${logoPair(b.game_id)}${esc(b.pick)} <small>${esc(price(b.price))}</small></b>
         <span class="play-meta">${esc(b.matchup)} · ${esc(day(b.game_date))}</span>
         <span class="edge-meter"><i style="width:${meter}%"></i></span>
         <b class="play-edge">${sgn(actionEdge(b))} edge</b>
         <em class="play-note">${esc(warn || (b.confidence<.8?"early-season confidence reserve applied":"model and market checked"))}</em>
         <b class="play-stake">${st?money(st):"—"}</b>
         <span class="play-track">${ledgerButton(b,st)}</span>
-      </div><div class="play-detail">${NCAAFViews.explanation(b,cfg())}</div>`;
+      </div><div class="play-detail">${rowVisual(b)}${NCAAFViews.explanation(b,cfg())}</div>`;
     }).join("") + `<p class="plays-foot">${esc(STAKING?STAKING.description(stakingSettings(),sym()):"Staking")} · capped at ${pct(stakingSettings().max_stake_pct,0)} per play and ${pct(stakingSettings().max_slate_exposure_pct,0)} per slate. Change this under Bankroll & Stakes. Re-check the price before betting.</p></div>`;
   }
 
@@ -594,7 +606,7 @@ function renderBest(){
   if (games.length){
     h += `<div class="panel-head every-head"><h2>Every game on this slate</h2><span class="pill">${games.length} games</span></div>
       <div class="tablewrap"><table><thead><tr><th>Game</th><th>Projected score</th><th>Top model angle</th><th class="r">Edge</th><th>Tier</th></tr></thead><tbody>`+
-      games.map(b=>{const p=b.projection||{},tc=TIERCLS[b.tier];return `<tr><td class="matchup">${esc(b.matchup)}<small>${esc(when(b.game_date))}</small></td>
+      games.map(b=>{const p=b.projection||{},tc=TIERCLS[b.tier];return `<tr><td class="matchup">${logoPair(b.game_id)}${esc(b.matchup)}<small>${esc(when(b.game_date))}</small></td>
         <td class="num">${esc(p.score_away??Math.round(p.proj_away_pts||0))}–${esc(p.score_home??Math.round(p.proj_home_pts||0))}</td>
         <td class="pick">${esc(b.pick)} ${esc(price(b.price))}</td><td class="r num">${sgn(actionEdge(b))}</td>
         <td><span class="tier ${tc}">${esc(tierLabel(b.tier))}</span></td></tr>`}).join("")+`</tbody></table></div>`;
@@ -707,6 +719,7 @@ function renderLedger(){
     ["ROI", sgn(summary.roi)], ["Win rate", pct(summary.win_rate)],
     ["Settled", summary.settled||0], ["Pending", summary.pending||0],
   ];
+  if (EV){ const c=EV.ledgerClvSummary(S.myLedger,S.games); kpis.push(["Beat the close", c.n?`${c.beat}/${c.beat+c.worse}`:"—"]); }
   h += `<div class="kpis ledger-kpis">${kpis.map(([key,value]) => `<div class="kpi"><div class="k">${esc(key)}</div><div class="v">${esc(value)}</div></div>`).join("")}</div>`;
 
   if (summary.curve.length > 1){
@@ -717,15 +730,16 @@ function renderLedger(){
 
   h += rows.length ? `<div class="tablewrap"><table><thead><tr>
       <th>Date</th><th>Game</th><th>Pick</th><th class="r">Price</th><th class="r">Stake</th>
-      <th class="r">Edge</th><th>Tier</th><th>Result</th><th class="r">P/L</th><th></th></tr></thead><tbody>` +
+      <th class="r">Edge</th><th>Tier</th><th class="r" title="Closing-line value: your number versus the last pregame line">CLV</th><th>Result</th><th class="r">P/L</th><th></th></tr></thead><tbody>` +
       rows.map(b => `<tr>
         <td class="num" style="white-space:nowrap;font-size:12px;color:var(--ink-3)">${esc(day(b.game_date))}</td>
         <td class="matchup">${esc(b.matchup)}${b.final_score?`<small>${esc(b.final_score)}</small>`:""}</td>
         <td class="pick">${esc(b.pick)}</td>
-        <td class="r num">${esc(price(b.price))}</td>
+        <td class="r num">${esc(price(b.price))}${b.board_price!=null&&Number(b.board_price)!==Number(b.price)?`<br><small style="color:var(--ink-3)">board ${esc(price(b.board_price))}</small>`:""}</td>
         <td class="r"><input class="ledger-stake" data-ledger-stake="${esc(b.id)}" type="number" min="0.5" step="0.5" value="${Number(b.stake||0).toFixed(2)}" aria-label="Stake for ${esc(b.pick)}" ${b.result?"disabled":""}></td>
         <td class="r num">${sgn(b.edge)}</td>
         <td><span class="tier ${TIERCLS[b.tier]}">${esc(tierLabel(b.tier))}</span></td>
+        <td class="r">${EV?EV.clvCell(EV.betClv(b,(S.games||[]).find(g=>String(g.game_id)===String(b.game_id)))):"—"}</td>
         <td><span class="res ${esc(b.result||"Pending")}">${esc(b.result||"Pending")}</span></td>
         <td class="r num ${b.pnl>0?"pos":b.pnl<0?"neg":""}">${b.pnl===null||b.pnl===undefined?"—":money(b.pnl)}</td>
         <td><button type="button" class="removebet" data-remove="${esc(b.id)}">Remove</button></td>
@@ -1109,6 +1123,8 @@ function bindLedgerActions(){
     if (NCAAFViews.expired(row)){ S.board=NCAAFViews.gateBoard(S.board); renderPanels(); return; }
     const stakeAmount = Number(button.dataset.defaultStake);
     if (!isFinite(stakeAmount) || stakeAmount <= 0){ window.alert("Enter the stake you actually placed."); return; }
+    if (EV){ EV.openBetDialog({row, stake:stakeAmount, settings:cfg(), currency:sym(),
+      onConfirm:(taken,amount)=>{ if(isTracked(taken))return; S.myLedger.push(LEDGER.entryFrom(taken, amount)); saveMyLedger(); refreshLedgerViews(); }}); return; }
     S.myLedger.push(LEDGER.entryFrom(row, stakeAmount)); saveMyLedger(); refreshLedgerViews();
   });
   document.querySelectorAll("[data-remove]").forEach(button => button.onclick = () => {
