@@ -40,7 +40,9 @@ html = replace_once(
 )
 
 # Put wagers that can actually be placed first. Within that group preserve the
-# model's tier hierarchy, then use edge as the tie-breaker. A high-edge HOLD
+# model's tier hierarchy, then use the risk-adjusted return (action_edge) the
+# tier was decided on as the tie-breaker. The compressed edge is a poor
+# tie-breaker: every long-odds play sits on the same 5.5% ceiling. A high-edge HOLD
 # should never visually outrank an available BEST BET simply because it is
 # further from kickoff.
 html = replace_once(
@@ -50,7 +52,7 @@ html = replace_once(
     '  const sorted = cands.slice().sort((a,b)=>\n'
     '    (Number(a.held)-Number(b.held)) ||\n'
     '    ((tierRank[a.tier]??9)-(tierRank[b.tier]??9)) ||\n'
-    '    ((b.edge||0)-(a.edge||0)));',
+    '    ((b.action_edge??b.edge??0)-(a.action_edge??a.edge??0)));',
     "Best Bets ordering",
 )
 html = replace_once(
@@ -65,7 +67,7 @@ html = replace_once(
 html = replace_once(
     html,
     '<span class="play-meta">${esc(c.matchup)} · ${esc(fmtDate(c.game_date))}</span>',
-    '<span class="play-meta">${esc(c.matchup)} · ${esc(fmtDate(c.game_date))} · ${c.held?"HOLD":"BETTABLE"}</span>',
+    '<span class="play-meta">${esc(c.matchup)} · ${esc(fmtDate(c.game_date))} · wins ${pct(c.model_prob)} · ${c.held?"HOLD":"BETTABLE"}</span>',
     "Best Bets state label",
 )
 
