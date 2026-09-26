@@ -300,7 +300,7 @@ def adverse_move(move: dict, market: str, side: str) -> float | None:
     return None
 
 
-TIER_VERSION = "2026-09-26-anchored"
+TIER_VERSION = "2026-09-27-clv-gate"
 
 
 def price_game(g: dict, proj: dict, cfg: dict, conf: float, stale: bool,
@@ -589,6 +589,7 @@ def correlation_guard(cands: list[dict], cfg: dict) -> list[dict]:
         playable.sort(key=lambda r: (M.TIER_RANK[r["tier"]], -r["edge"]))
         for i, r in enumerate(playable):
             if i >= limit:
+                r["capped_tier"] = r["tier"]
                 r["tier"] = "PASS"
                 r["filtered"] = "correlated with a stronger play on the same game"
     return cands
@@ -614,6 +615,7 @@ def weekly_cap(cands: list[dict], cfg: dict) -> list[dict]:
     for rows in by_week.values():
         rows.sort(key=lambda r: (M.TIER_RANK[r["tier"]], -r["edge"]))
         for r in rows[limit:]:
+            r["capped_tier"] = r["tier"]
             r["tier"] = "PASS"
             r["filtered"] = f"outside the top {limit} plays for this week"
     return cands
@@ -980,10 +982,18 @@ def main() -> int:
     # Timing gate (off by default for NFL -- see pipeline/early.py), then the
     # correlation and weekly caps, then lock every bettable play at its first
     # price so closing-line value and early-vs-late results can be measured.
-    board = weekly_cap(correlation_guard(early.timing_gate(board, cfg), cfg), cfg)
-    board.sort(key=lambda c: (M.TIER_RANK[c["tier"]], -c["edge"]))
+    # The closing-line gate reads the locks already on file: BEST BET and
+    # tiered totals have to be earned by beating the close (pipeline/early.py).
     early_state = store.load("early_plays.json", {})
+    gate = early.gate_status(early_state, cfg)
+    board = early.clv_gate(early.timing_gate(board, cfg), cfg, gate)
+    board = weekly_cap(correlation_guard(board, cfg), cfg)
+    board.sort(key=lambda c: (M.TIER_RANK[c["tier"]], -c["edge"]))
     early_summary = early.track(early_state, board, games, lines, cfg)
+    early_summary["gate"] = gate
+    print("   closing-line gate: " + " | ".join(
+        f"{k} {v['status']} ({v['closed']}/{v['need']} closed, beat {v['beat_close_pct']})"
+        for k, v in gate.items()))
     store.save("early_plays.json", early_state)
     print(f"   tracked plays: {early_summary['locked']} locked | record {early_summary['record']} | "
           f"avg CLV {early_summary['avg_clv_points']} pts | beat close {early_summary['beat_close_pct']}")
@@ -1053,6 +1063,13 @@ def main() -> int:
         c["stake"] = (0.0 if c["tier"] == "PASS" or c.get("held") else
                       M.stake_for(c["model_prob"], c["price"], starting, cfg, edge=stake_edge,
                                   push_prob=float(c.get("push_prob") or 0.0)))
+        # Late-week (timing gate) and failing-CLV plays carry a reduced stake.
+        mult = float(c.get("stake_multiplier", 1.0))
+        if c["stake"] and mult < 1.0:
+            step = float(cfg["bankroll"].get("round_stake_to") or 0.5)
+            c["stake"] = round(math.floor(c["stake"] * mult / step + 0.5) * step, 2)
+            if c["stake"] < float(cfg["bankroll"].get("min_stake") or 0):
+                c["stake"] = 0.0
     store.save("ledger.json", ledg)
     print("   ledger: manual browser confirmation; 0 automatic entries")
 

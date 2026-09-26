@@ -16,7 +16,7 @@ async function get(url){if(String(url).startsWith('file:'))return JSON.parse(awa
   // Public feeds (especially live-game summaries) fail transiently; retry with backoff before giving up.
   let last;for(let attempt=0;attempt<3;attempt++){
     if(attempt)await new Promise(r=>setTimeout(r,1500*attempt));
-    try{const response=await fetch(url,{signal:AbortSignal.timeout(20000),headers:{'User-Agent':'KEVBOT-public-ticket-archive/1.0'}});if(!response.ok)throw Error('HTTP '+response.status);return await response.json();}catch(e){last=e;}
+    try{const response=await fetch(url,{signal:AbortSignal.timeout(20000),headers:{'User-Agent':'Mozilla/5.0 (compatible; KEVBOT-public-ticket-archive/1.1; +https://github.com/)','Accept':'application/json'}});if(!response.ok)throw Error('HTTP '+response.status);return await response.json();}catch(e){last=e;}
   }
   throw last;}
 const index=await read('index.json',{schema:1,started_at:stamp,tickets:[]});
@@ -67,12 +67,27 @@ for(const entry of Object.values(state.entries)){
   const r=entry.pick,key=(r.key==='props'?'nfl':r.key)+':'+r.eventId;
   if(!tasks.has(key))tasks.set(key,{r,entries:[]});tasks.get(key).entries.push(entry);
 }
+// Final scores the boards already published. Each board's own refresh reads ESPN's scoreboard a
+// minute earlier, so grading from it costs no extra call -- and ESPN's per-game summary endpoint
+// answers GitHub's runners with HTTP 403, which left every football/WNBA pick Pending for good.
+// The summary is still used for props (player stats) and for any game a board did not publish.
+const scoreboards={nfl:'nfl',ncaaf:'college-football',wnba:'wnba'},boardGames={};
+await Promise.all(registry.filter(s=>s.active&&scoreboards[s.key]).map(async sport=>{try{
+  const rows=await get(new URL(sport.path+'data/games.json',base)),map=new Map();
+  for(const g of Array.isArray(rows)?rows:[]){const id=String(g.game_id??'');if(!id)continue;
+    const score=side=>C.number(g[side]&&typeof g[side]==='object'?g[side].score:g[side+'_score']);
+    map.set(id,{id,completed:g.completed===true,home:score('home'),away:score('away'),start:g.tipoff||g.date||null});}
+  boardGames[sport.key]=map;
+}catch(_){/* fall back to the per-game summary */}}));
 // Limit concurrent public calls, recheck finals for official stat corrections.
 const work=[...tasks.values()];
 async function worker(){while(work.length){const task=work.shift(),r=task.r;let summary,game,url;
   try{if(r.key==='mlb'){
     url='https://statsapi.mlb.com/api/v1.1/game/'+encodeURIComponent(r.eventId)+'/feed/live';summary=await get(url);
     game={id:String(summary.gamePk),completed:['Final','Game Over','Completed Early'].includes(summary.gameData?.status?.detailedState),home:summary.liveData?.linescore?.teams?.home?.runs,away:summary.liveData?.linescore?.teams?.away?.runs,start:summary.gameData?.datetime?.dateTime};
+  }else if(r.key!=='props'&&boardGames[r.key]?.has(String(r.eventId))){
+    game=boardGames[r.key].get(String(r.eventId));
+    url='https://www.espn.com/'+scoreboards[r.key]+'/game/_/gameId/'+encodeURIComponent(r.eventId);
   }else if(paths[r.key]){
     url='https://site.api.espn.com/apis/site/v2/sports/'+paths[r.key]+'/summary?event='+encodeURIComponent(r.eventId);summary=await get(url);
     const c=summary.header?.competitions?.[0],team=side=>c?.competitors?.find(t=>t.homeAway===side);

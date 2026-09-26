@@ -7,7 +7,7 @@
     // Volume/correlation limits may expose a research alternative; data and
     // integrity failures must never be reopened by a display threshold.
     const why=String(row.filtered||'');
-    const volume=/^(outside the top \d+ plays|correlated with a stronger play)/i.test(why);
+    const volume=/^(outside the top \d+ plays|correlated with a stronger play|research only)/i.test(why);
     if(why&&!volume)return null;
     // A newly generated forecast does not prove its cached price is current.
     const quote=row.odds_observed_at,t=C.instant(quote);
