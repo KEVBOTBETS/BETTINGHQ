@@ -100,12 +100,21 @@ def _weights(games: list[dict], halflife_games: float) -> list[float]:
 
 
 def solve_margin_ratings(games: list[dict], cfg: dict,
-                         prior: dict[str, float] | None = None) -> tuple[dict[str, float], float]:
+                         prior: dict[str, float] | None = None,
+                         hfa_teams: set[str] | None = None) -> tuple[dict[str, float], float]:
     """
     Returns ({team_abbr: rating_in_points}, solved_home_field_advantage).
 
     A rating is "points better than an average team in this sample on a neutral
     field". The difference between two ratings is a projected margin.
+
+    `hfa_teams` limits which games can inform home-field advantage. Pass the FBS
+    set. FCS "buy games" are nearly always hosted by the FBS side, and the FCS
+    visitor has almost no data or prior, so ridge shrinks it toward average and
+    the home-field column soaks up the talent gap instead. In 2026 that pinned
+    home field at its 5.0 clamp when FBS-vs-FBS games alone measure about 2.1
+    (the posted spreads imply ~2.7). Those games still inform team ratings; they
+    just stop counting as evidence about home field.
     """
     r = cfg["ratings"]
     lam = float(r["ridge_lambda"])
@@ -134,7 +143,7 @@ def solve_margin_ratings(games: list[dict], cfg: dict,
         margin = g["home_score"] - g["away_score"]
         margin = max(-cap, min(cap, margin))
         coefs = {idx[g["home"]["abbr"]]: 1.0, idx[g["away"]["abbr"]]: -1.0}
-        if not g.get("neutral"):
+        if _hfa_game(g, hfa_teams):
             coefs[hfa_col] = 1.0
         rows.append((coefs, float(margin), float(w)))
 
@@ -147,7 +156,7 @@ def solve_margin_ratings(games: list[dict], cfg: dict,
     # proportion to how many non-neutral games it was estimated from. In week 1
     # a raw solve can land anywhere; by November it should stand on its own.
     hfa = float(beta[hfa_col])
-    n_home_games = sum(1 for g in played if not g.get("neutral"))
+    n_home_games = sum(1 for g in played if _hfa_game(g, hfa_teams))
     k = 150.0
     hfa = (n_home_games * hfa + k * float(cfg["model"]["home_field_fallback"])) / (n_home_games + k)
     hfa = min(max(hfa, 0.5), 5.0)
@@ -155,6 +164,14 @@ def solve_margin_ratings(games: list[dict], cfg: dict,
     ratings = {t: float(beta[idx[t]]) for t in teams}
     mean = sum(ratings.values()) / len(ratings)
     return ({t: v - mean for t, v in ratings.items()}, hfa)
+
+
+def _hfa_game(g: dict, hfa_teams: set[str] | None) -> bool:
+    if g.get("neutral"):
+        return False
+    if hfa_teams is None:
+        return True
+    return g["home"]["abbr"] in hfa_teams and g["away"]["abbr"] in hfa_teams
 
 
 def solve_scoring_ratings(games: list[dict], cfg: dict,
@@ -246,6 +263,20 @@ def _centred(values: dict[str, float]) -> dict[str, float]:
     return {team: float(value) - mean for team, value in values.items()}
 
 
+def _match_scale(values: dict[str, float], reference: dict[str, float]) -> dict[str, float]:
+    common = [t for t in values if t in reference]
+    if len(common) < 10:
+        return values
+    def sd(xs):
+        m = sum(xs) / len(xs)
+        return (sum((x - m) ** 2 for x in xs) / len(xs)) ** 0.5
+    own, ref = sd([values[t] for t in common]), sd([reference[t] for t in common])
+    if own <= 1e-9 or ref <= 1e-9:
+        return values
+    k = ref / own
+    return {t: v * k for t, v in values.items()}
+
+
 def blend_preseason_ratings(internal: dict[str, float], fpi: dict[str, dict],
                             fpi_weight: float) -> tuple[dict[str, float], dict[str, dict]]:
     """Blend independent 2026 FPI with the model's regressed 2025 solve.
@@ -260,6 +291,12 @@ def blend_preseason_ratings(internal: dict[str, float], fpi: dict[str, dict],
     fpi_raw = {t: float(row["fpi"]) for t, row in fpi.items()
                if row.get("fpi") is not None}
     fpi_c = _centred(fpi_raw)
+    # The internal solve is heavily shrunk (ridge penalty, then prior_regression
+    # on top): in 2026 its spread was ~8x narrower than FPI's. Blending it raw
+    # did not add information, it just multiplied every FPI rating by 0.85 and
+    # squeezed favourites toward underdogs. Put it on FPI's point scale first so
+    # it contributes its ordering, and FPI keeps the scale.
+    internal_c = _match_scale(internal_c, fpi_c)
     teams = sorted(set(internal_c) | set(fpi_c))
     out: dict[str, float] = {}
     audit: dict[str, dict] = {}

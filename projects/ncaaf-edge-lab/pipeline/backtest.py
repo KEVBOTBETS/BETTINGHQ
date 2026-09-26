@@ -76,11 +76,11 @@ def run(games: list[dict], cfg: dict, min_history: int = 60,
     for d in days:
         todays = by_day[d]
         if len(history) >= min_history:
-            rat, hfa = R.solve_margin_ratings(history, cfg, prior=prior)
+            fbs = B.fbs_teams(history + todays)
+            rat, hfa = R.solve_margin_ratings(history, cfg, prior=prior, hfa_teams=fbs)
             sr, league, bump = R.solve_scoring_ratings(history, cfg)
             n_played = R.games_played(history)
             rests = B.rest_days(history + todays)
-            fbs = B.fbs_teams(history + todays)
 
             day_cands: list[dict] = []
             for g in todays:

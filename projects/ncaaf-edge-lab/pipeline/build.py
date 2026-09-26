@@ -434,10 +434,13 @@ def fit_projection_scale(projections: list[dict]) -> dict:
             "total": fit([x for x,_ in tp], [y for _,y in tp])}
 
 
-def debias_projection(proj: dict, fit: dict, cfg: dict) -> dict:
+def debias_projection(proj: dict, fit: dict, cfg: dict,
+                      margin: bool = True, total: bool = True) -> dict:
     """Replace systematic board-wide scale error with market-centred residuals."""
     out = dict(proj)
-    mfit = fit.get("margin") or {}
+    if not margin and not total:
+        return out
+    mfit = (fit.get("margin") or {}) if margin else {}
     if mfit.get("enabled") and proj.get("market_mu") is not None:
         market = float(proj["market_mu"])
         expected = float(mfit["intercept"]) + float(mfit["slope"]) * market
@@ -451,7 +454,7 @@ def debias_projection(proj: dict, fit: dict, cfg: dict) -> dict:
         out["debias_residual"] = round(residual, 2)
         out["debias_enabled"] = True
 
-    tfit = fit.get("total") or {}
+    tfit = (fit.get("total") or {}) if total else {}
     if tfit.get("enabled") and proj.get("market_total") is not None:
         market_total = float(proj["market_total"])
         expected_total = float(tfit["intercept"]) + float(tfit["slope"]) * market_total
@@ -1018,12 +1021,13 @@ def main() -> int:
     fpi_teams = fpi_data.get("teams") or {}
 
     # Ratings, solved from results around the blended preseason prior.
-    prior_rat, _ = R.solve_margin_ratings(prior_games, cfg)
+    fbs = fbs_teams(games)
+    prior_rat, _ = R.solve_margin_ratings(prior_games, cfg, hfa_teams=fbs_teams(prior_games))
     internal_preseason = R.regress_to_prior(
         prior_rat, float(cfg["ratings"]["prior_regression"]))
     preseason, rating_audit = R.blend_preseason_ratings(
         internal_preseason, fpi_teams, float(cfg["ratings"].get("fpi_weight", 0.0)))
-    rat, hfa = R.solve_margin_ratings(games, cfg, prior=preseason)
+    rat, hfa = R.solve_margin_ratings(games, cfg, prior=preseason, hfa_teams=fbs)
     if not any(g.get("completed") for g in games):
         rat, hfa = preseason, float(cfg["model"]["home_field_fallback"])
     prior_score, prior_league, prior_home_bump = R.solve_scoring_ratings(prior_games, cfg)
@@ -1041,7 +1045,7 @@ def main() -> int:
         anchor_prior, _ = R.blend_preseason_ratings(internal_preseason, anchor["teams"], float(cfg["ratings"]["fpi_weight"]))
         anchor_score = R.blend_scoring_priors(prior_score, anchor["teams"], float(cfg["ratings"]["fpi_scoring_weight"]))
         after = fpi_audit.after_anchor(games, audit_state)
-        ar, ah = R.solve_margin_ratings(after, cfg, prior=anchor_prior)
+        ar, ah = R.solve_margin_ratings(after, cfg, prior=anchor_prior, hfa_teams=fbs)
         if not any(g.get("completed") for g in after):
             ar, ah = anchor_prior, float(cfg["model"]["home_field_fallback"])
         asc, al, ab = R.solve_scoring_ratings(after, cfg, prior=anchor_score,
@@ -1050,7 +1054,6 @@ def main() -> int:
     played = R.games_played(games)
     form = R.ats_form(games)
     rests = rest_days(games)
-    fbs = fbs_teams(games)
     print(f"   ratings: {len(rat)} teams | home field {hfa:.2f} pts | league avg {league:.1f} pts")
     print(f"   ESPN FPI: {len(fpi_teams)} mapped teams | updated {fpi_data.get('last_updated') or 'n/a'}")
     print(f"   FBS home participants this season: {len(fbs)} teams")
@@ -1067,18 +1070,27 @@ def main() -> int:
     odds_health = espn.odds_health(upcoming)
     base_projections = {g["game_id"]: project(g, rat, hfa, score_rat, league, home_bump,
                                                rests, ovr, cfg) for g in upcoming}
-    scale_fit = fit_projection_scale(list(base_projections.values()))
+    # Fit the scale on FBS-vs-FBS games only. Buy games against FCS schools have
+    # thin, shrunk ratings on one side and would drag the fitted slope toward 0.
+    scale_fit = fit_projection_scale([
+        base_projections[g["game_id"]] for g in upcoming
+        if g["home"]["abbr"] in fbs and g["away"]["abbr"] in fbs])
     mf, tf = scale_fit["margin"], scale_fit["total"]
-    # A market-derived scale rescue is only a last resort when the independent
-    # preseason prior is unavailable. Applying it on top of healthy FPI ratings
-    # would regress each slate to the same prices we are trying to challenge and
-    # mechanically erase nearly every possible play.
+    # Without a healthy FPI prior, the market-derived fit rescues both margins
+    # and totals. With one, it still corrects the margin SCALE: the current-
+    # season solve caps blowouts at mov_cap, so it cannot learn that a team is
+    # 34 points better than another, and the leftover squeeze (market moved
+    # ~1.10 pts per model point in 2026) read as "take the underdog" on every
+    # big spread. Only that systematic straight-line tilt is removed; each
+    # game's own disagreement with the line survives.
     use_scale_rescue = len(fpi_teams) < 50
-    mf["applied"] = bool(use_scale_rescue and mf.get("enabled"))
+    scale_margin = use_scale_rescue or bool(cfg["model"].get("scale_margin_to_market", True))
+    mf["applied"] = bool(scale_margin and mf.get("enabled"))
     tf["applied"] = bool(use_scale_rescue and tf.get("enabled"))
-    print(f"   scale audit: margin slope {mf['slope']:.3f}, residual {mf['residual_sd']} pts | "
+    print(f"   scale audit (FBS games): margin slope {mf['slope']:.3f}, residual {mf['residual_sd']} pts | "
           f"total slope {tf['slope']:.3f}, residual {tf['residual_sd']} pts | "
-          f"market-derived rescue {'on' if use_scale_rescue else 'off (FPI prior healthy)'}")
+          f"margin scale {'matched to market' if mf['applied'] else 'raw'} | "
+          f"totals rescue {'on' if tf['applied'] else 'off (FPI prior healthy)'}")
 
     for g in upcoming:
         has_odds = espn.has_priced_market(g.get("odds"))
@@ -1095,8 +1107,8 @@ def main() -> int:
         if ((context.get("availability") or {}).get("status") != "complete"
                 or (context.get("weather") or {}).get("status") == "unavailable"):
             conf = min(conf, 0.75)
-        proj = (debias_projection(base_projections[g["game_id"]], scale_fit, cfg)
-                if use_scale_rescue else base_projections[g["game_id"]])
+        proj = debias_projection(base_projections[g["game_id"]], scale_fit, cfg,
+                                 margin=mf["applied"], total=tf["applied"])
         if not proj["ratings_known"]:
             conf = min(conf, 0.4)
         forecast_games.append({**g, "projection": proj, "p_home": M.moneyline_probability(proj["mu"], float(cfg["model"]["margin_sd"]), bool(cfg["model"]["use_key_numbers"]))})
@@ -1107,8 +1119,8 @@ def main() -> int:
         for quote in (g.get("odds_quotes") or [g.get("odds") or {}]):
             quoted_game = {**g, "odds": quote}
             quoted_proj = project(quoted_game, rat, hfa, score_rat, league, home_bump, rests, ovr, cfg)
-            if use_scale_rescue:
-                quoted_proj = debias_projection(quoted_proj, scale_fit, cfg)
+            quoted_proj = debias_projection(quoted_proj, scale_fit, cfg,
+                                            margin=mf["applied"], total=tf["applied"])
             priced = quotes.gate(apply_filters(price_game(quoted_game, quoted_proj, cfg, conf), cfg, odds_health["healthy"]), quoted_game, cfg)
             for c in priced:
                 c["projection"] = quoted_proj
