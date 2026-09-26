@@ -38,7 +38,6 @@
     "home_field_fallback": 2.4,
     "rest_day_weight": 0.35,
     "travel_weight_per_1000mi": 0.8,
-    "min_books_for_full_confidence": 2,
     "min_games_for_full_confidence": 4,
     "early_season_shrink": 0.55,
     "_early_season_shrink_note": "How hard to pull a team's current-season rating back toward its preseason prior before it has min_games_for_full_confidence games played.",
@@ -46,8 +45,7 @@
     "confidence_penalty_max": 0.018,
     "_confidence_penalty_note": "Bounded expected-return reserve: (1-confidence) × 1.8%, plus the selection haircut. Confidence never multiplies the tier thresholds.",
     "_selection_haircut_note": "Winner's-curse conservatism, subtracted from every estimated edge before tiering. You only bet where the model disagrees with the market, which is also where the model's own error is largest, so selected edges are overstated even when the model is calibrated across all games -- walk-forward simulation puts that gap at 9-15 points of probability. Raise it to bet less and more selectively. Re-measure with `python -m pipeline.backtest` on your own data rather than trusting this number.",
-    "_market_blend_calibration_note": "0.50 was chosen because it minimised out-of-sample calibration error in walk-forward simulation across both a sharp market and a soft one (mean absolute gap 0.045-0.050 at 0.50, vs 0.049-0.073 at 0.35 and 0.055-0.058 at 0.65). Profitability in simulation depends entirely on how inefficient you assume the market is, so it was not used to pick this value.",
-    "_min_books_for_full_confidence_note": "One complete sportsbook quote is a real offer, not a consensus. Until two distinct books are observed, confidence is capped and every surviving play is LEAN-only with reduced stake."
+    "_market_blend_calibration_note": "0.50 was chosen because it minimised out-of-sample calibration error in walk-forward simulation across both a sharp market and a soft one (mean absolute gap 0.045-0.050 at 0.50, vs 0.049-0.073 at 0.35 and 0.055-0.058 at 0.65). Profitability in simulation depends entirely on how inefficient you assume the market is, so it was not used to pick this value."
   },
   "ratings": {
     "ridge_lambda": 18,
@@ -118,6 +116,13 @@
       "teamrankings"
     ],
     "lookahead_days": 10,
-    "lookback_days": 5
+    "lookback_days": 5,
+    "odds_book": "DraftKings",
+    "_odds_book_note": "Every play is priced off this one book's line. ESPN's keyless feed carries one sportsbook per game (DraftKings), so no second market is required or checked. If a game has no DraftKings quote, the single best posted line is used instead."
+  },
+  "timing": {
+    "full_tier_min_hours": 96,
+    "late_stake_multiplier": 0.6,
+    "_note": "Plays priced less than this many hours before kickoff are capped at LEAN. Walk-forward on 2026 weeks 3-4: ATS on 4+ pt disagreements was 54% at 120h+, falling to 44-48% inside 72h, and the line moved toward the model by +0.92 pts early vs +0.18 near kickoff. GOOD/BEST picks made in the early window are locked in state/early_plays.json and graded at their locked price. Set 0 to disable."
   }
 }
