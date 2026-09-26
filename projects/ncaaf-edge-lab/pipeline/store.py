@@ -137,4 +137,7 @@ def line_move(lines: dict, game_id: str) -> dict:
         "snapshots": len(lines.get(str(game_id)) or []),
         "opened_spread": o.get("spread_home"),
         "opened_total": o.get("total"),
+        "opened_ml_home": o.get("ml_home"),
+        "opened_ml_away": o.get("ml_away"),
+        "opened_at": o.get("ts"),
     }

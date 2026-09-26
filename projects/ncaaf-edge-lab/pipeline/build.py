@@ -22,7 +22,7 @@ import os
 import sys
 from zoneinfo import ZoneInfo
 
-from . import espn, model as M, ratings as R, store, game_context, quotes, fpi_audit, early
+from . import espn, model as M, ratings as R, store, game_context, quotes, fpi_audit, early, clv as CLV
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SITE_DATA = os.path.join(ROOT, "site", "data")
@@ -1137,7 +1137,7 @@ def main() -> int:
     early_state = store.load("early_plays.json", {})
     early_summary = early.track(early_state, board, games, lines, cfg)
     store.save("early_plays.json", early_state)
-    print(f"   early plays: {early_summary['locked']} locked | record {early_summary['record']} | "
+    print(f"   tracked plays: {early_summary['locked']} locked | record {early_summary['record']} | "
           f"avg CLV {early_summary['avg_clv_points']} pts")
     board.sort(key=lambda c: (M.TIER_RANK[c["tier"]],
                               -c.get("action_edge", c["edge"])))
@@ -1214,6 +1214,16 @@ def main() -> int:
                                    os.path.join(SITE_DATA, "accuracy.json"), board,
                                    forecast_games, games, "NCAAF", season=season,
                                    game_only=True)
+    # Closing-line value: the model's frozen forecasts (whole season) and the
+    # tracked plays (from now on). Both read only stored lines; nothing is refetched.
+    accuracy["clv"] = {
+        "forecasts": CLV.forecast_clv(store.load("model_accuracy.json", {}).get("records") or {}, lines),
+        "plays": early_summary,
+    }
+    write("accuracy.json", accuracy)
+    print(f"   closing-line value: forecasts toward model {accuracy['clv']['forecasts']['spread']['toward_pct']} "
+          f"(n={accuracy['clv']['forecasts']['spread']['n']}) | tracked plays beat close "
+          f"{early_summary.get('beat_close_pct')} (n={early_summary.get('closed')})")
     game_accuracy = accuracy.get("games") or {}
     write("model_history.json", {
         "game_only": True,
