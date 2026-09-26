@@ -151,12 +151,20 @@
       "default": 0.25
     },
     "_position_points_note": "Points of team strength lost when that player is fully OUT. The starting-QB number is the only large one and it is deliberately conservative: market studies put a starting QB's value between 3 and 7 points depending on the backup, and this model has no way to know how good the backup is.",
-    "max_team_points": 7.0,
-    "_max_team_points_note": "Hard cap on how much one team's injury list can move the line. Without it, a long Week 14 report stacks a dozen small deductions into a fake double-digit swing.",
+    "max_team_points": 9.0,
+    "_max_team_points_note": "Hard cap on how much one team's injury list can move the line. Without it, a long Week 14 report stacks a dozen small deductions into a fake double-digit swing. Raised from 7 to 9 with measured QB value, so an elite starter (up to 8) plus a few depth pieces is not silently squeezed.",
     "total_points_per_offensive_point": 0.55,
     "_total_note": "How much a team's offensive injury load pulls the projected combined score down.",
     "starter_snap_rank": 1,
-    "depth_chart_enabled": true
+    "depth_chart_enabled": true,
+    "measured_qb_value": true,
+    "qb_points_per_epa": 22.5,
+    "qb_min_points": 0.5,
+    "qb_max_points": 8.0,
+    "_measured_qb_note": "Replaces the flat QB_starter number with the measured gap between the team's usual starter and the QB who would replace him (shrunk EPA/play from nflverse's free stats). 22.5 points per 1.0 EPA/play is fitted on 2019-2025 closing spreads (574 non-primary starts): average starter to replacement is ~5 pts. QB_starter above is still used when a starter has under 100 plays of evidence. See pipeline/qb_value.py.",
+    "hold_questionable_qb": true,
+    "qb_hold_release_minutes": 90,
+    "_hold_note": "A usual starting QB listed Questionable or Doubtful holds every market on that game (no stake, not locked) until 90 minutes before kickoff, when inactives are out. After that he is treated as active and the card says to confirm."
   },
   "weather": {
     "enabled": true,
@@ -200,6 +208,8 @@
     "_note": "Bets that fail these are still shown with the reason. No model pick is auto-logged: My Ledger contains only wagers the user explicitly adds in the browser.",
     "min_price": -350,
     "max_price": 300,
+    "ml_max_price": 120,
+    "_ml_max_price_note": "Moneyline plays longer than +120 are priced and shown but never tiered. In the 2011-2025 nflverse backtest (3,919 games at the close) moneyline edges ran backwards: 4%+ edges won 19% with -13.8% ROI, 2-4% edges -12.7%. Capping at +120 turned the moneyline slice from -6.8% to +5.1% ROI (39 plays -- small, but the direction was consistent). Totals and spreads are unaffected. See site/data/backtest.json.",
     "skip_if_no_odds": true,
     "max_bets_per_game": 1,
     "_max_bets_per_game_note": "Correlation guard. A team's moneyline and its spread are close to the same bet, so taking both is one position at double the variance Kelly assumed.",
@@ -211,6 +221,12 @@
     "_bet_preseason_note": "Preseason games are priced and displayed but never tiered as a play. Starter snap counts, not team strength, decide preseason games, and no rating model sees the coach's snap plan.",
     "bet_postseason": true,
     "_max_price_note": "Longest price the board will stake at all. Beyond +300 the de-vig, the favourite-longshot bias and the model's own error are all bigger than any edge it can claim."
+  },
+  "timing": {
+    "full_tier_min_hours": 0,
+    "track_early_hours": 96,
+    "late_stake_multiplier": 0.6,
+    "_note": "Every bettable LEAN-or-better play is locked at the first line and price it was published at, then compared with DraftKings' last pregame number (closing-line value) and graded at the locked price. Locks made 96h+ before kickoff (by Wednesday for a Sunday game) count as 'early'. The college board found early prices far better (54% ATS at 120h+ vs 44-48% inside 72h); the NFL is sharper, so the gate that caps late plays at LEAN stays OFF (0) until the early/late split on the Accuracy tab shows the same gap here. To turn it on, set full_tier_min_hours to 96."
   },
   "data": {
     "odds_provider_priority": [
