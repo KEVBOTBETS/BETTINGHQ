@@ -107,8 +107,8 @@
     const row=(label,x)=>'<tr><td>'+esc(label)+'</td><td>'+(x&&x.n?pct(x.toward_pct):"—")+'</td><td>'+(x&&x.n?signed(x.avg_points,2):"—")+'</td><td>'+(x?.n||0)+'</td></tr>';
     const g=p.by_tier?.good_or_better||{},lean=p.by_tier?.lean||{};
     return '</div><h4 class="clv-title">Beat the closing line?</h4>'+
-      '<div class="table-scroll"><table class="clv-table"><thead><tr><th>Model forecasts</th><th>Moved toward</th><th>Avg pts</th><th>n</th></tr></thead><tbody>'+
-      row("Spreads",f.spread)+row("Spreads, "+(big.min_gap||2)+"+ pt gap",big)+row("Totals",f.total)+'</tbody></table></div>'+
+      '<div class="table-scroll"><table class="clv-table"><thead><tr><th>Line moved…</th><th>Toward</th><th>Avg pts</th><th>n</th></tr></thead><tbody>'+
+      row("Spreads",f.spread)+row((big.min_gap||2)+"+ pt gap",big)+row("Totals",f.total)+'</tbody></table></div>'+
       '<div class="metrics">'+
       metric("Tracked plays beat the close",p.closed?pct(p.beat_close_pct)+" ("+p.beat_close+"–"+p.worse_than_close+"–"+p.same_as_close+")":"none closed yet")+
       metric("Avg line value",p.avg_clv_points==null?"—":signed(p.avg_clv_points,2)+" pts")+
