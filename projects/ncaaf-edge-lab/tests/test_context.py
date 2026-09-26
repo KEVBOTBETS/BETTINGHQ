@@ -47,19 +47,23 @@ class QuoteIntegrityTests(unittest.TestCase):
         self.assertEqual(quotes.gate([dict(row)], game, {}, NOW)[0]['stake_multiplier'], .5)
         self.assertEqual(quotes.gate([{'market': 'ML', 'tier': 'GOOD'}], game, {}, NOW)[0]['tier'], 'GOOD')
 
-    def test_single_book_market_is_lean_only_with_reduced_stake(self):
-        quote = {'book': 'Draft Kings', 'observed_at': NOW.isoformat(),
+    def test_single_draftkings_quote_keeps_its_tier_and_stake(self):
+        quote = {'book': 'DraftKings', 'observed_at': NOW.isoformat(),
                  'verified_markets': ['ML'], 'ml_home': -150, 'ml_away': 130}
         game = {'date_utc': (NOW+timedelta(hours=3)).isoformat(),
                 'odds': quote, 'odds_quotes': [quote], 'context': {}}
-        cfg = {'model': {'min_books_for_full_confidence': 2}}
-        row = quotes.gate([{'market': 'ML', 'tier': 'GOOD'}], game, cfg, NOW)[0]
-        self.assertEqual(row['tier'], 'LEAN')
-        self.assertEqual(row['stake_multiplier'], .65)
-        self.assertEqual(row['market_books_observed'], 1)
-        self.assertEqual(row['market_books_required'], 2)
-        self.assertIn('Single-book market', row['warning'])
+        row = quotes.gate([{'market': 'ML', 'tier': 'GOOD'}], game, {}, NOW)[0]
+        self.assertEqual(row['tier'], 'GOOD')
+        self.assertNotIn('stake_multiplier', row)
+        self.assertNotIn('warning', row)
 
+    def test_draftkings_is_the_only_quote_kept(self):
+        dk = {'book': 'DraftKings', 'verified_markets': ['ML']}
+        other = {'book': 'ESPN BET', 'verified_markets': ['ML', 'ATS', 'TOTAL']}
+        cfg = {'data': {'odds_provider_priority': ['DraftKings', 'ESPN BET']}}
+        self.assertIs(quotes.pick_quote([other, dk], 'draftkings', cfg), dk)
+        self.assertIs(quotes.pick_quote([other], 'draftkings', cfg), other)
+        self.assertIsNone(quotes.pick_quote([], 'draftkings', cfg))
 
 class ContextTests(unittest.TestCase):
     def test_new_feed_timestamp_does_not_revive_old_injury_reports(self):
@@ -74,11 +78,11 @@ class ContextTests(unittest.TestCase):
         self.assertEqual(health['status'], 'partial')
         self.assertEqual(C.parse_availability(payload, 2027, NOW)[0], {})
 
-    def test_unavailable_reports_raise_a_qb_and_lineup_review_flag(self):
+    def test_empty_feed_is_not_a_game_specific_review_flag(self):
         flags = C.availability_review_flags(
             {'status': 'unavailable'}, {'home': [], 'away': []}
         )
-        self.assertTrue(any('QB' in flag and 'unavailable' in flag for flag in flags))
+        self.assertEqual(flags, [])
         current = {'home': [{'position': 'QB'}], 'away': []}
         self.assertTrue(any('Recent QB report' in flag for flag in
                             C.availability_review_flags({'status': 'partial'}, current)))
