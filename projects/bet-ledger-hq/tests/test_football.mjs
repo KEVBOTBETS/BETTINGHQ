@@ -8,6 +8,8 @@ assert.equal(W.candidate(row,now,.015),null);
 assert.equal(W.candidate({...row,ev:-.01},now,0),null);
 assert.equal(W.candidate({...row,filtered:'odds feed integrity warning'},now,0),null);
 assert.equal(W.candidate({...row,filtered:'outside the top 6 plays for this week'},now,.005).research,true);
+assert.equal(W.candidate({...row,market:'TOTAL',filtered:'research only — model says GOOD, but totals are not tiered until proven'},now,.005).research,true);
+assert.equal(W.candidate({...row,filtered:'moneyline +180 is longer than +120'},now,.005),null);
 assert.equal(W.candidate({...row,odds_observed_at:'2026-09-18T12:00:00Z'},now,0),null);
 assert.equal(W.candidate({...row,held:true},now,0),null);
 assert.equal(W.candidate({...row,tier:'LEAN'},now,.005).research,false);
