@@ -1,7 +1,7 @@
 {
  "schema": 3,
  "game_only": true,
- "generated_at": "2026-09-26T00:41:30.548469+00:00",
+ "generated_at": "2026-09-26T03:36:58.021923+00:00",
  "label": "NCAAF prediction accuracy",
  "scope": {
   "season": 2026,
@@ -13,15 +13,15 @@
  "method": "One frozen pregame projection per game. Winner, spread direction, totals direction and error are graded from final scores. No wagers, prices, stake units or ledger records are stored in this history.",
  "games": {
   "logged": 292,
-  "graded": 164,
-  "pending": 128,
+  "graded": 166,
+  "pending": 126,
   "winner": {
-   "n": 164,
+   "n": 166,
    "correct": 121,
-   "accuracy": 0.7378,
+   "accuracy": 0.72892,
    "interval95": [
-    0.6656,
-    0.79912
+    0.65669,
+    0.79079
    ]
   },
   "ats": {
@@ -52,12 +52,12 @@
    "model_mae": 11.60741,
    "market_mae": 11.38889
   },
-  "margin_mae": 18.07213,
-  "total_mae": 12.13354,
-  "brier": 0.15961
+  "margin_mae": 18.24693,
+  "total_mae": 12.11566,
+  "brier": 0.16267
  },
  "validation": {
-  "n": 164,
+  "n": 166,
   "probability_target": "home team win",
   "calibration": [
    {
@@ -72,12 +72,12 @@
    },
    {
     "bucket": "20\u201340%",
-    "n": 19,
-    "predicted": 0.28697,
-    "actual": 0.5789473684210527,
+    "n": 21,
+    "predicted": 0.29365,
+    "actual": 0.6190476190476191,
     "interval95": [
-     0.36276,
-     0.76858
+     0.40879,
+     0.79249
     ]
    },
    {
@@ -111,7 +111,7 @@
     ]
    }
   ],
-  "brier": 0.15961,
+  "brier": 0.16267,
   "status": "review calibration",
   "note": "Only frozen forecasts from this season. Intervals show sampling uncertainty; neither a small sample nor market agreement proves an edge."
  },
@@ -2399,8 +2399,13 @@
    "market_total": null,
    "id": "game:NCAAF:401862778:::",
    "captured_at": "2026-09-15T00:38:41.668342+00:00",
-   "result": "Pending",
-   "version": "2026-09-06-ev2"
+   "result": "Graded",
+   "version": "2026-09-06-ev2",
+   "actual_margin": 4.0,
+   "actual_total": 44.0,
+   "final_home": 24.0,
+   "final_away": 20.0,
+   "graded_at": "2026-09-26T03:36:58.018031+00:00"
   },
   {
    "kind": "game",
@@ -2417,8 +2422,13 @@
    "market_total": null,
    "id": "game:NCAAF:401858468:::",
    "captured_at": "2026-09-15T00:38:41.668342+00:00",
-   "result": "Pending",
-   "version": "2026-09-06-ev2"
+   "result": "Graded",
+   "version": "2026-09-06-ev2",
+   "actual_margin": 51.0,
+   "actual_total": 65.0,
+   "final_home": 58.0,
+   "final_away": 7.0,
+   "graded_at": "2026-09-26T03:36:58.018031+00:00"
   },
   {
    "kind": "game",
