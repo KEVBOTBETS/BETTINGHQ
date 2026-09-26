@@ -76,5 +76,31 @@ class ScaleToMarketTests(unittest.TestCase):
         self.assertGreaterEqual(m['total_sd'], 13.5)
 
 
+class TotalsBumpTests(unittest.TestCase):
+    def test_home_bump_does_not_inflate_totals(self):
+        rng = random.Random(3)
+        teams = [f'T{i:02d}' for i in range(30)]
+        games, n = [], 0
+        for _ in range(8):
+            rng.shuffle(teams)
+            for h, a in zip(teams[::2], teams[1::2]):
+                hs, as_ = 29 + rng.gauss(0, 7), 25 + rng.gauss(0, 7)   # home +2 / away -2 around 27
+                games.append(game(n, h, a, round(hs), round(as_))); n += 1
+        c = cfg()
+        sr, league, bump = R.solve_scoring_ratings(games, c, hfa_teams=set(teams))
+        self.assertAlmostEqual(bump, 4.0, delta=1.2)
+        g = {'game_id': 'x', 'home': {'abbr': 'T00'}, 'away': {'abbr': 'T01'}, 'neutral': False}
+        p = B.project(g, {'T00': 0.0, 'T01': 0.0}, 2.0, {}, league, bump, {}, {}, c)
+        self.assertAlmostEqual(p['proj_total'], 2 * league, delta=0.3)   # no +bump on the total
+
+
+class PriorSeasonTests(unittest.TestCase):
+    def test_last_season_is_off(self):
+        r = cfg()['ratings']
+        self.assertFalse(r['use_prior_season'])
+        self.assertEqual(r['fpi_weight'], 1.0)
+        self.assertEqual(r['fpi_scoring_weight'], 1.0)
+
+
 if __name__ == '__main__':
     unittest.main()
