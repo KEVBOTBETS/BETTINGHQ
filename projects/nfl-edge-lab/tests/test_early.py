@@ -134,3 +134,76 @@ class ForecastClv(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+GATE = {"clv_gate": {"enabled": True, "min_closed": 4, "unlock_pct": .53, "fail_pct": .47,
+                     "failing_stake_multiplier": .5, "untiered_until_proven": ["totals"]}}
+
+
+def closed_locks(market, beat, worse):
+    locks = {}
+    for i in range(beat + worse):
+        pts = 1.0 if i < beat else -1.0
+        locks[f"{i}|{market}|home"] = {"game_id": str(i), "market": market, "side": "home",
+                                       "tier": "GOOD", "result": "Pending",
+                                       "closing_clv": {"points": pts, "prob": 0.0}}
+    return {"locks": locks}
+
+
+class ClosingLineGate(unittest.TestCase):
+    def test_unproven_caps_best_bet_and_untiers_totals(self):
+        status = early.gate_status({}, GATE)
+        self.assertEqual(status["sides"]["status"], "unproven")
+        rows = early.clv_gate([row(50, tier="BEST BET"), row(50, tier="GOOD", market="TOTAL", side="over")],
+                              GATE, status)
+        self.assertEqual((rows[0]["tier"], rows[0]["gate_tier"]), ("GOOD", "BEST BET"))
+        self.assertIn("beating the close", rows[0]["tier_note"])
+        self.assertEqual((rows[1]["tier"], rows[1]["research_tier"], rows[1]["research"]), ("PASS", "GOOD", True))
+        self.assertIn("research only", rows[1]["filtered"])
+
+    def test_proven_group_keeps_tiers(self):
+        status = early.gate_status(closed_locks("ATS", 4, 1), GATE)
+        self.assertEqual(status["sides"]["status"], "proven")
+        self.assertEqual(status["totals"]["status"], "unproven")
+        r = early.clv_gate([row(50, tier="BEST BET")], GATE, status)[0]
+        self.assertEqual(r["tier"], "BEST BET")
+
+    def test_proven_totals_are_tiered_again(self):
+        status = early.gate_status(closed_locks("TOTAL", 3, 1), GATE)
+        self.assertFalse(status["totals"]["untiered"])
+        r = early.clv_gate([row(50, tier="GOOD", market="TOTAL", side="over")], GATE, status)[0]
+        self.assertEqual(r["tier"], "GOOD")
+
+    def test_failing_group_is_capped_at_lean_with_half_stake(self):
+        status = early.gate_status(closed_locks("ATS", 1, 4), GATE)
+        self.assertEqual(status["sides"]["status"], "failing")
+        r = early.clv_gate([row(50, tier="GOOD")], GATE, status)[0]
+        self.assertEqual((r["tier"], r["stake_multiplier"]), ("LEAN", .5))
+
+    def test_disabled_gate_changes_nothing(self):
+        status = early.gate_status({}, {"clv_gate": {"enabled": False}})
+        self.assertEqual(status["sides"]["status"], "off")
+        r = early.clv_gate([row(50, tier="BEST BET")], {"clv_gate": {"enabled": False}}, status)[0]
+        self.assertEqual(r["tier"], "BEST BET")
+
+    def test_research_plays_are_locked_but_kept_out_of_the_record(self):
+        state = {}
+        status = early.gate_status({}, GATE)
+        board = early.clv_gate([row(50, tier="GOOD", market="TOTAL", side="over", line=44.5)], GATE, status)
+        summary = early.track(state, board, [], {}, CFG, NOW)
+        lock = state["locks"]["1|TOTAL|over"]
+        self.assertTrue(lock["research"])
+        self.assertEqual(lock["tier"], "GOOD")
+        self.assertEqual(summary["locked"], 0)
+        self.assertEqual(summary["research"]["tracked"], 1)
+        self.assertEqual(summary["by_group"]["totals"]["tracked"], 1)
+
+    def test_capped_plays_feed_the_gate_but_not_the_record(self):
+        state = {}
+        capped = {**row(50, tier="PASS"), "capped_tier": "GOOD",
+                  "filtered": "outside the top 3 plays for this week"}
+        summary = early.track(state, [capped], [], {}, CFG, NOW)
+        lock = state["locks"]["1|ATS|home"]
+        self.assertEqual((lock["tier"], lock["research"]), ("GOOD", True))
+        self.assertEqual(summary["locked"], 0)
+        self.assertEqual(summary["by_group"]["sides"]["tracked"], 1)

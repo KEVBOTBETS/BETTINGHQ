@@ -299,10 +299,11 @@ class TestTiering(unittest.TestCase):
         # exactly on the GOOD line at full confidence.
         edge = CFG["tiers"]["good"] + CFG["model"]["selection_haircut"] + 0.001
         self.assertEqual(M.tier_for(edge, CFG, 1.0, 2.0, -110)[0], "GOOD")
-        # 0.6 confidence: the reserve drops it exactly one tier. (With the
-        # 2026-09-26 thresholds the GOOD-LEAN gap is 0.8 pts, so 0.4
+        # 0.8 confidence: the reserve drops it exactly one tier. (With the
+        # 2026-09-27 thresholds the GOOD-LEAN gap is 0.5 pts, so 0.6
         # confidence drops it two -- thin data raising the bar harder.)
-        self.assertEqual(M.tier_for(edge, CFG, 0.6, 2.0, -110)[0], "LEAN")
+        self.assertEqual(M.tier_for(edge, CFG, 0.8, 2.0, -110)[0], "LEAN")
+        self.assertEqual(M.tier_for(edge, CFG, 0.6, 2.0, -110)[0], "PASS")
         self.assertEqual(M.tier_for(edge, CFG, 0.4, 2.0, -110)[0], "PASS")
         self.assertEqual(M.tier_for(edge, CFG, 0, 2.0, -110)[0], "PASS")
 
