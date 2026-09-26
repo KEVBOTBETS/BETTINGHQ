@@ -9,3 +9,25 @@
 @media(max-width:720px){.card-head h2{font-size:26px}.card-shell{grid-template-columns:1fr;grid-template-areas:'head' 'styles' 'preview' 'actions';padding:16px}.style-picker{grid-template-columns:1fr 1fr}.style-option{grid-template-columns:24px 1fr;padding:8px}.style-option i{width:24px;height:24px}.card-preview{max-height:none}.card-actions{grid-template-columns:1fr 1fr 1fr}}
 @media print{body,main{background:white;color:black}.intro,.saved-section{color:black}.toolbar,.ticket-bar,#health,#status,#storage-status,.cards,footer{display:none}.saved-row,.saved-row b,.saved-row small{color:black}.saved-section{margin-top:20px}.intro p:last-child{color:#333}#card-dialog{display:none}
 body.print-card main{display:none}body.print-card #print-area{display:block}#print-area img{display:block;max-width:100%;max-height:100vh;margin:0 auto}@page{margin:10mm}}
+
+/* ---- visual layer: logos, team colours, win-chance bars ---- */
+.slate-count{font-size:12px;color:#9aaabd;margin:-6px 0 14px}.slate-count:empty{display:none}.slate-count b{color:#61e6b8}
+.match-card{position:relative;background:linear-gradient(180deg,#121b26,#0f1720);transition:transform .15s ease,border-color .15s ease,box-shadow .15s ease}
+.match-card:before{content:"";position:absolute;inset:0 0 auto 0;height:4px;background:linear-gradient(90deg,var(--ta) 0 50%,var(--th) 50% 100%)}
+.match-card:not(.is-locked):hover{transform:translateY(-2px);border-color:#46586c;box-shadow:0 14px 34px -18px #000}
+.match-card.is-chosen{border-color:#2f6b55}
+.match-card.is-locked{opacity:.62;filter:saturate(.55)}
+.match-card h2{display:flex;justify-content:space-between;gap:10px;align-items:baseline}.match-card h2 span{font-size:10px;color:#7f91a5;letter-spacing:.4px;white-space:nowrap}
+.sport-dot{display:inline-block;width:7px;height:7px;border-radius:50%;margin-right:7px;vertical-align:1px;background:#61e6b8}
+.sport-ncaaf .sport-dot{background:#f5b94a}.sport-mlb .sport-dot{background:#6fb3ff}
+.team-option{padding-top:15px;border-top:3px solid var(--tc);background:linear-gradient(160deg,color-mix(in srgb,var(--tc) 16%,#18222e),#18222e 62%);overflow:hidden}
+.team-option strong em{font:600 13px 'Barlow Condensed',system-ui,sans-serif;color:#9aaabd;font-style:normal;vertical-align:4px}
+.team-option.is-predicted{box-shadow:inset 0 0 0 1px color-mix(in srgb,#61e6b8 55%,transparent)}
+.ml-logo{--tc:#5b6472;position:absolute;right:10px;top:12px;display:grid;place-items:center;width:44px;height:44px;border-radius:50%;background:var(--tc);color:#fff;font:700 12px/1 'DM Sans',system-ui,sans-serif;overflow:hidden;opacity:.95;box-shadow:0 0 0 3px #0b121a}
+.ml-logo.lt{color:#111}.ml-logo img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;background:#f4f6f8;padding:4px;opacity:0;transition:opacity .2s}.ml-logo img.ok{opacity:1}
+.team-option strong,.team-option small{padding-right:50px}
+.team-option[aria-pressed=true]:after{top:auto;bottom:9px}
+.ml-win{padding:0 15px 13px}.ml-win-lab{display:flex;justify-content:space-between;font:600 11px 'Share Tech Mono',ui-monospace,monospace;color:#b7c5d3;margin-bottom:6px}
+.ml-win-track{display:flex;gap:2px;height:9px;border-radius:99px;overflow:hidden;background:#1d2835}.ml-win-track i{display:block;height:100%;min-width:4px;background:color-mix(in srgb,var(--c) 72%,#fff 28%)}
+@media(prefers-reduced-motion:reduce){.match-card{transition:none}.match-card:not(.is-locked):hover{transform:none}}
+@media print{.match-card:before{display:none}}

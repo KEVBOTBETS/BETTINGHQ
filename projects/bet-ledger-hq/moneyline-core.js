@@ -40,7 +40,12 @@
         awayName:g.away_name||detail?.away?.name||away,stamp,fresh,locked,selectable:usable,
         predicted:usable?predicted:null,probability:usable&&predicted&&pHome!==null?(predicted==='home'?pHome:1-pHome):null,
         reason,notes:sport==='mlb'&&!g.lineups_confirmed?'Projected lineups':sport==='ncaaf'&&g.context?.availability?.status!=='available'?'Team availability not confirmed':'',
-        conditionalProbability:sport==='nfl'});
+        conditionalProbability:sport==='nfl',
+        // Presentation only: logos/colours as published by the feeds (never fetched or guessed).
+        homeLogo:g.home_logo||detail?.home?.logo||null,awayLogo:g.away_logo||detail?.away?.logo||null,
+        homeColor:g.home_color||detail?.home?.color||null,awayColor:g.away_color||detail?.away?.color||null,
+        homeRank:number(g.home_rank),awayRank:number(g.away_rank),margin:known&&mu!==null?mu:null,
+        venue:typeof g.venue==='object'?g.venue?.name||null:g.venue||null,broadcast:g.broadcast||detail?.broadcast||null});
     }
     return out.sort((a,b)=>a.when-b.when||a.key.localeCompare(b.key));
   }
