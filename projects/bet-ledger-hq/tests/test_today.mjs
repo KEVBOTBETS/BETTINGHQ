@@ -70,4 +70,34 @@ test('raw edge scales cannot let one sport take every place in the same tier',()
  const rows=[...Array.from({length:10},(_,i)=>({key:'mlb',tier:'GOOD',score:100+i,when:i})),{key:'nfl',tier:'GOOD',score:.01,when:20}];
  assert.equal(C.topPlays(rows,2).some(r=>r.key==='nfl'),true);
 });
+test("tier is the default play order",()=>{
+ const rows=[{key:"ncaaf",tier:"LEAN",when:1},{key:"mlb",tier:"BEST BET",when:9},{key:"nfl",tier:"GOOD",when:5}];
+ assert.deepEqual(C.sortPlays(rows).map(r=>r.tier),["BEST BET","GOOD","LEAN"]);
+ assert.deepEqual(C.sortPlays(rows,"time").map(r=>r.when),[1,5,9]);
+});
+test("fair and worst prices come from the model probability",()=>{
+ assert.equal(C.fairPrice(0.5),100);
+ assert.equal(C.fairPrice(0.6),-150);
+ assert.equal(C.worstPrice(0.245,0.025),319);        /* 1.025/0.245 = 4.184 -> +318.4, rounded up */
+ assert.equal(C.worstPrice(0.6,0.025),-141);         /* never overstates the room */
+ assert.equal(C.worstPrice(null,0.025),null);
+});
+test("card carries win chance, fair price and the board's own minimum return",()=>{
+ const r=C.plays("ncaaf",{meta:{generated_at:stamp,settings:{tiers:{lean:0.025}}},board:[{...base,market:"ML",side:"home",pick:"KC ML",price:220,model_prob:0.35,odds_observed_at:stamp}]},now)[0];
+ assert.equal(r.probability,0.35);assert.equal(r.fair,186);assert.equal(r.minReturn,0.025);assert.equal(r.worstReached,false);
+});
+test("spread movement is read from the pick's side",()=>{
+ const away=C.movement("ncaaf",{market:"ATS",line_move:{opened_spread:-13.5}},"away",11.5,-110);
+ assert.deepEqual([away.opened,away.now,away.toward],[13.5,11.5,2]);   /* dog got fewer points: market backed it */
+ const home=C.movement("ncaaf",{market:"ATS",line_move:{opened_spread:-7}},"home",-6,-110);
+ assert.equal(home.toward,-1);                                         /* favourite got cheaper: market faded it */
+});
+test("totals and moneyline movement",()=>{
+ assert.equal(C.movement("nfl",{market:"TOTAL",line_move:{opened_total:44.5}},"under",43,-110).toward,1.5);
+ assert.ok(C.movement("ncaaf",{market:"ML",line_move:{opened_ml_away:250}},"away",null,220).toward>0);
+ assert.equal(C.movement("ncaaf",{market:"ML",line_move:{opened_ml_home:-150}},"away",null,130),null);
+ assert.equal(C.movement("wnba",{market:"TOTAL",open_line:155.5,open_price:-110},"over",154.5,-110).toward,-1);
+ assert.equal(C.movement("mlb",{market:"ML"},"home",null,-120),null);
+});
+test("accuracy passes closing-line value through",()=>assert.equal(C.accuracy("ncaaf",{accuracy:{clv:{forecasts:{spread:{n:3}}},games:{}}}).clv.forecasts.spread.n,3));
 console.log(count+" Today checks passed.");
