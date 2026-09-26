@@ -1,51 +1,51 @@
 {
-  "checked_at": "2026-09-26T00:45:22.061Z",
+  "checked_at": "2026-09-26T00:50:40.875Z",
   "feeds": {
     "mlb": {
       "status": "recent",
       "failed_fields": [],
       "published_at": "2026-09-26T00:44:26+00:00",
-      "last_good_at": "2026-09-26T00:45:22.061Z",
-      "warnings": []
-    },
-    "props": {
-      "status": "review",
-      "failed_fields": [],
-      "published_at": "2026-09-26T00:45:06.573929+00:00",
-      "last_good_at": "2026-09-26T00:45:22.061Z",
-      "warnings": [
-        "One or more source requests failed.",
-        "No verified prop prices; projections are not wagers."
-      ]
-    },
-    "nfl": {
-      "status": "recent",
-      "failed_fields": [],
-      "published_at": "2026-09-26T00:41:21+00:00",
-      "last_good_at": "2026-09-26T00:45:22.061Z",
-      "warnings": []
-    },
-    "ladder": {
-      "status": "recent",
-      "failed_fields": [],
-      "published_at": "2026-09-26T00:45:19.728786+00:00",
-      "last_good_at": "2026-09-26T00:45:22.061Z",
+      "last_good_at": "2026-09-26T00:50:40.875Z",
       "warnings": []
     },
     "wnba": {
       "status": "review",
       "failed_fields": [],
       "published_at": "2026-09-26T00:45:10+00:00",
-      "last_good_at": "2026-09-26T00:45:22.061Z",
+      "last_good_at": "2026-09-26T00:50:40.875Z",
       "warnings": [
         "Some games have no usable prices; those games cannot qualify."
       ]
+    },
+    "props": {
+      "status": "review",
+      "failed_fields": [],
+      "published_at": "2026-09-26T00:45:06.573929+00:00",
+      "last_good_at": "2026-09-26T00:50:40.875Z",
+      "warnings": [
+        "One or more source requests failed.",
+        "No verified prop prices; projections are not wagers."
+      ]
+    },
+    "ladder": {
+      "status": "recent",
+      "failed_fields": [],
+      "published_at": "2026-09-26T00:45:19.728786+00:00",
+      "last_good_at": "2026-09-26T00:50:40.875Z",
+      "warnings": []
+    },
+    "nfl": {
+      "status": "recent",
+      "failed_fields": [],
+      "published_at": "2026-09-26T00:41:21+00:00",
+      "last_good_at": "2026-09-26T00:50:40.875Z",
+      "warnings": []
     },
     "ncaaf": {
       "status": "review",
       "failed_fields": [],
       "published_at": "2026-09-26T00:41:30+00:00",
-      "last_good_at": "2026-09-26T00:45:22.061Z",
+      "last_good_at": "2026-09-26T00:50:40.875Z",
       "warnings": [
         "Availability reports missing or incomplete; verify team news.",
         "No multi-book comparison in this refresh."
@@ -53,6 +53,11 @@
     }
   },
   "result_failures": [
+    {
+      "sport": "ncaaf",
+      "event_id": "401856686",
+      "error": "Official result feed unavailable"
+    },
     {
       "sport": "ncaaf",
       "event_id": "401856797",
@@ -65,22 +70,17 @@
     },
     {
       "sport": "ncaaf",
-      "event_id": "401856686",
-      "error": "Official result feed unavailable"
-    },
-    {
-      "sport": "ncaaf",
       "event_id": "401861963",
       "error": "Official result feed unavailable"
     },
     {
       "sport": "ncaaf",
-      "event_id": "401864507",
+      "event_id": "401856795",
       "error": "Official result feed unavailable"
     },
     {
       "sport": "ncaaf",
-      "event_id": "401856795",
+      "event_id": "401864507",
       "error": "Official result feed unavailable"
     },
     {
@@ -100,11 +100,6 @@
     },
     {
       "sport": "nfl",
-      "event_id": "401872938",
-      "error": "Official result feed unavailable"
-    },
-    {
-      "sport": "nfl",
       "event_id": "401872935",
       "error": "Official result feed unavailable"
     },
@@ -115,7 +110,7 @@
     },
     {
       "sport": "nfl",
-      "event_id": "401872939",
+      "event_id": "401872938",
       "error": "Official result feed unavailable"
     },
     {
@@ -126,6 +121,11 @@
     {
       "sport": "nfl",
       "event_id": "401872944",
+      "error": "Official result feed unavailable"
+    },
+    {
+      "sport": "nfl",
+      "event_id": "401872939",
       "error": "Official result feed unavailable"
     },
     {
