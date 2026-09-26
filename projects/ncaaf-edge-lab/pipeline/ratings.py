@@ -177,12 +177,13 @@ def _hfa_game(g: dict, hfa_teams: set[str] | None) -> bool:
 def solve_scoring_ratings(games: list[dict], cfg: dict,
                           prior: dict[str, dict] | None = None,
                           prior_league: float | None = None,
-                          prior_home_bump: float | None = None
+                          prior_home_bump: float | None = None,
+                          hfa_teams: set[str] | None = None
                           ) -> tuple[dict[str, dict], float, float]:
     """
     Offence / defence ratings for the totals model.
 
-        points_for(t vs o)  ~=  league_avg + off[t] - def[o] + home_bump*(home?)
+        points_for(t vs o)  ~=  league_avg + off[t] - def[o] +/- home_bump/2 (home/visitor)
 
     Returns ({team: {"off": x, "def": y}}, league_avg_points, home_scoring_bump).
     """
@@ -223,10 +224,20 @@ def solve_scoring_ratings(games: list[dict], cfg: dict,
     rows: list[tuple[dict[int, float], float, float]] = []
     for g, w in zip(played, ws):
         h, a = g["home"]["abbr"], g["away"]["abbr"]
-        rows.append(({off[h]: 1.0, dfn[a]: -1.0, home_col: 1.0},
-                     float(g["home_score"]) - league, float(w)))
-        rows.append(({off[a]: 1.0, dfn[h]: -1.0},
-                     float(g["away_score"]) - league, float(w)))
+        # Same trap as home field in the margin solve: FBS schools host FCS
+        # buy games and win 45-10, which reads as a huge home scoring bump
+        # unless only FBS-vs-FBS games inform it.
+        #
+        # The bump is split: home +bump/2, visitor -bump/2. `league` is the
+        # mean of ALL scores, so a one-sided home bump leaves the visitor's
+        # matching shortfall unexplained and adds the whole bump to every
+        # projected total (+2 pts on every non-neutral game in September 2026,
+        # which is why the board filled up with overs).
+        home, away = {off[h]: 1.0, dfn[a]: -1.0}, {off[a]: 1.0, dfn[h]: -1.0}
+        if _hfa_game(g, hfa_teams):
+            home[home_col], away[home_col] = 0.5, -0.5
+        rows.append((home, float(g["home_score"]) - league, float(w)))
+        rows.append((away, float(g["away_score"]) - league, float(w)))
 
     prior_mean = None
     if prior:

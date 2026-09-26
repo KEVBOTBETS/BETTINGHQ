@@ -375,8 +375,9 @@ def project(g: dict, rat: dict, hfa: float, score_rat: dict, league: float,
 
     so_h = score_rat.get(h) or {"off": 0.0, "def": 0.0}
     so_a = score_rat.get(a) or {"off": 0.0, "def": 0.0}
-    pts_home = league + so_h["off"] - so_a["def"] + (0.0 if g.get("neutral") else home_bump)
-    pts_away = league + so_a["off"] - so_h["def"]
+    half_bump = 0.0 if g.get("neutral") else home_bump / 2.0
+    pts_home = league + so_h["off"] - so_a["def"] + half_bump
+    pts_away = league + so_a["off"] - so_h["def"] - half_bump
     proj_total = pts_home + pts_away + float(o.get("total_adj", 0.0))
 
     odds = g.get("odds") or {}
@@ -962,12 +963,17 @@ def main() -> int:
     print(f"== ncaaf-edge build {store.now_iso()} (season {season}) ==")
 
     # 1. Prior season -- fetched once, then cached forever.
-    prior_games = store.load(f"history_{prior_season}.json", [])
-    if not prior_games:
+    # Last season is off by default: rosters, coaches and quarterbacks turn
+    # over too much in college football. ESPN's current-season FPI plus this
+    # season's results carry the ratings (see ratings.use_prior_season).
+    use_prior = bool(cfg["ratings"].get("use_prior_season", False))
+    prior_games = store.load(f"history_{prior_season}.json", []) if use_prior else []
+    if use_prior and not prior_games:
         print(f"-- backfilling {prior_season} season (one time, a few minutes)")
         prior_games = espn.fetch_season(prior_season, group, prio)
         store.save(f"history_{prior_season}.json", prior_games)
-    print(f"   prior season games: {len(prior_games)}")
+    print(f"   prior season games used: {len(prior_games)}"
+          + ("" if use_prior else " (off: 2026 FPI + 2026 results only)"))
 
     # 2. Current season.
     cache = store.load(f"games_{season}.json", [])
@@ -1022,22 +1028,36 @@ def main() -> int:
 
     # Ratings, solved from results around the blended preseason prior.
     fbs = fbs_teams(games)
-    prior_rat, _ = R.solve_margin_ratings(prior_games, cfg, hfa_teams=fbs_teams(prior_games))
-    internal_preseason = R.regress_to_prior(
-        prior_rat, float(cfg["ratings"]["prior_regression"]))
+    if prior_games:
+        prior_rat, _ = R.solve_margin_ratings(prior_games, cfg, hfa_teams=fbs_teams(prior_games))
+        internal_preseason = R.regress_to_prior(
+            prior_rat, float(cfg["ratings"]["prior_regression"]))
+    else:
+        internal_preseason = {}
     preseason, rating_audit = R.blend_preseason_ratings(
         internal_preseason, fpi_teams, float(cfg["ratings"].get("fpi_weight", 0.0)))
     rat, hfa = R.solve_margin_ratings(games, cfg, prior=preseason, hfa_teams=fbs)
     if not any(g.get("completed") for g in games):
         rat, hfa = preseason, float(cfg["model"]["home_field_fallback"])
-    prior_score, prior_league, prior_home_bump = R.solve_scoring_ratings(prior_games, cfg)
+    if prior_games:
+        prior_fbs = fbs_teams(prior_games)
+        prior_score, prior_league, prior_home_bump = R.solve_scoring_ratings(
+            [g for g in prior_games if g["home"]["abbr"] in prior_fbs and g["away"]["abbr"] in prior_fbs],
+            cfg, hfa_teams=prior_fbs)
+    else:
+        prior_score, prior_league, prior_home_bump = {}, None, None
+    # Totals are fitted on FBS-vs-FBS games only. Buy games (45-10 at home)
+    # inflate the home scoring bump and drag the league average; FCS games are
+    # never bet, and on 2026 weeks 2-3 this was the most accurate totals setup
+    # (beat both the opening and closing totals on average error).
+    fbs_only = [g for g in games if g["home"]["abbr"] in fbs and g["away"]["abbr"] in fbs]
     preseason_score = R.blend_scoring_priors(
         prior_score, fpi_teams,
         float(cfg["ratings"].get("fpi_scoring_weight",
                                  cfg["ratings"].get("fpi_weight", 0.0))))
     score_rat, league, home_bump = R.solve_scoring_ratings(
-        games, cfg, prior=preseason_score, prior_league=prior_league,
-        prior_home_bump=prior_home_bump)
+        fbs_only, cfg, prior=preseason_score, prior_league=prior_league,
+        prior_home_bump=prior_home_bump, hfa_teams=fbs)
     audit_state = fpi_audit.initialize(store.load(f"fpi_audit_{season}.json", {}), fpi_data, season)
     anchor = audit_state.get("anchor") or {}
     audit_ratings = None
@@ -1048,8 +1068,9 @@ def main() -> int:
         ar, ah = R.solve_margin_ratings(after, cfg, prior=anchor_prior, hfa_teams=fbs)
         if not any(g.get("completed") for g in after):
             ar, ah = anchor_prior, float(cfg["model"]["home_field_fallback"])
-        asc, al, ab = R.solve_scoring_ratings(after, cfg, prior=anchor_score,
-                                            prior_league=prior_league, prior_home_bump=prior_home_bump)
+        asc, al, ab = R.solve_scoring_ratings(
+            [g for g in after if g["home"]["abbr"] in fbs and g["away"]["abbr"] in fbs], cfg,
+            prior=anchor_score, prior_league=prior_league, prior_home_bump=prior_home_bump, hfa_teams=fbs)
         audit_ratings = (ar, ah, asc, al, ab)
     played = R.games_played(games)
     form = R.ats_form(games)
