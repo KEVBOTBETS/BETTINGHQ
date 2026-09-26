@@ -19,7 +19,7 @@ def run(project,command):
 
 run('nfl-edge-lab',[sys.executable,'-m','unittest','discover','-s','tests'])
 run('ncaaf-edge-lab',[sys.executable,'-m','tests.test_offline'])
-run('ncaaf-edge-lab',[sys.executable,'-m','unittest','tests.test_accuracy','tests.test_schedule','tests.test_context','tests.test_privacy','tests.test_early'])
+run('ncaaf-edge-lab',[sys.executable,'-m','unittest','tests.test_accuracy','tests.test_schedule','tests.test_context','tests.test_privacy','tests.test_early','tests.test_calibration'])
 run('props-edge',[sys.executable,'-m','unittest','discover','-s','tests'])
 run('wnba-edge-lab',[sys.executable,'-m','unittest','discover','-s','tests'])
 run('ladderbet',[sys.executable,'-m','pytest','-q','tests'])
