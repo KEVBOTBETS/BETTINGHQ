@@ -571,6 +571,19 @@ function ledgerButton(cand, plannedStake){
   return `<button type="button" class="iconbtn" data-add="${esc(cand.game_id)}:${esc(cand.market)}:${esc(cand.side)}" data-default-stake="${amount.toFixed(2)}">+ Ledger</button>`;
 }
 
+/* Plain-English hit rate, so a value pick on the side the projection has
+   losing never reads as a contradiction. */
+function winChanceNote(cand){
+  if(!cand||cand.model_prob==null)return "";
+  const p=Number(cand.model_prob), push=Number(cand.push_prob||0);
+  const inTen=Math.max(0,Math.min(10,Math.round(p*(1-push)*10)));
+  const pays=cand.price>0?`+${Math.round(cand.price)}`:`${Math.round(cand.price)}`;
+  const kind=p<0.5
+    ? `<b>Value play, not a winner pick.</b> The model expects this side to lose more often than it wins — the price (${esc(pays)}) is what makes it worth a bet.`
+    : `<b>Model's side.</b> Expected to win more often than it loses.`;
+  return `<div class="note" style="margin:8px 0 0;padding:8px 10px;font-size:12px">Wins about <b>${inTen} in 10</b> (${pct(p)}; break-even ${pct(cand.breakeven)}). ${kind}</div>`;
+}
+
 function gameCard(g, cand, plannedStake){
   const p = g.projection || {};
   const tier = cand ? cand.tier : "PASS";
@@ -585,7 +598,8 @@ function gameCard(g, cand, plannedStake){
 
   const pickBlock = cand ? `<div>
       <div class="bigpick">${esc(cand.pick)}<span>${price(cand.price)}</span></div>
-      ${cand.tier_note?`<div class="note" style="margin:8px 0 0;padding:8px 10px;font-size:12px">Held back from BEST BET: ${esc(cand.tier_note)}</div>`:""}
+      ${winChanceNote(cand)}
+      ${cand.tier_note?`<div class="note" style="margin:8px 0 0;padding:8px 10px;font-size:12px">Why this tier: ${esc(cand.tier_note)}</div>`:""}
       ${cand.held?`<div class="note" style="margin:8px 0 0;padding:8px 10px;font-size:12px;border-left-color:var(--flag)">Priced, not staked yet — ${esc(cand.hold_note||"")}.</div>`:""}
     </div>` : `<div class="bigpick" style="color:var(--ink-3);font-size:15px">No qualified play</div>`;
 
@@ -596,10 +610,10 @@ function gameCard(g, cand, plannedStake){
     </div>`;
 
   const stats4 = cand ? `<div class="grid5">
-      <div><div class="k">Model</div><div class="v">${pct(cand.model_prob)}</div></div>
+      <div><div class="k">Model win chance</div><div class="v">${pct(cand.model_prob)}</div></div>
       <div><div class="k">No-vig market</div><div class="v">${pct(cand.market_fair_prob)}</div></div>
       <div><div class="k">Break-even</div><div class="v">${pct(cand.breakeven)}</div></div>
-      <div><div class="k">Edge</div><div class="v ${posneg(cand.edge)}">${pct(cand.edge)}</div></div>
+      <div><div class="k">Adj. edge</div><div class="v ${posneg(cand.action_edge??cand.edge)}" title="Risk-adjusted expected return the tier is decided on. Raw compressed value: ${pct(cand.edge)}">${pct(cand.action_edge??cand.edge)}</div></div>
       <div><div class="k">Confidence</div><div class="v">${num(cand.confidence,2)}</div></div>
     </div>` : `<div class="grid4">
       <div><div class="k">Market</div><div class="v">${p.market_mu==null?"—":sgn(-p.market_mu)}</div></div>
@@ -668,13 +682,17 @@ function renderBest(){
   deck.innerHTML = `<div class="plays-head"><h2>${bettable} bettable now · ${esc(week&&week.label||"selected slate")}</h2>
       <span class="pill">${held} qualified but held until bet window</span></div>
     <div class="play-list">${sorted.map((c,i)=>{
-      const width=Math.max(3,Math.min(100,(Number(c.edge)||0)/0.055*100));
+      // Show the risk-adjusted return the tier was actually decided on. The raw
+      // compressed edge sits near the 5.5% ceiling for any long price and made
+      // a LEAN look as strong as a BEST BET.
+      const shown=c.action_edge!=null?Number(c.action_edge):Number(c.edge)||0;
+      const width=Math.max(3,Math.min(100,shown/0.055*100));
       return `<div class="play-row">
         <span>${tierChip(c.tier)}</span>
         <strong class="pick">${esc(c.pick)} <small>${price(c.price)}</small></strong>
         <span class="play-meta">${esc(c.matchup)} · ${esc(fmtDate(c.game_date))}</span>
         <span class="edge-meter"><i style="width:${width.toFixed(0)}%"></i></span>
-        <strong class="num ${posneg(c.edge)}">${pct(c.edge)} edge</strong>
+        <strong class="num ${posneg(shown)}" title="Risk-adjusted expected return (after the selection and confidence reserves). Raw value: ${pct(c.edge)}">${pct(shown)} edge</strong>
         <strong class="play-stake">${planned[i]?cur(planned[i]):"—"}</strong>
         <span class="play-state">${ledgerButton(c,planned[i])}</span>
       </div>`;
@@ -974,8 +992,8 @@ function simCompute(){
   const divs = D.divisions || {};
   const sameDiv = !!(divs[A] && divs[H] && divs[A][0] === divs[H][0] && divs[A][1] === divs[H][1]);
   const bump = neutral ? 0 : D.home_scoring_bump;
-  const ptsH = D.league_avg_points + th.off - ta.def + bump;
-  const ptsA = D.league_avg_points + ta.off - th.def;
+  const ptsH = D.league_avg_points + th.off - ta.def + bump / 2;
+  const ptsA = D.league_avg_points + ta.off - th.def - bump / 2;
   const divAdj = sameDiv ? D.divisional_total_adj : 0;
   const wx = Number(S.sim.wxTotal) || 0;
   const total = ptsH + ptsA + divAdj + wx;
