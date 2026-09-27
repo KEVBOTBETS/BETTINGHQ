@@ -1,13 +1,13 @@
 {
  "schema": 2,
  "projection_only": false,
- "generated_at": "2026-09-27T21:01:51.454440+00:00",
+ "generated_at": "2026-09-27T21:39:13.468240+00:00",
  "label": "NFL Props forecast and priced-call accuracy",
  "scope": {
   "season": 2026,
   "season_type": 2,
   "season_type_label": "regular season",
-  "included_records": 28880,
+  "included_records": 28881,
   "excluded_records": 0
  },
  "method": "First pre-event snapshot, frozen line and price. All model picks, including PASS/AVOID and unstaked picks. One preferred side per event/market in pick statistics; the complete priced-side audit is separate. One hypothetical unit per pick; no actual wagers are created. Missing results remain pending.",
@@ -145062,6 +145062,31 @@
    "selected": false,
    "id": "call:NFL:401872962:Kyren Williams:Receiving yards:over:10.5",
    "captured_at": "2026-09-27T21:01:49.390924+00:00",
+   "result": "Pending"
+  },
+  {
+   "kind": "call",
+   "league": "NFL",
+   "event_id": "401872962",
+   "start": "2026-09-28T00:20Z",
+   "matchup": "Los Angeles Rams @ Denver Broncos",
+   "player": "Jaylen Waddle",
+   "market": "Receiving yards",
+   "side": "over",
+   "line": 61.5,
+   "price": -111,
+   "probability": 0.45315,
+   "tier": "PASS",
+   "edge": -0.0972,
+   "book": "DraftKings",
+   "quote_time": "2026-09-27T21:38:57.923910+00:00",
+   "season": 2026,
+   "season_type": 2,
+   "stat_key": "jaylenwaddle|denverbroncos|receivingyards",
+   "version": "2026-09-23-restored-v1",
+   "selected": false,
+   "id": "call:NFL:401872962:Jaylen Waddle:Receiving yards:over:61.5",
+   "captured_at": "2026-09-27T21:39:11.624408+00:00",
    "result": "Pending"
   },
   {
@@ -519311,13 +519336,13 @@
   "brier": 0.23984
  },
  "all_calls": {
-  "logged": 608,
+  "logged": 609,
   "wins": 149,
   "losses": 141,
   "pushes": 0,
   "voids": 0,
   "settled": 290,
-  "pending": 318,
+  "pending": 319,
   "win_rate": 0.5137931034482759,
   "units": -9.694,
   "roi": -0.0334260724137931,
