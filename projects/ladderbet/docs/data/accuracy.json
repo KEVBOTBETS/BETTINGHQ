@@ -1,90 +1,90 @@
 {
  "schema": 1,
- "generated_at": "2026-09-26T21:32:58.791398+00:00",
+ "generated_at": "2026-09-27T14:54:03.465880+00:00",
  "label": "Ladder screened-option accuracy",
  "method": "Every screened option is saved before the event, whether or not you choose it. Probabilities here are de-vigged market estimates, not an independent sports model. First pre-event snapshot, frozen line and price. All model picks, including PASS/AVOID and unstaked picks. One preferred side per event/market in pick statistics; the complete priced-side audit is separate. One hypothetical unit per pick; no actual wagers are created. Missing results remain pending.",
  "overall": {
-  "logged": 136,
-  "wins": 51,
-  "losses": 28,
+  "logged": 140,
+  "wins": 60,
+  "losses": 33,
   "pushes": 0,
   "voids": 0,
-  "settled": 79,
-  "pending": 57,
-  "win_rate": 0.6455696202531646,
-  "units": -0.008,
-  "roi": -9.75949367088621e-05,
-  "brier": 0.23077
+  "settled": 93,
+  "pending": 47,
+  "win_rate": 0.6451612903225806,
+  "units": -0.548,
+  "roi": -0.005891172043010754,
+  "brier": 0.23038
  },
  "all_calls": {
-  "logged": 136,
-  "wins": 51,
-  "losses": 28,
+  "logged": 140,
+  "wins": 60,
+  "losses": 33,
   "pushes": 0,
   "voids": 0,
-  "settled": 79,
-  "pending": 57,
-  "win_rate": 0.6455696202531646,
-  "units": -0.008,
-  "roi": -9.75949367088621e-05,
-  "brier": 0.23077
+  "settled": 93,
+  "pending": 47,
+  "win_rate": 0.6451612903225806,
+  "units": -0.548,
+  "roi": -0.005891172043010754,
+  "brier": 0.23038
  },
  "by_tier": {
   "SCREENED": {
-   "logged": 136,
-   "wins": 51,
-   "losses": 28,
+   "logged": 140,
+   "wins": 60,
+   "losses": 33,
    "pushes": 0,
    "voids": 0,
-   "settled": 79,
-   "pending": 57,
-   "win_rate": 0.6455696202531646,
-   "units": -0.008,
-   "roi": -9.75949367088621e-05,
-   "brier": 0.23077
+   "settled": 93,
+   "pending": 47,
+   "win_rate": 0.6451612903225806,
+   "units": -0.548,
+   "roi": -0.005891172043010754,
+   "brier": 0.23038
   }
  },
  "by_market": {
   "ML": {
-   "logged": 136,
-   "wins": 51,
-   "losses": 28,
+   "logged": 140,
+   "wins": 60,
+   "losses": 33,
    "pushes": 0,
    "voids": 0,
-   "settled": 79,
-   "pending": 57,
-   "win_rate": 0.6455696202531646,
-   "units": -0.008,
-   "roi": -9.75949367088621e-05,
-   "brier": 0.23077
+   "settled": 93,
+   "pending": 47,
+   "win_rate": 0.6451612903225806,
+   "units": -0.548,
+   "roi": -0.005891172043010754,
+   "brier": 0.23038
   }
  },
  "by_version": {
   "2026-09-06-ev2": {
-   "logged": 136,
-   "wins": 51,
-   "losses": 28,
+   "logged": 140,
+   "wins": 60,
+   "losses": 33,
    "pushes": 0,
    "voids": 0,
-   "settled": 79,
-   "pending": 57,
-   "win_rate": 0.6455696202531646,
-   "units": -0.008,
-   "roi": -9.75949367088621e-05,
-   "brier": 0.23077
+   "settled": 93,
+   "pending": 47,
+   "win_rate": 0.6451612903225806,
+   "units": -0.548,
+   "roi": -0.005891172043010754,
+   "brier": 0.23038
   }
  },
  "calibration": [
   {
    "bucket": "50\u201360%",
-   "n": 29,
-   "predicted": 0.5856,
-   "actual": 0.55172
+   "n": 33,
+   "predicted": 0.58629,
+   "actual": 0.54545
   },
   {
    "bucket": "60\u201370%",
-   "n": 50,
-   "predicted": 0.6385,
+   "n": 60,
+   "predicted": 0.64155,
    "actual": 0.7
   }
  ],
@@ -123,6 +123,27 @@
  },
  "props": {},
  "records": [
+  {
+   "kind": "call",
+   "league": "nfl",
+   "event_id": "401872963",
+   "start": "2026-09-29T00:15Z",
+   "matchup": "Philadelphia Eagles @ Chicago Bears",
+   "pick": "Philadelphia Eagles",
+   "market": "ML",
+   "side": "away",
+   "price": -198.0,
+   "probability": 0.6369,
+   "tier": "SCREENED",
+   "edge": 0,
+   "book": "DraftKings",
+   "three_way": false,
+   "selected": true,
+   "id": "call:nfl:401872963::ML:away",
+   "captured_at": "2026-09-27T14:54:00.555756+00:00",
+   "result": "Pending",
+   "version": "2026-09-06-ev2"
+  },
   {
    "kind": "call",
    "league": "nfl",
@@ -246,6 +267,69 @@
    "selected": true,
    "id": "call:mlb:401817110::ML:home",
    "captured_at": "2026-09-26T21:09:43.981609+00:00",
+   "result": "Pending",
+   "version": "2026-09-06-ev2"
+  },
+  {
+   "kind": "call",
+   "league": "mlb",
+   "event_id": "401817105",
+   "start": "2026-09-27T19:07Z",
+   "matchup": "Cincinnati Reds @ Toronto Blue Jays",
+   "pick": "Toronto Blue Jays",
+   "market": "ML",
+   "side": "home",
+   "price": -181.0,
+   "probability": 0.616,
+   "tier": "SCREENED",
+   "edge": 0,
+   "book": "DraftKings",
+   "three_way": false,
+   "selected": true,
+   "id": "call:mlb:401817105::ML:home",
+   "captured_at": "2026-09-27T14:54:00.555756+00:00",
+   "result": "Pending",
+   "version": "2026-09-06-ev2"
+  },
+  {
+   "kind": "call",
+   "league": "mlb",
+   "event_id": "401817115",
+   "start": "2026-09-27T19:05Z",
+   "matchup": "Houston Astros @ Athletics",
+   "pick": "Houston Astros",
+   "market": "ML",
+   "side": "away",
+   "price": -192.0,
+   "probability": 0.6291,
+   "tier": "SCREENED",
+   "edge": 0,
+   "book": "DraftKings",
+   "three_way": false,
+   "selected": true,
+   "id": "call:mlb:401817115::ML:away",
+   "captured_at": "2026-09-27T14:54:00.555756+00:00",
+   "result": "Pending",
+   "version": "2026-09-06-ev2"
+  },
+  {
+   "kind": "call",
+   "league": "mlb",
+   "event_id": "401817108",
+   "start": "2026-09-27T19:05Z",
+   "matchup": "Tampa Bay Rays @ Philadelphia Phillies",
+   "pick": "Philadelphia Phillies",
+   "market": "ML",
+   "side": "home",
+   "price": -175.0,
+   "probability": 0.6083,
+   "tier": "SCREENED",
+   "edge": 0,
+   "book": "DraftKings",
+   "three_way": false,
+   "selected": true,
+   "id": "call:mlb:401817108::ML:home",
+   "captured_at": "2026-09-27T14:54:00.555756+00:00",
    "result": "Pending",
    "version": "2026-09-06-ev2"
   },
@@ -477,8 +561,13 @@
    "selected": true,
    "id": "call:ncaaf:401856703::ML:home",
    "captured_at": "2026-09-25T00:59:50.799575+00:00",
-   "result": "Pending",
-   "version": "2026-09-06-ev2"
+   "result": "Win",
+   "version": "2026-09-06-ev2",
+   "units": 0.434783,
+   "actual": null,
+   "final_home": 31.0,
+   "final_away": 24.0,
+   "graded_at": "2026-09-27T14:54:03.462800+00:00"
   },
   {
    "kind": "call",
@@ -498,8 +587,13 @@
    "selected": true,
    "id": "call:ncaaf:401858469::ML:away",
    "captured_at": "2026-09-25T00:59:50.799575+00:00",
-   "result": "Pending",
-   "version": "2026-09-06-ev2"
+   "result": "Win",
+   "version": "2026-09-06-ev2",
+   "units": 0.60241,
+   "actual": null,
+   "final_home": 27.0,
+   "final_away": 41.0,
+   "graded_at": "2026-09-27T14:54:03.462800+00:00"
   },
   {
    "kind": "call",
@@ -519,8 +613,13 @@
    "selected": true,
    "id": "call:mls:761834::ML:home",
    "captured_at": "2026-09-25T12:45:59.105061+00:00",
-   "result": "Pending",
-   "version": "2026-09-06-ev2"
+   "result": "Win",
+   "version": "2026-09-06-ev2",
+   "units": 0.434783,
+   "actual": null,
+   "final_home": 4.0,
+   "final_away": 2.0,
+   "graded_at": "2026-09-27T14:54:03.462800+00:00"
   },
   {
    "kind": "call",
@@ -540,8 +639,13 @@
    "selected": true,
    "id": "call:mlb:401817096::ML:home",
    "captured_at": "2026-09-25T21:39:15.858603+00:00",
-   "result": "Pending",
-   "version": "2026-09-06-ev2"
+   "result": "Win",
+   "version": "2026-09-06-ev2",
+   "units": 0.520833,
+   "actual": null,
+   "final_home": 3.0,
+   "final_away": 2.0,
+   "graded_at": "2026-09-27T14:54:03.462800+00:00"
   },
   {
    "kind": "call",
@@ -561,8 +665,13 @@
    "selected": true,
    "id": "call:mlb:401817095::ML:home",
    "captured_at": "2026-09-25T21:39:15.858603+00:00",
-   "result": "Pending",
-   "version": "2026-09-06-ev2"
+   "result": "Loss",
+   "version": "2026-09-06-ev2",
+   "units": -1,
+   "actual": null,
+   "final_home": 6.0,
+   "final_away": 9.0,
+   "graded_at": "2026-09-27T14:54:03.462800+00:00"
   },
   {
    "kind": "call",
@@ -582,8 +691,13 @@
    "selected": true,
    "id": "call:ncaaf:401869931::ML:home",
    "captured_at": "2026-09-25T00:59:50.799575+00:00",
-   "result": "Pending",
-   "version": "2026-09-06-ev2"
+   "result": "Win",
+   "version": "2026-09-06-ev2",
+   "units": 0.420168,
+   "actual": null,
+   "final_home": 17.0,
+   "final_away": 14.0,
+   "graded_at": "2026-09-27T14:54:03.462800+00:00"
   },
   {
    "kind": "call",
@@ -603,8 +717,13 @@
    "selected": true,
    "id": "call:ncaaf:401856814::ML:away",
    "captured_at": "2026-09-25T00:59:50.799575+00:00",
-   "result": "Pending",
-   "version": "2026-09-06-ev2"
+   "result": "Loss",
+   "version": "2026-09-06-ev2",
+   "units": -1,
+   "actual": null,
+   "final_home": 31.0,
+   "final_away": 26.0,
+   "graded_at": "2026-09-27T14:54:03.462800+00:00"
   },
   {
    "kind": "call",
@@ -624,8 +743,13 @@
    "selected": true,
    "id": "call:ncaaf:401869961::ML:away",
    "captured_at": "2026-09-25T00:59:50.799575+00:00",
-   "result": "Pending",
-   "version": "2026-09-06-ev2"
+   "result": "Win",
+   "version": "2026-09-06-ev2",
+   "units": 0.444444,
+   "actual": null,
+   "final_home": 20.0,
+   "final_away": 46.0,
+   "graded_at": "2026-09-27T14:54:03.462800+00:00"
   },
   {
    "kind": "call",
@@ -645,8 +769,13 @@
    "selected": true,
    "id": "call:ncaaf:401858464::ML:away",
    "captured_at": "2026-09-25T00:59:50.799575+00:00",
-   "result": "Pending",
-   "version": "2026-09-06-ev2"
+   "result": "Win",
+   "version": "2026-09-06-ev2",
+   "units": 0.444444,
+   "actual": null,
+   "final_home": 13.0,
+   "final_away": 31.0,
+   "graded_at": "2026-09-27T14:54:03.462800+00:00"
   },
   {
    "kind": "call",
@@ -666,8 +795,13 @@
    "selected": true,
    "id": "call:ncaaf:401861970::ML:home",
    "captured_at": "2026-09-25T00:59:50.799575+00:00",
-   "result": "Pending",
-   "version": "2026-09-06-ev2"
+   "result": "Win",
+   "version": "2026-09-06-ev2",
+   "units": 0.555556,
+   "actual": null,
+   "final_home": 24.0,
+   "final_away": 21.0,
+   "graded_at": "2026-09-27T14:54:03.462800+00:00"
   },
   {
    "kind": "call",
@@ -687,8 +821,13 @@
    "selected": true,
    "id": "call:ncaaf:401858463::ML:home",
    "captured_at": "2026-09-25T00:59:50.799575+00:00",
-   "result": "Pending",
-   "version": "2026-09-06-ev2"
+   "result": "Loss",
+   "version": "2026-09-06-ev2",
+   "units": -1,
+   "actual": null,
+   "final_home": 19.0,
+   "final_away": 20.0,
+   "graded_at": "2026-09-27T14:54:03.462800+00:00"
   },
   {
    "kind": "call",
@@ -708,8 +847,13 @@
    "selected": true,
    "id": "call:ncaaf:401856815::ML:away",
    "captured_at": "2026-09-25T00:59:50.799575+00:00",
-   "result": "Pending",
-   "version": "2026-09-06-ev2"
+   "result": "Loss",
+   "version": "2026-09-06-ev2",
+   "units": -1,
+   "actual": null,
+   "final_home": 21.0,
+   "final_away": 13.0,
+   "graded_at": "2026-09-27T14:54:03.462800+00:00"
   },
   {
    "kind": "call",
@@ -729,8 +873,13 @@
    "selected": true,
    "id": "call:ncaaf:401856699::ML:home",
    "captured_at": "2026-09-25T00:59:50.799575+00:00",
-   "result": "Pending",
-   "version": "2026-09-06-ev2"
+   "result": "Win",
+   "version": "2026-09-06-ev2",
+   "units": 0.60241,
+   "actual": null,
+   "final_home": 52.0,
+   "final_away": 28.0,
+   "graded_at": "2026-09-27T14:54:03.462800+00:00"
   },
   {
    "kind": "call",
@@ -776,8 +925,13 @@
    "selected": true,
    "id": "call:ncaaf:401864510::ML:away",
    "captured_at": "2026-09-25T00:59:50.799575+00:00",
-   "result": "Pending",
-   "version": "2026-09-06-ev2"
+   "result": "Loss",
+   "version": "2026-09-06-ev2",
+   "units": -1,
+   "actual": null,
+   "final_home": 27.0,
+   "final_away": 10.0,
+   "graded_at": "2026-09-27T14:54:03.462800+00:00"
   },
   {
    "kind": "call",
