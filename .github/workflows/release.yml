@@ -103,8 +103,14 @@ jobs:
             git fetch origin main
             [ "$(git rev-parse origin/main)" != "$built" ] && publish=false
             [ "$saved" = true ] && break
-            if ! git rebase origin/main; then
-              git rebase --abort
+            # The model builds also rewrite tracked files that are not model
+            # history (caches, scratch state). Those are left unstaged on
+            # purpose, and a plain rebase refuses to run at all with them
+            # present -- even when there is nothing to replay. --autostash
+            # sets them aside and puts them back. `rebase --abort` exits 128
+            # when no rebase started, so it must not be allowed to fail the step.
+            if ! git rebase --autostash origin/main; then
+              git rebase --abort 2>/dev/null || true
               echo "::warning::Refreshed data conflicted with a newer commit on main and was not saved; the next run refreshes it again."
               break
             fi
