@@ -1,24 +1,38 @@
 {
   "schema": 1,
-  "checked_at": "2026-09-27T05:45:22.686Z",
+  "checked_at": "2026-09-27T06:24:50.938Z",
   "coverage": {
-    "nfl": {
-      "status": "available",
-      "reports": 266,
-      "checked_at": "2026-09-27T05:45:22.686Z"
-    },
     "ncaaf": {
       "status": "empty",
       "reports": 0,
-      "checked_at": "2026-09-27T05:45:22.686Z"
+      "checked_at": "2026-09-27T06:24:50.938Z"
+    },
+    "nfl": {
+      "status": "available",
+      "reports": 266,
+      "checked_at": "2026-09-27T06:24:50.938Z"
     },
     "mlb": {
       "status": "available",
-      "reports": 52,
-      "checked_at": "2026-09-27T05:45:22.686Z"
+      "reports": 50,
+      "checked_at": "2026-09-27T06:24:50.938Z"
     }
   },
   "events": [
+    {
+      "id": "injury|nfl:3:Anthony Johnson Jr.|2026-09-27T06:24:50.938Z",
+      "kind": "injury",
+      "observed_at": "2026-09-27T06:24:50.938Z",
+      "sport": "nfl",
+      "title": "Player availability changed",
+      "event": "Chicago Bears",
+      "pick": "Anthony Johnson Jr.",
+      "before": "Out · Undisclosed",
+      "after": "Injured Reserve · Undisclosed",
+      "source_quote_at": "2026-09-27T06:00Z",
+      "source": "ESPN injuries",
+      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
+    },
     {
       "id": "injury|mlb:29:Gabriel Moreno|2026-09-27T04:46:20.555Z",
       "kind": "injury",
@@ -2802,20 +2816,6 @@
       "before": "Not in the previous dated report",
       "after": "Active",
       "source_quote_at": "2026-09-24T21:40Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:24:Trey Pipkins III|2026-09-26T22:45:38.832Z",
-      "kind": "injury",
-      "observed_at": "2026-09-26T22:45:38.832Z",
-      "sport": "nfl",
-      "title": "New availability report",
-      "event": "Los Angeles Chargers",
-      "pick": "Trey Pipkins III",
-      "before": "Not in the previous dated report",
-      "after": "Injured Reserve · Knee",
-      "source_quote_at": "2026-09-26T21:25Z",
       "source": "ESPN injuries",
       "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
     }
