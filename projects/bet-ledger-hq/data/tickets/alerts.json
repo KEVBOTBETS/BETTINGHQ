@@ -1,24 +1,38 @@
 {
   "schema": 1,
-  "checked_at": "2026-09-27T11:44:59.746Z",
+  "checked_at": "2026-09-27T12:24:12.338Z",
   "coverage": {
+    "mlb": {
+      "status": "available",
+      "reports": 50,
+      "checked_at": "2026-09-27T12:24:12.338Z"
+    },
     "ncaaf": {
       "status": "empty",
       "reports": 0,
-      "checked_at": "2026-09-27T11:44:59.746Z"
+      "checked_at": "2026-09-27T12:24:12.338Z"
     },
     "nfl": {
       "status": "available",
       "reports": 267,
-      "checked_at": "2026-09-27T11:44:59.746Z"
-    },
-    "mlb": {
-      "status": "available",
-      "reports": 50,
-      "checked_at": "2026-09-27T11:44:59.746Z"
+      "checked_at": "2026-09-27T12:24:12.338Z"
     }
   },
   "events": [
+    {
+      "id": "injury|nfl:3:Anthony Johnson Jr.|2026-09-27T12:24:12.338Z",
+      "kind": "injury",
+      "observed_at": "2026-09-27T12:24:12.338Z",
+      "sport": "nfl",
+      "title": "Player availability changed",
+      "event": "Chicago Bears",
+      "pick": "Anthony Johnson Jr.",
+      "before": "Out · Undisclosed",
+      "after": "Injured Reserve · Undisclosed",
+      "source_quote_at": "2026-09-27T12:01Z",
+      "source": "ESPN injuries",
+      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
+    },
     {
       "id": "injury|nfl:3:Anthony Johnson Jr.|2026-09-27T11:18:47.349Z",
       "kind": "injury",
@@ -2802,20 +2816,6 @@
       "before": "Active · Stukes ended with six tackles (four solo) and one interception in Sunday's 27-13 win over the Dolphins.",
       "after": "Out · Concussion",
       "source_quote_at": "2026-09-25T21:53Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:13:Dareke Young|2026-09-26T22:45:38.832Z",
-      "kind": "injury",
-      "observed_at": "2026-09-26T22:45:38.832Z",
-      "sport": "nfl",
-      "title": "New availability report",
-      "event": "Las Vegas Raiders",
-      "pick": "Dareke Young",
-      "before": "Not in the previous dated report",
-      "after": "Active · Young (hamstring) was a full participant in practice Thursday.",
-      "source_quote_at": "2026-09-25T02:40Z",
       "source": "ESPN injuries",
       "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
     }
