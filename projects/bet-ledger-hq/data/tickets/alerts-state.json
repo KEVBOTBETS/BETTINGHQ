@@ -3084,39 +3084,6 @@
       "probability": 0.60864,
       "source": "Props"
     },
-    "mlb|824219|2026-09-26T17:10:00Z|TOTAL||under|DraftKings": {
-      "key": "mlb",
-      "app": "mlb-edge",
-      "sport": "MLB",
-      "event": "PIT @ DET",
-      "eventId": "824219",
-      "player": "",
-      "playerId": "",
-      "side": "under",
-      "home": "DET",
-      "away": "PIT",
-      "version": "unversioned",
-      "start": "2026-09-26T17:10:00Z",
-      "when": 1790442600000,
-      "day": "2026-09-26",
-      "pick": "Under 9.0",
-      "market": "TOTAL",
-      "line": 9,
-      "sourceLine": 9,
-      "price": -114,
-      "book": "DraftKings",
-      "tier": "GOOD",
-      "score": 0.045,
-      "quote": "2026-09-26T15:31:55.592155+00:00",
-      "review": [],
-      "probability": 0.6242,
-      "fair": -166,
-      "worst": -157,
-      "minReturn": 0.02,
-      "worstReached": false,
-      "move": null,
-      "source": "MLB"
-    },
     "mlb|822759|2026-09-26T19:07:00Z|RL||home|DraftKings": {
       "key": "mlb",
       "app": "mlb-edge",
@@ -5576,6 +5543,39 @@
         "since": "2026-09-27T17:02:11+00:00"
       },
       "source": "NCAAF"
+    },
+    "props|401872961|2026-09-27T20:25Z|Receiving yards|Travis Etienne Jr.|over|DraftKings": {
+      "key": "props",
+      "app": "props",
+      "sport": "NFL",
+      "event": "Las Vegas Raiders @ New Orleans Saints",
+      "eventId": "401872961",
+      "player": "Travis Etienne Jr.",
+      "playerId": "",
+      "side": "over",
+      "home": "",
+      "away": "",
+      "version": "unversioned",
+      "start": "2026-09-27T20:25Z",
+      "when": 1790540700000,
+      "day": "2026-09-27",
+      "pick": "Travis Etienne Jr. — Over 9.5 Receiving yards",
+      "market": "Receiving yards",
+      "line": 9.5,
+      "sourceLine": 9.5,
+      "price": -108,
+      "book": "DraftKings",
+      "tier": "GOOD",
+      "score": 0.04679,
+      "quote": "2026-09-27T17:02:22.877134+00:00",
+      "review": [],
+      "probability": 0.56918,
+      "fair": -132,
+      "worst": -126,
+      "minReturn": 0.02,
+      "worstReached": false,
+      "move": null,
+      "source": "Props"
     }
   },
   "lineups": {
@@ -6208,36 +6208,6 @@
       "awayPitcher": "Jared Jones",
       "homePitcher": "River Ryan",
       "published_at": "2026-09-27T15:38:10+00:00"
-    },
-    "824219": {
-      "event": "PIT @ DET",
-      "start": "2026-09-26T17:10:00Z",
-      "confirmed": true,
-      "away": [
-        "Ryan O'Hearn",
-        "Brandon Lowe",
-        "Bryan Reynolds",
-        "Oneil Cruz",
-        "Konnor Griffin",
-        "Spencer Horwitz",
-        "Ronny Simon",
-        "Jacob Gonzalez",
-        "Henry Davis"
-      ],
-      "home": [
-        "Max Clark",
-        "Hao-Yu Lee",
-        "Kevin McGonigle",
-        "Eduardo Valencia",
-        "Riley Greene",
-        "Dillon Dingler",
-        "Spencer Torkelson",
-        "Zach McKinstry",
-        "Javier Báez"
-      ],
-      "awayPitcher": "Kirby Yates",
-      "homePitcher": "Justin Verlander",
-      "published_at": "2026-09-26T15:33:58+00:00"
     },
     "824542": {
       "event": "COL @ CWS",
@@ -6878,9 +6848,17 @@
         "sport": "nfl",
         "team": "Chicago Bears",
         "player": "Anthony Johnson Jr.",
-        "status": "Out",
+        "status": "Injured Reserve",
         "detail": "Undisclosed",
-        "report_at": "2026-09-27T16:44Z"
+        "report_at": "2026-09-27T17:00Z"
+      },
+      "nfl:3:Case Keenum": {
+        "sport": "nfl",
+        "team": "Chicago Bears",
+        "player": "Case Keenum",
+        "status": "Active",
+        "detail": "Keenum is in line to start Monday's game against the Eagles, Jay Glazer reported on \"Fox NFL Sunday.\"",
+        "report_at": "2026-09-27T16:59Z"
       },
       "nfl:3:Caleb Williams": {
         "sport": "nfl",
@@ -9229,6 +9207,14 @@
         "detail": "Abdomen",
         "report_at": "2026-09-24T23:04Z"
       },
+      "mlb:2:Mickey Gasper": {
+        "sport": "mlb",
+        "team": "Boston Red Sox",
+        "player": "Mickey Gasper",
+        "status": "10-Day-IL",
+        "detail": "Biceps",
+        "report_at": "2026-09-27T17:02Z"
+      },
       "mlb:2:Eli White": {
         "sport": "mlb",
         "team": "Boston Red Sox",
@@ -9243,14 +9229,6 @@
         "player": "Tyron Guerrero",
         "status": "15-Day-IL",
         "detail": "Shoulder",
-        "report_at": "2026-09-27T16:13Z"
-      },
-      "mlb:2:Mickey Gasper": {
-        "sport": "mlb",
-        "team": "Boston Red Sox",
-        "player": "Mickey Gasper",
-        "status": "10-Day-IL",
-        "detail": "Biceps",
         "report_at": "2026-09-27T16:13Z"
       },
       "mlb:16:Edward Cabrera": {
@@ -9355,7 +9333,7 @@
         "player": "Kyle Stowers",
         "status": "Day-To-Day",
         "detail": "Abdomen",
-        "report_at": "2026-09-26T17:58Z"
+        "report_at": "2026-09-27T17:03Z"
       },
       "mlb:28:Xavier Edwards": {
         "sport": "mlb",
