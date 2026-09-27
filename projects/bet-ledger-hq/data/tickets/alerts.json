@@ -1,24 +1,104 @@
 {
   "schema": 1,
-  "checked_at": "2026-09-27T14:54:05.752Z",
+  "checked_at": "2026-09-27T15:00:43.806Z",
   "coverage": {
-    "ncaaf": {
-      "status": "empty",
-      "reports": 0,
-      "checked_at": "2026-09-27T14:54:05.752Z"
-    },
     "mlb": {
       "status": "available",
       "reports": 49,
-      "checked_at": "2026-09-27T14:54:05.752Z"
+      "checked_at": "2026-09-27T15:00:43.806Z"
+    },
+    "ncaaf": {
+      "status": "empty",
+      "reports": 0,
+      "checked_at": "2026-09-27T15:00:43.806Z"
     },
     "nfl": {
       "status": "available",
       "reports": 267,
-      "checked_at": "2026-09-27T14:54:05.752Z"
+      "checked_at": "2026-09-27T15:00:43.806Z"
     }
   },
   "events": [
+    {
+      "id": "odds|ncaaf|401856819|2026-10-03T16:00Z|ATS||away|DraftKings|2026-09-27T15:00:43.806Z",
+      "kind": "odds",
+      "observed_at": "2026-09-27T15:00:43.806Z",
+      "sport": "ncaaf",
+      "event": "UCF @ HOU",
+      "start": "2026-10-03T16:00Z",
+      "pick": "UCF +12.5",
+      "title": "Published odds changed",
+      "before": "-110 · line 11.5",
+      "after": "-110 · line 12.5",
+      "book": "DraftKings",
+      "source_quote_at": "2026-09-27T14:59:59.439720+00:00",
+      "source": "Existing NCAAF board",
+      "note": "Your ticket keeps its original odds. Recheck the live book before placing a new wager."
+    },
+    {
+      "id": "odds|ncaaf|401858248|2026-10-03T19:30Z|ML||home|DraftKings|2026-09-27T15:00:43.806Z",
+      "kind": "odds",
+      "observed_at": "2026-09-27T15:00:43.806Z",
+      "sport": "ncaaf",
+      "event": "LOU @ NCSU",
+      "start": "2026-10-03T19:30Z",
+      "pick": "NCSU ML",
+      "title": "Published odds changed",
+      "before": "+180",
+      "after": "+170",
+      "book": "DraftKings",
+      "source_quote_at": "2026-09-27T15:00:08.972364+00:00",
+      "source": "Existing NCAAF board",
+      "note": "Your ticket keeps its original odds. Recheck the live book before placing a new wager."
+    },
+    {
+      "id": "odds|props|401872950|2026-09-27T17:00Z|Receiving yards|Mike Gesicki|over|Fanatics Sportsbook|2026-09-27T15:00:43.806Z",
+      "kind": "odds",
+      "observed_at": "2026-09-27T15:00:43.806Z",
+      "sport": "props",
+      "event": "Cincinnati Bengals @ Pittsburgh Steelers",
+      "start": "2026-09-27T17:00Z",
+      "pick": "Mike Gesicki — Over 25.5 Receiving yards",
+      "title": "Published odds changed",
+      "before": "-150 · line 20.5",
+      "after": "-105 · line 25.5",
+      "book": "Fanatics Sportsbook",
+      "source_quote_at": "2026-09-27T15:00:17.925217+00:00",
+      "source": "Existing Props board",
+      "note": "Your ticket keeps its original odds. Recheck the live book before placing a new wager."
+    },
+    {
+      "id": "odds|props|401872958|2026-09-27T20:05Z|Rushing yards|Jacoby Brissett|over|bet365|2026-09-27T15:00:43.806Z",
+      "kind": "odds",
+      "observed_at": "2026-09-27T15:00:43.806Z",
+      "sport": "props",
+      "event": "Arizona Cardinals @ San Francisco 49ers",
+      "start": "2026-09-27T20:05Z",
+      "pick": "Jacoby Brissett — Over 6.5 Rushing yards",
+      "title": "Published odds changed",
+      "before": "-120 · line 6.5",
+      "after": "-110 · line 7.5",
+      "book": "bet365",
+      "source_quote_at": "2026-09-27T15:00:17.925217+00:00",
+      "source": "Existing Props board",
+      "note": "Your ticket keeps its original odds. Recheck the live book before placing a new wager."
+    },
+    {
+      "id": "odds|props|401872961|2026-09-27T20:25Z|Receiving yards|Travis Etienne Jr.|over|Fanatics Sportsbook|2026-09-27T15:00:43.806Z",
+      "kind": "odds",
+      "observed_at": "2026-09-27T15:00:43.806Z",
+      "sport": "props",
+      "event": "Las Vegas Raiders @ New Orleans Saints",
+      "start": "2026-09-27T20:25Z",
+      "pick": "Travis Etienne Jr. — Over 10.5 Receiving yards",
+      "title": "Published odds changed",
+      "before": "-110 · line 10.5",
+      "after": "-105 · line 10.5",
+      "book": "Fanatics Sportsbook",
+      "source_quote_at": "2026-09-27T15:00:17.925217+00:00",
+      "source": "Existing Props board",
+      "note": "Your ticket keeps its original odds. Recheck the live book before placing a new wager."
+    },
     {
       "id": "odds|nfl|401872956|2026-09-27T17:00Z|TOTAL||over|DraftKings|2026-09-27T14:54:05.752Z",
       "kind": "odds",
@@ -2782,76 +2862,6 @@
       "before": "Doubtful · Groin",
       "after": "Injured Reserve · Groin",
       "source_quote_at": "2026-09-26T17:52Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:34:Lewis Bond|2026-09-26T22:45:38.832Z",
-      "kind": "injury",
-      "observed_at": "2026-09-26T22:45:38.832Z",
-      "sport": "nfl",
-      "title": "New availability report",
-      "event": "Houston Texans",
-      "pick": "Lewis Bond",
-      "before": "Not in the previous dated report",
-      "after": "Active · The Texans elevated Bond from the practice squad to the active roster Saturday ahead of Sunday's game against the Colts,",
-      "source_quote_at": "2026-09-26T17:50Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:34:Ed Ingram|2026-09-26T22:45:38.832Z",
-      "kind": "injury",
-      "observed_at": "2026-09-26T22:45:38.832Z",
-      "sport": "nfl",
-      "title": "New availability report",
-      "event": "Houston Texans",
-      "pick": "Ed Ingram",
-      "before": "Not in the previous dated report",
-      "after": "Out · Groin",
-      "source_quote_at": "2026-09-26T01:16Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:34:Jadeveon Clowney|2026-09-26T22:45:38.832Z",
-      "kind": "injury",
-      "observed_at": "2026-09-26T22:45:38.832Z",
-      "sport": "nfl",
-      "title": "New availability report",
-      "event": "Houston Texans",
-      "pick": "Jadeveon Clowney",
-      "before": "Not in the previous dated report",
-      "after": "Out · Knee",
-      "source_quote_at": "2026-09-25T22:26Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:34:Nico Collins|2026-09-26T22:45:38.832Z",
-      "kind": "injury",
-      "observed_at": "2026-09-26T22:45:38.832Z",
-      "sport": "nfl",
-      "title": "Player availability changed",
-      "event": "Houston Texans",
-      "pick": "Nico Collins",
-      "before": "Active · Collins caught seven of 10 targets for 75 yards and a touchdown while adding a seven-yard run in Sunday's 36-31 loss to the Bills.",
-      "after": "Out · Hamstring",
-      "source_quote_at": "2026-09-25T13:15Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:34:Logan Hall|2026-09-26T22:45:38.832Z",
-      "kind": "injury",
-      "observed_at": "2026-09-26T22:45:38.832Z",
-      "sport": "nfl",
-      "title": "New availability report",
-      "event": "Houston Texans",
-      "pick": "Logan Hall",
-      "before": "Not in the previous dated report",
-      "after": "Active",
-      "source_quote_at": "2026-09-24T21:29Z",
       "source": "ESPN injuries",
       "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
     }
