@@ -1,24 +1,38 @@
 {
   "schema": 1,
-  "checked_at": "2026-09-28T10:49:22.402Z",
+  "checked_at": "2026-09-28T11:20:22.171Z",
   "coverage": {
     "mlb": {
       "status": "available",
       "reports": 37,
-      "checked_at": "2026-09-28T10:49:22.402Z"
-    },
-    "nfl": {
-      "status": "available",
-      "reports": 503,
-      "checked_at": "2026-09-28T10:49:22.402Z"
+      "checked_at": "2026-09-28T11:20:22.171Z"
     },
     "ncaaf": {
       "status": "empty",
       "reports": 0,
-      "checked_at": "2026-09-28T10:49:22.402Z"
+      "checked_at": "2026-09-28T11:20:22.171Z"
+    },
+    "nfl": {
+      "status": "available",
+      "reports": 503,
+      "checked_at": "2026-09-28T11:20:22.171Z"
     }
   },
   "events": [
+    {
+      "id": "injury|nfl:3:Anthony Johnson Jr.|2026-09-28T11:20:22.171Z",
+      "kind": "injury",
+      "observed_at": "2026-09-28T11:20:22.171Z",
+      "sport": "nfl",
+      "title": "Player availability changed",
+      "event": "Chicago Bears",
+      "pick": "Anthony Johnson Jr.",
+      "before": "Injured Reserve · Undisclosed",
+      "after": "Out · Undisclosed",
+      "source_quote_at": "2026-09-28T11:01Z",
+      "source": "ESPN injuries",
+      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
+    },
     {
       "id": "odds|nfl|401872963|2026-09-29T00:15Z|ML||home|Draft Kings|2026-09-28T09:43:09.998Z",
       "kind": "odds",
@@ -2914,20 +2928,6 @@
       "before": "Not in the previous dated report",
       "after": "Out · Coach's Decision",
       "source_quote_at": "2026-09-27T23:12Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:14:Colby Parkinson|2026-09-27T23:18:03.802Z",
-      "kind": "injury",
-      "observed_at": "2026-09-27T23:18:03.802Z",
-      "sport": "nfl",
-      "title": "Player availability changed",
-      "event": "Los Angeles Rams",
-      "pick": "Colby Parkinson",
-      "before": "Questionable · Knee",
-      "after": "Active · Parkinson (knee) is listed as active Sunday at Denver, Sarah Barshop of ESPN.com reports.",
-      "source_quote_at": "2026-09-27T23:10Z",
       "source": "ESPN injuries",
       "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
     }
