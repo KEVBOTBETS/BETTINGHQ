@@ -1,37 +1,5 @@
 {
   "wnba": {
-    "meta": {
-      "league": "WNBA",
-      "season": 2026,
-      "generated_at": "2026-09-28T21:38:05+00:00",
-      "built_for": "2026-09-28",
-      "source": "ESPN schedule, box-score/team efficiency, predictor, injuries and DraftKings prices",
-      "source_status": "live",
-      "live_data": true,
-      "key_required": false,
-      "errors": [],
-      "odds_health": {
-        "status": "partial",
-        "upcoming_games": 10,
-        "priced_games": 4,
-        "provider": "ESPN public feed / DraftKings"
-      },
-      "calibration": {
-        "n": 120,
-        "method": "walk-forward regular-season residuals",
-        "margin_bias": 0.02,
-        "spread_mae": 9.446,
-        "spread_rmse": 12.482,
-        "spread_sigma": 12.482,
-        "total_bias": -1.417,
-        "total_mae": 12.57,
-        "total_rmse": 15.753,
-        "total_sigma": 15.689
-      }
-    },
-    "accuracy": {
-      "generated_at": "2026-09-28T21:38:05.673937+00:00"
-    },
     "board": [
       {
         "tier": "AVOID",
@@ -490,13 +458,45 @@
         "odds_fetched_at": "2026-09-28T21:38:04+00:00"
       }
     ],
-    "lastGoodAt": "2026-09-28T23:19:12.193Z"
+    "meta": {
+      "league": "WNBA",
+      "season": 2026,
+      "generated_at": "2026-09-28T21:38:05+00:00",
+      "built_for": "2026-09-28",
+      "source": "ESPN schedule, box-score/team efficiency, predictor, injuries and DraftKings prices",
+      "source_status": "live",
+      "live_data": true,
+      "key_required": false,
+      "errors": [],
+      "odds_health": {
+        "status": "partial",
+        "upcoming_games": 10,
+        "priced_games": 4,
+        "provider": "ESPN public feed / DraftKings"
+      },
+      "calibration": {
+        "n": 120,
+        "method": "walk-forward regular-season residuals",
+        "margin_bias": 0.02,
+        "spread_mae": 9.446,
+        "spread_rmse": 12.482,
+        "spread_sigma": 12.482,
+        "total_bias": -1.417,
+        "total_mae": 12.57,
+        "total_rmse": 15.753,
+        "total_sigma": 15.689
+      }
+    },
+    "accuracy": {
+      "generated_at": "2026-09-28T21:38:05.673937+00:00"
+    },
+    "lastGoodAt": "2026-09-28T23:46:44.181Z"
   },
   "ladder": {
     "accuracy": {
       "generated_at": "2026-09-28T21:38:08.266689+00:00"
     },
-    "lastGoodAt": "2026-09-28T23:19:12.193Z"
+    "lastGoodAt": "2026-09-28T23:46:44.181Z"
   },
   "props": {
     "meta": {
@@ -1936,7 +1936,7 @@
         "roster_verified": true
       }
     ],
-    "lastGoodAt": "2026-09-28T23:19:12.193Z"
+    "lastGoodAt": "2026-09-28T23:46:44.181Z"
   },
   "nfl": {
     "meta": {
@@ -2814,9 +2814,6 @@
           }
         }
       }
-    },
-    "accuracy": {
-      "generated_at": "2026-09-28T22:58:21.571444+00:00"
     },
     "board": [
       {
@@ -7802,7 +7799,10 @@
         "odds_observed_at": "2026-09-28T22:58:07.525558+00:00"
       }
     ],
-    "lastGoodAt": "2026-09-28T23:19:12.193Z"
+    "accuracy": {
+      "generated_at": "2026-09-28T22:58:21.571444+00:00"
+    },
+    "lastGoodAt": "2026-09-28T23:46:44.181Z"
   },
   "ncaaf": {
     "meta": {
@@ -14583,7 +14583,7 @@
         "odds_observed_at": "2026-09-28T22:58:24.079615+00:00"
       }
     ],
-    "lastGoodAt": "2026-09-28T23:19:12.193Z"
+    "lastGoodAt": "2026-09-28T23:46:44.181Z"
   },
   "mlb": {
     "meta": {
@@ -14755,6 +14755,6 @@
     "accuracy": {
       "generated_at": "2026-09-28T21:37:26+00:00"
     },
-    "lastGoodAt": "2026-09-28T23:19:12.193Z"
+    "lastGoodAt": "2026-09-28T23:46:44.181Z"
   }
 }
