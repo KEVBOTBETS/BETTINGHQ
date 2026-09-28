@@ -1,13 +1,13 @@
 {
  "schema": 2,
  "projection_only": false,
- "generated_at": "2026-09-28T19:59:54.293548+00:00",
+ "generated_at": "2026-09-28T21:01:42.725843+00:00",
  "label": "NFL Props forecast and priced-call accuracy",
  "scope": {
   "season": 2026,
   "season_type": 2,
   "season_type_label": "regular season",
-  "included_records": 29073,
+  "included_records": 29077,
   "excluded_records": 0
  },
  "method": "First pre-event snapshot, frozen line and price. All model picks, including PASS/AVOID and unstaked picks. One preferred side per event/market in pick statistics; the complete priced-side audit is separate. One hypothetical unit per pick; no actual wagers are created. Missing results remain pending.",
@@ -145,19 +145,19 @@
    "bias": 0.67142
   },
   "Sacks": {
-   "logged": 3676,
+   "logged": 3677,
    "graded": 1570,
    "mae": 0.16184,
    "bias": -0.01804
   },
   "Solo tackles": {
-   "logged": 3676,
+   "logged": 3677,
    "graded": 1570,
    "mae": 1.23734,
    "bias": -0.01624
   },
   "Tackles + assists": {
-   "logged": 3676,
+   "logged": 3677,
    "graded": 1570,
    "mae": 1.74711,
    "bias": 0.03619
@@ -33342,6 +33342,57 @@
    "captured_at": "2026-09-16T12:07:54.905887+00:00",
    "result": "Pending",
    "version": "2026-09-06-ev2"
+  },
+  {
+   "kind": "prop",
+   "league": "NFL",
+   "event_id": "401872975",
+   "start": "2026-10-04T20:25Z",
+   "matchup": "Denver Broncos @ San Francisco 49ers",
+   "player": "Matthew Judon",
+   "season": 2026,
+   "season_type": 2,
+   "market": "Tackles + assists",
+   "projection": 1.83,
+   "stat_key": "matthewjudon|sanfrancisco49ers|tacklesassists",
+   "version": "2026-09-23-restored-v1",
+   "id": "prop:NFL:401872975:Matthew Judon:Tackles + assists:",
+   "captured_at": "2026-09-28T21:01:40.818529+00:00",
+   "result": "Pending"
+  },
+  {
+   "kind": "prop",
+   "league": "NFL",
+   "event_id": "401872975",
+   "start": "2026-10-04T20:25Z",
+   "matchup": "Denver Broncos @ San Francisco 49ers",
+   "player": "Matthew Judon",
+   "season": 2026,
+   "season_type": 2,
+   "market": "Solo tackles",
+   "projection": 0.77,
+   "stat_key": "matthewjudon|sanfrancisco49ers|solotackles",
+   "version": "2026-09-23-restored-v1",
+   "id": "prop:NFL:401872975:Matthew Judon:Solo tackles:",
+   "captured_at": "2026-09-28T21:01:40.818529+00:00",
+   "result": "Pending"
+  },
+  {
+   "kind": "prop",
+   "league": "NFL",
+   "event_id": "401872975",
+   "start": "2026-10-04T20:25Z",
+   "matchup": "Denver Broncos @ San Francisco 49ers",
+   "player": "Matthew Judon",
+   "season": 2026,
+   "season_type": 2,
+   "market": "Sacks",
+   "projection": 0.0,
+   "stat_key": "matthewjudon|sanfrancisco49ers|sacks",
+   "version": "2026-09-23-restored-v1",
+   "id": "prop:NFL:401872975:Matthew Judon:Sacks:",
+   "captured_at": "2026-09-28T21:01:40.818529+00:00",
+   "result": "Pending"
   },
   {
    "kind": "prop",
@@ -138306,6 +138357,31 @@
    "selected": true,
    "id": "call:NFL:401872963:Johnny Mundt:Anytime touchdown:yes:None",
    "captured_at": "2026-09-28T00:48:44.770336+00:00",
+   "result": "Pending"
+  },
+  {
+   "kind": "call",
+   "league": "NFL",
+   "event_id": "401872963",
+   "start": "2026-09-29T00:15Z",
+   "matchup": "Philadelphia Eagles @ Chicago Bears",
+   "player": "Jalen Hurts",
+   "market": "Rushing yards",
+   "side": "over",
+   "line": 26.5,
+   "price": -109,
+   "probability": 0.55133,
+   "tier": "LEAN",
+   "edge": 0.02853,
+   "book": "DraftKings",
+   "quote_time": "2026-09-28T21:01:26.153657+00:00",
+   "season": 2026,
+   "season_type": 2,
+   "stat_key": "jalenhurts|philadelphiaeagles|rushingyards",
+   "version": "2026-09-23-restored-v1",
+   "selected": false,
+   "id": "call:NFL:401872963:Jalen Hurts:Rushing yards:over:26.5",
+   "captured_at": "2026-09-28T21:01:40.818529+00:00",
    "result": "Pending"
   },
   {
@@ -527377,13 +527453,13 @@
   "brier": 0.23454
  },
  "all_calls": {
-  "logged": 667,
+  "logged": 668,
   "wins": 312,
   "losses": 257,
   "pushes": 0,
   "voids": 0,
   "settled": 569,
-  "pending": 98,
+  "pending": 99,
   "win_rate": 0.5483304042179262,
   "units": 23.947,
   "roi": 0.04208631107205625,
