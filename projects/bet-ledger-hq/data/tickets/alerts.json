@@ -1,24 +1,116 @@
 {
   "schema": 1,
-  "checked_at": "2026-09-28T16:50:00.176Z",
+  "checked_at": "2026-09-28T17:01:25.780Z",
   "coverage": {
-    "nfl": {
+    "mlb": {
       "status": "available",
-      "reports": 505,
-      "checked_at": "2026-09-28T16:50:00.176Z"
+      "reports": 35,
+      "checked_at": "2026-09-28T17:01:25.780Z"
     },
     "ncaaf": {
       "status": "empty",
       "reports": 0,
-      "checked_at": "2026-09-28T16:50:00.176Z"
+      "checked_at": "2026-09-28T17:01:25.780Z"
     },
-    "mlb": {
+    "nfl": {
       "status": "available",
-      "reports": 36,
-      "checked_at": "2026-09-28T16:50:00.176Z"
+      "reports": 505,
+      "checked_at": "2026-09-28T17:01:25.780Z"
     }
   },
   "events": [
+    {
+      "id": "odds|ncaaf|401858250|2026-10-03T16:00Z|ATS||home|DraftKings|2026-09-28T17:01:25.780Z",
+      "kind": "odds",
+      "observed_at": "2026-09-28T17:01:25.780Z",
+      "sport": "ncaaf",
+      "event": "ND @ UNC",
+      "start": "2026-10-03T16:00Z",
+      "pick": "UNC +21",
+      "title": "Published odds changed",
+      "before": "-110 · line 21",
+      "after": "-108 · line 21",
+      "book": "DraftKings",
+      "source_quote_at": "2026-09-28T17:01:01.606275+00:00",
+      "source": "Existing NCAAF board",
+      "note": "Your ticket keeps its original odds. Recheck the live book before placing a new wager."
+    },
+    {
+      "id": "odds|ncaaf|401869956|2026-10-03T19:30Z|ATS||home|DraftKings|2026-09-28T17:01:25.780Z",
+      "kind": "odds",
+      "observed_at": "2026-09-28T17:01:25.780Z",
+      "sport": "ncaaf",
+      "event": "ODU @ GAST",
+      "start": "2026-10-03T19:30Z",
+      "pick": "GAST +1.5",
+      "title": "Published odds changed",
+      "before": "-105 · line -1.5",
+      "after": "-110 · line -1.5",
+      "book": "DraftKings",
+      "source_quote_at": "2026-09-28T17:01:01.606275+00:00",
+      "source": "Existing NCAAF board",
+      "note": "Your ticket keeps its original odds. Recheck the live book before placing a new wager."
+    },
+    {
+      "id": "odds|ncaaf|401858479|2026-10-03T16:30Z|ML||away|DraftKings|2026-09-28T17:01:25.780Z",
+      "kind": "odds",
+      "observed_at": "2026-09-28T17:01:25.780Z",
+      "sport": "ncaaf",
+      "event": "MSU @ WIS",
+      "start": "2026-10-03T16:30Z",
+      "pick": "MSU ML",
+      "title": "Published odds changed",
+      "before": "+300",
+      "after": "+320",
+      "book": "DraftKings",
+      "source_quote_at": "2026-09-28T17:01:01.606275+00:00",
+      "source": "Existing NCAAF board",
+      "note": "Your ticket keeps its original odds. Recheck the live book before placing a new wager."
+    },
+    {
+      "id": "odds|ncaaf|401858478|2026-10-03T23:30Z|TOTAL||over|DraftKings|2026-09-28T17:01:25.780Z",
+      "kind": "odds",
+      "observed_at": "2026-09-28T17:01:25.780Z",
+      "sport": "ncaaf",
+      "event": "WASH @ USC",
+      "start": "2026-10-03T23:30Z",
+      "pick": "Over 55.5",
+      "title": "Published odds changed",
+      "before": "-108 · line 57.5",
+      "after": "-115 · line 57.5",
+      "book": "DraftKings",
+      "source_quote_at": "2026-09-28T17:01:01.606275+00:00",
+      "source": "Existing NCAAF board",
+      "note": "Your ticket keeps its original odds. Recheck the live book before placing a new wager."
+    },
+    {
+      "id": "injury|nfl:29:Jaycee Horn|2026-09-28T17:01:25.780Z",
+      "kind": "injury",
+      "observed_at": "2026-09-28T17:01:25.780Z",
+      "sport": "nfl",
+      "title": "Player availability changed",
+      "event": "Carolina Panthers",
+      "pick": "Jaycee Horn",
+      "before": "Questionable · Quadriceps",
+      "after": "Out · Quadriceps",
+      "source_quote_at": "2026-09-28T16:44Z",
+      "source": "ESPN injuries",
+      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
+    },
+    {
+      "id": "injury|nfl:27:Jalon Daniels|2026-09-28T17:01:25.780Z",
+      "kind": "injury",
+      "observed_at": "2026-09-28T17:01:25.780Z",
+      "sport": "nfl",
+      "title": "Player availability changed",
+      "event": "Tampa Bay Buccaneers",
+      "pick": "Jalon Daniels",
+      "before": "Active · Daniels took over for an injured Baker Mayfield (thumb) during Sunday's 23-16 defeat to the Vikings, with the former failing to complete any of his three passes with an interceptio",
+      "after": "Active · Head coach Todd Bowles said Monday that Daniels will step in as the Buccaneers' new starting quarterback while Baker Mayfield is out for a \"minimum of three weeks\" due to a disloca",
+      "source_quote_at": "2026-09-28T16:55Z",
+      "source": "ESPN injuries",
+      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
+    },
     {
       "id": "injury|nfl:19:J.J. McCarthy|2026-09-28T16:50:00.176Z",
       "kind": "injury",
@@ -2863,102 +2955,6 @@
       "book": "Fanatics Sportsbook",
       "source_quote_at": "2026-09-28T00:01:59.979908+00:00",
       "source": "Existing Props board",
-      "note": "Your ticket keeps its original odds. Recheck the live book before placing a new wager."
-    },
-    {
-      "id": "odds|props|401872962|2026-09-28T00:20Z|Receiving yards|Evan Engram|over|BetMGM|2026-09-28T00:02:23.380Z",
-      "kind": "odds",
-      "observed_at": "2026-09-28T00:02:23.380Z",
-      "sport": "props",
-      "event": "Los Angeles Rams @ Denver Broncos",
-      "start": "2026-09-28T00:20Z",
-      "pick": "Evan Engram — Over 20.5 Receiving yards",
-      "title": "Published odds changed",
-      "before": "-115 · line 20.5",
-      "after": "-110 · line 21.5",
-      "book": "BetMGM",
-      "source_quote_at": "2026-09-28T00:01:59.979908+00:00",
-      "source": "Existing Props board",
-      "note": "Your ticket keeps its original odds. Recheck the live book before placing a new wager."
-    },
-    {
-      "id": "odds|ncaaf|401862791|2026-10-03T16:00Z|TOTAL||over|DraftKings|2026-09-28T00:02:23.380Z",
-      "kind": "odds",
-      "observed_at": "2026-09-28T00:02:23.380Z",
-      "sport": "ncaaf",
-      "event": "NAVY @ AFA",
-      "start": "2026-10-03T16:00Z",
-      "pick": "Over 48.5",
-      "title": "Published odds changed",
-      "before": "-105 · line 48.5",
-      "after": "-108 · line 47.5",
-      "book": "DraftKings",
-      "source_quote_at": "2026-09-28T00:01:47.917852+00:00",
-      "source": "Existing NCAAF board",
-      "note": "Your ticket keeps its original odds. Recheck the live book before placing a new wager."
-    },
-    {
-      "id": "odds|ncaaf|401858472|2026-10-03T20:15Z|TOTAL||over|DraftKings|2026-09-28T00:02:23.380Z",
-      "kind": "odds",
-      "observed_at": "2026-09-28T00:02:23.380Z",
-      "sport": "ncaaf",
-      "event": "PUR @ ILL",
-      "start": "2026-10-03T20:15Z",
-      "pick": "Over 59.5",
-      "title": "Published odds changed",
-      "before": "-115 · line 59.5",
-      "after": "-110 · line 59.5",
-      "book": "DraftKings",
-      "source_quote_at": "2026-09-28T00:00:53.554410+00:00",
-      "source": "Existing NCAAF board",
-      "note": "Your ticket keeps its original odds. Recheck the live book before placing a new wager."
-    },
-    {
-      "id": "odds|ncaaf|401856817|2026-10-04T02:30Z|TOTAL||under|DraftKings|2026-09-28T00:02:23.380Z",
-      "kind": "odds",
-      "observed_at": "2026-09-28T00:02:23.380Z",
-      "sport": "ncaaf",
-      "event": "BAY @ ASU",
-      "start": "2026-10-04T02:30Z",
-      "pick": "Under 50.5",
-      "title": "Published odds changed",
-      "before": "-118 · line 51.5",
-      "after": "-105 · line 50.5",
-      "book": "DraftKings",
-      "source_quote_at": "2026-09-28T00:00:53.555189+00:00",
-      "source": "Existing NCAAF board",
-      "note": "Your ticket keeps its original odds. Recheck the live book before placing a new wager."
-    },
-    {
-      "id": "odds|ncaaf|401858245|2026-10-02T23:00Z|ML||away|DraftKings|2026-09-28T00:02:23.380Z",
-      "kind": "odds",
-      "observed_at": "2026-09-28T00:02:23.380Z",
-      "sport": "ncaaf",
-      "event": "PITT @ VT",
-      "start": "2026-10-02T23:00Z",
-      "pick": "PITT ML",
-      "title": "Published odds changed",
-      "before": "+164",
-      "after": "+154",
-      "book": "DraftKings",
-      "source_quote_at": "2026-09-28T00:01:47.917852+00:00",
-      "source": "Existing NCAAF board",
-      "note": "Your ticket keeps its original odds. Recheck the live book before placing a new wager."
-    },
-    {
-      "id": "odds|ncaaf|401866433|2026-10-03T19:30Z|ML||home|DraftKings|2026-09-28T00:02:23.380Z",
-      "kind": "odds",
-      "observed_at": "2026-09-28T00:02:23.380Z",
-      "sport": "ncaaf",
-      "event": "EMU @ MASS",
-      "start": "2026-10-03T19:30Z",
-      "pick": "MASS ML",
-      "title": "Published odds changed",
-      "before": "-180",
-      "after": "-185",
-      "book": "DraftKings",
-      "source_quote_at": "2026-09-28T00:01:47.917852+00:00",
-      "source": "Existing NCAAF board",
       "note": "Your ticket keeps its original odds. Recheck the live book before placing a new wager."
     }
   ]
