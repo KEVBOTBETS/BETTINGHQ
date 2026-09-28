@@ -1,24 +1,38 @@
 {
   "schema": 1,
-  "checked_at": "2026-09-28T12:54:12.731Z",
+  "checked_at": "2026-09-28T13:22:27.556Z",
   "coverage": {
-    "ncaaf": {
-      "status": "empty",
-      "reports": 0,
-      "checked_at": "2026-09-28T12:54:12.731Z"
-    },
     "mlb": {
       "status": "available",
       "reports": 37,
-      "checked_at": "2026-09-28T12:54:12.731Z"
+      "checked_at": "2026-09-28T13:22:27.556Z"
     },
     "nfl": {
       "status": "available",
       "reports": 503,
-      "checked_at": "2026-09-28T12:54:12.731Z"
+      "checked_at": "2026-09-28T13:22:27.556Z"
+    },
+    "ncaaf": {
+      "status": "empty",
+      "reports": 0,
+      "checked_at": "2026-09-28T13:22:27.556Z"
     }
   },
   "events": [
+    {
+      "id": "injury|nfl:16:Josh Oliver|2026-09-28T13:22:27.556Z",
+      "kind": "injury",
+      "observed_at": "2026-09-28T13:22:27.556Z",
+      "sport": "nfl",
+      "title": "Player availability changed",
+      "event": "Minnesota Vikings",
+      "pick": "Josh Oliver",
+      "before": "Questionable · Arm",
+      "after": "Doubtful · Biceps",
+      "source_quote_at": "2026-09-28T13:18Z",
+      "source": "ESPN injuries",
+      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
+    },
     {
       "id": "odds|props|401872963|2026-09-29T00:15Z|Receiving yards|Luther Burden III|over|FanDuel|2026-09-28T12:48:15.343Z",
       "kind": "odds",
@@ -2920,20 +2934,6 @@
       "before": "Not in the previous dated report",
       "after": "Out · Coach's Decision",
       "source_quote_at": "2026-09-27T22:55Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:8:Sam LaPorta|2026-09-27T23:18:03.802Z",
-      "kind": "injury",
-      "observed_at": "2026-09-27T23:18:03.802Z",
-      "sport": "nfl",
-      "title": "New availability report",
-      "event": "Detroit Lions",
-      "pick": "Sam LaPorta",
-      "before": "Not in the previous dated report",
-      "after": "Active · LaPorta caught three of four targets for 44 yards in Sunday's 31-24 win over the Jets.",
-      "source_quote_at": "2026-09-27T23:09Z",
       "source": "ESPN injuries",
       "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
     }
