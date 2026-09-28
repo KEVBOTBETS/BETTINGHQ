@@ -1,24 +1,38 @@
 {
   "schema": 1,
-  "checked_at": "2026-09-28T08:50:25.651Z",
+  "checked_at": "2026-09-28T09:24:00.983Z",
   "coverage": {
-    "mlb": {
-      "status": "available",
-      "reports": 37,
-      "checked_at": "2026-09-28T08:50:25.651Z"
-    },
     "nfl": {
       "status": "available",
       "reports": 503,
-      "checked_at": "2026-09-28T08:50:25.651Z"
+      "checked_at": "2026-09-28T09:24:00.983Z"
     },
     "ncaaf": {
       "status": "empty",
       "reports": 0,
-      "checked_at": "2026-09-28T08:50:25.651Z"
+      "checked_at": "2026-09-28T09:24:00.983Z"
+    },
+    "mlb": {
+      "status": "available",
+      "reports": 37,
+      "checked_at": "2026-09-28T09:24:00.983Z"
     }
   },
   "events": [
+    {
+      "id": "injury|nfl:3:Anthony Johnson Jr.|2026-09-28T09:24:00.983Z",
+      "kind": "injury",
+      "observed_at": "2026-09-28T09:24:00.983Z",
+      "sport": "nfl",
+      "title": "Player availability changed",
+      "event": "Chicago Bears",
+      "pick": "Anthony Johnson Jr.",
+      "before": "Out · Undisclosed",
+      "after": "Injured Reserve · Undisclosed",
+      "source_quote_at": "2026-09-28T09:00Z",
+      "source": "ESPN injuries",
+      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
+    },
     {
       "id": "injury|nfl:7:Bo Nix|2026-09-28T08:24:10.815Z",
       "kind": "injury",
@@ -2892,22 +2906,6 @@
       "after": "+114",
       "book": "Draft Kings",
       "source_quote_at": "2026-09-27T23:00:33.363948+00:00",
-      "source": "Existing NFL board",
-      "note": "Your ticket keeps its original odds. Recheck the live book before placing a new wager."
-    },
-    {
-      "id": "odds|nfl|401872971|2026-10-04T17:00Z|ML||away|Draft Kings|2026-09-27T23:01:22.146Z",
-      "kind": "odds",
-      "observed_at": "2026-09-27T23:01:22.146Z",
-      "sport": "nfl",
-      "event": "NE @ BUF",
-      "start": "2026-10-04T17:00Z",
-      "pick": "NE ML",
-      "title": "Published odds changed",
-      "before": "+270",
-      "after": "+240",
-      "book": "Draft Kings",
-      "source_quote_at": "2026-09-27T23:00:33.363752+00:00",
       "source": "Existing NFL board",
       "note": "Your ticket keeps its original odds. Recheck the live book before placing a new wager."
     }
