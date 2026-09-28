@@ -1,24 +1,38 @@
 {
   "schema": 1,
-  "checked_at": "2026-09-28T11:49:55.889Z",
+  "checked_at": "2026-09-28T12:27:03.635Z",
   "coverage": {
-    "mlb": {
-      "status": "available",
-      "reports": 37,
-      "checked_at": "2026-09-28T11:49:55.889Z"
+    "ncaaf": {
+      "status": "empty",
+      "reports": 0,
+      "checked_at": "2026-09-28T12:27:03.635Z"
     },
     "nfl": {
       "status": "available",
       "reports": 503,
-      "checked_at": "2026-09-28T11:49:55.889Z"
+      "checked_at": "2026-09-28T12:27:03.635Z"
     },
-    "ncaaf": {
-      "status": "empty",
-      "reports": 0,
-      "checked_at": "2026-09-28T11:49:55.889Z"
+    "mlb": {
+      "status": "available",
+      "reports": 37,
+      "checked_at": "2026-09-28T12:27:03.635Z"
     }
   },
   "events": [
+    {
+      "id": "injury|nfl:3:Anthony Johnson Jr.|2026-09-28T12:27:03.635Z",
+      "kind": "injury",
+      "observed_at": "2026-09-28T12:27:03.635Z",
+      "sport": "nfl",
+      "title": "Player availability changed",
+      "event": "Chicago Bears",
+      "pick": "Anthony Johnson Jr.",
+      "before": "Out · Undisclosed",
+      "after": "Injured Reserve · Undisclosed",
+      "source_quote_at": "2026-09-28T12:00Z",
+      "source": "ESPN injuries",
+      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
+    },
     {
       "id": "injury|nfl:3:Anthony Johnson Jr.|2026-09-28T11:20:22.171Z",
       "kind": "injury",
@@ -2914,20 +2928,6 @@
       "before": "Not in the previous dated report",
       "after": "Active · McConkey secured four of five targets for 66 yards in the Chargers' 24-16 loss to the Bills on Sunday.",
       "source_quote_at": "2026-09-27T22:57Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:14:Ty Simpson|2026-09-27T23:18:03.802Z",
-      "kind": "injury",
-      "observed_at": "2026-09-27T23:18:03.802Z",
-      "sport": "nfl",
-      "title": "New availability report",
-      "event": "Los Angeles Rams",
-      "pick": "Ty Simpson",
-      "before": "Not in the previous dated report",
-      "after": "Out · Coach's Decision",
-      "source_quote_at": "2026-09-27T23:12Z",
       "source": "ESPN injuries",
       "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
     }
