@@ -1,24 +1,80 @@
 {
   "schema": 1,
-  "checked_at": "2026-09-28T21:01:44.006Z",
+  "checked_at": "2026-09-28T21:20:42.770Z",
   "coverage": {
     "nfl": {
       "status": "available",
-      "reports": 504,
-      "checked_at": "2026-09-28T21:01:44.006Z"
-    },
-    "ncaaf": {
-      "status": "empty",
-      "reports": 0,
-      "checked_at": "2026-09-28T21:01:44.006Z"
+      "reports": 500,
+      "checked_at": "2026-09-28T21:20:42.770Z"
     },
     "mlb": {
       "status": "available",
       "reports": 38,
-      "checked_at": "2026-09-28T21:01:44.006Z"
+      "checked_at": "2026-09-28T21:20:42.770Z"
+    },
+    "ncaaf": {
+      "status": "empty",
+      "reports": 0,
+      "checked_at": "2026-09-28T21:20:42.770Z"
     }
   },
   "events": [
+    {
+      "id": "injury|nfl:2:Josh Allen|2026-09-28T21:20:42.770Z",
+      "kind": "injury",
+      "observed_at": "2026-09-28T21:20:42.770Z",
+      "sport": "nfl",
+      "title": "Player availability changed",
+      "event": "Buffalo Bills",
+      "pick": "Josh Allen",
+      "before": "Active · Allen completed 16 of 26 passes for 204 yards with no touchdowns and two interceptions and added eight carries for 22 yards and two touchdowns in the Bills' 24-16 win over the Char",
+      "after": "Questionable · Knee",
+      "source_quote_at": "2026-09-28T21:03Z",
+      "source": "ESPN injuries",
+      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
+    },
+    {
+      "id": "injury|nfl:3:Anthony Johnson Jr.|2026-09-28T21:20:42.770Z",
+      "kind": "injury",
+      "observed_at": "2026-09-28T21:20:42.770Z",
+      "sport": "nfl",
+      "title": "Player availability changed",
+      "event": "Chicago Bears",
+      "pick": "Anthony Johnson Jr.",
+      "before": "Out · Undisclosed",
+      "after": "Injured Reserve · Undisclosed",
+      "source_quote_at": "2026-09-28T21:04Z",
+      "source": "ESPN injuries",
+      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
+    },
+    {
+      "id": "injury|nfl:16:Charles Demmings|2026-09-28T21:20:42.770Z",
+      "kind": "injury",
+      "observed_at": "2026-09-28T21:20:42.770Z",
+      "sport": "nfl",
+      "title": "Player availability changed",
+      "event": "Minnesota Vikings",
+      "pick": "Charles Demmings",
+      "before": "Questionable · Hamstring",
+      "after": "Out · Hamstring",
+      "source_quote_at": "2026-09-27T22:39Z",
+      "source": "ESPN injuries",
+      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
+    },
+    {
+      "id": "injury|mlb:18:Steven Okert|2026-09-28T21:20:42.770Z",
+      "kind": "injury",
+      "observed_at": "2026-09-28T21:20:42.770Z",
+      "sport": "mlb",
+      "title": "New availability report",
+      "event": "Houston Astros",
+      "pick": "Steven Okert",
+      "before": "Not in the previous dated report",
+      "after": "15-Day-IL · Hamstring",
+      "source_quote_at": "2026-09-28T21:03Z",
+      "source": "ESPN injuries",
+      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
+    },
     {
       "id": "odds|props|401872963|2026-09-29T00:15Z|Rushing yards|Jalen Hurts|over|DraftKings|2026-09-28T21:01:44.006Z",
       "kind": "odds",
@@ -2843,70 +2899,6 @@
       "book": "BetMGM",
       "source_quote_at": "2026-09-28T15:42:08.862442+00:00",
       "source": "Existing Props board",
-      "note": "Your ticket keeps its original odds. Recheck the live book before placing a new wager."
-    },
-    {
-      "id": "odds|props|401872963|2026-09-29T00:15Z|Receiving yards|Luther Burden III|over|FanDuel|2026-09-28T15:42:35.470Z",
-      "kind": "odds",
-      "observed_at": "2026-09-28T15:42:35.470Z",
-      "sport": "props",
-      "event": "Philadelphia Eagles @ Chicago Bears",
-      "start": "2026-09-29T00:15Z",
-      "pick": "Luther Burden III — Over 32.5 Receiving yards",
-      "title": "Published odds changed",
-      "before": "-106 · line 32.5",
-      "after": "-106 · line 37.5",
-      "book": "FanDuel",
-      "source_quote_at": "2026-09-28T15:42:08.862442+00:00",
-      "source": "Existing Props board",
-      "note": "Your ticket keeps its original odds. Recheck the live book before placing a new wager."
-    },
-    {
-      "id": "odds|props|401872963|2026-09-29T00:15Z|Receiving yards|D'Andre Swift|over|BetMGM|2026-09-28T15:42:35.470Z",
-      "kind": "odds",
-      "observed_at": "2026-09-28T15:42:35.470Z",
-      "sport": "props",
-      "event": "Philadelphia Eagles @ Chicago Bears",
-      "start": "2026-09-29T00:15Z",
-      "pick": "D'Andre Swift — Over 10.5 Receiving yards",
-      "title": "Published odds changed",
-      "before": "-135 · line 11.5",
-      "after": "-140 · line 11.5",
-      "book": "BetMGM",
-      "source_quote_at": "2026-09-28T15:42:08.862442+00:00",
-      "source": "Existing Props board",
-      "note": "Your ticket keeps its original odds. Recheck the live book before placing a new wager."
-    },
-    {
-      "id": "odds|ncaaf|401862791|2026-10-03T16:00Z|TOTAL||over|DraftKings|2026-09-28T15:42:35.470Z",
-      "kind": "odds",
-      "observed_at": "2026-09-28T15:42:35.470Z",
-      "sport": "ncaaf",
-      "event": "NAVY @ AFA",
-      "start": "2026-10-03T16:00Z",
-      "pick": "Over 45.5",
-      "title": "Published odds changed",
-      "before": "-108 · line 47.5",
-      "after": "-108 · line 45.5",
-      "book": "DraftKings",
-      "source_quote_at": "2026-09-28T15:39:48.384040+00:00",
-      "source": "Existing NCAAF board",
-      "note": "Your ticket keeps its original odds. Recheck the live book before placing a new wager."
-    },
-    {
-      "id": "odds|ncaaf|401856819|2026-10-03T16:00Z|ATS||away|DraftKings|2026-09-28T15:42:35.470Z",
-      "kind": "odds",
-      "observed_at": "2026-09-28T15:42:35.470Z",
-      "sport": "ncaaf",
-      "event": "UCF @ HOU",
-      "start": "2026-10-03T16:00Z",
-      "pick": "UCF +12.5",
-      "title": "Published odds changed",
-      "before": "-110 · line 11.5",
-      "after": "-112 · line 12.5",
-      "book": "DraftKings",
-      "source_quote_at": "2026-09-28T15:39:48.384040+00:00",
-      "source": "Existing NCAAF board",
       "note": "Your ticket keeps its original odds. Recheck the live book before placing a new wager."
     }
   ]
