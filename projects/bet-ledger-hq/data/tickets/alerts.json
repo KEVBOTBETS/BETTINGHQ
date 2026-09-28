@@ -1,24 +1,66 @@
 {
   "schema": 1,
-  "checked_at": "2026-09-28T17:01:25.780Z",
+  "checked_at": "2026-09-28T17:20:27.883Z",
   "coverage": {
-    "mlb": {
-      "status": "available",
-      "reports": 35,
-      "checked_at": "2026-09-28T17:01:25.780Z"
-    },
     "ncaaf": {
       "status": "empty",
       "reports": 0,
-      "checked_at": "2026-09-28T17:01:25.780Z"
+      "checked_at": "2026-09-28T17:20:27.883Z"
+    },
+    "mlb": {
+      "status": "available",
+      "reports": 35,
+      "checked_at": "2026-09-28T17:20:27.883Z"
     },
     "nfl": {
       "status": "available",
-      "reports": 505,
-      "checked_at": "2026-09-28T17:01:25.780Z"
+      "reports": 506,
+      "checked_at": "2026-09-28T17:20:27.883Z"
     }
   },
   "events": [
+    {
+      "id": "injury|mlb:2:Garrett Crochet|2026-09-28T17:20:27.883Z",
+      "kind": "injury",
+      "observed_at": "2026-09-28T17:20:27.883Z",
+      "sport": "mlb",
+      "title": "New availability report",
+      "event": "Boston Red Sox",
+      "pick": "Garrett Crochet",
+      "before": "Not in the previous dated report",
+      "after": "60-Day-IL · Lat",
+      "source_quote_at": "2026-09-28T17:01Z",
+      "source": "ESPN injuries",
+      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
+    },
+    {
+      "id": "injury|nfl:17:A.J. Brown|2026-09-28T17:20:27.883Z",
+      "kind": "injury",
+      "observed_at": "2026-09-28T17:20:27.883Z",
+      "sport": "nfl",
+      "title": "New availability report",
+      "event": "New England Patriots",
+      "pick": "A.J. Brown",
+      "before": "Not in the previous dated report",
+      "after": "Injured Reserve · Ankle",
+      "source_quote_at": "2026-09-28T17:01Z",
+      "source": "ESPN injuries",
+      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
+    },
+    {
+      "id": "injury|nfl:27:Bucky Irving|2026-09-28T17:20:27.883Z",
+      "kind": "injury",
+      "observed_at": "2026-09-28T17:20:27.883Z",
+      "sport": "nfl",
+      "title": "Player availability changed",
+      "event": "Tampa Bay Buccaneers",
+      "pick": "Bucky Irving",
+      "before": "Active · Irving notched 15 carries for 46 yards and two catches (on four targets) for 12 yards during Sunday's 23-16 loss to the Vikings.",
+      "after": "Active · Head coach Todd Bowles said that Irving won't be included on the Buccaneers' Week 4 injury report, despite missing the final two possessions of Sunday's 23-16 loss to the Vikings, ",
+      "source_quote_at": "2026-09-28T17:04Z",
+      "source": "ESPN injuries",
+      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
+    },
     {
       "id": "odds|ncaaf|401858250|2026-10-03T16:00Z|ATS||home|DraftKings|2026-09-28T17:01:25.780Z",
       "kind": "odds",
@@ -2907,54 +2949,6 @@
       "book": "DraftKings",
       "source_quote_at": "2026-09-28T00:00:42.990829+00:00",
       "source": "Existing NFL board",
-      "note": "Your ticket keeps its original odds. Recheck the live book before placing a new wager."
-    },
-    {
-      "id": "odds|nfl|401872967|2026-10-04T17:00Z|ATS||away|DraftKings|2026-09-28T00:02:23.380Z",
-      "kind": "odds",
-      "observed_at": "2026-09-28T00:02:23.380Z",
-      "sport": "nfl",
-      "event": "DAL @ HOU",
-      "start": "2026-10-04T17:00Z",
-      "pick": "DAL +3",
-      "title": "Published odds changed",
-      "before": "-110 · line 3",
-      "after": "-110 · line 2.5",
-      "book": "DraftKings",
-      "source_quote_at": "2026-09-28T00:00:42.991134+00:00",
-      "source": "Existing NFL board",
-      "note": "Your ticket keeps its original odds. Recheck the live book before placing a new wager."
-    },
-    {
-      "id": "odds|props|401872963|2026-09-29T00:15Z|Receiving yards|D'Andre Swift|over|BetMGM|2026-09-28T00:02:23.380Z",
-      "kind": "odds",
-      "observed_at": "2026-09-28T00:02:23.380Z",
-      "sport": "props",
-      "event": "Philadelphia Eagles @ Chicago Bears",
-      "start": "2026-09-29T00:15Z",
-      "pick": "D'Andre Swift — Over 10.5 Receiving yards",
-      "title": "Published odds changed",
-      "before": "-115 · line 9.5",
-      "after": "-110 · line 10.5",
-      "book": "BetMGM",
-      "source_quote_at": "2026-09-28T00:01:59.979908+00:00",
-      "source": "Existing Props board",
-      "note": "Your ticket keeps its original odds. Recheck the live book before placing a new wager."
-    },
-    {
-      "id": "odds|props|401872963|2026-09-29T00:15Z|Rushing yards|Jalen Hurts|over|Fanatics Sportsbook|2026-09-28T00:02:23.380Z",
-      "kind": "odds",
-      "observed_at": "2026-09-28T00:02:23.380Z",
-      "sport": "props",
-      "event": "Philadelphia Eagles @ Chicago Bears",
-      "start": "2026-09-29T00:15Z",
-      "pick": "Jalen Hurts — Over 25.5 Rushing yards",
-      "title": "Published odds changed",
-      "before": "+100 · line 25.5",
-      "after": "-105 · line 25.5",
-      "book": "Fanatics Sportsbook",
-      "source_quote_at": "2026-09-28T00:01:59.979908+00:00",
-      "source": "Existing Props board",
       "note": "Your ticket keeps its original odds. Recheck the live book before placing a new wager."
     }
   ]
