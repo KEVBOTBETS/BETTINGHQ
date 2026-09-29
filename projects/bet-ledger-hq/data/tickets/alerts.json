@@ -1,24 +1,72 @@
 {
   "schema": 1,
-  "checked_at": "2026-09-29T09:22:36.196Z",
+  "checked_at": "2026-09-29T09:42:39.707Z",
   "coverage": {
+    "mlb": {
+      "status": "available",
+      "reports": 35,
+      "checked_at": "2026-09-29T09:42:39.707Z"
+    },
     "ncaaf": {
       "status": "empty",
       "reports": 0,
-      "checked_at": "2026-09-29T09:22:36.196Z"
+      "checked_at": "2026-09-29T09:42:39.707Z"
     },
     "nfl": {
       "status": "available",
       "reports": 517,
-      "checked_at": "2026-09-29T09:22:36.196Z"
-    },
-    "mlb": {
-      "status": "available",
-      "reports": 35,
-      "checked_at": "2026-09-29T09:22:36.196Z"
+      "checked_at": "2026-09-29T09:42:39.707Z"
     }
   },
   "events": [
+    {
+      "id": "odds|mlb|849849|2026-09-29T21:00:00Z|ML||away|DraftKings|2026-09-29T09:42:39.707Z",
+      "kind": "odds",
+      "observed_at": "2026-09-29T09:42:39.707Z",
+      "sport": "mlb",
+      "event": "CWS @ HOU",
+      "start": "2026-09-29T21:00:00Z",
+      "pick": "CWS ML",
+      "title": "Published odds changed",
+      "before": "+102",
+      "after": "+105",
+      "book": "DraftKings",
+      "source_quote_at": "2026-09-29T09:39:55.463219+00:00",
+      "source": "Existing MLB board",
+      "note": "Your ticket keeps its original odds. Recheck the live book before placing a new wager."
+    },
+    {
+      "id": "odds|nfl|401872972|2026-10-04T17:00Z|ATS||home|DraftKings|2026-09-29T09:42:39.707Z",
+      "kind": "odds",
+      "observed_at": "2026-09-29T09:42:39.707Z",
+      "sport": "nfl",
+      "event": "NYJ @ CHI",
+      "start": "2026-10-04T17:00Z",
+      "pick": "CHI -3",
+      "title": "Published odds changed",
+      "before": "-115 · line -3.5",
+      "after": "-110 · line -3",
+      "book": "DraftKings",
+      "source_quote_at": "2026-09-29T09:39:33.865944+00:00",
+      "source": "Existing NFL board",
+      "note": "Your ticket keeps its original odds. Recheck the live book before placing a new wager."
+    },
+    {
+      "id": "odds|wnba|401918018|2026-09-29T22:30Z|ML||home|DraftKings|2026-09-29T09:42:39.707Z",
+      "kind": "odds",
+      "observed_at": "2026-09-29T09:42:39.707Z",
+      "sport": "wnba",
+      "event": "LV @ IND",
+      "start": "2026-09-29T22:30Z",
+      "pick": "IND ML",
+      "title": "Published odds changed",
+      "before": "-118",
+      "after": "-122",
+      "book": "DraftKings",
+      "source_quote_at": "2026-09-29T09:42:35+00:00",
+      "source": "Existing WNBA board",
+      "note": "Your ticket keeps its original odds. Recheck the live book before placing a new wager."
+    },
     {
       "id": "injury|nfl:3:Anthony Johnson Jr.|2026-09-29T08:23:35.134Z",
       "kind": "injury",
@@ -2871,48 +2919,6 @@
       "title": "Player availability changed",
       "event": "San Francisco 49ers",
       "pick": "Tatum Bethune",
-      "before": "Out · Coach's Decision",
-      "after": "Active",
-      "source_quote_at": "2026-09-28T19:05Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:25:Enrique Cruz Jr.|2026-09-28T19:19:09.434Z",
-      "kind": "injury",
-      "observed_at": "2026-09-28T19:19:09.434Z",
-      "sport": "nfl",
-      "title": "Player availability changed",
-      "event": "San Francisco 49ers",
-      "pick": "Enrique Cruz Jr.",
-      "before": "Out · Coach's Decision",
-      "after": "Active",
-      "source_quote_at": "2026-09-28T19:05Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:25:Ephesians Prysock|2026-09-28T19:19:09.434Z",
-      "kind": "injury",
-      "observed_at": "2026-09-28T19:19:09.434Z",
-      "sport": "nfl",
-      "title": "Player availability changed",
-      "event": "San Francisco 49ers",
-      "pick": "Ephesians Prysock",
-      "before": "Out · Coach's Decision",
-      "after": "Active",
-      "source_quote_at": "2026-09-28T19:05Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:25:Kurtis Rourke|2026-09-28T19:19:09.434Z",
-      "kind": "injury",
-      "observed_at": "2026-09-28T19:19:09.434Z",
-      "sport": "nfl",
-      "title": "Player availability changed",
-      "event": "San Francisco 49ers",
-      "pick": "Kurtis Rourke",
       "before": "Out · Coach's Decision",
       "after": "Active",
       "source_quote_at": "2026-09-28T19:05Z",
