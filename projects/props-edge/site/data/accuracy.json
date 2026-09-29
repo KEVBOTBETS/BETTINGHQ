@@ -1,13 +1,13 @@
 {
  "schema": 2,
  "projection_only": false,
- "generated_at": "2026-09-28T22:58:51.929153+00:00",
+ "generated_at": "2026-09-28T23:59:31.205841+00:00",
  "label": "NFL Props forecast and priced-call accuracy",
  "scope": {
   "season": 2026,
   "season_type": 2,
   "season_type_label": "regular season",
-  "included_records": 29077,
+  "included_records": 29078,
   "excluded_records": 0
  },
  "method": "First pre-event snapshot, frozen line and price. All model picks, including PASS/AVOID and unstaked picks. One preferred side per event/market in pick statistics; the complete priced-side audit is separate. One hypothetical unit per pick; no actual wagers are created. Missing results remain pending.",
@@ -139357,6 +139357,31 @@
    "selected": true,
    "id": "call:NFL:401872963:D'Andre Swift:Rushing yards:over:59.5",
    "captured_at": "2026-09-27T21:01:49.390924+00:00",
+   "result": "Pending"
+  },
+  {
+   "kind": "call",
+   "league": "NFL",
+   "event_id": "401872963",
+   "start": "2026-09-29T00:15Z",
+   "matchup": "Philadelphia Eagles @ Chicago Bears",
+   "player": "D'Andre Swift",
+   "market": "Rush attempts",
+   "side": "under",
+   "line": 15.5,
+   "price": -125,
+   "probability": 0.55648,
+   "tier": "PASS",
+   "edge": -0.01335,
+   "book": "Hard Rock Bet",
+   "quote_time": "2026-09-28T23:59:08.262105+00:00",
+   "season": 2026,
+   "season_type": 2,
+   "stat_key": "dandreswift|chicagobears|rushingattempts",
+   "version": "2026-09-23-restored-v1",
+   "selected": false,
+   "id": "call:NFL:401872963:D'Andre Swift:Rush attempts:under:15.5",
+   "captured_at": "2026-09-28T23:59:28.801006+00:00",
    "result": "Pending"
   },
   {
@@ -527453,13 +527478,13 @@
   "brier": 0.23454
  },
  "all_calls": {
-  "logged": 668,
+  "logged": 669,
   "wins": 312,
   "losses": 257,
   "pushes": 0,
   "voids": 0,
   "settled": 569,
-  "pending": 99,
+  "pending": 100,
   "win_rate": 0.5483304042179262,
   "units": 23.947,
   "roi": 0.04208631107205625,
