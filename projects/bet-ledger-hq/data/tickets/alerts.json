@@ -1,29 +1,57 @@
 {
   "schema": 1,
-  "checked_at": "2026-09-29T22:21:22.568Z",
+  "checked_at": "2026-09-29T22:47:03.981Z",
   "coverage": {
     "ncaaf": {
       "status": "empty",
       "reports": 0,
-      "checked_at": "2026-09-29T22:21:22.568Z"
+      "checked_at": "2026-09-29T22:47:03.981Z"
     },
     "nhl": {
       "status": "available",
-      "reports": 106,
-      "checked_at": "2026-09-29T22:21:22.568Z"
+      "reports": 105,
+      "checked_at": "2026-09-29T22:47:03.981Z"
+    },
+    "nfl": {
+      "status": "available",
+      "reports": 511,
+      "checked_at": "2026-09-29T22:47:03.981Z"
     },
     "mlb": {
       "status": "available",
       "reports": 44,
-      "checked_at": "2026-09-29T22:21:22.568Z"
-    },
-    "nfl": {
-      "status": "available",
-      "reports": 510,
-      "checked_at": "2026-09-29T22:21:22.568Z"
+      "checked_at": "2026-09-29T22:47:03.981Z"
     }
   },
   "events": [
+    {
+      "id": "injury|nfl:16:Josh Oliver|2026-09-29T22:47:03.981Z",
+      "kind": "injury",
+      "observed_at": "2026-09-29T22:47:03.981Z",
+      "sport": "nfl",
+      "title": "Player availability changed",
+      "event": "Minnesota Vikings",
+      "pick": "Josh Oliver",
+      "before": "Out · Biceps",
+      "after": "Injured Reserve · Biceps",
+      "source_quote_at": "2026-09-29T22:34Z",
+      "source": "ESPN injuries",
+      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
+    },
+    {
+      "id": "injury|nfl:28:Percy Butler|2026-09-29T22:47:03.981Z",
+      "kind": "injury",
+      "observed_at": "2026-09-29T22:47:03.981Z",
+      "sport": "nfl",
+      "title": "New availability report",
+      "event": "Washington Commanders",
+      "pick": "Percy Butler",
+      "before": "Not in the previous dated report",
+      "after": "Questionable · Concussion",
+      "source_quote_at": "2026-09-29T22:15Z",
+      "source": "ESPN injuries",
+      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
+    },
     {
       "id": "odds|nfl|401872965|2026-10-04T13:30Z|ATS||home|DraftKings|2026-09-29T22:18:35.024Z",
       "kind": "odds",
@@ -2892,34 +2920,6 @@
       "before": "Not in the previous dated report",
       "after": "60-Day-IL · Elbow",
       "source_quote_at": "2026-09-29T14:32Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:29:Damien Lewis|2026-09-29T14:22:28.361Z",
-      "kind": "injury",
-      "observed_at": "2026-09-29T14:22:28.361Z",
-      "sport": "nfl",
-      "title": "Player availability changed",
-      "event": "Carolina Panthers",
-      "pick": "Damien Lewis",
-      "before": "Questionable · Elbow",
-      "after": "Doubtful · Elbow",
-      "source_quote_at": "2026-09-29T14:07Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:6:Shavon Revel Jr.|2026-09-29T14:22:28.361Z",
-      "kind": "injury",
-      "observed_at": "2026-09-29T14:22:28.361Z",
-      "sport": "nfl",
-      "title": "New availability report",
-      "event": "Dallas Cowboys",
-      "pick": "Shavon Revel Jr.",
-      "before": "Not in the previous dated report",
-      "after": "Questionable · Knee",
-      "source_quote_at": "2026-09-29T13:57Z",
       "source": "ESPN injuries",
       "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
     }
