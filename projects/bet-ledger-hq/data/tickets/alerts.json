@@ -1,24 +1,118 @@
 {
   "schema": 1,
-  "checked_at": "2026-09-29T03:20:30.670Z",
+  "checked_at": "2026-09-29T03:42:09.491Z",
   "coverage": {
     "ncaaf": {
       "status": "empty",
       "reports": 0,
-      "checked_at": "2026-09-29T03:20:30.670Z"
-    },
-    "nfl": {
-      "status": "available",
-      "reports": 496,
-      "checked_at": "2026-09-29T03:20:30.670Z"
+      "checked_at": "2026-09-29T03:42:09.491Z"
     },
     "mlb": {
       "status": "available",
       "reports": 35,
-      "checked_at": "2026-09-29T03:20:30.670Z"
+      "checked_at": "2026-09-29T03:42:09.491Z"
+    },
+    "nfl": {
+      "status": "available",
+      "reports": 497,
+      "checked_at": "2026-09-29T03:42:09.491Z"
     }
   },
   "events": [
+    {
+      "id": "odds|nfl|401872970|2026-10-04T17:00Z|ML||home|DraftKings|2026-09-29T03:42:09.491Z",
+      "kind": "odds",
+      "observed_at": "2026-09-29T03:42:09.491Z",
+      "sport": "nfl",
+      "event": "LAR @ PHI",
+      "start": "2026-10-04T17:00Z",
+      "pick": "PHI ML",
+      "title": "Published odds changed",
+      "before": "+110",
+      "after": "+130",
+      "book": "DraftKings",
+      "source_quote_at": "2026-09-29T03:39:02.144768+00:00",
+      "source": "Existing NFL board",
+      "note": "Your ticket keeps its original odds. Recheck the live book before placing a new wager."
+    },
+    {
+      "id": "odds|nfl|401872972|2026-10-04T17:00Z|ATS||home|DraftKings|2026-09-29T03:42:09.491Z",
+      "kind": "odds",
+      "observed_at": "2026-09-29T03:42:09.491Z",
+      "sport": "nfl",
+      "event": "NYJ @ CHI",
+      "start": "2026-10-04T17:00Z",
+      "pick": "CHI -3",
+      "title": "Published odds changed",
+      "before": "-102 · line -3",
+      "after": "-115 · line -3.5",
+      "book": "DraftKings",
+      "source_quote_at": "2026-09-29T03:39:02.144664+00:00",
+      "source": "Existing NFL board",
+      "note": "Your ticket keeps its original odds. Recheck the live book before placing a new wager."
+    },
+    {
+      "id": "odds|ncaaf|401858246|2026-10-03T16:00Z|ATS||away|DraftKings|2026-09-29T03:42:09.491Z",
+      "kind": "odds",
+      "observed_at": "2026-09-29T03:42:09.491Z",
+      "sport": "ncaaf",
+      "event": "BC @ SMU",
+      "start": "2026-10-03T16:00Z",
+      "pick": "BC +20.5",
+      "title": "Published odds changed",
+      "before": "-110 · line 21",
+      "after": "-112 · line 21",
+      "book": "DraftKings",
+      "source_quote_at": "2026-09-29T03:39:18.950515+00:00",
+      "source": "Existing NCAAF board",
+      "note": "Your ticket keeps its original odds. Recheck the live book before placing a new wager."
+    },
+    {
+      "id": "odds|ncaaf|401858478|2026-10-03T23:30Z|TOTAL||over|DraftKings|2026-09-29T03:42:09.491Z",
+      "kind": "odds",
+      "observed_at": "2026-09-29T03:42:09.491Z",
+      "sport": "ncaaf",
+      "event": "WASH @ USC",
+      "start": "2026-10-03T23:30Z",
+      "pick": "Over 55.5",
+      "title": "Published odds changed",
+      "before": "-115 · line 57.5",
+      "after": "-110 · line 57.5",
+      "book": "DraftKings",
+      "source_quote_at": "2026-09-29T03:39:17.547028+00:00",
+      "source": "Existing NCAAF board",
+      "note": "Your ticket keeps its original odds. Recheck the live book before placing a new wager."
+    },
+    {
+      "id": "odds|ncaaf|401858476|2026-10-03T00:00Z|ML||home|DraftKings|2026-09-29T03:42:09.491Z",
+      "kind": "odds",
+      "observed_at": "2026-09-29T03:42:09.491Z",
+      "sport": "ncaaf",
+      "event": "PSU @ NU",
+      "start": "2026-10-03T00:00Z",
+      "pick": "NU ML",
+      "title": "Published odds changed",
+      "before": "+114",
+      "after": "+120",
+      "book": "DraftKings",
+      "source_quote_at": "2026-09-29T03:39:18.950515+00:00",
+      "source": "Existing NCAAF board",
+      "note": "Your ticket keeps its original odds. Recheck the live book before placing a new wager."
+    },
+    {
+      "id": "injury|nfl:3:D'Andre Swift|2026-09-29T03:42:09.491Z",
+      "kind": "injury",
+      "observed_at": "2026-09-29T03:42:09.491Z",
+      "sport": "nfl",
+      "title": "New availability report",
+      "event": "Chicago Bears",
+      "pick": "D'Andre Swift",
+      "before": "Not in the previous dated report",
+      "after": "Active · Swift rushed 20 times for 84 yards and brought in two of three targets for four yards in the Bears' 27-7 win over the Eagles on Monday night.",
+      "source_quote_at": "2026-09-29T03:31Z",
+      "source": "ESPN injuries",
+      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
+    },
     {
       "id": "injury|nfl:3:Braxton Jones|2026-09-29T03:20:30.670Z",
       "kind": "injury",
@@ -2834,90 +2928,6 @@
       "before": "Out · Coach's Decision",
       "after": "Active",
       "source_quote_at": "2026-09-28T18:12Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:22:Andrew Billings|2026-09-28T18:44:33.066Z",
-      "kind": "injury",
-      "observed_at": "2026-09-28T18:44:33.066Z",
-      "sport": "nfl",
-      "title": "Player availability changed",
-      "event": "Arizona Cardinals",
-      "pick": "Andrew Billings",
-      "before": "Out · Coach's Decision",
-      "after": "Active",
-      "source_quote_at": "2026-09-28T18:12Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:22:Reggie Virgil|2026-09-28T18:44:33.066Z",
-      "kind": "injury",
-      "observed_at": "2026-09-28T18:44:33.066Z",
-      "sport": "nfl",
-      "title": "Player availability changed",
-      "event": "Arizona Cardinals",
-      "pick": "Reggie Virgil",
-      "before": "Out · Coach's Decision",
-      "after": "Active",
-      "source_quote_at": "2026-09-28T18:12Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:33:K'Von Wallace|2026-09-28T18:44:33.066Z",
-      "kind": "injury",
-      "observed_at": "2026-09-28T18:44:33.066Z",
-      "sport": "nfl",
-      "title": "Player availability changed",
-      "event": "Baltimore Ravens",
-      "pick": "K'Von Wallace",
-      "before": "Out · inactive",
-      "after": "Active",
-      "source_quote_at": "2026-09-28T18:14Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:33:Carl Jones|2026-09-28T18:44:33.066Z",
-      "kind": "injury",
-      "observed_at": "2026-09-28T18:44:33.066Z",
-      "sport": "nfl",
-      "title": "Player availability changed",
-      "event": "Baltimore Ravens",
-      "pick": "Carl Jones",
-      "before": "Out · inactive",
-      "after": "Active",
-      "source_quote_at": "2026-09-28T18:14Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:33:Aeneas Peebles|2026-09-28T18:44:33.066Z",
-      "kind": "injury",
-      "observed_at": "2026-09-28T18:44:33.066Z",
-      "sport": "nfl",
-      "title": "Player availability changed",
-      "event": "Baltimore Ravens",
-      "pick": "Aeneas Peebles",
-      "before": "Out · inactive",
-      "after": "Active",
-      "source_quote_at": "2026-09-28T18:14Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:33:Joe Fagnano|2026-09-28T18:44:33.066Z",
-      "kind": "injury",
-      "observed_at": "2026-09-28T18:44:33.066Z",
-      "sport": "nfl",
-      "title": "Player availability changed",
-      "event": "Baltimore Ravens",
-      "pick": "Joe Fagnano",
-      "before": "Out · Coach's Decision",
-      "after": "Active · Fagnano (coach's decision) is inactive for Sunday's game against Dallas but will be available as the team's emergency quarterback if needed.",
-      "source_quote_at": "2026-09-27T19:08Z",
       "source": "ESPN injuries",
       "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
     }
