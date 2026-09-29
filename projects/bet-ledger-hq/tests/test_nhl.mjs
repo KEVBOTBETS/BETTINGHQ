@@ -1,0 +1,28 @@
+import assert from 'node:assert/strict';
+import {createRequire} from 'node:module';
+const require=createRequire(import.meta.url),C=require('../today-core.js'),M=require('../moneyline-core.js'),T=require('../ticket-core.js');
+const L=require('../../nhl-edge-lab/site/ledger.js'),S=require('../../nhl-edge-lab/site/sync-adapter.js');
+const now=Date.parse('2026-10-10T16:00:00Z'),stamp='2026-10-10T15:30:00Z',start='2026-10-10T23:00:00Z';
+const row={tier:'GOOD',game_id:'nhl1',start_time:start,season_type:2,home:'TOR',away:'MTL',matchup:'MTL @ TOR',market:'ATS',side:'away',line:1.5,pick:'MTL +1.5',price:-110,book:'Book',stake:1,model_prob:.57,odds_verified:true,odds_observed_at:stamp};
+const b={meta:{generated_at:stamp},board:[row]},picks=C.plays('nhl',b,now);
+assert.equal(picks.length,1);assert.equal(picks[0].sport,'NHL');assert.equal(picks[0].app,'nhl-lab');assert.equal(picks[0].line,1.5);assert.equal(C.topPlays(picks,10)[0].key,'nhl');
+for(const extra of [{held:true},{season_type:1},{stake:0},{odds_observed_at:null},{odds_observed_at:'2026-10-10T13:00:00Z'}])assert.equal(C.plays('nhl',{...b,board:[{...row,...extra}]},now).length,0);
+const game={game_id:'nhl1',date:start,season_type:2,home:'TOR',away:'MTL',projection:{ratings_known:true,mu:.4},p_home:.58};
+const cards=M.cards('nhl',{meta:b.meta,games:[game]},now);assert.equal(cards[0].predicted,'home');assert.equal(M.choose({},cards[0],'home',now)['nhl:nhl1'].sport,'nhl');
+assert.equal(M.cards('nhl',{meta:b.meta,games:[{...game,season_type:1}]},now).length,0);assert.equal(M.cards('nhl',{meta:b.meta,games:[{...game,completed:true}]},now)[0].selectable,false);
+const entry=L.entryFrom({...row,tipoff:start,date:'2026-10-10'},10);
+assert.equal(L.settle(entry,{game_id:'nhl1',completed:false,away:{score:2},home:{score:3}}),null);
+assert.equal(L.settle(entry,{game_id:'nhl1',completed:true,away:{score:2},home:{score:3}}).result,'Win');
+const canonical=S.toCanonical(entry);assert.equal(canonical.app,'nhl-lab');assert.equal(S.fromCanonical(canonical).game_id,'nhl1');
+const noNative={...canonical};delete noNative.native;assert.equal(S.fromCanonical(noNative).game_id,'nhl1');
+assert.equal(T.gradeScore(picks[0],{id:'nhl1',completed:true,away:2,home:3,start}), 'Win');
+assert.equal(T.gradeScore({...picks[0],market:'ML',side:'home'},{id:'nhl1',completed:true,away:2,home:3,start}),'Win');
+assert.equal(C.exposure([{...canonical,status:'Pending'}]).bySport.NHL,10);
+console.log('NHL daily picks, moneyline ticket, eligibility, puck-line orientation, OT result, ledger and shared sync passed');
+
+const A=require('../alerts-core.js');
+const goalieBundle={meta:{generated_at:stamp},games:[{...game,state:'pre',home_goalie:{name:'Starter',confirmed:false},away_goalie:{name:'Visitor',confirmed:true}}]};
+const first=A.scan(null,{goalies:A.goalies(goalieBundle,now)},stamp);
+goalieBundle.games[0].home_goalie.confirmed=true;
+const changed=A.scan(first.state,{goalies:A.goalies(goalieBundle,now)},'2026-10-10T16:00:00Z');
+assert.equal(changed.events[0].sport,'nhl');assert.match(changed.events[0].title,/goalie/);

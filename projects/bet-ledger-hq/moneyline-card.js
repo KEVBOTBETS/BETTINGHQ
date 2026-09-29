@@ -10,7 +10,7 @@
     northern:{name:'True North',note:'Red & white poster'},
     slip:{name:'Sportsbook Slip',note:'Printer friendly'}
   };
-  const W=1080,SPORT={nfl:'NFL',ncaaf:'NCAAF',mlb:'MLB',wnba:'WNBA',props:'PROPS',ladder:'LADDER'};
+  const W=1080,SPORT={nhl:'NHL',nfl:'NFL',ncaaf:'NCAAF',mlb:'MLB',wnba:'WNBA',props:'PROPS',ladder:'LADDER'};
   const tz='America/Toronto';
   const fmt=(v,o)=>new Intl.DateTimeFormat('en-CA',{timeZone:tz,...o}).format(new Date(v));
   const clock=v=>{const t=Date.parse(v);return Number.isFinite(t)?fmt(t,{hour:'numeric',minute:'2-digit'}).replace(/\s?([ap])\.?m\.?/i,(_,x)=>x.toUpperCase()+'M'):'';};

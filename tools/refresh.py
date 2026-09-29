@@ -8,9 +8,9 @@ from model_refresh import refresh_project
 
 ROOT=Path(__file__).resolve().parents[1]
 parser=argparse.ArgumentParser()
-parser.add_argument('--sport',choices=['all','football','mlb','wnba','props','ladder','archive'],default='all')
+parser.add_argument('--sport',choices=['all','football','mlb','wnba','nhl','props','ladder','archive'],default='all')
 args=parser.parse_args()
-selected={'all':['nfl-edge-lab','ncaaf-edge-lab','mlb-edge','props-edge','wnba-edge-lab','ladderbet'],'football':['nfl-edge-lab','ncaaf-edge-lab','props-edge'],'mlb':['mlb-edge'],'wnba':['wnba-edge-lab'],'props':['props-edge'],'ladder':['ladderbet'],'archive':[]}[args.sport]
+selected={'all':['nfl-edge-lab','ncaaf-edge-lab','mlb-edge','props-edge','wnba-edge-lab','nhl-edge-lab','ladderbet'],'football':['nfl-edge-lab','ncaaf-edge-lab','props-edge'],'mlb':['mlb-edge'],'nhl':['nhl-edge-lab'],'wnba':['wnba-edge-lab'],'props':['props-edge'],'ladder':['ladderbet'],'archive':[]}[args.sport]
 for repo in selected:
     command=['bash','scripts/run_build.sh'] if repo=='mlb-edge' else [sys.executable,'-m','ladder','render','--public','--out','docs/index.html'] if repo=='ladderbet' else [sys.executable,'-m','pipeline.build']
     try:

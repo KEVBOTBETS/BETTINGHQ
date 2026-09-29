@@ -8,7 +8,7 @@ ROOT=Path(__file__).resolve().parents[1]
 class PortableRelease(unittest.TestCase):
     def test_only_recovered_sports_are_active(self):
         registry=json.loads((ROOT/'projects/bet-ledger-hq/sports.json').read_text())
-        self.assertEqual({r['key'] for r in registry if r['active']},{'nfl','ncaaf','mlb','wnba','props','ladder'})
+        self.assertEqual({r['key'] for r in registry if r['active']},{'nfl','ncaaf','mlb','wnba','nhl','props','ladder'})
 
     def test_public_site_has_no_old_account_dependency(self):
         for p in (ROOT/'_site').rglob('*'):
@@ -42,7 +42,7 @@ class PortableRelease(unittest.TestCase):
 
     def test_shared_sync_engine_is_identical(self):
         reference=(ROOT/'projects/bet-ledger-hq/betsync.js').read_bytes()
-        for p in ['wnba-edge-lab/site','props-edge/site','ladderbet/docs']:
+        for p in ['wnba-edge-lab/site','nhl-edge-lab/site','props-edge/site','ladderbet/docs']:
             self.assertEqual((ROOT/'projects'/p/'betsync.js').read_bytes(),reference)
 
     def test_recovered_history_stays_present(self):

@@ -59,7 +59,7 @@ for(const e of Object.values(state.entries)){
   const candidates=quotes.filter(q=>T.selectionKey(q)===T.selectionKey(e.pick)&&q.book===e.pick.book).sort((a,b)=>Date.parse(b.quote)-Date.parse(a.quote));
   const close=T.closing(e.pick,candidates[0]);if(close&&(!e.closing||Date.parse(close.observed_at)>Date.parse(e.closing.observed_at)))e.closing=close;
 }
-const paths={nfl:'football/nfl',props:'football/nfl',ncaaf:'football/college-football',wnba:'basketball/wnba'};
+const paths={nhl:'hockey/nhl',nfl:'football/nfl',props:'football/nfl',ncaaf:'football/college-football',wnba:'basketball/wnba'};
 const tasks=new Map();
 for(const entry of Object.values(state.entries)){
   if(!registry.some(s=>s.active&&s.key===entry.pick.key))continue;
@@ -71,13 +71,14 @@ for(const entry of Object.values(state.entries)){
 // minute earlier, so grading from it costs no extra call -- and ESPN's per-game summary endpoint
 // answers GitHub's runners with HTTP 403, which left every football/WNBA pick Pending for good.
 // The summary is still used for props (player stats) and for any game a board did not publish.
-const scoreboards={nfl:'nfl',ncaaf:'college-football',wnba:'wnba'},boardGames={};
+const scoreboards={nhl:'nhl',nfl:'nfl',ncaaf:'college-football',wnba:'wnba'},boardGames={};
 await Promise.all(registry.filter(s=>s.active&&scoreboards[s.key]).map(async sport=>{try{
   const rows=await get(new URL(sport.path+'data/games.json',base)),map=new Map();
   for(const g of Array.isArray(rows)?rows:[]){const id=String(g.game_id??'');if(!id)continue;
     const score=side=>C.number(g[side]&&typeof g[side]==='object'?g[side].score:g[side+'_score']);
     map.set(id,{id,completed:g.completed===true,home:score('home'),away:score('away'),start:g.tipoff||g.date||null});}
   boardGames[sport.key]=map;
+  if(sport.key==='nhl'&&bundles.nhl)bundles.nhl.games=rows;
 }catch(_){/* fall back to the per-game summary */}}));
 // Limit concurrent public calls, recheck finals for official stat corrections.
 const work=[...tasks.values()];
@@ -101,17 +102,18 @@ async function worker(){while(work.length){const task=work.shift(),r=task.r;let 
   }catch(e){health.result_failures.push({sport:r.key,event_id:r.eventId,error:'Official result feed unavailable'});console.error('result feed unavailable: '+r.key+' '+r.eventId+' ('+(e?.message||e)+')');}
 }}
 await Promise.all(Array.from({length:4},worker));
-const injuryPaths={mlb:'baseball/mlb',nfl:'football/nfl',ncaaf:'football/college-football'};
+const injuryPaths={nhl:'hockey/nhl',mlb:'baseball/mlb',nfl:'football/nfl',ncaaf:'football/college-football'};
 const injuryData={},coverage={};
 await Promise.all(Object.entries(injuryPaths).map(async([sport,league])=>{try{const raw=await get('https://site.api.espn.com/apis/site/v2/sports/'+league+'/injuries');const reports=A.injuries(raw,sport,now);if(reports===null)throw Error('schema');injuryData[sport]=reports;coverage[sport]={status:Object.keys(reports).length?'available':'empty',reports:Object.keys(reports).length,checked_at:stamp};}catch(_){injuryData[sport]=null;coverage[sport]={status:'unavailable',reports:0,checked_at:stamp};}}));
 const previousAlerts=await read('alerts.json',{events:[]}),previousAlertState=await read('alerts-state.json',{});
-const alerts=A.scan(previousAlertState,{quotes,tracked:Object.values(state.entries).map(e=>e.pick),lineups:A.lineups(bundles.mlb,now),injuries:injuryData},stamp);
+const alerts=A.scan(previousAlertState,{quotes,tracked:Object.values(state.entries).map(e=>e.pick),lineups:A.lineups(bundles.mlb,now),goalies:A.goalies(bundles.nhl,now),injuries:injuryData},stamp);
 const events=[...alerts.events,...previousAlerts.events].filter(e=>now-Date.parse(e.observed_at)<7*86400000).slice(0,200);
 await write('alerts-state.json',alerts.state);await write('alerts.json',{schema:1,checked_at:stamp,coverage,events});
 index.checked_at=stamp;index.tickets.sort((a,b)=>b.published_at.localeCompare(a.published_at));state.checked_at=stamp;
-const pickFields=['tier','stake','recommended_stake','held','odds_verified','start_time','game_date','tipoff','game_id','event_id','result_event_id','player','player_id','matchup','market','side','home','away','pick','label','selection','line','price','price_american','book','action_edge','edge_real','edge','model_prob','p_final','updated_at','odds_observed_at','odds_fetched_at','current_season_samples','roster_verified','model_version'];
+const pickFields=['season_type','tier','stake','recommended_stake','held','odds_verified','start_time','game_date','tipoff','game_id','event_id','result_event_id','player','player_id','matchup','market','side','home','away','pick','label','selection','line','price','price_american','book','action_edge','edge_real','edge','model_prob','p_final','updated_at','odds_observed_at','odds_fetched_at','current_season_samples','roster_verified','model_version'];
 const slim=r=>Object.fromEntries(pickFields.filter(k=>r[k]!==undefined).map(k=>[k,r[k]]));
 for(const b of Object.values(cache)){
+ delete b.games;
  if(b.board)b.board=b.board.map(slim);
  if(b.accuracy)b.accuracy={generated_at:b.accuracy.generated_at};
  if(b.slate)b.slate={generated_at:b.slate.generated_at,games:b.slate.games.map(g=>({gamePk:g.gamePk,home:g.home,away:g.away,start:g.start,status:g.status,lineups_confirmed:g.lineups_confirmed,odds:{fetched_at:g.odds?.fetched_at},bets:(g.bets||[]).map(slim)}))};

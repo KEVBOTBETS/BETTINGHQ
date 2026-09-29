@@ -10,6 +10,8 @@ patterns=[
     'projects/props-edge/site/data/*.json',
     'projects/props-edge/site/data/history/*.json',
     'projects/props-edge/state/*.json',
+    'projects/nhl-edge-lab/state/*.json',
+    'projects/nhl-edge-lab/site/data/*.json',
     'projects/wnba-edge-lab/state/*.json',
     'projects/wnba-edge-lab/site/data/*.json',
     'projects/ladderbet/state/model_accuracy.json',

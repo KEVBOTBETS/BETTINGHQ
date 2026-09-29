@@ -1,6 +1,6 @@
 (()=>{'use strict';
   const $=s=>document.querySelector(s),esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-  const supported=new Set(['mlb','nfl','ncaaf']);
+  const supported=new Set(['mlb','nfl','ncaaf','nhl']);
   let data=null,error='',busy=false,read=new Set();try{read=new Set(JSON.parse(localStorage.getItem('kevbot.alerts-read.v1')||'[]'));}catch(_){}
   function render(){const host=$('#alerts-list');if(!host)return;const sport=$('#alerts-sport').value,kind=$('#alerts-kind').value;
     const stale=!data||Date.now()-Date.parse(data.checked_at)>4*3600000,offline=navigator.onLine===false;

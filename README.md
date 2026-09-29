@@ -1,10 +1,12 @@
 # KEVBOTBETS portable recovery
 
 One repository contains the recovered hub, Moneyline, NFL, college football,
-MLB, WNBA, Props and Ladder projects. Start with **START-HERE.md**. The initial page opens Weekly
+MLB, NHL, WNBA, Props and Ladder projects. Start with **START-HERE.md**. The initial page opens Weekly
 football; the existing sport dashboards and shared ledger remain available.
 
 ## What changed
+
+- **NHL Ice Lab** adds visual matchup cards, scoring probability maps, goalie status, team comparisons, PP/PK, standings, injury/news reports, explicit wager entry and frozen forecast accuracy. NHL is included in Moneyline tickets, qualified Daily Picks, ticket archives/results, pick changes, goalie alerts and the shared ledger. Keyless refresh runs twice hourly; see `projects/nhl-edge-lab/README.md` for qualification rules and model limits.
 
 - New **Weekly football** view shows a rolling seven-day NFL/CFB slate, winner
   forecasts and up to one priced candidate per market per game.
@@ -27,8 +29,8 @@ football; the existing sport dashboards and shared ledger remain available.
 
 ## Recovered scope
 
-All seven complete source projects are included: `bet-ledger-hq`, `nfl-edge-lab`,
-`ncaaf-edge-lab`, `mlb-edge`, `wnba-edge-lab`, `props-edge`, and `ladderbet`.
+All eight complete source projects are included: `bet-ledger-hq`, `nfl-edge-lab`,
+`ncaaf-edge-lab`, `mlb-edge`, `nhl-edge-lab`, `wnba-edge-lab`, `props-edge`, and `ladderbet`.
 Their saved forecast history is preserved. See **RESTORATION-2026-09-23.md** for
 the repaired quote, parlay, accuracy and shared-ledger behavior.
 
@@ -57,7 +59,7 @@ Open `http://localhost:8000/`. Serving files is required; opening HTML directly
 from Finder will not load the feeds correctly.
 
 For current data, run `python tools/refresh.py --sport all` while online.
-`--sport football` refreshes NFL, CFB and Props. Individual `mlb`, `wnba`,
+`--sport football` refreshes NFL, CFB and Props. Individual `mlb`, `nhl`, `wnba`,
 `props`, and `ladder` refreshes are supported; `archive` collects tickets/alerts
 from saved model feeds without repeating upstream requests.
 Recovered feed timestamps are preserved until an actual successful refresh.

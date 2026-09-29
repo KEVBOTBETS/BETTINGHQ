@@ -12,6 +12,12 @@
       awayPitcher:g.away_sp?.name||'',homePitcher:g.home_sp?.name||'',published_at:bundle.slate.generated_at
     }]));
   }
+  function goalies(bundle,now){
+    if(bundle?.error||!recent(bundle?.meta?.generated_at,now,6))return {};
+    return Object.fromEntries((bundle.games||[]).filter(g=>g.state==='pre'&&Date.parse(g.date)>now&&!g.source_stale).map(g=>[String(g.game_id),{
+      event:g.away+' @ '+g.home,start:g.date,away:{...(g.away_goalie||{})},home:{...(g.home_goalie||{})},published_at:bundle.meta.generated_at
+    }]));
+  }
   function injuries(data,sport,now){
     if(!data||!Array.isArray(data.injuries))return null;
     const out={};for(const team of data.injuries)for(const r of team.injuries||[]){
@@ -21,7 +27,7 @@
     }return out;
   }
   function scan(previous,input,at){
-    const now=Date.parse(at),old=previous||{quotes:{},lineups:{},injuries:{}},state={quotes:{...(old.quotes||{})},lineups:{...(old.lineups||{})},injuries:{...(old.injuries||{})}},events=[];
+    const now=Date.parse(at),old=previous||{quotes:{},lineups:{},injuries:{}},state={quotes:{...(old.quotes||{})},lineups:{...(old.lineups||{})},injuries:{...(old.injuries||{})},goalies:{...(old.goalies||{})}},events=[];
     const emit=(kind,entity,body)=>events.push({id:[kind,entity,at].join('|'),kind,observed_at:at,...body});
     const tracked=new Map((input.tracked||[]).filter(r=>Date.parse(r.start)>now).map(r=>[key(r),r]));
     for(const q of input.quotes||[]){const id=key(q),pick=tracked.get(id);if(!pick)continue;const before=old.quotes?.[id]||pick;
@@ -36,6 +42,16 @@
         for(const side of ['away','home']){const k=side+'Pitcher';if(before[k]&&g[k]&&before[k]!==g[k])emit('starter',id+side,{sport:'mlb',event:g.event,start:g.start,title:'Probable starting pitcher changed',before:before[k],after:g[k],source_quote_at:g.published_at,source:'MLB board'});}
       }state.lineups[id]=g;
     }
+    for(const [id,g] of Object.entries(input.goalies||{})){
+      const before=old.goalies?.[id];
+      if(before)for(const side of ['away','home']){
+        const was=before[side]||{},next=g[side]||{};
+        if(next.name&&((was.name&&was.name!==next.name)||(!was.confirmed&&next.confirmed)))
+          emit('starter','nhl:'+id+':'+side,{sport:'nhl',event:g.event,start:g.start,title:'NHL starting goalie updated',before:(was.name||'Not announced')+(was.confirmed?' · confirmed':''),after:next.name+(next.confirmed?' · confirmed':' · '+(next.status||'unconfirmed')),source_quote_at:g.published_at,source:'NHL board',note:'Review the matchup after a starter change; the baseline does not price individual goalie talent.'});
+      }
+      state.goalies[id]=g;
+    }
+    for(const [id,g] of Object.entries(state.goalies))if(Date.parse(g.start)<now-86400000)delete state.goalies[id];
     for(const [sport,reports] of Object.entries(input.injuries||{})){
       if(reports===null)continue;const hasBaseline=Object.prototype.hasOwnProperty.call(old.injuries||{},sport),before=old.injuries?.[sport]||{};
       for(const [id,r] of Object.entries(reports)){const prior=before[id];if(hasBaseline&&(!prior||prior.status!==r.status||prior.detail!==r.detail))emit('injury',id,{sport,title:prior?'Player availability changed':'New availability report',event:r.team,pick:r.player,before:prior?prior.status+(prior.detail?' · '+prior.detail:''):'Not in the previous dated report',after:r.status+(r.detail?' · '+r.detail:''),source_quote_at:r.report_at,source:'ESPN injuries',note:'A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy.'});}
@@ -45,5 +61,5 @@
     for(const [id,g] of Object.entries(state.lineups))if(Date.parse(g.start)<now-86400000)delete state.lineups[id];
     return {state,events};
   }
-  return {key,lineups,injuries,scan};
+  return {key,lineups,goalies,injuries,scan};
 });

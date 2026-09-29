@@ -9,6 +9,7 @@ OUTPUTS={
     'ncaaf-edge-lab':['state','site/data'],
     'props-edge':['state','site/data'],
     'wnba-edge-lab':['state','site/data'],
+    'nhl-edge-lab':['state','site/data'],
     'mlb-edge':['data','docs/data'],
     'ladderbet':['state/model_accuracy.json','docs/index.html','docs/data'],
 }

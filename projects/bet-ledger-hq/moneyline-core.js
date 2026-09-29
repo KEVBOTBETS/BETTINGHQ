@@ -39,7 +39,7 @@
       out.push({key,id,sport,start,when,day:day(start),home,away,homeName:g.home_name||detail?.home?.name||home,
         awayName:g.away_name||detail?.away?.name||away,stamp,fresh,locked,selectable:usable,
         predicted:usable?predicted:null,probability:usable&&predicted&&pHome!==null?(predicted==='home'?pHome:1-pHome):null,
-        reason,notes:sport==='mlb'&&!g.lineups_confirmed?'Projected lineups':sport==='ncaaf'&&g.context?.availability?.status!=='available'?'Team availability not confirmed':'',
+        reason,notes:sport==='nhl'?'Includes OT/SO · uncalibrated goal-rate estimate':sport==='mlb'&&!g.lineups_confirmed?'Projected lineups':sport==='ncaaf'&&g.context?.availability?.status!=='available'?'Team availability not confirmed':'',
         conditionalProbability:sport==='nfl',
         // Presentation only: logos/colours as published by the feeds (never fetched or guessed).
         homeLogo:g.home_logo||detail?.home?.logo||null,awayLogo:g.away_logo||detail?.away?.logo||null,
