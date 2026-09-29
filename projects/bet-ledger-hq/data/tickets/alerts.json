@@ -1,24 +1,72 @@
 {
   "schema": 1,
-  "checked_at": "2026-09-29T12:26:44.913Z",
+  "checked_at": "2026-09-29T12:48:50.003Z",
   "coverage": {
     "ncaaf": {
       "status": "empty",
       "reports": 0,
-      "checked_at": "2026-09-29T12:26:44.913Z"
+      "checked_at": "2026-09-29T12:48:50.003Z"
     },
     "mlb": {
       "status": "available",
       "reports": 35,
-      "checked_at": "2026-09-29T12:26:44.913Z"
+      "checked_at": "2026-09-29T12:48:50.003Z"
     },
     "nfl": {
       "status": "available",
       "reports": 517,
-      "checked_at": "2026-09-29T12:26:44.913Z"
+      "checked_at": "2026-09-29T12:48:50.003Z"
     }
   },
   "events": [
+    {
+      "id": "odds|mlb|849843|2026-09-30T02:00:00Z|TOTAL||over|DraftKings|2026-09-29T12:48:50.003Z",
+      "kind": "odds",
+      "observed_at": "2026-09-29T12:48:50.003Z",
+      "sport": "mlb",
+      "event": "CHC @ SD",
+      "start": "2026-09-30T02:00:00Z",
+      "pick": "Over 7.0",
+      "title": "Published odds changed",
+      "before": "-118 · line 7",
+      "after": "-119 · line 7",
+      "book": "DraftKings",
+      "source_quote_at": "2026-09-29T12:45:46.577116+00:00",
+      "source": "Existing MLB board",
+      "note": "Your ticket keeps its original odds. Recheck the live book before placing a new wager."
+    },
+    {
+      "id": "odds|nfl|401872972|2026-10-04T17:00Z|ATS||home|DraftKings|2026-09-29T12:48:50.003Z",
+      "kind": "odds",
+      "observed_at": "2026-09-29T12:48:50.003Z",
+      "sport": "nfl",
+      "event": "NYJ @ CHI",
+      "start": "2026-10-04T17:00Z",
+      "pick": "CHI -3",
+      "title": "Published odds changed",
+      "before": "-110 · line -3",
+      "after": "-108 · line -3.5",
+      "book": "DraftKings",
+      "source_quote_at": "2026-09-29T12:45:30.542132+00:00",
+      "source": "Existing NFL board",
+      "note": "Your ticket keeps its original odds. Recheck the live book before placing a new wager."
+    },
+    {
+      "id": "odds|nfl|401872970|2026-10-04T17:00Z|ML||home|DraftKings|2026-09-29T12:48:50.003Z",
+      "kind": "odds",
+      "observed_at": "2026-09-29T12:48:50.003Z",
+      "sport": "nfl",
+      "event": "LAR @ PHI",
+      "start": "2026-10-04T17:00Z",
+      "pick": "PHI ML",
+      "title": "Published odds changed",
+      "before": "+124",
+      "after": "+130",
+      "book": "DraftKings",
+      "source_quote_at": "2026-09-29T12:45:30.542263+00:00",
+      "source": "Existing NFL board",
+      "note": "Your ticket keeps its original odds. Recheck the live book before placing a new wager."
+    },
     {
       "id": "odds|mlb|849849|2026-09-29T21:00:00Z|ML||away|DraftKings|2026-09-29T09:42:39.707Z",
       "kind": "odds",
@@ -2880,48 +2928,6 @@
       "before": "Out · Coach's Decision",
       "after": "Active",
       "source_quote_at": "2026-09-28T19:00Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:23:Eli Heidenreich|2026-09-28T19:19:09.434Z",
-      "kind": "injury",
-      "observed_at": "2026-09-28T19:19:09.434Z",
-      "sport": "nfl",
-      "title": "Player availability changed",
-      "event": "Pittsburgh Steelers",
-      "pick": "Eli Heidenreich",
-      "before": "Out · Coach's Decision",
-      "after": "Active",
-      "source_quote_at": "2026-09-28T19:00Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:23:Will Howard|2026-09-28T19:19:09.434Z",
-      "kind": "injury",
-      "observed_at": "2026-09-28T19:19:09.434Z",
-      "sport": "nfl",
-      "title": "Player availability changed",
-      "event": "Pittsburgh Steelers",
-      "pick": "Will Howard",
-      "before": "Out · Coach's Decision",
-      "after": "Active",
-      "source_quote_at": "2026-09-28T19:00Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:25:Tatum Bethune|2026-09-28T19:19:09.434Z",
-      "kind": "injury",
-      "observed_at": "2026-09-28T19:19:09.434Z",
-      "sport": "nfl",
-      "title": "Player availability changed",
-      "event": "San Francisco 49ers",
-      "pick": "Tatum Bethune",
-      "before": "Out · Coach's Decision",
-      "after": "Active",
-      "source_quote_at": "2026-09-28T19:05Z",
       "source": "ESPN injuries",
       "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
     }
