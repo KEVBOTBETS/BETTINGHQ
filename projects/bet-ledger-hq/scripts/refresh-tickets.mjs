@@ -76,7 +76,7 @@ await Promise.all(registry.filter(s=>s.active&&scoreboards[s.key]).map(async spo
   const rows=await get(new URL(sport.path+'data/games.json',base)),map=new Map();
   for(const g of Array.isArray(rows)?rows:[]){const id=String(g.game_id??'');if(!id)continue;
     const score=side=>C.number(g[side]&&typeof g[side]==='object'?g[side].score:g[side+'_score']);
-    map.set(id,{id,completed:g.completed===true,home:score('home'),away:score('away'),start:g.tipoff||g.date||null});}
+    map.set(id,{id,completed:g.completed===true,home:score('home'),away:score('away'),start:g.tipoff||g.date||null,source_url:g.source_url||null});}
   boardGames[sport.key]=map;
   if(sport.key==='nhl'&&bundles.nhl)bundles.nhl.games=rows;
 }catch(_){/* fall back to the per-game summary */}}));
@@ -88,7 +88,7 @@ async function worker(){while(work.length){const task=work.shift(),r=task.r;let 
     game={id:String(summary.gamePk),completed:['Final','Game Over','Completed Early'].includes(summary.gameData?.status?.detailedState),home:summary.liveData?.linescore?.teams?.home?.runs,away:summary.liveData?.linescore?.teams?.away?.runs,start:summary.gameData?.datetime?.dateTime};
   }else if(r.key!=='props'&&boardGames[r.key]?.has(String(r.eventId))){
     game=boardGames[r.key].get(String(r.eventId));
-    url='https://www.espn.com/'+scoreboards[r.key]+'/game/_/gameId/'+encodeURIComponent(r.eventId);
+    url=game.source_url||'https://www.espn.com/'+scoreboards[r.key]+'/game/_/gameId/'+encodeURIComponent(r.eventId);
   }else if(paths[r.key]){
     url='https://site.api.espn.com/apis/site/v2/sports/'+paths[r.key]+'/summary?event='+encodeURIComponent(r.eventId);summary=await get(url);
     const c=summary.header?.competitions?.[0],team=side=>c?.competitors?.find(t=>t.homeAway===side);

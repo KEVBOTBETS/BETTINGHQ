@@ -91,7 +91,7 @@
     $("#play-count").textContent=rows.length+" available";
     $("#plays").innerHTML=rows.length?rows.map(r=>{
       const group=risk?.groups.find(g=>g.key===C.eventKey({sport:r.sport,event:r.event,start:r.start}));
-      return '<article class="card"><span class="tag">'+esc(r.source)+'</span><span class="tag '+(r.review.length?"review":"recent")+'">'+esc(r.tier)+'</span><h3>'+esc(r.pick)+'</h3><p>'+esc(r.event)+'<br><small>'+esc(time(r.start))+' ET</small></p>'+numbers(r)+moveLine(r)+'<p class="quote-line"><small>'+esc(r.book)+' · quote '+esc(r.quote?elapsed(r.quote):"time not supplied")+'</small></p>'+r.review.map(t=>'<p class="warning">'+esc(t)+'</p>').join("")+(group?'<p class="warning">Already exposed to this game: '+money(group.stake)+' across '+group.rows.length+' bet(s).</p>':"")+link(r.key,"Review odds and stake")+'</article>';
+      return '<article class="card" data-play-sport="'+esc(r.key)+'"><span class="tag">'+esc(r.source)+'</span><span class="tag '+(r.review.length?"review":"recent")+'">'+esc(r.tier)+'</span><h3>'+esc(r.pick)+'</h3><p>'+esc(r.event)+'<br><small>'+esc(time(r.start))+' ET</small></p>'+numbers(r)+moveLine(r)+'<p class="quote-line"><small>'+esc(r.book)+' · quote '+esc(r.quote?elapsed(r.quote):"time not supplied")+'</small></p>'+r.review.map(t=>'<p class="warning">'+esc(t)+'</p>').join("")+(group?'<p class="warning">Already exposed to this game: '+money(group.stake)+' across '+group.rows.length+' bet(s).</p>':"")+link(r.key,"Review odds and stake")+'</article>';
     }).join(""):empty(S.busy?"Loading board-qualified plays…":"No current qualified plays for this date and filter. This may mean no edge, no prices, or stale/unavailable data—see Data health below.");
   }
   function renderHealth(){

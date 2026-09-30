@@ -143,6 +143,7 @@ def update_accuracy(records, games, board, stamp):
                'frozen_at':stamp,'home':game['home'],'away':game['away'],'p_home':game['p_home'],
                'projection':game['projection'],'model_version':VERSION,'result':None}
         record=records.get(key)
+        if record and game.get('nhl_game_id'):record['nhl_game_id']=game['nhl_game_id']
         if record and game['completed'] and game['home_score'] is not None and game['away_score'] is not None and game['home_score']!=game['away_score']:
             if abs((instant(record['start'])-start).total_seconds())>36*3600:continue
             record['result']={'home':game['home_score'],'away':game['away_score'],'home_won':game['home_score']>game['away_score'],'verified_at':stamp}

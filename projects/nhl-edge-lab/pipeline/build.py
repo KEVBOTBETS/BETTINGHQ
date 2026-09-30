@@ -1,9 +1,10 @@
-"""Keyless NHL publication. Required schedule failure aborts; optional data stays labelled."""
-import json, re, urllib.request, unicodedata
+"""Keyless NHL publication. Independent schedule feeds; optional data stays labelled."""
+import json, re, urllib.request
 from concurrent.futures import ThreadPoolExecutor
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
 from zoneinfo import ZoneInfo
+from . import official as nhl
 from .model import VERSION, number, instant, project, candidates, update_accuracy, accuracy_report
 ROOT=Path(__file__).resolve().parents[1]
 STATE=ROOT/'state'; OUT=ROOT/'site/data'
@@ -84,7 +85,7 @@ def normalize(event,stamp):
       'completed':s.get('completed',False),'state':s.get('state','unknown'),'status':s.get('description','Unknown'),
       'status_detail':s.get('detail'),'venue':c.get('venue',{}).get('fullName'),'neutral':c.get('neutralSite',False),
       'broadcast':', '.join(n for b in c.get('broadcasts',[]) for n in b.get('names',[])),'quotes':quotes(c,stamp),
-      'source_url':next((l['href'] for l in event.get('links',[]) if l.get('href','').startswith('https://www.espn.com/')),None)}
+      'source_name':'ESPN','source_url':next((l['href'] for l in event.get('links',[]) if l.get('href','').startswith('https://www.espn.com/')),None)}
     for side in ('home','away'):
         row=teams[side];t=row['team'];score=row.get('score');score=score.get('value') if isinstance(score,dict) else score
         g.update({side:t.get('abbreviation'),side+'_id':str(t['id']),side+'_name':t.get('displayName'),
@@ -108,46 +109,80 @@ def main():
             health[key]={'status':'unavailable','observed_at':old.get('observed_at') if old else None,'url':url,'error':type(exc).__name__}
             if required:raise RuntimeError(f'Required NHL source failed: {key}') from exc
             return old['data'] if old else {}
-    first=source('scoreboard',BASE+'scoreboard?dates='+today.strftime('%Y%m%d'),required=True)
-    if not isinstance(first.get('events'),list):raise RuntimeError('Invalid NHL scoreboard schema')
+    # ESPN enriches the board; an independent NHL schedule keeps refreshes working
+    # when ESPN denies requests from a CI runner. Never retry a denied endpoint.
+    first=source('scoreboard',BASE+'scoreboard?dates='+today.strftime('%Y%m%d'))
+    espn_ok=health['scoreboard']['status']!='unavailable' and isinstance(first.get('events'),list)
     season=int(first.get('leagues',[{}])[0].get('season',{}).get('year') or (today.year+1 if today.month>=8 else today.year))
     dates=[today+timedelta(days=i) for i in range(-14,9) if i]
     def day_fetch(day):
         key='scoreboard-'+day.isoformat()
-        raw=source(key,BASE+'scoreboard?dates='+day.strftime('%Y%m%d'),ttl=0 if day>=today-timedelta(days=2) else 12*3600)
+        raw=source(key,BASE+'scoreboard?dates='+day.strftime('%Y%m%d'))
         return key,raw
-    with ThreadPoolExecutor(max_workers=4) as pool:boards=[('scoreboard',first),*pool.map(day_fetch,dates)]
-    games={}
+    boards=[]
+    if espn_ok:
+        with ThreadPoolExecutor(max_workers=4) as pool:boards=[('scoreboard',first),*pool.map(day_fetch,dates)]
+    official_boards=[]
+    for offset in (0,-14,-7,7):
+        day=today+timedelta(days=offset);key='nhl-schedule-'+day.isoformat()
+        raw=source(key,'https://api-web.nhle.com/v1/schedule/'+day.isoformat())
+        if health[key]['status']!='unavailable' and isinstance(raw.get('gameWeek'),list):official_boards.append((key,raw))
+    if not espn_ok and not any(k=='nhl-schedule-'+today.isoformat() for k,_ in official_boards):
+        raise RuntimeError('Both independent current NHL schedule feeds failed; retain prior publication')
+    standings_url='https://site.api.espn.com/apis/v2/sports/hockey/nhl/standings?season='
+    current=flatten_standings(source('standings-'+str(season),standings_url+str(season),ttl=1800))
+    prior=flatten_standings(source('standings-'+str(season-1),standings_url+str(season-1),ttl=7*86400))
+    for rows,year in ((current,season),(prior,season-1)):
+        for t in rows.values():t['observed_at']=health['standings-'+str(year)]['observed_at']
+    official=source('nhl-official','https://api-web.nhle.com/v1/standings/now',ttl=1800)
+    official_teams=nhl.standings(official,{**prior,**current},season)
+    if official_teams and health['nhl-official']['status']!='unavailable':
+        for t in official_teams.values():t['observed_at']=health['nhl-official']['observed_at']
+        current.update(official_teams)
+    summaries={}
+    for stats_year in (season-1,season):
+        season_id=f'{stats_year-1}{stats_year}'
+        url='https://api.nhle.com/stats/rest/en/team/summary?isAggregate=false&isGame=false&start=0&limit=100&cayenneExp=seasonId='+season_id+'%20and%20gameTypeId=2'
+        key='nhl-team-summary-'+str(stats_year)
+        raw=source(key,url,ttl=6*3600 if stats_year==season else 7*86400);summaries[stats_year]=raw
+        if stats_year==season-1 and health[key]['status']!='unavailable':
+            mapped=nhl.summary_teams(raw,{**prior,**current})
+            for t in mapped.values():t['observed_at']=health[key]['observed_at']
+            prior.update(mapped)
+    if not current and not prior:raise RuntimeError('NHL team statistics unavailable')
+    def team_stats(tid):
+        base=current.get(tid,prior.get(tid,{}));stats_season=season if current.get(tid,{}).get('gp',0)>0 else season-1
+        extra={};observed=None
+        if espn_ok and not tid.startswith('nhlteam:'):
+            key=f'team-{tid}-{stats_season}'
+            extra=extra_stats(source(key,BASE+f'teams/{tid}/statistics?season={stats_season}&seasontype=2',ttl=6*3600 if stats_season==season else 7*86400))
+            observed=health[key]['observed_at']
+        rows={nhl.name_key(r.get('teamFullName')):r for r in summaries[stats_season].get('data',[])}
+        summary=rows.get(nhl.name_key(base.get('name')),{});summary_key='nhl-team-summary-'+str(stats_season)
+        if summary:
+            extra.update(pp_pct=summary.get('powerPlayPct'),pk_pct=summary.get('penaltyKillPct'),regulation_wins=summary.get('winsInRegulation'))
+            if not espn_ok:
+                extra.update(shots_pg=summary.get('shotsForPerGame'),shots_against_pg=summary.get('shotsAgainstPerGame'),faceoff_pct=(summary['faceoffWinPct']*100 if summary.get('faceoffWinPct') is not None else None))
+                observed=health[summary_key]['observed_at']
+        return tid,{**base,'current':current.get(tid,{}),'prior':prior.get(tid,{}),'stats_season':stats_season,'extra':extra,'stats_observed_at':observed}
+    with ThreadPoolExecutor(max_workers=4) as pool:teams=dict(pool.map(team_stats,sorted(set(current)|set(prior))))
+    records=read(STATE/'model_accuracy.json',{})
+    known=read(OUT/'games.json',[])+list(records.values());games={}
     for key,raw in boards:
         for event in raw.get('events',[]):
             g=normalize(event,health[key]['observed_at'])
             if g:
-                g['source_stale']=health[key]['status']=='unavailable';games[g['game_id']]=g
-    standings_url='https://site.api.espn.com/apis/v2/sports/hockey/nhl/standings?season='
-    current=flatten_standings(source('standings-'+str(season),standings_url+str(season),ttl=1800))
-    prior=flatten_standings(source('standings-'+str(season-1),standings_url+str(season-1),ttl=7*86400))
-    if not current and not prior:raise RuntimeError('NHL team statistics unavailable')
-    def team_stats(tid):
-        base=current.get(tid,prior.get(tid,{}));stats_season=season if current.get(tid,{}).get('gp',0)>0 else season-1
-        key=f'team-{tid}-{stats_season}'
-        extra=extra_stats(source(key,BASE+f'teams/{tid}/statistics?season={stats_season}&seasontype=2',ttl=6*3600 if stats_season==season else 7*86400))
-        return tid,{**base,'current':current.get(tid,{}),'prior':prior.get(tid,{}),'stats_season':stats_season,'extra':extra,'stats_observed_at':health[key]['observed_at']}
-    with ThreadPoolExecutor(max_workers=4) as pool:teams=dict(pool.map(team_stats,sorted(set(current)|set(prior))))
-    official=source('nhl-official','https://api-web.nhle.com/v1/standings/now',ttl=6*3600)
-    official_rows={r.get('teamAbbrev',{}).get('default'):r for r in official.get('standings',[])}
-    for t in teams.values():t['official_rank']=official_rows.get(t['abbr'],{}).get('leagueSequence')
-    # Official season team summary supplies actual PP/PK percentages (never inferred).
-    for stats_year in sorted({t['stats_season'] for t in teams.values()}):
-        season_id=f'{stats_year-1}{stats_year}'
-        url='https://api.nhle.com/stats/rest/en/team/summary?isAggregate=false&isGame=false&start=0&limit=100&cayenneExp=seasonId='+season_id+'%20and%20gameTypeId=2'
-        raw=source('nhl-team-summary-'+str(stats_year),url,ttl=6*3600 if stats_year==season else 7*86400)
-        normalize_name=lambda name:unicodedata.normalize('NFKD',name or '').encode('ascii','ignore').decode().lower()
-        names={normalize_name(r.get('teamFullName')):r for r in raw.get('data',[])}
-        for t in teams.values():
-            if t['stats_season']!=stats_year:continue
-            summary=names.get(normalize_name(t['name']),{})
-            t['extra'].update(pp_pct=summary.get('powerPlayPct'),pk_pct=summary.get('penaltyKillPct'),regulation_wins=summary.get('winsInRegulation'))
-    records=read(STATE/'model_accuracy.json',{})
+                g=nhl.stabilize(g,known);g['source_stale']=health[key]['status']=='unavailable';games[g['game_id']]=g
+    for key,raw in official_boards:
+        for week in raw['gameWeek']:
+            for event in week.get('games',[]):
+                g=nhl.normalize(event,raw.get('oddsPartners',[]),health[key]['observed_at'],teams)
+                if not g or not today-timedelta(days=14)<=instant(g['date']).astimezone(TORONTO).date()<=today+timedelta(days=8):continue
+                g=nhl.stabilize(g,list(games.values())+known);existing=games.get(g['game_id'])
+                if existing and not existing['source_stale']:
+                    existing['nhl_game_id']=g['nhl_game_id']
+                    if not existing['quotes']:existing['quotes']=g['quotes']
+                else:games[g['game_id']]=g
     board=[];ordered=sorted(games.values(),key=lambda g:g['date'])
     for g in ordered:
         for side in ('home','away'):
@@ -156,8 +191,8 @@ def main():
             rest=max(0,(instant(g['date']).astimezone(TORONTO).date()-instant(previous[-1]['date']).astimezone(TORONTO).date()).days-1) if previous else None
             g[side+'_rest']=rest;g[side+'_stats']=t
         g['projection']=project(g['home_stats'],g['away_stats'],g['home_rest'],g['away_rest'],g['neutral'])
-        timestamps=[health.get('standings-'+str(season),{}).get('observed_at'),health.get('standings-'+str(season-1),{}).get('observed_at')]
-        g['stats_stale']=any(not instant(t) or (now-instant(t)).total_seconds()>limit for t,limit in zip(timestamps,[24*3600,30*86400]))
+        timestamps=[(g[side+'_stats'].get(period,{}).get('observed_at'),limit) for side in ('home','away') for period,limit in [('current',24*3600),('prior',30*86400)]]
+        g['stats_stale']=any(not instant(t) or not -300<=(now-instant(t)).total_seconds()<=limit for t,limit in timestamps)
         if g['stats_stale'] or g['source_stale']:g['projection']={'ratings_known':False,'reason':'Source data stale or unavailable'}
         if g['state']!='pre' or instant(g['date'])<=now:
             g['projection']=records.get(g['game_id'],{}).get('projection',{'ratings_known':False,'reason':'No frozen pregame forecast for this game'})
@@ -166,10 +201,23 @@ def main():
         if record.get('result') or record['game_id'] in games:continue
         start=instant(record['start'])
         if start and 0 <= (now-start).total_seconds() < 90*86400:
-            raw=source('result-'+record['game_id'],BASE+'summary?event='+record['game_id']);header=raw.get('header',{});comp=(header.get('competitions') or [{}])[0]
-            if comp:
-                g=normalize({**header,'date':comp.get('date'),'season':{'year':record['season'],'type':record['season_type']}},stamp)
-                if g:g['projection']={};ordered.append(g)
+            key='nhl-result-'+start.date().isoformat()
+            raw=source(key,'https://api-web.nhle.com/v1/schedule/'+start.date().isoformat(),ttl=300)
+            matched=False
+            if health[key]['status']!='unavailable':
+                for week in raw.get('gameWeek',[]):
+                    for event in week.get('games',[]):
+                        g=nhl.normalize(event,[],health[key]['observed_at'],teams)
+                        if not g:continue
+                        g=nhl.stabilize(g,[record])
+                        if g['game_id']==record['game_id']:
+                            g['projection']=record.get('projection',{});ordered.append(g);matched=True;break
+                    if matched:break
+            if not matched and espn_ok and not record['game_id'].startswith('nhl:'):
+                raw=source('result-'+record['game_id'],BASE+'summary?event='+record['game_id']);header=raw.get('header',{});comp=(header.get('competitions') or [{}])[0]
+                if comp:
+                    g=normalize({**header,'date':comp.get('date'),'season':{'year':record['season'],'type':record['season_type']}},stamp)
+                    if g:g['projection']=record.get('projection',{});ordered.append(g)
     records=update_accuracy(records,ordered,board,stamp)
     news=source('news',BASE+'news?limit=8',ttl=1800);injury_raw=source('injuries',BASE+'injuries',ttl=1800)
     injuries=[]
@@ -180,7 +228,7 @@ def main():
               'status':r.get('status'),'date':r.get('date'),'detail':r.get('shortComment') or r.get('details',{}).get('type')})
     upcoming=[g for g in ordered if instant(g['date'])>now and g['state']=='pre']
     meta={'generated_at':stamp,'model_version':VERSION,'season':season,'timezone':'America/Toronto','max_odds_age_hours':1.5,
-      'source_status':'live-data','sources':health,'odds_health':{'status':'ok' if all(g['quotes'] for g in upcoming) else 'partial',
+      'source_status':'partial' if any(v['status']=='unavailable' for v in health.values()) else 'live-data','schedule_source':'ESPN + NHL' if espn_ok else 'NHL fallback','sources':health,'odds_health':{'status':'ok' if all(g['quotes'] for g in upcoming) else 'partial',
        'upcoming_games':len(upcoming),'priced_games':sum(bool(g['quotes']) for g in upcoming)},
       'counts':{'games':len(upcoming),'qualified':sum(not r['held'] for r in board),'teams':len(teams)},
       'settings':{'tiers':{'lean':.03,'good':.05,'best':.08}},'limitations':[
@@ -203,7 +251,7 @@ def main():
         return {k:slim(v) for k,v in value.items() if k not in ignored}
     # Keep raw scoreboard status descriptions and goalie headshots intact. Persist only
     # season statistics: schedules/news/injuries are freshly requested each build.
-    cache={k:slim(v) for k,v in cache.items() if k.startswith(('team-','standings-','nhl-'))}
+    cache={k:slim(v) for k,v in cache.items() if k.startswith(('team-','standings-','nhl-')) and not k.startswith(('nhl-schedule-','nhl-result-'))}
     write(STATE/'sources.json',cache)
     for name,data in outputs.items():write(OUT/(name+'.json'),data)
     print(json.dumps({'sport':'NHL',**meta['counts'],'optional_source_failures':[k for k,v in health.items() if v['status']=='unavailable']}))

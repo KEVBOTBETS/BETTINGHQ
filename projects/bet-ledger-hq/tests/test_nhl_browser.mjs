@@ -7,10 +7,15 @@ const root=path.resolve('../../_site');
 const server=createServer(async(req,res)=>{const url=new URL(req.url,'http://localhost');let file=path.resolve(root,'.'+decodeURIComponent(url.pathname));if(url.pathname.endsWith('/'))file=path.join(file,'index.html');if(!file.startsWith(root+path.sep)){res.writeHead(403).end();return;}try{res.setHeader('Content-Type',file.endsWith('.js')?'text/javascript':file.endsWith('.css')?'text/css':file.endsWith('.json')?'application/json':'text/html');res.end(await readFile(file));}catch(_){res.writeHead(404).end();}});
 await new Promise(r=>server.listen(0,'127.0.0.1',r));
 const origin='http://127.0.0.1:'+server.address().port;
-const meta=JSON.parse(await readFile(root+'/nhl-edge-lab/data/meta.json','utf8'));
-const games=JSON.parse(await readFile(root+'/nhl-edge-lab/data/games.json','utf8'));
-const game=games.find(g=>g.state==='pre'&&g.quotes?.length&&g.projection?.ratings_known);
-assert.ok(game,'Live source snapshot contains an upcoming priced matchup');
+// Browser fixtures are isolated routes, never published data. This gate must also
+// work on off days and when all public prices are unavailable.
+const meta={generated_at:'2026-10-10T16:00:00Z',season:2027,sources:{schedule:{status:'ok',observed_at:'2026-10-10T16:00:00Z'}}};
+const team={current:{gp:3,gf_pg:3.1,ga_pg:2.9},prior:{gp:82,gf_pg:3.2,ga_pg:3},extra:{shots_pg:30,shots_against_pg:28,pp_pct:.21,pk_pct:.8}};
+const projection={ratings_known:true,mu:.2,p_home:.55,home_goals:3.1,away_goals:2.9,total:6.1,overtime_prob:.18,prior_weight:.87,scores:[{home:3,away:2,probability:.07}],matrix:Array.from({length:8},(_,a)=>Array.from({length:8},(_,h)=>h===a?0:.01))};
+const game={game_id:'browser-fixture',date:'2026-10-10T23:00:00Z',start:'2026-10-10T23:00:00Z',day:'2026-10-10',season_type:2,state:'pre',status:'Scheduled',home:'TOR',away:'MTL',home_name:'Toronto Maple Leafs',away_name:'Montréal Canadiens',home_stats:team,away_stats:team,home_goalie:{confirmed:false},away_goalie:{confirmed:false},p_home:.55,projection};
+const board=['home','away'].map(side=>({game_id:game.game_id,start_time:game.date,date:game.day,season_type:2,market:'ML',side,line:null,home:game.home,away:game.away,matchup:'MTL @ TOR',pick:game[side]+' ML',price:-110,book:'Browser test fixture',odds_verified:true,odds_observed_at:meta.generated_at,model_prob:.55,edge:.02,held:true,stake:0,tier:'PASS',reasons:['Starting goalies not both confirmed']}));
+const standings={teams:Array.from({length:32},(_,i)=>({abbr:'T'+i,name:'Test team '+i,conference:(i<16?'Eastern':'Western')+' Conference',gp:3,wins:2,losses:1,otl:0,points:4,points_pct:2/3,gf_pg:3,ga_pg:2.8,goal_diff:1}))};
+const fixtures={meta,games:[game],board,standings,news:[],injuries:[],accuracy:{games:{winner:{n:0}},pending:1,records:[]}};
 const browser=await chromium.launch({headless:true});
 try{
  await mkdir('test-results',{recursive:true});
@@ -18,7 +23,8 @@ try{
   const context=await browser.newContext({viewport:{width,height:1000},serviceWorkers:'block'}),page=await context.newPage(),errors=[];
   page.on('pageerror',e=>errors.push(e.message));await page.clock.install({time:new Date(meta.generated_at)});
   await page.route('https://**/*',r=>r.abort());
-  await page.goto(origin+'/nhl-edge-lab/');await page.locator('#health').filter({hasText:'Observed public data'}).waitFor();
+  await page.route('**/nhl-edge-lab/data/*.json',r=>{const name=new URL(r.request().url()).pathname.split('/').pop().replace('.json','');const value=name==='meta'?{...meta,schedule_source:width===393?'NHL fallback':'ESPN + NHL'}:fixtures[name];return value?r.fulfill({contentType:'application/json',body:JSON.stringify(value)}):r.continue();});
+  await page.goto(origin+'/nhl-edge-lab/');await page.locator('#health').filter({hasText:/Observed public data|NHL schedule fallback/}).waitFor();
   await page.locator('#date').fill(game.day);await page.locator('#date').dispatchEvent('change');
   const card=page.locator('[data-game="'+game.game_id+'"]');await card.locator('summary').click();
   assert.equal(await card.locator('.distribution span').count(),64);assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth));
@@ -36,7 +42,7 @@ try{
   await frame.getByRole('button',{name:'Make card',exact:true}).click();await frame.locator('#card-status').filter({hasText:/ML-/}).waitFor();
   const child=page.frames().find(f=>f.url().endsWith('moneyline.html'));assert.ok(await child.evaluate(()=>document.querySelector('#card-canvas').width===1080));
   await page.screenshot({path:'test-results/nhl-moneyline-'+width+'.png',fullPage:true});
-  await page.goto(origin+'/nhl-edge-lab/');await page.locator('#health').filter({hasText:'Observed public data'}).waitFor();
+  await page.goto(origin+'/nhl-edge-lab/');await page.locator('#health').filter({hasText:/Observed public data|NHL schedule fallback/}).waitFor();
   await page.route('**/nhl-edge-lab/data/meta.json',r=>r.fulfill({status:503,body:'Unavailable'}));
   await page.getByRole('button',{name:'↻ Refresh',exact:true}).click();await page.locator('#health').filter({hasText:'Refresh failed'}).waitFor();
   assert.equal(await page.locator('[data-bet]:enabled').count(),0);assert.deepEqual(errors,[]);
