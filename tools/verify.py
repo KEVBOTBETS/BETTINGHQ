@@ -40,6 +40,7 @@ for file in ['test_betsync.mjs','test_server.mjs','test_alerts_app.mjs','test_re
 run('',[sys.executable,'tools/build_site.py'])
 run('',[sys.executable,'-m','unittest','discover','-s','tests'])
 if args.browser:
+    run('bet-ledger-hq',['node','tests/test_sports_browser.mjs'])
     run('bet-ledger-hq',['node','tests/test_nhl_browser.mjs'])
     run('bet-ledger-hq',['node','tests/test_moneyline_browser.mjs'])
     run('bet-ledger-hq',['node','tests/test_today_browser.mjs'])

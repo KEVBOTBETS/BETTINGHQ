@@ -1,0 +1,123 @@
+/* KEVBOTBETS · Matchday design system. Presentation only; no data or state. */
+@font-face{font-family:KB Display;src:url('assets/sports/display-normal.woff') format('woff');font-weight:700 900;font-display:swap}
+@font-face{font-family:KB Display;src:url('assets/sports/display-italic.woff') format('woff');font-weight:700 900;font-style:italic;font-display:swap}
+@font-face{font-family:KB Sans;src:url('assets/sports/sans-400.woff') format('woff');font-weight:400 600;font-display:swap}
+@font-face{font-family:KB Sans;src:url('assets/sports/sans-700.woff') format('woff');font-weight:700 900;font-display:swap}
+:root[data-kb-sport]{--kb-accent:#d5f66b;--kb-secondary:#83cdb6;--kb-code:'HQ';--kb-bg:#090d12;--kb-panel:#141b23;--kb-panel2:#1a242f;--kb-line:#2c3946;--kb-ink:#f3f1e7;--kb-muted:#a2b0be;--kb-display:'KB Display','Arial Narrow',Impact,sans-serif;--kb-sans:'KB Sans',system-ui,sans-serif;--kb-art:url('assets/sports/arena.svg');--bg:var(--kb-bg);--ground:var(--kb-bg);--surface:var(--kb-panel);--surface-2:var(--kb-panel2);--panel:var(--kb-panel);--panel2:var(--kb-panel2);--line:var(--kb-line);--border:var(--kb-line);--ink:var(--kb-ink);--text:var(--kb-ink);--dim:var(--kb-muted);--muted:var(--kb-muted);--faint:var(--kb-muted);--accent:var(--kb-accent);--flag:var(--kb-accent);--cool:var(--kb-accent);--sans:var(--kb-sans);--ice:var(--kb-accent);font-family:var(--kb-sans)}
+:root[data-kb-sport=nfl]{--kb-accent:#ff8b72;--kb-secondary:#ef454e;--kb-code:'NFL';--kb-art:url('assets/sports/field.svg')}
+:root[data-kb-sport=ncaaf]{--kb-accent:#ffca6f;--kb-secondary:#ca7b27;--kb-code:'CFB';--kb-art:url('assets/sports/field.svg')}
+:root[data-kb-sport=mlb]{--kb-accent:#82bbff;--kb-secondary:#488adb;--kb-code:'MLB';--kb-art:url('assets/sports/diamond.svg')}
+:root[data-kb-sport=wnba]{--kb-accent:#d7a6ff;--kb-secondary:#9564dd;--kb-code:'WNBA';--kb-art:url('assets/sports/court.svg')}
+:root[data-kb-sport=nhl]{--kb-accent:#72e2ee;--kb-secondary:#53aee0;--kb-code:'NHL';--kb-art:url('assets/sports/ice.svg')}
+:root[data-kb-sport=props]{--kb-accent:#ffb071;--kb-secondary:#fa7353;--kb-code:'PROPS';--kb-art:url('assets/sports/field.svg')}
+:root[data-kb-sport=ladder]{--kb-accent:#f6d274;--kb-secondary:#d49e3b;--kb-code:'CLIMB'}
+:root[data-kb-page=moneyline]{--kb-code:'ML'}:root[data-kb-page=football]{--kb-code:'WK';--kb-accent:#ffbf7c;--kb-art:url('assets/sports/field.svg')}
+:root[data-kb-page=archive]{--kb-code:'REC'}:root[data-kb-page=ledger]{--kb-code:'HQ'}
+:root[data-kb-sport] body{font-family:var(--kb-sans);color:var(--kb-ink);background-color:var(--kb-bg);background-image:radial-gradient(ellipse at 100% 0%,color-mix(in srgb,var(--kb-accent) 7%,transparent),transparent 46%);background-attachment:fixed}
+:root[data-kb-sport] :is(button,input,select,textarea){font-family:var(--kb-sans)}
+:root[data-kb-sport] :is(h1,h2,h3){font-family:var(--kb-display);font-weight:800;letter-spacing:.2px;color:var(--kb-ink)}
+:root[data-kb-sport] h1{font-size:clamp(38px,4.7vw,64px);line-height:.98;text-transform:uppercase;letter-spacing:-.5px}
+:root[data-kb-sport] h2{font-size:26px;line-height:1.1}:root[data-kb-sport] h3{font-size:23px;line-height:1.12}
+:root[data-kb-sport] :is(.eyebrow,.nav-label){font-family:var(--kb-sans);font-size:10px;font-weight:800;letter-spacing:2.2px;color:var(--kb-accent);text-transform:uppercase}
+:root[data-kb-sport] :is(.intro,.mast-in,header.top,.masthead){position:relative;isolation:isolate;overflow:hidden;border:1px solid var(--kb-line);border-left:4px solid var(--kb-accent);border-radius:3px 20px 3px 3px;padding:30px 26px;min-height:150px;background:linear-gradient(110deg,var(--kb-panel) 25%,color-mix(in srgb,var(--kb-accent) 9%,var(--kb-bg)));box-shadow:0 14px 40px -28px #000}
+:root[data-kb-sport] :is(.intro,.mast-in,header.top,.masthead)::before{content:'';position:absolute;inset:0;z-index:-1;pointer-events:none;background:var(--kb-art) right center/auto 230% no-repeat;opacity:.12}
+:root[data-kb-sport] :is(.intro,.mast-in,header.top,.masthead)::after{content:var(--kb-code);position:absolute;right:8%;top:50%;transform:translateY(-50%) rotate(-8deg);font:italic 800 clamp(100px,15vw,180px)/1 var(--kb-display);letter-spacing:-3px;color:transparent;-webkit-text-stroke:1px color-mix(in srgb,var(--kb-accent) 19%,transparent);z-index:-1;pointer-events:none}
+:root[data-kb-sport] :is(.mast-in,.top) .brand::before{content:'KEVBOTBETS / MATCHDAY INTELLIGENCE';display:block;font:800 9px/1.4 var(--kb-sans);letter-spacing:1.8px;color:var(--kb-accent);margin-bottom:10px}
+:root[data-kb-sport] :is(.mast-in,.top) h1{margin:0 0 8px}:root[data-kb-sport] .mast-in{margin:18px auto 0}
+:root[data-kb-sport] :is(.mast,.masthead){background-color:var(--kb-bg)}
+:root[data-kb-sport] :is(.sub,.stamp,.meta,.note){color:var(--kb-muted)}
+:root[data-kb-sport] :is(button,.btn,.button,.iconbtn){border-radius:5px;border-color:var(--kb-line);transition:background-color .16s ease,border-color .16s ease,transform .16s ease}
+:root[data-kb-sport] :is(button,.btn,.button,.iconbtn):hover:not(:disabled){border-color:var(--kb-accent)}
+:root[data-kb-sport] :is(button,a,input,select,summary):focus-visible{outline:3px solid var(--kb-accent);outline-offset:3px}
+:root[data-kb-sport] :is(.tabs,.view-tabs){gap:4px;border-bottom:1px solid var(--kb-line);padding-bottom:8px}
+:root[data-kb-sport] :is(.tabs,.view-tabs) button{font-family:var(--kb-display);font-size:18px;font-weight:800;letter-spacing:.45px;text-transform:uppercase;border-radius:4px 4px 0 0;padding:10px 15px;min-height:44px;color:var(--kb-muted)}
+:root[data-kb-sport] :is(.tabs,.view-tabs) :is(button[aria-selected=true],button[aria-pressed=true],button.active,button.on,.tab.active){color:var(--kb-accent);border-color:transparent;background:color-mix(in srgb,var(--kb-accent) 9%,var(--kb-panel));box-shadow:inset 0 -3px var(--kb-accent)}
+:root[data-kb-sport] :is(.kpi,.metric){position:relative;border:1px solid var(--kb-line);border-radius:4px;background:linear-gradient(125deg,var(--kb-panel2),var(--kb-panel));box-shadow:inset 0 3px color-mix(in srgb,var(--kb-accent) 55%,transparent);overflow:hidden}
+:root[data-kb-sport] :is(.kpi,.metric)::after{content:'';position:absolute;right:-9px;bottom:-16px;width:52px;height:52px;border:8px solid color-mix(in srgb,var(--kb-accent) 6%,transparent);transform:rotate(-25deg);pointer-events:none}
+:root[data-kb-sport] :is(.kpi strong,.kpi .v,.metric strong,.rungnum){font-family:var(--kb-display);font-weight:800;font-size:34px;line-height:1.1;letter-spacing:.4px;font-variant-numeric:tabular-nums}
+:root[data-kb-sport] :is(.kpi .k,.metric>span,.kpi>small){font-size:10px;text-transform:uppercase;letter-spacing:1.1px;color:var(--kb-muted)}
+:root[data-kb-sport] :is(.card,.match-card,.game-card,.ticket,.bet,.health-card,.settings-card){border-color:var(--kb-line);border-radius:5px 15px 5px 5px;box-shadow:0 12px 24px -22px #000;background-color:var(--kb-panel)}
+:root[data-kb-sport] :is(.match-card,.game-card){background-image:linear-gradient(155deg,color-mix(in srgb,var(--kb-accent) 5%,var(--kb-panel)),var(--kb-panel) 50%)}
+:root[data-kb-sport] :is(.card-top,.game-top,.plays-head){background:var(--kb-panel2);border-bottom:1px solid var(--kb-line);letter-spacing:.75px}
+:root[data-kb-sport] :is(.card-top b,.game-top){font-size:11px}
+:root[data-kb-sport] :is(.team strong,.team-option strong,.bigpick,.matchup,.play-pick,.bet .pick){font-family:var(--kb-display);font-size:27px;letter-spacing:.35px}
+:root[data-kb-sport] :is(.play-row,.play-detail,.saved-row){border-color:var(--kb-line)}
+:root[data-kb-sport] :is(.panel-head,.section-head){padding-bottom:12px;border-bottom:1px solid var(--kb-line)}
+:root[data-kb-sport] :is(th,thead){background:var(--kb-panel2);color:var(--kb-muted);font-size:10px;text-transform:uppercase;letter-spacing:.75px}
+:root[data-kb-sport] td{border-color:var(--kb-line)}:root[data-kb-sport] tbody tr:hover{background:color-mix(in srgb,var(--kb-accent) 5%,transparent)}
+:root[data-kb-sport] :is(.tag,.pill,.tier){border-radius:3px;font-weight:800;letter-spacing:.6px}
+:root[data-kb-sport] :is(.table-wrap,.tablewrap,.table-scroll){border-radius:5px}
+:root[data-kb-sport] :is(dialog,#card-dialog,#ticket-dialog){border-radius:6px 20px 6px 6px;border-color:var(--kb-line);border-top:3px solid var(--kb-accent);background:var(--kb-bg);color:var(--kb-ink);box-shadow:0 32px 100px #0009}
+:root[data-kb-sport] :is(.card-head,.ticket-dialog-head){padding-bottom:15px;border-bottom:1px solid var(--kb-line)}
+:root[data-kb-sport] :is(.primary,#make-card,#ticket-download,#card-download,.ticket-tool){background:var(--kb-accent);border-color:var(--kb-accent);color:#11170b;font-weight:800}
+:root[data-kb-sport] footer{color:var(--kb-muted)}
+/* The hub: arena tunnel navigation, with a clear league identity. */
+:root[data-kb-page=index][data-kb-sport=hq] .brand{background:#10171c;border-bottom:1px solid var(--kb-line)}
+:root[data-kb-page=index][data-kb-sport=hq] .brand-mark{width:37px;height:40px;border-radius:4px 12px 4px 4px;background:var(--kb-accent);font:italic 800 29px var(--kb-display);box-shadow:4px 4px 0 #d5f66b18}
+:root[data-kb-page=index][data-kb-sport=hq] .wordmark{font-family:var(--kb-display);font-size:21px;letter-spacing:.2px;font-weight:800}.wordmark small{font-family:var(--kb-sans)}
+:root[data-kb-page=index][data-kb-sport=hq] .topbar{background:#0f161c;border-bottom:1px solid var(--kb-line)}
+:root[data-kb-page=index][data-kb-sport=hq] .page-heading h1{font-size:27px;letter-spacing:.5px}
+:root[data-kb-page=index][data-kb-sport=hq] .sidebar{background:linear-gradient(175deg,#10171c,#0b1015);border-color:var(--kb-line)}
+:root[data-kb-page=index][data-kb-sport=hq] .nav-label{color:#778b99;font-size:9px}
+:root[data-kb-page=index][data-kb-sport=hq] .board-link{font-family:var(--kb-display);font-size:18px;letter-spacing:.6px;font-weight:800;text-transform:uppercase;border-radius:4px;min-height:43px;padding:9px 12px;gap:11px;--nav:var(--kb-accent)}
+.board-link[href='#mlb']{--nav:#82bbff!important}.board-link[href='#nfl']{--nav:#ff8b72!important}.board-link[href='#ncaaf']{--nav:#ffca6f!important}.board-link[href='#nhl']{--nav:#72e2ee!important}.board-link[href='#wnba']{--nav:#d7a6ff!important}.board-link[href='#props']{--nav:#ffb071!important}
+:root[data-kb-page=index][data-kb-sport=hq] .board-link svg{color:var(--nav);opacity:.8;width:20px;height:20px}
+:root[data-kb-page=index][data-kb-sport=hq] .board-link[aria-current=page]{color:var(--nav);border-color:transparent;background:linear-gradient(90deg,color-mix(in srgb,var(--nav) 13%,transparent),transparent);box-shadow:inset 3px 0 var(--nav)}
+:root[data-kb-page=index][data-kb-sport=hq] .board-link[aria-current=page]::after{background:var(--nav);width:4px;height:12px;border-radius:0;transform:skew(-15deg)}
+:root[data-kb-page=index][data-kb-sport=hq] .ticket-tool{border-radius:4px 12px 4px 4px;box-shadow:0 6px 22px #d5f66b0c}.ticket-tool strong{font-family:var(--kb-display);font-size:21px}
+/* Today: a full-width editorial headline and a useful league shortcut strip. */
+:root[data-kb-page=today] .page{max-width:1400px}
+:root[data-kb-page=today] .intro{min-height:245px;padding:30px 36px;align-items:center}
+:root[data-kb-page=today] .intro h1{font-size:clamp(54px,7.2vw,96px);line-height:.86;margin:16px 0;letter-spacing:-1px}
+:root[data-kb-page=today] .intro h1 em{color:var(--kb-accent);font-style:italic}
+:root[data-kb-page=today] .intro::after{content:'KB';font-size:240px;right:16%;-webkit-text-stroke:1px #d5f66b40}
+:root[data-kb-page=today] .intro #refresh{align-self:flex-end;font-size:11px;white-space:nowrap;background:#0f1719}
+:root[data-kb-page=today] .ticker{border-bottom-color:var(--kb-line);background:#05080b}.ticker-label{background:#d5f66b;color:#12170a}
+.sports-rail{display:flex;align-items:stretch;gap:1px;margin:14px 0 22px;border:1px solid var(--kb-line);border-radius:5px;background:var(--kb-line);overflow:hidden}
+.sports-rail a{display:flex;align-items:center;justify-content:space-between;flex:1;gap:9px;padding:12px 15px;text-decoration:none;background:var(--kb-panel);font:800 20px/1 var(--kb-display);color:var(--rail,var(--kb-accent));transition:background .16s}
+.sports-rail a::after{content:'↗';font:400 14px var(--kb-sans);opacity:.6}.sports-rail a:hover{background:color-mix(in srgb,var(--rail) 10%,var(--kb-panel))}
+:root[data-kb-page=today] #plays .card{border-top:3px solid var(--play-color,var(--kb-accent));background:linear-gradient(130deg,color-mix(in srgb,var(--play-color,var(--kb-accent)) 5%,var(--kb-panel)),var(--kb-panel))}
+:root[data-kb-page=today] #plays .card h3{font-size:31px;line-height:1.05;margin:16px 0}
+:root[data-kb-page=today] #plays .card .tag:first-child{color:var(--play-color,var(--kb-accent));border-color:color-mix(in srgb,var(--play-color,var(--kb-accent)) 25%,transparent);background:color-mix(in srgb,var(--play-color,var(--kb-accent)) 6%,transparent)}
+[data-play-sport=nhl]{--play-color:#72e2ee}[data-play-sport=mlb]{--play-color:#82bbff}[data-play-sport=nfl]{--play-color:#ff8b72}[data-play-sport=ncaaf]{--play-color:#ffca6f}[data-play-sport=wnba]{--play-color:#d7a6ff}[data-play-sport=props]{--play-color:#ffb071}
+/* Moneyline and card studio: clear team panels, strong selected states. */
+:root[data-kb-page=moneyline] .intro{min-height:190px}:root[data-kb-page=moneyline] .intro h1{font-size:clamp(62px,9vw,106px)}
+:root[data-kb-page=moneyline] .stamp{max-width:260px;line-height:1.6}
+:root[data-kb-page=moneyline] .ticket-bar{border-color:#56702d;border-radius:4px 12px 4px 4px;background:linear-gradient(120deg,#24301c,#131e19);box-shadow:inset 4px 0 var(--kb-accent)}
+:root[data-kb-page=moneyline] .ticket-bar strong{font:800 25px/1 var(--kb-display)}
+:root[data-kb-page=moneyline] .team-option{min-height:142px;border-radius:4px;border-top-width:4px;padding:19px 13px}
+:root[data-kb-page=moneyline] .team-option strong{font-family:var(--kb-display);font-size:37px}
+:root[data-kb-page=moneyline] .team-option .ml-logo{width:47px;height:47px;right:8px;top:15px}
+:root[data-kb-page=moneyline] .team-option[aria-pressed=true]{border-color:var(--kb-accent);box-shadow:inset 0 0 0 1px var(--kb-accent);background:linear-gradient(145deg,#2d3b21,#17251e)}
+:root[data-kb-page=moneyline] .team-option[aria-pressed=true]::after{color:var(--kb-accent)}
+:root[data-kb-page=moneyline] .ml-win-track{height:7px;border-radius:2px}:root[data-kb-page=moneyline] .card-bottom{background:#18212a}
+:root[data-kb-page=moneyline] .style-option[aria-checked=true]{border-color:var(--kb-accent);background:#27321d;box-shadow:inset 3px 0 var(--kb-accent)}
+/* NHL: ice-blue rink, scoreboard typography, sharper data surfaces. */
+:root[data-kb-sport=nhl] .hero{position:relative;min-height:280px;border-bottom:3px solid var(--kb-accent);background:var(--kb-art) 85% 50%/540px no-repeat,radial-gradient(ellipse at 80% 0%,#174b60,transparent 65%),#0d1c28}
+:root[data-kb-sport=nhl] .hero h1{font-size:clamp(66px,9vw,112px);font-style:italic;line-height:.88;letter-spacing:-1px}
+:root[data-kb-sport=nhl] .hero .intro{position:static;isolation:auto;padding:0;min-height:0;background:none;border:0;box-shadow:none;border-radius:0;overflow:visible;font-size:14px}
+:root[data-kb-sport=nhl] .hero .intro::before,:root[data-kb-sport=nhl] .hero .intro::after{content:none}
+:root[data-kb-sport=nhl] .rink{width:300px;height:170px;transform:rotate(-12deg);background:#0e273c85;border:2px solid #72e2ee70;box-shadow:0 28px 65px #0006,inset 0 0 28px #72e2ee0e}
+:root[data-kb-sport=nhl] .rink b{font:italic 800 68px/.9 var(--kb-display);letter-spacing:3px}
+:root[data-kb-sport=nhl] .rink span{margin-top:8px}:root[data-kb-sport=nhl] .game-card{border-top:3px solid #72e2ee6b}
+:root[data-kb-sport=nhl] .faceoff{padding-top:26px;padding-bottom:22px;background:radial-gradient(ellipse at 50% 0%,#72e2ee09,transparent 70%)}
+:root[data-kb-sport=nhl] .team strong{font-size:33px}:root[data-kb-sport=nhl] .score strong{font:800 34px/1 var(--kb-display)}
+:root[data-kb-sport=nhl] .bar{border-radius:2px;height:6px}:root[data-kb-sport=nhl] .market{border-radius:4px;background:#101c26}
+:root[data-kb-sport=nhl] .market>div strong{font:800 22px/1 var(--kb-display)}
+/* Utility and generated ladder pages get the same identity. */
+:root[data-kb-page=ledger] body>header{background:var(--kb-panel);border-bottom:3px solid var(--kb-accent)}
+:root[data-kb-page=ledger] .hd{padding-top:24px;padding-bottom:22px}
+:root[data-kb-page=ledger] .hd h1::before{content:'KEVBOTBETS / YOUR RECORD';display:block;font:800 9px/1 var(--kb-sans);letter-spacing:1.6px;color:var(--kb-accent);margin-bottom:10px}
+:root[data-kb-sport=ladder] body{border-top:4px solid var(--kb-accent);padding-top:30px}
+:root[data-kb-sport=ladder] body>h1{font-size:70px;font-style:italic;margin-bottom:10px}
+:root[data-kb-sport=ladder] body>h1::before{content:'KEVBOTBETS / THE NEXT RUNG';display:block;font:800 10px/1 var(--kb-sans);letter-spacing:2px;color:var(--kb-accent);margin-bottom:12px}
+:root[data-kb-sport=ladder] .hero{border:1px solid var(--kb-line);border-left:4px solid var(--kb-accent);border-radius:4px;background:var(--kb-art) right/contain no-repeat,linear-gradient(120deg,var(--kb-panel2),var(--kb-bg));padding:20px 25px;margin:20px 0}
+:root[data-kb-sport=ladder] .rungnum{font-size:90px}:root[data-kb-sport=ladder] .bet{border-left:3px solid var(--kb-accent)}
+/* Light preference and the existing theme controls remain functional. */
+:root[data-kb-sport][data-theme=light]{--kb-bg:#edf0eb;--kb-panel:#fffefa;--kb-panel2:#e6ebe5;--kb-line:#c4cec5;--kb-ink:#15251f;--kb-muted:#4a6057;--kb-accent:#32642c;--kb-secondary:#416c37;--flag-ink:#245c30;--flag-soft:#e0efdc;color-scheme:light}
+@media(prefers-color-scheme:light){:root[data-kb-sport][data-kb-light]:not([data-theme=dark]){--kb-bg:#edf0eb;--kb-panel:#fffefa;--kb-panel2:#e6ebe5;--kb-line:#c4cec5;--kb-ink:#15251f;--kb-muted:#4a6057;--kb-accent:#32642c;--kb-secondary:#416c37;--flag-ink:#245c30;--flag-soft:#e0efdc;color-scheme:light}}
+@media(max-width:900px){:root[data-kb-sport] :is(.intro,.mast-in,header.top,.masthead){padding:24px 20px;gap:16px}:root[data-kb-sport] :is(.mast-in,header.top){flex-wrap:wrap}:root[data-kb-page=football] .intro h1{font-size:48px}:root[data-kb-sport=props] .masthead h1{font-size:54px}}
+@media(max-width:760px){:root[data-kb-page=index][data-kb-sport=hq] .wordmark{font-size:18px}:root[data-kb-page=index][data-kb-sport=hq] .brand{padding:6px 11px;background:none;border:0}:root[data-kb-page=index][data-kb-sport=hq] .brand-mark{width:29px;height:33px;font-size:24px}:root[data-kb-page=index][data-kb-sport=hq] .wordmark small{font-size:6px;letter-spacing:1px}:root[data-kb-page=index][data-kb-sport=hq] .board-link{font-size:11px;letter-spacing:.35px;min-height:56px;padding:7px 2px;gap:5px}:root[data-kb-page=index][data-kb-sport=hq] .ticket-tool{min-height:54px}:root[data-kb-page=index][data-kb-sport=hq] .ticket-tool strong{font-size:14px}:root[data-kb-sport=nhl] .rink{width:210px;height:120px;margin-right:-55px}:root[data-kb-sport=nhl] .rink b{font-size:46px}}
+@media(max-width:600px){:root[data-kb-sport] h1{font-size:39px}:root[data-kb-sport] h2{font-size:24px}:root[data-kb-sport] :is(.intro,.mast-in,header.top,.masthead){min-height:130px;padding:22px 17px;border-radius:3px 14px 3px 3px}:root[data-kb-sport] :is(.tabs,.view-tabs) button{font-size:16px;padding:9px 11px}:root[data-kb-sport] :is(.kpi strong,.kpi .v,.metric strong){font-size:29px}:root[data-kb-sport] :is(.mast-in,.top) .brand::before{font-size:8px;letter-spacing:1.2px}:root[data-kb-page=today] .intro{min-height:246px;display:block;padding:24px}:root[data-kb-page=today] .intro h1{font-size:67px}:root[data-kb-page=today] .intro #refresh{position:absolute;right:18px;bottom:19px;font-size:10px;min-height:36px;padding:8px}:root[data-kb-page=today] .intro>div>p:last-child{max-width:170px;font-size:11px}:root[data-kb-page=today] .intro::after{font-size:175px;right:-5px;top:58%;opacity:.7}.sports-rail{flex-wrap:wrap;gap:1px}.sports-rail a{flex:1 1 30%;font-size:18px;padding:12px}:root[data-kb-page=moneyline] .intro{min-height:155px}:root[data-kb-page=moneyline] .intro h1{font-size:68px}:root[data-kb-page=moneyline] .team-option{min-height:140px}:root[data-kb-page=football] .intro h1{font-size:43px}:root[data-kb-sport=nhl] .hero{min-height:235px}:root[data-kb-sport=nhl] .hero h1{font-size:74px}:root[data-kb-sport=nhl] .hero .intro{padding:0;min-height:0}:root[data-kb-sport=ladder] body>h1{font-size:56px}:root[data-kb-sport=ladder] .rungnum{font-size:74px}}
+@media(prefers-reduced-motion:reduce){:root[data-kb-sport] *{scroll-behavior:auto!important;transition:none!important;animation:none!important}}
+@media print{:root[data-kb-sport] body{background:white!important;color:black!important}:root[data-kb-sport] :is(.intro,.mast-in,header.top,.masthead){background:white!important;border-color:#777;box-shadow:none;min-height:0}:root[data-kb-sport] :is(.intro,.mast-in,header.top,.masthead)::before,:root[data-kb-sport] :is(.intro,.mast-in,header.top,.masthead)::after,.sports-rail{display:none}:root[data-kb-sport] :is(h1,h2,h3){color:black}}

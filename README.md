@@ -77,3 +77,16 @@ software and reporting; improved future accuracy or profit has not been establis
 
 The original per-project workflows are retained inside `projects/` for reference.
 GitHub executes only the root `.github/workflows/release.yml` in this repository.
+
+## Matchday presentation
+
+The hub and every league share `projects/bet-ledger-hq/sports-theme.css`:
+athletic display typography, league colours, field/rink/court artwork, scoreboard
+statistics and consistent ticket controls. Fonts are served locally with their
+OFL licences in `assets/sports/`. The existing light-theme controls, reduced-motion
+preference and print layouts remain supported.
+
+`tools/sports_theme.py` attaches the presentation during the portable site build,
+including generated NFL and Ladder pages, so scheduled model refreshes preserve
+the design. Models, qualification rules and personal ledger storage are separate
+from this layer. Use `tools/build_site.py` to preview the complete themed repo.
