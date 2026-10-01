@@ -1,29 +1,57 @@
 {
   "schema": 1,
-  "checked_at": "2026-10-01T16:22:40.359Z",
+  "checked_at": "2026-10-01T16:50:44.399Z",
   "coverage": {
-    "nhl": {
+    "mlb": {
       "status": "available",
-      "reports": 94,
-      "checked_at": "2026-10-01T16:22:40.359Z"
+      "reports": 42,
+      "checked_at": "2026-10-01T16:50:44.399Z"
+    },
+    "nfl": {
+      "status": "available",
+      "reports": 496,
+      "checked_at": "2026-10-01T16:50:44.399Z"
     },
     "ncaaf": {
       "status": "empty",
       "reports": 0,
-      "checked_at": "2026-10-01T16:22:40.359Z"
+      "checked_at": "2026-10-01T16:50:44.399Z"
     },
-    "mlb": {
+    "nhl": {
       "status": "available",
-      "reports": 41,
-      "checked_at": "2026-10-01T16:22:40.359Z"
-    },
-    "nfl": {
-      "status": "available",
-      "reports": 497,
-      "checked_at": "2026-10-01T16:22:40.359Z"
+      "reports": 94,
+      "checked_at": "2026-10-01T16:50:44.399Z"
     }
   },
   "events": [
+    {
+      "id": "injury|mlb:5:Colin Holderman|2026-10-01T16:50:44.399Z",
+      "kind": "injury",
+      "observed_at": "2026-10-01T16:50:44.399Z",
+      "sport": "mlb",
+      "title": "New availability report",
+      "event": "Cleveland Guardians",
+      "pick": "Colin Holderman",
+      "before": "Not in the previous dated report",
+      "after": "15-Day-IL · Wrist",
+      "source_quote_at": "2026-10-01T16:36Z",
+      "source": "ESPN injuries",
+      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
+    },
+    {
+      "id": "injury|nhl:5:Dylan Larkin|2026-10-01T16:50:44.399Z",
+      "kind": "injury",
+      "observed_at": "2026-10-01T16:50:44.399Z",
+      "sport": "nhl",
+      "title": "Player availability changed",
+      "event": "Detroit Red Wings",
+      "pick": "Dylan Larkin",
+      "before": "Day-To-Day · Upper Body",
+      "after": "Out · Upper Body",
+      "source_quote_at": "2026-10-01T16:16Z",
+      "source": "ESPN injuries",
+      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
+    },
     {
       "id": "injury|nhl:16:Blake Lizotte|2026-10-01T16:22:40.359Z",
       "kind": "injury",
@@ -2874,34 +2902,6 @@
       "before": "Not in the previous dated report",
       "after": "Questionable · Concussion",
       "source_quote_at": "2026-10-01T00:35Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:21:Will Shipley|2026-10-01T12:04:35.484Z",
-      "kind": "injury",
-      "observed_at": "2026-10-01T12:04:35.484Z",
-      "sport": "nfl",
-      "title": "New availability report",
-      "event": "Philadelphia Eagles",
-      "pick": "Will Shipley",
-      "before": "Not in the previous dated report",
-      "after": "Questionable · Foot",
-      "source_quote_at": "2026-10-01T00:19Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:21:Tanner McKee|2026-10-01T12:04:35.484Z",
-      "kind": "injury",
-      "observed_at": "2026-10-01T12:04:35.484Z",
-      "sport": "nfl",
-      "title": "Player availability changed",
-      "event": "Philadelphia Eagles",
-      "pick": "Tanner McKee",
-      "before": "Out · Coach's Decision",
-      "after": "Active",
-      "source_quote_at": "2026-09-30T23:34Z",
       "source": "ESPN injuries",
       "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
     }
