@@ -19,6 +19,8 @@ class NWSWeatherTests(unittest.TestCase):
         self.assertIsNone(forecast['snow_in'])
         self.assertIsNone(at_kickoff(series,'2026-10-01T15:00:00Z'))
         self.assertFalse(adjustment(forecast,'dome',{})['applied'])
+        adjusted=adjustment(forecast,'open',{'weather':{'wind_thresholds':[[10,-0.8]]}})
+        self.assertIn('gust forecast unavailable',' '.join(adjusted['reasons']))
     def test_stale_and_nonhourly_rejected(self):
         self.assertIsNone(nws_hourly(self.data,self.now+dt.timedelta(hours=7)))
         self.data['periods'][0]['endTime']='2026-10-01T21:00:00-04:00'

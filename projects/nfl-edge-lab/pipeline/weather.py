@@ -279,7 +279,8 @@ def adjustment(fc: dict | None, roof: str, cfg: dict) -> dict:
         if steady >= float(threshold) or wind >= float(threshold) + 6:
             total = float(points)
     if total:
-        result["reasons"].append(f"Wind {steady:.0f} mph (gusts {wind:.0f})")
+        gust_note = f" (gusts {fc['gust_mph']:.0f})" if fc.get("gust_mph") is not None else " (gust forecast unavailable)"
+        result["reasons"].append(f"Wind {steady:.0f} mph{gust_note}")
 
     snow = fc.get("snow_in") or 0.0
     if snow and snow > 0.05:
