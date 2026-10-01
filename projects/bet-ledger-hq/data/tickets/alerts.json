@@ -1,29 +1,107 @@
 {
   "schema": 1,
-  "checked_at": "2026-10-01T23:45:52.977Z",
+  "checked_at": "2026-10-01T23:58:06.901Z",
   "coverage": {
+    "nhl": {
+      "status": "available",
+      "reports": 64,
+      "checked_at": "2026-10-01T23:58:06.901Z"
+    },
+    "nfl": {
+      "status": "available",
+      "reports": 394,
+      "checked_at": "2026-10-01T23:58:06.901Z"
+    },
     "ncaaf": {
       "status": "empty",
       "reports": 0,
-      "checked_at": "2026-10-01T23:45:52.977Z"
-    },
-    "nhl": {
-      "status": "available",
-      "reports": 65,
-      "checked_at": "2026-10-01T23:45:52.977Z"
+      "checked_at": "2026-10-01T23:58:06.901Z"
     },
     "mlb": {
       "status": "available",
       "reports": 34,
-      "checked_at": "2026-10-01T23:45:52.977Z"
-    },
-    "nfl": {
-      "status": "available",
-      "reports": 396,
-      "checked_at": "2026-10-01T23:45:52.977Z"
+      "checked_at": "2026-10-01T23:58:06.901Z"
     }
   },
   "events": [
+    {
+      "id": "odds|nfl|401872970|2026-10-04T17:00Z|ML||home|DraftKings|2026-10-01T23:58:06.901Z",
+      "kind": "odds",
+      "observed_at": "2026-10-01T23:58:06.901Z",
+      "sport": "nfl",
+      "event": "LAR @ PHI",
+      "start": "2026-10-04T17:00Z",
+      "pick": "PHI ML",
+      "title": "Published odds changed",
+      "before": "+142",
+      "after": "+145",
+      "book": "DraftKings",
+      "source_quote_at": "2026-10-01T23:57:25.558235+00:00",
+      "source": "Existing NFL board",
+      "note": "Your ticket keeps its original odds. Recheck the live book before placing a new wager."
+    },
+    {
+      "id": "odds|nfl|401872965|2026-10-04T13:30Z|ATS||home|DraftKings|2026-10-01T23:58:06.901Z",
+      "kind": "odds",
+      "observed_at": "2026-10-01T23:58:06.901Z",
+      "sport": "nfl",
+      "event": "IND @ WSH",
+      "start": "2026-10-04T13:30Z",
+      "pick": "WSH +4.5",
+      "title": "Published odds changed",
+      "before": "-108 · line 3.5",
+      "after": "-110 · line 3.5",
+      "book": "DraftKings",
+      "source_quote_at": "2026-10-01T23:57:25.558081+00:00",
+      "source": "Existing NFL board",
+      "note": "Your ticket keeps its original odds. Recheck the live book before placing a new wager."
+    },
+    {
+      "id": "odds|props|401872964|2026-10-02T00:15Z|Rushing yards|Aaron Rodgers|over|DraftKings|2026-10-01T23:58:06.901Z",
+      "kind": "odds",
+      "observed_at": "2026-10-01T23:58:06.901Z",
+      "sport": "props",
+      "event": "Pittsburgh Steelers @ Cleveland Browns",
+      "start": "2026-10-02T00:15Z",
+      "pick": "Aaron Rodgers — Over 1.5 Rushing yards",
+      "title": "Published odds changed",
+      "before": "-115 · line 1.5",
+      "after": "-106 · line 1.5",
+      "book": "DraftKings",
+      "source_quote_at": "2026-10-01T23:57:47.082256+00:00",
+      "source": "Existing Props board",
+      "note": "Your ticket keeps its original odds. Recheck the live book before placing a new wager."
+    },
+    {
+      "id": "odds|props|401872977|2026-10-04T20:25Z|Rushing yards|Sam Darnold|over|bet365|2026-10-01T23:58:06.901Z",
+      "kind": "odds",
+      "observed_at": "2026-10-01T23:58:06.901Z",
+      "sport": "props",
+      "event": "Los Angeles Chargers @ Seattle Seahawks",
+      "start": "2026-10-04T20:25Z",
+      "pick": "Sam Darnold — Over 2.5 Rushing yards",
+      "title": "Published odds changed",
+      "before": "-110 · line 2.5",
+      "after": "-115 · line 2.5",
+      "book": "bet365",
+      "source_quote_at": "2026-10-01T23:57:47.082256+00:00",
+      "source": "Existing Props board",
+      "note": "Your ticket keeps its original odds. Recheck the live book before placing a new wager."
+    },
+    {
+      "id": "injury|nfl:27:Josiah Trotter|2026-10-01T23:58:06.901Z",
+      "kind": "injury",
+      "observed_at": "2026-10-01T23:58:06.901Z",
+      "sport": "nfl",
+      "title": "Player availability changed",
+      "event": "Tampa Bay Buccaneers",
+      "pick": "Josiah Trotter",
+      "before": "Active · Trotter (shoulder) was a limited participant in Wednesday's practice.",
+      "after": "Active · Trotter (shoulder) was a full participant at the Buccaneers' practice Thursday.",
+      "source_quote_at": "2026-10-01T23:40Z",
+      "source": "ESPN injuries",
+      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
+    },
     {
       "id": "injury|nfl:2:Christian Benford|2026-10-01T23:45:52.977Z",
       "kind": "injury",
@@ -2922,84 +3000,6 @@
       "source_quote_at": "2026-10-01T12:00:28.853691+00:00",
       "source": "Existing NCAAF board",
       "note": "Your ticket keeps its original odds. Recheck the live book before placing a new wager."
-    },
-    {
-      "id": "odds|ncaaf|401869956|2026-10-03T19:30Z|ATS||home|DraftKings|2026-10-01T12:04:35.484Z",
-      "kind": "odds",
-      "observed_at": "2026-10-01T12:04:35.484Z",
-      "sport": "ncaaf",
-      "event": "ODU @ GAST",
-      "start": "2026-10-03T19:30Z",
-      "pick": "GAST +1.5",
-      "title": "Published odds changed",
-      "before": "-108 · line -2.5",
-      "after": "-112 · line -2.5",
-      "book": "DraftKings",
-      "source_quote_at": "2026-10-01T12:00:28.854069+00:00",
-      "source": "Existing NCAAF board",
-      "note": "Your ticket keeps its original odds. Recheck the live book before placing a new wager."
-    },
-    {
-      "id": "odds|ncaaf|401862788|2026-10-03T23:00Z|TOTAL||over|DraftKings|2026-10-01T12:04:35.484Z",
-      "kind": "odds",
-      "observed_at": "2026-10-01T12:04:35.484Z",
-      "sport": "ncaaf",
-      "event": "UTSA @ RICE",
-      "start": "2026-10-03T23:00Z",
-      "pick": "Over 52.5",
-      "title": "Published odds changed",
-      "before": "-115 · line 55.5",
-      "after": "-108 · line 56.5",
-      "book": "DraftKings",
-      "source_quote_at": "2026-10-01T12:00:28.854396+00:00",
-      "source": "Existing NCAAF board",
-      "note": "Your ticket keeps its original odds. Recheck the live book before placing a new wager."
-    },
-    {
-      "id": "odds|ncaaf|401858473|2026-10-03T19:30Z|ML||home|DraftKings|2026-10-01T12:04:35.484Z",
-      "kind": "odds",
-      "observed_at": "2026-10-01T12:04:35.484Z",
-      "sport": "ncaaf",
-      "event": "OSU @ IOWA",
-      "start": "2026-10-03T19:30Z",
-      "pick": "IOWA ML",
-      "title": "Published odds changed",
-      "before": "+440",
-      "after": "+455",
-      "book": "DraftKings",
-      "source_quote_at": "2026-10-01T12:00:28.853660+00:00",
-      "source": "Existing NCAAF board",
-      "note": "Your ticket keeps its original odds. Recheck the live book before placing a new wager."
-    },
-    {
-      "id": "odds|ncaaf|401858248|2026-10-03T19:30Z|ML||home|DraftKings|2026-10-01T12:04:35.484Z",
-      "kind": "odds",
-      "observed_at": "2026-10-01T12:04:35.484Z",
-      "sport": "ncaaf",
-      "event": "LOU @ NCSU",
-      "start": "2026-10-03T19:30Z",
-      "pick": "NCSU ML",
-      "title": "Published odds changed",
-      "before": "+160",
-      "after": "+154",
-      "book": "DraftKings",
-      "source_quote_at": "2026-10-01T12:00:28.853787+00:00",
-      "source": "Existing NCAAF board",
-      "note": "Your ticket keeps its original odds. Recheck the live book before placing a new wager."
-    },
-    {
-      "id": "injury|nhl:25:Drew Helleson|2026-10-01T12:04:35.484Z",
-      "kind": "injury",
-      "observed_at": "2026-10-01T12:04:35.484Z",
-      "sport": "nhl",
-      "title": "Player availability changed",
-      "event": "Anaheim Ducks",
-      "pick": "Drew Helleson",
-      "before": "Day-To-Day · Lower Body",
-      "after": "Injured Reserve · Lower Body",
-      "source_quote_at": "2026-09-30T15:57Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
     }
   ]
 }
