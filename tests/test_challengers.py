@@ -48,4 +48,3 @@ class ChronologicalTests(unittest.TestCase):
     def test_symmetric_calibration(self):
         self.assertAlmostEqual(calibrate(.3,.75)+calibrate(.7,.75),1)
         self.assertEqual(calibrate(.5,.5),.5)
-
