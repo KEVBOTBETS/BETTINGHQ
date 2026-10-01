@@ -1,29 +1,104 @@
 {
   "schema": 1,
-  "checked_at": "2026-10-01T18:26:21.398Z",
+  "checked_at": "2026-10-01T18:38:55.034Z",
   "coverage": {
-    "nhl": {
+    "mlb": {
       "status": "available",
-      "reports": 93,
-      "checked_at": "2026-10-01T18:26:21.398Z"
-    },
-    "nfl": {
-      "status": "available",
-      "reports": 454,
-      "checked_at": "2026-10-01T18:26:21.398Z"
+      "reports": 40,
+      "checked_at": "2026-10-01T18:38:55.034Z"
     },
     "ncaaf": {
       "status": "empty",
       "reports": 0,
-      "checked_at": "2026-10-01T18:26:21.398Z"
+      "checked_at": "2026-10-01T18:38:55.034Z"
     },
-    "mlb": {
+    "nhl": {
       "status": "available",
-      "reports": 40,
-      "checked_at": "2026-10-01T18:26:21.398Z"
+      "reports": 92,
+      "checked_at": "2026-10-01T18:38:55.034Z"
+    },
+    "nfl": {
+      "status": "available",
+      "reports": 429,
+      "checked_at": "2026-10-01T18:38:55.034Z"
     }
   },
   "events": [
+    {
+      "id": "odds|ncaaf|401858472|2026-10-03T20:15Z|TOTAL||over|DraftKings|2026-10-01T18:38:55.034Z",
+      "kind": "odds",
+      "observed_at": "2026-10-01T18:38:55.034Z",
+      "sport": "ncaaf",
+      "event": "PUR @ ILL",
+      "start": "2026-10-03T20:15Z",
+      "pick": "Over 62.5",
+      "title": "Published odds changed",
+      "before": "-115 · line 61.5",
+      "after": "-110 · line 62.5",
+      "book": "DraftKings",
+      "source_quote_at": "2026-10-01T18:37:32.857212+00:00",
+      "source": "Existing NCAAF board",
+      "note": "Your ticket keeps its original odds. Recheck the live book before placing a new wager."
+    },
+    {
+      "id": "odds|ncaaf|401856819|2026-10-03T16:00Z|ATS||away|DraftKings|2026-10-01T18:38:55.034Z",
+      "kind": "odds",
+      "observed_at": "2026-10-01T18:38:55.034Z",
+      "sport": "ncaaf",
+      "event": "UCF @ HOU",
+      "start": "2026-10-03T16:00Z",
+      "pick": "UCF +12.5",
+      "title": "Published odds changed",
+      "before": "-108 · line 11.5",
+      "after": "-112 · line 11.5",
+      "book": "DraftKings",
+      "source_quote_at": "2026-10-01T18:37:32.020837+00:00",
+      "source": "Existing NCAAF board",
+      "note": "Your ticket keeps its original odds. Recheck the live book before placing a new wager."
+    },
+    {
+      "id": "odds|ncaaf|401856708|2026-10-03T19:30Z|TOTAL||over|DraftKings|2026-10-01T18:38:55.034Z",
+      "kind": "odds",
+      "observed_at": "2026-10-01T18:38:55.034Z",
+      "sport": "ncaaf",
+      "event": "FLA @ MIZ",
+      "start": "2026-10-03T19:30Z",
+      "pick": "Over 56.5",
+      "title": "Published odds changed",
+      "before": "-108 · line 57.5",
+      "after": "-112 · line 57.5",
+      "book": "DraftKings",
+      "source_quote_at": "2026-10-01T18:37:32.021619+00:00",
+      "source": "Existing NCAAF board",
+      "note": "Your ticket keeps its original odds. Recheck the live book before placing a new wager."
+    },
+    {
+      "id": "starter|849844home|2026-10-01T18:38:55.034Z",
+      "kind": "starter",
+      "observed_at": "2026-10-01T18:38:55.034Z",
+      "sport": "mlb",
+      "event": "PHI @ ATL",
+      "start": "2026-10-02T00:00:00Z",
+      "title": "Probable starting pitcher changed",
+      "before": "TBA",
+      "after": "Ray Kerr",
+      "source_quote_at": "2026-10-01T18:37:37+00:00",
+      "source": "MLB board"
+    },
+    {
+      "id": "injury|mlb:9:Walker Jenkins|2026-10-01T18:38:55.034Z",
+      "kind": "injury",
+      "observed_at": "2026-10-01T18:38:55.034Z",
+      "sport": "mlb",
+      "title": "New availability report",
+      "event": "Minnesota Twins",
+      "pick": "Walker Jenkins",
+      "before": "Not in the previous dated report",
+      "after": "Out · Elbow",
+      "source_quote_at": "2026-10-01T18:22Z",
+      "source": "ESPN injuries",
+      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
+    },
     {
       "id": "injury|nhl:16:Ben Kindel|2026-10-01T18:26:21.398Z",
       "kind": "injury",
@@ -2850,76 +2925,6 @@
       "before": "Active · Maye completed 14 of 25 passes for 199 yards with no touchdowns and two interceptions and added four carries for 18 yards in the Patriots' 35-6 loss to the Jaguars on Sunday. He al",
       "after": "Active · Maye was listed with a right shoulder injury on the Patriots' initial Week 4 practice report but was a full participant.",
       "source_quote_at": "2026-09-30T21:12Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:19:Tremaine Edmunds|2026-10-01T12:04:35.484Z",
-      "kind": "injury",
-      "observed_at": "2026-10-01T12:04:35.484Z",
-      "sport": "nfl",
-      "title": "New availability report",
-      "event": "New York Giants",
-      "pick": "Tremaine Edmunds",
-      "before": "Not in the previous dated report",
-      "after": "Active · Edmunds logged 10 tackles (six solo) and one pass defensed in the Giants' 12-7 win over the Titans.",
-      "source_quote_at": "2026-10-01T02:10Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:19:Dru Phillips|2026-10-01T12:04:35.484Z",
-      "kind": "injury",
-      "observed_at": "2026-10-01T12:04:35.484Z",
-      "sport": "nfl",
-      "title": "New availability report",
-      "event": "New York Giants",
-      "pick": "Dru Phillips",
-      "before": "Not in the previous dated report",
-      "after": "Active · Phillips made 11 tackles (eight solo) in the Giants' 12-7 win over the Titans.",
-      "source_quote_at": "2026-10-01T02:07Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:19:Arvell Reese|2026-10-01T12:04:35.484Z",
-      "kind": "injury",
-      "observed_at": "2026-10-01T12:04:35.484Z",
-      "sport": "nfl",
-      "title": "New availability report",
-      "event": "New York Giants",
-      "pick": "Arvell Reese",
-      "before": "Not in the previous dated report",
-      "after": "Active · Reese logged 13 tackles (10 solo) and one pass defensed in the Giants' 12-7 win over the Titans.",
-      "source_quote_at": "2026-10-01T02:02Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:19:Tyrone Tracy Jr.|2026-10-01T12:04:35.484Z",
-      "kind": "injury",
-      "observed_at": "2026-10-01T12:04:35.484Z",
-      "sport": "nfl",
-      "title": "New availability report",
-      "event": "New York Giants",
-      "pick": "Tyrone Tracy Jr.",
-      "before": "Not in the previous dated report",
-      "after": "Questionable · Knee",
-      "source_quote_at": "2026-09-30T23:20Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:19:Jaxson Dart|2026-10-01T12:04:35.484Z",
-      "kind": "injury",
-      "observed_at": "2026-10-01T12:04:35.484Z",
-      "sport": "nfl",
-      "title": "New availability report",
-      "event": "New York Giants",
-      "pick": "Jaxson Dart",
-      "before": "Not in the previous dated report",
-      "after": "Injured Reserve · Knee - Meniscus",
-      "source_quote_at": "2026-09-30T20:35Z",
       "source": "ESPN injuries",
       "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
     }
