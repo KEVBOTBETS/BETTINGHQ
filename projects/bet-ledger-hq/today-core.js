@@ -56,12 +56,14 @@
       if((meta.source_by_provider?.the_odds_api?.eligible_priced_quotes||0)===0&&(meta.source_by_provider?.odds_api_io?.eligible_priced_quotes||0)>0)warnings.push("Using the configured fallback odds provider.");
       if(!(meta.counts?.eligible_priced_quotes>0))warnings.push("No verified prop prices; projections are not wagers.");
     }
-    if(key==="wnba"&&meta.odds_health?.status==="partial")warnings.push("Some games have no usable prices; those games cannot qualify.");
+    if(meta.source_status==="partial"||Object.values(meta.sources||{}).some(s=>s?.status==="unavailable"))warnings.push("Some source feeds are unavailable; fresh publication does not mean complete coverage.");
+    if(meta.odds_health?.status==="partial")warnings.push("Some games have no usable prices; those games cannot qualify.");
+    if(number(meta.odds_health?.upcoming_games)>0&&number(meta.odds_health?.priced_games)===0)warnings.push("No upcoming games have verified prices; projections are research only.");
     if(key==="ncaaf"){
       if(meta.context_health?.availability?.status!=="available")warnings.push("Availability reports missing or incomplete; verify team news.");
     }
     if(meta.odds_health?.healthy===false||["failed","unavailable","error"].includes(meta.odds_health?.status))warnings.push("Odds coverage needs attention.");
-    return {key,label:LABELS[key],stamp:stamp||null,age,status:bundle.error?"unavailable":age.status==="stale"?"stale":warnings.length?"review":"recent",warnings};
+    return {key,label:LABELS[key],stamp:stamp||null,age,freshness:age.status,coverage:warnings.length?"review":"complete",status:bundle.error?"unavailable":age.status==="stale"?"stale":warnings.length?"review":"recent",warnings};
   }
   function plays(key,bundle,now=Date.now()){
     const rows=[],meta=bundle.meta||{},published=meta.generated_at||bundle.slate?.generated_at;

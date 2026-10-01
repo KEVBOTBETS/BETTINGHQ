@@ -1,5 +1,6 @@
 """Refresh public forecasts; each board keeps its last good files on outage."""
 import argparse
+import json
 import os
 from pathlib import Path
 import subprocess
@@ -21,4 +22,12 @@ for repo in selected:
 subprocess.run([sys.executable,'tools/build_site.py'],cwd=ROOT,check=True)
 env={**os.environ,'LOCAL_SITE_ROOT':str(ROOT/'_site')}
 subprocess.run(['node','scripts/refresh-tickets.mjs'],cwd=ROOT/'projects/bet-ledger-hq',env=env,check=True,timeout=600)
+health=json.loads((ROOT/'projects/bet-ledger-hq/data/tickets/health.json').read_text())
+summary=['## Public feed health','', '| Feed | Freshness | Coverage | Notes |','| --- | --- | --- | --- |']
+for sport, feed in health.get('feeds',{}).items():
+    notes='; '.join(feed.get('warnings',[])) or 'No reported gaps'
+    summary.append(f"| {sport.upper()} | {feed.get('freshness','unknown')} | {feed.get('coverage','unknown')} | {notes.replace('|','/')} |")
+    if feed.get('warnings'):print(f'::warning::{sport.upper()}: {notes}')
+if os.environ.get('GITHUB_STEP_SUMMARY'):
+    with open(os.environ['GITHUB_STEP_SUMMARY'],'a') as report:report.write('\n'.join(summary)+'\n')
 subprocess.run([sys.executable,'tools/build_site.py'],cwd=ROOT,check=True)

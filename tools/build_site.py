@@ -6,6 +6,7 @@ import subprocess
 import sys
 from sports_theme import apply as apply_sports_theme
 from performance import build as build_performance
+from challengers import evaluate as evaluate_challengers
 
 ROOT = Path(__file__).resolve().parents[1]
 OUT = ROOT / '_site'
@@ -37,7 +38,9 @@ def main():
             (data/'summary.json').write_text(json.dumps(dict(starting_bankroll=None,
                 current_bankroll=None,wins=0,losses=0,pushes=0,settled=0,pending=0,roi=None,pnl=None))+'\n')
     subprocess.run([sys.executable, 'tools/public_dashboard.py', str(OUT/'ladderbet/index.html')], cwd=PROJECTS/'ladderbet', check=True)
-    build_performance(ROOT, target/"data/performance.json")
+    performance = build_performance(ROOT, target/"data/performance.json")
+    performance['challengers'] = evaluate_challengers(performance['records'])
+    (target/'data/performance.json').write_text(json.dumps(performance,separators=(',',':'),allow_nan=False)+'\n')
     apply_sports_theme(OUT)
     (OUT/'.nojekyll').touch()
     (OUT/'index.html').write_text('''<!doctype html><html lang="en"><meta charset="utf-8">

@@ -2,7 +2,7 @@
    The model files are stubbed so the page is checked, not today's real slate. */
 import {chromium} from 'playwright';
 import {createServer} from 'node:http';
-import {readFile} from 'node:fs/promises';
+import {readFile,mkdir} from 'node:fs/promises';
 import path from 'node:path';
 import assert from 'node:assert/strict';
 
@@ -87,6 +87,7 @@ const meta = {
 };
 
 const browser = await chromium.launch({headless: true});
+await mkdir('test-results',{recursive:true});
 try {
   for (const width of [390, 1440]) {
     const context = await browser.newContext({viewport: {width, height: 900}, serviceWorkers: 'block'});
@@ -97,6 +98,10 @@ try {
     await page.route('**/data/legs.json*', route => route.fulfill({contentType: 'application/json', body: JSON.stringify(legs)}));
     await page.route('**/data/parlays.json*', route => route.fulfill({contentType: 'application/json', body: JSON.stringify(parlays)}));
     await page.route('**/data/meta.json*', route => route.fulfill({contentType: 'application/json', body: JSON.stringify(meta)}));
+    const archive={schema:1,generated_at:'2026-12-21T12:00:00Z',records:parlays.tickets.map(t=>({...t,captured_at:'2026-12-19T12:00:00Z',result:'Pending'}))};
+    let finalResults=[];
+    await page.route('**/data/parlay-history.json*',route=>route.fulfill({contentType:'application/json',body:JSON.stringify(archive)}));
+    await page.route('**/data/parlay-results.json*',route=>route.fulfill({contentType:'application/json',body:JSON.stringify({schema:1,records:finalResults})}));
     await page.goto(origin + '/props-edge/');
 
     await page.locator('.ticket').first().waitFor();
@@ -183,6 +188,26 @@ try {
     await page.locator('.ledger-row').first().waitFor();
     assert.equal(await page.locator('.ledger-row').count(), 1, 'the ledger survives a reload, on the tab it was left on');
     await page.locator('.ledger-row button[data-field="remove"]').click();
+
+    // A real parlay preserves structured selections and settles as one ticket.
+    await page.locator('[data-tab="parlays"]').click();
+    await page.locator('.ticket [data-action="ledger"]').first().click();
+    await page.locator('#wager-price').fill('750');await page.locator('#wager-book').fill('Actual Test Book');await page.locator('#wager-stake').fill('10');
+    await page.getByRole('button',{name:'Save actual bet'}).click();
+    const stored=await page.evaluate(()=>window.PropsApp.state.ledger[0]);assert.equal(stored.parlay_snapshot.legs.length,3);assert.equal(stored.price_american,750);
+    await page.locator('[data-tab="parlay-history"]').click();await page.locator('#parlay-history-source').selectOption('actual');
+    await page.locator('.history-ticket summary').first().click();assert.match(await page.locator('#parlay-history-list').innerText(),/Alpha Player/);
+    finalResults=stored.parlay_snapshot.legs.map(l=>({...l,result:'Win',actual:60,graded_at:'2026-12-21T10:00:00Z'}));
+    await page.evaluate(()=>{Date.now=()=>Date.parse('2026-12-21T12:00:00Z');window.dispatchEvent(new CustomEvent('props:data'));});
+    await page.waitForFunction(()=>window.PropsApp.state.ledger[0].result==='Win');
+    assert.match(await page.locator('#parlay-history-kpis').innerText(),/1–0/);
+    await page.locator('.history-ticket summary').first().click();assert.match(await page.locator('#parlay-history-list').innerText(),/\$75\.00/);
+    const exportTicket=page.waitForEvent('download');await page.locator('#parlay-history-export').click();assert.match((await exportTicket).suggestedFilename(),/my-wagers\.json$/);
+    await page.reload();await page.locator('#parlay-history-source').selectOption('actual');await page.locator('.history-ticket summary').first().waitFor();
+    assert.match(await page.locator('#parlay-history-kpis').innerText(),/1–0/);
+    await page.locator('#parlay-history-search').fill('nonexistent');assert.equal(await page.locator('.history-ticket').count(),0);await page.locator('#parlay-history-search').fill('');
+    await page.locator('#parlay-history-source').selectOption('model');assert.equal(await page.locator('.history-ticket').count(),3);
+    await page.screenshot({path:'test-results/props-parlay-history-'+width+'.png',fullPage:true});
 
     if (width === 1440) {
       await page.locator('[data-tab="parlays"]').click();

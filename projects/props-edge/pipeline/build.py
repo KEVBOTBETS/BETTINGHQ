@@ -11,6 +11,7 @@ from typing import Any
 from .http import ProviderError
 from .legs import build_legs
 from .parlays import build_parlays
+from .parlay_history import update as update_parlay_history
 from .qualified import evaluate_quotes, evaluate_quotes_against_projections, merge_boards, select_portfolio, eligible_book_key
 from .providers.covers import CoversProvider
 from .providers.espn_recovered import EspnProjectionProvider as RecoveredProjectionProvider
@@ -166,6 +167,7 @@ def build() -> dict[str, Any]:
     # and actual priced calls retain separate error/return metrics.
     grader.snapshot(legs)
     accuracy = grader.run()
+    parlay_record = update_parlay_history(ROOT, parlays['tickets'])
     history_errors = []
     projection_accuracy.update(ROOT, board, projections, history_errors,
                                max_odds_age_hours=qualification["projection_model"]["max_odds_age_hours"])
@@ -214,6 +216,7 @@ def build() -> dict[str, Any]:
         "line_source": "DraftKings lines via ESPN" if book_lines else None,
     }
     meta["accuracy"] = accuracy
+    meta["parlay_record"] = parlay_record
     meta["max_odds_age_hours"] = qualification["projection_model"]["max_odds_age_hours"]
     meta["price_source_status"] = "available" if quotes else "unavailable"
     meta["counts"]["injury_report"] = len(injuries)

@@ -31,7 +31,7 @@ await Promise.all(registry.filter(s=>s.active).map(async sport=>{
   }catch(e){failures.push(field);if(field!=='accuracy'||sport.key==='ladder')failed=true;}}));
   const previous=cache[sport.key];
   if(failed)bundles[sport.key]={...(previous||{}),error:true};else {bundle.lastGoodAt=stamp;bundles[sport.key]=bundle;cache[sport.key]=bundle;}
-  const h=C.health(sport.key,bundles[sport.key],now);health.feeds[sport.key]={status:h.status,failed_fields:failures,published_at:h.stamp,last_good_at:cache[sport.key]?.lastGoodAt||null,warnings:h.warnings};
+  const h=C.health(sport.key,bundles[sport.key],now);health.feeds[sport.key]={status:h.status,freshness:h.freshness,coverage:h.coverage,failed_fields:failures,published_at:h.stamp,last_good_at:cache[sport.key]?.lastGoodAt||null,warnings:h.warnings};
 }));
 // A missing source quote timestamp stays null and cannot become a closing quote.
 // The archive records when we observed the published price, without inventing its age.

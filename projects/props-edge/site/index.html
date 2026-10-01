@@ -10,10 +10,12 @@
 <link rel="stylesheet" href="styles.css">
 <script src="../bet-ledger-hq/moneyline-card.js" defer></script>
 <script src="quote-integrity.js" defer></script>
+<script src="parlay-history-core.js" defer></script>
 <script src="betsync.js" defer></script><script src="betsync-ui.js" defer></script>
 <script src="simulator.js" defer></script><script src="staking.js" defer></script>
 <script src="app.js" defer></script><script src="sync-adapter.js" defer></script>
 <script src="restored-features.js" defer></script><script src="model-accuracy.js" defer></script>
+<script src="parlay-history.js" defer></script>
 </head>
 <body>
 <header class="masthead">
@@ -39,6 +41,7 @@
 <nav class="tabs" role="tablist" aria-label="Props sections">
   <button class="tab" role="tab" data-tab="best" aria-selected="false">Best Bets</button>
   <button class="tab" role="tab" data-tab="parlays" aria-selected="true">Parlay lab</button>
+  <button class="tab" role="tab" data-tab="parlay-history" aria-selected="false">Parlay history</button>
   <button class="tab" role="tab" data-tab="sheet" aria-selected="false">Cheat sheets</button>
   <button class="tab" role="tab" data-tab="board" aria-selected="false">Prop board</button>
   <button class="tab" role="tab" data-tab="record" aria-selected="false">Model record</button>
@@ -65,6 +68,21 @@
     <div class="target-row" id="targets" role="radiogroup" aria-label="Payout target"></div>
     <div class="sub-filter"><label>Game <select id="parlay-game"><option value="all">Every game</option></select></label><label>Day <select id="parlay-day"><option value="all">Every day</option></select></label><span id="parlay-count" class="muted"></span></div>
     <div id="parlays" class="ticket-grid"></div>
+  </section>
+
+  <section id="tab-parlay-history" class="panel" role="tabpanel" aria-label="Parlay history" hidden>
+    <div class="panel-head"><div><h2>Every ticket. The whole story.</h2><p class="lede">Reopen a frozen parlay and see each leg, its final statistic and the complete ticket result. Published model tickets are separate from your actual wagers.</p></div><button id="parlay-history-export" type="button">Export full tickets</button></div>
+    <div class="board-filters">
+      <label>Record<select id="parlay-history-source"><option value="model">Published model tickets</option><option value="actual">My actual wagers</option></select></label>
+      <label>Result<select id="parlay-history-result"><option value="all">All results</option><option>Pending</option><option>Win</option><option>Loss</option><option>Void</option><option>Push</option><option value="Review">Book review</option></select></label>
+      <label>First game date<input id="parlay-history-date" type="date"></label>
+      <label>Find a ticket<input id="parlay-history-search" type="search" placeholder="Player, matchup or book"></label>
+    </div>
+    <p id="parlay-history-status" class="muted" role="status">Loading ticket history…</p>
+    <div id="parlay-history-kpis" class="kpis"></div>
+    <div id="parlay-history-list" class="parlay-history-list"></div>
+    <button id="parlay-history-more" type="button" hidden>Show 50 more tickets</button>
+    <p class="muted">Published combinations are recorded prospectively from this release, not reconstructed after games. Overlapping tickets are not independent trials. Pushed, voided or ambiguous legs require sportsbook-rule review; no reduced payout is guessed. Actual wagers remain in your browser and existing shared-ledger connection. Export a backup to keep another copy.</p>
   </section>
 
   <section id="tab-sheet" class="panel" role="tabpanel" aria-label="Cheat sheets" hidden>

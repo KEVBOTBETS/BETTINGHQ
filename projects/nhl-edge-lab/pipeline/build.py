@@ -5,6 +5,7 @@ from datetime import datetime, timedelta, timezone
 from pathlib import Path
 from zoneinfo import ZoneInfo
 from . import official as nhl
+from . import challenger
 from .model import VERSION, number, instant, project, candidates, update_accuracy, accuracy_report
 ROOT=Path(__file__).resolve().parents[1]
 STATE=ROOT/'state'; OUT=ROOT/'site/data'
@@ -139,12 +140,16 @@ def main():
     if official_teams and health['nhl-official']['status']!='unavailable':
         for t in official_teams.values():t['observed_at']=health['nhl-official']['observed_at']
         current.update(official_teams)
-    summaries={}
+    summaries={}; goalie_data={}
     for stats_year in (season-1,season):
         season_id=f'{stats_year-1}{stats_year}'
         url='https://api.nhle.com/stats/rest/en/team/summary?isAggregate=false&isGame=false&start=0&limit=100&cayenneExp=seasonId='+season_id+'%20and%20gameTypeId=2'
         key='nhl-team-summary-'+str(stats_year)
         raw=source(key,url,ttl=6*3600 if stats_year==season else 7*86400);summaries[stats_year]=raw
+        goalie_key='nhl-goalies-'+str(stats_year)
+        goalie_url='https://api.nhle.com/stats/rest/en/goalie/summary?isAggregate=false&isGame=false&start=0&limit=1000&cayenneExp=seasonId='+season_id+'%20and%20gameTypeId=2'
+        goalie_raw=source(goalie_key,goalie_url,ttl=6*3600 if stats_year==season else 7*86400)
+        goalie_data[stats_year]=challenger.goalie_index(goalie_raw,health[goalie_key]['observed_at'],stats_year) if health[goalie_key]['status']!='unavailable' else {}
         if stats_year==season-1 and health[key]['status']!='unavailable':
             mapped=nhl.summary_teams(raw,{**prior,**current})
             for t in mapped.values():t['observed_at']=health[key]['observed_at']
@@ -160,11 +165,18 @@ def main():
         rows={nhl.name_key(r.get('teamFullName')):r for r in summaries[stats_season].get('data',[])}
         summary=rows.get(nhl.name_key(base.get('name')),{});summary_key='nhl-team-summary-'+str(stats_season)
         if summary:
-            extra.update(pp_pct=summary.get('powerPlayPct'),pk_pct=summary.get('penaltyKillPct'),regulation_wins=summary.get('winsInRegulation'))
+            extra.update(pp_pct=summary.get('powerPlayPct'),pk_pct=summary.get('penaltyKillPct'),regulation_wins=summary.get('winsInRegulation'),
+                         ot_wins=(summary['wins']-summary['winsInRegulation']) if summary.get('wins') is not None and summary.get('winsInRegulation') is not None else None,
+                         ot_losses=summary.get('otLosses'))
             if not espn_ok:
                 extra.update(shots_pg=summary.get('shotsForPerGame'),shots_against_pg=summary.get('shotsAgainstPerGame'),faceoff_pct=(summary['faceoffWinPct']*100 if summary.get('faceoffWinPct') is not None else None))
                 observed=health[summary_key]['observed_at']
-        return tid,{**base,'current':current.get(tid,{}),'prior':prior.get(tid,{}),'stats_season':stats_season,'extra':extra,'stats_observed_at':observed}
+        context={'observed_at':health[summary_key]['observed_at'] if health[summary_key]['status']!='unavailable' else None,
+          'gp':summary.get('gamesPlayed'),'ga_pg':summary.get('goalsAgainstPerGame'),
+          'shots_pg':summary.get('shotsForPerGame'),'shots_against_pg':summary.get('shotsAgainstPerGame'),
+          'pp_pct':summary.get('powerPlayPct'),'pk_pct':summary.get('penaltyKillPct'),
+          'ot_wins':extra.get('ot_wins'),'ot_losses':extra.get('ot_losses')}
+        return tid,{**base,'current':current.get(tid,{}),'prior':prior.get(tid,{}),'stats_season':stats_season,'extra':extra,'stats_observed_at':observed,'context_features':context}
     with ThreadPoolExecutor(max_workers=4) as pool:teams=dict(pool.map(team_stats,sorted(set(current)|set(prior))))
     records=read(STATE/'model_accuracy.json',{})
     known=read(OUT/'games.json',[])+list(records.values());games={}
@@ -194,8 +206,10 @@ def main():
         timestamps=[(g[side+'_stats'].get(period,{}).get('observed_at'),limit) for side in ('home','away') for period,limit in [('current',24*3600),('prior',30*86400)]]
         g['stats_stale']=any(not instant(t) or not -300<=(now-instant(t)).total_seconds()<=limit for t,limit in timestamps)
         if g['stats_stale'] or g['source_stale']:g['projection']={'ratings_known':False,'reason':'Source data stale or unavailable'}
+        g['challenger']=challenger.project(g,goalie_data,season,now) if g['state']=='pre' and instant(g['date'])>now else None
         if g['state']!='pre' or instant(g['date'])<=now:
             g['projection']=records.get(g['game_id'],{}).get('projection',{'ratings_known':False,'reason':'No frozen pregame forecast for this game'})
+            g['challenger']=records.get(g['game_id'],{}).get('challenger')
         g['p_home']=g['projection'].get('p_home');board.extend(candidates(g,now))
     for record in list(records.values()):
         if record.get('result') or record['game_id'] in games:continue
@@ -228,6 +242,7 @@ def main():
               'status':r.get('status'),'date':r.get('date'),'detail':r.get('shortComment') or r.get('details',{}).get('type')})
     upcoming=[g for g in ordered if instant(g['date'])>now and g['state']=='pre']
     meta={'generated_at':stamp,'model_version':VERSION,'season':season,'timezone':'America/Toronto','max_odds_age_hours':1.5,
+      'challenger':{'version':challenger.VERSION,'mode':'shadow-only','promotion_enabled':False,'features':['shots','special teams','confirmed goalie performance','shrunk OT/SO outcomes']},
       'source_status':'partial' if any(v['status']=='unavailable' for v in health.values()) else 'live-data','schedule_source':'ESPN + NHL' if espn_ok else 'NHL fallback','sources':health,'odds_health':{'status':'ok' if all(g['quotes'] for g in upcoming) else 'partial',
        'upcoming_games':len(upcoming),'priced_games':sum(bool(g['quotes']) for g in upcoming)},
       'counts':{'games':len(upcoming),'qualified':sum(not r['held'] for r in board),'teams':len(teams)},
