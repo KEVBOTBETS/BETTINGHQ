@@ -1,29 +1,75 @@
 {
   "schema": 1,
-  "checked_at": "2026-10-01T21:49:17.017Z",
+  "checked_at": "2026-10-01T22:00:39.565Z",
   "coverage": {
+    "nhl": {
+      "status": "available",
+      "reports": 76,
+      "checked_at": "2026-10-01T22:00:39.565Z"
+    },
     "ncaaf": {
       "status": "empty",
       "reports": 0,
-      "checked_at": "2026-10-01T21:49:17.017Z"
-    },
-    "nhl": {
-      "status": "available",
-      "reports": 77,
-      "checked_at": "2026-10-01T21:49:17.017Z"
-    },
-    "nfl": {
-      "status": "available",
-      "reports": 397,
-      "checked_at": "2026-10-01T21:49:17.017Z"
+      "checked_at": "2026-10-01T22:00:39.565Z"
     },
     "mlb": {
       "status": "available",
       "reports": 35,
-      "checked_at": "2026-10-01T21:49:17.017Z"
+      "checked_at": "2026-10-01T22:00:39.565Z"
+    },
+    "nfl": {
+      "status": "available",
+      "reports": 397,
+      "checked_at": "2026-10-01T22:00:39.565Z"
     }
   },
   "events": [
+    {
+      "id": "odds|nfl|401872970|2026-10-04T17:00Z|TOTAL||under|Draft Kings|2026-10-01T22:00:39.565Z",
+      "kind": "odds",
+      "observed_at": "2026-10-01T22:00:39.565Z",
+      "sport": "nfl",
+      "event": "LAR @ PHI",
+      "start": "2026-10-04T17:00Z",
+      "pick": "Under 45.5",
+      "title": "Published odds changed",
+      "before": "-112 · line 43.5",
+      "after": "-102 · line 42.5",
+      "book": "Draft Kings",
+      "source_quote_at": "2026-10-01T21:59:35.493816+00:00",
+      "source": "Existing NFL board",
+      "note": "Your ticket keeps its original odds. Recheck the live book before placing a new wager."
+    },
+    {
+      "id": "odds|nfl|401872974|2026-10-04T20:05Z|ML||away|Draft Kings|2026-10-01T22:00:39.565Z",
+      "kind": "odds",
+      "observed_at": "2026-10-01T22:00:39.565Z",
+      "sport": "nfl",
+      "event": "MIA @ MIN",
+      "start": "2026-10-04T20:05Z",
+      "pick": "MIA ML",
+      "title": "Published odds changed",
+      "before": "+440",
+      "after": "+455",
+      "book": "Draft Kings",
+      "source_quote_at": "2026-10-01T21:59:35.493942+00:00",
+      "source": "Existing NFL board",
+      "note": "Your ticket keeps its original odds. Recheck the live book before placing a new wager."
+    },
+    {
+      "id": "injury|nfl:20:Minkah Fitzpatrick|2026-10-01T22:00:39.565Z",
+      "kind": "injury",
+      "observed_at": "2026-10-01T22:00:39.565Z",
+      "sport": "nfl",
+      "title": "Player availability changed",
+      "event": "New York Jets",
+      "pick": "Minkah Fitzpatrick",
+      "before": "Active",
+      "after": "Active · Fitzpatrick (groin) was a full participant in practice Thursday.",
+      "source_quote_at": "2026-10-01T21:49Z",
+      "source": "ESPN injuries",
+      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
+    },
     {
       "id": "injury|nfl:13:Treydan Stukes|2026-10-01T21:49:17.017Z",
       "kind": "injury",
@@ -2946,48 +2992,6 @@
       "before": "Not in the previous dated report",
       "after": "Questionable · Quadriceps",
       "source_quote_at": "2026-09-30T21:22Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:2:Damar Hamlin|2026-10-01T12:04:35.484Z",
-      "kind": "injury",
-      "observed_at": "2026-10-01T12:04:35.484Z",
-      "sport": "nfl",
-      "title": "New availability report",
-      "event": "Buffalo Bills",
-      "pick": "Damar Hamlin",
-      "before": "Not in the previous dated report",
-      "after": "Questionable · Ribs",
-      "source_quote_at": "2026-09-30T21:20Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:2:Joe Andreessen|2026-10-01T12:04:35.484Z",
-      "kind": "injury",
-      "observed_at": "2026-10-01T12:04:35.484Z",
-      "sport": "nfl",
-      "title": "New availability report",
-      "event": "Buffalo Bills",
-      "pick": "Joe Andreessen",
-      "before": "Not in the previous dated report",
-      "after": "Questionable · Knee",
-      "source_quote_at": "2026-09-30T21:19Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:2:DJ Moore|2026-10-01T12:04:35.484Z",
-      "kind": "injury",
-      "observed_at": "2026-10-01T12:04:35.484Z",
-      "sport": "nfl",
-      "title": "Player availability changed",
-      "event": "Buffalo Bills",
-      "pick": "DJ Moore",
-      "before": "Active · Moore brought in six of 10 targets for 67 yards in the Bills' 24-16 win over the Chargers on Sunday.",
-      "after": "Questionable · Shoulder",
-      "source_quote_at": "2026-09-30T21:19Z",
       "source": "ESPN injuries",
       "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
     }
