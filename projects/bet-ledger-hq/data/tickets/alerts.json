@@ -1,29 +1,45 @@
 {
   "schema": 1,
-  "checked_at": "2026-10-01T16:50:44.399Z",
+  "checked_at": "2026-10-01T17:03:04.469Z",
   "coverage": {
+    "nhl": {
+      "status": "available",
+      "reports": 94,
+      "checked_at": "2026-10-01T17:03:04.469Z"
+    },
     "mlb": {
       "status": "available",
       "reports": 42,
-      "checked_at": "2026-10-01T16:50:44.399Z"
-    },
-    "nfl": {
-      "status": "available",
-      "reports": 496,
-      "checked_at": "2026-10-01T16:50:44.399Z"
+      "checked_at": "2026-10-01T17:03:04.469Z"
     },
     "ncaaf": {
       "status": "empty",
       "reports": 0,
-      "checked_at": "2026-10-01T16:50:44.399Z"
+      "checked_at": "2026-10-01T17:03:04.469Z"
     },
-    "nhl": {
+    "nfl": {
       "status": "available",
-      "reports": 94,
-      "checked_at": "2026-10-01T16:50:44.399Z"
+      "reports": 494,
+      "checked_at": "2026-10-01T17:03:04.469Z"
     }
   },
   "events": [
+    {
+      "id": "odds|ncaaf|401858246|2026-10-03T16:00Z|ATS||away|Draft Kings|2026-10-01T17:03:04.469Z",
+      "kind": "odds",
+      "observed_at": "2026-10-01T17:03:04.469Z",
+      "sport": "ncaaf",
+      "event": "BC @ SMU",
+      "start": "2026-10-03T16:00Z",
+      "pick": "BC +21",
+      "title": "Published odds changed",
+      "before": "-112 · line 21",
+      "after": "-118 · line 21.5",
+      "book": "Draft Kings",
+      "source_quote_at": "2026-10-01T17:02:13.309698+00:00",
+      "source": "Existing NCAAF board",
+      "note": "Your ticket keeps its original odds. Recheck the live book before placing a new wager."
+    },
     {
       "id": "injury|mlb:5:Colin Holderman|2026-10-01T16:50:44.399Z",
       "kind": "injury",
@@ -2888,20 +2904,6 @@
       "before": "Active · Campbell totaled nine tackles (four solo) in Monday's loss to the Bears.",
       "after": "Questionable · Knee",
       "source_quote_at": "2026-10-01T00:40Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:21:Zack Baun|2026-10-01T12:04:35.484Z",
-      "kind": "injury",
-      "observed_at": "2026-10-01T12:04:35.484Z",
-      "sport": "nfl",
-      "title": "New availability report",
-      "event": "Philadelphia Eagles",
-      "pick": "Zack Baun",
-      "before": "Not in the previous dated report",
-      "after": "Questionable · Concussion",
-      "source_quote_at": "2026-10-01T00:35Z",
       "source": "ESPN injuries",
       "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
     }
