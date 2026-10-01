@@ -59,6 +59,12 @@ def normalize(sport, row):
         'market_margin':-spread if spread is not None else None,'market_total':number(row.get('market_total')),
         'actual_margin':h-a,'actual_total':h+a,'home_score':h,'away_score':a},None
 
+def season_of(row):
+    value = row.get("season")
+    if str(value).isdigit(): return int(value)
+    start = instant(row.get("start"))
+    return start.year if start else None
+
 def build(root, out):
     result={'schema':1,'generated_at':datetime.now(timezone.utc).isoformat(),'leagues':{},'records':[]}
     for sport,label in LEAGUES.items():
@@ -66,17 +72,17 @@ def build(root, out):
         data=json.loads(path.read_text()); rows=list(data.get('games',{}).values()) if sport=='mlb' else data.get('records',[])
         if sport not in ('mlb','nhl'): rows=[r for r in rows if r.get('kind')=='game']
         # Use only the latest season represented by the public report.
-        years=[int(r.get('season') or str(r.get('start',''))[:4]) for r in rows if str(r.get('season') or str(r.get('start',''))[:4]).isdigit()]
+        years=[season_of(r) for r in rows if season_of(r) is not None]
         season=max(years) if years else None
         counts=Counter(); seen=set(); accepted=[]
         for row in sorted(rows,key=lambda r:str(r.get('captured_at') or r.get('frozen_at') or r.get('updated_at') or '')):
-            if int(row.get('season') or str(row.get('start',''))[:4] or 0)!=season: continue
+            if season_of(row) is not None and season_of(row)!=season: continue
             entry,reason=normalize(sport,row)
             if reason: counts[reason]+=1; continue
             if entry['id'] in seen: counts['duplicate event']+=1; continue
             seen.add(entry['id']); accepted.append(entry)
         result['records'].extend(accepted)
-        result['leagues'][sport]={'label':label,'season':season,'source_updated':data.get('generated_at'),
+        result['leagues'][sport]={'label':label,'season':season,'source_updated':json.loads((root/'projects/mlb-edge/docs/data/predictions.json').read_text()).get('generated_at') if sport=='mlb' else data.get('generated_at'),
             'accepted':len(accepted),'excluded':dict(counts),'snapshot_policy':'Latest pregame' if sport=='mlb' else 'First pregame'}
     out.parent.mkdir(parents=True,exist_ok=True)
     out.write_text(json.dumps(result,separators=(',',':'),allow_nan=False)+'\n')

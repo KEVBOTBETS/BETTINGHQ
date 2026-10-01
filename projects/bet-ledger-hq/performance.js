@@ -14,7 +14,7 @@ function render(){
  selected=data.records.filter(r=>r.sport===sport&&Date.parse(r.start)>=cutoff&&(version==='all'||r.version===version)).sort((a,b)=>Date.parse(b.start)-Date.parse(a.start));
  const s=KevPerformance.summarize(selected);
  document.documentElement.dataset.kbLeague=sport;
- $('#perf-status').textContent=`${league.label} · ${league.season} · ${league.snapshot_policy} snapshot · ${s.n} verified games in view · Audit built ${time(data.generated_at)} ET`;
+ $('#perf-status').textContent=`${league.label} · ${league.season} · ${league.snapshot_policy} snapshot · ${s.n} verified games in view · Source ${league.source_updated?time(league.source_updated)+" ET":"time unavailable"} · Audit built ${time(data.generated_at)} ET`;
  $('#perf-kpis').innerHTML=[['Winner calls',pct(s.accuracy),`${s.correct} / ${s.picks} · 95% interval ${interval(s.interval)}`],['Brier score',n(s.brier),'Lower is better · probability error'],['Log loss',n(s.logloss),'Lower is better · clipped at 0.000001'],['Market pairs',String(s.paired.n),'Same games with a frozen market probability']].map(([label,value,note])=>`<div class="broadcast-stat"><span>${label}</span><strong>${value}</strong><small>${note}</small></div>`).join('');
  $('#perf-chart').innerHTML=chart(s.calibration);
  $('#perf-buckets').innerHTML=s.calibration.map(b=>`<tr><th>${b.bucket}</th><td>${b.n}</td><td>${pct(b.predicted)}</td><td>${pct(b.actual)}</td><td>${interval(b.interval)}</td></tr>`).join('');

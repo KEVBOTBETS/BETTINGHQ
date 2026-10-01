@@ -1,5 +1,5 @@
 import unittest
-from tools.performance import normalize
+from tools.performance import normalize, season_of
 
 class ForecastAudit(unittest.TestCase):
     def row(self, **extra):
@@ -15,6 +15,9 @@ class ForecastAudit(unittest.TestCase):
     def test_mlb_uses_latest_snapshot_not_first_seen(self):
         row={'gamePk':1,'home':'HOME','away':'AWAY','start':'2026-10-01T20:00Z','updated_at':'2026-10-01T21:00Z','first_seen':'2026-10-01T18:00Z','p_home':.7,'status':'graded','final_home':4,'final_away':2}
         self.assertEqual(normalize('mlb',row)[1],'missing or non-pregame snapshot')
+    def test_malformed_season_does_not_crash_audit(self):
+        self.assertIsNone(season_of({"start":"broken", "season":"unknown"}))
+        self.assertEqual(season_of({"start":"2026-10-01T20:00Z"}),2026)
     def test_nhl_actual_score_required(self):
         row={'game_id':'1','home':'TOR','away':'MTL','start':'2026-10-01T20:00Z','frozen_at':'2026-10-01T18:00Z','p_home':.6,'result':{'home_won':True}}
         self.assertEqual(normalize('nhl',row)[1],'awaiting verified result')
