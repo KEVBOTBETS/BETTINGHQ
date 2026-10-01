@@ -1,8 +1,24 @@
-# KEVBOTBETS portable recovery
+# KEVBOTBETS · The Matchday Network
 
 One repository contains the recovered hub, Moneyline, NFL, college football,
 MLB, NHL, WNBA, Props and Ladder projects. Start with **START-HERE.md**. The initial page opens Weekly
 football; the existing sport dashboards and shared ledger remain available.
+
+## Broadcast edition
+
+[Open the hub](https://kevbotbets.github.io/BETTINGHQ/bet-ledger-hq/#today) ·
+[Sports Desk](https://kevbotbets.github.io/BETTINGHQ/bet-ledger-hq/#desk) ·
+[Performance Center](https://kevbotbets.github.io/BETTINGHQ/bet-ledger-hq/#accuracy)
+
+The whole site shares a sports broadcast identity with local fonts, league
+colors, field/court/rink artwork and responsive data panels. The Sports Desk
+covers NFL, NCAAF, MLB, NHL, NBA, NCAAB and WNBA scores, standings and headlines.
+NBA/NCAAB are research views; automated picks remain closed pending validation.
+
+The Performance Center grades original pregame snapshots with calibration
+charts, confidence intervals, probability scores, paired market comparisons
+and a downloadable audit. It excludes unresolved teams and post-start captures.
+See [the methodology and league extension contract](projects/bet-ledger-hq/docs/broadcast-performance.md).
 
 ## What changed
 
