@@ -1,29 +1,43 @@
 {
   "schema": 1,
-  "checked_at": "2026-10-01T19:21:08.448Z",
+  "checked_at": "2026-10-01T19:46:41.717Z",
   "coverage": {
-    "ncaaf": {
-      "status": "empty",
-      "reports": 0,
-      "checked_at": "2026-10-01T19:21:08.448Z"
-    },
-    "mlb": {
+    "nhl": {
       "status": "available",
-      "reports": 37,
-      "checked_at": "2026-10-01T19:21:08.448Z"
+      "reports": 89,
+      "checked_at": "2026-10-01T19:46:41.717Z"
     },
     "nfl": {
       "status": "available",
       "reports": 382,
-      "checked_at": "2026-10-01T19:21:08.448Z"
+      "checked_at": "2026-10-01T19:46:41.717Z"
     },
-    "nhl": {
+    "ncaaf": {
+      "status": "empty",
+      "reports": 0,
+      "checked_at": "2026-10-01T19:46:41.717Z"
+    },
+    "mlb": {
       "status": "available",
-      "reports": 89,
-      "checked_at": "2026-10-01T19:21:08.448Z"
+      "reports": 37,
+      "checked_at": "2026-10-01T19:46:41.717Z"
     }
   },
   "events": [
+    {
+      "id": "injury|nfl:29:Princely Umanmielen|2026-10-01T19:46:41.717Z",
+      "kind": "injury",
+      "observed_at": "2026-10-01T19:46:41.717Z",
+      "sport": "nfl",
+      "title": "Player availability changed",
+      "event": "Carolina Panthers",
+      "pick": "Princely Umanmielen",
+      "before": "Questionable · Ankle",
+      "after": "Questionable · questionable",
+      "source_quote_at": "2026-09-30T19:23Z",
+      "source": "ESPN injuries",
+      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
+    },
     {
       "id": "injury|nfl:3:Anthony Johnson Jr.|2026-10-01T19:21:08.448Z",
       "kind": "injury",
@@ -2929,20 +2943,6 @@
       "before": "Not in the previous dated report",
       "after": "Questionable · Shoulder",
       "source_quote_at": "2026-10-01T00:20Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:14:Josh Wallace|2026-10-01T12:04:35.484Z",
-      "kind": "injury",
-      "observed_at": "2026-10-01T12:04:35.484Z",
-      "sport": "nfl",
-      "title": "New availability report",
-      "event": "Los Angeles Rams",
-      "pick": "Josh Wallace",
-      "before": "Not in the previous dated report",
-      "after": "Questionable · Shoulder",
-      "source_quote_at": "2026-09-30T23:56Z",
       "source": "ESPN injuries",
       "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
     }
