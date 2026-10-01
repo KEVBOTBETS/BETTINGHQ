@@ -15,3 +15,17 @@ assert.equal(C.rank(game,[leg('fallback',{updated_at:undefined})],options).lengt
 assert.equal(C.weeks([game]).filter(w=>w.season_type===2).length,18);
 assert.equal(C.weekKey({...game,season_type:1}),'1:4');
 console.log('Weekly game props: freshness, ranking, event identity, deduplication, quota and all 18 weeks passed.');
+const P=(await import('../site/parlay-history-core.js')).default;
+const frozen=C.capture(game,ranked,now);assert.equal(frozen.legs.length,3);
+assert.throws(()=>C.capture({...game,completed:true},ranked,now));
+assert.throws(()=>C.capture(game,[{...ranked[0],event_id:'402'}],now));
+assert.throws(()=>C.capture(game,[ranked[0],ranked[0]],now));
+const after=Date.parse('2026-10-05T00:00Z'),result={...ranked[0],result:'Win',actual:70,graded_at:'2026-10-04T23:00Z'};
+const evidence=C.grade(frozen,[result],P,after);assert.equal(evidence.counts.Win,1);assert.equal(evidence.counts.Pending,2);
+assert.equal(C.grade(frozen,[{...result,line:51.5}],P,after).counts.Win,0,'changed lines must not settle saved tickets');
+frozen.manual[P.key(frozen.legs[1])]={result:'Loss',at:new Date(after).toISOString()};
+assert.equal(C.grade(frozen,[result],P,after).counts.Loss,1);
+assert.equal(C.grade(frozen,[result],P,after).result,'Loss');
+delete frozen.manual[P.key(frozen.legs[1])];assert.equal(C.grade(frozen,[result],P,after).counts.Loss,0);
+assert.equal(frozen.legs[0].result,undefined,'grading never mutates frozen selections');
+console.log('Game ticket freezing, exact-line settlement, manual override and reset passed.');

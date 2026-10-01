@@ -37,5 +37,17 @@
     for(let w=1;w<=18;w++){const key=`2:${w}`;if(!map.has(key))map.set(key,{key,season_type:2,week:w,label:`Week ${w}`});}
     return [...map.values()].sort((a,b)=>a.season_type-b.season_type||a.week-b.week);
   }
-  const api={rank,weeks,weekKey};root.GameProps=api;if(typeof module!=='undefined')module.exports=api;
+  function capture(game,legs,now=Date.now()){
+    if(!legs.length||legs.length>10||Date.parse(game.date)<=now||!Number.isFinite(Date.parse(game.date))||game.completed)throw Error('Only a current pregame list can be saved.');
+    if(legs.some(l=>String(l.event_id)!==String(game.game_id)||!l.player||!l.market||Date.parse(l.start_time)<=now||!Number.isFinite(Date.parse(l.start_time))))throw Error('Selections must belong to this game and be saved before kickoff.');
+    const keys=legs.map(l=>norm(l.player)+'|'+norm(l.market));if(new Set(keys).size!==keys.length)throw Error('Duplicate player markets cannot be saved.');
+    return JSON.parse(JSON.stringify({schema:1,id:'game-'+game.game_id,game,captured_at:new Date(now).toISOString(),legs,manual:{}}));
+  }
+  function grade(ticket,results,settler,now=Date.now()){
+    const evidence=settler.settle(ticket,results,now);
+    const legs=evidence.legs.map(l=>{const manual=ticket.manual?.[settler.key(l)];return manual&&['Win','Loss','Pending','Push','Void'].includes(manual.result)?{...l,result:manual.result,actual:null,result_source:'Manual',manual_at:manual.at}:{...l,result_source:l.graded_at?'Verified final result':'Awaiting result'};});
+    const counts=Object.fromEntries(['Win','Loss','Pending','Push','Void','Review'].map(s=>[s,legs.filter(l=>l.result===s).length]));
+    return {legs,counts,result:settler.outcome(legs)};
+  }
+  const api={rank,weeks,weekKey,capture,grade};root.GameProps=api;if(typeof module!=='undefined')module.exports=api;
 })(typeof window!=='undefined'?window:globalThis);
