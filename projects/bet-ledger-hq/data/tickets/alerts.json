@@ -1,29 +1,77 @@
 {
   "schema": 1,
-  "checked_at": "2026-10-01T15:55:51.641Z",
+  "checked_at": "2026-10-01T16:04:31.955Z",
   "coverage": {
-    "ncaaf": {
-      "status": "empty",
-      "reports": 0,
-      "checked_at": "2026-10-01T15:55:51.641Z"
-    },
-    "mlb": {
-      "status": "available",
-      "reports": 41,
-      "checked_at": "2026-10-01T15:55:51.641Z"
-    },
     "nhl": {
       "status": "available",
       "reports": 94,
-      "checked_at": "2026-10-01T15:55:51.641Z"
+      "checked_at": "2026-10-01T16:04:31.955Z"
     },
     "nfl": {
       "status": "available",
       "reports": 497,
-      "checked_at": "2026-10-01T15:55:51.641Z"
+      "checked_at": "2026-10-01T16:04:31.955Z"
+    },
+    "ncaaf": {
+      "status": "empty",
+      "reports": 0,
+      "checked_at": "2026-10-01T16:04:31.955Z"
+    },
+    "mlb": {
+      "status": "available",
+      "reports": 41,
+      "checked_at": "2026-10-01T16:04:31.955Z"
     }
   },
   "events": [
+    {
+      "id": "odds|nfl|401872966|2026-10-04T17:00Z|ML||home|Draft Kings|2026-10-01T16:04:31.955Z",
+      "kind": "odds",
+      "observed_at": "2026-10-01T16:04:31.955Z",
+      "sport": "nfl",
+      "event": "ARI @ NYG",
+      "start": "2026-10-04T17:00Z",
+      "pick": "NYG ML",
+      "title": "Published odds changed",
+      "before": "+120",
+      "after": "+114",
+      "book": "Draft Kings",
+      "source_quote_at": "2026-10-01T16:03:26.744655+00:00",
+      "source": "Existing NFL board",
+      "note": "Your ticket keeps its original odds. Recheck the live book before placing a new wager."
+    },
+    {
+      "id": "odds|ncaaf|401862791|2026-10-03T16:00Z|TOTAL||over|Draft Kings|2026-10-01T16:04:31.955Z",
+      "kind": "odds",
+      "observed_at": "2026-10-01T16:04:31.955Z",
+      "sport": "ncaaf",
+      "event": "NAVY @ AFA",
+      "start": "2026-10-03T16:00Z",
+      "pick": "Over 47.5",
+      "title": "Published odds changed",
+      "before": "-112 · line 45.5",
+      "after": "-108 · line 46.5",
+      "book": "Draft Kings",
+      "source_quote_at": "2026-10-01T16:03:40.485915+00:00",
+      "source": "Existing NCAAF board",
+      "note": "Your ticket keeps its original odds. Recheck the live book before placing a new wager."
+    },
+    {
+      "id": "odds|ncaaf|401858487|2026-10-10T01:00Z|ATS||away|Draft Kings|2026-10-01T16:04:31.955Z",
+      "kind": "odds",
+      "observed_at": "2026-10-01T16:04:31.955Z",
+      "sport": "ncaaf",
+      "event": "IOWA @ WASH",
+      "start": "2026-10-10T01:00Z",
+      "pick": "IOWA +1.5",
+      "title": "Published odds changed",
+      "before": "-110 · line 1.5",
+      "after": "-115 · line 1.5",
+      "book": "Draft Kings",
+      "source_quote_at": "2026-10-01T16:03:40.485915+00:00",
+      "source": "Existing NCAAF board",
+      "note": "Your ticket keeps its original odds. Recheck the live book before placing a new wager."
+    },
     {
       "id": "injury|nfl:21:Chance Campbell|2026-10-01T15:55:51.641Z",
       "kind": "injury",
@@ -2854,48 +2902,6 @@
       "before": "Questionable · Ankle",
       "after": "Active · Halton (ankle) was not listed on Wednesday's practice report, Vic Tafur of The Athletic reports.",
       "source_quote_at": "2026-10-01T00:21Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:25:KhaDarel Hodge|2026-10-01T12:04:35.484Z",
-      "kind": "injury",
-      "observed_at": "2026-10-01T12:04:35.484Z",
-      "sport": "nfl",
-      "title": "Player availability changed",
-      "event": "San Francisco 49ers",
-      "pick": "KhaDarel Hodge",
-      "before": "Active · Hodge went without a target while logging 30 of the 49ers' 54 offensive snaps in Sunday's 36-30 win over the Cardinals.",
-      "after": "Questionable · Knee",
-      "source_quote_at": "2026-10-01T00:17Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:25:Mykel Williams|2026-10-01T12:04:35.484Z",
-      "kind": "injury",
-      "observed_at": "2026-10-01T12:04:35.484Z",
-      "sport": "nfl",
-      "title": "New availability report",
-      "event": "San Francisco 49ers",
-      "pick": "Mykel Williams",
-      "before": "Not in the previous dated report",
-      "after": "Out · Knee - ACL",
-      "source_quote_at": "2026-09-30T23:11Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:25:Keion White|2026-10-01T12:04:35.484Z",
-      "kind": "injury",
-      "observed_at": "2026-10-01T12:04:35.484Z",
-      "sport": "nfl",
-      "title": "New availability report",
-      "event": "San Francisco 49ers",
-      "pick": "Keion White",
-      "before": "Not in the previous dated report",
-      "after": "Questionable · Hamstring",
-      "source_quote_at": "2026-09-30T22:36Z",
       "source": "ESPN injuries",
       "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
     }
