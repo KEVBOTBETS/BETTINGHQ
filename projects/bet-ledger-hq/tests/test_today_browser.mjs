@@ -3,13 +3,14 @@ import {createServer} from "node:http";
 import {readFile,mkdir} from "node:fs/promises";
 import path from "node:path";
 import assert from "node:assert/strict";
-const root=process.cwd();
+// Test the same staged pages users receive, including the shared theme.
+const root=path.resolve(process.cwd(),"../../_site/bet-ledger-hq");
 await mkdir("test-results",{recursive:true});
 const server=createServer(async(req,res)=>{
   const pathname=decodeURIComponent(new URL(req.url,"http://localhost").pathname),rel=pathname.replace(/^\/bet-ledger-hq\//,"");
   const file=path.resolve(root,rel===""?"index.html":rel);
   if(!file.startsWith(root+path.sep)){res.writeHead(403);res.end();return;}
-  try{const data=await readFile(file);res.setHeader("Content-Type",file.endsWith(".css")?"text/css":file.endsWith(".js")?"text/javascript":file.endsWith('.webmanifest')?'application/manifest+json':file.endsWith(".json")?"application/json":file.endsWith(".jpg")?"image/jpeg":file.endsWith(".png")?"image/png":file.endsWith('.webp')?'image/webp':"text/html");res.end(data);}
+  try{const data=await readFile(file);res.setHeader("Content-Type",file.endsWith(".woff")?"font/woff":file.endsWith(".svg")?"image/svg+xml":file.endsWith(".css")?"text/css":file.endsWith(".js")?"text/javascript":file.endsWith('.webmanifest')?'application/manifest+json':file.endsWith(".json")?"application/json":file.endsWith(".jpg")?"image/jpeg":file.endsWith(".png")?"image/png":file.endsWith('.webp')?'image/webp':"text/html");res.end(data);}
   catch(_){res.writeHead(404);res.end("Not found");}
 });
 await new Promise(resolve=>server.listen(0,"127.0.0.1",resolve));
