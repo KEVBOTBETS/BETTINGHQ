@@ -1,29 +1,43 @@
 {
   "schema": 1,
-  "checked_at": "2026-10-01T19:02:03.675Z",
+  "checked_at": "2026-10-01T19:21:08.448Z",
   "coverage": {
     "ncaaf": {
       "status": "empty",
       "reports": 0,
-      "checked_at": "2026-10-01T19:02:03.675Z"
-    },
-    "nhl": {
-      "status": "available",
-      "reports": 92,
-      "checked_at": "2026-10-01T19:02:03.675Z"
+      "checked_at": "2026-10-01T19:21:08.448Z"
     },
     "mlb": {
       "status": "available",
-      "reports": 38,
-      "checked_at": "2026-10-01T19:02:03.675Z"
+      "reports": 37,
+      "checked_at": "2026-10-01T19:21:08.448Z"
     },
     "nfl": {
       "status": "available",
-      "reports": 400,
-      "checked_at": "2026-10-01T19:02:03.675Z"
+      "reports": 382,
+      "checked_at": "2026-10-01T19:21:08.448Z"
+    },
+    "nhl": {
+      "status": "available",
+      "reports": 89,
+      "checked_at": "2026-10-01T19:21:08.448Z"
     }
   },
   "events": [
+    {
+      "id": "injury|nfl:3:Anthony Johnson Jr.|2026-10-01T19:21:08.448Z",
+      "kind": "injury",
+      "observed_at": "2026-10-01T19:21:08.448Z",
+      "sport": "nfl",
+      "title": "Player availability changed",
+      "event": "Chicago Bears",
+      "pick": "Anthony Johnson Jr.",
+      "before": "Out · Undisclosed",
+      "after": "Injured Reserve · Undisclosed",
+      "source_quote_at": "2026-10-01T19:01Z",
+      "source": "ESPN injuries",
+      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
+    },
     {
       "id": "odds|props|401872978|2026-10-05T00:20Z|Receiving yards|Darren Waller|over|FanDuel|2026-10-01T19:02:03.675Z",
       "kind": "odds",
@@ -2929,20 +2943,6 @@
       "before": "Not in the previous dated report",
       "after": "Questionable · Shoulder",
       "source_quote_at": "2026-09-30T23:56Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:14:Aaron Donald|2026-10-01T12:04:35.484Z",
-      "kind": "injury",
-      "observed_at": "2026-10-01T12:04:35.484Z",
-      "sport": "nfl",
-      "title": "New availability report",
-      "event": "Los Angeles Rams",
-      "pick": "Aaron Donald",
-      "before": "Not in the previous dated report",
-      "after": "Questionable · Back",
-      "source_quote_at": "2026-09-30T21:30Z",
       "source": "ESPN injuries",
       "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
     }
