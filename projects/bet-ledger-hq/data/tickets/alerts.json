@@ -1,29 +1,115 @@
 {
   "schema": 1,
-  "checked_at": "2026-10-01T21:39:18.933Z",
+  "checked_at": "2026-10-01T21:44:30.917Z",
   "coverage": {
-    "mlb": {
-      "status": "available",
-      "reports": 35,
-      "checked_at": "2026-10-01T21:39:18.933Z"
-    },
     "ncaaf": {
       "status": "empty",
       "reports": 0,
-      "checked_at": "2026-10-01T21:39:18.933Z"
+      "checked_at": "2026-10-01T21:44:30.917Z"
+    },
+    "mlb": {
+      "status": "available",
+      "reports": 35,
+      "checked_at": "2026-10-01T21:44:30.917Z"
     },
     "nhl": {
       "status": "available",
-      "reports": 79,
-      "checked_at": "2026-10-01T21:39:18.933Z"
+      "reports": 78,
+      "checked_at": "2026-10-01T21:44:30.917Z"
     },
     "nfl": {
       "status": "available",
-      "reports": 393,
-      "checked_at": "2026-10-01T21:39:18.933Z"
+      "reports": 397,
+      "checked_at": "2026-10-01T21:44:30.917Z"
     }
   },
   "events": [
+    {
+      "id": "odds|props|401872969|2026-10-04T17:00Z|Rushing yards|Trevor Lawrence|over|Fanatics Sportsbook|2026-10-01T21:44:30.917Z",
+      "kind": "odds",
+      "observed_at": "2026-10-01T21:44:30.917Z",
+      "sport": "props",
+      "event": "Jacksonville Jaguars @ Cincinnati Bengals",
+      "start": "2026-10-04T17:00Z",
+      "pick": "Trevor Lawrence — Over 15.5 Rushing yards",
+      "title": "Published odds changed",
+      "before": "+105 · line 15.5",
+      "after": "+100 · line 15.5",
+      "book": "Fanatics Sportsbook",
+      "source_quote_at": "2026-10-01T21:43:58.754657+00:00",
+      "source": "Existing Props board",
+      "note": "Your ticket keeps its original odds. Recheck the live book before placing a new wager."
+    },
+    {
+      "id": "injury|nfl:9:Jager Burton|2026-10-01T21:44:30.917Z",
+      "kind": "injury",
+      "observed_at": "2026-10-01T21:44:30.917Z",
+      "sport": "nfl",
+      "title": "New availability report",
+      "event": "Green Bay Packers",
+      "pick": "Jager Burton",
+      "before": "Not in the previous dated report",
+      "after": "Questionable · Groin",
+      "source_quote_at": "2026-10-01T21:35Z",
+      "source": "ESPN injuries",
+      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
+    },
+    {
+      "id": "injury|nfl:18:Kaden Elliss|2026-10-01T21:44:30.917Z",
+      "kind": "injury",
+      "observed_at": "2026-10-01T21:44:30.917Z",
+      "sport": "nfl",
+      "title": "New availability report",
+      "event": "New Orleans Saints",
+      "pick": "Kaden Elliss",
+      "before": "Not in the previous dated report",
+      "after": "Questionable · Calf",
+      "source_quote_at": "2026-10-01T21:39Z",
+      "source": "ESPN injuries",
+      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
+    },
+    {
+      "id": "injury|nfl:18:Carl Granderson|2026-10-01T21:44:30.917Z",
+      "kind": "injury",
+      "observed_at": "2026-10-01T21:44:30.917Z",
+      "sport": "nfl",
+      "title": "New availability report",
+      "event": "New Orleans Saints",
+      "pick": "Carl Granderson",
+      "before": "Not in the previous dated report",
+      "after": "Questionable · Ankle",
+      "source_quote_at": "2026-10-01T21:39Z",
+      "source": "ESPN injuries",
+      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
+    },
+    {
+      "id": "injury|nfl:18:Martin Emerson Jr.|2026-10-01T21:44:30.917Z",
+      "kind": "injury",
+      "observed_at": "2026-10-01T21:44:30.917Z",
+      "sport": "nfl",
+      "title": "Player availability changed",
+      "event": "New Orleans Saints",
+      "pick": "Martin Emerson Jr.",
+      "before": "Questionable · Shoulder",
+      "after": "Active",
+      "source_quote_at": "2026-10-01T21:39Z",
+      "source": "ESPN injuries",
+      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
+    },
+    {
+      "id": "injury|nfl:18:Julian Blackmon|2026-10-01T21:44:30.917Z",
+      "kind": "injury",
+      "observed_at": "2026-10-01T21:44:30.917Z",
+      "sport": "nfl",
+      "title": "New availability report",
+      "event": "New Orleans Saints",
+      "pick": "Julian Blackmon",
+      "before": "Not in the previous dated report",
+      "after": "Questionable · Calf",
+      "source_quote_at": "2026-10-01T21:39Z",
+      "source": "ESPN injuries",
+      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
+    },
     {
       "id": "odds|mlb|849844|2026-10-02T00:00:00Z|ML||home|DraftKings|2026-10-01T21:39:18.933Z",
       "kind": "odds",
@@ -2902,90 +2988,6 @@
       "before": "Not in the previous dated report",
       "after": "Questionable · Concussion",
       "source_quote_at": "2026-10-01T01:05Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:29:Damien Lewis|2026-10-01T12:04:35.484Z",
-      "kind": "injury",
-      "observed_at": "2026-10-01T12:04:35.484Z",
-      "sport": "nfl",
-      "title": "Player availability changed",
-      "event": "Carolina Panthers",
-      "pick": "Damien Lewis",
-      "before": "Doubtful · Elbow",
-      "after": "Out · Elbow",
-      "source_quote_at": "2026-10-01T01:00Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:29:Devin Lloyd|2026-10-01T12:04:35.484Z",
-      "kind": "injury",
-      "observed_at": "2026-10-01T12:04:35.484Z",
-      "sport": "nfl",
-      "title": "Player availability changed",
-      "event": "Carolina Panthers",
-      "pick": "Devin Lloyd",
-      "before": "Questionable · Calf",
-      "after": "Active · Lloyd (calf) was a full participant in Wednesday's practice.",
-      "source_quote_at": "2026-09-30T20:04Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:29:Nick Scott|2026-10-01T12:04:35.484Z",
-      "kind": "injury",
-      "observed_at": "2026-10-01T12:04:35.484Z",
-      "sport": "nfl",
-      "title": "Player availability changed",
-      "event": "Carolina Panthers",
-      "pick": "Nick Scott",
-      "before": "Questionable · Ribs",
-      "after": "Active · Scott (ribs) practiced fully Wednesday.",
-      "source_quote_at": "2026-09-30T20:01Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:29:Mike Jackson|2026-10-01T12:04:35.484Z",
-      "kind": "injury",
-      "observed_at": "2026-10-01T12:04:35.484Z",
-      "sport": "nfl",
-      "title": "Player availability changed",
-      "event": "Carolina Panthers",
-      "pick": "Mike Jackson",
-      "before": "Questionable · Groin",
-      "after": "Injured Reserve · Groin",
-      "source_quote_at": "2026-09-30T19:44Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:29:Xavier Legette|2026-10-01T12:04:35.484Z",
-      "kind": "injury",
-      "observed_at": "2026-10-01T12:04:35.484Z",
-      "sport": "nfl",
-      "title": "Player availability changed",
-      "event": "Carolina Panthers",
-      "pick": "Xavier Legette",
-      "before": "Questionable · Knee",
-      "after": "Doubtful · Knee",
-      "source_quote_at": "2026-09-30T19:24Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:29:Princely Umanmielen|2026-10-01T12:04:35.484Z",
-      "kind": "injury",
-      "observed_at": "2026-10-01T12:04:35.484Z",
-      "sport": "nfl",
-      "title": "New availability report",
-      "event": "Carolina Panthers",
-      "pick": "Princely Umanmielen",
-      "before": "Not in the previous dated report",
-      "after": "Questionable · Ankle",
-      "source_quote_at": "2026-09-30T19:23Z",
       "source": "ESPN injuries",
       "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
     }
