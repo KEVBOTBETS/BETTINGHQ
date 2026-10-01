@@ -1,5 +1,6 @@
 """Transparent NHL baseline. Goal-rate Poisson model; no claimed calibration."""
 import math
+from copy import deepcopy
 from datetime import datetime, timezone
 
 VERSION = 'nhl-poisson-1.0'
@@ -155,12 +156,14 @@ def update_accuracy(records, games, board, stamp):
         if key not in records and game['season_type'] in (2,3) and game['state']=='pre' and start and start>now and game['projection'].get('ratings_known'):
             records[key]={'game_id':key,'season':game['season'],'season_type':game['season_type'],'start':game['date'],
                'frozen_at':stamp,'home':game['home'],'away':game['away'],'p_home':game['p_home'],
-               'projection':game['projection'],'model_version':VERSION,'market_snapshot':market_snapshot(game,stamp),'result':None}
+               'projection':deepcopy(game['projection']),'model_version':VERSION,'market_snapshot':market_snapshot(game,stamp),'challenger':deepcopy(game.get('challenger')),'result':None}
         record=records.get(key)
         if record and game.get('nhl_game_id'):record['nhl_game_id']=game['nhl_game_id']
         if record and game['completed'] and game['home_score'] is not None and game['away_score'] is not None and game['home_score']!=game['away_score']:
             if abs((instant(record['start'])-start).total_seconds())>36*3600:continue
-            record['result']={'home':game['home_score'],'away':game['away_score'],'home_won':game['home_score']>game['away_score'],'verified_at':stamp}
+            old=record.get('result') or {}
+            if old.get('home')!=game['home_score'] or old.get('away')!=game['away_score']:
+                record['result']={'home':game['home_score'],'away':game['away_score'],'home_won':game['home_score']>game['away_score'],'verified_at':stamp}
     return records
 
 def accuracy_report(records, season, stamp):

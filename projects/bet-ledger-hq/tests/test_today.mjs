@@ -32,6 +32,11 @@ test("provider quota is visible without leaking errors",()=>{
   assert.ok(h.warnings.some(x=>/quota/.test(x)));assert.ok(!JSON.stringify(h).includes("secret"));
 });
 test("healthy publication is not a sheet sync status",()=>assert.equal(C.health("nfl",bundle,now).status,"recent"));
+test("fresh NHL publication exposes incomplete sources and prices",()=>{
+  const h=C.health("nhl",{meta:{generated_at:stamp,source_status:"partial",odds_health:{status:"partial",upcoming_games:5,priced_games:0}}},now);
+  assert.equal(h.freshness,"recent");assert.equal(h.coverage,"review");assert.equal(h.status,"review");
+  assert.ok(h.warnings.some(x=>/No upcoming games/.test(x)));assert.ok(h.warnings.some(x=>/source feeds/.test(x)));
+});
 const bets=[
  {app:"nfl-lab",sport:"NFL",event:"DEN @ KC",event_date:start,status:"Pending",stake:10},
  {app:"props",sport:"NFL",event:"Denver Broncos @ Kansas City Chiefs",event_date:start,status:"Pending",stake:5},

@@ -608,6 +608,16 @@ class GradingTests(unittest.TestCase):
         self.assertEqual(values[("rrice", "Anytime touchdown")], 1)
         self.assertEqual(values[("tkelce", "Anytime touchdown")], 0)
 
+    def test_ambiguous_abbreviated_names_stay_ungraded(self):
+        from pipeline.grade import grade_leg, market_values
+        summary = self._summary()
+        summary['boxscore']['players'][0]['statistics'][1]['athletes'].append(
+            {'athlete': {'displayName': 'Robert Rice', 'id': 'different'}, 'stats': ['2', '10', '0']})
+        values = market_values(summary)
+        self.assertNotIn(('rrice', 'Receiving yards'), values)
+        self.assertIsNone(grade_leg({'player': 'Rashee Rice', 'market': 'Receiving yards', 'side': 'over', 'line': 58.5}, values))
+        self.assertEqual(values[('tkelce', 'Receptions')], 4)
+
     def test_legs_are_graded_win_loss_and_push(self):
         from pipeline.grade import grade_leg, market_values
         values = market_values(self._summary())

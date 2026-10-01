@@ -63,6 +63,7 @@ class NHLSourcesTests(unittest.TestCase):
             if '/schedule/' in url: return {'gameWeek': [{'games': [copy.deepcopy(GAME)]}], 'oddsPartners': PARTNERS}
             if '/standings/' in url: return standings
             if '/team/summary' in url: return summary
+            if '/goalie/summary' in url: return {'data':[]}
             raise AssertionError(url)
         with tempfile.TemporaryDirectory() as temp:
             state, out = Path(temp)/'state', Path(temp)/'data'; out.mkdir()
@@ -77,6 +78,8 @@ class NHLSourcesTests(unittest.TestCase):
             self.assertTrue(all('Starting goalies not both confirmed' in r['reasons'] for r in board))
             records = json.loads((state/'model_accuracy.json').read_text())
             self.assertEqual(records['401234']['nhl_game_id'], str(GAME['id']))
+            self.assertEqual(meta['challenger']['mode'],'shadow-only')
+            self.assertIsNotNone(records['401234']['challenger'])
             self.assertFalse(any(k.startswith('nhl-schedule-') for k in json.loads((state/'sources.json').read_text())))
 
     def test_both_current_schedule_failures_retain_original_publication(self):

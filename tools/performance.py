@@ -57,7 +57,9 @@ def normalize(sport, row):
         'season':row.get('season') or start.year,'version':row.get('model_version') or row.get('version') or row.get('snapshot_policy') or 'legacy',
         'p':p,'y':int(h>a),'market':market,'margin':margin,'total':total,
         'market_margin':-spread if spread is not None else None,'market_total':number(row.get('market_total')),
-        'actual_margin':h-a,'actual_total':h+a,'home_score':h,'away_score':a},None
+        'actual_margin':h-a,'actual_total':h+a,'home_score':h,'away_score':a,
+        'result_at':result.get('verified_at') if nhl else row.get('graded_at'),
+        'challenger':row.get('challenger') if nhl else None},None
 
 def season_of(row):
     value = row.get("season")

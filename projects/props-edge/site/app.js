@@ -46,6 +46,7 @@
     });
     const [meta, legs, parlays] = await Promise.all([get('meta.json'), get('legs.json').catch(() => []), get('parlays.json').catch(() => ({ tickets: [] }))]);
     state.meta = meta; state.legs = Array.isArray(legs) ? legs : []; state.parlays = parlays || { tickets: [] };
+    window.dispatchEvent(new CustomEvent('props:data'));
   }
 
   function freshness() {
@@ -325,6 +326,7 @@
         <button data-field="remove" class="ghost">Remove</button>
       </div>
     </article>`).join('') : '<div class="empty">No bets saved. Add a parlay from the Parlay lab or a single from the board.</div>';
+    window.dispatchEvent(new CustomEvent('props:ledger'));
   }
 
   function exportLedger() {
@@ -549,7 +551,10 @@
         setTimeout(() => { button.textContent = 'Copy legs'; }, 1600);
       }
       if (button.dataset.action === 'ledger') {
-        addEntry({ title: `${ticket.leg_count}-leg parlay · ${ticket.scope === 'game' ? ticket.label : ticket.scope}`, price_american: american, legs: text, model_prob: probability, kind: 'parlay' });
+        try {
+          const snapshot=window.PropsParlays.snapshot(ticket,legs);
+          addEntry({ title: `${ticket.leg_count}-leg parlay · ${ticket.scope === 'game' ? ticket.label : ticket.scope}`, price_american: american, legs: text, model_prob: probability, kind: 'parlay',parlay_snapshot:snapshot,event_date:Q.day(snapshot.start_time),matchup:ticket.games.join(' / '),settlement_mode:'auto' });
+        } catch(error){alert(error.message);}
 
       }
       if (button.dataset.action === 'card') openCard(parlayCardPayload(ticket));
@@ -561,6 +566,7 @@
       if(field==='stake'&&(!Number.isFinite(Number(event.target.value))||Number(event.target.value)<=0)){renderLedger();return;}
       if(field==='price_american'&&!Q.validPrice(event.target.value)){renderLedger();return;}
       entry[field] = ['stake','price_american'].includes(field) ? Number(event.target.value) : event.target.value;
+      if(field==='result')entry.settlement_mode='manual';
       saveLedger(); renderLedger();
     });
     $('#ledger').addEventListener('click', (event) => {
@@ -634,7 +640,7 @@
       await load();
       freshness();
       const tab = new URLSearchParams(location.search).get('tab')==='accuracy'?'accuracy':(location.hash || '#parlays').slice(1);
-      showTab(['parlays','sheet','board','record','ledger','best','projections','simulator','accuracy','sources'].includes(tab)?tab:'parlays');
+      showTab(['parlays','parlay-history','sheet','board','record','ledger','best','projections','simulator','accuracy','sources'].includes(tab)?tab:'parlays');
     } catch (error) {
       $('#freshness').textContent = 'The model files could not be loaded. The last build may still be running.';
       $('#parlays').innerHTML = `<div class="empty">${esc(error.message)}</div>`;

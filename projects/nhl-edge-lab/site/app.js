@@ -44,6 +44,13 @@
     if(filter==='final')games=games.filter(g=>g.completed);
     const expanded=new Set([...document.querySelectorAll('.game-card details[open]')].map(d=>d.closest('[data-game]').dataset.game));
     $('#games').innerHTML=games.length?games.map(card).join(''):'<div class="empty">'+(filter==='qualified'?'No NHL picks meet every qualification check for this date. Switch to All matchups to inspect forecasts and the reasons.':'No games in this published date window. Choose another date or use Next game day.')+'</div>';
+    for(const article of $('#games').querySelectorAll('[data-game]')){
+      const g=games.find(x=>x.game_id===article.dataset.game),c=g?.challenger;
+      if(!c)continue;
+      const panel=document.createElement('div');panel.className='note';panel.style.padding='12px 18px';
+      panel.innerHTML='<b>CONTEXT CHALLENGER · RESEARCH ONLY</b><p>'+esc(g.home)+' win: '+pct(c.p_home)+' vs baseline '+pct(g.p_home)+' · OT/SO tie-break '+pct(c.ot_home_probability)+'</p><p>'+['home','away'].map(s=>{const a=c.adjustments?.[s]||{};return esc(g[s])+': shots '+fmt(a.shots,3)+', special teams '+fmt(a.special_teams,3)+', opposing goalie '+fmt(a.opponent_goalie,3)+' goals';}).join(' · ')+'</p><p>'+esc((c.missing||[]).join('; ')||'All context components available.')+'</p><a href="../bet-ledger-hq/#accuracy" target="_top">Compare frozen results in Performance Center →</a>';
+      article.querySelector('.deep-dive')?.append(panel);
+    }
     document.querySelectorAll('.game-card').forEach(c=>{if(expanded.has(c.dataset.game))c.querySelector('details').open=true;});
     const teams=data.standings.teams.filter(t=>$('#conference').value==='all'||t.conference===$('#conference').value).sort((a,b)=>(b.points||0)-(a.points||0)||(b.goal_diff||0)-(a.goal_diff||0)||a.abbr.localeCompare(b.abbr));
     $('#standings-note').textContent='Current-season standings. Matchup comparisons use clearly labelled prior-season rates when the current season has no sample.';

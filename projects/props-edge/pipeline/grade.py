@@ -30,6 +30,17 @@ def name_key(value: str) -> str:
 def market_values(summary: dict[str, Any]) -> dict[tuple[str, str], float]:
     """Every stat in one box score, keyed by player and the market it settles."""
     values: dict[tuple[str, str], float] = {}
+    # ESPN names can be abbreviated. Never settle two distinct athletes that
+    # collapse to the same first-initial/surname identity in one event.
+    athletes_by_key = {}
+    for team_index, team_block in enumerate(((summary.get("boxscore") or {}).get("players") or [])):
+        for stat_group in team_block.get("statistics") or []:
+            for row in stat_group.get("athletes") or []:
+                athlete = row.get("athlete") or {}
+                name = str(athlete.get("displayName") or "")
+                if name:
+                    identity = str(athlete.get("id") or f"{team_index}:{name.casefold()}")
+                    athletes_by_key.setdefault(name_key(name), set()).add(identity)
     for team_block in ((summary.get("boxscore") or {}).get("players") or []):
         for stat_group in team_block.get("statistics") or []:
             group = str(stat_group.get("type") or stat_group.get("name") or "")
@@ -39,6 +50,8 @@ def market_values(summary: dict[str, Any]) -> dict[tuple[str, str], float]:
                 if not player or athlete_row.get("didNotPlay") or athlete_row.get("inactive"):
                     continue
                 key = name_key(player)
+                if len(athletes_by_key.get(key, set())) != 1:
+                    continue
                 for name, raw in zip(names, athlete_row.get("stats") or []):
                     combined = re.match(r"^\s*(\d+(?:\.\d+)?)\s*/\s*(\d+(?:\.\d+)?)\s*$", str(raw))
                     if "passing" in group.casefold() and combined and "c" in str(name).casefold():

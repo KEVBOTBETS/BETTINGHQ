@@ -29,7 +29,8 @@ on:
 permissions:
   contents: read
 concurrency:
-  group: kevbot-release
+  # PR testing must not occupy the production refresh queue.
+  group: ${{ github.event_name == 'pull_request' && format('kevbot-pr-{0}', github.event.pull_request.number) || 'kevbot-release' }}
   cancel-in-progress: false
 
 jobs:
@@ -61,10 +62,37 @@ jobs:
       - run: pip install -r requirements-lock.txt
       - run: npm ci --ignore-scripts
         working-directory: projects/bet-ledger-hq
+      - name: Fingerprint release code
+        id: code
+        run: echo "fingerprint=$(python tools/release_fingerprint.py)" >> "$GITHUB_OUTPUT"
+      - name: Restore exact successful browser certificate
+        id: visual
+        uses: actions/cache/restore@v6
+        with:
+          path: .validation/browser-certificate
+          key: browser-${{ runner.os }}-py312-node22-${{ steps.code.outputs.fingerprint }}
       - run: npx playwright install --with-deps chromium
+        if: github.event_name != 'schedule' || steps.visual.outputs.cache-hit != 'true'
         working-directory: projects/bet-ledger-hq
       - name: Offline release checks
-        run: python tools/verify.py --browser
+        env:
+          REUSE_BROWSER: ${{ github.event_name == 'schedule' && steps.visual.outputs.cache-hit == 'true' }}
+          CODE_FINGERPRINT: ${{ steps.code.outputs.fingerprint }}
+        run: |
+          if [ "$REUSE_BROWSER" = true ]; then
+            python tools/verify.py
+            echo "Reusing successful browser checks for identical release code; data integrity checks ran again." >> "$GITHUB_STEP_SUMMARY"
+          else
+            python tools/verify.py --browser
+            mkdir -p .validation
+            echo "$CODE_FINGERPRINT" > .validation/browser-certificate
+          fi
+      - name: Save successful browser certificate
+        if: steps.visual.outputs.cache-hit != 'true'
+        uses: actions/cache/save@v6
+        with:
+          path: .validation/browser-certificate
+          key: browser-${{ runner.os }}-py312-node22-${{ steps.code.outputs.fingerprint }}
       - name: Refresh real data
         if: github.event_name != 'pull_request'
         env:
@@ -72,8 +100,9 @@ jobs:
           EVENT_SCHEDULE: ${{ github.event.schedule }}
           MLB_SEASON: ${{ vars.MLB_SEASON || '2026' }}
           MLB_BANKROLL: ${{ vars.MLB_BANKROLL || '250' }}
-          ODDS_API_IO_KEY: ${{ secrets.ODDS_API_IO_KEY }}
-          THE_ODDS_API_KEY: ${{ secrets.THE_ODDS_API_KEY }}
+          # Explicitly keyless: optional commercial adapters remain disabled.
+          ODDS_API_IO_KEY: ''
+          THE_ODDS_API_KEY: ''
         run: |
           sport="$REQUESTED_SPORT"
           if [ "$EVENT_SCHEDULE" = '53 12-23 * * 0' ] || [ "$EVENT_SCHEDULE" = '53 15-23 * * 1,4,5,6' ]; then sport=football; fi
