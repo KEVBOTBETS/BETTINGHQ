@@ -1,29 +1,57 @@
 {
   "schema": 1,
-  "checked_at": "2026-10-01T18:04:38.739Z",
+  "checked_at": "2026-10-01T18:26:21.398Z",
   "coverage": {
+    "nhl": {
+      "status": "available",
+      "reports": 93,
+      "checked_at": "2026-10-01T18:26:21.398Z"
+    },
+    "nfl": {
+      "status": "available",
+      "reports": 454,
+      "checked_at": "2026-10-01T18:26:21.398Z"
+    },
     "ncaaf": {
       "status": "empty",
       "reports": 0,
-      "checked_at": "2026-10-01T18:04:38.739Z"
+      "checked_at": "2026-10-01T18:26:21.398Z"
     },
     "mlb": {
       "status": "available",
       "reports": 40,
-      "checked_at": "2026-10-01T18:04:38.739Z"
-    },
-    "nhl": {
-      "status": "available",
-      "reports": 94,
-      "checked_at": "2026-10-01T18:04:38.739Z"
-    },
-    "nfl": {
-      "status": "available",
-      "reports": 494,
-      "checked_at": "2026-10-01T18:04:38.739Z"
+      "checked_at": "2026-10-01T18:26:21.398Z"
     }
   },
   "events": [
+    {
+      "id": "injury|nhl:16:Ben Kindel|2026-10-01T18:26:21.398Z",
+      "kind": "injury",
+      "observed_at": "2026-10-01T18:26:21.398Z",
+      "sport": "nhl",
+      "title": "New availability report",
+      "event": "Pittsburgh Penguins",
+      "pick": "Ben Kindel",
+      "before": "Not in the previous dated report",
+      "after": "Injured Reserve · Lower Body",
+      "source_quote_at": "2026-10-01T18:03Z",
+      "source": "ESPN injuries",
+      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
+    },
+    {
+      "id": "injury|nfl:3:Anthony Johnson Jr.|2026-10-01T18:26:21.398Z",
+      "kind": "injury",
+      "observed_at": "2026-10-01T18:26:21.398Z",
+      "sport": "nfl",
+      "title": "Player availability changed",
+      "event": "Chicago Bears",
+      "pick": "Anthony Johnson Jr.",
+      "before": "Injured Reserve · Undisclosed",
+      "after": "Out · Undisclosed",
+      "source_quote_at": "2026-10-01T18:00Z",
+      "source": "ESPN injuries",
+      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
+    },
     {
       "id": "odds|props|401872973|2026-10-04T17:00Z|Rushing yards|Tony Pollard|over|bet365|2026-10-01T18:04:38.739Z",
       "kind": "odds",
@@ -2892,34 +2920,6 @@
       "before": "Not in the previous dated report",
       "after": "Injured Reserve · Knee - Meniscus",
       "source_quote_at": "2026-09-30T20:35Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:19:Andrew Thomas|2026-10-01T12:04:35.484Z",
-      "kind": "injury",
-      "observed_at": "2026-10-01T12:04:35.484Z",
-      "sport": "nfl",
-      "title": "New availability report",
-      "event": "New York Giants",
-      "pick": "Andrew Thomas",
-      "before": "Not in the previous dated report",
-      "after": "Questionable · Groin",
-      "source_quote_at": "2026-09-30T20:17Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:20:Demario Davis|2026-10-01T12:04:35.484Z",
-      "kind": "injury",
-      "observed_at": "2026-10-01T12:04:35.484Z",
-      "sport": "nfl",
-      "title": "New availability report",
-      "event": "New York Jets",
-      "pick": "Demario Davis",
-      "before": "Not in the previous dated report",
-      "after": "Active · Davis recorded 10 tackles (seven solo) including 1.0 sacks during Sunday's 31-24 loss at Detroit.",
-      "source_quote_at": "2026-10-01T01:51Z",
       "source": "ESPN injuries",
       "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
     }
