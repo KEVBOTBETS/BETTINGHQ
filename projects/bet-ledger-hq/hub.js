@@ -3,6 +3,8 @@
 (() => {
   "use strict";
   const configs = {
+    "ncaaf-newsletter":{title:"NCAAF newsletter",description:"Weekly college football stories, matchups and playoff context.",url:"newsletter.html?sport=ncaaf"},
+    "nfl-newsletter":{title:"NFL newsletter",description:"Weekly NFL stories, matchups and playoff context.",url:"newsletter.html?sport=nfl"},
     desk:{title:"Sports Desk",description:"Seven leagues. Scores, standings, headlines and matchup research.",url:"sports-desk.html"},
     nba:{title:"NBA Courtside",description:"NBA scores and team research. Model qualification awaits validation.",url:"sports-desk.html?sport=nba"},
     ncaab:{title:"NCAAB Courtside",description:"College hoops scores and team research. Model qualification awaits validation.",url:"sports-desk.html?sport=ncaab"},
@@ -81,7 +83,7 @@
     links.forEach(link=>{if(link.hash==="#"+key)link.setAttribute("aria-current","page");else link.removeAttribute("aria-current");});
     if(matchMedia('(max-width:760px)').matches){
       const nav=document.querySelector('.boards'),selected=links.find(link=>link.hash==='#'+key);
-      if(selected){const a=selected.getBoundingClientRect(),b=nav.getBoundingClientRect();if(a.left<b.left)nav.scrollLeft-=b.left-a.left;else if(a.right>b.right)nav.scrollLeft+=a.right-b.right;}
+      if(selected&&nav.contains(selected)){const a=selected.getBoundingClientRect(),b=nav.getBoundingClientRect();if(a.left<b.left)nav.scrollLeft-=b.left-a.left;else if(a.right>b.right)nav.scrollLeft+=a.right-b.right;}
     }
     document.querySelector("#board-title").textContent=configs[key].title;
     document.querySelector("#board-description").textContent=configs[key].description;

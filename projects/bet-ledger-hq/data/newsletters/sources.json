@@ -1,0 +1,50 @@
+[
+  {
+    "name": "ESPN",
+    "url": "https://www.espn.com/",
+    "status": "Connected",
+    "use": "Schedules, published book quotes, headlines, team records and game results. Quotes carry capture times; missing prices never qualify a bet."
+  },
+  {
+    "name": "nflverse",
+    "url": "https://nflverse.nflverse.com/",
+    "status": "Connected \u00b7 NFL history",
+    "use": "Existing historical NFL inputs and reproducible research. New features require chronological testing before promotion."
+  },
+  {
+    "name": "Open-Meteo",
+    "url": "https://open-meteo.com/",
+    "status": "Connected \u00b7 weather",
+    "use": "Keyless kickoff forecasts. Usage terms apply. NFL uses its existing weather rules; college forecasts remain review context."
+  },
+  {
+    "name": "National Weather Service",
+    "url": "https://www.weather.gov/documentation/services-web-API",
+    "status": "Connected \u00b7 NFL fallback",
+    "use": "US hourly forecasts when primary kickoff weather is missing. Source and forecast hour are preserved. No key required; User-Agent required."
+  },
+  {
+    "name": "Covers / VegasInsider / OddsChecker",
+    "url": "https://www.covers.com/",
+    "status": "Research links",
+    "use": "Useful for manually checking lines and matchup history. No automated historical odds feed or line-shopping coverage is claimed."
+  },
+  {
+    "name": "PFF / Action Network / The Athletic",
+    "url": "https://www.pff.com/",
+    "status": "Premium research",
+    "use": "Potential injury, tactical and efficiency context. Restricted content is not scraped or used as an unseen model feature."
+  },
+  {
+    "name": "Sportsbooks / prop menus",
+    "url": "https://www.draftkings.com/",
+    "status": "Published quotes only",
+    "use": "The current ESPN book feed supplies supported markets. Login, location and protected sportsbook screens are not bypassed."
+  },
+  {
+    "name": "NFL / CFP",
+    "url": "https://collegefootballplayoff.com/",
+    "status": "Official context",
+    "use": "Rules and selection-process links for playoff research. No invented playoff odds or guaranteed matchup advantages."
+  }
+]

@@ -5,5 +5,13 @@ const day=v=>{const d=new Date(v);return Number.isFinite(d.getTime())?new Intl.D
 const safeUrl=v=>{try{const u=new URL(v);return u.protocol==='https:'?u.href:'';}catch{return '';}};
 function events(data){return (data.events||[]).flatMap(e=>{const c=e.competitions?.[0];if(!c)return [];const status=c.status?.type||e.status?.type||{},sides=['away','home'].map(side=>{const x=c.competitors?.find(t=>t.homeAway===side);if(!x)return null;return {name:x.team?.displayName||'TBD',abbr:x.team?.abbreviation||'TBD',logo:safeUrl(x.team?.logo),score:x.score??null,rank:x.curatedRank?.current<26?x.curatedRank.current:null,record:x.records?.find(r=>r.type==='total'||r.name==='overall')?.summary||x.records?.[0]?.summary||null,stats:(x.statistics||[]).slice(0,4).map(s=>({name:s.abbreviation||s.shortDisplayName||s.name,value:s.displayValue??s.value})),leader:(x.leaders?.[0]?.leaders||[]).map(l=>[l.athlete?.displayName,l.displayValue].filter(Boolean).join(' · '))[0]||null};});if(sides.some(x=>!x))return [];return [{id:String(e.id),date:e.date,state:status.state||'pre',status:status.shortDetail||status.description||'Status unavailable',away:sides[0],home:sides[1],venue:c.venue?.fullName||'',broadcast:(c.broadcasts||[]).flatMap(b=>b.names||[]).join(' · '),url:safeUrl((e.links||[]).find(l=>l.rel?.includes('summary'))?.href||e.links?.[0]?.href)}];});}
 function standings(data){const groups=[];function walk(d,label=''){const s=d.standings;if(s?.entries?.length)groups.push({label:d.name||label,entries:s.entries});for(const c of d.children||[])walk(c,d.name||label);}walk(data);return groups;}
-root.KevSportsDesk={leagues,day,safeUrl,events,standings};
+function spotlight(rows){
+ const evening=rows.filter(g=>{const d=new Date(g.date);return Number.isFinite(d.getTime())&&Number(new Intl.DateTimeFormat('en-US',{timeZone:'America/Toronto',hour:'2-digit',hourCycle:'h23'}).format(d))>=18;});
+ if(evening.length===1)return {game:evening[0],reason:'Tonight’s only game'};
+ if(rows.length===1)return {game:rows[0],reason:'The day’s only game'};
+ const live=rows.find(g=>g.state==='in');if(live)return {game:live,reason:'Live game spotlight'};
+ const upcoming=[...rows].filter(g=>g.state==='pre').sort((a,b)=>new Date(a.date)-new Date(b.date));
+ const game=upcoming[0]||rows[0];return game?{game,reason:upcoming.length?'Next kickoff / tipoff':'Final score spotlight'}:null;
+}
+root.KevSportsDesk={spotlight,leagues,day,safeUrl,events,standings};
 })(typeof window==='undefined'?globalThis:window);

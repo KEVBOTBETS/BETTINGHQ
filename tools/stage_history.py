@@ -4,6 +4,7 @@ import subprocess
 ROOT=Path(__file__).resolve().parents[1]
 patterns=[
     'projects/bet-ledger-hq/data/tickets/**/*.json',
+    'projects/bet-ledger-hq/data/newsletters/**/*.json',
     'projects/mlb-edge/docs/data/*.json',
     'projects/mlb-edge/data/predictions.json',
     'projects/mlb-edge/data/shadow.json',
