@@ -76,7 +76,8 @@ try{
     await frame.getByRole("heading",{name:"Prediction accuracy across every board"}).waitFor({state:"visible"});
     await frame.getByRole("button",{name:"Exposure",exact:true}).click();
     await frame.getByText("Connect and sync in Ledger").waitFor();
-    assert.equal(await page.locator(".board-link").count(),13);
+    assert.deepEqual(await page.locator(".board-link").evaluateAll(links=>links.map(a=>a.hash).sort()),
+      ["#desk","#today","#ledger","#accuracy","#football","#moneyline","#mlb","#nfl","#ncaaf","#nhl","#wnba","#nba","#ncaab","#props","#ladder","#archive"].sort());
     assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth));
     const child=page.frames().find(f=>f.url().endsWith("today.html"));
     assert.ok(await child.evaluate(()=>document.documentElement.scrollWidth<=innerWidth));
@@ -88,6 +89,11 @@ try{
     await frame.getByRole("button",{name:"Today's board",exact:true}).click();
     await mkdir("test-results",{recursive:true});
     await page.screenshot({path:"test-results/today-"+width+".png"});
+    for(const [name,key] of [["Sports Desk","desk"],["NBA","nba"],["NCAAB","ncaab"]]){
+      await page.getByRole("link",{name,exact:true}).click();
+      await page.frameLocator("#frame-"+key).locator("#desk-title").waitFor();
+      assert.equal(await page.getByRole("link",{name,exact:true}).getAttribute("aria-current"),"page");
+    }
     await page.getByRole('link',{name:'Tickets & results',exact:true}).click();
     const archive=page.frameLocator('#frame-archive');
     await archive.locator('#archive-select option').first().waitFor({state:'attached'});
