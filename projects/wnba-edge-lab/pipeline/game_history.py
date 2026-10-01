@@ -17,6 +17,23 @@ def call(row, league, historical=False):
                 "graded_at": row.get("graded_at")} if historical else {})}
 
 
+def market_snapshot(row):
+    """Only an actually collected, fresh pair from one book; never backfill."""
+    from datetime import datetime, timezone
+    odds = row.get('odds') or {}; quotes = odds.get('quotes') or {}
+    home, away = quotes.get('home_ml') or {}, quotes.get('away_ml') or {}
+    h, a = A.number(home.get('price')), A.number(away.get('price'))
+    observed = A.instant(odds.get('fetched_at')); start = A.instant(row.get('tipoff') or row.get('date'))
+    now = datetime.now(timezone.utc)
+    book = home.get('book') or odds.get('book')
+    if not book or book != (away.get('book') or odds.get('book')): return None
+    if not observed or not start or observed >= start or now >= start or not 0 <= (now-observed).total_seconds() <= 5400: return None
+    if h is None or a is None or abs(h)<100 or abs(a)<100: return None
+    ph, pa = [1/(1 + (p/100 if p>0 else 100/-p)) for p in (h,a)]
+    return {'p_home':ph/(ph+pa),'home_price':h,'away_price':a,'book':book,
+            'observed_at':odds['fetched_at'],'method':'same-book proportional no-vig'}
+
+
 def game(row, league):
     p = row.get("projection") or {}
     o = row.get("odds") or {}
@@ -26,7 +43,7 @@ def game(row, league):
             "completed": row.get("completed"),
             "matchup": row.get("matchup") or f'{away.get("abbr")} @ {home.get("abbr")}',
             "margin": p.get("mu", p.get("margin")), "total": p.get("proj_total", p.get("total")),
-            "probability": row.get("p_home"),
+            "probability": row.get("p_home"), "market_snapshot": market_snapshot(row),
             "market_spread": o.get("spread_home", -p["market_margin"] if p.get("market_margin") is not None else None),
             "market_total": o.get("total", p.get("market_total"))}
 

@@ -163,6 +163,9 @@ def build(target_date: str | None = None, days: int | None = None, offline: bool
     for game in window_games:
         if game.get("season_type") not in {2, 3}:
             continue
+        # A bracket placeholder is a schedule slot, not a modelable matchup.
+        if any(str(game.get(side, {}).get("abbr") or "").upper() in {"", "TBD", "TBA", "UNKNOWN"} for side in ("home", "away")):
+            continue
         prior = [row for row in history if row["tipoff"] < game["tipoff"]]
         game["days_out"] = (_date(game["date"]) - selected).days
         venue_team = game["home"]["abbr"]

@@ -3,7 +3,10 @@
 (() => {
   "use strict";
   const configs = {
-    accuracy:{title:"Accuracy",description:"Every forecast, including predictions you did not bet.",url:"accuracy.html"},
+    desk:{title:"Sports Desk",description:"Seven leagues. Scores, standings, headlines and matchup research.",url:"sports-desk.html"},
+    nba:{title:"NBA Courtside",description:"NBA scores and team research. Model qualification awaits validation.",url:"sports-desk.html?sport=nba"},
+    ncaab:{title:"NCAAB Courtside",description:"College hoops scores and team research. Model qualification awaits validation.",url:"sports-desk.html?sport=ncaab"},
+    accuracy:{title:"Performance Center",description:"Frozen forecasts, calibration and like-for-like market benchmarks.",url:"accuracy.html"},
     nhl:{title:"NHL Ice Lab",description:"Hockey matchups, goalie watch, team stats and qualified picks.",url:"../nhl-edge-lab/"},
     wnba:{title:"WNBA Edge Lab",description:"WNBA matchups, best bets and forecast accuracy.",url:"../wnba-edge-lab/"},
     ladder:{title:"Ladder",description:"Ladder options, simulation and your shared ledger.",url:"../ladderbet/"},

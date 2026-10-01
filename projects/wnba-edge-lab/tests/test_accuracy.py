@@ -103,3 +103,15 @@ class AccuracyTests(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+class PlaceholderIntegrity(unittest.TestCase):
+    def test_placeholder_never_freezes_or_counts_but_audit_survives(self):
+        from pipeline import model_accuracy as A
+        row={'kind':'game','league':'WNBA','event_id':'tbd','matchup':'TBD @ TBD','start':'2026-10-02T20:00Z','probability':.7,'margin':5,'total':160}
+        log=A.record({},[row],now='2026-10-01T20:00Z')
+        self.assertEqual(log['records'],{})
+        old={**row,'id':'old','result':'Graded','actual_margin':5,'actual_total':160}
+        result=A.report({'records':{'old':old}})
+        self.assertEqual(result['games']['graded'],0)
+        self.assertEqual(result['excluded_unresolved_teams'],1)
+        self.assertEqual(len(result['records']),1)
