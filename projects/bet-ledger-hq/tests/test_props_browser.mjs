@@ -98,6 +98,9 @@ try {
     await page.route('**/data/legs.json*', route => route.fulfill({contentType: 'application/json', body: JSON.stringify(legs)}));
     await page.route('**/data/parlays.json*', route => route.fulfill({contentType: 'application/json', body: JSON.stringify(parlays)}));
     await page.route('**/data/meta.json*', route => route.fulfill({contentType: 'application/json', body: JSON.stringify(meta)}));
+    const nflGames=[{game_id:'401',date:start,week:4,season_type:2,away:'BUF',home:'HOU',away_name:'Buffalo Bills',home_name:'Houston Texans'}, {game_id:'499',date:start,week:4,season_type:2,away:'KC',home:'DEN'}, {game_id:'500',date:'2027-01-01T18:00Z',week:5,season_type:2,away:'DAL',home:'NYG'}];
+    await page.route('**/nfl-edge-lab/data/games.json*',route=>route.fulfill({contentType:'application/json',body:JSON.stringify(nflGames)}));
+    await page.route('**/nfl-edge-lab/data/meta.json*',route=>route.fulfill({contentType:'application/json',body:JSON.stringify({season:2026,current_week:{season_type:2,week:4},generated_at:new Date().toISOString()})}));
     const archive={schema:1,generated_at:'2026-12-21T12:00:00Z',records:parlays.tickets.map(t=>({...t,captured_at:'2026-12-19T12:00:00Z',result:'Pending'}))};
     let finalResults=[];
     await page.route('**/data/parlay-history.json*',route=>route.fulfill({contentType:'application/json',body:JSON.stringify(archive)}));
@@ -222,6 +225,30 @@ try {
 
     assert.ok(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth), 'no sideways scroll at ' + width);
     assert.deepEqual(errors, []);
+    // Weekly matchup rankings reuse the current published legs and card studio.
+    await page.evaluate(()=>{for(const l of window.PropsApp.state.legs)l.updated_at=new Date().toISOString();});
+    await page.locator('[data-tab="games"]').click();
+    await page.locator('.game-props-card').first().waitFor();
+    assert.equal(await page.locator('#game-week').inputValue(),'2:4');
+    assert.equal(await page.locator('.game-props-card').count(),2);
+    assert.equal(await page.locator('.game-props-rows li').count(),2);
+    assert.match(await page.locator('[data-game="499"]').textContent(),/No recent supported props/);
+    assert.equal(await page.locator('#game-week option').count(),18);
+    await page.locator('#game-team').fill('buffalo');
+    assert.equal(await page.locator('.game-props-card').count(),1);
+    assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1),'weekly cards fit viewport');
+    await page.screenshot({path:`test-results/props-games-${width}.png`,fullPage:true});
+    await page.locator('[data-game-action="card"]').click();
+    await page.waitForFunction(()=>document.querySelector('#card-status').textContent.includes('TOP 2'));
+    assert.match(await page.locator('#card-status').textContent(),/BUF @ HOU/);
+    await page.locator('#card-close').click();
+    await page.locator('#game-team').fill('');
+    await page.locator('#game-week-next').click();
+    assert.equal(await page.locator('#game-week').inputValue(),'2:5');
+    assert.equal(await page.locator('.game-props-card').count(),1);
+    await page.locator('#game-week-prev').click();
+    assert.equal(await page.locator('#game-week').inputValue(),'2:4');
+    assert.deepEqual(errors,[],'weekly props cause no script errors');
     await context.close();
   }
   console.log('Props browser: parlay targets, same-game scope, cheat sheet, board, ledger and card studio passed');

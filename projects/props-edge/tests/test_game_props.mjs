@@ -1,0 +1,17 @@
+import assert from 'node:assert/strict';
+import C from '../site/game-props-core.js';
+const now=Date.parse('2026-10-01T20:00Z'),game={game_id:'401',date:'2026-10-04T18:00Z',week:4,season_type:2},at='2026-10-01T19:00Z';
+const leg=(id,extra={})=>({id,event_id:'401',sport:'NFL',player:'Player '+id,market:'Receiving yards',side:'over',line:50.5,model_prob:.6,samples:8,line_source:'Posted line',updated_at:at,start_time:game.date,...extra});
+const options={now,generatedAt:at};
+const rows=[leg('research',{model_prob:.9}),leg('qualified',{price_source:'book',price_american:-110,tier:'GOOD',edge:.05}),leg('held',{price_source:'book',price_american:-110,tier:'BEST BET',edge:.5,held:true}),leg('duplicate',{player:'Player qualified',side:'under',line:60.5}),leg('old',{updated_at:'2026-09-29T00:00Z'}),leg('wrong',{event_id:'402'}),leg('out',{status:'Out'}),leg('thin',{samples:2}),leg('invented',{line_source:null}),leg('invalid',{model_prob:null})];
+const ranked=C.rank(game,rows,options);
+assert.equal(ranked[0].id,'qualified');assert.equal(ranked[0].game_prop_qualified,true);
+assert.equal(ranked.find(l=>l.id==='held').game_prop_qualified,false);
+assert.deepEqual(new Set(ranked.map(l=>l.id)),new Set(['qualified','research','held']));
+assert.equal(C.rank({...game,completed:true},rows,options).length,0);
+assert.equal(C.rank({...game,date:'2026-10-01T19:00Z'},rows,options).length,0);
+assert.equal(C.rank(game,Array.from({length:20},(_,i)=>leg(String(i))),options).length,10);
+assert.equal(C.rank(game,[leg('fallback',{updated_at:undefined})],options).length,1);
+assert.equal(C.weeks([game]).filter(w=>w.season_type===2).length,18);
+assert.equal(C.weekKey({...game,season_type:1}),'1:4');
+console.log('Weekly game props: freshness, ranking, event identity, deduplication, quota and all 18 weeks passed.');

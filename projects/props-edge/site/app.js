@@ -640,14 +640,14 @@
       await load();
       freshness();
       const tab = new URLSearchParams(location.search).get('tab')==='accuracy'?'accuracy':(location.hash || '#parlays').slice(1);
-      showTab(['parlays','parlay-history','sheet','board','record','ledger','best','projections','simulator','accuracy','sources'].includes(tab)?tab:'parlays');
+      showTab(['games','parlays','parlay-history','sheet','board','record','ledger','best','projections','simulator','accuracy','sources'].includes(tab)?tab:'parlays');
     } catch (error) {
       $('#freshness').textContent = 'The model files could not be loaded. The last build may still be running.';
       $('#parlays').innerHTML = `<div class="empty">${esc(error.message)}</div>`;
     }
   }
 
-  window.PropsApp={state,showTab,esc,odds,pct,money,clock,addEntry,saveLedger,renderLedger,readStore,writeStore,LEDGER_KEY,ticketPrice,parlayCardPayload,
+  window.PropsApp={state,showTab,esc,odds,pct,money,clock,addEntry,saveLedger,renderLedger,readStore,writeStore,LEDGER_KEY,ticketPrice,parlayCardPayload,openCard,pricedLeg,
     applySharedBank:bank=>{state.sharedBank=bank;state.bank.bankroll=bank.current;$('#bankroll').value=bank.current;$('#bankroll').readOnly=true;renderLedger();},
     replaceLedger:rows=>{const unverified=state.ledger.filter(e=>!e.confirmed_actual);const ids=new Set(rows.map(e=>e.id));const next=[...rows,...unverified.filter(e=>!ids.has(e.id))];writeStore(LEDGER_KEY,next);state.ledger=next;renderLedger();}};
   state.imported = readStore(IMPORT_KEY, {});
