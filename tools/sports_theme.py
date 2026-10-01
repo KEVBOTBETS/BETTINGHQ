@@ -21,4 +21,10 @@ def apply(root):
             source = re.sub(r'<html\b', '<html data-kb-sport="'+sport+'" data-kb-page="'+identity+'"'+light, source, count=1, flags=re.I)
             href = os.path.relpath(css, page.parent).replace(os.sep, '/')
             source = re.sub(r'</head>', '<link rel="stylesheet" href="'+href+'">\n</head>', source, count=1, flags=re.I)
+            if sport != 'hq':
+                home = os.path.relpath(root/'bet-ledger-hq/index.html', page.parent).replace(os.sep, '/')
+                desk = os.path.relpath(root/'bet-ledger-hq/sports-desk.html', page.parent).replace(os.sep, '/')
+                league = sport if sport in ('nfl','ncaaf','mlb','nhl','wnba') else 'nfl'
+                nav = f'<nav class="kb-network" aria-label="Matchday network"><a href="{home}#today" target="_top">KB / {sport.upper()} LAB</a><a href="{desk}?sport={league}">SPORTS DESK ↗</a><a href="{home}#accuracy" target="_top">PERFORMANCE ↗</a></nav>'
+                source = re.sub(r'(<body\b[^>]*>)', lambda m:m[0]+nav, source, count=1, flags=re.I)
             page.write_text(source)

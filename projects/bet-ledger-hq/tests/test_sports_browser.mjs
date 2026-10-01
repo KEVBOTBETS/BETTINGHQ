@@ -12,7 +12,7 @@ try{
 for(const width of [1440,393]){
 const ctx=await browser.newContext({viewport:{width,height:1050},colorScheme:'dark',serviceWorkers:'block'});
 await ctx.route('https://**/*',r=>r.abort());
-for(const [name,url] of [['hub','bet-ledger-hq/#today'],['moneyline','bet-ledger-hq/moneyline.html'],['weekly','bet-ledger-hq/football.html'],['ledger','bet-ledger-hq/ledger.html'],['archive','bet-ledger-hq/archive.html'],['nhl','nhl-edge-lab/'],['nfl','nfl-edge-lab/'],['ncaaf','ncaaf-edge-lab/'],['mlb','mlb-edge/'],['wnba','wnba-edge-lab/'],['props','props-edge/'],['ladder','ladderbet/']]){
+for(const [name,url] of [['hub','bet-ledger-hq/#today'],['performance','bet-ledger-hq/accuracy.html'],['desk','bet-ledger-hq/sports-desk.html'],['ncaab','bet-ledger-hq/sports-desk.html?sport=ncaab'],['moneyline','bet-ledger-hq/moneyline.html'],['weekly','bet-ledger-hq/football.html'],['ledger','bet-ledger-hq/ledger.html'],['archive','bet-ledger-hq/archive.html'],['nhl','nhl-edge-lab/'],['nfl','nfl-edge-lab/'],['ncaaf','ncaaf-edge-lab/'],['mlb','mlb-edge/'],['wnba','wnba-edge-lab/'],['props','props-edge/'],['ladder','ladderbet/']]){
  const page=await ctx.newPage(),errors=[];page.on('pageerror',e=>errors.push(e.message));
  await page.goto(origin+'/'+url,{waitUntil:'networkidle'});await page.evaluate(()=>document.fonts.ready);
  if(name==='nhl'){const b=page.locator('#next');if(await b.count())await b.click();}
@@ -24,5 +24,5 @@ await ctx.close();
 await writeFile(out+'/report.json',JSON.stringify(results,null,2));
 const failures=results.filter(r=>!r.theme||!r.fonts||r.scroll>r.width+2||r.errors.length);
 assert.deepEqual(failures,[],'Every app must load its theme and fonts without script errors or horizontal page overflow');
-console.log('All 12 apps passed the sports presentation checks at desktop and mobile sizes.');
+console.log('All 15 views passed the sports presentation checks at desktop and mobile sizes.');
 }finally{await browser.close();await new Promise(r=>server.close(r));}

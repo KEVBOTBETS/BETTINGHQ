@@ -1,7 +1,7 @@
 # KEVBOTBETS — one page for every board
 
-Open **https://chillychilly14.github.io/bet-ledger-hq/** and use the navigation
-for Today, Ledger, Moneyline, MLB, NFL, NCAAF, Props and Ladder. The selected board opens inside
+Open **https://kevbotbets.github.io/BETTINGHQ/bet-ledger-hq/** and use the navigation
+for Sports Desk, Performance, Today, Ledger, Moneyline, MLB, NFL, NCAAF, NHL, WNBA, NBA/NCAAB research, Props and Ladder. The selected board opens inside
 the workspace, without a new browser tab. On phones the navigation stays at
 the bottom; on desktop it sits on the left.
 
@@ -12,7 +12,7 @@ works between selections. Reload board affects only the selected board.
 
 ## Moneyline: pick the winners
 
-Open **Moneyline** (`#moneyline`) for NFL, college football and MLB winner-only
+Open **Moneyline** (`#moneyline`) for NHL, NFL, college football and MLB winner-only
 cards. Filter by Toronto game date and sport, choose either team, or fill the
 card with the predicted winners. Selections save in this browser and lock when
 the game starts; Print card prints the selected winners. No wager or stake is
@@ -23,25 +23,25 @@ Run `npm run test:moneyline` for adapter and browser checks. See
 [the accuracy review](docs/accuracy-review-2026-09-19.md) for the confirmed MLB
 tracking defect, its companion fix, source roles and validation limits.
 
-The five sports repositories retain their own scheduled data workflows.
+The root workflow refreshes, verifies and deploys all league apps together.
 The original Ledger HQ remains at `ledger.html` and uses the same browser
 storage and shared Google Sheet. See [SETUP-SYNC.md](SETUP-SYNC.md) to enable
 cross-device syncing. No token or Google Sheet credentials belong in this repo.
 
-GitHub Pages should serve `main` from `/ (root)`. Add the hub to your phone's
+GitHub Pages is deployed by the root Actions workflow from the staged `_site`. Add the hub to your phone's
 home screen for one KEVBOTBETS shortcut. An internet connection is required to
-load boards; this hub does not promise offline caching.
+load boards; static assets and saved ticket originals are available offline.
 
 ## Ledger HQ
 
-Every bet from every board, in one place — and the shared ledger the five boards
+Every bet from every board, in one place — and the shared ledger the connected boards
 sync through.
 
-The boards ([mlb-edge](https://github.com/chillychilly14/mlb-edge),
-[ncaaf-edge-lab](https://github.com/chillychilly14/ncaaf-edge-lab),
-[nfl-edge-lab](https://github.com/chillychilly14/nfl-edge-lab),
-[props-edge](https://github.com/chillychilly14/props-edge),
-[ladderbet](https://github.com/chillychilly14/ladderbet)) each keep their bets in
+The boards ([mlb-edge](https://github.com/KEVBOTBETS/BETTINGHQ/tree/main/projects/mlb-edge),
+[ncaaf-edge-lab](https://github.com/KEVBOTBETS/BETTINGHQ/tree/main/projects/ncaaf-edge-lab),
+[nfl-edge-lab](https://github.com/KEVBOTBETS/BETTINGHQ/tree/main/projects/nfl-edge-lab),
+[props-edge](https://github.com/KEVBOTBETS/BETTINGHQ/tree/main/projects/props-edge),
+[ladderbet](https://github.com/KEVBOTBETS/BETTINGHQ/tree/main/projects/ladderbet)) each keep their bets in
 the browser, as they always have. This repository holds the two things that let
 those copies agree with each other:
 
@@ -50,7 +50,7 @@ those copies agree with each other:
   edit by hand.
 - **`betsync.js`** — the client the boards load. It works out what changed on
   this device, sends it, takes back what changed elsewhere, and resolves the
-  disagreements. It is byte-identical in all five boards.
+  disagreements. It is byte-identical in all connected boards.
 
 And the page itself:
 
@@ -77,10 +77,10 @@ restoring the values that were undone.
 
 ## One bankroll
 
-All five boards size their stakes off one number: what you started with, plus
+All connected boards size their stakes off one number: what you started with, plus
 every settled result anywhere. Set it once, in any Sync panel or on this page.
 A losing weekend on the props board shrinks the next MLB stake, which is the
-point — five separate bankrolls that only exist on paper are five ways to be
+point — separate bankrolls that only exist on paper are ways to be
 more exposed than you think.
 
 ## Tests
@@ -154,3 +154,7 @@ or previewing a file.
 Run `node tests/test_recovery_history.mjs` for the backup/history checks. Browser
 tests include small-screen navigation height, the single ticket button, and a
 backup → preview → cancel → confirmed restore cycle against a fake sheet only.
+
+## Broadcast desk and performance
+
+`#desk`, `#nba` and `#ncaab` open the keyless seven-league research desk. `#accuracy` opens the forecast Performance Center with filters, calibration, matched market benchmarks and CSV export. See [methodology and coverage](docs/broadcast-performance.md). Model and ticket eligibility stay separate from research access.

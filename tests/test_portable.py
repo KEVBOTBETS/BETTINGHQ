@@ -20,7 +20,7 @@ class PortableRelease(unittest.TestCase):
         targets=re.findall(r'url:"([^"]+)"',(hub/'hub.js').read_text())
         self.assertGreaterEqual(len(targets),8)
         for target in targets:
-            p=hub/target
+            p=hub/target.split("?",1)[0]
             self.assertTrue(p.exists(),str(p))
 
     def test_no_public_financial_ledgers(self):

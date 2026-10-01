@@ -1,0 +1,28 @@
+import {chromium} from 'playwright';
+import assert from 'node:assert/strict';
+import {createServer} from 'node:http';
+import {readFile,mkdir} from 'node:fs/promises';
+import path from 'node:path';
+const root=path.resolve('../../_site'),out=path.resolve('test-results/broadcast');await mkdir(out,{recursive:true});
+const server=createServer(async(req,res)=>{let f=path.resolve(root,'.'+new URL(req.url,'http://localhost').pathname);if(f===root||f.endsWith(path.sep))f=path.join(f,'index.html');try{const stat=await import('node:fs/promises');if((await stat.stat(f)).isDirectory())f=path.join(f,'index.html');res.setHeader('Content-Type',({'.woff':'font/woff','.js':'application/javascript','.css':'text/css','.json':'application/json','.svg':'image/svg+xml'})[path.extname(f)]||'text/html');res.end(await readFile(f));}catch{res.writeHead(404).end();}});
+await new Promise(r=>server.listen(0,'127.0.0.1',r));const origin='http://127.0.0.1:'+server.address().port;const browser=await chromium.launch({headless:true});
+try{
+for(const width of [1440,393,320]){
+ const ctx=await browser.newContext({viewport:{width,height:1100},colorScheme:'dark',serviceWorkers:'block'});await ctx.route('https://**/*',r=>r.abort());
+ const page=await ctx.newPage(),errors=[];page.on('pageerror',e=>errors.push(e.message));
+ await page.goto(origin+'/bet-ledger-hq/accuracy.html');await page.locator('#perf-content:not([hidden])').waitFor();await page.selectOption('#perf-sport','mlb');assert.ok(await page.locator('#perf-records tr').count()>0);assert.ok((await page.locator('#perf-chart circle').count())>0);
+ const download=page.waitForEvent('download');await page.click('#perf-export');assert.match((await download).suggestedFilename(),/forecast-audit.csv$/);
+ assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+2));
+ await page.screenshot({path:out+'/performance-'+width+'.png',fullPage:true});
+ await ctx.route('https://site.api.espn.com/**',async route=>{const u=new URL(route.request().url());let data={};if(u.pathname.endsWith('/scoreboard')){const date=u.searchParams.get('dates'),d=date.slice(0,4)+'-'+date.slice(4,6)+'-'+date.slice(6);data={events:[{id:'fixture',date:d+'T20:00:00Z',links:[{href:'https://www.espn.com/mens-college-basketball/scoreboard'}],competitions:[{status:{type:{state:'in',shortDetail:'2nd · 05:42'}},venue:{fullName:'Test arena'},competitors:[{homeAway:'away',score:'68',team:{displayName:'Duke Blue Devils',abbreviation:'DUKE'},records:[{type:'total',summary:'12-2'}],curatedRank:{current:5},statistics:[{name:'rebounds',abbreviation:'REB',displayValue:'32'}]},{homeAway:'home',score:'70',team:{displayName:'North Carolina Tar Heels',abbreviation:'UNC'},records:[{type:'total',summary:'11-3'}],statistics:[{name:'rebounds',abbreviation:'REB',displayValue:'35'}]}]}]}]};}else if(u.pathname.endsWith('/news'))data={articles:[{headline:'College basketball preview',published:'2026-10-01T16:00Z',links:{web:{href:'https://www.espn.com/mens-college-basketball/'}}}]};else data={season:2026,children:[{name:'ACC',standings:{entries:[{team:{displayName:'Duke Blue Devils'},stats:[{name:'wins',abbreviation:'W',displayValue:'12'},{name:'losses',abbreviation:'L',displayValue:'2'}]}]}}]};await route.fulfill({contentType:'application/json',body:JSON.stringify(data)});});
+ await page.goto(origin+'/bet-ledger-hq/sports-desk.html?sport=ncaab');await page.locator('.score-card').waitFor();assert.match(await page.locator('#desk-description').innerText(),/after model validation/);assert.match(await page.locator('.score-card').innerText(),/68/);assert.match(await page.locator('#desk-standings').innerText(),/Duke/);assert.equal(await page.locator('#desk-news a').count(),1);
+ await page.fill('#desk-search','duke');assert.equal(await page.locator('.score-card').count(),1);await page.fill('#desk-search','nomatch');assert.equal(await page.locator('.score-card').count(),0);await page.fill('#desk-search','');
+ const old=await page.inputValue('#desk-date');await page.click('#desk-next');assert.notEqual(await page.inputValue('#desk-date'),old);await page.locator('.score-card').waitFor();
+ await page.evaluate(()=>document.fonts.ready);await page.screenshot({path:out+'/ncaab-'+width+'.png',fullPage:true});
+ assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+2));
+ await ctx.unroute('https://site.api.espn.com/**');await page.locator('[data-sport=nba]').click();await page.waitForFunction(()=>document.querySelector('#desk-status').textContent.includes('unavailable'));assert.equal(await page.locator('.score-card').count(),0);assert.match(await page.locator('#desk-status').innerText(),/No games or scores are inferred/);
+ assert.deepEqual(errors,[]);await ctx.close();
+}
+for(const target of ['mlb-edge/','wnba-edge-lab/']){const ctx=await browser.newContext({viewport:{width:393,height:1000},colorScheme:'light',serviceWorkers:'block'});await ctx.route('https://**/*',r=>r.abort());const p=await ctx.newPage();await p.goto(origin+'/'+target,{waitUntil:'networkidle'});assert.ok(await p.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+2));const brand=p.locator('header.top .brand,.mast-in .brand').first();if(await brand.count())assert.equal(await brand.evaluate(e=>getComputedStyle(e).display),'block');await p.screenshot({path:out+'/light-'+target.replace('/','')+'.png'});await ctx.close();}
+console.log('Broadcast interaction checks passed: probability audit, CSV, NCAAB scores and stats, search, dates, failed feeds, 320/393/1440px and light themes.');
+}finally{await browser.close();await new Promise(r=>server.close(r));}

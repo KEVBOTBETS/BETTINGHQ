@@ -1,0 +1,11 @@
+import assert from 'node:assert/strict';
+import '../performance-core.js';
+import '../sports-desk-core.js';
+const P=globalThis.KevPerformance,C=globalThis.KevSportsDesk;
+const s=P.summarize([{p:.8,y:1,market:.6,margin:4,market_margin:5,actual_margin:8,total:40,market_total:45,actual_total:44},{p:.2,y:0,market:.4,margin:4,market_margin:null,actual_margin:8},{p:.5,y:1,market:null}]);
+assert.equal(s.n,3);assert.equal(s.picks,2);assert.equal(s.correct,2);assert.equal(s.paired.n,2);assert.ok(Math.abs(s.paired.skill-.75)<1e-8);assert.deepEqual(s.margin,{n:1,model:4,market:3});assert.equal(s.calibration.reduce((n,b)=>n+b.n,0),3);
+assert.equal(P.score([]).brier,null);assert.equal(P.score([{p:null,y:1}]).n,0);assert.ok(Number.isFinite(P.score([{p:0,y:1}]).logloss));assert.ok(P.wilson(2,2)[0]<.5);
+assert.equal(C.safeUrl('javascript:alert(1)'), '');assert.equal(C.day('2026-10-01T01:00Z'),'2026-09-30');assert.equal(C.events({events:[]}).length,0);
+const ev={id:'a',date:'2026-10-01T20:00Z',competitions:[{status:{type:{state:'pre'}},competitors:[{homeAway:'away',team:{abbreviation:'A'}},{homeAway:'home',team:{abbreviation:'B'},score:'0'}]}]};
+const game=C.events({events:[ev]})[0];assert.equal(game.away.score,null);assert.equal(game.home.score,'0');assert.equal(game.state,'pre');assert.equal(Object.keys(C.leagues).length,7);
+console.log('Forecast probability scoring, paired benchmarks and seven-league adapters passed.');

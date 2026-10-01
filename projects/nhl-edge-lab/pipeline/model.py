@@ -133,6 +133,20 @@ def candidates(game, now):
         row.update(held=True,stake=0,tier='PASS',reasons=['Higher-ranked market selected for this game'])
     return result
 
+def market_snapshot(game, stamp):
+    """Freeze a fresh same-book two-sided benchmark with the original forecast."""
+    now, start = instant(stamp), instant(game.get('date'))
+    if not now or not start or now >= start or game.get('source_stale'): return None
+    for quote in game.get('quotes', []):
+        if quote.get('market') != 'ML' or quote.get('side') != 'home' or not quote.get('book'): continue
+        observed = instant(quote.get('observed_at'))
+        home, away = decimal(quote.get('price')), decimal(quote.get('opposite_price'))
+        if not observed or not 0 <= (now-observed).total_seconds() <= MAX_QUOTE_HOURS*3600 or not home or not away: continue
+        h, a = 1/home, 1/away
+        return {'p_home': h/(h+a), 'home_price':quote['price'], 'away_price':quote['opposite_price'],
+                'book':quote['book'], 'observed_at':quote['observed_at'], 'method':'same-book proportional no-vig'}
+    return None
+
 def update_accuracy(records, games, board, stamp):
     """Freeze first pregame forecast; never manufacture forecasts from final games."""
     now=instant(stamp)
@@ -141,7 +155,7 @@ def update_accuracy(records, games, board, stamp):
         if key not in records and game['season_type'] in (2,3) and game['state']=='pre' and start and start>now and game['projection'].get('ratings_known'):
             records[key]={'game_id':key,'season':game['season'],'season_type':game['season_type'],'start':game['date'],
                'frozen_at':stamp,'home':game['home'],'away':game['away'],'p_home':game['p_home'],
-               'projection':game['projection'],'model_version':VERSION,'result':None}
+               'projection':game['projection'],'model_version':VERSION,'market_snapshot':market_snapshot(game,stamp),'result':None}
         record=records.get(key)
         if record and game.get('nhl_game_id'):record['nhl_game_id']=game['nhl_game_id']
         if record and game['completed'] and game['home_score'] is not None and game['away_score'] is not None and game['home_score']!=game['away_score']:

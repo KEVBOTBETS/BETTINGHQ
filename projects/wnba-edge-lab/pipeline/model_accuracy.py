@@ -8,6 +8,7 @@ from __future__ import annotations
 
 import json
 import math
+import re
 from collections import defaultdict
 from datetime import datetime, timezone
 from pathlib import Path
@@ -58,6 +59,10 @@ def group(row):
                     ("league", "event_id", "player", "market"))
 
 
+def unresolved(row):
+    return bool(re.search(r"\b(TBD|TBA|Unknown)\b", str(row.get("matchup") or ""), re.I))
+
+
 def record(log, rows, now=None):
     now = instant(now) if now is not None else datetime.now(timezone.utc)
     records = log.setdefault("records", {})
@@ -65,6 +70,8 @@ def record(log, rows, now=None):
     # The first selected side is immutable, including its line, tier and price.
     for source in sorted(rows, key=lambda r: -(number(r.get("edge")) or 0)):
         r = dict(source)
+        if unresolved(r):
+            continue
         k = key(r)
         if k in records:
             continue
@@ -184,7 +191,8 @@ def buckets(rows, field):
 
 
 def report(log, label="Model accuracy"):
-    rows = list(log.get("records", {}).values())
+    original = list(log.get("records", {}).values())
+    rows = [r for r in original if not unresolved(r)]
     calls = [r for r in rows if r["kind"] == "call"]
     picks = [r for r in calls if r.get("selected")]
     games = [r for r in rows if r["kind"] == "game"]
@@ -234,4 +242,5 @@ def report(log, label="Model accuracy"):
             "props": {k: {"logged": len(v), "graded": sum(r["result"] == "Graded" for r in v),
                           "mae": mean([abs(r["projection"]-r["actual"]) for r in v if r["result"] == "Graded"]),
                           "bias": mean([r["projection"]-r["actual"] for r in v if r["result"] == "Graded"])} for k,v in sorted(prop_groups.items())},
-            "records": sorted(rows, key=lambda r: (r.get("start") or "", r["id"]), reverse=True)}
+            "excluded_unresolved_teams": sum(unresolved(r) for r in original),
+            "records": sorted(original, key=lambda r: (r.get("start") or "", r["id"]), reverse=True)}

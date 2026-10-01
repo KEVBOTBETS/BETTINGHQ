@@ -37,6 +37,17 @@ class NHLModelTests(unittest.TestCase):
   final={**self.game,'completed':True,'state':'post','home_score':4,'away_score':3}
   update_accuracy(records,[final],[],(NOW+timedelta(hours=7)).isoformat());self.assertTrue(records['1']['result']['home_won'])
   self.assertEqual(update_accuracy({},[final],[],NOW.isoformat()),{});self.assertEqual(accuracy_report(records,2027,NOW.isoformat())['games']['winner']['n'],1)
+ def test_market_benchmark_freezes_with_original_forecast(self):
+  quote={'market':'ML','side':'home','price':-120,'opposite_price':110,'book':'Book','observed_at':NOW.isoformat()}
+  self.game['quotes']=[quote]
+  log=update_accuracy({},[self.game],[],NOW.isoformat());snap=copy.deepcopy(log['1']['market_snapshot'])
+  self.assertAlmostEqual(snap['p_home'],(120/220)/((120/220)+(100/210)))
+  self.game['quotes'][0]['price']=-300
+  update_accuracy(log,[self.game],[],(NOW+timedelta(minutes=5)).isoformat());self.assertEqual(log['1']['market_snapshot'],snap)
+  self.game['quotes'][0]['observed_at']=(NOW+timedelta(minutes=1)).isoformat()
+  self.assertIsNone(update_accuracy({},[self.game],[],NOW.isoformat())['1']['market_snapshot'])
+  self.game['quotes'][0]['observed_at']=(NOW-timedelta(hours=2)).isoformat()
+  self.assertIsNone(update_accuracy({},[self.game],[],NOW.isoformat())['1']['market_snapshot'])
  def test_toronto_date_and_confirmed_goalie(self):
   event={'id':'1','date':'2026-10-11T00:00Z','season':{'year':2027,'type':2},'status':{'type':{'state':'pre'}},'competitions':[{'competitors':[{'homeAway':s,'team':{'id':i,'abbreviation':s},'probables':[{'name':'probableStartingGoalie','status':{'type':'confirmed'},'athlete':{'displayName':'Goalie'}}]} for s,i in [('home','1'),('away','2')]]}]}
   g=normalize(event,NOW.isoformat());self.assertEqual(g['day'],'2026-10-10');self.assertTrue(g['home_goalie']['confirmed'])
