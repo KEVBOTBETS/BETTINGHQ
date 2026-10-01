@@ -9,3 +9,6 @@ assert.equal(C.safeUrl('javascript:alert(1)'), '');assert.equal(C.day('2026-10-0
 const ev={id:'a',date:'2026-10-01T20:00Z',competitions:[{status:{type:{state:'pre'}},competitors:[{homeAway:'away',team:{abbreviation:'A'}},{homeAway:'home',team:{abbreviation:'B'},score:'0'}]}]};
 const game=C.events({events:[ev]})[0];assert.equal(game.away.score,null);assert.equal(game.home.score,'0');assert.equal(game.state,'pre');assert.equal(Object.keys(C.leagues).length,7);
 console.log('Forecast probability scoring, paired benchmarks and seven-league adapters passed.');
+
+const night={...game,id:'night',date:'2026-10-02T00:15Z'},daytime={...game,id:'day',date:'2026-10-01T17:00Z'};
+assert.equal(C.spotlight([daytime,night]).game.id,'night');assert.match(C.spotlight([daytime,night]).reason,/only game/);assert.equal(C.spotlight([]),null);assert.equal(C.spotlight([daytime]).game.id,'day');assert.equal(C.spotlight([daytime,night,{...night,id:'later',date:'2026-10-02T01:00Z'}]).game.id,'day');

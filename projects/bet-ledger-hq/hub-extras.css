@@ -10,3 +10,6 @@
 .app-notices{position:fixed;z-index:30;bottom:12px;right:12px;max-width:min(440px,calc(100% - 24px));font-size:12px}
 .app-notices p{padding:12px;border:1px solid #ffc857;background:#19202a;border-radius:9px;color:#ffe39e}
 @media(max-width:760px){.app-notices{bottom:calc(74px + env(safe-area-inset-bottom))}}
+
+.newsletter-tools{display:flex;flex-direction:column;gap:7px;padding:0 10px 12px}.newsletter-tool{border:1px solid #3e515f;background:#122a34;padding:12px!important;border-radius:8px;gap:10px!important}.newsletter-tool>span:first-child{font-size:24px;color:#d4ff68}.newsletter-tool strong{display:block;font-size:12px}.newsletter-tool small{display:block;font-size:10px;color:#a6bcc7;margin-top:4px}.newsletter-tool[aria-current=page]{border-color:#d4ff68;background:#244438}
+@media(max-width:760px){.newsletter-tools{grid-column:1/-1;grid-row:3;flex-direction:row;padding:0;gap:6px}.newsletter-tool{flex:1;min-width:0;justify-content:center;padding:8px!important}.newsletter-tool>span:first-child,.newsletter-tool small{display:none}.newsletter-tool strong{font-size:11px}.sidebar{row-gap:6px}}

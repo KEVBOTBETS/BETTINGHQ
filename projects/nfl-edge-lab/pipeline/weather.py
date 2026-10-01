@@ -26,6 +26,9 @@ from __future__ import annotations
 import datetime as dt
 import json
 import os
+import re
+from concurrent.futures import ThreadPoolExecutor
+from urllib.parse import urlparse
 from typing import Any
 
 import requests
@@ -146,8 +149,58 @@ def fetch_forecasts(points: list[tuple[float, float]], days: int = 16) -> dict[s
     out: dict[str, dict] = {}
     for point, block in zip(uniq, blocks):
         if isinstance(block, dict) and block.get("hourly"):
-            out[_round_key(*point)] = block["hourly"]
+            out[_round_key(*point)] = {**block["hourly"], "_source": "Open-Meteo"}
     return out
+
+
+def nws_hourly(properties: dict, now=None) -> dict | None:
+    """Convert official hourly periods; unknown gust/rain amounts remain unknown."""
+    now = now or dt.datetime.now(dt.timezone.utc)
+    try:
+        generated = dt.datetime.fromisoformat(properties['generatedAt'].replace('Z', '+00:00'))
+        if not 0 <= (now-generated).total_seconds() <= 6*3600: return None
+    except (KeyError, ValueError, TypeError): return None
+    result = {'time': [], 'temperature_2m': [], 'wind_speed_10m': [],
+              'precipitation_probability': [], '_source': 'National Weather Service',
+              '_generated_at': generated.isoformat(), '_conditions': []}
+    for period in properties.get('periods', []):
+        try:
+            start = dt.datetime.fromisoformat(period['startTime']).astimezone(dt.timezone.utc)
+            end = dt.datetime.fromisoformat(period['endTime']).astimezone(dt.timezone.utc)
+            if (end-start).total_seconds() != 3600: continue
+            temp = period.get('temperature')
+            unit = period.get('temperatureUnit')
+            if not isinstance(temp,(int,float)) or unit not in ('F','C'): continue
+            temp = temp if unit == 'F' else temp*9/5+32
+            speed = str(period.get('windSpeed', ''))
+            numbers = re.findall(r'\d+(?:\.\d+)?',speed)
+            wind = max(map(float,numbers)) if numbers and speed.endswith(' mph') else 0.0 if speed.lower()=='calm' else None
+            probability = (period.get('probabilityOfPrecipitation') or {}).get('value')
+            probability = probability if isinstance(probability,(int,float)) and 0<=probability<=100 else None
+            result['time'].append(start.replace(tzinfo=None).isoformat())
+            result['temperature_2m'].append(round(temp,1))
+            result['wind_speed_10m'].append(wind)
+            result['precipitation_probability'].append(probability)
+            result['_conditions'].append(period.get('shortForecast') or '—')
+        except (KeyError, ValueError, TypeError): continue
+    return result if result['time'] else None
+
+
+def fetch_nws(point: tuple) -> dict | None:
+    lat, lon = point
+    if not (24<=lat<=50 and -130<=lon<=-60): return None
+    headers = {'User-Agent': 'KEVBOTBETS-weather (https://kevbotbets.github.io/BETTINGHQ/)',
+               'Accept': 'application/geo+json'}
+    try:
+        response = requests.get(f'https://api.weather.gov/points/{lat},{lon}', headers=headers, timeout=12)
+        response.raise_for_status()
+        url = response.json().get('properties',{}).get('forecastHourly','')
+        parsed = urlparse(url)
+        if parsed.scheme!='https' or parsed.netloc!='api.weather.gov': return None
+        response = requests.get(url,headers=headers,timeout=12)
+        response.raise_for_status()
+        return nws_hourly(response.json().get('properties',{}))
+    except (requests.RequestException, ValueError, TypeError): return None
 
 
 def at_kickoff(hourly: dict, kickoff_utc: str) -> dict | None:
@@ -169,8 +222,12 @@ def at_kickoff(hourly: dict, kickoff_utc: str) -> dict | None:
         gap = abs((ts - ko).total_seconds())
         if best_gap is None or gap < best_gap:
             best_i, best_gap = i, gap
-    if best_i is None or best_gap is None or best_gap > 6 * 3600:
+    if best_i is None or best_gap is None or best_gap > (3600 if hourly.get("_source") == "National Weather Service" else 6 * 3600):
         return None
+
+    if hourly.get("_source") == "National Weather Service":
+        hour = dt.datetime.fromisoformat(times[best_i])
+        if not hour <= ko < hour + dt.timedelta(hours=1): return None
 
     def val(field: str):
         arr = hourly.get(field) or []
@@ -188,7 +245,9 @@ def at_kickoff(hourly: dict, kickoff_utc: str) -> dict | None:
         "snow_in": val("snowfall"),
         "cloud_pct": val("cloud_cover"),
         "code": code,
-        "condition": WMO.get(int(code), "—") if code is not None else "—",
+        "condition": val("_conditions") or (WMO.get(int(code), "—") if code is not None else "—"),
+        "source": hourly.get("_source", "Open-Meteo"),
+        "source_generated_at": hourly.get("_generated_at"),
     }
 
 
@@ -268,6 +327,20 @@ def build_for_games(games: list[dict], cfg: dict, geo_cache: dict) -> dict[str, 
 
     series = fetch_forecasts(points, days=int((cfg.get("weather") or {}).get("forecast_days", 16)))
 
+    # Request NWS only for near-term outdoor kickoffs without primary coverage.
+    now = dt.datetime.now(dt.timezone.utc)
+    missing = set()
+    for g in games:
+        loc = located.get(g['game_id'])
+        try: kickoff = dt.datetime.fromisoformat(g.get('date_utc','').replace('Z','+00:00'))
+        except (ValueError, TypeError): continue
+        if not loc or loc['roof']=='dome' or not 0 <= (kickoff-now).total_seconds() <= 7*86400: continue
+        point = (round(float(loc['lat']),3),round(float(loc['lon']),3))
+        hourly = series.get(_round_key(*point))
+        if not hourly or not at_kickoff(hourly,g['date_utc']): missing.add(point)
+    with ThreadPoolExecutor(max_workers=4) as pool:
+        fallback_series = dict(zip(sorted(missing),pool.map(fetch_nws,sorted(missing))))
+
     out: dict[str, dict] = {}
     for g in games:
         loc = located.get(g["game_id"])
@@ -275,6 +348,9 @@ def build_for_games(games: list[dict], cfg: dict, geo_cache: dict) -> dict[str, 
             continue
         hourly = series.get(_round_key(loc["lat"], loc["lon"]))
         fc = at_kickoff(hourly, g.get("date_utc") or "") if hourly else None
+        if not fc:
+            fallback = fallback_series.get((round(float(loc["lat"]),3),round(float(loc["lon"]),3)))
+            fc = at_kickoff(fallback,g.get("date_utc") or "") if fallback else None
         adj = adjustment(fc, loc["roof"], cfg)
         out[g["game_id"]] = {
             "venue": g.get("venue"),

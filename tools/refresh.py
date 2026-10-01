@@ -19,6 +19,7 @@ for repo in selected:
     except (subprocess.CalledProcessError,subprocess.TimeoutExpired) as exc:
         # Stale feeds retain their original timestamps and cannot qualify as new picks.
         print(f'::warning::{repo} refresh failed ({type(exc).__name__}); inspect freshness before using its board.')
+subprocess.run([sys.executable,'tools/newsletters.py'],cwd=ROOT,check=True,timeout=90)
 subprocess.run([sys.executable,'tools/build_site.py'],cwd=ROOT,check=True)
 env={**os.environ,'LOCAL_SITE_ROOT':str(ROOT/'_site')}
 subprocess.run(['node','scripts/refresh-tickets.mjs'],cwd=ROOT/'projects/bet-ledger-hq',env=env,check=True,timeout=600)
