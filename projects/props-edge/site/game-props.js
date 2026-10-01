@@ -77,7 +77,7 @@
   $('#game-matchup').addEventListener('change',render);$('#game-view').addEventListener('change',()=>{fillWeeks();render();});
   $('#game-week').addEventListener('change',render);$('#game-team').addEventListener('input',render);
   for(const [id,delta] of [['game-week-prev',-1],['game-week-next',1]])$(id.startsWith('#')?id:'#'+id).addEventListener('click',()=>{const s=$('#game-week');s.selectedIndex=Math.max(0,Math.min(s.options.length-1,s.selectedIndex+delta));render();});
-  window.addEventListener('props:tab',async ev=>{if(ev.detail==='games'){await load();render();await refreshResults();}});
-  window.addEventListener('props:data',()=>{if(ready){render();refreshResults();}});
+  window.addEventListener('props:tab',async ev=>{if(ev.detail==='games'){await load();await refreshResults();render();}});
+  window.addEventListener('props:data',()=>{if(ready)refreshResults();});
   setInterval(()=>{if(!document.hidden&&!panel.hidden){render();refreshResults();}},60000);
 })();
