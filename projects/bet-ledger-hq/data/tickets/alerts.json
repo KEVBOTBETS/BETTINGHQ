@@ -1,29 +1,85 @@
 {
   "schema": 1,
-  "checked_at": "2026-10-01T23:58:06.901Z",
+  "checked_at": "2026-10-02T00:28:17.858Z",
   "coverage": {
-    "nhl": {
+    "mlb": {
       "status": "available",
-      "reports": 64,
-      "checked_at": "2026-10-01T23:58:06.901Z"
-    },
-    "nfl": {
-      "status": "available",
-      "reports": 394,
-      "checked_at": "2026-10-01T23:58:06.901Z"
+      "reports": 34,
+      "checked_at": "2026-10-02T00:28:17.858Z"
     },
     "ncaaf": {
       "status": "empty",
       "reports": 0,
-      "checked_at": "2026-10-01T23:58:06.901Z"
+      "checked_at": "2026-10-02T00:28:17.858Z"
     },
-    "mlb": {
+    "nhl": {
       "status": "available",
-      "reports": 34,
-      "checked_at": "2026-10-01T23:58:06.901Z"
+      "reports": 63,
+      "checked_at": "2026-10-02T00:28:17.858Z"
+    },
+    "nfl": {
+      "status": "available",
+      "reports": 388,
+      "checked_at": "2026-10-02T00:28:17.858Z"
     }
   },
   "events": [
+    {
+      "id": "injury|nfl:3:Anthony Johnson Jr.|2026-10-02T00:28:17.858Z",
+      "kind": "injury",
+      "observed_at": "2026-10-02T00:28:17.858Z",
+      "sport": "nfl",
+      "title": "Player availability changed",
+      "event": "Chicago Bears",
+      "pick": "Anthony Johnson Jr.",
+      "before": "Out · Undisclosed",
+      "after": "Injured Reserve · Undisclosed",
+      "source_quote_at": "2026-10-02T00:18Z",
+      "source": "ESPN injuries",
+      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
+    },
+    {
+      "id": "injury|nfl:6:Joey Porter Jr.|2026-10-02T00:28:17.858Z",
+      "kind": "injury",
+      "observed_at": "2026-10-02T00:28:17.858Z",
+      "sport": "nfl",
+      "title": "Player availability changed",
+      "event": "Dallas Cowboys",
+      "pick": "Joey Porter Jr.",
+      "before": "Questionable · Back",
+      "after": "Active · Porter (back) wasn't listed on the Cowboys' injury report Friday, Patrik Walker of the team's official site reports.",
+      "source_quote_at": "2026-10-02T00:24Z",
+      "source": "ESPN injuries",
+      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
+    },
+    {
+      "id": "injury|nfl:13:Treydan Stukes|2026-10-02T00:28:17.858Z",
+      "kind": "injury",
+      "observed_at": "2026-10-02T00:28:17.858Z",
+      "sport": "nfl",
+      "title": "Player availability changed",
+      "event": "Las Vegas Raiders",
+      "pick": "Treydan Stukes",
+      "before": "Active · Stukes (concussion) was a full participant at practice Wednesday.",
+      "after": "Active · Stukes logged a second straight full practice Thursday.",
+      "source_quote_at": "2026-10-01T23:53Z",
+      "source": "ESPN injuries",
+      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
+    },
+    {
+      "id": "injury|nfl:18:Pete Werner|2026-10-02T00:28:17.858Z",
+      "kind": "injury",
+      "observed_at": "2026-10-02T00:28:17.858Z",
+      "sport": "nfl",
+      "title": "New availability report",
+      "event": "New Orleans Saints",
+      "pick": "Pete Werner",
+      "before": "Not in the previous dated report",
+      "after": "Questionable · Neck",
+      "source_quote_at": "2026-10-02T00:06Z",
+      "source": "ESPN injuries",
+      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
+    },
     {
       "id": "odds|nfl|401872970|2026-10-04T17:00Z|ML||home|DraftKings|2026-10-01T23:58:06.901Z",
       "kind": "odds",
@@ -2934,70 +2990,6 @@
       "after": "-105 · line 43.5",
       "book": "DraftKings",
       "source_quote_at": "2026-10-01T12:00:28.854038+00:00",
-      "source": "Existing NCAAF board",
-      "note": "Your ticket keeps its original odds. Recheck the live book before placing a new wager."
-    },
-    {
-      "id": "odds|ncaaf|401856819|2026-10-03T16:00Z|ATS||away|DraftKings|2026-10-01T12:04:35.484Z",
-      "kind": "odds",
-      "observed_at": "2026-10-01T12:04:35.484Z",
-      "sport": "ncaaf",
-      "event": "UCF @ HOU",
-      "start": "2026-10-03T16:00Z",
-      "pick": "UCF +12.5",
-      "title": "Published odds changed",
-      "before": "-112 · line 12.5",
-      "after": "-108 · line 11.5",
-      "book": "DraftKings",
-      "source_quote_at": "2026-10-01T12:00:28.853068+00:00",
-      "source": "Existing NCAAF board",
-      "note": "Your ticket keeps its original odds. Recheck the live book before placing a new wager."
-    },
-    {
-      "id": "odds|ncaaf|401858250|2026-10-03T16:00Z|ATS||home|DraftKings|2026-10-01T12:04:35.484Z",
-      "kind": "odds",
-      "observed_at": "2026-10-01T12:04:35.484Z",
-      "sport": "ncaaf",
-      "event": "ND @ UNC",
-      "start": "2026-10-03T16:00Z",
-      "pick": "UNC +21",
-      "title": "Published odds changed",
-      "before": "-110 · line 21",
-      "after": "-108 · line 21",
-      "book": "DraftKings",
-      "source_quote_at": "2026-10-01T12:00:28.852984+00:00",
-      "source": "Existing NCAAF board",
-      "note": "Your ticket keeps its original odds. Recheck the live book before placing a new wager."
-    },
-    {
-      "id": "odds|ncaaf|401856820|2026-10-04T03:00Z|ATS||away|DraftKings|2026-10-01T12:04:35.484Z",
-      "kind": "odds",
-      "observed_at": "2026-10-01T12:04:35.484Z",
-      "sport": "ncaaf",
-      "event": "CIN @ ARIZ",
-      "start": "2026-10-04T03:00Z",
-      "pick": "CIN +8.5",
-      "title": "Published odds changed",
-      "before": "-105 · line 7",
-      "after": "-105 · line 6.5",
-      "book": "DraftKings",
-      "source_quote_at": "2026-10-01T12:00:28.854888+00:00",
-      "source": "Existing NCAAF board",
-      "note": "Your ticket keeps its original odds. Recheck the live book before placing a new wager."
-    },
-    {
-      "id": "odds|ncaaf|401856708|2026-10-03T19:30Z|TOTAL||over|DraftKings|2026-10-01T12:04:35.484Z",
-      "kind": "odds",
-      "observed_at": "2026-10-01T12:04:35.484Z",
-      "sport": "ncaaf",
-      "event": "FLA @ MIZ",
-      "start": "2026-10-03T19:30Z",
-      "pick": "Over 56.5",
-      "title": "Published odds changed",
-      "before": "-112 · line 56.5",
-      "after": "-108 · line 57.5",
-      "book": "DraftKings",
-      "source_quote_at": "2026-10-01T12:00:28.853691+00:00",
       "source": "Existing NCAAF board",
       "note": "Your ticket keeps its original odds. Recheck the live book before placing a new wager."
     }
