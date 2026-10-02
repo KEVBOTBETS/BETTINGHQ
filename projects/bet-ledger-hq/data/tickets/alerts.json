@@ -1,29 +1,45 @@
 {
   "schema": 1,
-  "checked_at": "2026-10-02T03:20:54.066Z",
+  "checked_at": "2026-10-02T03:43:44.889Z",
   "coverage": {
+    "mlb": {
+      "status": "available",
+      "reports": 34,
+      "checked_at": "2026-10-02T03:43:44.889Z"
+    },
     "nhl": {
       "status": "available",
       "reports": 63,
-      "checked_at": "2026-10-02T03:20:54.066Z"
+      "checked_at": "2026-10-02T03:43:44.889Z"
+    },
+    "nfl": {
+      "status": "available",
+      "reports": 375,
+      "checked_at": "2026-10-02T03:43:44.889Z"
     },
     "ncaaf": {
       "status": "empty",
       "reports": 0,
-      "checked_at": "2026-10-02T03:20:54.066Z"
-    },
-    "mlb": {
-      "status": "available",
-      "reports": 34,
-      "checked_at": "2026-10-02T03:20:54.066Z"
-    },
-    "nfl": {
-      "status": "available",
-      "reports": 377,
-      "checked_at": "2026-10-02T03:20:54.066Z"
+      "checked_at": "2026-10-02T03:43:44.889Z"
     }
   },
   "events": [
+    {
+      "id": "odds|nfl|401872971|2026-10-04T17:00Z|ML||away|Draft Kings|2026-10-02T03:43:44.889Z",
+      "kind": "odds",
+      "observed_at": "2026-10-02T03:43:44.889Z",
+      "sport": "nfl",
+      "event": "NE @ BUF",
+      "start": "2026-10-04T17:00Z",
+      "pick": "NE ML",
+      "title": "Published odds changed",
+      "before": "+245",
+      "after": "+240",
+      "book": "Draft Kings",
+      "source_quote_at": "2026-10-02T03:38:59.830322+00:00",
+      "source": "Existing NFL board",
+      "note": "Your ticket keeps its original odds. Recheck the live book before placing a new wager."
+    },
     {
       "id": "injury|nfl:5:Mike Hall Jr.|2026-10-02T03:20:54.066Z",
       "kind": "injury",
@@ -2940,22 +2956,6 @@
       "after": "+150",
       "book": "Draft Kings",
       "source_quote_at": "2026-10-01T12:47:01.906981+00:00",
-      "source": "Existing NFL board",
-      "note": "Your ticket keeps its original odds. Recheck the live book before placing a new wager."
-    },
-    {
-      "id": "odds|nfl|401872967|2026-10-04T17:00Z|ML||away|Draft Kings|2026-10-01T12:50:28.163Z",
-      "kind": "odds",
-      "observed_at": "2026-10-01T12:50:28.163Z",
-      "sport": "nfl",
-      "event": "DAL @ HOU",
-      "start": "2026-10-04T17:00Z",
-      "pick": "DAL ML",
-      "title": "Published odds changed",
-      "before": "+120",
-      "after": "+136",
-      "book": "Draft Kings",
-      "source_quote_at": "2026-10-01T12:47:01.907046+00:00",
       "source": "Existing NFL board",
       "note": "Your ticket keeps its original odds. Recheck the live book before placing a new wager."
     }
