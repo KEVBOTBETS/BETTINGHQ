@@ -1,29 +1,57 @@
 {
   "schema": 1,
-  "checked_at": "2026-10-02T00:48:32.450Z",
+  "checked_at": "2026-10-02T00:52:52.106Z",
   "coverage": {
     "ncaaf": {
       "status": "empty",
       "reports": 0,
-      "checked_at": "2026-10-02T00:48:32.450Z"
+      "checked_at": "2026-10-02T00:52:52.106Z"
     },
-    "mlb": {
+    "nfl": {
       "status": "available",
-      "reports": 34,
-      "checked_at": "2026-10-02T00:48:32.450Z"
+      "reports": 383,
+      "checked_at": "2026-10-02T00:52:52.106Z"
     },
     "nhl": {
       "status": "available",
       "reports": 63,
-      "checked_at": "2026-10-02T00:48:32.450Z"
+      "checked_at": "2026-10-02T00:52:52.106Z"
     },
-    "nfl": {
+    "mlb": {
       "status": "available",
-      "reports": 382,
-      "checked_at": "2026-10-02T00:48:32.450Z"
+      "reports": 34,
+      "checked_at": "2026-10-02T00:52:52.106Z"
     }
   },
   "events": [
+    {
+      "id": "injury|nfl:5:Mason Graham|2026-10-02T00:52:52.106Z",
+      "kind": "injury",
+      "observed_at": "2026-10-02T00:52:52.106Z",
+      "sport": "nfl",
+      "title": "Player availability changed",
+      "event": "Cleveland Browns",
+      "pick": "Mason Graham",
+      "before": "Active · Graham logged seven tackles (four solo), including 2.0 sacks, in the Browns' 21-18 win over the Panthers on Sunday.",
+      "after": "Questionable · Knee",
+      "source_quote_at": "2026-10-02T00:40Z",
+      "source": "ESPN injuries",
+      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
+    },
+    {
+      "id": "injury|nfl:18:Kevin Austin Jr.|2026-10-02T00:52:52.106Z",
+      "kind": "injury",
+      "observed_at": "2026-10-02T00:52:52.106Z",
+      "sport": "nfl",
+      "title": "New availability report",
+      "event": "New Orleans Saints",
+      "pick": "Kevin Austin Jr.",
+      "before": "Not in the previous dated report",
+      "after": "Active · The Saints signed Austin from their practice squad to their active roster Thursday.",
+      "source_quote_at": "2026-10-02T00:41Z",
+      "source": "ESPN injuries",
+      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
+    },
     {
       "id": "odds|nfl|401872968|2026-10-04T17:00Z|ML||home|Draft Kings|2026-10-02T00:48:32.450Z",
       "kind": "odds",
@@ -2957,38 +2985,6 @@
       "book": "DraftKings",
       "source_quote_at": "2026-10-01T12:03:43.837778+00:00",
       "source": "Existing Props board",
-      "note": "Your ticket keeps its original odds. Recheck the live book before placing a new wager."
-    },
-    {
-      "id": "odds|props|401872975|2026-10-04T20:25Z|Rushing yards|Brock Purdy|over|Fanatics Sportsbook|2026-10-01T12:04:35.484Z",
-      "kind": "odds",
-      "observed_at": "2026-10-01T12:04:35.484Z",
-      "sport": "props",
-      "event": "Denver Broncos @ San Francisco 49ers",
-      "start": "2026-10-04T20:25Z",
-      "pick": "Brock Purdy — Over 15.5 Rushing yards",
-      "title": "Published odds changed",
-      "before": "-125 · line 15.5",
-      "after": "-120 · line 15.5",
-      "book": "Fanatics Sportsbook",
-      "source_quote_at": "2026-10-01T12:03:43.837778+00:00",
-      "source": "Existing Props board",
-      "note": "Your ticket keeps its original odds. Recheck the live book before placing a new wager."
-    },
-    {
-      "id": "odds|ncaaf|401858472|2026-10-03T20:15Z|TOTAL||over|DraftKings|2026-10-01T12:04:35.484Z",
-      "kind": "odds",
-      "observed_at": "2026-10-01T12:04:35.484Z",
-      "sport": "ncaaf",
-      "event": "PUR @ ILL",
-      "start": "2026-10-03T20:15Z",
-      "pick": "Over 59.5",
-      "title": "Published odds changed",
-      "before": "-108 · line 61.5",
-      "after": "-115 · line 61.5",
-      "book": "DraftKings",
-      "source_quote_at": "2026-10-01T12:00:28.854223+00:00",
-      "source": "Existing NCAAF board",
       "note": "Your ticket keeps its original odds. Recheck the live book before placing a new wager."
     }
   ]
