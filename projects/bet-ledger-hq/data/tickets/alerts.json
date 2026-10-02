@@ -1,29 +1,61 @@
 {
   "schema": 1,
-  "checked_at": "2026-10-02T22:57:02.632Z",
+  "checked_at": "2026-10-02T23:00:49.910Z",
   "coverage": {
-    "mlb": {
-      "status": "available",
-      "reports": 22,
-      "checked_at": "2026-10-02T22:57:02.632Z"
+    "ncaaf": {
+      "status": "empty",
+      "reports": 0,
+      "checked_at": "2026-10-02T23:00:49.910Z"
     },
     "nhl": {
       "status": "available",
       "reports": 31,
-      "checked_at": "2026-10-02T22:57:02.632Z"
+      "checked_at": "2026-10-02T23:00:49.910Z"
+    },
+    "mlb": {
+      "status": "available",
+      "reports": 22,
+      "checked_at": "2026-10-02T23:00:49.910Z"
     },
     "nfl": {
       "status": "available",
       "reports": 361,
-      "checked_at": "2026-10-02T22:57:02.632Z"
-    },
-    "ncaaf": {
-      "status": "empty",
-      "reports": 0,
-      "checked_at": "2026-10-02T22:57:02.632Z"
+      "checked_at": "2026-10-02T23:00:49.910Z"
     }
   },
   "events": [
+    {
+      "id": "odds|props|401872969|2026-10-04T17:00Z|Rushing yards|Trevor Lawrence|over|Fanatics Sportsbook|2026-10-02T23:00:49.910Z",
+      "kind": "odds",
+      "observed_at": "2026-10-02T23:00:49.910Z",
+      "sport": "props",
+      "event": "Jacksonville Jaguars @ Cincinnati Bengals",
+      "start": "2026-10-04T17:00Z",
+      "pick": "Trevor Lawrence — Over 15.5 Rushing yards",
+      "title": "Published odds changed",
+      "before": "+105 · line 15.5",
+      "after": "-105 · line 15.5",
+      "book": "Fanatics Sportsbook",
+      "source_quote_at": "2026-10-02T23:00:16.678178+00:00",
+      "source": "Existing Props board",
+      "note": "Your ticket keeps its original odds. Recheck the live book before placing a new wager."
+    },
+    {
+      "id": "odds|ncaaf|401858476|2026-10-03T00:00Z|ML||home|DraftKings|2026-10-02T23:00:49.910Z",
+      "kind": "odds",
+      "observed_at": "2026-10-02T23:00:49.910Z",
+      "sport": "ncaaf",
+      "event": "PSU @ NU",
+      "start": "2026-10-03T00:00Z",
+      "pick": "NU ML",
+      "title": "Published odds changed",
+      "before": "+120",
+      "after": "+114",
+      "book": "DraftKings",
+      "source_quote_at": "2026-10-02T23:00:05.386579+00:00",
+      "source": "Existing NCAAF board",
+      "note": "Your ticket keeps its original odds. Recheck the live book before placing a new wager."
+    },
     {
       "id": "odds|props|401872973|2026-10-04T17:00Z|Rushing yards|Tony Pollard|over|FanDuel|2026-10-02T22:57:02.632Z",
       "kind": "odds",
@@ -2871,34 +2903,6 @@
       "before": "Not in the previous dated report",
       "after": "Out · Achilles",
       "source_quote_at": "2026-10-02T16:17Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:27:Benjamin Morrison|2026-10-02T16:50:15.701Z",
-      "kind": "injury",
-      "observed_at": "2026-10-02T16:50:15.701Z",
-      "sport": "nfl",
-      "title": "Player availability changed",
-      "event": "Tampa Bay Buccaneers",
-      "pick": "Benjamin Morrison",
-      "before": "Questionable · Quadriceps",
-      "after": "Out · Quadriceps",
-      "source_quote_at": "2026-10-02T16:29Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:27:Rueben Bain Jr.|2026-10-02T16:50:15.701Z",
-      "kind": "injury",
-      "observed_at": "2026-10-02T16:50:15.701Z",
-      "sport": "nfl",
-      "title": "Player availability changed",
-      "event": "Tampa Bay Buccaneers",
-      "pick": "Rueben Bain Jr.",
-      "before": "Questionable · Groin",
-      "after": "Out · Groin",
-      "source_quote_at": "2026-10-02T16:29Z",
       "source": "ESPN injuries",
       "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
     }
