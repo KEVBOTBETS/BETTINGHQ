@@ -7,6 +7,7 @@ import sys
 from sports_theme import apply as apply_sports_theme
 from performance import build as build_performance
 from challengers import evaluate as evaluate_challengers
+from spread_tracking import load_state as load_spread_state
 
 ROOT = Path(__file__).resolve().parents[1]
 OUT = ROOT / '_site'
@@ -23,7 +24,7 @@ def main():
     for path in hub.iterdir():
         if path.is_file() and (path.suffix in suffixes or path.name == 'SETUP-SYNC.md'):
             shutil.copy2(path, target / path.name)
-    for name in ['assets', 'data/tickets', 'data/newsletters']:
+    for name in ['assets', 'data/tickets', 'data/newsletters', 'data/spreads']:
         if (hub / name).exists(): shutil.copytree(hub / name, target / name)
     subprocess.run([sys.executable, 'tools/prepare_public_site.py'], cwd=PROJECTS/'nfl-edge-lab', check=True)
     for repo, folder in [('nfl-edge-lab','_public_site'),('ncaaf-edge-lab','site'),('mlb-edge','docs'),('props-edge','site'),('wnba-edge-lab','site'),('nhl-edge-lab','site'),('ladderbet','docs')]:
@@ -38,6 +39,9 @@ def main():
             (data/'summary.json').write_text(json.dumps(dict(starting_bankroll=None,
                 current_bankroll=None,wins=0,losses=0,pushes=0,settled=0,pending=0,roi=None,pnl=None))+'\n')
     subprocess.run([sys.executable, 'tools/public_dashboard.py', str(OUT/'ladderbet/index.html')], cwd=PROJECTS/'ladderbet', check=True)
+    spread_path=target/'data/spreads/history.json'
+    spread_path.parent.mkdir(parents=True,exist_ok=True)
+    spread_path.write_text(json.dumps(load_spread_state(ROOT),separators=(',',':'),allow_nan=False)+'\n')
     performance = build_performance(ROOT, target/"data/performance.json")
     performance['challengers'] = evaluate_challengers(performance['records'])
     (target/'data/performance.json').write_text(json.dumps(performance,separators=(',',':'),allow_nan=False)+'\n')

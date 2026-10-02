@@ -60,7 +60,7 @@
     <div class="panel-head">
       <div>
         <h2>Parlay lab</h2>
-        <p class="lede">Research combinations aimed at a payout you choose. Prices may be estimated; same-game win probabilities are unavailable until a joint model is validated. Confirm the combined price in your book.</p>
+        <p class="lede">Core uses fresh, qualified offers at one book across distinct games. Longshot retains the big payout targets. Prices may be estimated; same-game win probabilities are unavailable until a joint model is validated. Confirm the combined price in your book.</p>
       </div>
       <div class="scope-picker" role="radiogroup" aria-label="Parlay scope">
         <button class="chip" role="radio" data-scope="slate" aria-checked="true">Full slate</button>
@@ -68,7 +68,7 @@
         <button class="chip" role="radio" data-scope="game" aria-checked="false">Same game</button>
       </div>
     </div>
-    <div class="target-row" id="targets" role="radiogroup" aria-label="Payout target"></div>
+    <div class="sub-filter"><label>Strategy <select id="parlay-profile"><option value="core">Core · 2–3 legs</option><option value="longshot">Longshot · maximum payout</option></select></label><span>Core prioritizes estimated chance without padding legs to hit a payout target.</span></div><div class="target-row" id="targets" role="radiogroup" aria-label="Payout target"></div>
     <div class="sub-filter"><label>Game <select id="parlay-game"><option value="all">Every game</option></select></label><label>Day <select id="parlay-day"><option value="all">Every day</option></select></label><span id="parlay-count" class="muted"></span></div>
     <div id="parlays" class="ticket-grid"></div>
   </section>
@@ -83,7 +83,7 @@
     </div>
     <p id="parlay-history-status" class="muted" role="status">Loading ticket history…</p>
     <div id="parlay-history-kpis" class="kpis"></div>
-    <div id="parlay-history-list" class="parlay-history-list"></div>
+    <section id="parlay-audit" class="banner" hidden></section><div id="parlay-history-list" class="parlay-history-list"></div>
     <button id="parlay-history-more" type="button" hidden>Show 50 more tickets</button>
     <p class="muted">Published combinations are recorded prospectively from this release, not reconstructed after games. Overlapping tickets are not independent trials. Pushed, voided or ambiguous legs require sportsbook-rule review; no reduced payout is guessed. Actual wagers remain in your browser and existing shared-ledger connection. Export a backup to keep another copy.</p>
   </section>

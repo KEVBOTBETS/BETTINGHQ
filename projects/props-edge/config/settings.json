@@ -101,9 +101,16 @@
       "50000": 6
     },
     "sgp_min_legs": 3,
-    "book_lines_only": false,
+    "book_lines_only": true,
     "min_book_pool": 12,
-    "mode": "research"
+    "mode": "research",
+    "core_enabled": true,
+    "core_targets": [
+      200,
+      500,
+      1000
+    ],
+    "core_max_quote_age_hours": 12
   },
   "odds_feed": {
     "markets": [
