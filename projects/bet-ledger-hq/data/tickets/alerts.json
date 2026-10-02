@@ -1,29 +1,127 @@
 {
   "schema": 1,
-  "checked_at": "2026-10-02T17:01:03.525Z",
+  "checked_at": "2026-10-02T17:20:23.933Z",
   "coverage": {
+    "nhl": {
+      "status": "available",
+      "reports": 38,
+      "checked_at": "2026-10-02T17:20:23.933Z"
+    },
+    "mlb": {
+      "status": "available",
+      "reports": 25,
+      "checked_at": "2026-10-02T17:20:23.933Z"
+    },
     "ncaaf": {
       "status": "empty",
       "reports": 0,
-      "checked_at": "2026-10-02T17:01:03.525Z"
-    },
-    "nhl": {
-      "status": "available",
-      "reports": 42,
-      "checked_at": "2026-10-02T17:01:03.525Z"
+      "checked_at": "2026-10-02T17:20:23.933Z"
     },
     "nfl": {
       "status": "available",
       "reports": 344,
-      "checked_at": "2026-10-02T17:01:03.525Z"
-    },
-    "mlb": {
-      "status": "available",
-      "reports": 23,
-      "checked_at": "2026-10-02T17:01:03.525Z"
+      "checked_at": "2026-10-02T17:20:23.933Z"
     }
   },
   "events": [
+    {
+      "id": "injury|mlb:15:Martin Perez|2026-10-02T17:20:23.933Z",
+      "kind": "injury",
+      "observed_at": "2026-10-02T17:20:23.933Z",
+      "sport": "mlb",
+      "title": "New availability report",
+      "event": "Atlanta Braves",
+      "pick": "Martin Perez",
+      "before": "Not in the previous dated report",
+      "after": "15-Day-IL · Back",
+      "source_quote_at": "2026-10-02T17:14Z",
+      "source": "ESPN injuries",
+      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
+    },
+    {
+      "id": "injury|mlb:15:Bryce Elder|2026-10-02T17:20:23.933Z",
+      "kind": "injury",
+      "observed_at": "2026-10-02T17:20:23.933Z",
+      "sport": "mlb",
+      "title": "New availability report",
+      "event": "Atlanta Braves",
+      "pick": "Bryce Elder",
+      "before": "Not in the previous dated report",
+      "after": "15-Day-IL · Knee",
+      "source_quote_at": "2026-10-02T17:10Z",
+      "source": "ESPN injuries",
+      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
+    },
+    {
+      "id": "injury|nfl:3:Caleb Williams|2026-10-02T17:20:23.933Z",
+      "kind": "injury",
+      "observed_at": "2026-10-02T17:20:23.933Z",
+      "sport": "nfl",
+      "title": "Player availability changed",
+      "event": "Chicago Bears",
+      "pick": "Caleb Williams",
+      "before": "Doubtful · Hamstring",
+      "after": "Out · Hamstring",
+      "source_quote_at": "2026-10-02T17:00Z",
+      "source": "ESPN injuries",
+      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
+    },
+    {
+      "id": "injury|nfl:28:Terry McLaurin|2026-10-02T17:20:23.933Z",
+      "kind": "injury",
+      "observed_at": "2026-10-02T17:20:23.933Z",
+      "sport": "nfl",
+      "title": "New availability report",
+      "event": "Washington Commanders",
+      "pick": "Terry McLaurin",
+      "before": "Not in the previous dated report",
+      "after": "Questionable · Hamstring",
+      "source_quote_at": "2026-10-02T17:06Z",
+      "source": "ESPN injuries",
+      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
+    },
+    {
+      "id": "injury|nfl:28:Ben Sinnott|2026-10-02T17:20:23.933Z",
+      "kind": "injury",
+      "observed_at": "2026-10-02T17:20:23.933Z",
+      "sport": "nfl",
+      "title": "Player availability changed",
+      "event": "Washington Commanders",
+      "pick": "Ben Sinnott",
+      "before": "Questionable · Ribs",
+      "after": "Active",
+      "source_quote_at": "2026-10-02T17:06Z",
+      "source": "ESPN injuries",
+      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
+    },
+    {
+      "id": "injury|nfl:28:Rachaad White|2026-10-02T17:20:23.933Z",
+      "kind": "injury",
+      "observed_at": "2026-10-02T17:20:23.933Z",
+      "sport": "nfl",
+      "title": "Player availability changed",
+      "event": "Washington Commanders",
+      "pick": "Rachaad White",
+      "before": "Questionable · Shoulder",
+      "after": "Out · Shoulder",
+      "source_quote_at": "2026-10-02T17:05Z",
+      "source": "ESPN injuries",
+      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
+    },
+    {
+      "id": "injury|nfl:28:Chig Okonkwo|2026-10-02T17:20:23.933Z",
+      "kind": "injury",
+      "observed_at": "2026-10-02T17:20:23.933Z",
+      "sport": "nfl",
+      "title": "Player availability changed",
+      "event": "Washington Commanders",
+      "pick": "Chig Okonkwo",
+      "before": "Questionable · Hamstring",
+      "after": "Active",
+      "source_quote_at": "2026-10-02T17:05Z",
+      "source": "ESPN injuries",
+      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
+    },
     {
       "id": "odds|props|401872973|2026-10-04T17:00Z|Rushing yards|Tony Pollard|over|bet365|2026-10-02T17:01:03.525Z",
       "kind": "odds",
@@ -2850,104 +2948,6 @@
       "before": "Questionable · Heel",
       "after": "Active",
       "source_quote_at": "2026-10-01T20:30Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:33:Marlon Humphrey|2026-10-01T20:49:15.342Z",
-      "kind": "injury",
-      "observed_at": "2026-10-01T20:49:15.342Z",
-      "sport": "nfl",
-      "title": "Player availability changed",
-      "event": "Baltimore Ravens",
-      "pick": "Marlon Humphrey",
-      "before": "Questionable · Hamstring",
-      "after": "Active",
-      "source_quote_at": "2026-10-01T20:29Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:33:Zay Flowers|2026-10-01T20:49:15.342Z",
-      "kind": "injury",
-      "observed_at": "2026-10-01T20:49:15.342Z",
-      "sport": "nfl",
-      "title": "Player availability changed",
-      "event": "Baltimore Ravens",
-      "pick": "Zay Flowers",
-      "before": "Questionable · Hamstring",
-      "after": "Active · Flowers (hamstring) was limited in Wednesday's practice, Sam Cohn of The Baltimore Sun reports.",
-      "source_quote_at": "2026-09-30T20:40Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:4:DJ Turner II|2026-10-01T20:49:15.342Z",
-      "kind": "injury",
-      "observed_at": "2026-10-01T20:49:15.342Z",
-      "sport": "nfl",
-      "title": "New availability report",
-      "event": "Cincinnati Bengals",
-      "pick": "DJ Turner II",
-      "before": "Not in the previous dated report",
-      "after": "Questionable · Ankle",
-      "source_quote_at": "2026-10-01T20:33Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:4:Swayze Bozeman|2026-10-01T20:49:15.342Z",
-      "kind": "injury",
-      "observed_at": "2026-10-01T20:49:15.342Z",
-      "sport": "nfl",
-      "title": "New availability report",
-      "event": "Cincinnati Bengals",
-      "pick": "Swayze Bozeman",
-      "before": "Not in the previous dated report",
-      "after": "Questionable · Groin",
-      "source_quote_at": "2026-10-01T20:33Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:30:Nate Boerkircher|2026-10-01T20:49:15.342Z",
-      "kind": "injury",
-      "observed_at": "2026-10-01T20:49:15.342Z",
-      "sport": "nfl",
-      "title": "New availability report",
-      "event": "Jacksonville Jaguars",
-      "pick": "Nate Boerkircher",
-      "before": "Not in the previous dated report",
-      "after": "Questionable · Illness",
-      "source_quote_at": "2026-10-01T20:23Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:17:Channing Canada|2026-10-01T20:49:15.342Z",
-      "kind": "injury",
-      "observed_at": "2026-10-01T20:49:15.342Z",
-      "sport": "nfl",
-      "title": "New availability report",
-      "event": "New England Patriots",
-      "pick": "Channing Canada",
-      "before": "Not in the previous dated report",
-      "after": "Questionable · Hamstring",
-      "source_quote_at": "2026-10-01T20:44Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:18:Travis Etienne Jr.|2026-10-01T20:49:15.342Z",
-      "kind": "injury",
-      "observed_at": "2026-10-01T20:49:15.342Z",
-      "sport": "nfl",
-      "title": "New availability report",
-      "event": "New Orleans Saints",
-      "pick": "Travis Etienne Jr.",
-      "before": "Not in the previous dated report",
-      "after": "Injured Reserve · Hamstring",
-      "source_quote_at": "2026-10-01T20:36Z",
       "source": "ESPN injuries",
       "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
     }
