@@ -1,29 +1,43 @@
 {
   "schema": 1,
-  "checked_at": "2026-10-02T13:50:32.060Z",
+  "checked_at": "2026-10-02T14:22:28.946Z",
   "coverage": {
-    "nfl": {
+    "mlb": {
       "status": "available",
-      "reports": 364,
-      "checked_at": "2026-10-02T13:50:32.060Z"
-    },
-    "nhl": {
-      "status": "available",
-      "reports": 63,
-      "checked_at": "2026-10-02T13:50:32.060Z"
+      "reports": 33,
+      "checked_at": "2026-10-02T14:22:28.946Z"
     },
     "ncaaf": {
       "status": "empty",
       "reports": 0,
-      "checked_at": "2026-10-02T13:50:32.060Z"
+      "checked_at": "2026-10-02T14:22:28.946Z"
     },
-    "mlb": {
+    "nhl": {
       "status": "available",
-      "reports": 34,
-      "checked_at": "2026-10-02T13:50:32.060Z"
+      "reports": 63,
+      "checked_at": "2026-10-02T14:22:28.946Z"
+    },
+    "nfl": {
+      "status": "available",
+      "reports": 364,
+      "checked_at": "2026-10-02T14:22:28.946Z"
     }
   },
   "events": [
+    {
+      "id": "injury|nfl:28:Jayden Daniels|2026-10-02T14:22:28.946Z",
+      "kind": "injury",
+      "observed_at": "2026-10-02T14:22:28.946Z",
+      "sport": "nfl",
+      "title": "Player availability changed",
+      "event": "Washington Commanders",
+      "pick": "Jayden Daniels",
+      "before": "Questionable · Elbow",
+      "after": "Out · Elbow",
+      "source_quote_at": "2026-10-02T14:09Z",
+      "source": "ESPN injuries",
+      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
+    },
     {
       "id": "injury|nhl:3:Henry Mews|2026-10-02T13:50:32.060Z",
       "kind": "injury",
@@ -2944,19 +2958,6 @@
       "source_quote_at": "2026-10-01T18:37:32.021619+00:00",
       "source": "Existing NCAAF board",
       "note": "Your ticket keeps its original odds. Recheck the live book before placing a new wager."
-    },
-    {
-      "id": "starter|849844home|2026-10-01T18:38:55.034Z",
-      "kind": "starter",
-      "observed_at": "2026-10-01T18:38:55.034Z",
-      "sport": "mlb",
-      "event": "PHI @ ATL",
-      "start": "2026-10-02T00:00:00Z",
-      "title": "Probable starting pitcher changed",
-      "before": "TBA",
-      "after": "Ray Kerr",
-      "source_quote_at": "2026-10-01T18:37:37+00:00",
-      "source": "MLB board"
     }
   ]
 }
