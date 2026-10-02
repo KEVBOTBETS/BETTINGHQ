@@ -1,29 +1,43 @@
 {
   "schema": 1,
-  "checked_at": "2026-10-02T12:54:07.549Z",
+  "checked_at": "2026-10-02T13:22:26.960Z",
   "coverage": {
-    "mlb": {
-      "status": "available",
-      "reports": 34,
-      "checked_at": "2026-10-02T12:54:07.549Z"
+    "ncaaf": {
+      "status": "empty",
+      "reports": 0,
+      "checked_at": "2026-10-02T13:22:26.960Z"
     },
     "nhl": {
       "status": "available",
       "reports": 62,
-      "checked_at": "2026-10-02T12:54:07.549Z"
+      "checked_at": "2026-10-02T13:22:26.960Z"
     },
-    "ncaaf": {
-      "status": "empty",
-      "reports": 0,
-      "checked_at": "2026-10-02T12:54:07.549Z"
+    "mlb": {
+      "status": "available",
+      "reports": 34,
+      "checked_at": "2026-10-02T13:22:26.960Z"
     },
     "nfl": {
       "status": "available",
       "reports": 364,
-      "checked_at": "2026-10-02T12:54:07.549Z"
+      "checked_at": "2026-10-02T13:22:26.960Z"
     }
   },
   "events": [
+    {
+      "id": "injury|nfl:3:Anthony Johnson Jr.|2026-10-02T13:22:26.960Z",
+      "kind": "injury",
+      "observed_at": "2026-10-02T13:22:26.960Z",
+      "sport": "nfl",
+      "title": "Player availability changed",
+      "event": "Chicago Bears",
+      "pick": "Anthony Johnson Jr.",
+      "before": "Injured Reserve · Undisclosed",
+      "after": "Out · Undisclosed",
+      "source_quote_at": "2026-10-02T13:00Z",
+      "source": "ESPN injuries",
+      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
+    },
     {
       "id": "odds|props|401872977|2026-10-04T20:25Z|Rushing yards|Sam Darnold|over|bet365|2026-10-02T12:46:39.152Z",
       "kind": "odds",
@@ -2944,22 +2958,6 @@
       "before": "+105 · line 15.5",
       "after": "-105 · line 15.5",
       "book": "Fanatics Sportsbook",
-      "source_quote_at": "2026-10-01T18:04:15.837367+00:00",
-      "source": "Existing Props board",
-      "note": "Your ticket keeps its original odds. Recheck the live book before placing a new wager."
-    },
-    {
-      "id": "odds|props|401872969|2026-10-04T17:00Z|Passing yards|Trevor Lawrence|under|Hard Rock Bet|2026-10-01T18:04:38.739Z",
-      "kind": "odds",
-      "observed_at": "2026-10-01T18:04:38.739Z",
-      "sport": "props",
-      "event": "Jacksonville Jaguars @ Cincinnati Bengals",
-      "start": "2026-10-04T17:00Z",
-      "pick": "Trevor Lawrence — Under 264.5 Passing yards",
-      "title": "Published odds changed",
-      "before": "-115 · line 264.5",
-      "after": "-115 · line 262.5",
-      "book": "Hard Rock Bet",
       "source_quote_at": "2026-10-01T18:04:15.837367+00:00",
       "source": "Existing Props board",
       "note": "Your ticket keeps its original odds. Recheck the live book before placing a new wager."
