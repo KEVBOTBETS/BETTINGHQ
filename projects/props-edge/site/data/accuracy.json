@@ -1,13 +1,13 @@
 {
  "schema": 2,
  "projection_only": false,
- "generated_at": "2026-10-02T21:39:48.935311+00:00",
+ "generated_at": "2026-10-02T21:59:05.112858+00:00",
  "label": "NFL Props forecast and priced-call accuracy",
  "scope": {
   "season": 2026,
   "season_type": 2,
   "season_type_label": "regular season",
-  "included_records": 30285,
+  "included_records": 30286,
   "excluded_records": 0
  },
  "method": "First pre-event snapshot, frozen line and price. All model picks, including PASS/AVOID and unstaked picks. One preferred side per event/market in pick statistics; the complete priced-side audit is separate. One hypothetical unit per pick; no actual wagers are created. Missing results remain pending.",
@@ -50955,6 +50955,31 @@
    "selected": true,
    "id": "call:NFL:401872977:Emanuel Wilson:Rushing yards:over:45.5",
    "captured_at": "2026-10-02T21:39:45.897445+00:00",
+   "result": "Pending"
+  },
+  {
+   "kind": "call",
+   "league": "NFL",
+   "event_id": "401872977",
+   "start": "2026-10-04T20:25Z",
+   "matchup": "Los Angeles Chargers @ Seattle Seahawks",
+   "player": "Emanuel Wilson",
+   "market": "Rushing yards",
+   "side": "over",
+   "line": 41.5,
+   "price": -120,
+   "probability": 0.46138,
+   "tier": "PASS",
+   "edge": -0.10179,
+   "book": "bet365",
+   "quote_time": "2026-10-02T21:58:41.604032+00:00",
+   "season": 2026,
+   "season_type": 2,
+   "stat_key": "emanuelwilson|seattleseahawks|rushingyards",
+   "version": "2026-09-23-restored-v1",
+   "selected": false,
+   "id": "call:NFL:401872977:Emanuel Wilson:Rushing yards:over:41.5",
+   "captured_at": "2026-10-02T21:59:03.418468+00:00",
    "result": "Pending"
   },
   {
@@ -554261,13 +554286,13 @@
   "brier": 0.23261
  },
  "all_calls": {
-  "logged": 1221,
+  "logged": 1222,
   "wins": 393,
   "losses": 324,
   "pushes": 0,
   "voids": 0,
   "settled": 717,
-  "pending": 504,
+  "pending": 505,
   "win_rate": 0.5481171548117155,
   "units": 31.973,
   "roi": 0.04459292050209206,
