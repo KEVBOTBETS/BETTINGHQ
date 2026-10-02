@@ -1,29 +1,127 @@
 {
   "schema": 1,
-  "checked_at": "2026-10-02T16:21:13.140Z",
+  "checked_at": "2026-10-02T16:50:15.701Z",
   "coverage": {
-    "mlb": {
-      "status": "available",
-      "reports": 24,
-      "checked_at": "2026-10-02T16:21:13.140Z"
-    },
-    "nhl": {
-      "status": "available",
-      "reports": 51,
-      "checked_at": "2026-10-02T16:21:13.140Z"
-    },
     "ncaaf": {
       "status": "empty",
       "reports": 0,
-      "checked_at": "2026-10-02T16:21:13.140Z"
+      "checked_at": "2026-10-02T16:50:15.701Z"
+    },
+    "nhl": {
+      "status": "available",
+      "reports": 42,
+      "checked_at": "2026-10-02T16:50:15.701Z"
     },
     "nfl": {
       "status": "available",
-      "reports": 366,
-      "checked_at": "2026-10-02T16:21:13.140Z"
+      "reports": 343,
+      "checked_at": "2026-10-02T16:50:15.701Z"
+    },
+    "mlb": {
+      "status": "available",
+      "reports": 23,
+      "checked_at": "2026-10-02T16:50:15.701Z"
     }
   },
   "events": [
+    {
+      "id": "injury|nfl:29:Xavier Legette|2026-10-02T16:50:15.701Z",
+      "kind": "injury",
+      "observed_at": "2026-10-02T16:50:15.701Z",
+      "sport": "nfl",
+      "title": "Player availability changed",
+      "event": "Carolina Panthers",
+      "pick": "Xavier Legette",
+      "before": "Doubtful · Knee",
+      "after": "Out · Knee",
+      "source_quote_at": "2026-10-01T19:42Z",
+      "source": "ESPN injuries",
+      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
+    },
+    {
+      "id": "injury|nfl:6:Cobie Durant|2026-10-02T16:50:15.701Z",
+      "kind": "injury",
+      "observed_at": "2026-10-02T16:50:15.701Z",
+      "sport": "nfl",
+      "title": "Player availability changed",
+      "event": "Dallas Cowboys",
+      "pick": "Cobie Durant",
+      "before": "Doubtful · Hamstring",
+      "after": "Out · Hamstring",
+      "source_quote_at": "2026-10-02T16:26Z",
+      "source": "ESPN injuries",
+      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
+    },
+    {
+      "id": "injury|nfl:6:DeMarvion Overshown|2026-10-02T16:50:15.701Z",
+      "kind": "injury",
+      "observed_at": "2026-10-02T16:50:15.701Z",
+      "sport": "nfl",
+      "title": "Player availability changed",
+      "event": "Dallas Cowboys",
+      "pick": "DeMarvion Overshown",
+      "before": "Questionable · Hamstring",
+      "after": "Out · Hamstring",
+      "source_quote_at": "2026-10-02T16:25Z",
+      "source": "ESPN injuries",
+      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
+    },
+    {
+      "id": "injury|nfl:8:Brian Branch|2026-10-02T16:50:15.701Z",
+      "kind": "injury",
+      "observed_at": "2026-10-02T16:50:15.701Z",
+      "sport": "nfl",
+      "title": "New availability report",
+      "event": "Detroit Lions",
+      "pick": "Brian Branch",
+      "before": "Not in the previous dated report",
+      "after": "Out · Achilles",
+      "source_quote_at": "2026-10-02T16:17Z",
+      "source": "ESPN injuries",
+      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
+    },
+    {
+      "id": "injury|nfl:27:Benjamin Morrison|2026-10-02T16:50:15.701Z",
+      "kind": "injury",
+      "observed_at": "2026-10-02T16:50:15.701Z",
+      "sport": "nfl",
+      "title": "Player availability changed",
+      "event": "Tampa Bay Buccaneers",
+      "pick": "Benjamin Morrison",
+      "before": "Questionable · Quadriceps",
+      "after": "Out · Quadriceps",
+      "source_quote_at": "2026-10-02T16:29Z",
+      "source": "ESPN injuries",
+      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
+    },
+    {
+      "id": "injury|nfl:27:Rueben Bain Jr.|2026-10-02T16:50:15.701Z",
+      "kind": "injury",
+      "observed_at": "2026-10-02T16:50:15.701Z",
+      "sport": "nfl",
+      "title": "Player availability changed",
+      "event": "Tampa Bay Buccaneers",
+      "pick": "Rueben Bain Jr.",
+      "before": "Questionable · Groin",
+      "after": "Out · Groin",
+      "source_quote_at": "2026-10-02T16:29Z",
+      "source": "ESPN injuries",
+      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
+    },
+    {
+      "id": "injury|nfl:27:Ko Kieft|2026-10-02T16:50:15.701Z",
+      "kind": "injury",
+      "observed_at": "2026-10-02T16:50:15.701Z",
+      "sport": "nfl",
+      "title": "Player availability changed",
+      "event": "Tampa Bay Buccaneers",
+      "pick": "Ko Kieft",
+      "before": "Questionable · Elbow",
+      "after": "Out · Elbow",
+      "source_quote_at": "2026-10-01T20:37Z",
+      "source": "ESPN injuries",
+      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
+    },
     {
       "id": "injury|nhl:14:Warren Foegele|2026-10-02T16:21:13.140Z",
       "kind": "injury",
@@ -2844,108 +2942,6 @@
       "source_quote_at": "2026-10-01T20:09Z",
       "source": "ESPN injuries",
       "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:11:Keenan Allen|2026-10-01T20:21:05.664Z",
-      "kind": "injury",
-      "observed_at": "2026-10-01T20:21:05.664Z",
-      "sport": "nfl",
-      "title": "New availability report",
-      "event": "Indianapolis Colts",
-      "pick": "Keenan Allen",
-      "before": "Not in the previous dated report",
-      "after": "Questionable · Groin",
-      "source_quote_at": "2026-10-01T20:04Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:11:Ashton Dulin|2026-10-01T20:21:05.664Z",
-      "kind": "injury",
-      "observed_at": "2026-10-01T20:21:05.664Z",
-      "sport": "nfl",
-      "title": "Player availability changed",
-      "event": "Indianapolis Colts",
-      "pick": "Ashton Dulin",
-      "before": "Questionable · Dulin (ankle) is not practicing Wednesday, James Boyd of The Athletic reports.",
-      "after": "Active",
-      "source_quote_at": "2026-10-01T19:50Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:11:Akeem Davis-Gaither|2026-10-01T20:21:05.664Z",
-      "kind": "injury",
-      "observed_at": "2026-10-01T20:21:05.664Z",
-      "sport": "nfl",
-      "title": "Player availability changed",
-      "event": "Indianapolis Colts",
-      "pick": "Akeem Davis-Gaither",
-      "before": "Questionable · questionable",
-      "after": "Active",
-      "source_quote_at": "2026-10-01T19:49Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:20:Minkah Fitzpatrick|2026-10-01T20:21:05.664Z",
-      "kind": "injury",
-      "observed_at": "2026-10-01T20:21:05.664Z",
-      "sport": "nfl",
-      "title": "Player availability changed",
-      "event": "New York Jets",
-      "pick": "Minkah Fitzpatrick",
-      "before": "Questionable · Groin",
-      "after": "Active",
-      "source_quote_at": "2026-10-01T20:11Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:28:Amik Robertson|2026-10-01T20:21:05.664Z",
-      "kind": "injury",
-      "observed_at": "2026-10-01T20:21:05.664Z",
-      "sport": "nfl",
-      "title": "Player availability changed",
-      "event": "Washington Commanders",
-      "pick": "Amik Robertson",
-      "before": "Questionable · Knee",
-      "after": "Active",
-      "source_quote_at": "2026-10-01T20:00Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "odds|nfl|401872970|2026-10-04T17:00Z|ML||home|DraftKings|2026-10-01T19:58:35.879Z",
-      "kind": "odds",
-      "observed_at": "2026-10-01T19:58:35.879Z",
-      "sport": "nfl",
-      "event": "LAR @ PHI",
-      "start": "2026-10-04T17:00Z",
-      "pick": "PHI ML",
-      "title": "Published odds changed",
-      "before": "+136",
-      "after": "+142",
-      "book": "DraftKings",
-      "source_quote_at": "2026-10-01T19:57:49.297844+00:00",
-      "source": "Existing NFL board",
-      "note": "Your ticket keeps its original odds. Recheck the live book before placing a new wager."
-    },
-    {
-      "id": "odds|props|401872978|2026-10-05T00:20Z|Rushing yards|Jared Goff|over|DraftKings|2026-10-01T19:58:35.879Z",
-      "kind": "odds",
-      "observed_at": "2026-10-01T19:58:35.879Z",
-      "sport": "props",
-      "event": "Detroit Lions @ Carolina Panthers",
-      "start": "2026-10-05T00:20Z",
-      "pick": "Jared Goff — Over 1.5 Rushing yards",
-      "title": "Published odds changed",
-      "before": "-113 · line 1.5",
-      "after": "-109 · line 1.5",
-      "book": "DraftKings",
-      "source_quote_at": "2026-10-01T19:58:11.024823+00:00",
-      "source": "Existing Props board",
-      "note": "Your ticket keeps its original odds. Recheck the live book before placing a new wager."
     }
   ]
 }
