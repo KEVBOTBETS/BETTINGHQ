@@ -1,29 +1,121 @@
 {
   "schema": 1,
-  "checked_at": "2026-10-02T17:47:22.846Z",
+  "checked_at": "2026-10-02T18:00:32.580Z",
   "coverage": {
     "nhl": {
       "status": "available",
-      "reports": 37,
-      "checked_at": "2026-10-02T17:47:22.846Z"
+      "reports": 34,
+      "checked_at": "2026-10-02T18:00:32.580Z"
     },
     "ncaaf": {
       "status": "empty",
       "reports": 0,
-      "checked_at": "2026-10-02T17:47:22.846Z"
+      "checked_at": "2026-10-02T18:00:32.580Z"
     },
     "mlb": {
       "status": "available",
-      "reports": 22,
-      "checked_at": "2026-10-02T17:47:22.846Z"
+      "reports": 20,
+      "checked_at": "2026-10-02T18:00:32.580Z"
     },
     "nfl": {
       "status": "available",
       "reports": 343,
-      "checked_at": "2026-10-02T17:47:22.846Z"
+      "checked_at": "2026-10-02T18:00:32.580Z"
     }
   },
   "events": [
+    {
+      "id": "odds|nfl|401872973|2026-10-04T17:00Z|ML||away|Draft Kings|2026-10-02T18:00:32.580Z",
+      "kind": "odds",
+      "observed_at": "2026-10-02T18:00:32.580Z",
+      "sport": "nfl",
+      "event": "TEN @ BAL",
+      "start": "2026-10-04T17:00Z",
+      "pick": "TEN ML",
+      "title": "Published odds changed",
+      "before": "+470",
+      "after": "+490",
+      "book": "Draft Kings",
+      "source_quote_at": "2026-10-02T17:59:22.221008+00:00",
+      "source": "Existing NFL board",
+      "note": "Your ticket keeps its original odds. Recheck the live book before placing a new wager."
+    },
+    {
+      "id": "odds|nfl|401872971|2026-10-04T17:00Z|TOTAL||under|Draft Kings|2026-10-02T18:00:32.580Z",
+      "kind": "odds",
+      "observed_at": "2026-10-02T18:00:32.580Z",
+      "sport": "nfl",
+      "event": "NE @ BUF",
+      "start": "2026-10-04T17:00Z",
+      "pick": "Under 49.5",
+      "title": "Published odds changed",
+      "before": "-105 · line 48.5",
+      "after": "-108 · line 49.5",
+      "book": "Draft Kings",
+      "source_quote_at": "2026-10-02T17:59:22.220575+00:00",
+      "source": "Existing NFL board",
+      "note": "Your ticket keeps its original odds. Recheck the live book before placing a new wager."
+    },
+    {
+      "id": "odds|nfl|401872965|2026-10-04T13:30Z|ML||home|Draft Kings|2026-10-02T18:00:32.580Z",
+      "kind": "odds",
+      "observed_at": "2026-10-02T18:00:32.580Z",
+      "sport": "nfl",
+      "event": "IND @ WSH",
+      "start": "2026-10-04T13:30Z",
+      "pick": "WSH ML",
+      "title": "Published odds changed",
+      "before": "+160",
+      "after": "+164",
+      "book": "Draft Kings",
+      "source_quote_at": "2026-10-02T17:59:22.220483+00:00",
+      "source": "Existing NFL board",
+      "note": "Your ticket keeps its original odds. Recheck the live book before placing a new wager."
+    },
+    {
+      "id": "odds|ncaaf|401858473|2026-10-03T19:30Z|ATS||home|Draft Kings|2026-10-02T18:00:32.580Z",
+      "kind": "odds",
+      "observed_at": "2026-10-02T18:00:32.580Z",
+      "sport": "ncaaf",
+      "event": "OSU @ IOWA",
+      "start": "2026-10-03T19:30Z",
+      "pick": "IOWA +14",
+      "title": "Published odds changed",
+      "before": "-110 · line 14.5",
+      "after": "-108 · line 14",
+      "book": "Draft Kings",
+      "source_quote_at": "2026-10-02T17:59:35.486163+00:00",
+      "source": "Existing NCAAF board",
+      "note": "Your ticket keeps its original odds. Recheck the live book before placing a new wager."
+    },
+    {
+      "id": "injury|nfl:28:Ben Sinnott|2026-10-02T18:00:32.580Z",
+      "kind": "injury",
+      "observed_at": "2026-10-02T18:00:32.580Z",
+      "sport": "nfl",
+      "title": "Player availability changed",
+      "event": "Washington Commanders",
+      "pick": "Ben Sinnott",
+      "before": "Active · Sinnott (ribs) was a limited participant at Thursday's practice.",
+      "after": "Active · Sinnott (ribs) doesn't have an injury designation for Sunday's game against the Colts.",
+      "source_quote_at": "2026-10-02T17:42Z",
+      "source": "ESPN injuries",
+      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
+    },
+    {
+      "id": "injury|nfl:28:Chig Okonkwo|2026-10-02T18:00:32.580Z",
+      "kind": "injury",
+      "observed_at": "2026-10-02T18:00:32.580Z",
+      "sport": "nfl",
+      "title": "Player availability changed",
+      "event": "Washington Commanders",
+      "pick": "Chig Okonkwo",
+      "before": "Active · Okonkwo (hamstring) was a limited participant at Thursday's practice.",
+      "after": "Active · Okonkwo (hamstring) doesn't have an injury designation for Sunday's game against the Colts.",
+      "source_quote_at": "2026-10-02T17:40Z",
+      "source": "ESPN injuries",
+      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
+    },
     {
       "id": "injury|nhl:11:Seamus Casey|2026-10-02T17:47:22.846Z",
       "kind": "injury",
@@ -2851,100 +2943,6 @@
       "source_quote_at": "2026-10-01T20:58Z",
       "source": "ESPN injuries",
       "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:18:Jordyn Tyson|2026-10-01T21:03:33.868Z",
-      "kind": "injury",
-      "observed_at": "2026-10-01T21:03:33.868Z",
-      "sport": "nfl",
-      "title": "New availability report",
-      "event": "New Orleans Saints",
-      "pick": "Jordyn Tyson",
-      "before": "Not in the previous dated report",
-      "after": "Injured Reserve · Hamstring",
-      "source_quote_at": "2026-10-01T20:53Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "odds|mlb|849844|2026-10-02T00:00:00Z|ML||home|DraftKings|2026-10-01T20:59:37.777Z",
-      "kind": "odds",
-      "observed_at": "2026-10-01T20:59:37.777Z",
-      "sport": "mlb",
-      "event": "PHI @ ATL",
-      "start": "2026-10-02T00:00:00Z",
-      "pick": "ATL ML",
-      "title": "Published odds changed",
-      "before": "-108",
-      "after": "-109",
-      "book": "DraftKings",
-      "source_quote_at": "2026-10-01T20:56:34.245832+00:00",
-      "source": "Existing MLB board",
-      "note": "Your ticket keeps its original odds. Recheck the live book before placing a new wager."
-    },
-    {
-      "id": "odds|props|401872964|2026-10-02T00:15Z|Rushing yards|Aaron Rodgers|over|DraftKings|2026-10-01T20:59:37.777Z",
-      "kind": "odds",
-      "observed_at": "2026-10-01T20:59:37.777Z",
-      "sport": "props",
-      "event": "Pittsburgh Steelers @ Cleveland Browns",
-      "start": "2026-10-02T00:15Z",
-      "pick": "Aaron Rodgers — Over 1.5 Rushing yards",
-      "title": "Published odds changed",
-      "before": "-104 · line 1.5",
-      "after": "-115 · line 1.5",
-      "book": "DraftKings",
-      "source_quote_at": "2026-10-01T20:59:08.917261+00:00",
-      "source": "Existing Props board",
-      "note": "Your ticket keeps its original odds. Recheck the live book before placing a new wager."
-    },
-    {
-      "id": "odds|props|401872977|2026-10-04T20:25Z|Rushing yards|Omarion Hampton|over|Caesars|2026-10-01T20:59:37.777Z",
-      "kind": "odds",
-      "observed_at": "2026-10-01T20:59:37.777Z",
-      "sport": "props",
-      "event": "Los Angeles Chargers @ Seattle Seahawks",
-      "start": "2026-10-04T20:25Z",
-      "pick": "Omarion Hampton — Over 46.5 Rushing yards",
-      "title": "Published odds changed",
-      "before": "-105 · line 45.5",
-      "after": "-105 · line 46.5",
-      "book": "Caesars",
-      "source_quote_at": "2026-10-01T20:59:08.917261+00:00",
-      "source": "Existing Props board",
-      "note": "Your ticket keeps its original odds. Recheck the live book before placing a new wager."
-    },
-    {
-      "id": "odds|props|401872969|2026-10-04T17:00Z|Rushing yards|Trevor Lawrence|over|Fanatics Sportsbook|2026-10-01T20:59:37.777Z",
-      "kind": "odds",
-      "observed_at": "2026-10-01T20:59:37.777Z",
-      "sport": "props",
-      "event": "Jacksonville Jaguars @ Cincinnati Bengals",
-      "start": "2026-10-04T17:00Z",
-      "pick": "Trevor Lawrence — Over 15.5 Rushing yards",
-      "title": "Published odds changed",
-      "before": "+100 · line 15.5",
-      "after": "+105 · line 15.5",
-      "book": "Fanatics Sportsbook",
-      "source_quote_at": "2026-10-01T20:59:08.917261+00:00",
-      "source": "Existing Props board",
-      "note": "Your ticket keeps its original odds. Recheck the live book before placing a new wager."
-    },
-    {
-      "id": "odds|props|401872965|2026-10-04T13:30Z|Receiving yards|Stefon Diggs|over|DraftKings|2026-10-01T20:59:37.777Z",
-      "kind": "odds",
-      "observed_at": "2026-10-01T20:59:37.777Z",
-      "sport": "props",
-      "event": "Indianapolis Colts @ Washington Commanders",
-      "start": "2026-10-04T13:30Z",
-      "pick": "Stefon Diggs — Over 40.5 Receiving yards",
-      "title": "Published odds changed",
-      "before": "-110 · line 43.5",
-      "after": "-114 · line 43.5",
-      "book": "DraftKings",
-      "source_quote_at": "2026-10-01T20:59:08.917261+00:00",
-      "source": "Existing Props board",
-      "note": "Your ticket keeps its original odds. Recheck the live book before placing a new wager."
     }
   ]
 }
