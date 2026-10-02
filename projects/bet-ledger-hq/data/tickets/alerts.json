@@ -1,29 +1,43 @@
 {
   "schema": 1,
-  "checked_at": "2026-10-02T03:49:38.523Z",
+  "checked_at": "2026-10-02T04:21:16.191Z",
   "coverage": {
     "ncaaf": {
       "status": "empty",
       "reports": 0,
-      "checked_at": "2026-10-02T03:49:38.523Z"
+      "checked_at": "2026-10-02T04:21:16.191Z"
     },
     "nhl": {
       "status": "available",
       "reports": 63,
-      "checked_at": "2026-10-02T03:49:38.523Z"
-    },
-    "nfl": {
-      "status": "available",
-      "reports": 374,
-      "checked_at": "2026-10-02T03:49:38.523Z"
+      "checked_at": "2026-10-02T04:21:16.191Z"
     },
     "mlb": {
       "status": "available",
       "reports": 34,
-      "checked_at": "2026-10-02T03:49:38.523Z"
+      "checked_at": "2026-10-02T04:21:16.191Z"
+    },
+    "nfl": {
+      "status": "available",
+      "reports": 363,
+      "checked_at": "2026-10-02T04:21:16.191Z"
     }
   },
   "events": [
+    {
+      "id": "injury|nfl:3:Anthony Johnson Jr.|2026-10-02T04:21:16.191Z",
+      "kind": "injury",
+      "observed_at": "2026-10-02T04:21:16.191Z",
+      "sport": "nfl",
+      "title": "Player availability changed",
+      "event": "Chicago Bears",
+      "pick": "Anthony Johnson Jr.",
+      "before": "Out · Undisclosed",
+      "after": "Injured Reserve · Undisclosed",
+      "source_quote_at": "2026-10-02T04:00Z",
+      "source": "ESPN injuries",
+      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
+    },
     {
       "id": "odds|nfl|401872971|2026-10-04T17:00Z|ML||away|Draft Kings|2026-10-02T03:43:44.889Z",
       "kind": "odds",
@@ -2940,22 +2954,6 @@
       "after": "+500",
       "book": "Draft Kings",
       "source_quote_at": "2026-10-01T12:47:01.907013+00:00",
-      "source": "Existing NFL board",
-      "note": "Your ticket keeps its original odds. Recheck the live book before placing a new wager."
-    },
-    {
-      "id": "odds|nfl|401872968|2026-10-04T17:00Z|ML||home|Draft Kings|2026-10-01T12:50:28.163Z",
-      "kind": "odds",
-      "observed_at": "2026-10-01T12:50:28.163Z",
-      "sport": "nfl",
-      "event": "GB @ TB",
-      "start": "2026-10-04T17:00Z",
-      "pick": "TB ML",
-      "title": "Published odds changed",
-      "before": "+160",
-      "after": "+150",
-      "book": "Draft Kings",
-      "source_quote_at": "2026-10-01T12:47:01.906981+00:00",
       "source": "Existing NFL board",
       "note": "Your ticket keeps its original odds. Recheck the live book before placing a new wager."
     }
