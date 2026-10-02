@@ -1,29 +1,43 @@
 {
   "schema": 1,
-  "checked_at": "2026-10-02T15:43:01.790Z",
+  "checked_at": "2026-10-02T15:50:53.195Z",
   "coverage": {
-    "nhl": {
-      "status": "available",
-      "reports": 61,
-      "checked_at": "2026-10-02T15:43:01.790Z"
-    },
     "ncaaf": {
       "status": "empty",
       "reports": 0,
-      "checked_at": "2026-10-02T15:43:01.790Z"
+      "checked_at": "2026-10-02T15:50:53.195Z"
     },
     "mlb": {
       "status": "available",
-      "reports": 27,
-      "checked_at": "2026-10-02T15:43:01.790Z"
+      "reports": 26,
+      "checked_at": "2026-10-02T15:50:53.195Z"
+    },
+    "nhl": {
+      "status": "available",
+      "reports": 61,
+      "checked_at": "2026-10-02T15:50:53.195Z"
     },
     "nfl": {
       "status": "available",
       "reports": 366,
-      "checked_at": "2026-10-02T15:43:01.790Z"
+      "checked_at": "2026-10-02T15:50:53.195Z"
     }
   },
   "events": [
+    {
+      "id": "injury|nhl:16:Andrei Kuzmenko|2026-10-02T15:50:53.195Z",
+      "kind": "injury",
+      "observed_at": "2026-10-02T15:50:53.195Z",
+      "sport": "nhl",
+      "title": "Player availability changed",
+      "event": "Pittsburgh Penguins",
+      "pick": "Andrei Kuzmenko",
+      "before": "Injured Reserve · Personal",
+      "after": "Injured Reserve · Kuzmenko (personal) has rejoined the Penguins and was on the ice for practice Friday, Michelle Crechiolo of the Penguins' official site reports.",
+      "source_quote_at": "2026-10-02T14:56Z",
+      "source": "ESPN injuries",
+      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
+    },
     {
       "id": "odds|nfl|401872970|2026-10-04T17:00Z|ML||home|DraftKings|2026-10-02T15:43:01.790Z",
       "kind": "odds",
@@ -2934,22 +2948,6 @@
       "after": "-115 · line 21.5",
       "book": "DraftKings",
       "source_quote_at": "2026-10-01T19:58:00.170489+00:00",
-      "source": "Existing NCAAF board",
-      "note": "Your ticket keeps its original odds. Recheck the live book before placing a new wager."
-    },
-    {
-      "id": "odds|ncaaf|401866433|2026-10-03T19:30Z|ML||home|DraftKings|2026-10-01T19:58:35.879Z",
-      "kind": "odds",
-      "observed_at": "2026-10-01T19:58:35.879Z",
-      "sport": "ncaaf",
-      "event": "EMU @ MASS",
-      "start": "2026-10-03T19:30Z",
-      "pick": "MASS ML",
-      "title": "Published odds changed",
-      "before": "-225",
-      "after": "-218",
-      "book": "DraftKings",
-      "source_quote_at": "2026-10-01T19:58:00.171501+00:00",
       "source": "Existing NCAAF board",
       "note": "Your ticket keeps its original odds. Recheck the live book before placing a new wager."
     }
