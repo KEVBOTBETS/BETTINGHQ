@@ -1,29 +1,43 @@
 {
   "schema": 1,
-  "checked_at": "2026-10-02T02:47:45.678Z",
+  "checked_at": "2026-10-02T03:20:54.066Z",
   "coverage": {
-    "mlb": {
-      "status": "available",
-      "reports": 34,
-      "checked_at": "2026-10-02T02:47:45.678Z"
-    },
     "nhl": {
       "status": "available",
       "reports": 63,
-      "checked_at": "2026-10-02T02:47:45.678Z"
+      "checked_at": "2026-10-02T03:20:54.066Z"
     },
     "ncaaf": {
       "status": "empty",
       "reports": 0,
-      "checked_at": "2026-10-02T02:47:45.678Z"
+      "checked_at": "2026-10-02T03:20:54.066Z"
+    },
+    "mlb": {
+      "status": "available",
+      "reports": 34,
+      "checked_at": "2026-10-02T03:20:54.066Z"
     },
     "nfl": {
       "status": "available",
       "reports": 377,
-      "checked_at": "2026-10-02T02:47:45.678Z"
+      "checked_at": "2026-10-02T03:20:54.066Z"
     }
   },
   "events": [
+    {
+      "id": "injury|nfl:5:Mike Hall Jr.|2026-10-02T03:20:54.066Z",
+      "kind": "injury",
+      "observed_at": "2026-10-02T03:20:54.066Z",
+      "sport": "nfl",
+      "title": "Player availability changed",
+      "event": "Cleveland Browns",
+      "pick": "Mike Hall Jr.",
+      "before": "Questionable · Hall (ankle) is questionable to return to Thursday night's matchup with Pittsburgh.",
+      "after": "Active · Hall (ankle) has returned to action Thursday night versus the Steelers, Chris Easterling of the Akron Beacon Journal reports.",
+      "source_quote_at": "2026-10-02T02:35Z",
+      "source": "ESPN injuries",
+      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
+    },
     {
       "id": "injury|nhl:26:Gustav Forsling|2026-10-02T02:47:45.678Z",
       "kind": "injury",
@@ -2942,22 +2956,6 @@
       "after": "+136",
       "book": "Draft Kings",
       "source_quote_at": "2026-10-01T12:47:01.907046+00:00",
-      "source": "Existing NFL board",
-      "note": "Your ticket keeps its original odds. Recheck the live book before placing a new wager."
-    },
-    {
-      "id": "odds|nfl|401872968|2026-10-04T17:00Z|ATS||home|Draft Kings|2026-10-01T12:50:28.163Z",
-      "kind": "odds",
-      "observed_at": "2026-10-01T12:50:28.163Z",
-      "sport": "nfl",
-      "event": "GB @ TB",
-      "start": "2026-10-04T17:00Z",
-      "pick": "TB +3.5",
-      "title": "Published odds changed",
-      "before": "+100 · line 3.5",
-      "after": "-108 · line 3.5",
-      "book": "Draft Kings",
-      "source_quote_at": "2026-10-01T12:47:01.906981+00:00",
       "source": "Existing NFL board",
       "note": "Your ticket keeps its original odds. Recheck the live book before placing a new wager."
     }
