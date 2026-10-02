@@ -1,5 +1,34 @@
 {
   "wnba": {
+    "meta": {
+      "league": "WNBA",
+      "season": 2026,
+      "generated_at": "2026-10-02T03:43:31+00:00",
+      "built_for": "2026-10-01",
+      "source": "ESPN schedule, box-score/team efficiency, predictor, injuries and DraftKings prices",
+      "source_status": "live",
+      "live_data": true,
+      "key_required": false,
+      "errors": [],
+      "odds_health": {
+        "status": "partial",
+        "upcoming_games": 3,
+        "priced_games": 2,
+        "provider": "ESPN public feed / DraftKings"
+      },
+      "calibration": {
+        "n": 120,
+        "method": "walk-forward regular-season residuals",
+        "margin_bias": 0.02,
+        "spread_mae": 9.446,
+        "spread_rmse": 12.482,
+        "spread_sigma": 12.482,
+        "total_bias": -1.417,
+        "total_mae": 12.57,
+        "total_rmse": 15.753,
+        "total_sigma": 15.689
+      }
+    },
     "board": [
       {
         "tier": "GOOD",
@@ -230,45 +259,16 @@
         "odds_fetched_at": "2026-10-02T03:43:30+00:00"
       }
     ],
-    "meta": {
-      "league": "WNBA",
-      "season": 2026,
-      "generated_at": "2026-10-02T03:43:31+00:00",
-      "built_for": "2026-10-01",
-      "source": "ESPN schedule, box-score/team efficiency, predictor, injuries and DraftKings prices",
-      "source_status": "live",
-      "live_data": true,
-      "key_required": false,
-      "errors": [],
-      "odds_health": {
-        "status": "partial",
-        "upcoming_games": 3,
-        "priced_games": 2,
-        "provider": "ESPN public feed / DraftKings"
-      },
-      "calibration": {
-        "n": 120,
-        "method": "walk-forward regular-season residuals",
-        "margin_bias": 0.02,
-        "spread_mae": 9.446,
-        "spread_rmse": 12.482,
-        "spread_sigma": 12.482,
-        "total_bias": -1.417,
-        "total_mae": 12.57,
-        "total_rmse": 15.753,
-        "total_sigma": 15.689
-      }
-    },
     "accuracy": {
       "generated_at": "2026-10-02T03:43:31.559065+00:00"
     },
-    "lastGoodAt": "2026-10-02T04:21:16.191Z"
+    "lastGoodAt": "2026-10-02T04:49:27.843Z"
   },
   "ladder": {
     "accuracy": {
       "generated_at": "2026-10-02T03:43:41.475455+00:00"
     },
-    "lastGoodAt": "2026-10-02T04:21:16.191Z"
+    "lastGoodAt": "2026-10-02T04:49:27.843Z"
   },
   "props": {
     "meta": {
@@ -499,7 +499,7 @@
     "accuracy": {
       "generated_at": "2026-10-02T03:43:28.483145+00:00"
     },
-    "lastGoodAt": "2026-10-02T04:21:16.191Z"
+    "lastGoodAt": "2026-10-02T04:49:27.843Z"
   },
   "nfl": {
     "meta": {
@@ -7995,7 +7995,7 @@
     "accuracy": {
       "generated_at": "2026-10-02T03:39:18.544561+00:00"
     },
-    "lastGoodAt": "2026-10-02T04:21:16.191Z"
+    "lastGoodAt": "2026-10-02T04:49:27.843Z"
   },
   "ncaaf": {
     "meta": {
@@ -16600,105 +16600,9 @@
         "odds_observed_at": "2026-10-02T03:39:19.814031+00:00"
       }
     ],
-    "lastGoodAt": "2026-10-02T04:21:16.191Z"
+    "lastGoodAt": "2026-10-02T04:49:27.843Z"
   },
   "mlb": {
-    "slate": {
-      "generated_at": "2026-10-02T03:41:13+00:00",
-      "games": [
-        {
-          "gamePk": 849844,
-          "home": "ATL",
-          "away": "PHI",
-          "start": "2026-10-02T00:00:00Z",
-          "status": "Final",
-          "lineups_confirmed": true,
-          "odds": {
-            "fetched_at": "2026-10-02T03:39:49.949606+00:00"
-          },
-          "bets": [
-            {
-              "tier": "BEST BET",
-              "stake": 4,
-              "market": "ML",
-              "label": "ATL ML",
-              "selection": "ATL",
-              "line": null,
-              "price": -114,
-              "book": "DraftKings",
-              "edge_real": 0.0545,
-              "edge": 0.0549,
-              "p_final": 0.6111
-            },
-            {
-              "tier": "GOOD",
-              "stake": 0,
-              "market": "RL",
-              "label": "ATL +1.5",
-              "selection": "ATL",
-              "line": 1.5,
-              "price": -198,
-              "book": "DraftKings",
-              "edge_real": 0.0519,
-              "edge": 0.0541,
-              "p_final": 0.7289
-            },
-            {
-              "tier": "PASS",
-              "stake": 0,
-              "market": "TOTAL",
-              "label": "Over 7.5",
-              "selection": "Over",
-              "line": 7.5,
-              "price": -102,
-              "book": "DraftKings",
-              "edge_real": -0.0161,
-              "edge": 0.027,
-              "p_final": 0.4965
-            },
-            {
-              "tier": "PASS",
-              "stake": 0,
-              "market": "TOTAL",
-              "label": "Under 7.5",
-              "selection": "Under",
-              "line": 7.5,
-              "price": -118,
-              "book": "DraftKings",
-              "edge_real": -0.0411,
-              "edge": -0.0255,
-              "p_final": 0.5035
-            },
-            {
-              "tier": "PASS",
-              "stake": 0,
-              "market": "ML",
-              "label": "PHI ML",
-              "selection": "PHI",
-              "line": null,
-              "price": -106,
-              "book": "DraftKings",
-              "edge_real": -0.055,
-              "edge": -0.0549,
-              "p_final": 0.3889
-            },
-            {
-              "tier": "PASS",
-              "stake": 0,
-              "market": "RL",
-              "label": "PHI -1.5",
-              "selection": "PHI",
-              "line": 1.5,
-              "price": 162,
-              "book": "DraftKings",
-              "edge_real": -0.055,
-              "edge": -0.055,
-              "p_final": 0.2711
-            }
-          ]
-        }
-      ]
-    },
     "meta": {
       "generated_at": "2026-10-02T03:42:30+00:00",
       "day_summary": {
@@ -16864,14 +16768,110 @@
         "probability_reason": "139 independent snapshots of 150 needed"
       }
     },
+    "slate": {
+      "generated_at": "2026-10-02T03:41:13+00:00",
+      "games": [
+        {
+          "gamePk": 849844,
+          "home": "ATL",
+          "away": "PHI",
+          "start": "2026-10-02T00:00:00Z",
+          "status": "Final",
+          "lineups_confirmed": true,
+          "odds": {
+            "fetched_at": "2026-10-02T03:39:49.949606+00:00"
+          },
+          "bets": [
+            {
+              "tier": "BEST BET",
+              "stake": 4,
+              "market": "ML",
+              "label": "ATL ML",
+              "selection": "ATL",
+              "line": null,
+              "price": -114,
+              "book": "DraftKings",
+              "edge_real": 0.0545,
+              "edge": 0.0549,
+              "p_final": 0.6111
+            },
+            {
+              "tier": "GOOD",
+              "stake": 0,
+              "market": "RL",
+              "label": "ATL +1.5",
+              "selection": "ATL",
+              "line": 1.5,
+              "price": -198,
+              "book": "DraftKings",
+              "edge_real": 0.0519,
+              "edge": 0.0541,
+              "p_final": 0.7289
+            },
+            {
+              "tier": "PASS",
+              "stake": 0,
+              "market": "TOTAL",
+              "label": "Over 7.5",
+              "selection": "Over",
+              "line": 7.5,
+              "price": -102,
+              "book": "DraftKings",
+              "edge_real": -0.0161,
+              "edge": 0.027,
+              "p_final": 0.4965
+            },
+            {
+              "tier": "PASS",
+              "stake": 0,
+              "market": "TOTAL",
+              "label": "Under 7.5",
+              "selection": "Under",
+              "line": 7.5,
+              "price": -118,
+              "book": "DraftKings",
+              "edge_real": -0.0411,
+              "edge": -0.0255,
+              "p_final": 0.5035
+            },
+            {
+              "tier": "PASS",
+              "stake": 0,
+              "market": "ML",
+              "label": "PHI ML",
+              "selection": "PHI",
+              "line": null,
+              "price": -106,
+              "book": "DraftKings",
+              "edge_real": -0.055,
+              "edge": -0.0549,
+              "p_final": 0.3889
+            },
+            {
+              "tier": "PASS",
+              "stake": 0,
+              "market": "RL",
+              "label": "PHI -1.5",
+              "selection": "PHI",
+              "line": 1.5,
+              "price": 162,
+              "book": "DraftKings",
+              "edge_real": -0.055,
+              "edge": -0.055,
+              "p_final": 0.2711
+            }
+          ]
+        }
+      ]
+    },
     "accuracy": {
       "generated_at": "2026-10-02T03:42:30+00:00"
     },
-    "lastGoodAt": "2026-10-02T04:21:16.191Z"
+    "lastGoodAt": "2026-10-02T04:49:27.843Z"
   },
   "nhl": {
     "meta": {
-      "generated_at": "2026-10-02T04:21:14.310266+00:00",
+      "generated_at": "2026-10-02T04:49:25.848157+00:00",
       "model_version": "nhl-poisson-1.0",
       "season": 2027,
       "timezone": "America/Toronto",
@@ -16898,22 +16898,22 @@
         },
         "nhl-schedule-2026-10-02": {
           "status": "ok",
-          "observed_at": "2026-10-02T04:21:14.310266+00:00",
+          "observed_at": "2026-10-02T04:49:25.848157+00:00",
           "url": "https://api-web.nhle.com/v1/schedule/2026-10-02"
         },
         "nhl-schedule-2026-09-18": {
           "status": "ok",
-          "observed_at": "2026-10-02T04:21:14.310266+00:00",
+          "observed_at": "2026-10-02T04:49:25.848157+00:00",
           "url": "https://api-web.nhle.com/v1/schedule/2026-09-18"
         },
         "nhl-schedule-2026-09-25": {
           "status": "ok",
-          "observed_at": "2026-10-02T04:21:14.310266+00:00",
+          "observed_at": "2026-10-02T04:49:25.848157+00:00",
           "url": "https://api-web.nhle.com/v1/schedule/2026-09-25"
         },
         "nhl-schedule-2026-10-09": {
           "status": "ok",
-          "observed_at": "2026-10-02T04:21:14.310266+00:00",
+          "observed_at": "2026-10-02T04:49:25.848157+00:00",
           "url": "https://api-web.nhle.com/v1/schedule/2026-10-09"
         },
         "standings-2027": {
@@ -16928,7 +16928,7 @@
           "url": "https://site.api.espn.com/apis/v2/sports/hockey/nhl/standings?season=2026"
         },
         "nhl-official": {
-          "status": "ok",
+          "status": "cached",
           "observed_at": "2026-10-02T04:21:14.310266+00:00",
           "url": "https://api-web.nhle.com/v1/standings/now"
         },
@@ -16992,8 +16992,8 @@
     },
     "board": [],
     "accuracy": {
-      "generated_at": "2026-10-02T04:21:14.310266+00:00"
+      "generated_at": "2026-10-02T04:49:25.848157+00:00"
     },
-    "lastGoodAt": "2026-10-02T04:21:16.191Z"
+    "lastGoodAt": "2026-10-02T04:49:27.843Z"
   }
 }
