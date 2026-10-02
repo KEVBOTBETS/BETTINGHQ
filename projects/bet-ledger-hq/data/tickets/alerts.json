@@ -1,29 +1,45 @@
 {
   "schema": 1,
-  "checked_at": "2026-10-02T15:50:53.195Z",
+  "checked_at": "2026-10-02T16:01:23.360Z",
   "coverage": {
+    "nhl": {
+      "status": "available",
+      "reports": 57,
+      "checked_at": "2026-10-02T16:01:23.360Z"
+    },
     "ncaaf": {
       "status": "empty",
       "reports": 0,
-      "checked_at": "2026-10-02T15:50:53.195Z"
+      "checked_at": "2026-10-02T16:01:23.360Z"
     },
     "mlb": {
       "status": "available",
       "reports": 26,
-      "checked_at": "2026-10-02T15:50:53.195Z"
-    },
-    "nhl": {
-      "status": "available",
-      "reports": 61,
-      "checked_at": "2026-10-02T15:50:53.195Z"
+      "checked_at": "2026-10-02T16:01:23.360Z"
     },
     "nfl": {
       "status": "available",
       "reports": 366,
-      "checked_at": "2026-10-02T15:50:53.195Z"
+      "checked_at": "2026-10-02T16:01:23.360Z"
     }
   },
   "events": [
+    {
+      "id": "odds|nfl|401872972|2026-10-04T17:00Z|ATS||home|DraftKings|2026-10-02T16:01:23.360Z",
+      "kind": "odds",
+      "observed_at": "2026-10-02T16:01:23.360Z",
+      "sport": "nfl",
+      "event": "NYJ @ CHI",
+      "start": "2026-10-04T17:00Z",
+      "pick": "CHI -3",
+      "title": "Published odds changed",
+      "before": "-105 · line -3.5",
+      "after": "-112 · line -3.5",
+      "book": "DraftKings",
+      "source_quote_at": "2026-10-02T16:00:36.239290+00:00",
+      "source": "Existing NFL board",
+      "note": "Your ticket keeps its original odds. Recheck the live book before placing a new wager."
+    },
     {
       "id": "injury|nhl:16:Andrei Kuzmenko|2026-10-02T15:50:53.195Z",
       "kind": "injury",
@@ -2932,22 +2948,6 @@
       "after": "-108 · line 52.5",
       "book": "DraftKings",
       "source_quote_at": "2026-10-01T19:58:00.171097+00:00",
-      "source": "Existing NCAAF board",
-      "note": "Your ticket keeps its original odds. Recheck the live book before placing a new wager."
-    },
-    {
-      "id": "odds|ncaaf|401858246|2026-10-03T16:00Z|ATS||away|DraftKings|2026-10-01T19:58:35.879Z",
-      "kind": "odds",
-      "observed_at": "2026-10-01T19:58:35.879Z",
-      "sport": "ncaaf",
-      "event": "BC @ SMU",
-      "start": "2026-10-03T16:00Z",
-      "pick": "BC +20.5",
-      "title": "Published odds changed",
-      "before": "-118 · line 21.5",
-      "after": "-115 · line 21.5",
-      "book": "DraftKings",
-      "source_quote_at": "2026-10-01T19:58:00.170489+00:00",
       "source": "Existing NCAAF board",
       "note": "Your ticket keeps its original odds. Recheck the live book before placing a new wager."
     }
