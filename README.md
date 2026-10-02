@@ -22,6 +22,24 @@ See [the methodology and league extension contract](projects/bet-ledger-hq/docs/
 
 ## What changed
 
+- **NHL Props** and **NCAAF Props** have their own sidebar entries, game and
+  market filters, player history charts, observed offers and browser-saved
+  research tickets. Tickets support manually confirmed leg results and JSON
+  backups. Public offers must match the event and current roster; unavailable
+  prices stay unavailable. These sports do not yet have calibrated prop models.
+- **Spread accuracy** tracks the whole sheet separately from qualified ATS
+  picks. Pregame margins, selections, lines and quoted prices are frozen.
+  Filters cover sport, season and result, with CSV export, cover accuracy,
+  margin error and simulated returns only when a book price was recorded.
+  Historical snapshots without market lines remain unscored. Qualified-pick
+  tracking begins with this release.
+- **Core parlays** use 2–3 qualifying book-priced legs from one book across
+  different games and players. **Longshot** retains the large payout targets.
+  The parlay-history audit shows distinct games, unique legs, repeated exposure
+  and results by profile, market and ticket size. The legacy 0–68 record covers
+  overlapping research tickets from one game with estimated prices; it is
+  preserved. The new filters have no established forward performance yet.
+
 - **NHL Ice Lab** adds visual matchup cards, scoring probability maps, goalie status, team comparisons, PP/PK, standings, injury/news reports, explicit wager entry and frozen forecast accuracy. NHL is included in Moneyline tickets, qualified Daily Picks, ticket archives/results, pick changes, goalie alerts and the shared ledger. Keyless refresh runs twice hourly; see `projects/nhl-edge-lab/README.md` for qualification rules and model limits.
 
 - New **Weekly football** view shows a rolling seven-day NFL/CFB slate, winner

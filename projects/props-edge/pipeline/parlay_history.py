@@ -4,6 +4,7 @@ from datetime import datetime, timezone
 import hashlib
 import json
 from .grade import identity, instant
+from .parlay_audit import audit
 
 FINALS = {'Win', 'Loss', 'Push', 'Void'}
 
@@ -33,7 +34,7 @@ def update(root, tickets, now=None):
         if len(set(keys))!=len(keys):continue
         key='parlay-'+hashlib.sha256('|'.join(keys).encode()).hexdigest()[:24]
         if key in state['records']:continue
-        saved={k:deepcopy(ticket.get(k)) for k in ('id','scope','label','target','price_american','price_decimal','model_prob','independent_prob','estimated_prices','same_game','probability_method','games')}
+        saved={k:deepcopy(ticket.get(k)) for k in ('id','scope','label','target','price_american','price_decimal','model_prob','independent_prob','estimated_prices','same_game','probability_method','games','profile','builder_version')}
         saved.update(id=key,source_ticket_id=ticket.get('id'),captured_at=stamp,start_time=min(l['start_time'] for l in legs),
                      leg_count=len(legs),legs=legs,result='Pending',research_only=True)
         state['records'][key]=saved
@@ -59,8 +60,9 @@ def update(root, tickets, now=None):
     summary={name:sum(r['result']==name for r in rows) for name in ('Win','Loss','Pending','Void','Review')}
     decided=summary['Win']+summary['Loss']
     public={'schema':1,'generated_at':stamp,'records':rows,'summary':{**summary,'total':len(rows),'hit_rate':summary['Win']/decided if decided else None},
+      'audit':audit(rows),
       'note':'Unique published leg combinations frozen before their first game. Overlapping tickets are not independent trials. Research outcomes are not wager ROI. Push/void legs require book-rule review. Tracking starts with this release; old tickets are not reconstructed.'}
-    for target,data in [(path,state),(root/'site/data/parlay-history.json',public),(root/'site/data/parlay-results.json',{'schema':1,'generated_at':stamp,'records':compact})]:
+    for target,data in [(path,state),(root/'site/data/parlay-audit.json',{'schema':1,'generated_at':stamp,**public['audit']}),(root/'site/data/parlay-history.json',public),(root/'site/data/parlay-results.json',{'schema':1,'generated_at':stamp,'records':compact})]:
         target.parent.mkdir(parents=True,exist_ok=True);temp=target.with_suffix('.tmp')
         temp.write_text(json.dumps(data,separators=(',',':'),allow_nan=False)+'\n');temp.replace(target)
     return public['summary']
