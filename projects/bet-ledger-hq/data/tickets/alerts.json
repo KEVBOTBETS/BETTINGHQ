@@ -1,29 +1,113 @@
 {
   "schema": 1,
-  "checked_at": "2026-10-02T19:04:17.912Z",
+  "checked_at": "2026-10-02T19:20:26.112Z",
   "coverage": {
+    "nhl": {
+      "status": "available",
+      "reports": 32,
+      "checked_at": "2026-10-02T19:20:26.112Z"
+    },
     "ncaaf": {
       "status": "empty",
       "reports": 0,
-      "checked_at": "2026-10-02T19:04:17.912Z"
+      "checked_at": "2026-10-02T19:20:26.112Z"
+    },
+    "nfl": {
+      "status": "available",
+      "reports": 346,
+      "checked_at": "2026-10-02T19:20:26.112Z"
     },
     "mlb": {
       "status": "available",
       "reports": 22,
-      "checked_at": "2026-10-02T19:04:17.912Z"
-    },
-    "nfl": {
-      "status": "available",
-      "reports": 345,
-      "checked_at": "2026-10-02T19:04:17.912Z"
-    },
-    "nhl": {
-      "status": "available",
-      "reports": 32,
-      "checked_at": "2026-10-02T19:04:17.912Z"
+      "checked_at": "2026-10-02T19:20:26.112Z"
     }
   },
   "events": [
+    {
+      "id": "injury|nfl:33:Chris Moore|2026-10-02T19:20:26.112Z",
+      "kind": "injury",
+      "observed_at": "2026-10-02T19:20:26.112Z",
+      "sport": "nfl",
+      "title": "Player availability changed",
+      "event": "Baltimore Ravens",
+      "pick": "Chris Moore",
+      "before": "Questionable · Ankle",
+      "after": "Active · Ankle",
+      "source_quote_at": "2026-10-02T19:15Z",
+      "source": "ESPN injuries",
+      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
+    },
+    {
+      "id": "injury|nfl:3:Braxton Jones|2026-10-02T19:20:26.112Z",
+      "kind": "injury",
+      "observed_at": "2026-10-02T19:20:26.112Z",
+      "sport": "nfl",
+      "title": "Player availability changed",
+      "event": "Chicago Bears",
+      "pick": "Braxton Jones",
+      "before": "Doubtful · Knee",
+      "after": "Out · Knee",
+      "source_quote_at": "2026-10-02T19:09Z",
+      "source": "ESPN injuries",
+      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
+    },
+    {
+      "id": "injury|nfl:3:Cam Lewis|2026-10-02T19:20:26.112Z",
+      "kind": "injury",
+      "observed_at": "2026-10-02T19:20:26.112Z",
+      "sport": "nfl",
+      "title": "New availability report",
+      "event": "Chicago Bears",
+      "pick": "Cam Lewis",
+      "before": "Not in the previous dated report",
+      "after": "Doubtful · Leg",
+      "source_quote_at": "2026-10-02T19:09Z",
+      "source": "ESPN injuries",
+      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
+    },
+    {
+      "id": "injury|nfl:3:D'Andre Swift|2026-10-02T19:20:26.112Z",
+      "kind": "injury",
+      "observed_at": "2026-10-02T19:20:26.112Z",
+      "sport": "nfl",
+      "title": "Player availability changed",
+      "event": "Chicago Bears",
+      "pick": "D'Andre Swift",
+      "before": "Questionable · Knee",
+      "after": "Active · Swift (knee) was a full participant in Friday's practice and doesn't have a designation for Sunday's game against the Jets.",
+      "source_quote_at": "2026-10-02T19:05Z",
+      "source": "ESPN injuries",
+      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
+    },
+    {
+      "id": "injury|nfl:16:Blake Cashman|2026-10-02T19:20:26.112Z",
+      "kind": "injury",
+      "observed_at": "2026-10-02T19:20:26.112Z",
+      "sport": "nfl",
+      "title": "Player availability changed",
+      "event": "Minnesota Vikings",
+      "pick": "Blake Cashman",
+      "before": "Questionable · Elbow",
+      "after": "Active",
+      "source_quote_at": "2026-10-02T19:15Z",
+      "source": "ESPN injuries",
+      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
+    },
+    {
+      "id": "injury|nfl:17:Drake Maye|2026-10-02T19:20:26.112Z",
+      "kind": "injury",
+      "observed_at": "2026-10-02T19:20:26.112Z",
+      "sport": "nfl",
+      "title": "Player availability changed",
+      "event": "New England Patriots",
+      "pick": "Drake Maye",
+      "before": "Active · Maye was listed with a right shoulder injury on the Patriots' initial Week 4 practice report but was a full participant in Wednesday's practice.",
+      "after": "Active · Maye (shoulder) was a full participant in Friday's practice and does not have an injury designation for Sunday's game against Buffalo.",
+      "source_quote_at": "2026-10-02T19:08Z",
+      "source": "ESPN injuries",
+      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
+    },
     {
       "id": "odds|ncaaf|401866477|2026-10-03T19:30Z|TOTAL||over|DraftKings|2026-10-02T19:04:17.912Z",
       "kind": "odds",
@@ -2857,96 +2941,6 @@
       "source_quote_at": "2026-10-01T21:39Z",
       "source": "ESPN injuries",
       "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:18:Carl Granderson|2026-10-01T21:44:30.917Z",
-      "kind": "injury",
-      "observed_at": "2026-10-01T21:44:30.917Z",
-      "sport": "nfl",
-      "title": "New availability report",
-      "event": "New Orleans Saints",
-      "pick": "Carl Granderson",
-      "before": "Not in the previous dated report",
-      "after": "Questionable · Ankle",
-      "source_quote_at": "2026-10-01T21:39Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:18:Martin Emerson Jr.|2026-10-01T21:44:30.917Z",
-      "kind": "injury",
-      "observed_at": "2026-10-01T21:44:30.917Z",
-      "sport": "nfl",
-      "title": "Player availability changed",
-      "event": "New Orleans Saints",
-      "pick": "Martin Emerson Jr.",
-      "before": "Questionable · Shoulder",
-      "after": "Active",
-      "source_quote_at": "2026-10-01T21:39Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:18:Julian Blackmon|2026-10-01T21:44:30.917Z",
-      "kind": "injury",
-      "observed_at": "2026-10-01T21:44:30.917Z",
-      "sport": "nfl",
-      "title": "New availability report",
-      "event": "New Orleans Saints",
-      "pick": "Julian Blackmon",
-      "before": "Not in the previous dated report",
-      "after": "Questionable · Calf",
-      "source_quote_at": "2026-10-01T21:39Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "odds|mlb|849844|2026-10-02T00:00:00Z|ML||home|DraftKings|2026-10-01T21:39:18.933Z",
-      "kind": "odds",
-      "observed_at": "2026-10-01T21:39:18.933Z",
-      "sport": "mlb",
-      "event": "PHI @ ATL",
-      "start": "2026-10-02T00:00:00Z",
-      "pick": "ATL ML",
-      "title": "Published odds changed",
-      "before": "-109",
-      "after": "-112",
-      "book": "DraftKings",
-      "source_quote_at": "2026-10-01T21:37:17.069529+00:00",
-      "source": "Existing MLB board",
-      "note": "Your ticket keeps its original odds. Recheck the live book before placing a new wager."
-    },
-    {
-      "id": "odds|wnba|401918294|2026-10-03T01:00Z|ML||away|DraftKings|2026-10-01T21:39:18.933Z",
-      "kind": "odds",
-      "observed_at": "2026-10-01T21:39:18.933Z",
-      "sport": "wnba",
-      "event": "DAL @ GS",
-      "start": "2026-10-03T01:00Z",
-      "pick": "DAL ML",
-      "title": "Published odds changed",
-      "before": "+275",
-      "after": "+280",
-      "book": "DraftKings",
-      "source_quote_at": "2026-10-01T21:39:07+00:00",
-      "source": "Existing WNBA board",
-      "note": "Your ticket keeps its original odds. Recheck the live book before placing a new wager."
-    },
-    {
-      "id": "odds|ncaaf|401858478|2026-10-03T23:30Z|TOTAL||over|DraftKings|2026-10-01T21:39:18.933Z",
-      "kind": "odds",
-      "observed_at": "2026-10-01T21:39:18.933Z",
-      "sport": "ncaaf",
-      "event": "WASH @ USC",
-      "start": "2026-10-03T23:30Z",
-      "pick": "Over 55.5",
-      "title": "Published odds changed",
-      "before": "-112 · line 58.5",
-      "after": "-105 · line 58.5",
-      "book": "DraftKings",
-      "source_quote_at": "2026-10-01T21:36:57.281624+00:00",
-      "source": "Existing NCAAF board",
-      "note": "Your ticket keeps its original odds. Recheck the live book before placing a new wager."
     }
   ]
 }
