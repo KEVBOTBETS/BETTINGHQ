@@ -1,29 +1,87 @@
 {
   "schema": 1,
-  "checked_at": "2026-10-02T18:51:21.662Z",
+  "checked_at": "2026-10-02T19:04:17.912Z",
   "coverage": {
-    "mlb": {
-      "status": "available",
-      "reports": 21,
-      "checked_at": "2026-10-02T18:51:21.662Z"
-    },
     "ncaaf": {
       "status": "empty",
       "reports": 0,
-      "checked_at": "2026-10-02T18:51:21.662Z"
+      "checked_at": "2026-10-02T19:04:17.912Z"
     },
-    "nhl": {
+    "mlb": {
       "status": "available",
-      "reports": 33,
-      "checked_at": "2026-10-02T18:51:21.662Z"
+      "reports": 22,
+      "checked_at": "2026-10-02T19:04:17.912Z"
     },
     "nfl": {
       "status": "available",
       "reports": 345,
-      "checked_at": "2026-10-02T18:51:21.662Z"
+      "checked_at": "2026-10-02T19:04:17.912Z"
+    },
+    "nhl": {
+      "status": "available",
+      "reports": 32,
+      "checked_at": "2026-10-02T19:04:17.912Z"
     }
   },
   "events": [
+    {
+      "id": "odds|ncaaf|401866477|2026-10-03T19:30Z|TOTAL||over|DraftKings|2026-10-02T19:04:17.912Z",
+      "kind": "odds",
+      "observed_at": "2026-10-02T19:04:17.912Z",
+      "sport": "ncaaf",
+      "event": "BGSU @ M-OH",
+      "start": "2026-10-03T19:30Z",
+      "pick": "Over 43.5",
+      "title": "Published odds changed",
+      "before": "-105 · line 43.5",
+      "after": "-115 · line 42.5",
+      "book": "DraftKings",
+      "source_quote_at": "2026-10-02T19:02:29.490571+00:00",
+      "source": "Existing NCAAF board",
+      "note": "Your ticket keeps its original odds. Recheck the live book before placing a new wager."
+    },
+    {
+      "id": "injury|mlb:12:Michael Toglia|2026-10-02T19:04:17.912Z",
+      "kind": "injury",
+      "observed_at": "2026-10-02T19:04:17.912Z",
+      "sport": "mlb",
+      "title": "New availability report",
+      "event": "Seattle Mariners",
+      "pick": "Michael Toglia",
+      "before": "Not in the previous dated report",
+      "after": "Out · Shoulder",
+      "source_quote_at": "2026-10-02T18:55Z",
+      "source": "ESPN injuries",
+      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
+    },
+    {
+      "id": "injury|nfl:12:Josh Simmons|2026-10-02T19:04:17.912Z",
+      "kind": "injury",
+      "observed_at": "2026-10-02T19:04:17.912Z",
+      "sport": "nfl",
+      "title": "Player availability changed",
+      "event": "Kansas City Chiefs",
+      "pick": "Josh Simmons",
+      "before": "Questionable · Back",
+      "after": "Out · Back",
+      "source_quote_at": "2026-10-02T19:01Z",
+      "source": "ESPN injuries",
+      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
+    },
+    {
+      "id": "injury|nfl:12:L'Jarius Sneed|2026-10-02T19:04:17.912Z",
+      "kind": "injury",
+      "observed_at": "2026-10-02T19:04:17.912Z",
+      "sport": "nfl",
+      "title": "Player availability changed",
+      "event": "Kansas City Chiefs",
+      "pick": "L'Jarius Sneed",
+      "before": "Questionable · Knee",
+      "after": "Active",
+      "source_quote_at": "2026-10-02T19:01Z",
+      "source": "ESPN injuries",
+      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
+    },
     {
       "id": "injury|nfl:14:Puka Nacua|2026-10-02T18:51:21.662Z",
       "kind": "injury",
@@ -2889,62 +2947,6 @@
       "source_quote_at": "2026-10-01T21:36:57.281624+00:00",
       "source": "Existing NCAAF board",
       "note": "Your ticket keeps its original odds. Recheck the live book before placing a new wager."
-    },
-    {
-      "id": "injury|nfl:1:Divine Deablo|2026-10-01T21:39:18.933Z",
-      "kind": "injury",
-      "observed_at": "2026-10-01T21:39:18.933Z",
-      "sport": "nfl",
-      "title": "New availability report",
-      "event": "Atlanta Falcons",
-      "pick": "Divine Deablo",
-      "before": "Not in the previous dated report",
-      "after": "Questionable · Hamstring",
-      "source_quote_at": "2026-10-01T21:25Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:8:DJ Wonnum|2026-10-01T21:39:18.933Z",
-      "kind": "injury",
-      "observed_at": "2026-10-01T21:39:18.933Z",
-      "sport": "nfl",
-      "title": "Player availability changed",
-      "event": "Detroit Lions",
-      "pick": "DJ Wonnum",
-      "before": "Questionable · Back",
-      "after": "Active",
-      "source_quote_at": "2026-10-01T21:22Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:34:Noah Whittington|2026-10-01T21:39:18.933Z",
-      "kind": "injury",
-      "observed_at": "2026-10-01T21:39:18.933Z",
-      "sport": "nfl",
-      "title": "New availability report",
-      "event": "Houston Texans",
-      "pick": "Noah Whittington",
-      "before": "Not in the previous dated report",
-      "after": "Out · Quadriceps",
-      "source_quote_at": "2026-10-01T21:08Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:13:Treydan Stukes|2026-10-01T21:39:18.933Z",
-      "kind": "injury",
-      "observed_at": "2026-10-01T21:39:18.933Z",
-      "sport": "nfl",
-      "title": "Player availability changed",
-      "event": "Las Vegas Raiders",
-      "pick": "Treydan Stukes",
-      "before": "Questionable · Concussion",
-      "after": "Active",
-      "source_quote_at": "2026-10-01T21:36Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
     }
   ]
 }
