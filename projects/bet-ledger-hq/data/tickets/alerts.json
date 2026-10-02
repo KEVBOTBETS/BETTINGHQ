@@ -1,29 +1,43 @@
 {
   "schema": 1,
-  "checked_at": "2026-10-02T07:49:32.838Z",
+  "checked_at": "2026-10-02T08:22:59.381Z",
   "coverage": {
-    "nhl": {
-      "status": "available",
-      "reports": 62,
-      "checked_at": "2026-10-02T07:49:32.838Z"
+    "ncaaf": {
+      "status": "empty",
+      "reports": 0,
+      "checked_at": "2026-10-02T08:22:59.381Z"
     },
     "mlb": {
       "status": "available",
       "reports": 34,
-      "checked_at": "2026-10-02T07:49:32.838Z"
+      "checked_at": "2026-10-02T08:22:59.381Z"
     },
-    "ncaaf": {
-      "status": "empty",
-      "reports": 0,
-      "checked_at": "2026-10-02T07:49:32.838Z"
+    "nhl": {
+      "status": "available",
+      "reports": 62,
+      "checked_at": "2026-10-02T08:22:59.381Z"
     },
     "nfl": {
       "status": "available",
       "reports": 364,
-      "checked_at": "2026-10-02T07:49:32.838Z"
+      "checked_at": "2026-10-02T08:22:59.381Z"
     }
   },
   "events": [
+    {
+      "id": "injury|nfl:3:Anthony Johnson Jr.|2026-10-02T08:22:59.381Z",
+      "kind": "injury",
+      "observed_at": "2026-10-02T08:22:59.381Z",
+      "sport": "nfl",
+      "title": "Player availability changed",
+      "event": "Chicago Bears",
+      "pick": "Anthony Johnson Jr.",
+      "before": "Injured Reserve · Undisclosed",
+      "after": "Out · Undisclosed",
+      "source_quote_at": "2026-10-02T08:01Z",
+      "source": "ESPN injuries",
+      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
+    },
     {
       "id": "odds|wnba|401918294|2026-10-03T01:00Z|ML||away|DraftKings|2026-10-02T06:47:14.493Z",
       "kind": "odds",
@@ -2941,20 +2955,6 @@
       "before": "Day-To-Day · Upper Body",
       "after": "Out · Upper Body",
       "source_quote_at": "2026-10-01T16:16Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nhl:16:Blake Lizotte|2026-10-01T16:22:40.359Z",
-      "kind": "injury",
-      "observed_at": "2026-10-01T16:22:40.359Z",
-      "sport": "nhl",
-      "title": "New availability report",
-      "event": "Pittsburgh Penguins",
-      "pick": "Blake Lizotte",
-      "before": "Not in the previous dated report",
-      "after": "Day-To-Day · Lower Body",
-      "source_quote_at": "2026-10-01T15:58Z",
       "source": "ESPN injuries",
       "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
     }
