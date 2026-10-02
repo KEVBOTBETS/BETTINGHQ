@@ -23,7 +23,7 @@ def main():
     for path in hub.iterdir():
         if path.is_file() and (path.suffix in suffixes or path.name == 'SETUP-SYNC.md'):
             shutil.copy2(path, target / path.name)
-    for name in ['assets', 'data/tickets', 'data/newsletters']:
+    for name in ['assets', 'data/tickets', 'data/newsletters', 'data/spreads']:
         if (hub / name).exists(): shutil.copytree(hub / name, target / name)
     subprocess.run([sys.executable, 'tools/prepare_public_site.py'], cwd=PROJECTS/'nfl-edge-lab', check=True)
     for repo, folder in [('nfl-edge-lab','_public_site'),('ncaaf-edge-lab','site'),('mlb-edge','docs'),('props-edge','site'),('wnba-edge-lab','site'),('nhl-edge-lab','site'),('ladderbet','docs')]:

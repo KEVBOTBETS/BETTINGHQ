@@ -372,6 +372,7 @@ class LegAndParlayTests(unittest.TestCase):
     def test_parlays_hit_every_target_in_each_scope(self):
         from pipeline.legs import build_legs
         from pipeline.parlays import build_parlays
+        self.settings['parlays']['book_lines_only']=False
         result = build_parlays(build_legs([], self._projections(), self.settings), self.settings)
         self.assertTrue(result["tickets"])
         for scope in ("slate", "game"):
@@ -394,6 +395,7 @@ class LegAndParlayTests(unittest.TestCase):
     def test_bigger_targets_cost_win_chance(self):
         from pipeline.legs import build_legs
         from pipeline.parlays import build_parlays
+        self.settings['parlays']['book_lines_only']=False
         result = build_parlays(build_legs([], self._projections(), self.settings), self.settings)
         best = {}
         for ticket in result["tickets"]:

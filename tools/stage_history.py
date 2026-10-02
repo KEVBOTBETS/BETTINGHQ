@@ -5,6 +5,7 @@ ROOT=Path(__file__).resolve().parents[1]
 patterns=[
     'projects/bet-ledger-hq/data/tickets/**/*.json',
     'projects/bet-ledger-hq/data/newsletters/**/*.json',
+    'projects/bet-ledger-hq/data/spreads/**/*.json',
     'projects/mlb-edge/docs/data/*.json',
     'projects/mlb-edge/data/predictions.json',
     'projects/mlb-edge/data/shadow.json',
@@ -26,5 +27,5 @@ for repo in ['nfl-edge-lab','ncaaf-edge-lab']:
         'lines.json','context_cache.json','quote_cache.json','rank_history.json',
         'shadow.json','predictions.json','forecasts.json','early_plays.json','qb_quality.json']]
 files=sorted({str(p.relative_to(ROOT)) for pat in patterns for p in ROOT.glob(pat)
-              if p.is_file() and p.name not in {'ledger.json','summary.json','ladder.json'}})
+              if p.is_file() and p.name not in {'ledger.json','summary.json','ladder.json','multisport_cache.json'}})
 if files: subprocess.run(['git','add','--',*files],cwd=ROOT,check=True)

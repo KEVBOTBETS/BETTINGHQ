@@ -25,7 +25,7 @@
   const americanOf = (decimal) => (decimal >= 2 ? Math.round((decimal - 1) * 100) : -Math.round(100 / (decimal - 1)));
   const norm = (value) => String(value ?? '').toLowerCase().replace(/[^a-z0-9]+/g, '');
 
-  const state = { meta: null, legs: [], parlays: { tickets: [] }, imported: {}, scope: 'slate', target: null, sheetMarket: 'Anytime touchdown', realLinesOnly: true, ledger: [], bank: { bankroll: 0, maxBet: 10 } };
+  const state = { meta: null, legs: [], parlays: { tickets: [] }, imported: {}, scope: 'slate', profile: null, target: null, sheetMarket: 'Anytime touchdown', realLinesOnly: true, ledger: [], bank: { bankroll: 0, maxBet: 10 } };
 
   /* ---------- storage ---------- */
   const readStore = (key, fallback) => { try { const raw = localStorage.getItem(key); return raw ? JSON.parse(raw) : fallback; } catch (_) { return fallback; } };
@@ -79,10 +79,12 @@
 
   /* ---------- parlay lab ---------- */
   function targets() {
-    const list = (state.parlays.targets || [1000, 5000, 10000, 30000, 50000]);
-    if (state.target == null) state.target = list[0];
+    if (state.profile == null) state.profile = state.parlays.profiles ? 'core' : 'longshot';
+    $('#parlay-profile').value = state.profile;
+    const list = (state.parlays.profiles?.[state.profile]?.targets || state.parlays.targets || [1000, 5000, 10000, 30000, 50000]);
+    if (!list.includes(state.target)) state.target = list[0];
     $('#targets').innerHTML = list.map((target) => {
-      const count = (state.parlays.tickets || []).filter((ticket) => ticket.target === target && ticket.scope === state.scope).length;
+      const count = (state.parlays.tickets || []).filter((ticket) => ticket.target === target && ticket.scope === state.scope && (ticket.profile || 'longshot') === state.profile).length;
       return `<button class="target" role="radio" data-target="${target}" aria-checked="${state.target === target}"><b>+${target.toLocaleString('en-CA')}</b><small>${count} TICKET${count === 1 ? '' : 'S'}</small></button>`;
     }).join('');
   }
@@ -154,14 +156,14 @@
     targets(); parlayFilters();
     const game = $('#parlay-game').value, day = $('#parlay-day').value;
     const tickets = (state.parlays.tickets || []).filter((ticket) =>
-      ticket.scope === state.scope && ticket.target === state.target
+      ticket.scope === state.scope && ticket.target === state.target && (ticket.profile || 'longshot') === state.profile
       && (game === 'all' || ticket.games.includes(game))
       && (day === 'all' || Q.day(ticket.start_time) === day));
     $('#parlay-count').textContent = `${tickets.length} ticket${tickets.length === 1 ? '' : 's'} at this target`
       + (state.parlays.book_lines_only ? ' · every leg is a line the book posts' : '');
     $('#parlays').innerHTML = tickets.length
       ? tickets.map(ticketCard).join('')
-      : `<div class="empty">No parlay reached +${Number(state.target).toLocaleString('en-CA')} for this filter.<br>Try another target or scope. Parlays need enough legs with a recent player sample, so an empty board usually means the slate has not been built yet.</div>`;
+      : state.profile === 'core' ? '<div class="empty">No Core tickets qualify for this filter. Core requires 2–3 fresh book-priced, positive-edge legs with adequate samples, at one book across distinct games and players. Use Full slate or inspect the single-pick board. No extra legs are added just to reach a payout.</div>' : `<div class="empty">No parlay reached +${Number(state.target).toLocaleString('en-CA')} for this filter.<br>Try another target or scope. Parlays need enough legs with a recent player sample, so an empty board usually means the slate has not been built yet.</div>`;
   }
 
   /* ---------- cheat sheets ---------- */
@@ -518,6 +520,7 @@
       const button = event.target.closest('[data-target]'); if (!button) return;
       state.target = Number(button.dataset.target); renderParlays();
     });
+    $('#parlay-profile').addEventListener('change',()=>{state.profile=$('#parlay-profile').value;state.target=null;renderParlays();});
     $('#parlay-game').addEventListener('change', renderParlays);
     $('#parlay-day').addEventListener('change', renderParlays);
     $('#sheet-markets').addEventListener('click', (event) => {

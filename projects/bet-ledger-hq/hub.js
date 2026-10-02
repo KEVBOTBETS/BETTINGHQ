@@ -8,6 +8,9 @@
     desk:{title:"Sports Desk",description:"Seven leagues. Scores, standings, headlines and matchup research.",url:"sports-desk.html"},
     nba:{title:"NBA Courtside",description:"NBA scores and team research. Model qualification awaits validation.",url:"sports-desk.html?sport=nba"},
     ncaab:{title:"NCAAB Courtside",description:"College hoops scores and team research. Model qualification awaits validation.",url:"sports-desk.html?sport=ncaab"},
+    "spread-accuracy":{title:"Spread accuracy",description:"Whole-sheet spread forecasts, cover records and quoted-price returns.",url:"spread-accuracy.html"},
+    "nhl-props":{title:"NHL Props",description:"NHL player statistics and observed prop prices.",url:"../props-edge/multisport.html?sport=NHL"},
+    "ncaaf-props":{title:"NCAAF Props",description:"College football player statistics and observed prop prices.",url:"../props-edge/multisport.html?sport=NCAAF"},
     accuracy:{title:"Performance Center",description:"Frozen forecasts, calibration and like-for-like market benchmarks.",url:"accuracy.html"},
     nhl:{title:"NHL Ice Lab",description:"Hockey matchups, goalie watch, team stats and qualified picks.",url:"../nhl-edge-lab/"},
     wnba:{title:"WNBA Edge Lab",description:"WNBA matchups, best bets and forecast accuracy.",url:"../wnba-edge-lab/"},
@@ -20,7 +23,7 @@
     mlb:{title:"MLB Edge",description:"Baseball matchups, best bets and your game simulator.",url:"../mlb-edge/"},
     nfl:{title:"NFL Edge Lab",description:"NFL matchups, predictions and your season record.",url:"../nfl-edge-lab/"},
     ncaaf:{title:"NCAAF Edge Lab",description:"College football schedules, edges and simulations.",url:"../ncaaf-edge-lab/"},
-    props:{title:"Props Edge",description:"NFL player props, the parlay lab and your props ledger.",url:"../props-edge/"},
+    props:{title:"NFL Props",description:"NFL player props, the parlay lab and your props ledger.",url:"../props-edge/"},
   };
   const links=[...document.querySelectorAll(".board-link")];
   const workspace=document.querySelector("#workspace"), frames=new Map();

@@ -19,11 +19,12 @@ import datetime as dt
 import hashlib
 import math
 import re
+from itertools import combinations
 from zoneinfo import ZoneInfo
 from typing import Any, Iterable
 
 from .legs import PASS_CATCHER_MARKETS, market_group
-from .schema import decimal_to_american
+from .schema import decimal_to_american, american_to_decimal
 
 
 def _norm(value: str) -> str:
@@ -320,10 +321,16 @@ def build_parlays(legs: list[dict[str, Any]], settings: dict[str, Any], now: dt.
                     continue
                 tickets.append(_ticket(ticket_legs, "game", label, int(target), settings))
 
+    for ticket in tickets:
+        ticket['profile']='longshot'
+        ticket['builder_version']='2026-10-02'
+    if cfg.get('core_enabled',False):
+        tickets.extend(core_tickets(upcoming,settings,now))
     tickets.sort(key=lambda ticket: (ticket["scope"], ticket["target"], -ticket["independent_prob"]))
     return {
         "generated_at": now.isoformat(),
         "targets": list(cfg["targets"]),
+        "profiles": {"core":{"label":"Core · 2–3 legs","targets":cfg.get("core_targets",[200,500,1000])},"longshot":{"label":"Longshot · maximum payout","targets":list(cfg["targets"])}},
         "counts": {
             scope: sum(ticket["scope"] == scope for ticket in tickets) for scope in ("slate", "day", "game")
         },
@@ -331,3 +338,47 @@ def build_parlays(legs: list[dict[str, Any]], settings: dict[str, Any], now: dt.
         "book_lines_only": book_only,
         "tickets": tickets,
     }
+
+
+def core_eligible(leg,now,max_age=12):
+    try:
+        at=dt.datetime.fromisoformat(str(leg.get('updated_at','')).replace('Z','+00:00'))
+        start=dt.datetime.fromisoformat(str(leg.get('start_time','')).replace('Z','+00:00'))
+        return (leg.get('price_source')=='book' and bool(leg.get('book')) and not leg.get('held')
+                and leg.get('tier') in ('LEAN','GOOD','BEST') and int(leg.get('samples',0))>=6
+                and float(leg.get('confidence',0))>=.6 and .6<=float(leg.get('model_prob',0))<1
+                and float(leg.get('action_edge',leg.get('edge') or 0))>=.02
+                and abs(float(leg['price_american']))>=100 and math.isfinite(float(leg['price_decimal']))
+                and abs(float(leg['price_decimal'])-american_to_decimal(float(leg['price_american'])))<.001
+                and at.tzinfo is not None and start.tzinfo is not None and at<=now<start
+                and 0<=(now-at).total_seconds()<=max_age*3600)
+    except (TypeError,ValueError,KeyError):return False
+
+
+def core_tickets(legs,settings,now):
+    """Short tickets from one book and distinct games; never pad to buy a payout."""
+    cfg=settings['parlays'];books={}
+    for leg in legs:
+        if core_eligible(leg,now,float(cfg.get('core_max_quote_age_hours',12))):
+            books.setdefault(_norm(leg['book']),[]).append(leg)
+    found=[]
+    for book,rows in books.items():
+        rows=sorted(rows,key=lambda l:-float(l['model_prob']))[:40]
+        candidates=[]
+        for n in (2,3):
+            for chosen in combinations(rows,n):
+                if len({l['event_id'] for l in chosen})!=n or len({_norm(l['player']) for l in chosen})!=n:continue
+                probability=math.prod(float(l['model_prob']) for l in chosen)
+                decimal=math.prod(float(l['price_decimal']) for l in chosen)
+                candidates.append((probability,decimal,list(chosen)))
+        candidates.sort(key=lambda x:(-x[0],len(x[2]),x[1]))
+        kept=[]
+        for probability,decimal,chosen in candidates:
+            ids={l['id'] for l in chosen}
+            if any(len(ids & other)>1 for other in kept):continue
+            target=min(cfg.get('core_targets',[200,500,1000]),key=lambda x:abs((1+x/100)-decimal))
+            ticket=_ticket(chosen,'slate','Core · '+chosen[0]['book'],target,settings)
+            ticket.update(profile='core',builder_version='2026-10-02',id='core-'+ticket['id'],qualification='2–3 legs, fresh observed prices from one book, separate games, mature samples and no held/PASS legs. Confirm the combined quote. The joint estimate is an unvalidated independence baseline.')
+            found.append(ticket);kept.append(ids)
+            if len(kept)>=2:break
+    return sorted(found,key=lambda t:-t['independent_prob'])[:6]

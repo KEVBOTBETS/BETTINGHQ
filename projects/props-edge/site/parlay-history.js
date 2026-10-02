@@ -2,7 +2,7 @@
 (() => {
  'use strict';
  const A=window.PropsApp,C=window.PropsParlays,$=s=>document.querySelector(s),e=A.esc;
- let archive=null,results=null,loading=false,busy=false,failed=false,storageFailed=false,limit=50,shown=[];
+ let archive=null,results=null,loading=false,busy=false,failed=false,storageFailed=false,limit=50,shown=[],audit=null;
  const when=v=>Number.isFinite(Date.parse(v))?new Intl.DateTimeFormat('en-CA',{timeZone:'America/Toronto',dateStyle:'medium',timeStyle:'short'}).format(new Date(v))+' ET':'Not recorded';
  const date=v=>Number.isFinite(Date.parse(v))?window.PropsQuotes.day(v):'';
  function privateRows(){return A.state.ledger.filter(r=>r.kind==='parlay').map(r=>({...r,
@@ -13,6 +13,8 @@
    legacy:!r.parlay_snapshot}));}
  function render(){
    const actual=$('#parlay-history-source').value==='actual';
+   const auditBox=$('#parlay-audit');auditBox.hidden=actual||!audit;
+   if(!auditBox.hidden)auditBox.innerHTML=`<h3>Why the headline record needs context</h3><p>${audit.wins}–${audit.losses} decided research tickets share ${audit.distinct_events} distinct games and ${audit.unique_legs} unique legs. ${audit.same_game_tickets} are same-game combinations; ${audit.estimated_tickets} include estimated prices.</p><p>${e(audit.note)}</p><p>Core now uses 2–3 fresh qualified legs at one book across distinct games, with limits on repeated exposure. Longshot remains available. These construction changes have not yet established improved win rates.</p><details><summary>Repeated legs and ticket exposures</summary><ul>${(audit.repeated_legs||[]).map(l=>`<li>${e(l.pick)} · ${e(l.result)} · shared by ${l.tickets} decided tickets</li>`).join('')}</ul></details>`;
    const all=actual?privateRows():(archive?.records||[]),status=$('#parlay-history-result').value,day=$('#parlay-history-date').value,search=$('#parlay-history-search').value.trim().toLowerCase();
    shown=all.filter(r=>(status==='all'||r.result===status)&&(!day||date(r.start_time)===day)&&(!search||JSON.stringify(r).toLowerCase().includes(search))).sort((a,b)=>Date.parse(b.captured_at)-Date.parse(a.captured_at));
    const count=s=>shown.filter(r=>r.result===s).length,w=count('Win'),l=count('Loss');
@@ -34,9 +36,10 @@
  async function refresh(){
    if(loading)return;loading=true;render();
    const get=file=>fetch('data/'+file+'?v='+Date.now(),{cache:'no-store'}).then(r=>{if(!r.ok)throw Error('Unavailable');return r.json();});
-   const fetched=await Promise.allSettled([get('parlay-history.json'),get('parlay-results.json')]);
-   failed=fetched.some(r=>r.status==='rejected');
-   if(fetched[0].status==='fulfilled'&&fetched[0].value.schema===1&&Array.isArray(fetched[0].value.records))archive=fetched[0].value;else failed=true;
+   const fetched=await Promise.allSettled([get('parlay-history.json'),get('parlay-results.json'),get('parlay-audit.json')]);
+   failed=fetched.slice(0,2).some(r=>r.status==='rejected');
+   if(fetched[2].status==='fulfilled')audit=fetched[2].value;
+   if(fetched[0].status==='fulfilled'&&fetched[0].value.schema===1&&Array.isArray(fetched[0].value.records)){archive=fetched[0].value;audit=archive.audit||audit;}else failed=true;
    if(fetched[1].status==='fulfilled'&&fetched[1].value.schema===1&&Array.isArray(fetched[1].value.records)){results=fetched[1].value.records;reconcile();}else{results=null;failed=true;}
    loading=false;render();
  }
