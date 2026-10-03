@@ -1,29 +1,61 @@
 {
   "schema": 1,
-  "checked_at": "2026-10-03T09:21:31.206Z",
+  "checked_at": "2026-10-03T09:42:16.338Z",
   "coverage": {
     "nhl": {
       "status": "available",
       "reports": 30,
-      "checked_at": "2026-10-03T09:21:31.206Z"
-    },
-    "ncaaf": {
-      "status": "empty",
-      "reports": 0,
-      "checked_at": "2026-10-03T09:21:31.206Z"
-    },
-    "mlb": {
-      "status": "available",
-      "reports": 22,
-      "checked_at": "2026-10-03T09:21:31.206Z"
+      "checked_at": "2026-10-03T09:42:16.338Z"
     },
     "nfl": {
       "status": "available",
       "reports": 319,
-      "checked_at": "2026-10-03T09:21:31.206Z"
+      "checked_at": "2026-10-03T09:42:16.338Z"
+    },
+    "ncaaf": {
+      "status": "empty",
+      "reports": 0,
+      "checked_at": "2026-10-03T09:42:16.338Z"
+    },
+    "mlb": {
+      "status": "available",
+      "reports": 22,
+      "checked_at": "2026-10-03T09:42:16.338Z"
     }
   },
   "events": [
+    {
+      "id": "odds|nfl|401872965|2026-10-04T13:30Z|ML||home|Draft Kings|2026-10-03T09:42:16.338Z",
+      "kind": "odds",
+      "observed_at": "2026-10-03T09:42:16.338Z",
+      "sport": "nfl",
+      "event": "IND @ WSH",
+      "start": "2026-10-04T13:30Z",
+      "pick": "WSH ML",
+      "title": "Published odds changed",
+      "before": "+164",
+      "after": "+170",
+      "book": "Draft Kings",
+      "source_quote_at": "2026-10-03T09:37:29.967070+00:00",
+      "source": "Existing NFL board",
+      "note": "Your ticket keeps its original odds. Recheck the live book before placing a new wager."
+    },
+    {
+      "id": "odds|ncaaf|401862791|2026-10-03T16:00Z|TOTAL||over|Draft Kings|2026-10-03T09:42:16.338Z",
+      "kind": "odds",
+      "observed_at": "2026-10-03T09:42:16.338Z",
+      "sport": "ncaaf",
+      "event": "NAVY @ AFA",
+      "start": "2026-10-03T16:00Z",
+      "pick": "Over 47.5",
+      "title": "Published odds changed",
+      "before": "-112 · line 45.5",
+      "after": "-105 · line 45.5",
+      "book": "Draft Kings",
+      "source_quote_at": "2026-10-03T09:37:49.730862+00:00",
+      "source": "Existing NCAAF board",
+      "note": "Your ticket keeps its original odds. Recheck the live book before placing a new wager."
+    },
     {
       "id": "injury|nfl:3:Anthony Johnson Jr.|2026-10-03T09:21:31.206Z",
       "kind": "injury",
@@ -2895,36 +2927,6 @@
       "source_quote_at": "2026-10-02T19:59:49.335238+00:00",
       "source": "Existing NCAAF board",
       "note": "Your ticket keeps its original odds. Recheck the live book before placing a new wager."
-    },
-    {
-      "id": "odds|ncaaf|401858476|2026-10-03T00:00Z|ML||home|DraftKings|2026-10-02T20:00:35.765Z",
-      "kind": "odds",
-      "observed_at": "2026-10-02T20:00:35.765Z",
-      "sport": "ncaaf",
-      "event": "PSU @ NU",
-      "start": "2026-10-03T00:00Z",
-      "pick": "NU ML",
-      "title": "Published odds changed",
-      "before": "+114",
-      "after": "+120",
-      "book": "DraftKings",
-      "source_quote_at": "2026-10-02T19:59:49.214016+00:00",
-      "source": "Existing NCAAF board",
-      "note": "Your ticket keeps its original odds. Recheck the live book before placing a new wager."
-    },
-    {
-      "id": "injury|nfl:30:DaVon Hamilton|2026-10-02T20:00:35.765Z",
-      "kind": "injury",
-      "observed_at": "2026-10-02T20:00:35.765Z",
-      "sport": "nfl",
-      "title": "Player availability changed",
-      "event": "Jacksonville Jaguars",
-      "pick": "DaVon Hamilton",
-      "before": "Questionable · Back",
-      "after": "Active",
-      "source_quote_at": "2026-10-02T19:52Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
     }
   ]
 }
