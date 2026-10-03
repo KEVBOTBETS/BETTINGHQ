@@ -1,29 +1,43 @@
 {
   "schema": 1,
-  "checked_at": "2026-10-03T03:58:26.431Z",
+  "checked_at": "2026-10-03T04:20:42.720Z",
   "coverage": {
-    "ncaaf": {
-      "status": "empty",
-      "reports": 0,
-      "checked_at": "2026-10-03T03:58:26.431Z"
-    },
     "nhl": {
       "status": "available",
       "reports": 31,
-      "checked_at": "2026-10-03T03:58:26.431Z"
+      "checked_at": "2026-10-03T04:20:42.720Z"
+    },
+    "ncaaf": {
+      "status": "empty",
+      "reports": 0,
+      "checked_at": "2026-10-03T04:20:42.720Z"
+    },
+    "nfl": {
+      "status": "available",
+      "reports": 325,
+      "checked_at": "2026-10-03T04:20:42.720Z"
     },
     "mlb": {
       "status": "available",
       "reports": 22,
-      "checked_at": "2026-10-03T03:58:26.431Z"
-    },
-    "nfl": {
-      "status": "available",
-      "reports": 328,
-      "checked_at": "2026-10-03T03:58:26.431Z"
+      "checked_at": "2026-10-03T04:20:42.720Z"
     }
   },
   "events": [
+    {
+      "id": "injury|nfl:3:Anthony Johnson Jr.|2026-10-03T04:20:42.720Z",
+      "kind": "injury",
+      "observed_at": "2026-10-03T04:20:42.720Z",
+      "sport": "nfl",
+      "title": "Player availability changed",
+      "event": "Chicago Bears",
+      "pick": "Anthony Johnson Jr.",
+      "before": "Out · Undisclosed",
+      "after": "Injured Reserve · Undisclosed",
+      "source_quote_at": "2026-10-03T04:00Z",
+      "source": "ESPN injuries",
+      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
+    },
     {
       "id": "odds|nfl|401872973|2026-10-04T17:00Z|ML||away|Draft Kings|2026-10-03T03:46:19.649Z",
       "kind": "odds",
@@ -2903,20 +2917,6 @@
       "before": "Questionable · Hamstring",
       "after": "Out · Hamstring",
       "source_quote_at": "2026-10-02T16:28Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:27:Bucky Irving|2026-10-02T20:00:35.765Z",
-      "kind": "injury",
-      "observed_at": "2026-10-02T20:00:35.765Z",
-      "sport": "nfl",
-      "title": "Player availability changed",
-      "event": "Tampa Bay Buccaneers",
-      "pick": "Bucky Irving",
-      "before": "Questionable · Lower Body",
-      "after": "Active · Irving (glute) was a full participant in Friday's practice and doesn't carry an injury designation into Sunday's game against the Packers, Brianna Dix of the Buccaneers' official s",
-      "source_quote_at": "2026-10-02T19:42Z",
       "source": "ESPN injuries",
       "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
     }
