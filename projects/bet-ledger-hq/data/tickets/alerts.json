@@ -1,29 +1,43 @@
 {
   "schema": 1,
-  "checked_at": "2026-10-03T04:20:42.720Z",
+  "checked_at": "2026-10-03T04:48:26.587Z",
   "coverage": {
+    "mlb": {
+      "status": "available",
+      "reports": 22,
+      "checked_at": "2026-10-03T04:48:26.587Z"
+    },
     "nhl": {
       "status": "available",
       "reports": 31,
-      "checked_at": "2026-10-03T04:20:42.720Z"
+      "checked_at": "2026-10-03T04:48:26.587Z"
+    },
+    "nfl": {
+      "status": "available",
+      "reports": 319,
+      "checked_at": "2026-10-03T04:48:26.587Z"
     },
     "ncaaf": {
       "status": "empty",
       "reports": 0,
-      "checked_at": "2026-10-03T04:20:42.720Z"
-    },
-    "nfl": {
-      "status": "available",
-      "reports": 325,
-      "checked_at": "2026-10-03T04:20:42.720Z"
-    },
-    "mlb": {
-      "status": "available",
-      "reports": 22,
-      "checked_at": "2026-10-03T04:20:42.720Z"
+      "checked_at": "2026-10-03T04:48:26.587Z"
     }
   },
   "events": [
+    {
+      "id": "injury|nhl:19:Alexey Toropchenko|2026-10-03T04:48:26.587Z",
+      "kind": "injury",
+      "observed_at": "2026-10-03T04:48:26.587Z",
+      "sport": "nhl",
+      "title": "Player availability changed",
+      "event": "St. Louis Blues",
+      "pick": "Alexey Toropchenko",
+      "before": "Day-To-Day · Undisclosed",
+      "after": "Out · Upper Body",
+      "source_quote_at": "2026-10-03T04:22Z",
+      "source": "ESPN injuries",
+      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
+    },
     {
       "id": "injury|nfl:3:Anthony Johnson Jr.|2026-10-03T04:20:42.720Z",
       "kind": "injury",
@@ -2903,20 +2917,6 @@
       "before": "Questionable · Shoulder",
       "after": "Active",
       "source_quote_at": "2026-10-02T19:57Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:21:DeVonta Smith|2026-10-02T20:00:35.765Z",
-      "kind": "injury",
-      "observed_at": "2026-10-02T20:00:35.765Z",
-      "sport": "nfl",
-      "title": "Player availability changed",
-      "event": "Philadelphia Eagles",
-      "pick": "DeVonta Smith",
-      "before": "Questionable · Hamstring",
-      "after": "Out · Hamstring",
-      "source_quote_at": "2026-10-02T16:28Z",
       "source": "ESPN injuries",
       "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
     }
