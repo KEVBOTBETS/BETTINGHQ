@@ -11,6 +11,8 @@ ROOT = Path(__file__).resolve().parents[1]
 
 def publication(path):
     parts = Path(path).parts
+    if parts[:2] == ('research','inputs') and path.endswith('.json'):
+        return True
     if len(parts) < 4 or parts[0] != 'projects':
         return False
     return (parts[2] == 'state' and path.endswith('.json') or
