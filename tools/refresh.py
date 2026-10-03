@@ -26,6 +26,9 @@ if args.sport in ['all','football','nhl','props']:
         print('::warning::Multisport props refresh failed; prior quote timestamps retained.')
 subprocess.run([sys.executable,'tools/spread_tracking.py'],cwd=ROOT,check=True,timeout=90)
 subprocess.run([sys.executable,'tools/newsletters.py'],cwd=ROOT,check=True,timeout=90)
+if args.sport in ['all','football','props']:
+    subprocess.run([sys.executable,'-m','tools.research.ingest'],cwd=ROOT,timeout=180,check=False)
+subprocess.run([sys.executable,'-m','tools.research.build','--capture'],cwd=ROOT,check=True,timeout=180)
 subprocess.run([sys.executable,'tools/build_site.py'],cwd=ROOT,check=True)
 env={**os.environ,'LOCAL_SITE_ROOT':str(ROOT/'_site')}
 subprocess.run(['node','scripts/refresh-tickets.mjs'],cwd=ROOT/'projects/bet-ledger-hq',env=env,check=True,timeout=600)

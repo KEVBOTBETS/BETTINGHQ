@@ -3,6 +3,7 @@ on:
   push:
     branches: [main]
     paths-ignore:
+      - 'research/inputs/**'
       - 'projects/**/site/data/**'
       - 'projects/**/docs/data/**'
       - 'projects/**/state/**'

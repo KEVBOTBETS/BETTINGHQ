@@ -3,6 +3,7 @@
 (() => {
   "use strict";
   const configs = {
+    "model-lab":{title:"Model Lab",description:"Compare forecasts, inspect availability and explore shared-game prop simulations.",url:"model-lab.html"},
     "ncaaf-newsletter":{title:"NCAAF newsletter",description:"Weekly college football stories, matchups and playoff context.",url:"newsletter.html?sport=ncaaf"},
     "nfl-newsletter":{title:"NFL newsletter",description:"Weekly NFL stories, matchups and playoff context.",url:"newsletter.html?sport=nfl"},
     desk:{title:"Sports Desk",description:"Seven leagues. Scores, standings, headlines and matchup research.",url:"sports-desk.html"},
