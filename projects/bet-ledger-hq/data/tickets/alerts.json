@@ -1,29 +1,103 @@
 {
   "schema": 1,
-  "checked_at": "2026-10-03T00:39:51.577Z",
+  "checked_at": "2026-10-03T00:47:16.880Z",
   "coverage": {
-    "nhl": {
+    "mlb": {
       "status": "available",
-      "reports": 31,
-      "checked_at": "2026-10-03T00:39:51.577Z"
+      "reports": 22,
+      "checked_at": "2026-10-03T00:47:16.880Z"
     },
     "ncaaf": {
       "status": "empty",
       "reports": 0,
-      "checked_at": "2026-10-03T00:39:51.577Z"
+      "checked_at": "2026-10-03T00:47:16.880Z"
     },
-    "mlb": {
+    "nhl": {
       "status": "available",
-      "reports": 22,
-      "checked_at": "2026-10-03T00:39:51.577Z"
+      "reports": 31,
+      "checked_at": "2026-10-03T00:47:16.880Z"
     },
     "nfl": {
       "status": "available",
-      "reports": 355,
-      "checked_at": "2026-10-03T00:39:51.577Z"
+      "reports": 357,
+      "checked_at": "2026-10-03T00:47:16.880Z"
     }
   },
   "events": [
+    {
+      "id": "odds|ncaaf|401856817|2026-10-04T02:30Z|TOTAL||under|Draft Kings|2026-10-03T00:47:16.880Z",
+      "kind": "odds",
+      "observed_at": "2026-10-03T00:47:16.880Z",
+      "sport": "ncaaf",
+      "event": "BAY @ ASU",
+      "start": "2026-10-04T02:30Z",
+      "pick": "Under 49.5",
+      "title": "Published odds changed",
+      "before": "-105 · line 48.5",
+      "after": "-110 · line 48.5",
+      "book": "Draft Kings",
+      "source_quote_at": "2026-10-03T00:44:31.403102+00:00",
+      "source": "Existing NCAAF board",
+      "note": "Your ticket keeps its original odds. Recheck the live book before placing a new wager."
+    },
+    {
+      "id": "odds|ncaaf|401856821|2026-10-03T23:30Z|TOTAL||under|Draft Kings|2026-10-03T00:47:16.880Z",
+      "kind": "odds",
+      "observed_at": "2026-10-03T00:47:16.880Z",
+      "sport": "ncaaf",
+      "event": "TTU @ COLO",
+      "start": "2026-10-03T23:30Z",
+      "pick": "Under 50.5",
+      "title": "Published odds changed",
+      "before": "-108 · line 49.5",
+      "after": "-112 · line 49.5",
+      "book": "Draft Kings",
+      "source_quote_at": "2026-10-03T00:44:33.789047+00:00",
+      "source": "Existing NCAAF board",
+      "note": "Your ticket keeps its original odds. Recheck the live book before placing a new wager."
+    },
+    {
+      "id": "injury|nfl:21:Makai Lemon|2026-10-03T00:47:16.880Z",
+      "kind": "injury",
+      "observed_at": "2026-10-03T00:47:16.880Z",
+      "sport": "nfl",
+      "title": "New availability report",
+      "event": "Philadelphia Eagles",
+      "pick": "Makai Lemon",
+      "before": "Not in the previous dated report",
+      "after": "Active · Lemon and Dontayvion Wicks will both operate in larger roles against the Rams on Sunday due to the absence of DeVonta Smith (hamstring), Chris McPherson of the Eagles' official sit",
+      "source_quote_at": "2026-10-03T00:31Z",
+      "source": "ESPN injuries",
+      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
+    },
+    {
+      "id": "injury|nfl:26:Julian Love|2026-10-03T00:47:16.880Z",
+      "kind": "injury",
+      "observed_at": "2026-10-03T00:47:16.880Z",
+      "sport": "nfl",
+      "title": "Player availability changed",
+      "event": "Seattle Seahawks",
+      "pick": "Julian Love",
+      "before": "Active",
+      "after": "Active · Love (calf) does not have any injury designation ahead of Sunday's game against the Chargers.",
+      "source_quote_at": "2026-10-03T00:22Z",
+      "source": "ESPN injuries",
+      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
+    },
+    {
+      "id": "injury|nfl:28:Jacory Croskey-Merritt|2026-10-03T00:47:16.880Z",
+      "kind": "injury",
+      "observed_at": "2026-10-03T00:47:16.880Z",
+      "sport": "nfl",
+      "title": "New availability report",
+      "event": "Washington Commanders",
+      "pick": "Jacory Croskey-Merritt",
+      "before": "Not in the previous dated report",
+      "after": "Active · Croskey-Merritt has served as the Commanders' RB1 this season, but his backfield snap count for Week 4 against the Colts figures to be larger due to the absence of Rachaad White (s",
+      "source_quote_at": "2026-10-03T00:39Z",
+      "source": "ESPN injuries",
+      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
+    },
     {
       "id": "odds|props|401872974|2026-10-04T20:05Z|Receiving yards|Greg Dulcich|over|BetRivers|2026-10-03T00:39:51.577Z",
       "kind": "odds",
@@ -2841,78 +2915,6 @@
       "source_quote_at": "2026-10-02T18:44Z",
       "source": "ESPN injuries",
       "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:14:Terrance Ferguson|2026-10-02T18:51:21.662Z",
-      "kind": "injury",
-      "observed_at": "2026-10-02T18:51:21.662Z",
-      "sport": "nfl",
-      "title": "Player availability changed",
-      "event": "Los Angeles Rams",
-      "pick": "Terrance Ferguson",
-      "before": "Doubtful · Ankle",
-      "after": "Out · Ankle",
-      "source_quote_at": "2026-10-02T18:41Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:14:Aaron Donald|2026-10-02T18:51:21.662Z",
-      "kind": "injury",
-      "observed_at": "2026-10-02T18:51:21.662Z",
-      "sport": "nfl",
-      "title": "Player availability changed",
-      "event": "Los Angeles Rams",
-      "pick": "Aaron Donald",
-      "before": "Questionable · Back",
-      "after": "Out · Back",
-      "source_quote_at": "2026-10-02T18:38Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:14:Jaylen Watson|2026-10-02T18:51:21.662Z",
-      "kind": "injury",
-      "observed_at": "2026-10-02T18:51:21.662Z",
-      "sport": "nfl",
-      "title": "New availability report",
-      "event": "Los Angeles Rams",
-      "pick": "Jaylen Watson",
-      "before": "Not in the previous dated report",
-      "after": "Out · Shoulder",
-      "source_quote_at": "2026-10-02T18:37Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:16:Brett Thorson|2026-10-02T18:51:21.662Z",
-      "kind": "injury",
-      "observed_at": "2026-10-02T18:51:21.662Z",
-      "sport": "nfl",
-      "title": "New availability report",
-      "event": "Minnesota Vikings",
-      "pick": "Brett Thorson",
-      "before": "Not in the previous dated report",
-      "after": "Out · Hamstring",
-      "source_quote_at": "2026-10-02T18:46Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "odds|wnba|401918294|2026-10-03T01:00Z|ML||away|DraftKings|2026-10-02T18:44:43.888Z",
-      "kind": "odds",
-      "observed_at": "2026-10-02T18:44:43.888Z",
-      "sport": "wnba",
-      "event": "DAL @ GS",
-      "start": "2026-10-03T01:00Z",
-      "pick": "DAL ML",
-      "title": "Published odds changed",
-      "before": "+260",
-      "after": "+270",
-      "book": "DraftKings",
-      "source_quote_at": "2026-10-02T18:44:34+00:00",
-      "source": "Existing WNBA board",
-      "note": "Your ticket keeps its original odds. Recheck the live book before placing a new wager."
     }
   ]
 }
