@@ -1,29 +1,43 @@
 {
   "schema": 1,
-  "checked_at": "2026-10-03T09:47:35.757Z",
+  "checked_at": "2026-10-03T10:18:32.487Z",
   "coverage": {
     "ncaaf": {
       "status": "empty",
       "reports": 0,
-      "checked_at": "2026-10-03T09:47:35.757Z"
+      "checked_at": "2026-10-03T10:18:32.487Z"
     },
     "nhl": {
       "status": "available",
       "reports": 30,
-      "checked_at": "2026-10-03T09:47:35.757Z"
-    },
-    "nfl": {
-      "status": "available",
-      "reports": 319,
-      "checked_at": "2026-10-03T09:47:35.757Z"
+      "checked_at": "2026-10-03T10:18:32.487Z"
     },
     "mlb": {
       "status": "available",
       "reports": 22,
-      "checked_at": "2026-10-03T09:47:35.757Z"
+      "checked_at": "2026-10-03T10:18:32.487Z"
+    },
+    "nfl": {
+      "status": "available",
+      "reports": 319,
+      "checked_at": "2026-10-03T10:18:32.487Z"
     }
   },
   "events": [
+    {
+      "id": "injury|nfl:3:Anthony Johnson Jr.|2026-10-03T10:18:32.487Z",
+      "kind": "injury",
+      "observed_at": "2026-10-03T10:18:32.487Z",
+      "sport": "nfl",
+      "title": "Player availability changed",
+      "event": "Chicago Bears",
+      "pick": "Anthony Johnson Jr.",
+      "before": "Injured Reserve · Undisclosed",
+      "after": "Out · Undisclosed",
+      "source_quote_at": "2026-10-03T10:00Z",
+      "source": "ESPN injuries",
+      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
+    },
     {
       "id": "odds|nfl|401872965|2026-10-04T13:30Z|ML||home|Draft Kings|2026-10-03T09:42:16.338Z",
       "kind": "odds",
@@ -2910,22 +2924,6 @@
       "book": "DraftKings",
       "source_quote_at": "2026-10-02T20:00:04.239885+00:00",
       "source": "Existing Props board",
-      "note": "Your ticket keeps its original odds. Recheck the live book before placing a new wager."
-    },
-    {
-      "id": "odds|ncaaf|401856820|2026-10-04T03:00Z|ATS||away|DraftKings|2026-10-02T20:00:35.765Z",
-      "kind": "odds",
-      "observed_at": "2026-10-02T20:00:35.765Z",
-      "sport": "ncaaf",
-      "event": "CIN @ ARIZ",
-      "start": "2026-10-04T03:00Z",
-      "pick": "CIN +8.5",
-      "title": "Published odds changed",
-      "before": "-105 · line 6.5",
-      "after": "-118 · line 7",
-      "book": "DraftKings",
-      "source_quote_at": "2026-10-02T19:59:49.335238+00:00",
-      "source": "Existing NCAAF board",
       "note": "Your ticket keeps its original odds. Recheck the live book before placing a new wager."
     }
   ]
