@@ -1,29 +1,91 @@
 {
   "schema": 1,
-  "checked_at": "2026-10-03T03:26:07.941Z",
+  "checked_at": "2026-10-03T03:46:19.649Z",
   "coverage": {
     "nhl": {
       "status": "available",
-      "reports": 30,
-      "checked_at": "2026-10-03T03:26:07.941Z"
-    },
-    "ncaaf": {
-      "status": "empty",
-      "reports": 0,
-      "checked_at": "2026-10-03T03:26:07.941Z"
-    },
-    "nfl": {
-      "status": "available",
-      "reports": 331,
-      "checked_at": "2026-10-03T03:26:07.941Z"
+      "reports": 31,
+      "checked_at": "2026-10-03T03:46:19.649Z"
     },
     "mlb": {
       "status": "available",
       "reports": 22,
-      "checked_at": "2026-10-03T03:26:07.941Z"
+      "checked_at": "2026-10-03T03:46:19.649Z"
+    },
+    "nfl": {
+      "status": "available",
+      "reports": 329,
+      "checked_at": "2026-10-03T03:46:19.649Z"
+    },
+    "ncaaf": {
+      "status": "empty",
+      "reports": 0,
+      "checked_at": "2026-10-03T03:46:19.649Z"
     }
   },
   "events": [
+    {
+      "id": "odds|nfl|401872973|2026-10-04T17:00Z|ML||away|Draft Kings|2026-10-03T03:46:19.649Z",
+      "kind": "odds",
+      "observed_at": "2026-10-03T03:46:19.649Z",
+      "sport": "nfl",
+      "event": "TEN @ BAL",
+      "start": "2026-10-04T17:00Z",
+      "pick": "TEN ML",
+      "title": "Published odds changed",
+      "before": "+500",
+      "after": "+490",
+      "book": "Draft Kings",
+      "source_quote_at": "2026-10-03T03:44:02.776068+00:00",
+      "source": "Existing NFL board",
+      "note": "Your ticket keeps its original odds. Recheck the live book before placing a new wager."
+    },
+    {
+      "id": "odds|ncaaf|401858246|2026-10-03T16:00Z|TOTAL||under|Draft Kings|2026-10-03T03:46:19.649Z",
+      "kind": "odds",
+      "observed_at": "2026-10-03T03:46:19.649Z",
+      "sport": "ncaaf",
+      "event": "BC @ SMU",
+      "start": "2026-10-03T16:00Z",
+      "pick": "Under 56.5",
+      "title": "Published odds changed",
+      "before": "-118 · line 55.5",
+      "after": "-115 · line 55.5",
+      "book": "Draft Kings",
+      "source_quote_at": "2026-10-03T03:44:17.166247+00:00",
+      "source": "Existing NCAAF board",
+      "note": "Your ticket keeps its original odds. Recheck the live book before placing a new wager."
+    },
+    {
+      "id": "odds|ncaaf|401869842|2026-10-03T23:30Z|TOTAL||over|Draft Kings|2026-10-03T03:46:19.649Z",
+      "kind": "odds",
+      "observed_at": "2026-10-03T03:46:19.649Z",
+      "sport": "ncaaf",
+      "event": "ARMY @ LT",
+      "start": "2026-10-03T23:30Z",
+      "pick": "Over 44.5",
+      "title": "Published odds changed",
+      "before": "-105 · line 47.5",
+      "after": "-115 · line 46.5",
+      "book": "Draft Kings",
+      "source_quote_at": "2026-10-03T03:44:17.167551+00:00",
+      "source": "Existing NCAAF board",
+      "note": "Your ticket keeps its original odds. Recheck the live book before placing a new wager."
+    },
+    {
+      "id": "injury|nhl:19:Alexey Toropchenko|2026-10-03T03:46:19.649Z",
+      "kind": "injury",
+      "observed_at": "2026-10-03T03:46:19.649Z",
+      "sport": "nhl",
+      "title": "New availability report",
+      "event": "St. Louis Blues",
+      "pick": "Alexey Toropchenko",
+      "before": "Not in the previous dated report",
+      "after": "Day-To-Day · Undisclosed",
+      "source_quote_at": "2026-10-03T03:24Z",
+      "source": "ESPN injuries",
+      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
+    },
     {
       "id": "injury|nfl:2:DJ Moore|2026-10-03T03:26:07.941Z",
       "kind": "injury",
@@ -2855,62 +2917,6 @@
       "before": "Questionable · Lower Body",
       "after": "Active · Irving (glute) was a full participant in Friday's practice and doesn't carry an injury designation into Sunday's game against the Packers, Brianna Dix of the Buccaneers' official s",
       "source_quote_at": "2026-10-02T19:42Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:33:Chris Moore|2026-10-02T19:48:55.795Z",
-      "kind": "injury",
-      "observed_at": "2026-10-02T19:48:55.795Z",
-      "sport": "nfl",
-      "title": "Player availability changed",
-      "event": "Baltimore Ravens",
-      "pick": "Chris Moore",
-      "before": "Active · Ankle",
-      "after": "Questionable · Ankle",
-      "source_quote_at": "2026-10-02T19:45Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:2:DJ Moore|2026-10-02T19:48:55.795Z",
-      "kind": "injury",
-      "observed_at": "2026-10-02T19:48:55.795Z",
-      "sport": "nfl",
-      "title": "Player availability changed",
-      "event": "Buffalo Bills",
-      "pick": "DJ Moore",
-      "before": "Questionable · Shoulder",
-      "after": "Active · Moore (shoulder) was limited in Friday's practice but doesn't have an injury designation for Sunday's game against New England.",
-      "source_quote_at": "2026-10-02T19:23Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:2:Joe Andreessen|2026-10-02T19:48:55.795Z",
-      "kind": "injury",
-      "observed_at": "2026-10-02T19:48:55.795Z",
-      "sport": "nfl",
-      "title": "Player availability changed",
-      "event": "Buffalo Bills",
-      "pick": "Joe Andreessen",
-      "before": "Questionable · Knee",
-      "after": "Active",
-      "source_quote_at": "2026-10-02T19:20Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:2:Damar Hamlin|2026-10-02T19:48:55.795Z",
-      "kind": "injury",
-      "observed_at": "2026-10-02T19:48:55.795Z",
-      "sport": "nfl",
-      "title": "Player availability changed",
-      "event": "Buffalo Bills",
-      "pick": "Damar Hamlin",
-      "before": "Questionable · Ribs",
-      "after": "Active",
-      "source_quote_at": "2026-10-02T19:17Z",
       "source": "ESPN injuries",
       "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
     }
