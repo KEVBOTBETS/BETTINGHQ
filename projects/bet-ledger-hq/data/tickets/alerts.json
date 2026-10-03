@@ -1,29 +1,43 @@
 {
   "schema": 1,
-  "checked_at": "2026-10-03T05:51:32.609Z",
+  "checked_at": "2026-10-03T06:27:40.405Z",
   "coverage": {
-    "mlb": {
-      "status": "available",
-      "reports": 22,
-      "checked_at": "2026-10-03T05:51:32.609Z"
-    },
     "nhl": {
       "status": "available",
       "reports": 30,
-      "checked_at": "2026-10-03T05:51:32.609Z"
-    },
-    "nfl": {
-      "status": "available",
-      "reports": 319,
-      "checked_at": "2026-10-03T05:51:32.609Z"
+      "checked_at": "2026-10-03T06:27:40.405Z"
     },
     "ncaaf": {
       "status": "empty",
       "reports": 0,
-      "checked_at": "2026-10-03T05:51:32.609Z"
+      "checked_at": "2026-10-03T06:27:40.405Z"
+    },
+    "mlb": {
+      "status": "available",
+      "reports": 22,
+      "checked_at": "2026-10-03T06:27:40.405Z"
+    },
+    "nfl": {
+      "status": "available",
+      "reports": 319,
+      "checked_at": "2026-10-03T06:27:40.405Z"
     }
   },
   "events": [
+    {
+      "id": "injury|nfl:3:Anthony Johnson Jr.|2026-10-03T06:27:40.405Z",
+      "kind": "injury",
+      "observed_at": "2026-10-03T06:27:40.405Z",
+      "sport": "nfl",
+      "title": "Player availability changed",
+      "event": "Chicago Bears",
+      "pick": "Anthony Johnson Jr.",
+      "before": "Injured Reserve · Undisclosed",
+      "after": "Out · Undisclosed",
+      "source_quote_at": "2026-10-03T06:00Z",
+      "source": "ESPN injuries",
+      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
+    },
     {
       "id": "injury|nfl:23:Germie Bernard|2026-10-03T05:51:32.609Z",
       "kind": "injury",
@@ -2903,20 +2917,6 @@
       "before": "Questionable · Thumb",
       "after": "Active",
       "source_quote_at": "2026-10-02T19:52Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:13:Jackson Powers-Johnson|2026-10-02T20:00:35.765Z",
-      "kind": "injury",
-      "observed_at": "2026-10-02T20:00:35.765Z",
-      "sport": "nfl",
-      "title": "New availability report",
-      "event": "Las Vegas Raiders",
-      "pick": "Jackson Powers-Johnson",
-      "before": "Not in the previous dated report",
-      "after": "Out · Groin",
-      "source_quote_at": "2026-10-02T19:51Z",
       "source": "ESPN injuries",
       "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
     }
