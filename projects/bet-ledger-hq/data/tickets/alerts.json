@@ -1,29 +1,43 @@
 {
   "schema": 1,
-  "checked_at": "2026-10-03T05:18:36.143Z",
+  "checked_at": "2026-10-03T05:51:32.609Z",
   "coverage": {
-    "ncaaf": {
-      "status": "empty",
-      "reports": 0,
-      "checked_at": "2026-10-03T05:18:36.143Z"
-    },
     "mlb": {
       "status": "available",
       "reports": 22,
-      "checked_at": "2026-10-03T05:18:36.143Z"
+      "checked_at": "2026-10-03T05:51:32.609Z"
+    },
+    "nhl": {
+      "status": "available",
+      "reports": 30,
+      "checked_at": "2026-10-03T05:51:32.609Z"
     },
     "nfl": {
       "status": "available",
       "reports": 319,
-      "checked_at": "2026-10-03T05:18:36.143Z"
+      "checked_at": "2026-10-03T05:51:32.609Z"
     },
-    "nhl": {
-      "status": "available",
-      "reports": 31,
-      "checked_at": "2026-10-03T05:18:36.143Z"
+    "ncaaf": {
+      "status": "empty",
+      "reports": 0,
+      "checked_at": "2026-10-03T05:51:32.609Z"
     }
   },
   "events": [
+    {
+      "id": "injury|nfl:23:Germie Bernard|2026-10-03T05:51:32.609Z",
+      "kind": "injury",
+      "observed_at": "2026-10-03T05:51:32.609Z",
+      "sport": "nfl",
+      "title": "Player availability changed",
+      "event": "Pittsburgh Steelers",
+      "pick": "Germie Bernard",
+      "before": "Active · Bernard caught both of his passes for 11 yards during the Steelers' 27-24 loss to the Browns on Thursday.",
+      "after": "Active · Bernard caught both of his targets for 11 yards during the Steelers' 27-24 loss to the Browns on Thursday.",
+      "source_quote_at": "2026-10-02T23:31Z",
+      "source": "ESPN injuries",
+      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
+    },
     {
       "id": "injury|nhl:19:Alexey Toropchenko|2026-10-03T04:48:26.587Z",
       "kind": "injury",
@@ -2903,20 +2917,6 @@
       "before": "Not in the previous dated report",
       "after": "Out · Groin",
       "source_quote_at": "2026-10-02T19:51Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:15:Tucker Addington|2026-10-02T20:00:35.765Z",
-      "kind": "injury",
-      "observed_at": "2026-10-02T20:00:35.765Z",
-      "sport": "nfl",
-      "title": "Player availability changed",
-      "event": "Miami Dolphins",
-      "pick": "Tucker Addington",
-      "before": "Questionable · Shoulder",
-      "after": "Active",
-      "source_quote_at": "2026-10-02T19:57Z",
       "source": "ESPN injuries",
       "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
     }
