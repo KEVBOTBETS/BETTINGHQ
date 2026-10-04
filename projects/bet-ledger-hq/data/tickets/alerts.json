@@ -1,29 +1,43 @@
 {
   "schema": 1,
-  "checked_at": "2026-10-04T21:49:44.708Z",
+  "checked_at": "2026-10-04T21:53:16.907Z",
   "coverage": {
-    "mlb": {
-      "status": "available",
-      "reports": 16,
-      "checked_at": "2026-10-04T21:49:44.708Z"
-    },
     "ncaaf": {
       "status": "empty",
       "reports": 0,
-      "checked_at": "2026-10-04T21:49:44.708Z"
-    },
-    "nfl": {
-      "status": "available",
-      "reports": 445,
-      "checked_at": "2026-10-04T21:49:44.708Z"
+      "checked_at": "2026-10-04T21:53:16.907Z"
     },
     "nhl": {
       "status": "available",
       "reports": 22,
-      "checked_at": "2026-10-04T21:49:44.708Z"
+      "checked_at": "2026-10-04T21:53:16.907Z"
+    },
+    "mlb": {
+      "status": "available",
+      "reports": 16,
+      "checked_at": "2026-10-04T21:53:16.907Z"
+    },
+    "nfl": {
+      "status": "available",
+      "reports": 445,
+      "checked_at": "2026-10-04T21:53:16.907Z"
     }
   },
   "events": [
+    {
+      "id": "injury|nhl:22:Jake DeBrusk|2026-10-04T21:53:16.907Z",
+      "kind": "injury",
+      "observed_at": "2026-10-04T21:53:16.907Z",
+      "sport": "nhl",
+      "title": "Player availability changed",
+      "event": "Vancouver Canucks",
+      "pick": "Jake DeBrusk",
+      "before": "Day-To-Day · Illness",
+      "after": "Out · Illness",
+      "source_quote_at": "2026-10-04T21:49Z",
+      "source": "ESPN injuries",
+      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
+    },
     {
       "id": "odds|props|401872978|2026-10-05T00:20Z|Pass completions|Bryce Young|over|BetRivers|2026-10-04T21:49:44.708Z",
       "kind": "odds",
@@ -2868,20 +2882,6 @@
       "title": "New availability report",
       "event": "Dallas Cowboys",
       "pick": "James Houston",
-      "before": "Not in the previous dated report",
-      "after": "Out · Coach's Decision",
-      "source_quote_at": "2026-10-04T15:37Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:6:Caelen Carson|2026-10-04T18:06:25.560Z",
-      "kind": "injury",
-      "observed_at": "2026-10-04T18:06:25.560Z",
-      "sport": "nfl",
-      "title": "New availability report",
-      "event": "Dallas Cowboys",
-      "pick": "Caelen Carson",
       "before": "Not in the previous dated report",
       "after": "Out · Coach's Decision",
       "source_quote_at": "2026-10-04T15:37Z",
