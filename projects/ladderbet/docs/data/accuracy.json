@@ -1,91 +1,91 @@
 {
  "schema": 1,
- "generated_at": "2026-10-04T13:54:38.053041+00:00",
+ "generated_at": "2026-10-04T20:49:05.075663+00:00",
  "label": "Ladder screened-option accuracy",
  "method": "Every screened option is saved before the event, whether or not you choose it. Probabilities here are de-vigged market estimates, not an independent sports model. First pre-event snapshot, frozen line and price. All model picks, including PASS/AVOID and unstaked picks. One preferred side per event/market in pick statistics; the complete priced-side audit is separate. One hypothetical unit per pick; no actual wagers are created. Missing results remain pending.",
  "overall": {
-  "logged": 194,
-  "wins": 86,
-  "losses": 46,
+  "logged": 197,
+  "wins": 91,
+  "losses": 47,
   "pushes": 0,
   "voids": 0,
-  "settled": 132,
-  "pending": 62,
-  "win_rate": 0.6515151515151515,
-  "units": -0.138,
-  "roi": -0.0010443106060606061,
-  "brier": 0.22752
+  "settled": 138,
+  "pending": 59,
+  "win_rate": 0.6594202898550725,
+  "units": 1.65,
+  "roi": 0.011954840579710146,
+  "brier": 0.22553
  },
  "all_calls": {
-  "logged": 194,
-  "wins": 86,
-  "losses": 46,
+  "logged": 197,
+  "wins": 91,
+  "losses": 47,
   "pushes": 0,
   "voids": 0,
-  "settled": 132,
-  "pending": 62,
-  "win_rate": 0.6515151515151515,
-  "units": -0.138,
-  "roi": -0.0010443106060606061,
-  "brier": 0.22752
+  "settled": 138,
+  "pending": 59,
+  "win_rate": 0.6594202898550725,
+  "units": 1.65,
+  "roi": 0.011954840579710146,
+  "brier": 0.22553
  },
  "by_tier": {
   "SCREENED": {
-   "logged": 194,
-   "wins": 86,
-   "losses": 46,
+   "logged": 197,
+   "wins": 91,
+   "losses": 47,
    "pushes": 0,
    "voids": 0,
-   "settled": 132,
-   "pending": 62,
-   "win_rate": 0.6515151515151515,
-   "units": -0.138,
-   "roi": -0.0010443106060606061,
-   "brier": 0.22752
+   "settled": 138,
+   "pending": 59,
+   "win_rate": 0.6594202898550725,
+   "units": 1.65,
+   "roi": 0.011954840579710146,
+   "brier": 0.22553
   }
  },
  "by_market": {
   "ML": {
-   "logged": 194,
-   "wins": 86,
-   "losses": 46,
+   "logged": 197,
+   "wins": 91,
+   "losses": 47,
    "pushes": 0,
    "voids": 0,
-   "settled": 132,
-   "pending": 62,
-   "win_rate": 0.6515151515151515,
-   "units": -0.138,
-   "roi": -0.0010443106060606061,
-   "brier": 0.22752
+   "settled": 138,
+   "pending": 59,
+   "win_rate": 0.6594202898550725,
+   "units": 1.65,
+   "roi": 0.011954840579710146,
+   "brier": 0.22553
   }
  },
  "by_version": {
   "2026-09-06-ev2": {
-   "logged": 194,
-   "wins": 86,
-   "losses": 46,
+   "logged": 197,
+   "wins": 91,
+   "losses": 47,
    "pushes": 0,
    "voids": 0,
-   "settled": 132,
-   "pending": 62,
-   "win_rate": 0.6515151515151515,
-   "units": -0.138,
-   "roi": -0.0010443106060606061,
-   "brier": 0.22752
+   "settled": 138,
+   "pending": 59,
+   "win_rate": 0.6594202898550725,
+   "units": 1.65,
+   "roi": 0.011954840579710146,
+   "brier": 0.22553
   }
  },
  "calibration": [
   {
    "bucket": "50\u201360%",
-   "n": 44,
-   "predicted": 0.58637,
-   "actual": 0.54545
+   "n": 46,
+   "predicted": 0.58645,
+   "actual": 0.54348
   },
   {
    "bucket": "60\u201370%",
-   "n": 88,
-   "predicted": 0.64371,
-   "actual": 0.70455
+   "n": 92,
+   "predicted": 0.64288,
+   "actual": 0.71739
   }
  ],
  "games": {
@@ -123,6 +123,69 @@
  },
  "props": {},
  "records": [
+  {
+   "kind": "call",
+   "league": "nhl",
+   "event_id": "401892448",
+   "start": "2026-10-06T00:00Z",
+   "matchup": "San Jose Sharks @ Dallas Stars",
+   "pick": "Dallas Stars",
+   "market": "ML",
+   "side": "home",
+   "price": -166.0,
+   "probability": 0.5996,
+   "tier": "SCREENED",
+   "edge": 0,
+   "book": "DraftKings",
+   "three_way": false,
+   "selected": true,
+   "id": "call:nhl:401892448::ML:home",
+   "captured_at": "2026-10-04T20:49:01.489095+00:00",
+   "result": "Pending",
+   "version": "2026-09-06-ev2"
+  },
+  {
+   "kind": "call",
+   "league": "nhl",
+   "event_id": "401892447",
+   "start": "2026-10-05T23:30Z",
+   "matchup": "Winnipeg Jets @ Pittsburgh Penguins",
+   "pick": "Pittsburgh Penguins",
+   "market": "ML",
+   "side": "home",
+   "price": -170.0,
+   "probability": 0.6038,
+   "tier": "SCREENED",
+   "edge": 0,
+   "book": "DraftKings",
+   "three_way": false,
+   "selected": true,
+   "id": "call:nhl:401892447::ML:home",
+   "captured_at": "2026-10-04T20:49:01.489095+00:00",
+   "result": "Pending",
+   "version": "2026-09-06-ev2"
+  },
+  {
+   "kind": "call",
+   "league": "nhl",
+   "event_id": "401892445",
+   "start": "2026-10-05T23:00Z",
+   "matchup": "Philadelphia Flyers @ Tampa Bay Lightning",
+   "pick": "Tampa Bay Lightning",
+   "market": "ML",
+   "side": "home",
+   "price": -192.0,
+   "probability": 0.6309,
+   "tier": "SCREENED",
+   "edge": 0,
+   "book": "DraftKings",
+   "three_way": false,
+   "selected": true,
+   "id": "call:nhl:401892445::ML:home",
+   "captured_at": "2026-10-04T20:49:01.489095+00:00",
+   "result": "Pending",
+   "version": "2026-09-06-ev2"
+  },
   {
    "kind": "call",
    "league": "mlb",
@@ -267,8 +330,13 @@
    "selected": true,
    "id": "call:nfl:401872972::ML:home",
    "captured_at": "2026-10-02T18:44:38.334484+00:00",
-   "result": "Pending",
-   "version": "2026-09-06-ev2"
+   "result": "Win",
+   "version": "2026-09-06-ev2",
+   "units": 0.540541,
+   "actual": null,
+   "final_home": 23.0,
+   "final_away": 12.0,
+   "graded_at": "2026-10-04T20:49:05.071174+00:00"
   },
   {
    "kind": "call",
@@ -288,8 +356,13 @@
    "selected": true,
    "id": "call:nfl:401872970::ML:away",
    "captured_at": "2026-10-02T18:44:38.334484+00:00",
-   "result": "Pending",
-   "version": "2026-09-06-ev2"
+   "result": "Win",
+   "version": "2026-09-06-ev2",
+   "units": 0.540541,
+   "actual": null,
+   "final_home": 20.0,
+   "final_away": 24.0,
+   "graded_at": "2026-10-04T20:49:05.071174+00:00"
   },
   {
    "kind": "call",
@@ -309,8 +382,13 @@
    "selected": true,
    "id": "call:nfl:401872968::ML:away",
    "captured_at": "2026-10-02T18:44:38.334484+00:00",
-   "result": "Pending",
-   "version": "2026-09-06-ev2"
+   "result": "Win",
+   "version": "2026-09-06-ev2",
+   "units": 0.540541,
+   "actual": null,
+   "final_home": 14.0,
+   "final_away": 17.0,
+   "graded_at": "2026-10-04T20:49:05.071174+00:00"
   },
   {
    "kind": "call",
@@ -330,8 +408,13 @@
    "selected": true,
    "id": "call:nfl:401872967::ML:home",
    "captured_at": "2026-10-02T18:44:38.334484+00:00",
-   "result": "Pending",
-   "version": "2026-09-06-ev2"
+   "result": "Loss",
+   "version": "2026-09-06-ev2",
+   "units": -1,
+   "actual": null,
+   "final_home": 30.0,
+   "final_away": 34.0,
+   "graded_at": "2026-10-04T20:49:05.071174+00:00"
   },
   {
    "kind": "call",
@@ -351,8 +434,13 @@
    "selected": true,
    "id": "call:nfl:401872965::ML:away",
    "captured_at": "2026-10-02T15:42:55.765511+00:00",
-   "result": "Pending",
-   "version": "2026-09-06-ev2"
+   "result": "Win",
+   "version": "2026-09-06-ev2",
+   "units": 0.520833,
+   "actual": null,
+   "final_home": 13.0,
+   "final_away": 30.0,
+   "graded_at": "2026-10-04T20:49:05.071174+00:00"
   },
   {
    "kind": "call",
@@ -372,8 +460,13 @@
    "selected": true,
    "id": "call:wnba:401918295::ML:home",
    "captured_at": "2026-10-02T06:47:11.210972+00:00",
-   "result": "Pending",
-   "version": "2026-09-06-ev2"
+   "result": "Win",
+   "version": "2026-09-06-ev2",
+   "units": 0.645161,
+   "actual": null,
+   "final_home": 92.0,
+   "final_away": 82.0,
+   "graded_at": "2026-10-04T20:49:05.071174+00:00"
   },
   {
    "kind": "call",
