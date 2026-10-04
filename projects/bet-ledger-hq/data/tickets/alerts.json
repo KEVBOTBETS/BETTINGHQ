@@ -1,29 +1,59 @@
 {
   "schema": 1,
-  "checked_at": "2026-10-04T02:49:02.142Z",
+  "checked_at": "2026-10-04T03:59:47.941Z",
   "coverage": {
-    "nhl": {
-      "status": "available",
-      "reports": 26,
-      "checked_at": "2026-10-04T02:49:02.142Z"
-    },
     "mlb": {
       "status": "available",
       "reports": 20,
-      "checked_at": "2026-10-04T02:49:02.142Z"
+      "checked_at": "2026-10-04T03:59:47.941Z"
+    },
+    "nhl": {
+      "status": "available",
+      "reports": 26,
+      "checked_at": "2026-10-04T03:59:47.941Z"
     },
     "ncaaf": {
       "status": "empty",
       "reports": 0,
-      "checked_at": "2026-10-04T02:49:02.142Z"
+      "checked_at": "2026-10-04T03:59:47.941Z"
     },
     "nfl": {
       "status": "available",
       "reports": 278,
-      "checked_at": "2026-10-04T02:49:02.142Z"
+      "checked_at": "2026-10-04T03:59:47.941Z"
     }
   },
   "events": [
+    {
+      "id": "odds|wnba|401918296|2026-10-04T20:00Z|ML||home|DraftKings|2026-10-04T03:59:47.941Z",
+      "kind": "odds",
+      "observed_at": "2026-10-04T03:59:47.941Z",
+      "sport": "wnba",
+      "event": "LV @ GS",
+      "start": "2026-10-04T20:00Z",
+      "pick": "GS ML",
+      "title": "Published odds changed",
+      "before": "-112",
+      "after": "-110",
+      "book": "DraftKings",
+      "source_quote_at": "2026-10-04T03:59:12+00:00",
+      "source": "Existing WNBA board",
+      "note": "Your ticket keeps its original odds. Recheck the live book before placing a new wager."
+    },
+    {
+      "id": "injury|nfl:3:Anthony Johnson Jr.|2026-10-04T03:59:47.941Z",
+      "kind": "injury",
+      "observed_at": "2026-10-04T03:59:47.941Z",
+      "sport": "nfl",
+      "title": "Player availability changed",
+      "event": "Chicago Bears",
+      "pick": "Anthony Johnson Jr.",
+      "before": "Out · Undisclosed",
+      "after": "Injured Reserve · Undisclosed",
+      "source_quote_at": "2026-10-04T03:00Z",
+      "source": "ESPN injuries",
+      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
+    },
     {
       "id": "odds|nfl|401872966|2026-10-04T17:00Z|ML||home|Draft Kings|2026-10-04T02:49:02.142Z",
       "kind": "odds",
@@ -2935,34 +2965,6 @@
       "before": "Active · Washington caught three of four targets for 67 yards during the Steelers' 30-27 win over the Bengals on Sunday.",
       "after": "Active · Washington caught three of five targets for 27 yards and a touchdown in a loss to Cleveland on Thursday.",
       "source_quote_at": "2026-10-02T23:19Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:23:Michael Pittman Jr.|2026-10-02T23:45:51.157Z",
-      "kind": "injury",
-      "observed_at": "2026-10-02T23:45:51.157Z",
-      "sport": "nfl",
-      "title": "New availability report",
-      "event": "Pittsburgh Steelers",
-      "pick": "Michael Pittman Jr.",
-      "before": "Not in the previous dated report",
-      "after": "Active · Pittman caught two of four targets for 15 yards Thursday in a loss to the Browns.",
-      "source_quote_at": "2026-10-02T23:12Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:34:Jadeveon Clowney|2026-10-02T23:16:57.675Z",
-      "kind": "injury",
-      "observed_at": "2026-10-02T23:16:57.675Z",
-      "sport": "nfl",
-      "title": "New availability report",
-      "event": "Houston Texans",
-      "pick": "Jadeveon Clowney",
-      "before": "Not in the previous dated report",
-      "after": "Questionable · Knee",
-      "source_quote_at": "2026-10-02T23:02Z",
       "source": "ESPN injuries",
       "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
     }
