@@ -1,29 +1,43 @@
 {
   "schema": 1,
-  "checked_at": "2026-10-05T17:37:17.457Z",
+  "checked_at": "2026-10-05T17:52:01.082Z",
   "coverage": {
+    "ncaaf": {
+      "status": "empty",
+      "reports": 0,
+      "checked_at": "2026-10-05T17:52:01.082Z"
+    },
+    "nfl": {
+      "status": "available",
+      "reports": 549,
+      "checked_at": "2026-10-05T17:52:01.082Z"
+    },
     "nhl": {
       "status": "available",
       "reports": 25,
-      "checked_at": "2026-10-05T17:37:17.457Z"
+      "checked_at": "2026-10-05T17:52:01.082Z"
     },
     "mlb": {
       "status": "available",
       "reports": 14,
-      "checked_at": "2026-10-05T17:37:17.457Z"
-    },
-    "nfl": {
-      "status": "available",
-      "reports": 551,
-      "checked_at": "2026-10-05T17:37:17.457Z"
-    },
-    "ncaaf": {
-      "status": "empty",
-      "reports": 0,
-      "checked_at": "2026-10-05T17:37:17.457Z"
+      "checked_at": "2026-10-05T17:52:01.082Z"
     }
   },
   "events": [
+    {
+      "id": "injury|nhl:4:Andrew Mangiapane|2026-10-05T17:52:01.082Z",
+      "kind": "injury",
+      "observed_at": "2026-10-05T17:52:01.082Z",
+      "sport": "nhl",
+      "title": "Player availability changed",
+      "event": "Chicago Blackhawks",
+      "pick": "Andrew Mangiapane",
+      "before": "Day-To-Day · Lower Body",
+      "after": "Out · Lower Body",
+      "source_quote_at": "2026-10-05T17:40Z",
+      "source": "ESPN injuries",
+      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
+    },
     {
       "id": "odds|mlb|849834|2026-10-05T21:00:00Z|TOTAL||over|DraftKings|2026-10-05T17:37:17.457Z",
       "kind": "odds",
@@ -2890,20 +2904,6 @@
       "before": "Not in the previous dated report",
       "after": "Active · Skattebo carried the ball 18 times for 58 yards and caught his only target for eight yards in Sunday's 36-24 win over the Cardinals.",
       "source_quote_at": "2026-10-05T00:00Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:19:Malik Nabers|2026-10-05T00:31:08.094Z",
-      "kind": "injury",
-      "observed_at": "2026-10-05T00:31:08.094Z",
-      "sport": "nfl",
-      "title": "New availability report",
-      "event": "New York Giants",
-      "pick": "Malik Nabers",
-      "before": "Not in the previous dated report",
-      "after": "Active · Nabers caught six of seven targets for 112 yards and a touchdown in Sunday's 36-24 win over the Cardinals.",
-      "source_quote_at": "2026-10-04T23:56Z",
       "source": "ESPN injuries",
       "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
     }
