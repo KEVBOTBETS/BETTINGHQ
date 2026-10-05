@@ -27553,7 +27553,7 @@
     "home_name": "Tampa Bay Lightning",
     "home_logo": "https://assets.nhle.com/logos/nhl/svg/TBL_light.svg",
     "home_color": null,
-    "home_score": 0.0,
+    "home_score": 1.0,
     "home_record": "1-1-0",
     "home_goalie": {
       "name": null,
@@ -27918,59 +27918,14 @@
     "day": "2026-10-05",
     "season": 2027,
     "season_type": 2,
-    "state": "pre",
-    "status": "Pregame",
+    "state": "in",
+    "status": "In Progress",
     "completed": false,
-    "status_detail": "Pregame",
+    "status_detail": "In Progress \u00b7 Period 1",
     "venue": "TD Garden",
     "neutral": false,
     "broadcast": "SN+, TVAS, NESN",
-    "quotes": [
-      {
-        "market": "ML",
-        "side": "home",
-        "line": null,
-        "price": -104.0,
-        "opposite_price": -115.0,
-        "book": "FanDuel (CA)",
-        "observed_at": "2026-10-05T23:18:27.270160+00:00",
-        "open_price": null,
-        "source": "NHL public schedule"
-      },
-      {
-        "market": "ML",
-        "side": "away",
-        "line": null,
-        "price": -115.0,
-        "opposite_price": -104.0,
-        "book": "FanDuel (CA)",
-        "observed_at": "2026-10-05T23:18:27.270160+00:00",
-        "open_price": null,
-        "source": "NHL public schedule"
-      },
-      {
-        "market": "ML",
-        "side": "home",
-        "line": null,
-        "price": -102.0,
-        "opposite_price": -118.0,
-        "book": "DraftKings (US)",
-        "observed_at": "2026-10-05T23:18:27.270160+00:00",
-        "open_price": null,
-        "source": "NHL public schedule"
-      },
-      {
-        "market": "ML",
-        "side": "away",
-        "line": null,
-        "price": -118.0,
-        "opposite_price": -102.0,
-        "book": "DraftKings (US)",
-        "observed_at": "2026-10-05T23:18:27.270160+00:00",
-        "open_price": null,
-        "source": "NHL public schedule"
-      }
-    ],
+    "quotes": [],
     "source_stale": false,
     "source_name": "NHL",
     "source_url": "https://www.nhl.com/gamecenter/ott-vs-bos/2026/10/05/2026020041",
@@ -27979,7 +27934,7 @@
     "home_name": "Boston Bruins",
     "home_logo": "https://assets.nhle.com/logos/nhl/svg/BOS_light.svg",
     "home_color": null,
-    "home_score": null,
+    "home_score": 0.0,
     "home_record": "2-1-0",
     "home_goalie": {
       "name": null,
@@ -27992,7 +27947,7 @@
     "away_name": "Ottawa Senators",
     "away_logo": "https://assets.nhle.com/logos/nhl/svg/OTT_light.svg",
     "away_color": null,
-    "away_score": null,
+    "away_score": 0.0,
     "away_record": "1-0-0",
     "away_goalie": {
       "name": null,
@@ -28200,168 +28155,141 @@
     },
     "projection": {
       "ratings_known": true,
-      "home_goals": 3.156,
-      "away_goals": 2.953,
-      "mu": 0.203,
-      "p_home": 0.532099,
-      "total": 6.273,
-      "overtime_prob": 0.164585,
+      "home_goals": 3.23,
+      "away_goals": 3.023,
+      "mu": 0.206,
+      "p_home": 0.532227,
+      "total": 6.416,
+      "overtime_prob": 0.162574,
       "scores": [
         {
           "home": 3,
           "away": 2,
-          "probability": 0.07492
+          "probability": 0.072328
         },
         {
           "home": 2,
           "away": 3,
-          "probability": 0.071647
+          "probability": 0.069171
         },
         {
           "home": 4,
           "away": 3,
-          "probability": 0.064423
+          "probability": 0.065073
         },
         {
           "home": 3,
           "away": 4,
-          "probability": 0.061882
-        },
-        {
-          "home": 2,
-          "away": 1,
-          "probability": 0.043061
-        },
-        {
-          "home": 1,
-          "away": 2,
-          "probability": 0.040954
+          "probability": 0.062504
         },
         {
           "home": 4,
           "away": 2,
-          "probability": 0.040066
+          "probability": 0.039878
+        },
+        {
+          "home": 2,
+          "away": 1,
+          "probability": 0.039747
+        },
+        {
+          "home": 1,
+          "away": 2,
+          "probability": 0.037806
         },
         {
           "home": 2,
           "away": 4,
-          "probability": 0.035069
+          "probability": 0.034943
         }
       ],
       "matrix": [
         [
           0,
-          0.008131,
-          0.011075,
-          0.011651,
-          0.009192,
-          0.005802,
-          0.003052,
-          0.001376
+          0.007179,
+          0.010039,
+          0.010807,
+          0.008726,
+          0.005637,
+          0.003034,
+          0.0014
         ],
         [
-          0.007678,
+          0.006782,
           0,
-          0.043061,
-          0.034399,
-          0.02714,
-          0.01713,
-          0.00901,
-          0.004062
+          0.039747,
+          0.032673,
+          0.026381,
+          0.017041,
+          0.009173,
+          0.004232
         ],
         [
-          0.009694,
-          0.040954,
+          0.008796,
+          0.037806,
           0,
-          0.07492,
-          0.040066,
-          0.025289,
-          0.013302,
-          0.005997
+          0.072328,
+          0.039878,
+          0.025759,
+          0.013866,
+          0.006397
         ],
         [
-          0.00954,
-          0.030109,
-          0.071647,
+          0.008864,
+          0.028629,
+          0.069171,
           0,
-          0.064423,
-          0.024889,
-          0.013091,
-          0.005902
+          0.065073,
+          0.025958,
+          0.013973,
+          0.006447
         ],
         [
-          0.007042,
-          0.022225,
-          0.035069,
-          0.061882,
+          0.0067,
+          0.021638,
+          0.034943,
+          0.062504,
           0,
-          0.032925,
-          0.009663,
-          0.004357
+          0.034806,
+          0.010561,
+          0.004873
         ],
         [
-          0.004159,
-          0.013124,
-          0.020709,
-          0.021785,
-          0.031741,
+          0.004051,
+          0.013084,
+          0.021128,
+          0.022746,
+          0.033552,
           0,
-          0.011131,
-          0.002573
+          0.012317,
+          0.002946
         ],
         [
-          0.002046,
-          0.006458,
-          0.010191,
-          0.01072,
-          0.008458,
-          0.010763,
+          0.002041,
+          0.006592,
+          0.010646,
+          0.011461,
+          0.009254,
+          0.011909,
           0,
-          0.00267
+          0.003093
         ],
         [
-          0.000863,
-          0.002724,
-          0.004298,
-          0.004522,
-          0.003568,
-          0.002252,
-          0.002588,
+          0.000882,
+          0.002847,
+          0.004598,
+          0.00495,
+          0.003997,
+          0.002582,
+          0.002998,
           0
         ]
       ],
-      "prior_weight": 0.952
+      "prior_weight": 1.0
     },
     "stats_stale": false,
-    "challenger": {
-      "version": "nhl-context-shadow-1.0",
-      "mode": "shadow-only",
-      "observed_at": "2026-10-05T23:18:27.270160+00:00",
-      "p_home": 0.53476,
-      "home_goals": 3.148,
-      "away_goals": 2.953,
-      "ot_home_probability": 0.52381,
-      "adjustments": {
-        "home": {
-          "shots": -0.0026,
-          "special_teams": -0.0054,
-          "opponent_goalie": 0.0,
-          "goalie_sample": null
-        },
-        "away": {
-          "shots": -0.0012,
-          "special_teams": 0.001,
-          "opponent_goalie": 0.0,
-          "goalie_sample": null
-        }
-      },
-      "missing": [
-        "away: confirmed goalie sample unavailable",
-        "home: confirmed goalie sample unavailable"
-      ],
-      "note": "Prospective experiment, not validated confidence; production picks are unchanged."
-    },
-    "p_home": 0.532099
+    "challenger": null,
+    "p_home": 0.532227
   },
   {
     "game_id": "401892447",
@@ -28371,59 +28299,14 @@
     "day": "2026-10-05",
     "season": 2027,
     "season_type": 2,
-    "state": "pre",
-    "status": "Pregame",
+    "state": "in",
+    "status": "In Progress",
     "completed": false,
-    "status_detail": "Pregame",
+    "status_detail": "In Progress \u00b7 Period 1",
     "venue": "PPG Paints Arena",
     "neutral": false,
     "broadcast": "SN+, SN-PIT",
-    "quotes": [
-      {
-        "market": "ML",
-        "side": "home",
-        "line": null,
-        "price": -182.0,
-        "opposite_price": 150.0,
-        "book": "FanDuel (CA)",
-        "observed_at": "2026-10-05T23:18:27.270160+00:00",
-        "open_price": null,
-        "source": "NHL public schedule"
-      },
-      {
-        "market": "ML",
-        "side": "away",
-        "line": null,
-        "price": 150.0,
-        "opposite_price": -182.0,
-        "book": "FanDuel (CA)",
-        "observed_at": "2026-10-05T23:18:27.270160+00:00",
-        "open_price": null,
-        "source": "NHL public schedule"
-      },
-      {
-        "market": "ML",
-        "side": "home",
-        "line": null,
-        "price": -180.0,
-        "opposite_price": 150.0,
-        "book": "DraftKings (US)",
-        "observed_at": "2026-10-05T23:18:27.270160+00:00",
-        "open_price": null,
-        "source": "NHL public schedule"
-      },
-      {
-        "market": "ML",
-        "side": "away",
-        "line": null,
-        "price": 150.0,
-        "opposite_price": -180.0,
-        "book": "DraftKings (US)",
-        "observed_at": "2026-10-05T23:18:27.270160+00:00",
-        "open_price": null,
-        "source": "NHL public schedule"
-      }
-    ],
+    "quotes": [],
     "source_stale": false,
     "source_name": "NHL",
     "source_url": "https://www.nhl.com/gamecenter/wpg-vs-pit/2026/10/05/2026020042",
@@ -28432,7 +28315,7 @@
     "home_name": "Pittsburgh Penguins",
     "home_logo": "https://assets.nhle.com/logos/nhl/svg/PIT_light.svg",
     "home_color": null,
-    "home_score": null,
+    "home_score": 0.0,
     "home_record": "2-0-0",
     "home_goalie": {
       "name": null,
@@ -28445,7 +28328,7 @@
     "away_name": "Winnipeg Jets",
     "away_logo": "https://assets.nhle.com/logos/nhl/svg/WPG_light.svg",
     "away_color": null,
-    "away_score": null,
+    "away_score": 0.0,
     "away_record": "1-0-1",
     "away_goalie": {
       "name": null,
@@ -28653,168 +28536,141 @@
     },
     "projection": {
       "ratings_known": true,
-      "home_goals": 3.524,
-      "away_goals": 2.762,
-      "mu": 0.762,
-      "p_home": 0.617171,
-      "total": 6.443,
-      "overtime_prob": 0.155866,
+      "home_goals": 3.407,
+      "away_goals": 2.826,
+      "mu": 0.581,
+      "p_home": 0.59024,
+      "total": 6.392,
+      "overtime_prob": 0.159345,
       "scores": [
         {
           "home": 3,
           "away": 2,
-          "probability": 0.073848
+          "probability": 0.074432
         },
         {
           "home": 4,
           "away": 3,
-          "probability": 0.065874
+          "probability": 0.065807
         },
         {
           "home": 2,
           "away": 3,
-          "probability": 0.062652
+          "probability": 0.065618
         },
         {
           "home": 3,
           "away": 4,
-          "probability": 0.056791
+          "probability": 0.058735
         },
         {
           "home": 4,
           "away": 2,
-          "probability": 0.045638
+          "probability": 0.044019
         },
         {
           "home": 2,
           "away": 1,
-          "probability": 0.040983
+          "probability": 0.041657
         },
         {
           "home": 3,
           "away": 1,
-          "probability": 0.037502
+          "probability": 0.036575
         },
         {
-          "home": 5,
-          "away": 4,
-          "probability": 0.034968
+          "home": 1,
+          "away": 2,
+          "probability": 0.036165
         }
       ],
       "matrix": [
         [
           0,
-          0.007489,
-          0.011556,
-          0.013576,
-          0.011961,
-          0.00843,
-          0.004952,
-          0.002493
+          0.007671,
+          0.011396,
+          0.012942,
+          0.011024,
+          0.007512,
+          0.004266,
+          0.002076
         ],
         [
-          0.006071,
+          0.00653,
           0,
-          0.040983,
-          0.037502,
-          0.033041,
-          0.023289,
-          0.013679,
-          0.006887
+          0.041657,
+          0.036575,
+          0.031153,
+          0.021228,
+          0.012054,
+          0.005867
         ],
         [
-          0.007101,
-          0.034083,
+          0.00784,
+          0.036165,
           0,
-          0.073848,
-          0.045638,
-          0.032167,
-          0.018894,
-          0.009512
+          0.074432,
+          0.044019,
+          0.029995,
+          0.017033,
+          0.00829
         ],
         [
-          0.006539,
-          0.023043,
-          0.062652,
+          0.007385,
+          0.025163,
+          0.065618,
           0,
-          0.065874,
-          0.029621,
-          0.017398,
-          0.008759
+          0.065807,
+          0.028255,
+          0.016045,
+          0.007809
         ],
         [
-          0.004516,
-          0.015914,
-          0.028042,
-          0.056791,
+          0.005218,
+          0.017777,
+          0.030284,
+          0.058735,
           0,
-          0.034968,
-          0.012015,
-          0.006049
+          0.03461,
+          0.011335,
+          0.005517
         ],
         [
-          0.002495,
-          0.008792,
-          0.015493,
-          0.0182,
-          0.030547,
+          0.002949,
+          0.010048,
+          0.017117,
+          0.019439,
+          0.031205,
           0,
-          0.01229,
-          0.003342
+          0.012048,
+          0.003118
         ],
         [
-          0.001149,
-          0.004048,
-          0.007133,
-          0.00838,
-          0.007383,
-          0.010855,
+          0.001389,
+          0.004732,
+          0.008062,
+          0.009156,
+          0.007799,
+          0.010955,
           0,
-          0.003067
+          0.002977
         ],
         [
-          0.000453,
-          0.001598,
-          0.002815,
-          0.003307,
-          0.002914,
-          0.002054,
-          0.002734,
+          0.000561,
+          0.001911,
+          0.003255,
+          0.003696,
+          0.003148,
+          0.002145,
+          0.002727,
           0
         ]
       ],
-      "prior_weight": 0.909
+      "prior_weight": 1.0
     },
     "stats_stale": false,
-    "challenger": {
-      "version": "nhl-context-shadow-1.0",
-      "mode": "shadow-only",
-      "observed_at": "2026-10-05T23:18:27.270160+00:00",
-      "p_home": 0.627554,
-      "home_goals": 3.548,
-      "away_goals": 2.765,
-      "ot_home_probability": 0.547511,
-      "adjustments": {
-        "home": {
-          "shots": 0.0074,
-          "special_teams": 0.0166,
-          "opponent_goalie": 0.0,
-          "goalie_sample": null
-        },
-        "away": {
-          "shots": -0.0091,
-          "special_teams": 0.0117,
-          "opponent_goalie": 0.0,
-          "goalie_sample": null
-        }
-      },
-      "missing": [
-        "away: confirmed goalie sample unavailable",
-        "home: confirmed goalie sample unavailable"
-      ],
-      "note": "Prospective experiment, not validated confidence; production picks are unchanged."
-    },
-    "p_home": 0.617171
+    "challenger": null,
+    "p_home": 0.59024
   },
   {
     "game_id": "401892448",
@@ -28825,9 +28681,9 @@
     "season": 2027,
     "season_type": 2,
     "state": "pre",
-    "status": "Scheduled",
+    "status": "Pregame",
     "completed": false,
-    "status_detail": "Scheduled",
+    "status_detail": "Pregame",
     "venue": "American Airlines Center",
     "neutral": false,
     "broadcast": "Prime Video, NBCSCA",
@@ -28839,7 +28695,7 @@
         "price": -210.0,
         "opposite_price": 172.0,
         "book": "FanDuel (CA)",
-        "observed_at": "2026-10-05T23:18:27.270160+00:00",
+        "observed_at": "2026-10-05T23:45:41.523586+00:00",
         "open_price": null,
         "source": "NHL public schedule"
       },
@@ -28850,7 +28706,7 @@
         "price": 172.0,
         "opposite_price": -210.0,
         "book": "FanDuel (CA)",
-        "observed_at": "2026-10-05T23:18:27.270160+00:00",
+        "observed_at": "2026-10-05T23:45:41.523586+00:00",
         "open_price": null,
         "source": "NHL public schedule"
       },
@@ -28861,7 +28717,7 @@
         "price": -205.0,
         "opposite_price": 170.0,
         "book": "DraftKings (US)",
-        "observed_at": "2026-10-05T23:18:27.270160+00:00",
+        "observed_at": "2026-10-05T23:45:41.523586+00:00",
         "open_price": null,
         "source": "NHL public schedule"
       },
@@ -28872,7 +28728,7 @@
         "price": 170.0,
         "opposite_price": -205.0,
         "book": "DraftKings (US)",
-        "observed_at": "2026-10-05T23:18:27.270160+00:00",
+        "observed_at": "2026-10-05T23:45:41.523586+00:00",
         "open_price": null,
         "source": "NHL public schedule"
       }
@@ -29242,7 +29098,7 @@
     "challenger": {
       "version": "nhl-context-shadow-1.0",
       "mode": "shadow-only",
-      "observed_at": "2026-10-05T23:18:27.270160+00:00",
+      "observed_at": "2026-10-05T23:45:41.523586+00:00",
       "p_home": 0.546952,
       "home_goals": 3.259,
       "away_goals": 2.913,
@@ -29650,7 +29506,7 @@
     "challenger": {
       "version": "nhl-context-shadow-1.0",
       "mode": "shadow-only",
-      "observed_at": "2026-10-05T23:18:27.270160+00:00",
+      "observed_at": "2026-10-05T23:45:41.523586+00:00",
       "p_home": 0.533038,
       "home_goals": 3.107,
       "away_goals": 2.899,
@@ -30058,7 +29914,7 @@
     "challenger": {
       "version": "nhl-context-shadow-1.0",
       "mode": "shadow-only",
-      "observed_at": "2026-10-05T23:18:27.270160+00:00",
+      "observed_at": "2026-10-05T23:45:41.523586+00:00",
       "p_home": 0.52575,
       "home_goals": 3.197,
       "away_goals": 3.008,
@@ -30466,7 +30322,7 @@
     "challenger": {
       "version": "nhl-context-shadow-1.0",
       "mode": "shadow-only",
-      "observed_at": "2026-10-05T23:18:27.270160+00:00",
+      "observed_at": "2026-10-05T23:45:41.523586+00:00",
       "p_home": 0.526508,
       "home_goals": 3.06,
       "away_goals": 2.894,
@@ -30874,7 +30730,7 @@
     "challenger": {
       "version": "nhl-context-shadow-1.0",
       "mode": "shadow-only",
-      "observed_at": "2026-10-05T23:18:27.270160+00:00",
+      "observed_at": "2026-10-05T23:45:41.523586+00:00",
       "p_home": 0.463736,
       "home_goals": 2.878,
       "away_goals": 3.131,
@@ -31282,7 +31138,7 @@
     "challenger": {
       "version": "nhl-context-shadow-1.0",
       "mode": "shadow-only",
-      "observed_at": "2026-10-05T23:18:27.270160+00:00",
+      "observed_at": "2026-10-05T23:45:41.523586+00:00",
       "p_home": 0.508995,
       "home_goals": 3.114,
       "away_goals": 3.057,
@@ -31690,7 +31546,7 @@
     "challenger": {
       "version": "nhl-context-shadow-1.0",
       "mode": "shadow-only",
-      "observed_at": "2026-10-05T23:18:27.270160+00:00",
+      "observed_at": "2026-10-05T23:45:41.523586+00:00",
       "p_home": 0.535563,
       "home_goals": 2.953,
       "away_goals": 2.736,
@@ -32098,7 +31954,7 @@
     "challenger": {
       "version": "nhl-context-shadow-1.0",
       "mode": "shadow-only",
-      "observed_at": "2026-10-05T23:18:27.270160+00:00",
+      "observed_at": "2026-10-05T23:45:41.523586+00:00",
       "p_home": 0.485767,
       "home_goals": 2.932,
       "away_goals": 3.021,
@@ -32506,7 +32362,7 @@
     "challenger": {
       "version": "nhl-context-shadow-1.0",
       "mode": "shadow-only",
-      "observed_at": "2026-10-05T23:18:27.270160+00:00",
+      "observed_at": "2026-10-05T23:45:41.523586+00:00",
       "p_home": 0.526707,
       "home_goals": 3.113,
       "away_goals": 2.944,
@@ -32914,7 +32770,7 @@
     "challenger": {
       "version": "nhl-context-shadow-1.0",
       "mode": "shadow-only",
-      "observed_at": "2026-10-05T23:18:27.270160+00:00",
+      "observed_at": "2026-10-05T23:45:41.523586+00:00",
       "p_home": 0.525601,
       "home_goals": 3.151,
       "away_goals": 2.986,
@@ -33322,7 +33178,7 @@
     "challenger": {
       "version": "nhl-context-shadow-1.0",
       "mode": "shadow-only",
-      "observed_at": "2026-10-05T23:18:27.270160+00:00",
+      "observed_at": "2026-10-05T23:45:41.523586+00:00",
       "p_home": 0.497111,
       "home_goals": 3.174,
       "away_goals": 3.168,
@@ -33730,7 +33586,7 @@
     "challenger": {
       "version": "nhl-context-shadow-1.0",
       "mode": "shadow-only",
-      "observed_at": "2026-10-05T23:18:27.270160+00:00",
+      "observed_at": "2026-10-05T23:45:41.523586+00:00",
       "p_home": 0.43952,
       "home_goals": 2.927,
       "away_goals": 3.289,
@@ -34138,7 +33994,7 @@
     "challenger": {
       "version": "nhl-context-shadow-1.0",
       "mode": "shadow-only",
-      "observed_at": "2026-10-05T23:18:27.270160+00:00",
+      "observed_at": "2026-10-05T23:45:41.523586+00:00",
       "p_home": 0.524897,
       "home_goals": 3.401,
       "away_goals": 3.286,
@@ -34546,7 +34402,7 @@
     "challenger": {
       "version": "nhl-context-shadow-1.0",
       "mode": "shadow-only",
-      "observed_at": "2026-10-05T23:18:27.270160+00:00",
+      "observed_at": "2026-10-05T23:45:41.523586+00:00",
       "p_home": 0.497438,
       "home_goals": 3.015,
       "away_goals": 3.056,
@@ -34954,7 +34810,7 @@
     "challenger": {
       "version": "nhl-context-shadow-1.0",
       "mode": "shadow-only",
-      "observed_at": "2026-10-05T23:18:27.270160+00:00",
+      "observed_at": "2026-10-05T23:45:41.523586+00:00",
       "p_home": 0.544611,
       "home_goals": 3.186,
       "away_goals": 2.904,
@@ -35362,7 +35218,7 @@
     "challenger": {
       "version": "nhl-context-shadow-1.0",
       "mode": "shadow-only",
-      "observed_at": "2026-10-05T23:18:27.270160+00:00",
+      "observed_at": "2026-10-05T23:45:41.523586+00:00",
       "p_home": 0.559046,
       "home_goals": 3.285,
       "away_goals": 2.884,
@@ -35770,7 +35626,7 @@
     "challenger": {
       "version": "nhl-context-shadow-1.0",
       "mode": "shadow-only",
-      "observed_at": "2026-10-05T23:18:27.270160+00:00",
+      "observed_at": "2026-10-05T23:45:41.523586+00:00",
       "p_home": 0.596911,
       "home_goals": 3.303,
       "away_goals": 2.735,
@@ -36178,7 +36034,7 @@
     "challenger": {
       "version": "nhl-context-shadow-1.0",
       "mode": "shadow-only",
-      "observed_at": "2026-10-05T23:18:27.270160+00:00",
+      "observed_at": "2026-10-05T23:45:41.523586+00:00",
       "p_home": 0.516865,
       "home_goals": 3.055,
       "away_goals": 2.949,
@@ -36586,7 +36442,7 @@
     "challenger": {
       "version": "nhl-context-shadow-1.0",
       "mode": "shadow-only",
-      "observed_at": "2026-10-05T23:18:27.270160+00:00",
+      "observed_at": "2026-10-05T23:45:41.523586+00:00",
       "p_home": 0.595744,
       "home_goals": 3.507,
       "away_goals": 2.859,
@@ -36994,7 +36850,7 @@
     "challenger": {
       "version": "nhl-context-shadow-1.0",
       "mode": "shadow-only",
-      "observed_at": "2026-10-05T23:18:27.270160+00:00",
+      "observed_at": "2026-10-05T23:45:41.523586+00:00",
       "p_home": 0.621007,
       "home_goals": 3.318,
       "away_goals": 2.556,
@@ -37402,7 +37258,7 @@
     "challenger": {
       "version": "nhl-context-shadow-1.0",
       "mode": "shadow-only",
-      "observed_at": "2026-10-05T23:18:27.270160+00:00",
+      "observed_at": "2026-10-05T23:45:41.523586+00:00",
       "p_home": 0.527034,
       "home_goals": 3.216,
       "away_goals": 2.996,
@@ -37810,7 +37666,7 @@
     "challenger": {
       "version": "nhl-context-shadow-1.0",
       "mode": "shadow-only",
-      "observed_at": "2026-10-05T23:18:27.270160+00:00",
+      "observed_at": "2026-10-05T23:45:41.523586+00:00",
       "p_home": 0.413665,
       "home_goals": 2.782,
       "away_goals": 3.333,
@@ -38218,7 +38074,7 @@
     "challenger": {
       "version": "nhl-context-shadow-1.0",
       "mode": "shadow-only",
-      "observed_at": "2026-10-05T23:18:27.270160+00:00",
+      "observed_at": "2026-10-05T23:45:41.523586+00:00",
       "p_home": 0.582555,
       "home_goals": 3.32,
       "away_goals": 2.794,
@@ -38626,7 +38482,7 @@
     "challenger": {
       "version": "nhl-context-shadow-1.0",
       "mode": "shadow-only",
-      "observed_at": "2026-10-05T23:18:27.270160+00:00",
+      "observed_at": "2026-10-05T23:45:41.523586+00:00",
       "p_home": 0.503781,
       "home_goals": 2.963,
       "away_goals": 2.939,
@@ -39034,7 +38890,7 @@
     "challenger": {
       "version": "nhl-context-shadow-1.0",
       "mode": "shadow-only",
-      "observed_at": "2026-10-05T23:18:27.270160+00:00",
+      "observed_at": "2026-10-05T23:45:41.523586+00:00",
       "p_home": 0.542583,
       "home_goals": 3.052,
       "away_goals": 2.787,
@@ -39442,7 +39298,7 @@
     "challenger": {
       "version": "nhl-context-shadow-1.0",
       "mode": "shadow-only",
-      "observed_at": "2026-10-05T23:18:27.270160+00:00",
+      "observed_at": "2026-10-05T23:45:41.523586+00:00",
       "p_home": 0.479718,
       "home_goals": 3.158,
       "away_goals": 3.264,
@@ -39850,7 +39706,7 @@
     "challenger": {
       "version": "nhl-context-shadow-1.0",
       "mode": "shadow-only",
-      "observed_at": "2026-10-05T23:18:27.270160+00:00",
+      "observed_at": "2026-10-05T23:45:41.523586+00:00",
       "p_home": 0.522803,
       "home_goals": 3.216,
       "away_goals": 3.021,
@@ -40258,7 +40114,7 @@
     "challenger": {
       "version": "nhl-context-shadow-1.0",
       "mode": "shadow-only",
-      "observed_at": "2026-10-05T23:18:27.270160+00:00",
+      "observed_at": "2026-10-05T23:45:41.523586+00:00",
       "p_home": 0.596212,
       "home_goals": 3.254,
       "away_goals": 2.719,
@@ -40666,7 +40522,7 @@
     "challenger": {
       "version": "nhl-context-shadow-1.0",
       "mode": "shadow-only",
-      "observed_at": "2026-10-05T23:18:27.270160+00:00",
+      "observed_at": "2026-10-05T23:45:41.523586+00:00",
       "p_home": 0.550085,
       "home_goals": 3.331,
       "away_goals": 3.008,
@@ -41074,7 +40930,7 @@
     "challenger": {
       "version": "nhl-context-shadow-1.0",
       "mode": "shadow-only",
-      "observed_at": "2026-10-05T23:18:27.270160+00:00",
+      "observed_at": "2026-10-05T23:45:41.523586+00:00",
       "p_home": 0.517425,
       "home_goals": 3.395,
       "away_goals": 3.351,
@@ -41482,7 +41338,7 @@
     "challenger": {
       "version": "nhl-context-shadow-1.0",
       "mode": "shadow-only",
-      "observed_at": "2026-10-05T23:18:27.270160+00:00",
+      "observed_at": "2026-10-05T23:45:41.523586+00:00",
       "p_home": 0.476118,
       "home_goals": 2.914,
       "away_goals": 3.041,
@@ -41890,7 +41746,7 @@
     "challenger": {
       "version": "nhl-context-shadow-1.0",
       "mode": "shadow-only",
-      "observed_at": "2026-10-05T23:18:27.270160+00:00",
+      "observed_at": "2026-10-05T23:45:41.523586+00:00",
       "p_home": 0.502244,
       "home_goals": 3.127,
       "away_goals": 3.113,
@@ -42298,7 +42154,7 @@
     "challenger": {
       "version": "nhl-context-shadow-1.0",
       "mode": "shadow-only",
-      "observed_at": "2026-10-05T23:18:27.270160+00:00",
+      "observed_at": "2026-10-05T23:45:41.523586+00:00",
       "p_home": 0.589337,
       "home_goals": 3.342,
       "away_goals": 2.748,
@@ -42706,7 +42562,7 @@
     "challenger": {
       "version": "nhl-context-shadow-1.0",
       "mode": "shadow-only",
-      "observed_at": "2026-10-05T23:18:27.270160+00:00",
+      "observed_at": "2026-10-05T23:45:41.523586+00:00",
       "p_home": 0.571184,
       "home_goals": 3.244,
       "away_goals": 2.794,
@@ -43114,7 +42970,7 @@
     "challenger": {
       "version": "nhl-context-shadow-1.0",
       "mode": "shadow-only",
-      "observed_at": "2026-10-05T23:18:27.270160+00:00",
+      "observed_at": "2026-10-05T23:45:41.523586+00:00",
       "p_home": 0.563694,
       "home_goals": 3.286,
       "away_goals": 2.904,
@@ -43522,7 +43378,7 @@
     "challenger": {
       "version": "nhl-context-shadow-1.0",
       "mode": "shadow-only",
-      "observed_at": "2026-10-05T23:18:27.270160+00:00",
+      "observed_at": "2026-10-05T23:45:41.523586+00:00",
       "p_home": 0.448271,
       "home_goals": 2.833,
       "away_goals": 3.159,
@@ -43930,7 +43786,7 @@
     "challenger": {
       "version": "nhl-context-shadow-1.0",
       "mode": "shadow-only",
-      "observed_at": "2026-10-05T23:18:27.270160+00:00",
+      "observed_at": "2026-10-05T23:45:41.523586+00:00",
       "p_home": 0.55038,
       "home_goals": 3.155,
       "away_goals": 2.838,
@@ -44338,7 +44194,7 @@
     "challenger": {
       "version": "nhl-context-shadow-1.0",
       "mode": "shadow-only",
-      "observed_at": "2026-10-05T23:18:27.270160+00:00",
+      "observed_at": "2026-10-05T23:45:41.523586+00:00",
       "p_home": 0.641336,
       "home_goals": 3.582,
       "away_goals": 2.661,
@@ -44746,7 +44602,7 @@
     "challenger": {
       "version": "nhl-context-shadow-1.0",
       "mode": "shadow-only",
-      "observed_at": "2026-10-05T23:18:27.270160+00:00",
+      "observed_at": "2026-10-05T23:45:41.523586+00:00",
       "p_home": 0.534762,
       "home_goals": 3.051,
       "away_goals": 2.835,
@@ -45154,7 +45010,7 @@
     "challenger": {
       "version": "nhl-context-shadow-1.0",
       "mode": "shadow-only",
-      "observed_at": "2026-10-05T23:18:27.270160+00:00",
+      "observed_at": "2026-10-05T23:45:41.523586+00:00",
       "p_home": 0.497392,
       "home_goals": 3.071,
       "away_goals": 3.063,
@@ -45562,7 +45418,7 @@
     "challenger": {
       "version": "nhl-context-shadow-1.0",
       "mode": "shadow-only",
-      "observed_at": "2026-10-05T23:18:27.270160+00:00",
+      "observed_at": "2026-10-05T23:45:41.523586+00:00",
       "p_home": 0.593862,
       "home_goals": 3.41,
       "away_goals": 2.829,
@@ -45970,7 +45826,7 @@
     "challenger": {
       "version": "nhl-context-shadow-1.0",
       "mode": "shadow-only",
-      "observed_at": "2026-10-05T23:18:27.270160+00:00",
+      "observed_at": "2026-10-05T23:45:41.523586+00:00",
       "p_home": 0.539748,
       "home_goals": 3.123,
       "away_goals": 2.873,
@@ -46378,7 +46234,7 @@
     "challenger": {
       "version": "nhl-context-shadow-1.0",
       "mode": "shadow-only",
-      "observed_at": "2026-10-05T23:18:27.270160+00:00",
+      "observed_at": "2026-10-05T23:45:41.523586+00:00",
       "p_home": 0.61574,
       "home_goals": 3.459,
       "away_goals": 2.69,
@@ -46786,7 +46642,7 @@
     "challenger": {
       "version": "nhl-context-shadow-1.0",
       "mode": "shadow-only",
-      "observed_at": "2026-10-05T23:18:27.270160+00:00",
+      "observed_at": "2026-10-05T23:45:41.523586+00:00",
       "p_home": 0.470346,
       "home_goals": 2.862,
       "away_goals": 2.998,
@@ -47194,7 +47050,7 @@
     "challenger": {
       "version": "nhl-context-shadow-1.0",
       "mode": "shadow-only",
-      "observed_at": "2026-10-05T23:18:27.270160+00:00",
+      "observed_at": "2026-10-05T23:45:41.523586+00:00",
       "p_home": 0.569768,
       "home_goals": 3.294,
       "away_goals": 2.872,
@@ -47602,7 +47458,7 @@
     "challenger": {
       "version": "nhl-context-shadow-1.0",
       "mode": "shadow-only",
-      "observed_at": "2026-10-05T23:18:27.270160+00:00",
+      "observed_at": "2026-10-05T23:45:41.523586+00:00",
       "p_home": 0.493174,
       "home_goals": 2.985,
       "away_goals": 3.053,
@@ -48010,7 +47866,7 @@
     "challenger": {
       "version": "nhl-context-shadow-1.0",
       "mode": "shadow-only",
-      "observed_at": "2026-10-05T23:18:27.270160+00:00",
+      "observed_at": "2026-10-05T23:45:41.523586+00:00",
       "p_home": 0.553916,
       "home_goals": 3.199,
       "away_goals": 2.858,
@@ -48418,7 +48274,7 @@
     "challenger": {
       "version": "nhl-context-shadow-1.0",
       "mode": "shadow-only",
-      "observed_at": "2026-10-05T23:18:27.270160+00:00",
+      "observed_at": "2026-10-05T23:45:41.523586+00:00",
       "p_home": 0.570926,
       "home_goals": 3.151,
       "away_goals": 2.685,
@@ -48826,7 +48682,7 @@
     "challenger": {
       "version": "nhl-context-shadow-1.0",
       "mode": "shadow-only",
-      "observed_at": "2026-10-05T23:18:27.270160+00:00",
+      "observed_at": "2026-10-05T23:45:41.523586+00:00",
       "p_home": 0.581977,
       "home_goals": 3.262,
       "away_goals": 2.766,
@@ -49234,7 +49090,7 @@
     "challenger": {
       "version": "nhl-context-shadow-1.0",
       "mode": "shadow-only",
-      "observed_at": "2026-10-05T23:18:27.270160+00:00",
+      "observed_at": "2026-10-05T23:45:41.523586+00:00",
       "p_home": 0.556821,
       "home_goals": 3.377,
       "away_goals": 2.985,
@@ -49642,7 +49498,7 @@
     "challenger": {
       "version": "nhl-context-shadow-1.0",
       "mode": "shadow-only",
-      "observed_at": "2026-10-05T23:18:27.270160+00:00",
+      "observed_at": "2026-10-05T23:45:41.523586+00:00",
       "p_home": 0.540924,
       "home_goals": 3.131,
       "away_goals": 2.874,
@@ -50050,7 +49906,7 @@
     "challenger": {
       "version": "nhl-context-shadow-1.0",
       "mode": "shadow-only",
-      "observed_at": "2026-10-05T23:18:27.270160+00:00",
+      "observed_at": "2026-10-05T23:45:41.523586+00:00",
       "p_home": 0.475556,
       "home_goals": 2.917,
       "away_goals": 3.022,
@@ -50458,7 +50314,7 @@
     "challenger": {
       "version": "nhl-context-shadow-1.0",
       "mode": "shadow-only",
-      "observed_at": "2026-10-05T23:18:27.270160+00:00",
+      "observed_at": "2026-10-05T23:45:41.523586+00:00",
       "p_home": 0.531298,
       "home_goals": 3.022,
       "away_goals": 2.828,
@@ -50866,7 +50722,7 @@
     "challenger": {
       "version": "nhl-context-shadow-1.0",
       "mode": "shadow-only",
-      "observed_at": "2026-10-05T23:18:27.270160+00:00",
+      "observed_at": "2026-10-05T23:45:41.523586+00:00",
       "p_home": 0.54619,
       "home_goals": 3.143,
       "away_goals": 2.853,
@@ -51274,7 +51130,7 @@
     "challenger": {
       "version": "nhl-context-shadow-1.0",
       "mode": "shadow-only",
-      "observed_at": "2026-10-05T23:18:27.270160+00:00",
+      "observed_at": "2026-10-05T23:45:41.523586+00:00",
       "p_home": 0.591835,
       "home_goals": 3.429,
       "away_goals": 2.813,
@@ -51682,7 +51538,7 @@
     "challenger": {
       "version": "nhl-context-shadow-1.0",
       "mode": "shadow-only",
-      "observed_at": "2026-10-05T23:18:27.270160+00:00",
+      "observed_at": "2026-10-05T23:45:41.523586+00:00",
       "p_home": 0.416323,
       "home_goals": 2.913,
       "away_goals": 3.431,
@@ -52090,7 +51946,7 @@
     "challenger": {
       "version": "nhl-context-shadow-1.0",
       "mode": "shadow-only",
-      "observed_at": "2026-10-05T23:18:27.270160+00:00",
+      "observed_at": "2026-10-05T23:45:41.523586+00:00",
       "p_home": 0.510845,
       "home_goals": 3.028,
       "away_goals": 2.936,
@@ -52498,7 +52354,7 @@
     "challenger": {
       "version": "nhl-context-shadow-1.0",
       "mode": "shadow-only",
-      "observed_at": "2026-10-05T23:18:27.270160+00:00",
+      "observed_at": "2026-10-05T23:45:41.523586+00:00",
       "p_home": 0.455395,
       "home_goals": 2.905,
       "away_goals": 3.188,
@@ -52906,7 +52762,7 @@
     "challenger": {
       "version": "nhl-context-shadow-1.0",
       "mode": "shadow-only",
-      "observed_at": "2026-10-05T23:18:27.270160+00:00",
+      "observed_at": "2026-10-05T23:45:41.523586+00:00",
       "p_home": 0.523753,
       "home_goals": 3.071,
       "away_goals": 2.922,
@@ -53314,7 +53170,7 @@
     "challenger": {
       "version": "nhl-context-shadow-1.0",
       "mode": "shadow-only",
-      "observed_at": "2026-10-05T23:18:27.270160+00:00",
+      "observed_at": "2026-10-05T23:45:41.523586+00:00",
       "p_home": 0.607483,
       "home_goals": 3.39,
       "away_goals": 2.703,
@@ -53722,7 +53578,7 @@
     "challenger": {
       "version": "nhl-context-shadow-1.0",
       "mode": "shadow-only",
-      "observed_at": "2026-10-05T23:18:27.270160+00:00",
+      "observed_at": "2026-10-05T23:45:41.523586+00:00",
       "p_home": 0.60219,
       "home_goals": 3.403,
       "away_goals": 2.771,
@@ -54130,7 +53986,7 @@
     "challenger": {
       "version": "nhl-context-shadow-1.0",
       "mode": "shadow-only",
-      "observed_at": "2026-10-05T23:18:27.270160+00:00",
+      "observed_at": "2026-10-05T23:45:41.523586+00:00",
       "p_home": 0.490098,
       "home_goals": 3.285,
       "away_goals": 3.351,
@@ -54538,7 +54394,7 @@
     "challenger": {
       "version": "nhl-context-shadow-1.0",
       "mode": "shadow-only",
-      "observed_at": "2026-10-05T23:18:27.270160+00:00",
+      "observed_at": "2026-10-05T23:45:41.523586+00:00",
       "p_home": 0.520291,
       "home_goals": 3.199,
       "away_goals": 3.091,
