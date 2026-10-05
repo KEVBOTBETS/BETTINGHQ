@@ -1,29 +1,73 @@
 {
   "schema": 1,
-  "checked_at": "2026-10-05T17:52:01.082Z",
+  "checked_at": "2026-10-05T18:05:59.721Z",
   "coverage": {
+    "nhl": {
+      "status": "available",
+      "reports": 25,
+      "checked_at": "2026-10-05T18:05:59.721Z"
+    },
     "ncaaf": {
       "status": "empty",
       "reports": 0,
-      "checked_at": "2026-10-05T17:52:01.082Z"
+      "checked_at": "2026-10-05T18:05:59.721Z"
     },
     "nfl": {
       "status": "available",
       "reports": 549,
-      "checked_at": "2026-10-05T17:52:01.082Z"
-    },
-    "nhl": {
-      "status": "available",
-      "reports": 25,
-      "checked_at": "2026-10-05T17:52:01.082Z"
+      "checked_at": "2026-10-05T18:05:59.721Z"
     },
     "mlb": {
       "status": "available",
-      "reports": 14,
-      "checked_at": "2026-10-05T17:52:01.082Z"
+      "reports": 15,
+      "checked_at": "2026-10-05T18:05:59.721Z"
     }
   },
   "events": [
+    {
+      "id": "odds|props|401872979|2026-10-06T00:15Z|Passing yards|Tyler Shough|over|Fanatics Sportsbook|2026-10-05T18:05:59.721Z",
+      "kind": "odds",
+      "observed_at": "2026-10-05T18:05:59.721Z",
+      "sport": "props",
+      "event": "Atlanta Falcons @ New Orleans Saints",
+      "start": "2026-10-06T00:15Z",
+      "pick": "Tyler Shough — Over 255.5 Passing yards",
+      "title": "Published odds changed",
+      "before": "-115 · line 255.5",
+      "after": "-120 · line 255.5",
+      "book": "Fanatics Sportsbook",
+      "source_quote_at": "2026-10-05T18:04:50.868659+00:00",
+      "source": "Existing Props board",
+      "note": "Your ticket keeps its original odds. Recheck the live book before placing a new wager."
+    },
+    {
+      "id": "injury|nfl:19:Braxton Berrios|2026-10-05T18:05:59.721Z",
+      "kind": "injury",
+      "observed_at": "2026-10-05T18:05:59.721Z",
+      "sport": "nfl",
+      "title": "Player availability changed",
+      "event": "New York Giants",
+      "pick": "Braxton Berrios",
+      "before": "Questionable · Foot",
+      "after": "Out · Foot",
+      "source_quote_at": "2026-10-04T19:53Z",
+      "source": "ESPN injuries",
+      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
+    },
+    {
+      "id": "injury|mlb:11:Seth Johnson|2026-10-05T18:05:59.721Z",
+      "kind": "injury",
+      "observed_at": "2026-10-05T18:05:59.721Z",
+      "sport": "mlb",
+      "title": "New availability report",
+      "event": "Athletics",
+      "pick": "Seth Johnson",
+      "before": "Not in the previous dated report",
+      "after": "Out · Knee",
+      "source_quote_at": "2026-10-05T17:53Z",
+      "source": "ESPN injuries",
+      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
+    },
     {
       "id": "injury|nhl:4:Andrew Mangiapane|2026-10-05T17:52:01.082Z",
       "kind": "injury",
@@ -2862,48 +2906,6 @@
       "before": "Out · Foot",
       "after": "Questionable · Foot",
       "source_quote_at": "2026-10-04T22:35Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:19:Isaiah Likely|2026-10-05T00:31:08.094Z",
-      "kind": "injury",
-      "observed_at": "2026-10-05T00:31:08.094Z",
-      "sport": "nfl",
-      "title": "New availability report",
-      "event": "New York Giants",
-      "pick": "Isaiah Likely",
-      "before": "Not in the previous dated report",
-      "after": "Active · Likely caught seven of 12 targets for 66 yards in Sunday's 36-24 win over Arizona.",
-      "source_quote_at": "2026-10-05T00:11Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:19:Jameis Winston|2026-10-05T00:31:08.094Z",
-      "kind": "injury",
-      "observed_at": "2026-10-05T00:31:08.094Z",
-      "sport": "nfl",
-      "title": "New availability report",
-      "event": "New York Giants",
-      "pick": "Jameis Winston",
-      "before": "Not in the previous dated report",
-      "after": "Active · Winston completed 18 of 29 passes for 250 yards and three touchdowns with two interceptions in Sunday's 36-24 win over Arizona.",
-      "source_quote_at": "2026-10-05T00:07Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:19:Cam Skattebo|2026-10-05T00:31:08.094Z",
-      "kind": "injury",
-      "observed_at": "2026-10-05T00:31:08.094Z",
-      "sport": "nfl",
-      "title": "New availability report",
-      "event": "New York Giants",
-      "pick": "Cam Skattebo",
-      "before": "Not in the previous dated report",
-      "after": "Active · Skattebo carried the ball 18 times for 58 yards and caught his only target for eight yards in Sunday's 36-24 win over the Cardinals.",
-      "source_quote_at": "2026-10-05T00:00Z",
       "source": "ESPN injuries",
       "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
     }
