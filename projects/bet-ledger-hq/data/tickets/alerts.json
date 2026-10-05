@@ -1,29 +1,85 @@
 {
   "schema": 1,
-  "checked_at": "2026-10-05T21:42:54.624Z",
+  "checked_at": "2026-10-05T21:51:38.111Z",
   "coverage": {
-    "nfl": {
+    "mlb": {
       "status": "available",
-      "reports": 535,
-      "checked_at": "2026-10-05T21:42:54.624Z"
-    },
-    "ncaaf": {
-      "status": "empty",
-      "reports": 0,
-      "checked_at": "2026-10-05T21:42:54.624Z"
+      "reports": 7,
+      "checked_at": "2026-10-05T21:51:38.111Z"
     },
     "nhl": {
       "status": "available",
       "reports": 22,
-      "checked_at": "2026-10-05T21:42:54.624Z"
+      "checked_at": "2026-10-05T21:51:38.111Z"
     },
-    "mlb": {
+    "ncaaf": {
+      "status": "empty",
+      "reports": 0,
+      "checked_at": "2026-10-05T21:51:38.111Z"
+    },
+    "nfl": {
       "status": "available",
-      "reports": 10,
-      "checked_at": "2026-10-05T21:42:54.624Z"
+      "reports": 535,
+      "checked_at": "2026-10-05T21:51:38.111Z"
     }
   },
   "events": [
+    {
+      "id": "injury|nfl:22:Paris Johnson Jr.|2026-10-05T21:51:38.111Z",
+      "kind": "injury",
+      "observed_at": "2026-10-05T21:51:38.111Z",
+      "sport": "nfl",
+      "title": "Player availability changed",
+      "event": "Arizona Cardinals",
+      "pick": "Paris Johnson Jr.",
+      "before": "Questionable · Biceps",
+      "after": "Out · Biceps",
+      "source_quote_at": "2026-10-05T21:42Z",
+      "source": "ESPN injuries",
+      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
+    },
+    {
+      "id": "injury|nfl:33:Chris Moore|2026-10-05T21:51:38.111Z",
+      "kind": "injury",
+      "observed_at": "2026-10-05T21:51:38.111Z",
+      "sport": "nfl",
+      "title": "Player availability changed",
+      "event": "Baltimore Ravens",
+      "pick": "Chris Moore",
+      "before": "Active · Ankle",
+      "after": "Out · Ankle",
+      "source_quote_at": "2026-10-05T21:42Z",
+      "source": "ESPN injuries",
+      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
+    },
+    {
+      "id": "injury|nfl:6:Tyler Smith|2026-10-05T21:51:38.111Z",
+      "kind": "injury",
+      "observed_at": "2026-10-05T21:51:38.111Z",
+      "sport": "nfl",
+      "title": "New availability report",
+      "event": "Dallas Cowboys",
+      "pick": "Tyler Smith",
+      "before": "Not in the previous dated report",
+      "after": "Injured Reserve · Thumb",
+      "source_quote_at": "2026-10-05T21:31Z",
+      "source": "ESPN injuries",
+      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
+    },
+    {
+      "id": "injury|nfl:25:Marques Sigle|2026-10-05T21:51:38.111Z",
+      "kind": "injury",
+      "observed_at": "2026-10-05T21:51:38.111Z",
+      "sport": "nfl",
+      "title": "Player availability changed",
+      "event": "San Francisco 49ers",
+      "pick": "Marques Sigle",
+      "before": "Questionable · Ankle",
+      "after": "Doubtful · Ankle",
+      "source_quote_at": "2026-10-05T00:10Z",
+      "source": "ESPN injuries",
+      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
+    },
     {
       "id": "odds|props|401872979|2026-10-06T00:15Z|Passing yards|Tyler Shough|over|Fanatics Sportsbook|2026-10-05T21:42:54.624Z",
       "kind": "odds",
@@ -2812,70 +2868,6 @@
       "book": "Fanatics Sportsbook",
       "source_quote_at": "2026-10-05T15:44:11.184600+00:00",
       "source": "Existing Props board",
-      "note": "Your ticket keeps its original odds. Recheck the live book before placing a new wager."
-    },
-    {
-      "id": "odds|props|401872979|2026-10-06T00:15Z|Passing yards|Tyler Shough|over|bet365|2026-10-05T15:45:09.458Z",
-      "kind": "odds",
-      "observed_at": "2026-10-05T15:45:09.458Z",
-      "sport": "props",
-      "event": "Atlanta Falcons @ New Orleans Saints",
-      "start": "2026-10-06T00:15Z",
-      "pick": "Tyler Shough — Over 257.5 Passing yards",
-      "title": "Published odds changed",
-      "before": "+115 · line 257.5",
-      "after": "-115 · line 262.5",
-      "book": "bet365",
-      "source_quote_at": "2026-10-05T15:44:11.184600+00:00",
-      "source": "Existing Props board",
-      "note": "Your ticket keeps its original odds. Recheck the live book before placing a new wager."
-    },
-    {
-      "id": "odds|props|401872979|2026-10-06T00:15Z|Pass attempts|Tyler Shough|over|BetRivers|2026-10-05T15:45:09.458Z",
-      "kind": "odds",
-      "observed_at": "2026-10-05T15:45:09.458Z",
-      "sport": "props",
-      "event": "Atlanta Falcons @ New Orleans Saints",
-      "start": "2026-10-06T00:15Z",
-      "pick": "Tyler Shough — Over 34.5 Pass attempts",
-      "title": "Published odds changed",
-      "before": "-113 · line 34.5",
-      "after": "-103 · line 35.5",
-      "book": "BetRivers",
-      "source_quote_at": "2026-10-05T15:44:11.184600+00:00",
-      "source": "Existing Props board",
-      "note": "Your ticket keeps its original odds. Recheck the live book before placing a new wager."
-    },
-    {
-      "id": "odds|ncaaf|401856712|2026-10-10T23:30Z|TOTAL||over|Draft Kings|2026-10-05T15:45:09.458Z",
-      "kind": "odds",
-      "observed_at": "2026-10-05T15:45:09.458Z",
-      "sport": "ncaaf",
-      "event": "UGA @ ALA",
-      "start": "2026-10-10T23:30Z",
-      "pick": "Over 55.5",
-      "title": "Published odds changed",
-      "before": "-102 · line 55.5",
-      "after": "-108 · line 55.5",
-      "book": "Draft Kings",
-      "source_quote_at": "2026-10-05T15:41:49.939237+00:00",
-      "source": "Existing NCAAF board",
-      "note": "Your ticket keeps its original odds. Recheck the live book before placing a new wager."
-    },
-    {
-      "id": "odds|ncaaf|401860902|2026-10-10T22:00Z|TOTAL||under|Draft Kings|2026-10-05T15:45:09.458Z",
-      "kind": "odds",
-      "observed_at": "2026-10-05T15:45:09.458Z",
-      "sport": "ncaaf",
-      "event": "SDSU @ ORST",
-      "start": "2026-10-10T22:00Z",
-      "pick": "Under 56.5",
-      "title": "Published odds changed",
-      "before": "-112 · line 56.5",
-      "after": "-105 · line 55.5",
-      "book": "Draft Kings",
-      "source_quote_at": "2026-10-05T15:41:46.813121+00:00",
-      "source": "Existing NCAAF board",
       "note": "Your ticket keeps its original odds. Recheck the live book before placing a new wager."
     }
   ]
