@@ -1,29 +1,118 @@
 {
   "schema": 1,
-  "checked_at": "2026-10-05T17:19:54.209Z",
+  "checked_at": "2026-10-05T17:37:17.457Z",
   "coverage": {
     "nhl": {
       "status": "available",
-      "reports": 26,
-      "checked_at": "2026-10-05T17:19:54.209Z"
+      "reports": 25,
+      "checked_at": "2026-10-05T17:37:17.457Z"
     },
     "mlb": {
       "status": "available",
       "reports": 14,
-      "checked_at": "2026-10-05T17:19:54.209Z"
-    },
-    "ncaaf": {
-      "status": "empty",
-      "reports": 0,
-      "checked_at": "2026-10-05T17:19:54.209Z"
+      "checked_at": "2026-10-05T17:37:17.457Z"
     },
     "nfl": {
       "status": "available",
       "reports": 551,
-      "checked_at": "2026-10-05T17:19:54.209Z"
+      "checked_at": "2026-10-05T17:37:17.457Z"
+    },
+    "ncaaf": {
+      "status": "empty",
+      "reports": 0,
+      "checked_at": "2026-10-05T17:37:17.457Z"
     }
   },
   "events": [
+    {
+      "id": "odds|mlb|849834|2026-10-05T21:00:00Z|TOTAL||over|DraftKings|2026-10-05T17:37:17.457Z",
+      "kind": "odds",
+      "observed_at": "2026-10-05T17:37:17.457Z",
+      "sport": "mlb",
+      "event": "CWS @ CLE",
+      "start": "2026-10-05T21:00:00Z",
+      "pick": "Over 6.5",
+      "title": "Published odds changed",
+      "before": "-115 · line 6.5",
+      "after": "-114 · line 6.5",
+      "book": "DraftKings",
+      "source_quote_at": "2026-10-05T17:34:03.128728+00:00",
+      "source": "Existing MLB board",
+      "note": "Your ticket keeps its original odds. Recheck the live book before placing a new wager."
+    },
+    {
+      "id": "odds|ncaaf|401856824|2026-10-10T16:00Z|TOTAL||under|Draft Kings|2026-10-05T17:37:17.457Z",
+      "kind": "odds",
+      "observed_at": "2026-10-05T17:37:17.457Z",
+      "sport": "ncaaf",
+      "event": "UCF @ OKST",
+      "start": "2026-10-10T16:00Z",
+      "pick": "Under 54.5",
+      "title": "Published odds changed",
+      "before": "-115 · line 54.5",
+      "after": "-105 · line 53.5",
+      "book": "Draft Kings",
+      "source_quote_at": "2026-10-05T17:33:54.904697+00:00",
+      "source": "Existing NCAAF board",
+      "note": "Your ticket keeps its original odds. Recheck the live book before placing a new wager."
+    },
+    {
+      "id": "odds|ncaaf|401858487|2026-10-10T01:00Z|ATS||away|Draft Kings|2026-10-05T17:37:17.457Z",
+      "kind": "odds",
+      "observed_at": "2026-10-05T17:37:17.457Z",
+      "sport": "ncaaf",
+      "event": "IOWA @ WASH",
+      "start": "2026-10-10T01:00Z",
+      "pick": "IOWA +1.5",
+      "title": "Published odds changed",
+      "before": "-105 · line 2.5",
+      "after": "-108 · line 3",
+      "book": "Draft Kings",
+      "source_quote_at": "2026-10-05T17:33:54.904697+00:00",
+      "source": "Existing NCAAF board",
+      "note": "Your ticket keeps its original odds. Recheck the live book before placing a new wager."
+    },
+    {
+      "id": "lineup|849834|2026-10-05T17:37:17.457Z",
+      "kind": "lineup",
+      "observed_at": "2026-10-05T17:37:17.457Z",
+      "sport": "mlb",
+      "event": "CWS @ CLE",
+      "start": "2026-10-05T21:00:00Z",
+      "title": "Batting orders confirmed",
+      "before": "Projected batting orders",
+      "after": "Confirmed batting orders",
+      "source_quote_at": "2026-10-05T17:34:32+00:00",
+      "source": "MLB board"
+    },
+    {
+      "id": "injury|nhl:13:Joe Veleno|2026-10-05T17:37:17.457Z",
+      "kind": "injury",
+      "observed_at": "2026-10-05T17:37:17.457Z",
+      "sport": "nhl",
+      "title": "Player availability changed",
+      "event": "New York Rangers",
+      "pick": "Joe Veleno",
+      "before": "Day-To-Day · Lower Body",
+      "after": "Out · Lower Body",
+      "source_quote_at": "2026-10-05T17:24Z",
+      "source": "ESPN injuries",
+      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
+    },
+    {
+      "id": "injury|nfl:9:Edgerrin Cooper|2026-10-05T17:37:17.457Z",
+      "kind": "injury",
+      "observed_at": "2026-10-05T17:37:17.457Z",
+      "sport": "nfl",
+      "title": "Player availability changed",
+      "event": "Green Bay Packers",
+      "pick": "Edgerrin Cooper",
+      "before": "Doubtful · Achilles",
+      "after": "Out · Achilles",
+      "source_quote_at": "2026-10-04T20:39Z",
+      "source": "ESPN injuries",
+      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
+    },
     {
       "id": "injury|nfl:3:Case Keenum|2026-10-05T17:03:38.573Z",
       "kind": "injury",
@@ -2815,90 +2904,6 @@
       "before": "Not in the previous dated report",
       "after": "Active · Nabers caught six of seven targets for 112 yards and a touchdown in Sunday's 36-24 win over the Cardinals.",
       "source_quote_at": "2026-10-04T23:56Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:19:Dominic Zvada|2026-10-05T00:31:08.094Z",
-      "kind": "injury",
-      "observed_at": "2026-10-05T00:31:08.094Z",
-      "sport": "nfl",
-      "title": "New availability report",
-      "event": "New York Giants",
-      "pick": "Dominic Zvada",
-      "before": "Not in the previous dated report",
-      "after": "Active · Zvada went 3-for-3 on field-goal attempts and made his only extra-point try during Sunday's 36-24 win over the Cardinals.",
-      "source_quote_at": "2026-10-04T23:51Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:21:Jake Elliott|2026-10-05T00:31:08.094Z",
-      "kind": "injury",
-      "observed_at": "2026-10-05T00:31:08.094Z",
-      "sport": "nfl",
-      "title": "New availability report",
-      "event": "Philadelphia Eagles",
-      "pick": "Jake Elliott",
-      "before": "Not in the previous dated report",
-      "after": "Active · Elliott converted both field-goal attempts and both PATs in Sunday's 24-20 loss to the Rams.",
-      "source_quote_at": "2026-10-05T00:12Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:25:Marques Sigle|2026-10-05T00:31:08.094Z",
-      "kind": "injury",
-      "observed_at": "2026-10-05T00:31:08.094Z",
-      "sport": "nfl",
-      "title": "New availability report",
-      "event": "San Francisco 49ers",
-      "pick": "Marques Sigle",
-      "before": "Not in the previous dated report",
-      "after": "Questionable · Ankle",
-      "source_quote_at": "2026-10-05T00:10Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:25:Kyle Juszczyk|2026-10-05T00:31:08.094Z",
-      "kind": "injury",
-      "observed_at": "2026-10-05T00:31:08.094Z",
-      "sport": "nfl",
-      "title": "Player availability changed",
-      "event": "San Francisco 49ers",
-      "pick": "Kyle Juszczyk",
-      "before": "Out · Knee",
-      "after": "Questionable · Knee",
-      "source_quote_at": "2026-10-04T23:08Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:27:Emeka Egbuka|2026-10-05T00:31:08.094Z",
-      "kind": "injury",
-      "observed_at": "2026-10-05T00:31:08.094Z",
-      "sport": "nfl",
-      "title": "New availability report",
-      "event": "Tampa Bay Buccaneers",
-      "pick": "Emeka Egbuka",
-      "before": "Not in the previous dated report",
-      "after": "Active · Egbuka brought in two of four targets for 13 yards in the Buccaneers' 17-14 loss to the Packers on Sunday.",
-      "source_quote_at": "2026-10-05T00:13Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:27:Chris Godwin Jr.|2026-10-05T00:31:08.094Z",
-      "kind": "injury",
-      "observed_at": "2026-10-05T00:31:08.094Z",
-      "sport": "nfl",
-      "title": "New availability report",
-      "event": "Tampa Bay Buccaneers",
-      "pick": "Chris Godwin Jr.",
-      "before": "Not in the previous dated report",
-      "after": "Active · Godwin brought in six of seven targets for 31 yards in the Buccaneers' 17-14 loss to the Packers on Sunday.",
-      "source_quote_at": "2026-10-05T00:06Z",
       "source": "ESPN injuries",
       "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
     }
