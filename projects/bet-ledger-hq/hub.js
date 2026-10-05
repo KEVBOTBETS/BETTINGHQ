@@ -3,6 +3,7 @@
 (() => {
   "use strict";
   const configs = {
+    "all-spreads":{title:"All football spreads",description:"Every NFL and college game, model spread and your manual bet selections.",url:"all-spreads.html"},
     "model-lab":{title:"Model Lab",description:"Compare forecasts, inspect availability and explore shared-game prop simulations.",url:"model-lab.html"},
     "ncaaf-newsletter":{title:"NCAAF newsletter",description:"Weekly college football stories, matchups and playoff context.",url:"newsletter.html?sport=ncaaf"},
     "nfl-newsletter":{title:"NFL newsletter",description:"Weekly NFL stories, matchups and playoff context.",url:"newsletter.html?sport=nfl"},

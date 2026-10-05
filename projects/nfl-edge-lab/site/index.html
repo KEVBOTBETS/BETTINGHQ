@@ -395,31 +395,18 @@ const posneg = v => v==null ? "" : (v>0?"pos":v<0?"neg":"");
 /* ============================================================ week / dates */
 function calendar(){ return (S.meta && S.meta.calendar) || []; }
 
-/**
- * Which week to open on.
- *
- * Not simply "the week we are in". On a Tuesday the current week's games have
- * already been played and the thing you actually want to see is the next slate
- * the model has priced. So: the earliest week that has board entries, falling
- * back to ESPN's own current week when nothing is priced at all.
- */
+/** Open the current calendar week, even when no bets qualify. */
 function currentWeekKey(){
-  const board = S.board || [];
-  if (board.length){
-    const weeks = board.map(b => ({st: b.season_type==null?2:b.season_type, wk: b.week,
-                                   d: b.game_date||""}))
-                       .filter(x => x.wk!=null)
-                       .sort((a,b) => String(a.d).localeCompare(String(b.d)));
-    const withPlays = board.filter(b => b.tier!=="PASS")
-                           .sort((a,b) => String(a.game_date).localeCompare(String(b.game_date)))[0];
-    const pick = withPlays
-      ? {st: withPlays.season_type==null?2:withPlays.season_type, wk: withPlays.week}
-      : weeks[0];
-    if (pick && pick.wk!=null) return `${pick.st}:${pick.wk}`;
-  }
-  const cw = S.meta && S.meta.current_week;
-  return cw ? `${cw.season_type}:${cw.week}` : null;
+  const now=Date.now(), cal=calendar();
+  const active=cal.find(c=>Date.parse(c.start)<=now&&now<=Date.parse(c.end));
+  if(active)return `${active.season_type}:${active.week}`;
+  const cw=S.meta&&S.meta.current_week;
+  if(cw)return `${cw.season_type}:${cw.week}`;
+  const next=(S.games||[]).filter(g=>!g.completed&&Date.parse(g.date)>now)
+    .sort((a,b)=>Date.parse(a.date)-Date.parse(b.date))[0];
+  return next?`${next.season_type||2}:${next.week}`:null;
 }
+
 function selKey(){
   if (S.sel.week==null) return currentWeekKey();
   return `${S.sel.seasonType}:${S.sel.week}`;
@@ -689,7 +676,13 @@ function renderBest(){
   const cands = (S.board||[]).filter(b => b.tier!=="PASS" && inSelection(b));
   if (!cands.length){
     host.appendChild(el("div","panel-head",
-      `<div><h2>What to bet</h2><p>No wager is forced. The closest calls remain visible below so a quiet slate is still auditable.</p></div>`));
+      `<div><h2>What to bet</h2><p>No bets cleared the model’s value thresholds. Every scheduled game and spread forecast remains available below; you can make your own selection on the All football spreads tab.</p></div>`));
+    const games=(S.games||[]).filter(inSelection),details=new Map((S.games_detail||[]).map(g=>[String(g.game_id),g]));
+    const e=selEntry(),range=e&&e.start&&e.end?`?from=${String(e.start).slice(0,10)}&through=${String(e.end).slice(0,10)}&league=nfl`:"?league=nfl";
+    host.appendChild(el("div","notice",`<b>${games.length} scheduled games in this week.</b> <a href="../bet-ledger-hq/all-spreads.html${range}" target="_top">View every spread and select your bets →</a>`));
+    games.forEach(g=>{const frozen=((S.accuracy||{}).records||[]).find(r=>r.kind==="game"&&String(r.event_id)===String(g.game_id)),d=details.get(String(g.game_id)),p=d&&d.projection||(frozen&&frozen.margin!=null?{mu:frozen.margin}:null),o=d&&d.odds||g.odds||{},gap=p&&o.spread_home!=null?p.mu+o.spread_home:null;
+      host.appendChild(el("div","notice",`<b>${esc(g.away)} @ ${esc(g.home)}</b> · ${esc(fmtDate(g.date))}${g.completed?" · Final":""}<br>${g.completed?"Frozen pregame model spread":"Home model spread"}: <b>${p?esc((-p.mu).toFixed(1)):"No current projection"}</b> · Posted: <b>${o.spread_home==null?"Unavailable":esc(o.spread_home)}</b> · ${gap==null?"No current priced lean":gap===0?"No spread edge":"Cover lean: "+esc(gap>0?g.home:g.away)} · ${g.completed?"Saved forecast; review Accuracy for results":"Model rating: PASS"}`));
+    });
     host.appendChild(quietBoardNote());
     renderPassNear(host);
     return;

@@ -34,8 +34,8 @@ html = replace_once(
 )
 html = replace_once(
     html,
-    '<div><h2>What to bet</h2><p>No wager is forced.',
-    '<div><h2>Best Bets</h2><p>No wager is forced.',
+    '<div><h2>What to bet</h2><p>',
+    '<div><h2>Best Bets</h2><p>',
     "empty Best Bets heading",
 )
 

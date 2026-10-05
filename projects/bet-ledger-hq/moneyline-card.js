@@ -307,9 +307,42 @@
   async function draw(canvas,picks,{style='gridiron',day}={}){
     const card=moneylineCard(picks,day||picks[0]?.day||'');await render(canvas,card,style);return {canvas,meta:card.meta};
   }
+  // Tickets use a full-width, variable-height list: long prop names must survive export.
+  async function readableTicket(canvas,card,style){
+    await fonts();
+    const theme={gridiron:['#101923','#f2c14e'],ballpark:['#0c1a2e','#f6ecd6'],scoreboard:['#050608','#ffb000'],northern:['#820b22','#fff'],slip:['#fff','#111']}[style]||['#101923','#f2c14e'];
+    const light=style==='slip',ink=light?'#111':'#fff',muted=light?'#555':'#b9c8d6';
+    canvas.width=W;const ctx=canvas.getContext('2d');
+    function wrap(value,width,font){ctx.font=font;const lines=[];let line='';
+      for(const word of String(value||'').split(/\s+/)){const next=line?line+' '+word:word;
+        if(line&&ctx.measureText(next).width>width){lines.push(line);line=word;}else line=next;
+        // Split exceptionally long tokens without dropping characters.
+        while(ctx.measureText(line).width>width){let end=line.length-1;while(end>1&&ctx.measureText(line.slice(0,end)).width>width)end--;lines.push(line.slice(0,end));line=line.slice(end);}
+      }if(line)lines.push(line);return lines;}
+    const pickFont='700 28px "DM Sans", Arial, sans-serif',detailFont='500 21px "DM Sans", Arial, sans-serif';
+    const layout=card.rows.map(r=>{const pick=wrap(r.big,735,pickFont),detail=wrap([r.sport,r.vs,r.time+' ET',r.name].filter(Boolean).join(' · '),735,detailFont);return {r,pick,detail,h:42+pick.length*36+detail.length*29};});
+    const legacyArt=['baseball','hockey','football'].includes(style),top=legacyArt?730:350,H=Math.max(1350,top+layout.reduce((n,r)=>n+r.h+14,0)+140);canvas.height=H;
+    ctx.fillStyle=theme[0];ctx.fillRect(0,0,W,H);ctx.fillStyle=theme[1];ctx.fillRect(0,0,W,12);
+    logo(ctx,await image('kevbot-logo.jpg'),48,40,100,theme[1]);
+    text(ctx,'KEVBOT BETS · '+card.title,175,88,{font:'800 40px "Barlow Condensed", Arial, sans-serif',color:ink,max:850});
+    text(ctx,card.subtitle,175,125,{font:'700 23px "DM Sans", Arial, sans-serif',color:theme[1],max:850});
+    text(ctx,card.dayLong,48,190,{font:'600 25px "DM Sans", Arial, sans-serif',color:ink,max:980});
+    card.stats.forEach(([k,v],i)=>{text(ctx,k,48+i*246,247,{font:'600 16px "DM Sans", Arial, sans-serif',color:muted,max:230});text(ctx,v,48+i*246,292,{font:'800 34px "Barlow Condensed", Arial, sans-serif',color:theme[1],max:230});});
+    if(legacyArt){const art=await image('assets/tickets/'+style+'.webp');if(art){ctx.save();ctx.beginPath();ctx.rect(40,325,1000,355);ctx.clip();ctx.drawImage(art,40,100,1000,1250);ctx.restore();}}
+    let y=top;
+    for(const {r,pick,detail,h} of layout){rr(ctx,40,y,1000,h,10);ctx.fillStyle=light?'#f2f2ee':'#1b2935';ctx.fill();
+      text(ctx,r.n,55,y+37,{font:'700 20px "DM Sans", Arial, sans-serif',color:theme[1]});
+      pick.forEach((line,i)=>text(ctx,line,100,y+38+i*36,{font:pickFont,color:ink}));
+      detail.forEach((line,i)=>text(ctx,line,100,y+48+pick.length*36+i*29,{font:detailFont,color:muted}));
+      text(ctx,r.value,1020,y+40,{font:'800 30px "Barlow Condensed", Arial, sans-serif',color:theme[1],align:'right',max:160});
+      text(ctx,r.chipShort,1020,y+73,{font:'700 16px "DM Sans", Arial, sans-serif',color:muted,align:'right',max:160});y+=h+14;
+    }
+    if(!layout.length)text(ctx,'No selections on this ticket.',48,top+55,{font:pickFont,color:ink});
+    footer(ctx,H,muted,theme[1],card);return canvas;
+  }
   async function drawTicket(canvas,ticket,{style='gridiron',results=null,outcomeKey,override=null}={}){
     const card={...ticketCard(ticket,results,outcomeKey||(r=>root.KevTickets?.outcomeKey(r))),...(override||{})};
-    await render(canvas,card,style);return canvas;
+    await readableTicket(canvas,card,style);return canvas;
   }
   root.MoneylineCard={styles:STYLES,draw,drawTicket,base:''};
 })(window);
