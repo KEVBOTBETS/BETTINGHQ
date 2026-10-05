@@ -1,29 +1,71 @@
 {
   "schema": 1,
-  "checked_at": "2026-10-05T23:00:42.124Z",
+  "checked_at": "2026-10-05T23:19:26.328Z",
   "coverage": {
+    "nfl": {
+      "status": "available",
+      "reports": 538,
+      "checked_at": "2026-10-05T23:19:26.328Z"
+    },
     "nhl": {
       "status": "available",
       "reports": 22,
-      "checked_at": "2026-10-05T23:00:42.124Z"
-    },
-    "ncaaf": {
-      "status": "empty",
-      "reports": 0,
-      "checked_at": "2026-10-05T23:00:42.124Z"
+      "checked_at": "2026-10-05T23:19:26.328Z"
     },
     "mlb": {
       "status": "available",
       "reports": 7,
-      "checked_at": "2026-10-05T23:00:42.124Z"
+      "checked_at": "2026-10-05T23:19:26.328Z"
     },
-    "nfl": {
-      "status": "available",
-      "reports": 541,
-      "checked_at": "2026-10-05T23:00:42.124Z"
+    "ncaaf": {
+      "status": "empty",
+      "reports": 0,
+      "checked_at": "2026-10-05T23:19:26.328Z"
     }
   },
   "events": [
+    {
+      "id": "injury|nfl:3:Anthony Johnson Jr.|2026-10-05T23:19:26.328Z",
+      "kind": "injury",
+      "observed_at": "2026-10-05T23:19:26.328Z",
+      "sport": "nfl",
+      "title": "Player availability changed",
+      "event": "Chicago Bears",
+      "pick": "Anthony Johnson Jr.",
+      "before": "Out · Undisclosed",
+      "after": "Injured Reserve · Undisclosed",
+      "source_quote_at": "2026-10-05T23:02Z",
+      "source": "ESPN injuries",
+      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
+    },
+    {
+      "id": "injury|nfl:11:Arden Key|2026-10-05T23:19:26.328Z",
+      "kind": "injury",
+      "observed_at": "2026-10-05T23:19:26.328Z",
+      "sport": "nfl",
+      "title": "New availability report",
+      "event": "Indianapolis Colts",
+      "pick": "Arden Key",
+      "before": "Not in the previous dated report",
+      "after": "Out · Hamstring",
+      "source_quote_at": "2026-10-05T23:02Z",
+      "source": "ESPN injuries",
+      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
+    },
+    {
+      "id": "injury|nfl:18:Pete Werner|2026-10-05T23:19:26.328Z",
+      "kind": "injury",
+      "observed_at": "2026-10-05T23:19:26.328Z",
+      "sport": "nfl",
+      "title": "Player availability changed",
+      "event": "New Orleans Saints",
+      "pick": "Pete Werner",
+      "before": "Active",
+      "after": "Active · Werner (neck) is active for Monday night's matchup with Atlanta.",
+      "source_quote_at": "2026-10-05T23:09Z",
+      "source": "ESPN injuries",
+      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
+    },
     {
       "id": "odds|nfl|401872993|2026-10-12T00:20Z|ATS||home|DraftKings|2026-10-05T23:00:42.124Z",
       "kind": "odds",
@@ -2818,52 +2860,6 @@
       "source_quote_at": "2026-10-05T17:53Z",
       "source": "ESPN injuries",
       "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nhl:4:Andrew Mangiapane|2026-10-05T17:52:01.082Z",
-      "kind": "injury",
-      "observed_at": "2026-10-05T17:52:01.082Z",
-      "sport": "nhl",
-      "title": "Player availability changed",
-      "event": "Chicago Blackhawks",
-      "pick": "Andrew Mangiapane",
-      "before": "Day-To-Day · Lower Body",
-      "after": "Out · Lower Body",
-      "source_quote_at": "2026-10-05T17:40Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "odds|mlb|849834|2026-10-05T21:00:00Z|TOTAL||over|DraftKings|2026-10-05T17:37:17.457Z",
-      "kind": "odds",
-      "observed_at": "2026-10-05T17:37:17.457Z",
-      "sport": "mlb",
-      "event": "CWS @ CLE",
-      "start": "2026-10-05T21:00:00Z",
-      "pick": "Over 6.5",
-      "title": "Published odds changed",
-      "before": "-115 · line 6.5",
-      "after": "-114 · line 6.5",
-      "book": "DraftKings",
-      "source_quote_at": "2026-10-05T17:34:03.128728+00:00",
-      "source": "Existing MLB board",
-      "note": "Your ticket keeps its original odds. Recheck the live book before placing a new wager."
-    },
-    {
-      "id": "odds|ncaaf|401856824|2026-10-10T16:00Z|TOTAL||under|Draft Kings|2026-10-05T17:37:17.457Z",
-      "kind": "odds",
-      "observed_at": "2026-10-05T17:37:17.457Z",
-      "sport": "ncaaf",
-      "event": "UCF @ OKST",
-      "start": "2026-10-10T16:00Z",
-      "pick": "Under 54.5",
-      "title": "Published odds changed",
-      "before": "-115 · line 54.5",
-      "after": "-105 · line 53.5",
-      "book": "Draft Kings",
-      "source_quote_at": "2026-10-05T17:33:54.904697+00:00",
-      "source": "Existing NCAAF board",
-      "note": "Your ticket keeps its original odds. Recheck the live book before placing a new wager."
     }
   ]
 }
