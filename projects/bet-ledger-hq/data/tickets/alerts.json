@@ -1,29 +1,85 @@
 {
   "schema": 1,
-  "checked_at": "2026-10-05T12:58:03.853Z",
+  "checked_at": "2026-10-05T13:28:42.277Z",
   "coverage": {
-    "nfl": {
-      "status": "available",
-      "reports": 550,
-      "checked_at": "2026-10-05T12:58:03.853Z"
-    },
     "nhl": {
       "status": "available",
-      "reports": 22,
-      "checked_at": "2026-10-05T12:58:03.853Z"
-    },
-    "mlb": {
-      "status": "available",
-      "reports": 16,
-      "checked_at": "2026-10-05T12:58:03.853Z"
+      "reports": 23,
+      "checked_at": "2026-10-05T13:28:42.277Z"
     },
     "ncaaf": {
       "status": "empty",
       "reports": 0,
-      "checked_at": "2026-10-05T12:58:03.853Z"
+      "checked_at": "2026-10-05T13:28:42.277Z"
+    },
+    "nfl": {
+      "status": "available",
+      "reports": 550,
+      "checked_at": "2026-10-05T13:28:42.277Z"
+    },
+    "mlb": {
+      "status": "available",
+      "reports": 15,
+      "checked_at": "2026-10-05T13:28:42.277Z"
     }
   },
   "events": [
+    {
+      "id": "injury|nhl:5:Marco Kasper|2026-10-05T13:28:42.277Z",
+      "kind": "injury",
+      "observed_at": "2026-10-05T13:28:42.277Z",
+      "sport": "nhl",
+      "title": "Player availability changed",
+      "event": "Detroit Red Wings",
+      "pick": "Marco Kasper",
+      "before": "Out · Upper Body",
+      "after": "Day-To-Day · Upper Body",
+      "source_quote_at": "2026-10-05T13:03Z",
+      "source": "ESPN injuries",
+      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
+    },
+    {
+      "id": "injury|nhl:13:Joe Veleno|2026-10-05T13:28:42.277Z",
+      "kind": "injury",
+      "observed_at": "2026-10-05T13:28:42.277Z",
+      "sport": "nhl",
+      "title": "Player availability changed",
+      "event": "New York Rangers",
+      "pick": "Joe Veleno",
+      "before": "Out · Lower Body",
+      "after": "Day-To-Day · Lower Body",
+      "source_quote_at": "2026-10-05T13:03Z",
+      "source": "ESPN injuries",
+      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
+    },
+    {
+      "id": "injury|nhl:22:Jake DeBrusk|2026-10-05T13:28:42.277Z",
+      "kind": "injury",
+      "observed_at": "2026-10-05T13:28:42.277Z",
+      "sport": "nhl",
+      "title": "Player availability changed",
+      "event": "Vancouver Canucks",
+      "pick": "Jake DeBrusk",
+      "before": "Out · Illness",
+      "after": "Day-To-Day · Illness",
+      "source_quote_at": "2026-10-05T13:03Z",
+      "source": "ESPN injuries",
+      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
+    },
+    {
+      "id": "injury|nhl:37:Raphael Lavoie|2026-10-05T13:28:42.277Z",
+      "kind": "injury",
+      "observed_at": "2026-10-05T13:28:42.277Z",
+      "sport": "nhl",
+      "title": "New availability report",
+      "event": "Vegas Golden Knights",
+      "pick": "Raphael Lavoie",
+      "before": "Not in the previous dated report",
+      "after": "Day-To-Day · Undisclosed",
+      "source_quote_at": "2026-10-05T13:03Z",
+      "source": "ESPN injuries",
+      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
+    },
     {
       "id": "odds|mlb|849834|2026-10-05T21:00:00Z|TOTAL||over|DraftKings|2026-10-05T12:52:30.479Z",
       "kind": "odds",
@@ -2823,62 +2879,6 @@
       "before": "Not in the previous dated report",
       "after": "Active · Meyers brought in seven of nine targets for 82 yards, returned six kickoffs for 161 yards and ran back two punts for nine yards in the Bengals' 22-17 loss to the Jaguars on Sunday.",
       "source_quote_at": "2026-10-04T22:25Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:7:Riley Moss|2026-10-04T22:47:35.660Z",
-      "kind": "injury",
-      "observed_at": "2026-10-04T22:47:35.660Z",
-      "sport": "nfl",
-      "title": "New availability report",
-      "event": "Denver Broncos",
-      "pick": "Riley Moss",
-      "before": "Not in the previous dated report",
-      "after": "Questionable · Ribs",
-      "source_quote_at": "2026-10-04T22:27Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:34:David Montgomery|2026-10-04T22:47:35.660Z",
-      "kind": "injury",
-      "observed_at": "2026-10-04T22:47:35.660Z",
-      "sport": "nfl",
-      "title": "New availability report",
-      "event": "Houston Texans",
-      "pick": "David Montgomery",
-      "before": "Not in the previous dated report",
-      "after": "Active · Montgomery carried the ball 10 times for 24 yards and added 19 receiving yards on a hook-and-ladder play in Sunday's 34-30 loss to the Cowboys.",
-      "source_quote_at": "2026-10-04T22:15Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:34:C.J. Stroud|2026-10-04T22:47:35.660Z",
-      "kind": "injury",
-      "observed_at": "2026-10-04T22:47:35.660Z",
-      "sport": "nfl",
-      "title": "New availability report",
-      "event": "Houston Texans",
-      "pick": "C.J. Stroud",
-      "before": "Not in the previous dated report",
-      "after": "Active · Stroud completed 21 of 31 passes for 347 yards and two touchdowns in Sunday's 34-30 loss to the Cowboys. He added 12 yards on two carries.",
-      "source_quote_at": "2026-10-04T22:10Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:11:Spencer Shrader|2026-10-04T22:47:35.660Z",
-      "kind": "injury",
-      "observed_at": "2026-10-04T22:47:35.660Z",
-      "sport": "nfl",
-      "title": "New availability report",
-      "event": "Indianapolis Colts",
-      "pick": "Spencer Shrader",
-      "before": "Not in the previous dated report",
-      "after": "Active · Shrader went 3-for-3 on field-goal attempts and made all three of his PATs in Sunday's 30-13 win over Washington.",
-      "source_quote_at": "2026-10-04T22:26Z",
       "source": "ESPN injuries",
       "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
     }
