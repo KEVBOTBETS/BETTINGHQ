@@ -1,29 +1,43 @@
 {
   "schema": 1,
-  "checked_at": "2026-10-05T06:59:38.200Z",
+  "checked_at": "2026-10-05T07:25:06.491Z",
   "coverage": {
-    "ncaaf": {
-      "status": "empty",
-      "reports": 0,
-      "checked_at": "2026-10-05T06:59:38.200Z"
-    },
     "nhl": {
       "status": "available",
       "reports": 22,
-      "checked_at": "2026-10-05T06:59:38.200Z"
-    },
-    "nfl": {
-      "status": "available",
-      "reports": 550,
-      "checked_at": "2026-10-05T06:59:38.200Z"
+      "checked_at": "2026-10-05T07:25:06.491Z"
     },
     "mlb": {
       "status": "available",
       "reports": 16,
-      "checked_at": "2026-10-05T06:59:38.200Z"
+      "checked_at": "2026-10-05T07:25:06.491Z"
+    },
+    "ncaaf": {
+      "status": "empty",
+      "reports": 0,
+      "checked_at": "2026-10-05T07:25:06.491Z"
+    },
+    "nfl": {
+      "status": "available",
+      "reports": 550,
+      "checked_at": "2026-10-05T07:25:06.491Z"
     }
   },
   "events": [
+    {
+      "id": "injury|nfl:3:Anthony Johnson Jr.|2026-10-05T07:25:06.491Z",
+      "kind": "injury",
+      "observed_at": "2026-10-05T07:25:06.491Z",
+      "sport": "nfl",
+      "title": "Player availability changed",
+      "event": "Chicago Bears",
+      "pick": "Anthony Johnson Jr.",
+      "before": "Injured Reserve · Undisclosed",
+      "after": "Out · Undisclosed",
+      "source_quote_at": "2026-10-05T07:00Z",
+      "source": "ESPN injuries",
+      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
+    },
     {
       "id": "odds|nfl|401872981|2026-10-11T13:30Z|ATS||home|DraftKings|2026-10-05T06:55:05.339Z",
       "kind": "odds",
@@ -2859,20 +2873,6 @@
       "before": "Active · McConkey (foot) is active for Sunday's game at Seattle, Eric Smith of the Chargers' official site reports.",
       "after": "Out · Foot",
       "source_quote_at": "2026-10-04T22:36Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:16:Christian Darrisaw|2026-10-04T22:47:35.660Z",
-      "kind": "injury",
-      "observed_at": "2026-10-04T22:47:35.660Z",
-      "sport": "nfl",
-      "title": "Player availability changed",
-      "event": "Minnesota Vikings",
-      "pick": "Christian Darrisaw",
-      "before": "Active · Darrisaw (neck) has returned to Sunday's matchup with Miami, Alec Lewis of The Athletic reports.",
-      "after": "Questionable · Head",
-      "source_quote_at": "2026-10-04T22:39Z",
       "source": "ESPN injuries",
       "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
     }
