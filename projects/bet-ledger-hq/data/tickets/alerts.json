@@ -1,29 +1,143 @@
 {
   "schema": 1,
-  "checked_at": "2026-10-05T00:31:08.094Z",
+  "checked_at": "2026-10-05T00:52:09.652Z",
   "coverage": {
+    "mlb": {
+      "status": "available",
+      "reports": 16,
+      "checked_at": "2026-10-05T00:52:09.652Z"
+    },
     "ncaaf": {
       "status": "empty",
       "reports": 0,
-      "checked_at": "2026-10-05T00:31:08.094Z"
+      "checked_at": "2026-10-05T00:52:09.652Z"
+    },
+    "nfl": {
+      "status": "available",
+      "reports": 500,
+      "checked_at": "2026-10-05T00:52:09.652Z"
     },
     "nhl": {
       "status": "available",
       "reports": 23,
-      "checked_at": "2026-10-05T00:31:08.094Z"
-    },
-    "mlb": {
-      "status": "available",
-      "reports": 16,
-      "checked_at": "2026-10-05T00:31:08.094Z"
-    },
-    "nfl": {
-      "status": "available",
-      "reports": 497,
-      "checked_at": "2026-10-05T00:31:08.094Z"
+      "checked_at": "2026-10-05T00:52:09.652Z"
     }
   },
   "events": [
+    {
+      "id": "odds|ncaaf|401858487|2026-10-10T01:00Z|ATS||away|Draft Kings|2026-10-05T00:52:09.652Z",
+      "kind": "odds",
+      "observed_at": "2026-10-05T00:52:09.652Z",
+      "sport": "ncaaf",
+      "event": "IOWA @ WASH",
+      "start": "2026-10-10T01:00Z",
+      "pick": "IOWA +1.5",
+      "title": "Published odds changed",
+      "before": "-110 · line 2.5",
+      "after": "-105 · line 2.5",
+      "book": "Draft Kings",
+      "source_quote_at": "2026-10-05T00:49:18.479190+00:00",
+      "source": "Existing NCAAF board",
+      "note": "Your ticket keeps its original odds. Recheck the live book before placing a new wager."
+    },
+    {
+      "id": "injury|nfl:9:MarShawn Lloyd|2026-10-05T00:52:09.652Z",
+      "kind": "injury",
+      "observed_at": "2026-10-05T00:52:09.652Z",
+      "sport": "nfl",
+      "title": "New availability report",
+      "event": "Green Bay Packers",
+      "pick": "MarShawn Lloyd",
+      "before": "Not in the previous dated report",
+      "after": "Active · Lloyd rushed seven times for 13 yards and brought in all five targets for 36 yards in the Packers' 17-14 win over the Buccaneers on Sunday.",
+      "source_quote_at": "2026-10-05T00:25Z",
+      "source": "ESPN injuries",
+      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
+    },
+    {
+      "id": "injury|nfl:13:Brock Bowers|2026-10-05T00:52:09.652Z",
+      "kind": "injury",
+      "observed_at": "2026-10-05T00:52:09.652Z",
+      "sport": "nfl",
+      "title": "Player availability changed",
+      "event": "Las Vegas Raiders",
+      "pick": "Brock Bowers",
+      "before": "Active · Bowers is now being listed with an illness on the Raiders' injury report, but he doesn't have a designation for Sunday's game against the Chiefs and is set to play, Paul Gutierrez ",
+      "after": "Active · Bowers (illness) caught six of 11 targets for 86 yards and a touchdown in Sunday's 30-27 loss to the Chiefs.",
+      "source_quote_at": "2026-10-05T00:31Z",
+      "source": "ESPN injuries",
+      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
+    },
+    {
+      "id": "injury|nfl:13:Ashton Jeanty|2026-10-05T00:52:09.652Z",
+      "kind": "injury",
+      "observed_at": "2026-10-05T00:52:09.652Z",
+      "sport": "nfl",
+      "title": "New availability report",
+      "event": "Las Vegas Raiders",
+      "pick": "Ashton Jeanty",
+      "before": "Not in the previous dated report",
+      "after": "Active · Jeanty rushed 15 times for 58 yards while catching six of eight targets for 68 yards in Sunday's 30-27 loss to the Chiefs.",
+      "source_quote_at": "2026-10-05T00:29Z",
+      "source": "ESPN injuries",
+      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
+    },
+    {
+      "id": "injury|nfl:25:Mike Evans|2026-10-05T00:52:09.652Z",
+      "kind": "injury",
+      "observed_at": "2026-10-05T00:52:09.652Z",
+      "sport": "nfl",
+      "title": "Player availability changed",
+      "event": "San Francisco 49ers",
+      "pick": "Mike Evans",
+      "before": "Active · Evans (ribs) is active for Sunday's game against the Broncos.",
+      "after": "Active · Evans brought in five of eight targets for 76 yards in the 49ers' 24-14 win over the Broncos on Sunday.",
+      "source_quote_at": "2026-10-05T00:37Z",
+      "source": "ESPN injuries",
+      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
+    },
+    {
+      "id": "injury|nfl:25:Christian McCaffrey|2026-10-05T00:52:09.652Z",
+      "kind": "injury",
+      "observed_at": "2026-10-05T00:52:09.652Z",
+      "sport": "nfl",
+      "title": "New availability report",
+      "event": "San Francisco 49ers",
+      "pick": "Christian McCaffrey",
+      "before": "Not in the previous dated report",
+      "after": "Active · McCaffrey rushed 15 times for 52 yards and a touchdown and brought in three of five targets for 18 yards in the 49ers' 24-14 win over the Broncos on Sunday.",
+      "source_quote_at": "2026-10-05T00:34Z",
+      "source": "ESPN injuries",
+      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
+    },
+    {
+      "id": "injury|nfl:26:Jaxon Smith-Njigba|2026-10-05T00:52:09.652Z",
+      "kind": "injury",
+      "observed_at": "2026-10-05T00:52:09.652Z",
+      "sport": "nfl",
+      "title": "New availability report",
+      "event": "Seattle Seahawks",
+      "pick": "Jaxon Smith-Njigba",
+      "before": "Not in the previous dated report",
+      "after": "Active · Smith-Njigba gathered in five of six targets for 76 yards during Sunday's 30-23 win against the Chargers.",
+      "source_quote_at": "2026-10-05T00:24Z",
+      "source": "ESPN injuries",
+      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
+    },
+    {
+      "id": "injury|nhl:37:Raphael Lavoie|2026-10-05T00:52:09.652Z",
+      "kind": "injury",
+      "observed_at": "2026-10-05T00:52:09.652Z",
+      "sport": "nhl",
+      "title": "Player availability changed",
+      "event": "Vegas Golden Knights",
+      "pick": "Raphael Lavoie",
+      "before": "Day-To-Day · Undisclosed",
+      "after": "Out · Undisclosed",
+      "source_quote_at": "2026-10-05T00:39Z",
+      "source": "ESPN injuries",
+      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
+    },
     {
       "id": "injury|nhl:26:Aaron Ekblad|2026-10-05T00:31:08.094Z",
       "kind": "injury",
@@ -2771,118 +2885,6 @@
       "before": "Not in the previous dated report",
       "after": "Out · Coach's Decision",
       "source_quote_at": "2026-10-04T19:02Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:24:Ladd McConkey|2026-10-04T20:49:41.535Z",
-      "kind": "injury",
-      "observed_at": "2026-10-04T20:49:41.535Z",
-      "sport": "nfl",
-      "title": "Player availability changed",
-      "event": "Los Angeles Chargers",
-      "pick": "Ladd McConkey",
-      "before": "Questionable · Foot",
-      "after": "Active · McConkey (foot) is active for Sunday's game at Seattle, Eric Smith of the Chargers' official site reports.",
-      "source_quote_at": "2026-10-04T19:00Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:14:Puka Nacua|2026-10-04T20:49:41.535Z",
-      "kind": "injury",
-      "observed_at": "2026-10-04T20:49:41.535Z",
-      "sport": "nfl",
-      "title": "Player availability changed",
-      "event": "Los Angeles Rams",
-      "pick": "Puka Nacua",
-      "before": "Active · Nacua is active for Sunday's Week 4 matchup against the Eagles.",
-      "after": "Active · Nacua (hip) caught nine of 12 targets for 125 yards and added a two-yard rushing touchdown in Sunday's 24-20 win over the Eagles.",
-      "source_quote_at": "2026-10-04T20:39Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:14:Kyren Williams|2026-10-04T20:49:41.535Z",
-      "kind": "injury",
-      "observed_at": "2026-10-04T20:49:41.535Z",
-      "sport": "nfl",
-      "title": "New availability report",
-      "event": "Los Angeles Rams",
-      "pick": "Kyren Williams",
-      "before": "Not in the previous dated report",
-      "after": "Active · Williams rushed 16 times for 80 yards and two touchdowns while catching 10 of 13 targets for 67 yards in Sunday's 24-20 win over the Eagles.",
-      "source_quote_at": "2026-10-04T20:37Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:14:Konata Mumpfield|2026-10-04T20:49:41.535Z",
-      "kind": "injury",
-      "observed_at": "2026-10-04T20:49:41.535Z",
-      "sport": "nfl",
-      "title": "New availability report",
-      "event": "Los Angeles Rams",
-      "pick": "Konata Mumpfield",
-      "before": "Not in the previous dated report",
-      "after": "Active",
-      "source_quote_at": "2026-10-04T19:06Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:15:Jackson Woodard|2026-10-04T20:49:41.535Z",
-      "kind": "injury",
-      "observed_at": "2026-10-04T20:49:41.535Z",
-      "sport": "nfl",
-      "title": "New availability report",
-      "event": "Miami Dolphins",
-      "pick": "Jackson Woodard",
-      "before": "Not in the previous dated report",
-      "after": "Questionable · Ankle",
-      "source_quote_at": "2026-10-04T20:29Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:15:Brady Cook|2026-10-04T20:49:41.535Z",
-      "kind": "injury",
-      "observed_at": "2026-10-04T20:49:41.535Z",
-      "sport": "nfl",
-      "title": "New availability report",
-      "event": "Miami Dolphins",
-      "pick": "Brady Cook",
-      "before": "Not in the previous dated report",
-      "after": "Out · Coach's Decision",
-      "source_quote_at": "2026-10-04T18:41Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:15:Justin Joly|2026-10-04T20:49:41.535Z",
-      "kind": "injury",
-      "observed_at": "2026-10-04T20:49:41.535Z",
-      "sport": "nfl",
-      "title": "New availability report",
-      "event": "Miami Dolphins",
-      "pick": "Justin Joly",
-      "before": "Not in the previous dated report",
-      "after": "Out · Coach's Decision",
-      "source_quote_at": "2026-10-04T18:38Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:15:Marcellas Dial Jr.|2026-10-04T20:49:41.535Z",
-      "kind": "injury",
-      "observed_at": "2026-10-04T20:49:41.535Z",
-      "sport": "nfl",
-      "title": "New availability report",
-      "event": "Miami Dolphins",
-      "pick": "Marcellas Dial Jr.",
-      "before": "Not in the previous dated report",
-      "after": "Out · Coach's Decision",
-      "source_quote_at": "2026-10-04T18:38Z",
       "source": "ESPN injuries",
       "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
     }
