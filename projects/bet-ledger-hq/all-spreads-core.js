@@ -24,5 +24,19 @@
   // Display lines are from the chosen team's perspective, not the home line.
   return {key:row.key,sport:row.sport,game_id:row.game_id,start:row.date,day:row.date.slice(0,10),event:row.away+' @ '+row.home,source:row.sport.toUpperCase(),side,line,price,book:String(book).trim(),pick:row[side]+' '+(line>0?'+':'')+line,tier:'MANUAL',model_margin:row.mu,forecast_rating:row.rating,model_side:row.side,agrees_with_model:row.side?row.side===side:null,forecast_at:row.forecast_at||null,selected_at:new Date(now).toISOString(),probability:null};
  }
- const api={rows,selection,number};if(typeof module==='object')module.exports=api;else root.AllSpreads=api;
+ // Prefer the league calendar; college feeds without one use Toronto Monday–Sunday weeks.
+ function weeks(bundle,now=Date.now()){
+  const phase=g=>Number(g.season_type||2),key=g=>phase(g)+':'+g.week;
+  const calendar=(bundle.meta?.calendar||[]).map(w=>({...w,key:key(w)})).filter(w=>Number.isFinite(Date.parse(w.start))&&Number.isFinite(Date.parse(w.end))).sort((a,b)=>Date.parse(a.start)-Date.parse(b.start));
+  if(calendar.length){const active=calendar.findIndex(w=>Date.parse(w.start)<=now&&now<=Date.parse(w.end));return calendar.slice(active>=0?active:calendar.findIndex(w=>Date.parse(w.start)>now)).filter(w=>Date.parse(w.end)>=now);}
+  const groups=new Map();for(const g of bundle.games||[]){if(g.week==null||!Number.isFinite(Date.parse(g.date)))continue;const k=key(g),date=Date.parse(g.date);if(!groups.has(k))groups.set(k,{key:k,week:g.week,season_type:phase(g),first:date,last:date});else{const w=groups.get(k);w.first=Math.min(w.first,date);w.last=Math.max(w.last,date);}}
+  const monday=t=>{const d=new Date(new Intl.DateTimeFormat('en-CA',{timeZone:'America/Toronto',year:'numeric',month:'2-digit',day:'2-digit'}).format(t)+'T00:00Z');d.setUTCDate(d.getUTCDate()-(d.getUTCDay()+6)%7);return d.getTime();};
+  return [...groups.values()].sort((a,b)=>a.first-b.first).filter(w=>monday(w.last)>=monday(now)).map(w=>({...w,label:(w.season_type===3?'Postseason ': '')+'Week '+w.week}));
+ }
+ function weekChoices(bundles,league,now=Date.now()){
+  const lists=Object.entries(bundles).filter(([s])=>league==='all'||s===league).map(([sport,b])=>({sport,weeks:weeks(b,now)}));
+  return Array.from({length:Math.max(0,...lists.map(l=>l.weeks.length))},(_,offset)=>{const members=lists.filter(l=>l.weeks[offset]).map(l=>({sport:l.sport,...l.weeks[offset]}));return {offset,members,label:(offset===0?'Current · ': '')+members.map(w=>w.sport.toUpperCase()+' '+(w.label||'Week '+w.week)).join(' / ')};});
+ }
+ function inWeek(row,choice){return !!choice?.members.some(w=>w.sport===row.sport&&w.key===Number(row.season_type||2)+':'+row.week);}
+ const api={rows,selection,number,weeks,weekChoices,inWeek};if(typeof module==='object')module.exports=api;else root.AllSpreads=api;
 })(typeof window==='object'?window:globalThis);
