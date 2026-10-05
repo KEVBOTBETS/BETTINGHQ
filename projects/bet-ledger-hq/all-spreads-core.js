@@ -22,7 +22,7 @@
   line=number(line);price=number(price);
   if(row.locked||Date.parse(row.date)<=now||!['home','away'].includes(side)||line==null||Math.abs(line)>100||price==null||Math.abs(price)<100||!String(book||'').trim())return null;
   // Display lines are from the chosen team's perspective, not the home line.
-  return {key:row.key,sport:row.sport,game_id:row.game_id,start:row.date,day:row.date.slice(0,10),event:row.away+' @ '+row.home,source:row.sport.toUpperCase(),side,line,price,book:String(book).trim(),pick:row[side]+' '+(line>0?'+':'')+line,tier:'MANUAL · '+row.rating,model_margin:row.mu,forecast_rating:row.rating,forecast_at:row.forecast_at||null,selected_at:new Date(now).toISOString(),probability:null};
+  return {key:row.key,sport:row.sport,game_id:row.game_id,start:row.date,day:row.date.slice(0,10),event:row.away+' @ '+row.home,source:row.sport.toUpperCase(),side,line,price,book:String(book).trim(),pick:row[side]+' '+(line>0?'+':'')+line,tier:'MANUAL',model_margin:row.mu,forecast_rating:row.rating,model_side:row.side,agrees_with_model:row.side?row.side===side:null,forecast_at:row.forecast_at||null,selected_at:new Date(now).toISOString(),probability:null};
  }
  const api={rows,selection,number};if(typeof module==='object')module.exports=api;else root.AllSpreads=api;
 })(typeof window==='object'?window:globalThis);
