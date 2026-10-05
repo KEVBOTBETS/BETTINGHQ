@@ -6,10 +6,10 @@
   const odds=v=>v==null?'—':(v>0?'+':'')+v;
   function fit(ctx,value,width){let s=String(value||'');if(ctx.measureText(s).width<=width)return s;while(s&&ctx.measureText(s+'…').width>width)s=s.slice(0,-1);return s+'…';}
   async function draw(canvas,ticket,{style='gridiron',results=null}={}){
-    if(NEW[style]&&root.MoneylineCard)return root.MoneylineCard.drawTicket(canvas,ticket,{style,results,outcomeKey:r=>root.KevTickets.outcomeKey(r)});
+    if(root.MoneylineCard)return root.MoneylineCard.drawTicket(canvas,ticket,{style,results,outcomeKey:r=>root.KevTickets.outcomeKey(r)});
     if(NEW[style])style='classic';
-    const rows=ticket.picks||[],ctx=canvas.getContext('2d'),art=style!=='classic';canvas.width=1080;canvas.height=1350;
-    ctx.fillStyle='#09121c';ctx.fillRect(0,0,1080,1350);ctx.fillStyle='#da1524';ctx.fillRect(0,0,1080,16);
+    const rows=ticket.picks||[],ctx=canvas.getContext('2d'),art=style!=='classic';canvas.width=1080;canvas.height=Math.max(1350,(art?661:286)+Math.max(1,rows.length)*(art?59:94)+125);
+    ctx.fillStyle='#09121c';ctx.fillRect(0,0,1080,canvas.height);ctx.fillStyle='#da1524';ctx.fillRect(0,0,1080,16);
     const logo=await load('kevbot-logo.jpg');ctx.drawImage(logo,48,38,100,100);
     ctx.fillStyle='#fff';ctx.font='900 55px Arial, sans-serif';ctx.fillText('KEVBOT BETS',173,93);
     ctx.fillStyle='#7be7bd';ctx.font='800 25px Arial, sans-serif';ctx.fillText(results?'TOP PICKS · RESULTS':'DAILY TOP PICKS',176,133);
@@ -25,8 +25,8 @@
       if(results){ctx.fillStyle=({Win:'#7be7bd',Loss:'#ff6b78',Pending:'#ffd166',Push:'#a8c9fa',Void:'#a8c9fa'})[status]||'#ffd166';ctx.font='bold '+(['Win','Loss'].includes(status)?29:14)+'px Arial, sans-serif';ctx.fillText(({Win:'W',Loss:'L',Pending:'PENDING',Push:'PUSH',Void:'VOID'})[status]||'PENDING',942,y+33);}
     });
     if(!rows.length){ctx.fillStyle='#fff';ctx.font='bold 30px Arial, sans-serif';ctx.fillText('No qualified picks for this date.',75,start+70);}
-    ctx.fillStyle='#92a7b9';ctx.font='17px Arial, sans-serif';ctx.fillText(fit(ctx,(ticket.id?'Ticket '+ticket.id+' · ':'')+(results?'W = Win · L = Loss · Unverified results remain pending':'Prices captured '+(ticket.published_at||'').replace('T',' ').slice(0,16)+' UTC'),975),48,1290);
-    ctx.fillText('19+ · Bet responsibly · Original odds retained · Verify current prices before betting',48,1318);
+    ctx.fillStyle='#92a7b9';ctx.font='17px Arial, sans-serif';ctx.fillText(fit(ctx,(ticket.id?'Ticket '+ticket.id+' · ':'')+(results?'W = Win · L = Loss · Unverified results remain pending':'Prices captured '+(ticket.published_at||'').replace('T',' ').slice(0,16)+' UTC'),975),48,canvas.height-60);
+    ctx.fillText('19+ · Bet responsibly · Original odds retained · Verify current prices before betting',48,canvas.height-32);
     return canvas;
   }
   root.KevTicketRenderer={styles,draw};

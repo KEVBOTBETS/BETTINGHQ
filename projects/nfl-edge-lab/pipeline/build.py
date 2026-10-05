@@ -1175,6 +1175,17 @@ def main() -> int:
     write("team_stats.json", {"espn": team_stat_rows, "derived": derived, "league": league_ctx,
                               "espn_season": locals().get("stats_season", season)})
     write("weather.json", wx_by_game)
+    # Publish every future rated matchup for manual spread review, including
+    # games without book prices. This does not create or tier betting candidates.
+    all_projections={str(c["game_id"]):c["projection"] for c in game_cards}
+    for g in games:
+        if (str(g["game_id"]) not in all_projections and not g.get("completed")
+                and g.get("date_utc") and g["date_utc"][:10]>=today.isoformat()
+                and R.real_matchup(g)):
+            p=project(g, rat, hfa, score_rat, league_pts, home_bump, rests, ovr, cfg,
+                      inj_by_game, wx_by_game, venues, team_hfa, divisions)
+            if p.get("ratings_known"):
+                all_projections[str(g["game_id"])]=p
     write("games.json", [{
         "game_id": g["game_id"], "date": g.get("date_utc"), "week": g.get("week"),
         "season_type": g.get("season_type"),
@@ -1186,6 +1197,8 @@ def main() -> int:
         "completed": g.get("completed"), "neutral": g.get("neutral"),
         "venue": g.get("venue"), "broadcast": g.get("broadcast"),
         "status": g.get("status_detail"), "odds": g.get("odds"),
+        "projection": all_projections.get(str(g["game_id"])),
+        "projection_note": "Current ratings; distant games may lack injury/weather inputs. Not a qualified wager.",
     } for g in games])
 
     print(f"   wrote {SITE_DATA}")

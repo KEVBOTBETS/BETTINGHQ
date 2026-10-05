@@ -1268,6 +1268,17 @@ def main() -> int:
           "ats": form.get(t)}
          for t in rat],
         key=lambda r: -r["rating"]))
+    # Extend display forecasts beyond the quote/qualification window. Preserve
+    # the production projections within that window and never fabricate odds.
+    display_projections={str(r["game_id"]):r["projection"] for r in forecast_games}
+    for g in games:
+        if (str(g["game_id"]) not in display_projections and not g.get("completed")
+                and not g.get("postponed") and not g.get("canceled")
+                and g.get("date_utc") and g["date_utc"][:10]>=today.isoformat()):
+            p=project(g, rat, hfa, score_rat, league, home_bump, rests, ovr, cfg)
+            if p.get("ratings_known"):
+                display_projections[str(g["game_id"])]=debias_projection(
+                    p, scale_fit, cfg, margin=mf["applied"], total=tf["applied"])
     game_rows = [{
         "game_id": g["game_id"], "date": g.get("date_utc"), "week": g.get("week"),
         "season": g.get("season"), "season_type": g.get("season_type"),
@@ -1278,7 +1289,8 @@ def main() -> int:
         "away_color": g["away"].get("color"), "home_color": g["home"].get("color"),
         "away_rank": g["away"].get("rank"), "home_rank": g["home"].get("rank"),
         "context": g.get("context") or {}, "venue": g.get("venue"),
-        "projection": next((r["projection"] for r in forecast_games if r["game_id"] == g["game_id"]), None),
+        "projection": display_projections.get(str(g["game_id"])),
+        "projection_note": "Current ratings; distant games may lack availability/weather inputs. Not a qualified wager.",
         "odds_quotes": g.get("odds_quotes") or [],
         "away_score": g.get("away_score"), "home_score": g.get("home_score"),
         "completed": g.get("completed"), "neutral": g.get("neutral"),

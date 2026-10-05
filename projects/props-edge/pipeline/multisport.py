@@ -7,6 +7,8 @@ import datetime as dt
 import json
 import re
 from pathlib import Path
+from html.parser import HTMLParser
+from urllib.parse import urljoin
 from concurrent.futures import ThreadPoolExecutor
 import urllib.request
 from .http import JsonClient, ProviderError, response_text
@@ -16,11 +18,27 @@ from .schema import american_to_decimal
 
 ROOT=Path(__file__).resolve().parents[1]
 MARKETS_NHL={'SHOTS ON GOAL':'Shots on goal','GOALS':'Goals','ASSISTS':'Assists','POINTS':'Points','ANYTIME GOALSCORER':'Anytime goal','ANYTIME GOAL SCORER':'Anytime goal','SAVES':'Saves'}
+NHL_CODES={'TB':'TBL','SJ':'SJS','LA':'LAK','NJ':'NJD','MON':'MTL','MTL':'MTL','WIN':'WPG','VEG':'VGK','NAS':'NSH','UTAH':'UTA'}
 PATHS={'NHL':'hockey/nhl','NCAAF':'football/ncaaf'}
 
 def instant(x):
     try:return dt.datetime.fromisoformat(x.replace('Z','+00:00')).astimezone(dt.timezone.utc)
     except (TypeError,ValueError,AttributeError):return None
+
+class MatchupLinks(HTMLParser):
+    """Read only advertised Covers matchup links, without guessing endpoints."""
+    def __init__(self,sport):
+        super().__init__();self.sport=sport;self.links=[];self.active=None;self.text=[]
+    def handle_starttag(self,tag,attrs):
+        values=dict(attrs)
+        if tag=='a' and re.fullmatch('/sport/'+PATHS[self.sport]+r'/matchup/\d+/odds',values.get('href','')):
+            self.active=values['href'];self.text=[]
+    def handle_data(self,value):
+        if self.active and value.strip():self.text.append(value.strip())
+    def handle_endtag(self,tag):
+        if tag=='a' and self.active:
+            self.links.append({'url':urljoin('https://www.covers.com',self.active),'label':' '.join(self.text)})
+            self.active=None
 
 def roster_players(data):
     rows=[]
@@ -69,11 +87,11 @@ def nhl_watchlist(game,rosters,stats,season):
         team=game[side];ids={a['id']:a for a in rosters.get(team,[])};data=stats.get(team,{})
         for player in data.get('skaters',[]):
             who=ids.get(str(player.get('playerId')));gp=player.get('gamesPlayed') or 0
-            if not who or gp<5:continue
+            if not who or gp<1:continue
             for market,key in [('Shots on goal','shots'),('Goals','goals'),('Assists','assists'),('Points','points')]:
                 val=player.get(key)
                 if not isinstance(val,(int,float)):continue
-                rows.append({'sport':'NHL','event_id':str(game['game_id']),'start_time':game['date'],'matchup':game['away']+' @ '+game['home'],'team':team,**who,'athlete_id':who['id'],'market':market,'average':round(val/gp,2),'samples':gp,'recent':[],'history_season':str(data.get('season',season)),'history_note':'Official regular-season average with this club. Current roster membership does not confirm game participation.','model_prob':None})
+                rows.append({'sport':'NHL','event_id':str(game['game_id']),'start_time':game['date'],'matchup':game['away']+' @ '+game['home'],'team':team,**who,'athlete_id':who['id'],'market':market,'average':round(val/gp,2),'samples':gp,'recent':[],'history_season':str(data.get('season',season)),'history_note':'Official regular-season average with this club. '+('Small current-season sample; not a stable projection. ' if gp<5 else '')+'Current roster membership does not confirm game participation.','model_prob':None})
     return sorted(rows,key=lambda x:(x['market']!='Shots on goal',-x['average']))[:50]
 
 class Cache:
@@ -107,17 +125,19 @@ def build(sport,cache,now):
         if re.search(r'access denied|verify that you are human|captcha',html[:10000],re.I):raise ProviderError('Access restricted')
     except (OSError,ProviderError):errors.append('Public prop prices unavailable; no prices inferred.')
     parser=_TokenParser();parser.feed(html)
+    links=MatchupLinks(sport);links.feed(html)
     rosters={};stats={};watch=[]
     if sport=='NHL':
         start_year=now.year if now.month>=7 else now.year-1;season=start_year*10000+start_year+1
         def team_data(team):
-            roster=cache.get('https://api-web.nhle.com/v1/roster/'+team+'/current') or {}
+            api_team=NHL_CODES.get(team,team)
+            roster=cache.get('https://api-web.nhle.com/v1/roster/'+api_team+'/current') or {}
             athletes=[{'id':str(a['id']),'player':(a.get('firstName') or {}).get('default','')+' '+(a.get('lastName') or {}).get('default',''),'image':a.get('headshot'),'position':a.get('positionCode')} for group in ['forwards','defensemen','goalies'] for a in roster.get(group,[]) if a.get('id')]
             stat_season=season
-            data=cache.get(f'https://api-web.nhle.com/v1/club-stats/{team}/{season}/2',3) or {}
-            if not data.get('skaters'):
+            data=cache.get(f'https://api-web.nhle.com/v1/club-stats/{api_team}/{season}/2',3) or {}
+            if not any((p.get('gamesPlayed') or 0)>0 for p in data.get('skaters',[])):
                 stat_season=season-10001
-                data=cache.get(f'https://api-web.nhle.com/v1/club-stats/{team}/{stat_season}/2',24) or {}
+                data=cache.get(f'https://api-web.nhle.com/v1/club-stats/{api_team}/{stat_season}/2',24) or {}
             data={**data,'season':stat_season}
             return team,athletes,data
         with ThreadPoolExecutor(max_workers=6) as pool:
@@ -156,10 +176,14 @@ def build(sport,cache,now):
         w=history.get((q['event_id'],q['athlete_id'],q['market']))
         if w:q.update({k:w[k] for k in ['average','samples','recent','history_season','history_note']})
     result={'sport':sport,'generated_at':stamp,'source_model_at':json.loads((folder/'site/data/meta.json').read_text()).get('generated_at'),'games':[{k:g.get(k) for k in ['game_id','date','away','home','away_name','home_name','away_logo','home_logo','season_type','venue']} for g in games],'quotes':quotes,'watchlist':watch,'errors':errors,'notes':['Public book offers are matched to one upcoming game and one current roster player.','Player participation, starting goalie and final combined parlay price must be confirmed at the book.','NHL/college history is descriptive research; no calibrated prop win probability is claimed.'],'source_url':url}
-    # Shared source notes live once in the feed, keeping public player rows compact.
-    for row in [*result['quotes'],*result['watchlist']]:
-        row.pop('history_note',None)
-        row.pop('source_url',None)
+    result['diagnostics']={'advertised_game_pages':len(links.links),'index_cards':len(parser.cards),'upcoming_games':len(games),'roster_teams':sum(bool(v) for v in rosters.values()),'statistics_teams':sum(bool(v.get('skaters')) for v in stats.values()),'matched_offers':len(quotes)}
+    result['public_game_pages']=links.links
+    if games and not quotes:
+        if links.links and not parser.cards:errors.append('Covers now advertises separate game odds pages; its index contains no player offer cards.')
+        errors.append('No event-matched book offers were extracted. Player statistics and manual book-line entry remain available.')
+    if sport=='NHL' and teams and not watch:
+        errors.append('Official NHL player history unavailable for the scheduled teams.')
+
     dest=ROOT/'site/data'/f'{sport.lower()}-props.json';dest.write_text(json.dumps(result,separators=(',',':'),allow_nan=False)+'\n')
     print(sport,len(games),'games',len(quotes),'observed offers',len(watch),'history rows')
     return result
