@@ -1,29 +1,61 @@
 {
   "schema": 1,
-  "checked_at": "2026-10-05T12:28:44.407Z",
+  "checked_at": "2026-10-05T12:52:30.479Z",
   "coverage": {
+    "mlb": {
+      "status": "available",
+      "reports": 16,
+      "checked_at": "2026-10-05T12:52:30.479Z"
+    },
     "nhl": {
       "status": "available",
       "reports": 22,
-      "checked_at": "2026-10-05T12:28:44.407Z"
+      "checked_at": "2026-10-05T12:52:30.479Z"
     },
     "ncaaf": {
       "status": "empty",
       "reports": 0,
-      "checked_at": "2026-10-05T12:28:44.407Z"
+      "checked_at": "2026-10-05T12:52:30.479Z"
     },
     "nfl": {
       "status": "available",
       "reports": 550,
-      "checked_at": "2026-10-05T12:28:44.407Z"
-    },
-    "mlb": {
-      "status": "available",
-      "reports": 16,
-      "checked_at": "2026-10-05T12:28:44.407Z"
+      "checked_at": "2026-10-05T12:52:30.479Z"
     }
   },
   "events": [
+    {
+      "id": "odds|mlb|849834|2026-10-05T21:00:00Z|TOTAL||over|DraftKings|2026-10-05T12:52:30.479Z",
+      "kind": "odds",
+      "observed_at": "2026-10-05T12:52:30.479Z",
+      "sport": "mlb",
+      "event": "CWS @ CLE",
+      "start": "2026-10-05T21:00:00Z",
+      "pick": "Over 6.5",
+      "title": "Published odds changed",
+      "before": "-120 · line 6.5",
+      "after": "-115 · line 6.5",
+      "book": "DraftKings",
+      "source_quote_at": "2026-10-05T12:48:39.491901+00:00",
+      "source": "Existing MLB board",
+      "note": "Your ticket keeps its original odds. Recheck the live book before placing a new wager."
+    },
+    {
+      "id": "odds|props|401872979|2026-10-06T00:15Z|Passing yards|Tyler Shough|over|Fanatics Sportsbook|2026-10-05T12:52:30.479Z",
+      "kind": "odds",
+      "observed_at": "2026-10-05T12:52:30.479Z",
+      "sport": "props",
+      "event": "Atlanta Falcons @ New Orleans Saints",
+      "start": "2026-10-06T00:15Z",
+      "pick": "Tyler Shough — Over 250.5 Passing yards",
+      "title": "Published odds changed",
+      "before": "-115 · line 250.5",
+      "after": "-115 · line 255.5",
+      "book": "Fanatics Sportsbook",
+      "source_quote_at": "2026-10-05T12:51:17.391115+00:00",
+      "source": "Existing Props board",
+      "note": "Your ticket keeps its original odds. Recheck the live book before placing a new wager."
+    },
     {
       "id": "odds|mlb|849834|2026-10-05T21:00:00Z|TOTAL||over|DraftKings|2026-10-05T09:44:19.099Z",
       "kind": "odds",
@@ -2847,34 +2879,6 @@
       "before": "Not in the previous dated report",
       "after": "Active · Shrader went 3-for-3 on field-goal attempts and made all three of his PATs in Sunday's 30-13 win over Washington.",
       "source_quote_at": "2026-10-04T22:26Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:30:Parker Washington|2026-10-04T22:47:35.660Z",
-      "kind": "injury",
-      "observed_at": "2026-10-04T22:47:35.660Z",
-      "sport": "nfl",
-      "title": "New availability report",
-      "event": "Jacksonville Jaguars",
-      "pick": "Parker Washington",
-      "before": "Not in the previous dated report",
-      "after": "Active · Washington secured one of three targets for seven yards, rushed once for three yards and returned one punt for three yards in the Jaguars' 22-17 win over the Bengals on Sunday.",
-      "source_quote_at": "2026-10-04T22:20Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:30:Brian Thomas Jr.|2026-10-04T22:47:35.660Z",
-      "kind": "injury",
-      "observed_at": "2026-10-04T22:47:35.660Z",
-      "sport": "nfl",
-      "title": "New availability report",
-      "event": "Jacksonville Jaguars",
-      "pick": "Brian Thomas Jr.",
-      "before": "Not in the previous dated report",
-      "after": "Active · Thomas secured both targets for 17 yards and a touchdown in the Jaguars' 22-17 win over the Bengals on Sunday.",
-      "source_quote_at": "2026-10-04T22:15Z",
       "source": "ESPN injuries",
       "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
     }
