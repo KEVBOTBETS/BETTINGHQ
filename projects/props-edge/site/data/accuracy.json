@@ -1,13 +1,13 @@
 {
  "schema": 2,
  "projection_only": false,
- "generated_at": "2026-10-05T06:54:16.521792+00:00",
+ "generated_at": "2026-10-05T09:43:35.054301+00:00",
  "label": "NFL Props forecast and priced-call accuracy",
  "scope": {
   "season": 2026,
   "season_type": 2,
   "season_type_label": "regular season",
-  "included_records": 36662,
+  "included_records": 36663,
   "excluded_records": 0
  },
  "method": "First pre-event snapshot, frozen line and price. All model picks, including PASS/AVOID and unstaked picks. One preferred side per event/market in pick statistics; the complete priced-side audit is separate. One hypothetical unit per pick; no actual wagers are created. Missing results remain pending.",
@@ -121417,6 +121417,31 @@
    "selected": true,
    "id": "call:NFL:401872979:Tyler Shough:Anytime touchdown:yes:None",
    "captured_at": "2026-10-04T20:48:52.230813+00:00",
+   "result": "Pending"
+  },
+  {
+   "kind": "call",
+   "league": "NFL",
+   "event_id": "401872979",
+   "start": "2026-10-06T00:15Z",
+   "matchup": "Atlanta Falcons @ New Orleans Saints",
+   "player": "Kyle Pitts Sr.",
+   "market": "Receiving yards",
+   "side": "over",
+   "line": 30.5,
+   "price": -115,
+   "probability": 0.52956,
+   "tier": "PASS",
+   "edge": -0.02455,
+   "book": "Hard Rock Bet",
+   "quote_time": "2026-10-05T09:43:18.806189+00:00",
+   "season": 2026,
+   "season_type": 2,
+   "stat_key": "kylepittssr|atlantafalcons|receivingyards",
+   "version": "2026-09-23-restored-v1",
+   "selected": false,
+   "id": "call:NFL:401872979:Kyle Pitts Sr.:Receiving yards:over:30.5",
+   "captured_at": "2026-10-05T09:43:32.784800+00:00",
    "result": "Pending"
   },
   {
@@ -675689,13 +675714,13 @@
   "brier": 0.23725
  },
  "all_calls": {
-  "logged": 1452,
+  "logged": 1453,
   "wins": 719,
   "losses": 609,
   "pushes": 0,
   "voids": 0,
   "settled": 1328,
-  "pending": 124,
+  "pending": 125,
   "win_rate": 0.5414156626506024,
   "units": 40.676,
   "roi": 0.030629440512048203,

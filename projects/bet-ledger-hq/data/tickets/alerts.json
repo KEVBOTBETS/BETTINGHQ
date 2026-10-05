@@ -1,29 +1,45 @@
 {
   "schema": 1,
-  "checked_at": "2026-10-05T09:25:08.309Z",
+  "checked_at": "2026-10-05T09:44:19.099Z",
   "coverage": {
     "mlb": {
       "status": "available",
       "reports": 16,
-      "checked_at": "2026-10-05T09:25:08.309Z"
-    },
-    "ncaaf": {
-      "status": "empty",
-      "reports": 0,
-      "checked_at": "2026-10-05T09:25:08.309Z"
+      "checked_at": "2026-10-05T09:44:19.099Z"
     },
     "nhl": {
       "status": "available",
       "reports": 22,
-      "checked_at": "2026-10-05T09:25:08.309Z"
+      "checked_at": "2026-10-05T09:44:19.099Z"
+    },
+    "ncaaf": {
+      "status": "empty",
+      "reports": 0,
+      "checked_at": "2026-10-05T09:44:19.099Z"
     },
     "nfl": {
       "status": "available",
       "reports": 550,
-      "checked_at": "2026-10-05T09:25:08.309Z"
+      "checked_at": "2026-10-05T09:44:19.099Z"
     }
   },
   "events": [
+    {
+      "id": "odds|mlb|849834|2026-10-05T21:00:00Z|TOTAL||over|DraftKings|2026-10-05T09:44:19.099Z",
+      "kind": "odds",
+      "observed_at": "2026-10-05T09:44:19.099Z",
+      "sport": "mlb",
+      "event": "CWS @ CLE",
+      "start": "2026-10-05T21:00:00Z",
+      "pick": "Over 6.5",
+      "title": "Published odds changed",
+      "before": "-122 · line 6.5",
+      "after": "-120 · line 6.5",
+      "book": "DraftKings",
+      "source_quote_at": "2026-10-05T09:42:28.650118+00:00",
+      "source": "Existing MLB board",
+      "note": "Your ticket keeps its original odds. Recheck the live book before placing a new wager."
+    },
     {
       "id": "injury|nfl:3:Anthony Johnson Jr.|2026-10-05T07:25:06.491Z",
       "kind": "injury",
@@ -2859,20 +2875,6 @@
       "before": "Not in the previous dated report",
       "after": "Active · Thomas secured both targets for 17 yards and a touchdown in the Jaguars' 22-17 win over the Bengals on Sunday.",
       "source_quote_at": "2026-10-04T22:15Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:24:Ladd McConkey|2026-10-04T22:47:35.660Z",
-      "kind": "injury",
-      "observed_at": "2026-10-04T22:47:35.660Z",
-      "sport": "nfl",
-      "title": "Player availability changed",
-      "event": "Los Angeles Chargers",
-      "pick": "Ladd McConkey",
-      "before": "Active · McConkey (foot) is active for Sunday's game at Seattle, Eric Smith of the Chargers' official site reports.",
-      "after": "Out · Foot",
-      "source_quote_at": "2026-10-04T22:36Z",
       "source": "ESPN injuries",
       "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
     }
