@@ -1,29 +1,43 @@
 {
   "schema": 1,
-  "checked_at": "2026-10-06T15:51:59.463Z",
+  "checked_at": "2026-10-06T16:24:21.829Z",
   "coverage": {
+    "nfl": {
+      "status": "available",
+      "reports": 585,
+      "checked_at": "2026-10-06T16:24:21.829Z"
+    },
     "ncaaf": {
       "status": "empty",
       "reports": 0,
-      "checked_at": "2026-10-06T15:51:59.463Z"
+      "checked_at": "2026-10-06T16:24:21.829Z"
     },
     "mlb": {
       "status": "available",
-      "reports": 6,
-      "checked_at": "2026-10-06T15:51:59.463Z"
+      "reports": 5,
+      "checked_at": "2026-10-06T16:24:21.829Z"
     },
     "nhl": {
       "status": "available",
       "reports": 29,
-      "checked_at": "2026-10-06T15:51:59.463Z"
-    },
-    "nfl": {
-      "status": "available",
-      "reports": 585,
-      "checked_at": "2026-10-06T15:51:59.463Z"
+      "checked_at": "2026-10-06T16:24:21.829Z"
     }
   },
   "events": [
+    {
+      "id": "injury|nhl:5:J.T. Compher|2026-10-06T16:24:21.829Z",
+      "kind": "injury",
+      "observed_at": "2026-10-06T16:24:21.829Z",
+      "sport": "nhl",
+      "title": "New availability report",
+      "event": "Detroit Red Wings",
+      "pick": "J.T. Compher",
+      "before": "Not in the previous dated report",
+      "after": "Out · Undisclosed",
+      "source_quote_at": "2026-10-06T15:54Z",
+      "source": "ESPN injuries",
+      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
+    },
     {
       "id": "odds|mlb|849819|2026-10-06T22:00:00Z|ML||away|DraftKings|2026-10-06T15:44:30.690Z",
       "kind": "odds",
@@ -2901,20 +2915,6 @@
       "title": "Player availability changed",
       "event": "Houston Texans",
       "pick": "Marlin Klein",
-      "before": "Out · Coach's Decision",
-      "after": "Active",
-      "source_quote_at": "2026-10-05T18:43Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:34:Febechi Nwaiwu|2026-10-05T21:35:22.994Z",
-      "kind": "injury",
-      "observed_at": "2026-10-05T21:35:22.994Z",
-      "sport": "nfl",
-      "title": "Player availability changed",
-      "event": "Houston Texans",
-      "pick": "Febechi Nwaiwu",
       "before": "Out · Coach's Decision",
       "after": "Active",
       "source_quote_at": "2026-10-05T18:43Z",
