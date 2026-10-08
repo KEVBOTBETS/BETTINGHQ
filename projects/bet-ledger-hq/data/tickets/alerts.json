@@ -1,29 +1,121 @@
 {
   "schema": 1,
-  "checked_at": "2026-10-08T18:24:17.092Z",
+  "checked_at": "2026-10-08T18:46:49.699Z",
   "coverage": {
     "ncaaf": {
       "status": "empty",
       "reports": 0,
-      "checked_at": "2026-10-08T18:24:17.092Z"
+      "checked_at": "2026-10-08T18:46:49.699Z"
     },
     "nhl": {
       "status": "available",
       "reports": 35,
-      "checked_at": "2026-10-08T18:24:17.092Z"
+      "checked_at": "2026-10-08T18:46:49.699Z"
     },
     "mlb": {
       "status": "available",
-      "reports": 7,
-      "checked_at": "2026-10-08T18:24:17.092Z"
+      "reports": 5,
+      "checked_at": "2026-10-08T18:46:49.699Z"
     },
     "nfl": {
       "status": "available",
-      "reports": 535,
-      "checked_at": "2026-10-08T18:24:17.092Z"
+      "reports": 481,
+      "checked_at": "2026-10-08T18:46:49.699Z"
     }
   },
   "events": [
+    {
+      "id": "odds|mlb|849832|2026-10-09T00:00:00Z|ML||home|DraftKings|2026-10-08T18:46:49.699Z",
+      "kind": "odds",
+      "observed_at": "2026-10-08T18:46:49.699Z",
+      "sport": "mlb",
+      "event": "CLE @ CWS",
+      "start": "2026-10-09T00:00:00Z",
+      "pick": "CWS ML",
+      "title": "Published odds changed",
+      "before": "-104",
+      "after": "-105",
+      "book": "DraftKings",
+      "source_quote_at": "2026-10-08T18:45:00.251370+00:00",
+      "source": "Existing MLB board",
+      "note": "Your ticket keeps its original odds. Recheck the live book before placing a new wager."
+    },
+    {
+      "id": "odds|props|401872982|2026-10-11T17:00Z|Passing yards|Joe Burrow|over|theScore Bet|2026-10-08T18:46:49.699Z",
+      "kind": "odds",
+      "observed_at": "2026-10-08T18:46:49.699Z",
+      "sport": "props",
+      "event": "Cincinnati Bengals @ Miami Dolphins",
+      "start": "2026-10-11T17:00Z",
+      "pick": "Joe Burrow — Over 234.5 Passing yards",
+      "title": "Published odds changed",
+      "before": "-115 · line 234.5",
+      "after": "-110 · line 239.5",
+      "book": "theScore Bet",
+      "source_quote_at": "2026-10-08T18:45:46.436160+00:00",
+      "source": "Existing Props board",
+      "note": "Your ticket keeps its original odds. Recheck the live book before placing a new wager."
+    },
+    {
+      "id": "odds|ncaaf|401858487|2026-10-10T01:00Z|ATS||away|Draft Kings|2026-10-08T18:46:49.699Z",
+      "kind": "odds",
+      "observed_at": "2026-10-08T18:46:49.699Z",
+      "sport": "ncaaf",
+      "event": "IOWA @ WASH",
+      "start": "2026-10-10T01:00Z",
+      "pick": "IOWA +1.5",
+      "title": "Published odds changed",
+      "before": "-105 · line 3",
+      "after": "-108 · line 3",
+      "book": "Draft Kings",
+      "source_quote_at": "2026-10-08T18:44:51.740235+00:00",
+      "source": "Existing NCAAF board",
+      "note": "Your ticket keeps its original odds. Recheck the live book before placing a new wager."
+    },
+    {
+      "id": "odds|ncaaf|401862794|2026-10-08T23:30Z|TOTAL||under|Draft Kings|2026-10-08T18:46:49.699Z",
+      "kind": "odds",
+      "observed_at": "2026-10-08T18:46:49.699Z",
+      "sport": "ncaaf",
+      "event": "USF @ UTSA",
+      "start": "2026-10-08T23:30Z",
+      "pick": "Under 53.5",
+      "title": "Published odds changed",
+      "before": "-108 · line 49.5",
+      "after": "-112 · line 50.5",
+      "book": "Draft Kings",
+      "source_quote_at": "2026-10-08T18:44:51.696793+00:00",
+      "source": "Existing NCAAF board",
+      "note": "Your ticket keeps its original odds. Recheck the live book before placing a new wager."
+    },
+    {
+      "id": "injury|nfl:2:DJ Moore|2026-10-08T18:46:49.699Z",
+      "kind": "injury",
+      "observed_at": "2026-10-08T18:46:49.699Z",
+      "sport": "nfl",
+      "title": "Player availability changed",
+      "event": "Buffalo Bills",
+      "pick": "DJ Moore",
+      "before": "Questionable · Shoulder",
+      "after": "Questionable · Shoulder - AC Joint",
+      "source_quote_at": "2026-10-08T17:56Z",
+      "source": "ESPN injuries",
+      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
+    },
+    {
+      "id": "injury|nfl:6:Tyler Smith|2026-10-08T18:46:49.699Z",
+      "kind": "injury",
+      "observed_at": "2026-10-08T18:46:49.699Z",
+      "sport": "nfl",
+      "title": "Player availability changed",
+      "event": "Dallas Cowboys",
+      "pick": "Tyler Smith",
+      "before": "Injured Reserve · Thumb",
+      "after": "Questionable · Thumb",
+      "source_quote_at": "2026-10-08T18:41Z",
+      "source": "ESPN injuries",
+      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
+    },
     {
       "id": "injury|nhl:5:J.T. Compher|2026-10-08T18:24:17.092Z",
       "kind": "injury",
@@ -2809,90 +2901,6 @@
       "before": "Active",
       "after": "Questionable · Foot",
       "source_quote_at": "2026-10-07T21:55Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:17:Dre'Mont Jones|2026-10-08T17:03:50.324Z",
-      "kind": "injury",
-      "observed_at": "2026-10-08T17:03:50.324Z",
-      "sport": "nfl",
-      "title": "Player availability changed",
-      "event": "New England Patriots",
-      "pick": "Dre'Mont Jones",
-      "before": "Active · Jones (shoulder) is active for Sunday's game against Buffalo.",
-      "after": "Questionable · Shoulder",
-      "source_quote_at": "2026-10-07T21:55Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:17:Christian Elliss|2026-10-08T17:03:50.324Z",
-      "kind": "injury",
-      "observed_at": "2026-10-08T17:03:50.324Z",
-      "sport": "nfl",
-      "title": "Player availability changed",
-      "event": "New England Patriots",
-      "pick": "Christian Elliss",
-      "before": "Active · Elliss (chest) is active against the Bills on Sunday.",
-      "after": "Questionable · Chest",
-      "source_quote_at": "2026-10-07T21:54Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:17:Reggie Gilliam|2026-10-08T17:03:50.324Z",
-      "kind": "injury",
-      "observed_at": "2026-10-08T17:03:50.324Z",
-      "sport": "nfl",
-      "title": "Player availability changed",
-      "event": "New England Patriots",
-      "pick": "Reggie Gilliam",
-      "before": "Active · Gilliam (ankle) has returned to Sunday's game against the Bills, Mike Reiss of ESPN.com reports.",
-      "after": "Questionable · Ankle",
-      "source_quote_at": "2026-10-07T21:54Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:17:Karon Prunty|2026-10-08T17:03:50.324Z",
-      "kind": "injury",
-      "observed_at": "2026-10-08T17:03:50.324Z",
-      "sport": "nfl",
-      "title": "New availability report",
-      "event": "New England Patriots",
-      "pick": "Karon Prunty",
-      "before": "Not in the previous dated report",
-      "after": "Questionable · Hamstring",
-      "source_quote_at": "2026-10-07T21:53Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:17:Carlton Davis III|2026-10-08T17:03:50.324Z",
-      "kind": "injury",
-      "observed_at": "2026-10-08T17:03:50.324Z",
-      "sport": "nfl",
-      "title": "New availability report",
-      "event": "New England Patriots",
-      "pick": "Carlton Davis III",
-      "before": "Not in the previous dated report",
-      "after": "Questionable · Neck",
-      "source_quote_at": "2026-10-07T21:52Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:17:A.J. Brown|2026-10-08T17:03:50.324Z",
-      "kind": "injury",
-      "observed_at": "2026-10-08T17:03:50.324Z",
-      "sport": "nfl",
-      "title": "New availability report",
-      "event": "New England Patriots",
-      "pick": "A.J. Brown",
-      "before": "Not in the previous dated report",
-      "after": "Injured Reserve · Ankle",
-      "source_quote_at": "2026-10-07T18:07Z",
       "source": "ESPN injuries",
       "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
     }
