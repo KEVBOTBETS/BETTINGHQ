@@ -1,29 +1,91 @@
 {
   "schema": 1,
-  "checked_at": "2026-10-08T19:21:58.128Z",
+  "checked_at": "2026-10-08T19:39:53.806Z",
   "coverage": {
     "ncaaf": {
       "status": "empty",
       "reports": 0,
-      "checked_at": "2026-10-08T19:21:58.128Z"
+      "checked_at": "2026-10-08T19:39:53.806Z"
     },
     "nhl": {
       "status": "available",
       "reports": 35,
-      "checked_at": "2026-10-08T19:21:58.128Z"
-    },
-    "mlb": {
-      "status": "available",
-      "reports": 5,
-      "checked_at": "2026-10-08T19:21:58.128Z"
+      "checked_at": "2026-10-08T19:39:53.806Z"
     },
     "nfl": {
       "status": "available",
       "reports": 426,
-      "checked_at": "2026-10-08T19:21:58.128Z"
+      "checked_at": "2026-10-08T19:39:53.806Z"
+    },
+    "mlb": {
+      "status": "available",
+      "reports": 5,
+      "checked_at": "2026-10-08T19:39:53.806Z"
     }
   },
   "events": [
+    {
+      "id": "odds|nfl|401872988|2026-10-11T17:00Z|ATS||away|DraftKings|2026-10-08T19:39:53.806Z",
+      "kind": "odds",
+      "observed_at": "2026-10-08T19:39:53.806Z",
+      "sport": "nfl",
+      "event": "NYG @ WSH",
+      "start": "2026-10-11T17:00Z",
+      "pick": "NYG +3",
+      "title": "Published odds changed",
+      "before": "-105 · line 3.5",
+      "after": "-115 · line 4.5",
+      "book": "DraftKings",
+      "source_quote_at": "2026-10-08T19:37:21.979149+00:00",
+      "source": "Existing NFL board",
+      "note": "Your ticket keeps its original odds. Recheck the live book before placing a new wager."
+    },
+    {
+      "id": "odds|nfl|401872983|2026-10-11T17:00Z|ML||away|DraftKings|2026-10-08T19:39:53.806Z",
+      "kind": "odds",
+      "observed_at": "2026-10-08T19:39:53.806Z",
+      "sport": "nfl",
+      "event": "CLE @ NYJ",
+      "start": "2026-10-11T17:00Z",
+      "pick": "CLE ML",
+      "title": "Published odds changed",
+      "before": "+110",
+      "after": "+114",
+      "book": "DraftKings",
+      "source_quote_at": "2026-10-08T19:37:21.979101+00:00",
+      "source": "Existing NFL board",
+      "note": "Your ticket keeps its original odds. Recheck the live book before placing a new wager."
+    },
+    {
+      "id": "odds|ncaaf|401858487|2026-10-10T01:00Z|ML||away|DraftKings|2026-10-08T19:39:53.806Z",
+      "kind": "odds",
+      "observed_at": "2026-10-08T19:39:53.806Z",
+      "sport": "ncaaf",
+      "event": "IOWA @ WASH",
+      "start": "2026-10-10T01:00Z",
+      "pick": "IOWA ML",
+      "title": "Published odds changed",
+      "before": "+140",
+      "after": "+130",
+      "book": "DraftKings",
+      "source_quote_at": "2026-10-08T19:37:39.462836+00:00",
+      "source": "Existing NCAAF board",
+      "note": "Your ticket keeps its original odds. Recheck the live book before placing a new wager."
+    },
+    {
+      "id": "injury|nfl:1:Samson Ebukam|2026-10-08T19:39:53.806Z",
+      "kind": "injury",
+      "observed_at": "2026-10-08T19:39:53.806Z",
+      "sport": "nfl",
+      "title": "Player availability changed",
+      "event": "Atlanta Falcons",
+      "pick": "Samson Ebukam",
+      "before": "Active · Ebukam (hamstring) is active for Monday night's game against the Saints, Tori McElhaney of the Falcons' official site reports.",
+      "after": "Active · Hamstring",
+      "source_quote_at": "2026-10-05T23:17Z",
+      "source": "ESPN injuries",
+      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
+    },
     {
       "id": "injury|nhl:37:Victor Olofsson|2026-10-08T19:21:58.128Z",
       "kind": "injury",
@@ -2855,62 +2917,6 @@
       "before": "Not in the previous dated report",
       "after": "Active · Brooks recorded 13 tackles (five solo) and a pass defensed during Sunday's 15-10 loss at Minnesota.",
       "source_quote_at": "2026-10-07T01:18Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:15:Jacob Rodriguez|2026-10-08T17:03:50.324Z",
-      "kind": "injury",
-      "observed_at": "2026-10-08T17:03:50.324Z",
-      "sport": "nfl",
-      "title": "New availability report",
-      "event": "Miami Dolphins",
-      "pick": "Jacob Rodriguez",
-      "before": "Not in the previous dated report",
-      "after": "Active · Rodriguez recorded 18 tackles (nine solo) during Sunday's 15-10 loss at Minnesota.",
-      "source_quote_at": "2026-10-07T01:12Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:16:Michael Jurgens|2026-10-08T17:03:50.324Z",
-      "kind": "injury",
-      "observed_at": "2026-10-08T17:03:50.324Z",
-      "sport": "nfl",
-      "title": "New availability report",
-      "event": "Minnesota Vikings",
-      "pick": "Michael Jurgens",
-      "before": "Not in the previous dated report",
-      "after": "Injured Reserve · Elbow",
-      "source_quote_at": "2026-10-08T00:07Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:16:Brian O'Neill|2026-10-08T17:03:50.324Z",
-      "kind": "injury",
-      "observed_at": "2026-10-08T17:03:50.324Z",
-      "sport": "nfl",
-      "title": "New availability report",
-      "event": "Minnesota Vikings",
-      "pick": "Brian O'Neill",
-      "before": "Not in the previous dated report",
-      "after": "Questionable · Knee",
-      "source_quote_at": "2026-10-07T22:05Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:16:Ben Yurosek|2026-10-08T17:03:50.324Z",
-      "kind": "injury",
-      "observed_at": "2026-10-08T17:03:50.324Z",
-      "sport": "nfl",
-      "title": "New availability report",
-      "event": "Minnesota Vikings",
-      "pick": "Ben Yurosek",
-      "before": "Not in the previous dated report",
-      "after": "Injured Reserve · Ankle",
-      "source_quote_at": "2026-10-07T21:47Z",
       "source": "ESPN injuries",
       "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
     }
