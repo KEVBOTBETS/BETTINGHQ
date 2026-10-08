@@ -78,7 +78,7 @@ try{
     await frame.getByRole("button",{name:"Exposure",exact:true}).click();
     await frame.getByText("Connect and sync in Ledger").waitFor();
     assert.deepEqual(await page.locator(".board-link").evaluateAll(links=>links.map(a=>a.hash).sort()),
-      ["#model-lab","#desk","#today","#ledger","#accuracy","#football","#moneyline","#mlb","#nfl","#ncaaf","#nhl","#wnba","#nba","#ncaab","#props","#ladder","#archive","#nfl-newsletter","#ncaaf-newsletter","#ncaaf-props","#nhl-props","#all-spreads","#spread-accuracy"].sort());
+      ["#thursday-night","#sunday-night","#monday-night","#model-lab","#desk","#today","#ledger","#accuracy","#football","#moneyline","#mlb","#nfl","#ncaaf","#nhl","#wnba","#nba","#ncaab","#props","#ladder","#archive","#nfl-newsletter","#ncaaf-newsletter","#ncaaf-props","#nhl-props","#all-spreads","#spread-accuracy"].sort());
     assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth));
     const child=page.frames().find(f=>f.url().endsWith("today.html"));
     assert.ok(await child.evaluate(()=>document.documentElement.scrollWidth<=innerWidth));

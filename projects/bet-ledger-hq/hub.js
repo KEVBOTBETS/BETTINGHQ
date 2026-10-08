@@ -3,6 +3,10 @@
 (() => {
   "use strict";
   const configs = {
+    "thursday-night":{title:"Thursday Night Football",description:"This night’s NFL matchups, news, lines, bets, props and parlays.",url:"night-football.html?night=thursday"},
+    "sunday-night":{title:"Sunday Night Football",description:"This night’s NFL matchups, news, lines, bets, props and parlays.",url:"night-football.html?night=sunday"},
+    "monday-night":{title:"Monday Night Football",description:"This night’s NFL matchups, news, lines, bets, props and parlays.",url:"night-football.html?night=monday"},
+
     "all-spreads":{title:"All football spreads",description:"Every NFL and college game, model spread and your manual bet selections.",url:"all-spreads.html"},
     "model-lab":{title:"Model Lab",description:"Compare forecasts, inspect availability and explore shared-game prop simulations.",url:"model-lab.html"},
     "ncaaf-newsletter":{title:"NCAAF newsletter",description:"Weekly college football stories, matchups and playoff context.",url:"newsletter.html?sport=ncaaf"},
