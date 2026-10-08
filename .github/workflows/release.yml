@@ -29,13 +29,13 @@ on:
 
 permissions:
   contents: read
-concurrency:
-  # PR testing must not occupy the production refresh queue.
-  group: ${{ github.event_name == 'pull_request' && format('kevbot-pr-{0}', github.event.pull_request.number) || 'kevbot-release' }}
-  cancel-in-progress: false
 
 jobs:
   build:
+    # Deployment environment waits must never stop odds/history collection.
+    concurrency:
+      group: ${{ github.event_name == 'pull_request' && format('kevbot-pr-{0}', github.event.pull_request.number) || 'kevbot-refresh' }}
+      cancel-in-progress: false
     runs-on: ubuntu-latest
     timeout-minutes: 55
     permissions:
@@ -164,6 +164,9 @@ jobs:
             validation.json
             projects/bet-ledger-hq/test-results/
   publish:
+    concurrency:
+      group: kevbot-pages
+      cancel-in-progress: true
     if: github.event_name != 'pull_request' && needs.build.outputs.publish == 'true'
     needs: build
     runs-on: ubuntu-latest

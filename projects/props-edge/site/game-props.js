@@ -12,7 +12,7 @@
   const savedFor=g=>tickets.find(t=>String(t.game.game_id)===String(g.game_id));
   async function refreshResults(){
     if(resultLoading)return resultLoading;
-    resultLoading=fetch('data/parlay-results.json?v='+Date.now(),{cache:'no-store'}).then(r=>{if(!r.ok)throw Error();return r.json();}).then(data=>{
+    resultLoading=fetch('data/parlay-results.json?v='+Date.now(),{cache:'no-store',signal:AbortSignal.timeout(20000)}).then(r=>{if(!r.ok)throw Error();return r.json();}).then(data=>{
       if(data.schema!==1||!Array.isArray(data.records))throw Error();results=data.records;resultError=false;
       const next=tickets.map(t=>({...t,evidence:C.grade(t,results,window.PropsParlays),last_checked:new Date().toISOString()}));
       if(tickets.length)saveTickets(next);
@@ -20,7 +20,7 @@
   }
   async function load(){
     if(loading)return loading;
-    loading=Promise.all(['games','meta'].map(file=>fetch(`../nfl-edge-lab/data/${file}.json?v=${Date.now()}`,{cache:'no-store'}).then(r=>{if(!r.ok)throw Error('NFL schedule unavailable. Try reopening Weekly game props.');return r.json();})))
+    loading=Promise.all(['games','meta'].map(file=>fetch(`../nfl-edge-lab/data/${file}.json?v=${Date.now()}`,{cache:'no-store',signal:AbortSignal.timeout(20000)}).then(r=>{if(!r.ok)throw Error('NFL schedule unavailable. Try reopening Weekly game props.');return r.json();})))
       .then(([g,m])=>{if(!Array.isArray(g))throw Error('NFL schedule unavailable.');games=g;meta=m||{};feedError='';ready=true;fillWeeks();})
       .catch(err=>{feedError=err.message;})
       .finally(()=>{loading=null;});
@@ -29,7 +29,8 @@
   function fillWeeks(){
     const previous=$('#game-week').value,ws=C.weeks([...games,...tickets.map(t=>t.game)],meta);
     $('#game-week').innerHTML=ws.map(w=>`<option value="${e(w.key)}">${e(meta.season||'NFL')} · ${e(w.label)}</option>`).join('');
-    const current=meta.current_week?C.weekKey(meta.current_week):'2:1';
+    const active=(meta.calendar||[]).find(w=>Date.parse(w.start)<=Date.now()&&Date.now()<=Date.parse(w.end));
+    const current=active?C.weekKey(active):meta.current_week?C.weekKey(meta.current_week):ws[0]?.key;
     $('#game-week').value=ws.some(w=>w.key===previous)?previous:ws.some(w=>w.key===current)?current:'2:1';
   }
   const date=x=>Number.isFinite(Date.parse(x))?new Intl.DateTimeFormat('en-CA',{timeZone:'America/Toronto',weekday:'short',month:'short',day:'numeric',hour:'numeric',minute:'2-digit',timeZoneName:'short'}).format(new Date(x)):'Kickoff TBA';
@@ -78,6 +79,6 @@
   $('#game-week').addEventListener('change',render);$('#game-team').addEventListener('input',render);
   for(const [id,delta] of [['game-week-prev',-1],['game-week-next',1]])$(id.startsWith('#')?id:'#'+id).addEventListener('click',()=>{const s=$('#game-week');s.selectedIndex=Math.max(0,Math.min(s.options.length-1,s.selectedIndex+delta));render();});
   window.addEventListener('props:tab',async ev=>{if(ev.detail==='games'){await load();await refreshResults();render();}});
-  window.addEventListener('props:data',()=>{if(ready)refreshResults();});
+  window.addEventListener('props:data',async()=>{if(ready){await load();render();refreshResults();}});
   setInterval(()=>{if(!document.hidden&&!panel.hidden){render();refreshResults();}},60000);
 })();

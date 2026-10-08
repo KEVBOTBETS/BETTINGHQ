@@ -40,12 +40,13 @@
   /* ---------- loading ---------- */
   async function load() {
     const stamp = Date.now();
-    const get = (file) => fetch(`data/${file}?v=${stamp}`, { cache: 'no-store' }).then((response) => {
+    const get = (file) => fetch(`data/${file}?v=${stamp}`, { cache: 'no-store', signal: AbortSignal.timeout(20000) }).then((response) => {
       if (!response.ok) throw new Error(`${file} unavailable`);
       return response.json();
     });
-    const [meta, legs, parlays] = await Promise.all([get('meta.json'), get('legs.json').catch(() => []), get('parlays.json').catch(() => ({ tickets: [] }))]);
-    state.meta = meta; state.legs = Array.isArray(legs) ? legs : []; state.parlays = parlays || { tickets: [] };
+    const [meta, legs, parlays] = await Promise.all([get('meta.json'), get('legs.json'), get('parlays.json')]);
+    if (!meta?.generated_at || !Array.isArray(legs) || !Array.isArray(parlays?.tickets)) throw new Error('Invalid props publication');
+    state.meta = meta; state.legs = legs; state.parlays = parlays;
     window.dispatchEvent(new CustomEvent('props:data'));
   }
 
@@ -638,15 +639,24 @@
     window.addEventListener('online', refresh);
   }
 
-  async function refresh() {
+  let refreshTask = null;
+  function refresh() {
+    if (!refreshTask) refreshTask = refreshOnce().finally(() => { refreshTask = null; });
+    return refreshTask;
+  }
+  async function refreshOnce() {
+    $('#refresh-props').disabled = true;
     try {
       await load();
       freshness();
       const tab = new URLSearchParams(location.search).get('tab')==='accuracy'?'accuracy':(location.hash || '#parlays').slice(1);
       showTab(['games','parlays','parlay-history','sheet','board','record','ledger','best','projections','simulator','accuracy','sources'].includes(tab)?tab:'parlays');
     } catch (error) {
-      $('#freshness').textContent = 'The model files could not be loaded. The last build may still be running.';
-      $('#parlays').innerHTML = `<div class="empty">${esc(error.message)}</div>`;
+      $('#freshness').textContent = state.meta
+        ? `Refresh failed: ${error.message}. Retaining publication from ${clock(state.meta.generated_at)}; quote expiry still applies.`
+        : `Model files unavailable: ${error.message}. Try Refresh view.`;
+    } finally {
+      $('#refresh-props').disabled = false;
     }
   }
 
@@ -654,6 +664,6 @@
     applySharedBank:bank=>{state.sharedBank=bank;state.bank.bankroll=bank.current;$('#bankroll').value=bank.current;$('#bankroll').readOnly=true;renderLedger();},
     replaceLedger:rows=>{const unverified=state.ledger.filter(e=>!e.confirmed_actual);const ids=new Set(rows.map(e=>e.id));const next=[...rows,...unverified.filter(e=>!ids.has(e.id))];writeStore(LEDGER_KEY,next);state.ledger=next;renderLedger();}};
   state.imported = readStore(IMPORT_KEY, {});
-  loadLedger(); wire(); refresh();
+  loadLedger(); wire(); $('#refresh-props').addEventListener('click', refresh); refresh();
   setInterval(() => { if (!document.hidden) refresh(); }, 600000);
 })();

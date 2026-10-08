@@ -59,7 +59,8 @@ try{
   await page.screenshot({path:'test-results/weekly-'+width+'.png',fullPage:true});
   failed=true;await frame.locator('#refresh').click();
   await frame.locator('#health').filter({hasText:'feed unavailable'}).waitFor();
-  assert.equal(await frame.locator('.match-card').count(),0,'Failed feed must clear prior research suggestions');
+  assert.equal(await frame.locator('.match-card').count(),2,'Retain forecasts with an unavailable feed label');
+  assert.equal(await frame.locator('.market').count(),0,'A failed feed must suppress prior betting suggestions');
   assert.deepEqual(errors,[]);
   await context.close();
  }

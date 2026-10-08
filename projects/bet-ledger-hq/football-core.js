@@ -25,7 +25,7 @@
     return C.cards(sport,bundle,now).filter(c=>c.day>=startDay&&c.day<end).map(c=>{
       const d=details.get(c.id),projection=d?.projection||{};
       const suggestions=[];
-      if(c.selectable&&!c.locked&&c.predicted){
+      if(!bundle.error&&c.selectable&&!c.locked&&c.predicted){
         for(const market of ['ML','ATS','TOTAL']){
           const options=(boards.get(c.id)||[]).filter(r=>r.market===market).map(r=>candidate(r,now,floor)).filter(Boolean)
             .sort((a,b)=>Number(a.research)-Number(b.research)||b.action_edge-a.action_edge);

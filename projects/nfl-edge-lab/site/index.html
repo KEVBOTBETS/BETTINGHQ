@@ -261,7 +261,7 @@ footer b{color:var(--ink-2)}
       <button class="iconbtn" id="weeknow" type="button">Now</button>
     </div>
     <div class="mast-right">
-      <div class="stamp" id="stamp">&nbsp;</div>
+      <div><button id="refresh-nfl" type="button" class="iconbtn">Refresh view</button><div class="stamp" id="stamp">&nbsp;</div><p id="refresh-status" role="status" aria-live="polite"></p></div>
       <button class="iconbtn" id="themebtn" type="button" title="Switch theme">Theme</button>
     </div>
   </div>
@@ -329,11 +329,14 @@ const STAKING = window.EdgeStaking;
 const STAKING_KEY = "nfl-edge.staking.v1";
 
 async function loadAll(){
+  const stamp=Date.now();
   const res = await Promise.all(FILES.map(f =>
-    fetch(DATA_BASE + f + ".json", {cache:"no-store"})
+    fetch(DATA_BASE + f + ".json?v=" + stamp, {cache:"no-store",signal:AbortSignal.timeout(20000)})
       .then(r => r.ok ? r.json() : null).catch(() => null)));
+  // Publish the required slate together. A partial refresh must not mix weeks.
+  if(!res[0]?.generated_at || !["board","games_detail","games"].every(f=>Array.isArray(res[FILES.indexOf(f)])))return false;
   FILES.forEach((f,i) => { if (res[i] !== null) S[f] = res[i]; });
-  return !!S.meta;
+  return true;
 }
 
 /* ================================================================= helpers */
@@ -1735,16 +1738,21 @@ function readURL(){
   }
 }
 
-async function boot(again){
-  readURL();
+let refreshTask=null;
+function boot(again){
+  if(!refreshTask)refreshTask=refreshBoard(again).finally(()=>{refreshTask=null;$("#refresh-nfl").disabled=false;});
+  return refreshTask;
+}
+async function refreshBoard(again){
+  $("#refresh-nfl").disabled=true;
+  $("#refresh-status").textContent="Checking published forecasts…";
+  if(!again)readURL();
   const ok = await loadAll();
   if (!ok){
-    document.body.innerHTML = `<div class="wrap" style="padding-top:60px">
-      <div class="empty">Could not load the data files from <code>${esc(DATA_BASE)}</code>.
-      If you are opening this file directly from disk, serve the folder instead:
-      <code>python -m http.server</code> from the <code>site/</code> directory.</div></div>`;
+    $("#refresh-status").textContent=S.meta?"Refresh failed. Retaining the last loaded forecast; verify its publication and quote times.":"Could not load the NFL publication. Use Refresh view to retry.";
     return;
   }
+  $("#refresh-status").textContent="Files checked "+fmtDate(new Date().toISOString())+". Odds collection runs separately.";
   S.myLedger=L?L.load():[];if(L){const settled=L.settleAll(S.myLedger,S.games||[]);S.myLedger=settled.entries;if(settled.changed)L.save(S.myLedger);}
   const m = S.meta;
   $("#seasonline").textContent =
@@ -1760,6 +1768,11 @@ async function boot(again){
   if (!again) { /* first paint */ }
   render();
 }
+$("#refresh-nfl").addEventListener("click",()=>boot(true));
+window.addEventListener("online",()=>boot(true));
+window.addEventListener("message",event=>{if(event.origin===location.origin&&event.data?.type==="kevbotbets:activate")boot(true);});
+document.addEventListener("visibilitychange",()=>{if(!document.hidden)boot(true);});
+setInterval(()=>{if(!document.hidden)boot(true);},300000);
 boot(false);
 </script>
 <script src="model-accuracy.js"></script>

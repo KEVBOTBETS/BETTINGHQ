@@ -30,3 +30,7 @@ const freshForecastOldPrice={...bundle,meta:{generated_at:'2026-09-19T11:59:00Z'
 assert.equal(W.slate('ncaaf',freshForecastOldPrice,'2026-09-19',now)[0].suggestions.length,0);
 assert.equal(W.slate('ncaaf',freshForecastOldPrice,'2026-09-19',now)[0].predicted,'home','Price freshness does not erase the winner forecast');
 console.log('Weekly football: lower research threshold, data/price guards, stale-feed rejection, and date window passed');
+
+const failed=W.slate("ncaaf",{...bundle,error:true},"2026-09-19",now,.005);
+assert.equal(failed.length,1,"Keep the loaded forecast visible during an outage");
+assert(failed.every(c=>c.suggestions.length===0),"A retained failed feed cannot offer research bets");
