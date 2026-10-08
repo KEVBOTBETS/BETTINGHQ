@@ -1,0 +1,22 @@
+# Keyless model improvements
+
+All ten improvements are implemented through the existing scheduled collection and publication workflow. No commercial data key is required. New model probabilities remain research outputs while prospective results accumulate; implementation does not establish an accuracy gain.
+
+| Improvement | Implementation and review location |
+|---|---|
+| 1. Prospective evidence | First valid pregame captures remain immutable by event/model/version. Compare paired results against both the current model and exact-price market benchmark. Date-clustered intervals require 100 paired games across 28 dates; promotion is disabled. Model Lab → Competition. |
+| 2. Opponent-adjusted efficiency | Passing/rushing EPA, success, explosives and pace from public nflverse play data; prior-date opponent profiles and chronological residuals. Version `nfl-efficiency-v2`. Model Lab → Efficiency. |
+| 3. Early-season shrinkage | Prior-season records receive 35% weight, with recency weighting and sample shrinkage. Current-season counts and effective data weight are shown. Corrected-data replay remains exploratory. |
+| 4. Player workload | Independently transactional nflverse snap/depth collectors. Unique game/team/player joins only; recent snap share scales target/carry shares within explicit bounds. Expected snaps, targets and carries are shown before yardage probabilities. Snaps are not routes. Model Lab → Props. |
+| 5. Starters and absences | Expected QB roles, absence lists, questionable players, missing injury reports, source times and offensive-line flags. Uncertain roles lower the displayed research confidence; expected depth rank is never called a confirmed starter. NHL uses its existing goalie scenarios. Model Lab → Lineups. |
+| 6. Separate market calibration | Independent league/market/baseline-version calibration, including TD contracts when exact verified results exist. Fixed symmetric slope grid trains only on earlier verified outcomes; needs 200 unique contracts and 100 games. Prospective raw/calibrated log loss, reliability bins and clustered intervals are recorded. No automatic promotion. Model Lab → Calibration. |
+| 7. Exact quote comparisons | Book aliases normalized; line, player, rules and original observation retained. Opposite prices must match book and timestamp to de-vig. Estimated model prices are rejected. Binary TD contracts supported; line movement stays separate. Model Lab → Prices. |
+| 8. Kickoff weather | Hourly forecasts more than one hour from kickoff are rejected. Source receipt time, gust/rain/temperature gaps and roof assumptions are published. Unknown roof or gust data remains unknown. Model Lab → Weather. |
+| 9. Parlay dependence | Shared game draws connect pace, targets, receptions, receiving yards and QB passing yards. Joint masks support ticket comparisons, with duplicate/contradictory contracts rejected. Distinct games assume independence. Seven workload markets are supported; TD dependence and unquoted combined payout/EV remain unavailable. Model Lab → Props. |
+| 10. Empty-board diagnosis | Scheduled games, rows and exclusions distinguish missing/expired prices, stale forecast publication, betting-window holds, true PASS and qualified rows. NFL/Props pages link directly to diagnosis. Model Lab → Feed diagnosis. |
+
+The Model Lab refreshes on demand, every five minutes while visible, on reconnection and on visibility change. Failed loads retain the previous valid snapshot. Refresh checks published files; it does not claim to collect new sportsbook quotes.
+
+Public sources: [nflverse play data](https://github.com/nflverse/nflverse-data/releases/tag/pbp), [snaps](https://github.com/nflverse/nflverse-data/releases/tag/snap_counts), [depth charts](https://github.com/nflverse/nflverse-data/releases/tag/depth_charts), [Open-Meteo](https://open-meteo.com/en/docs), [NWS](https://www.weather.gov/documentation/services-web-api), and [Covers offers](https://www.covers.com/sport/football/nfl/player-props). Source failures preserve original data and timestamps.
+
+Regression coverage includes prospective immutability, future-result exclusion, version isolation, pushes, failed-source retention, ambiguous/stale snap rejection, depth expiration, separate empty-board reasons, binary opposite quotes, weather-hour alignment and future-game immunity. Browser checks exercise all nine Model Lab tabs at desktop/mobile sizes and the existing site recovery and navigation suite.

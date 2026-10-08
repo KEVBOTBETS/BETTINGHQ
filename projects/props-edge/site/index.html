@@ -18,7 +18,7 @@
 <script src="parlay-history.js" defer></script>
 <script src="game-props-core.js" defer></script>
 <script src="game-props.js" defer></script>
-</head>
+<script src="../bet-ledger-hq/board-health.js" defer></script></head>
 <body>
 <header class="masthead">
   <div class="brand">
@@ -30,7 +30,7 @@
   </div>
   <div class="masthead-side">
     <button id="refresh-props" type="button">Refresh view</button>
-    <p id="freshness" class="freshness">Loading the board…</p>
+    <div id="board-diagnosis" data-board="props" style="margin:12px 0;font-size:13px;line-height:1.6" hidden></div><p id="freshness" class="freshness">Loading the board…</p>
     <div class="masthead-actions">
       <button id="paste-lines" class="ghost" type="button">Paste odds</button>
       <button id="import-lines" class="ghost" type="button">Import CSV</button>
@@ -60,7 +60,7 @@
   <section id="tab-parlays" class="panel" role="tabpanel" aria-label="Parlay lab">
     <div class="panel-head">
       <div>
-        <h2>Parlay lab</h2>
+        <h2>Parlay lab</h2><p><a href="../bet-ledger-hq/model-lab.html?tab=props" style="color:inherit">Review shared-game workload simulations and joint ticket probabilities ↗</a></p>
         <p class="lede">Core uses fresh, qualified offers at one book across distinct games. Longshot retains the big payout targets. Prices may be estimated; same-game win probabilities are unavailable until a joint model is validated. Confirm the combined price in your book.</p>
       </div>
       <div class="scope-picker" role="radiogroup" aria-label="Parlay scope">

@@ -94,3 +94,60 @@ def collect(root=ROOT,seasons=None):
 
 if __name__=='__main__':
     parser=argparse.ArgumentParser();parser.add_argument('--seasons',nargs='+',type=int);args=parser.parse_args();collect(seasons=args.seasons)
+
+def collect_workload(root=ROOT,season=None,now=None):
+    """Public snap/depth releases, independently transactional per source."""
+    now=now or datetime.now(timezone.utc);season=season or (now.year if now.month>=8 else now.year-1)
+    path=root/'research/inputs/nfl-workload.json';old=read(path,{});out=dict(old);errors=[]
+    for kind in ['snap_counts','depth_charts']:
+        url=f'https://github.com/nflverse/nflverse-data/releases/download/{kind}/{kind}_{season}.csv'
+        try:
+            request=urllib.request.Request(url,headers={'User-Agent':'BETTINGHQ-research/2.0'})
+            limit=80_000_000 if kind=='depth_charts' else 15_000_000
+            with urllib.request.urlopen(request,timeout=30) as response:blob=response.read(limit+1)
+            if len(blob)>limit:raise ValueError('Dataset exceeds size limit')
+            rows=list(csv.DictReader(io.StringIO(blob.decode('utf-8-sig'))))
+            required={'game_id','team','player','offense_snaps','offense_pct'} if kind=='snap_counts' else {'dt','team','player_name','pos_abb','pos_rank'}
+            if not rows or not required.issubset(rows[0]):raise ValueError('Invalid workload schema')
+            if kind=='depth_charts':
+                # Retain the latest expected QB role per team, not a season of daily rosters.
+                latest={}
+                for r in rows:
+                    if r.get('pos_abb')!='QB' or number(r.get('pos_rank'))!=1:continue
+                    t=r['team'];dt=r['dt']
+                    if t not in latest or dt>latest[t][0]['dt']:latest[t]=[r]
+                    elif dt==latest[t][0]['dt']:latest[t].append(r)
+                rows=[r for values in latest.values() for r in values]
+            out[kind]={'rows':rows,'observed_at':now.isoformat(),'url':url,'season':season}
+        except (OSError,ValueError,UnicodeError) as exc:errors.append({'source':kind,'error':type(exc).__name__})
+    out.update(schema=1,errors=errors,policy='Offensive snaps are recorded participation, not route counts. Depth rank is expected role, not confirmed gameday availability. Failed sources keep their original timestamps.')
+    write(path,out);return out
+
+def enrich_workload(dataset,workload,now):
+    from .common import instant
+    from .opportunity import identity
+    result={**dataset,'players':[dict(p) for p in dataset.get('players',[])]}
+    feed=workload.get('snap_counts') or {};at=instant(feed.get('observed_at'));matched=0
+    if at and at<=now and (now-at).total_seconds()<=7*86400:
+        index=defaultdict(list)
+        for r in feed.get('rows',[]):index[r.get('game_id'),key_team(r.get('team')),identity(r.get('player'))].append(r)
+        for p in result['players']:
+            hits=index[p['game_id'],key_team(p['team']),identity(p['name'])]
+            if len(hits)!=1:continue
+            snaps,share=number(hits[0].get('offense_snaps')),number(hits[0].get('offense_pct'))
+            if snaps is None or snaps<0 or share is None or not 0<=share<=1:continue
+            p.update(offensive_snaps=snaps,snap_share=share,snap_observed_at=feed['observed_at']);matched+=1
+    depth=workload.get('depth_charts') or {};received=instant(depth.get('observed_at'));starters={}
+    if received and received<=now and (now-received).total_seconds()<=36*3600:
+        rows=defaultdict(list)
+        for r in depth.get('rows',[]):
+            at=instant(r.get('dt'))
+            if r.get('pos_abb')=='QB' and number(r.get('pos_rank'))==1 and at and at<=now and (now-at).total_seconds()<=36*3600:rows[key_team(r['team'])].append(r)
+        for t,values in rows.items():
+            newest=max(r['dt'] for r in values);latest=[r for r in values if r['dt']==newest]
+            if len({r['player_name'] for r in latest})==1:starters[t]={'player':latest[0]['player_name'],'player_id':latest[0].get('gsis_id'),'observed_at':newest,'fresh':True}
+    result['workload_coverage']={'matched_player_games':matched,'snap_observed_at':feed.get('observed_at'),'expected_qb_teams':len(starters),'errors':workload.get('errors',[])}
+    result['expected_starters']=starters
+    return result
+
+if __name__=='__main__':collect_workload()

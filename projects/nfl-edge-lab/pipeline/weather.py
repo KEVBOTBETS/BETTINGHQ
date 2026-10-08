@@ -149,7 +149,7 @@ def fetch_forecasts(points: list[tuple[float, float]], days: int = 16) -> dict[s
     out: dict[str, dict] = {}
     for point, block in zip(uniq, blocks):
         if isinstance(block, dict) and block.get("hourly"):
-            out[_round_key(*point)] = {**block["hourly"], "_source": "Open-Meteo"}
+            out[_round_key(*point)] = {**block["hourly"], "_source": "Open-Meteo", "_retrieved_at":dt.datetime.now(dt.timezone.utc).isoformat()}
     return out
 
 
@@ -222,7 +222,7 @@ def at_kickoff(hourly: dict, kickoff_utc: str) -> dict | None:
         gap = abs((ts - ko).total_seconds())
         if best_gap is None or gap < best_gap:
             best_i, best_gap = i, gap
-    if best_i is None or best_gap is None or best_gap > (3600 if hourly.get("_source") == "National Weather Service" else 6 * 3600):
+    if best_i is None or best_gap is None or best_gap > 3600:
         return None
 
     if hourly.get("_source") == "National Weather Service":
@@ -248,6 +248,8 @@ def at_kickoff(hourly: dict, kickoff_utc: str) -> dict | None:
         "condition": val("_conditions") or (WMO.get(int(code), "—") if code is not None else "—"),
         "source": hourly.get("_source", "Open-Meteo"),
         "source_generated_at": hourly.get("_generated_at"),
+        "source_observed_at": hourly.get("_retrieved_at") or hourly.get("_generated_at"),
+        "kickoff_gap_hours":best_gap/3600,
     }
 
 
@@ -357,6 +359,9 @@ def build_for_games(games: list[dict], cfg: dict, geo_cache: dict) -> dict[str, 
             "venue": g.get("venue"),
             "city": g.get("venue_city"),
             "roof": loc["roof"],
+            "observed_at":dt.datetime.now(dt.timezone.utc).isoformat(),
+            "roof_status":"fixed dome" if loc["roof"]=="dome" else "unconfirmed" if loc["roof"]=="retractable" else "open",
+            "coverage":"available" if fc or loc["roof"]=="dome" else "hourly forecast unavailable",
             "forecast": fc,
             **adj,
         }

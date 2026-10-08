@@ -7,7 +7,7 @@ import importlib.util
 from pathlib import Path
 import numpy as np
 from .common import read,write,instant,number,decimal,team,cover,summary,VERSION
-from . import market,lineups,efficiency,experiments,opportunity,prop_tracking
+from . import market,lineups,efficiency,experiments,opportunity,prop_tracking,calibration,readiness,weather_review,ingest
 
 ROOT=Path(__file__).resolve().parents[2]
 ARCHIVE=Path('projects/bet-ledger-hq/data/research/history.json')
@@ -45,11 +45,18 @@ def quotes_for_games(sport,games):
 
 def build(root=ROOT,out=None,capture=False,now=None):
     now=now or datetime.now(timezone.utc);old=read(root/ARCHIVE,{'forecasts':[],'quotes':[]});dataset=read(root/'research/inputs/nfl-pbp.json',{})
+    dataset=ingest.enrich_workload(dataset,read(root/'research/inputs/nfl-workload.json',{}),now)
     rows=dataset.get('teams',[]);trained=efficiency.fit(rows,now.date().isoformat()) if rows and instant(dataset.get('observed_at')) and instant(dataset['observed_at'])<=now else None
-    raw=[];allgames={};metas={};results={};games=[];forecasts=[];gaps=[]
+    raw=[];allgames={};metas={};results={};games=[];forecasts=[];gaps=[];diagnostics=[];weather=[];calibration_rows=[]
     for sport in ['nfl','ncaaf','nhl']:
         folder=root/f'projects/{sport}-edge-lab';meta=read(folder/'site/data/meta.json',{});metas[sport]=meta
         source=read(folder/('site/data/games_detail.json' if sport=='nfl' else 'site/data/games.json'),[]);allgames[sport]=source
+        board=read(folder/'site/data/board.json',[])
+        diagnostics.append(readiness.health(sport,meta,source,board,now))
+        # Capture canonical home/over probabilities only; opposite sides are not extra samples.
+        for q in board:
+            if q.get('side') not in ['home','over'] or q.get('market') not in ['ML','ATS','TOTAL']:continue
+            calibration_rows.append({'sport':sport,'event_id':str(q.get('game_id')),'market':q['market'],'side':q['side'],'line':q.get('line') if q['market']!='ML' else None,'p_win':q.get('model_prob'),'p_push':q.get('push_prob',0),'price':q.get('price'),'book':q.get('book'),'start':q.get('game_date'),'observed_at':q.get('odds_observed_at'),'generated_at':meta.get('generated_at'),'baseline_version':meta.get('model_version') or q.get('tier_version','current-v1'),'rules':'full-game'})
         graded=read(folder/f"state/games_{meta.get('season',now.year)}.json",[]) if sport=='nfl' else source
         for g in graded:
             if g.get('completed'):results[sport,str(g['game_id'])]={**g,'result_observed_at':meta.get('generated_at')}
@@ -65,10 +72,14 @@ def build(root=ROOT,out=None,capture=False,now=None):
             shadow=g.get('challenger') or {}
             if sport=='nhl' and fresh and number(shadow.get('p_home')) is not None and instant(shadow.get('observed_at')) and instant(shadow['observed_at'])<=now:
                 comparison.append({'model':'lineup-context','version':shadow['version'],'p_home':shadow['p_home'],'margin':shadow['home_goals']-shadow['away_goals'],'source_observed_at':shadow['observed_at'],'mode':'shadow','missing':shadow.get('missing',[])})
-            games.append({**base,'models':comparison,'scenarios':lineups.scenarios(g,sport,now),'status':'Fresh source' if fresh else 'Stale or missing forecast source','season_type':g.get('season_type')})
+            if sport in ['nfl','ncaaf']:weather.append(weather_review.review(sport,g,meta,now))
+            availability=readiness.availability(g,meta,now,dataset.get('expected_starters',{}) if sport=='nfl' else {}) if sport!='nhl' else {'sides':[],'confidence_multiplier':None,'status':'See goalie scenarios','actionable':False}
+            games.append({**base,'availability':availability,'models':comparison,'scenarios':lineups.scenarios(g,sport,now),'status':'Fresh source' if fresh else 'Stale or missing forecast source','season_type':g.get('season_type')})
     prop_raw=[];projections=read(root/'projects/props-edge/site/data/projections.json',[])
-    board=read(root/'projects/props-edge/site/data/board.json',[])
+    board=read(root/'projects/props-edge/site/data/board.json',[]);props_meta=read(root/'projects/props-edge/site/data/meta.json',{})
+    diagnostics.append(readiness.health('props',read(root/'projects/props-edge/site/data/meta.json',{}),allgames.get('nfl',[]),board,now))
     for q in board:
+        calibration_rows.append({'sport':'nfl','event_id':str(q.get('event_id')),'market':q['market'],'player':q.get('player'),'side':q['side'],'line':q.get('line'),'p_win':q.get('model_prob'),'p_push':q.get('push_prob',0),'price':q.get('price_american'),'book':q.get('book'),'price_source':q.get('price_source'),'start':q.get('start_time'),'observed_at':q.get('updated_at'),'generated_at':props_meta.get('generated_at'),'baseline_version':q.get('tier_version','props-current-v1'),'rules':'full-game'})
         prop_raw.append({**q,'sport':'nfl','price':q.get('price_american'),'observed_at':q.get('updated_at'),'start':q.get('start_time'),'rules':'full-game'})
     multisport={}
     for sport in ['nhl','ncaaf']:
@@ -88,7 +99,7 @@ def build(root=ROOT,out=None,capture=False,now=None):
             w=weight['efficiency_weight'];b,c=index['current'],index['efficiency']
             game['models'].append({'model':'ensemble','version':'prospective-grid-v1','p_home':w*c['p_home']+(1-w)*b['p_home'],'margin':w*c['margin']+(1-w)*b['margin'],'source_observed_at':now.isoformat(),'mode':'shadow','weights':weight})
         for model in game['models']:
-            f={**game,**model};f.pop('models');f.pop('scenarios');f.pop('status');f['cohort']='preseason' if f.get('season_type')==1 else 'regular season'
+            f={**game,**model};f.pop('models');f.pop('scenarios');f.pop('status');f.pop('availability',None);f['cohort']='preseason' if f.get('season_type')==1 else 'regular season'
             ats=[x for x in by_event[game['sport'],game['event_id']] if x['contract'][2]=='ATS' and x['contract'][4]==f.get('home_spread')]
             # ROI only uses the paired same-book original prices; never cherry-pick each side's book.
             if ats:
@@ -106,13 +117,14 @@ def build(root=ROOT,out=None,capture=False,now=None):
         if not offers:continue
         candidates=[p for p in projections if str(p.get('event_id'))==str(g['game_id']) and p['market'] in opportunity.MARKETS]
         arrays,reviews=opportunity.simulate_event(g,candidates,dataset,now)
-        workloads.extend([{**r,'event_id':str(g['game_id'])} for r in reviews])
+        available=readiness.availability(g,metas['nfl'],now,dataset.get('expected_starters',{}))
+        workloads.extend([{**r,'event_id':str(g['game_id']),'confidence_multiplier':available['confidence_multiplier']} for r in reviews])
         unique={q['id']:q for q in offers}
         for q in unique.values():
             values=arrays.get(q.get('player'),{}).get(opportunity.MARKETS[q['market']])
             if values is None:continue
             probability,hits,pushes=opportunity.price_outcome(values,q['side'],q['line'])
-            row={**q,'probability':probability,'simulations':len(values),'actionable':False,'mode':'unvalidated opportunity challenger','breakeven':1/q['decimal'],'conditional_ev':probability['win']*(q['decimal']-1)-probability['loss'],'hit_mask':base64.b64encode(np.packbits(hits,bitorder='little').tobytes()).decode(),'push_mask':base64.b64encode(np.packbits(pushes,bitorder='little').tobytes()).decode()}
+            row={**q,'probability':probability,'simulations':len(values),'actionable':False,'mode':'unvalidated opportunity challenger','availability_confidence':available['confidence_multiplier'],'breakeven':1/q['decimal'],'conditional_ev':probability['win']*(q['decimal']-1)-probability['loss'],'hit_mask':base64.b64encode(np.packbits(hits,bitorder='little').tobytes()).decode(),'push_mask':base64.b64encode(np.packbits(pushes,bitorder='little').tobytes()).decode()}
             props.append(row);simulated.append({**row,'hits':hits,'pushes':pushes})
     tickets=[]
     for book in sorted({q['book'] for q in simulated}):
@@ -128,14 +140,22 @@ def build(root=ROOT,out=None,capture=False,now=None):
             if len(legs)<2:continue
             ticket=opportunity.joint_ticket(legs)
             if ticket:tickets.append({'sport':'nfl','profile':profile,'book':book,**ticket,'legs':[{'player':q['player'],'event_id':q['event_id'],'market':q['market'],'side':q['side'],'line':q['line'],'win':q['probability']['win'],'price':q['price']} for q in legs]})
-    clv=[{'sport':q['sport'],'matchup':q.get('matchup'),'market':q['market'],'side':q['side'],'book':q['book'],**c} for q in old.get('quotes',[]) if (c:=market.closing_value(q,quote_archive,now))]
+    close_index=defaultdict(list)
+    for q in quote_archive:close_index[tuple(q.get('contract',[])),q.get('book'),q.get('side')].append(q)
+    clv=[{'sport':q['sport'],'matchup':q.get('matchup'),'market':q['market'],'side':q['side'],'book':q['book'],**c} for q in old.get('quotes',[]) if (c:=market.closing_value(q,close_index[tuple(q.get('contract',[])),q.get('book'),q.get('side')],now))]
     state={'schema':1,'version':VERSION,'updated_at':now.isoformat(),'forecasts':frozen,'quotes':quote_archive}
     prop_archive=prop_tracking.freeze(old.get('prop_forecasts',[]),props,now) if capture else old.get('prop_forecasts',[])
     if capture:prop_archive=prop_tracking.settle(prop_archive,dataset,root/'projects/nfl-edge-lab/state/nflverse_games.csv',now)
     state['prop_forecasts']=prop_archive
+    market_archive=calibration.freeze(old.get('market_forecasts',[]),calibration_rows,now) if capture else old.get('market_forecasts',[])
+    if capture:market_archive=calibration.attach_props(calibration.settle(market_archive,results,now),prop_archive,now)
+    if capture:market_archive=calibration.attach_verified_props(market_archive,read(root/'projects/props-edge/site/data/parlay-results.json',{}).get('records',[]),now)
+    state['market_forecasts']=market_archive
     if capture:write(root/ARCHIVE,state)
-    result={'schema':1,'version':VERSION,'generated_at':now.isoformat(),'mode':'Local research · promotion disabled','games':games,'market':prices,'props':props,'workloads':workloads,'tickets':tickets,'lab':experiments.report(frozen,now),'prop_lab':prop_tracking.report(prop_archive,now),'closing_prices':clv,'coverage':{'nfl':{'team_games':len(rows),'player_games':len(dataset.get('players',[])),'observed_at':dataset.get('observed_at'),'efficiency_training_games':trained['games'] if trained else 0,'residual_games':len(trained['residuals']) if trained else 0},**multisport},'notes':['NFL efficiency replay uses corrected public data and is exploratory. Prospective captures provide the real test.','NCAAF EPA and NHL ice-time inputs are unavailable; those opportunity challengers abstain. Existing forecasts and price comparisons remain available.','Lineup sensitivities have no invented availability probabilities and do not add a second injury haircut to production.','All new outputs are shadow research. No automatic promotion, push, bet placement or publication.'],'sources':[{'name':'nflverse play data','url':'https://github.com/nflverse/nflverse-data/releases/tag/pbp'},{'name':'nflverse update schedule','url':'https://nflverse.nflverse.com/articles/nflverse_data_schedule.html'},{'name':'Observed public prop offers','url':'https://www.covers.com/sport/football/nfl/player-props'}]}
-    if out:write(out,result)
+    result={'schema':1,'version':VERSION,'generated_at':now.isoformat(),'mode':'Local research · promotion disabled','games':games,'market':prices,'props':props,'workloads':workloads,'tickets':tickets,'lab':experiments.report(frozen,now),'prop_lab':prop_tracking.report(prop_archive,now),'closing_prices':clv,'coverage':{'nfl':{'team_games':len(rows),'player_games':len(dataset.get('players',[])),'observed_at':dataset.get('observed_at'),'efficiency_training_games':trained['games'] if trained else 0,'residual_games':len(trained['residuals']) if trained else 0},**multisport},'upgrades':readiness.completion(),'diagnostics':diagnostics,'weather':weather,'market_calibration':calibration.report(market_archive,now),'workload_coverage':dataset.get('workload_coverage',{}),'notes':['NFL efficiency replay uses corrected public data and is exploratory. Prospective captures provide the real test.','NCAAF EPA and NHL ice-time inputs are unavailable; those opportunity challengers abstain. Existing forecasts and price comparisons remain available.','Lineup sensitivities have no invented availability probabilities and do not add a second injury haircut to production.','All new outputs are shadow research. No automatic model promotion or bet placement. Reports are published by the normal release workflow.'],'sources':[{'name':'nflverse play data','url':'https://github.com/nflverse/nflverse-data/releases/tag/pbp'},{'name':'nflverse update schedule','url':'https://nflverse.nflverse.com/articles/nflverse_data_schedule.html'},{'name':'Observed public prop offers','url':'https://www.covers.com/sport/football/nfl/player-props'}]}
+    if out:
+        write(out,result)
+        write(out.with_name('diagnostics.json'),{'generated_at':now.isoformat(),'boards':diagnostics})
     return result
 
 if __name__=='__main__':

@@ -16,7 +16,10 @@ def workload(history, day):
     if len(eligible)<3:return None
     weights=np.array([.85**(len(eligible)-i-1) for i in range(len(eligible))]);weights/=weights.sum()
     means={k:float(sum(w*r.get(k,0) for w,r in zip(weights,eligible))) for k in set(MARKETS.values())}
-    return {'samples':len(eligible),'through':eligible[-1]['date'],'means':means,'history':eligible}
+    snaps=[r['snap_share'] for r in eligible if number(r.get('snap_share')) is not None]
+    recent=snaps[-3:];base=sum(snaps)/len(snaps) if snaps else None
+    factor=float(np.clip((sum(recent)/len(recent))/base,.7,1.3)) if base and recent else 1.
+    return {'samples':len(eligible),'through':eligible[-1]['date'],'means':means,'history':eligible,'snap_samples':len(snaps),'snap_share':sum(recent)/len(recent) if recent else None,'workload_factor':factor,'workload_note':'Recent offensive snap share scales historical opportunity shares, capped at ±30%' if snaps else 'Snap history unavailable; historical opportunity shares only'}
 
 def count(rng, mean, size, variability=.15):
     # A mixture models uncertain volume without negative opportunities.
@@ -26,7 +29,7 @@ def simulate_event(game, candidates, dataset, now, size=6000):
     start=instant(game.get('date')); observed=instant(dataset.get('observed_at'))
     live=instant(dataset.get('live_observed_at') or dataset.get('observed_at'))
     if not start or start<=now or not observed or observed>now or not live or live>now or (now-live).total_seconds()>7*86400:return {},[]
-    rng=np.random.default_rng(seed([game.get('game_id'),'joint-opportunity-v2',dataset['observed_at']]))
+    rng=np.random.default_rng(seed([game.get('game_id'),'joint-opportunity-v3',dataset['observed_at']]))
     histories=defaultdict(list)
     for r in dataset.get('players',[]):histories[r['player_id']].append(r)
     ids=defaultdict(set)
@@ -43,7 +46,8 @@ def simulate_event(game, candidates, dataset, now, size=6000):
             qb=((game.get('injuries') or {}).get(side,{}) or {}).get('qb') or {}
             value=qb.get('value') or {};status=str(qb.get('status') or '').lower()
             expected=value.get('replacement') if qb.get('weight')==1 or status=='out' else qb.get('name') or value.get('starter')
-            if not expected or qb.get('questionable') or status in ['questionable','doubtful'] or identity(c['player'])!=identity(expected):
+            if not expected:expected=dataset.get('expected_starters',{}).get(key_team(team(game,side)),{}).get('player') if side else None
+            if str(c.get('injury_status','')).lower() in ['questionable','doubtful'] or not expected or qb.get('questionable') or status in ['questionable','doubtful'] or identity(c['player'])!=identity(expected):
                 gaps.append({'player':c['player'],'reason':'Quarterback starting role missing, uncertain, or assigned to another player'});continue
             c={**c,'expected_starter':True}
         options=ids.get(identity(c.get('player')),set())
@@ -75,7 +79,7 @@ def simulate_event(game, candidates, dataset, now, size=6000):
             values=[]
             for c in active:
                 numerator=sum(r.get(key,0) for r in c['history']);denominator=sum(totals[r['game_id'],r['team']][key] for r in c['history'])
-                values.append(numerator/denominator if denominator else 0)
+                values.append((numerator/denominator if denominator else 0)*c['workload_factor'])
             # Keep an explicit 'other players' bucket; never invent their identities.
             used=sum(values); factor=min(1.,.98/max(used,.00001))
             values=[x*factor for x in values];return np.array(values+[1-sum(values)])
@@ -97,7 +101,7 @@ def simulate_event(game, candidates, dataset, now, size=6000):
             rushyards=np.rint(rng.normal(rushes*ypr,np.sqrt(rushes)*max(2,abs(ypr))));rushyards[rushes==0]=0
             receiving.append(recyards)
             arrays[c['player']]={'targets':targets,'receptions':rec,'receiving_yards':recyards,'carries':rushes,'rush_yards':rushyards,'pass_attempts':qb_counts[:,i]}
-            reviews.append({'player':c['player'],'team':abbr,'samples':c['samples'],'through':c['through'],'means':c['means'],'expected_targets':float(targets.mean()),'expected_carries':float(rushes.mean()),'policy':'Conditional on being active. Missing games are not recorded as zero. Historical shares are normalized across the verified current roster.'})
+            reviews.append({'player':c['player'],'team':abbr,'samples':c['samples'],'through':c['through'],'means':c['means'],'snap_samples':c['snap_samples'],'snap_share':c['snap_share'],'workload_note':c['workload_note'],'expected_snaps':float((attempts+carries).mean()*c['snap_share']) if c['snap_share'] is not None else None,'expected_targets':float(targets.mean()),'expected_carries':float(rushes.mean()),'policy':'Conditional on being active. Missing games are not recorded as zero. Historical shares are normalized across the verified current roster.'})
         other_rec=rng.binomial(target_counts[:,-1],.65);other_yards=np.rint(rng.gamma(np.maximum(other_rec*2,.001),6.));other_yards[other_rec==0]=0
         totalyards=sum(receiving)+other_yards
         for i,c in enumerate(active):

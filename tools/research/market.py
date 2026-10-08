@@ -3,12 +3,18 @@ from collections import defaultdict
 from .common import instant, number, decimal, seed
 
 def normalize(raw, now):
-    q=dict(raw); at=instant(q.get('observed_at')); start=instant(q.get('start')); price=number(q.get('price'))
+    q=dict(raw)
+    if q.get('price_source')=='model':return None
+    aliases={'draft kings':'DraftKings','draftkings':'DraftKings','bet 365':'bet365','bet365':'bet365','fan duel':'FanDuel','fanduel':'FanDuel'}
+    q['book']=aliases.get(str(q.get('book','')).strip().lower(),str(q.get('book','')).strip())
+    q['rules']=str(q.get('rules') or 'full-game').strip().lower()
+    at=instant(q.get('observed_at')); start=instant(q.get('start')); price=number(q.get('price'))
     if not q.get('sport') or not q.get('event_id') or not q.get('book') or not q.get('market') or not q.get('side'):return None
     if not at or not start or not at<=now<start or (now-at).total_seconds()>12*3600 or not decimal(price):return None
-    if q['side'] not in (['home','away'] if q['market'] in ['ML','ATS'] else ['over','under']):return None
-    if q['market']!='ML' and number(q.get('line')) is None:return None
-    q['line']=number(q.get('line')) if q['market']!='ML' else None
+    binary=q['market'] in ['Anytime touchdown','First touchdown','Last touchdown']
+    if q['side'] not in (['home','away'] if q['market'] in ['ML','ATS'] else ['yes','no'] if binary else ['over','under']):return None
+    if q['market']!='ML' and not binary and number(q.get('line')) is None:return None
+    q['line']=number(q.get('line')) if q['market']!='ML' and not binary else None
     q.update(price=price,decimal=decimal(price),observed_at=at.isoformat(),start=start.isoformat())
     q['contract']=[q['sport'],str(q['event_id']),q['market'],q.get('player_id') or q.get('player',''),q.get('line'),q.get('rules','full-game')]
     q['id']=str(seed([*q['contract'],q['side'],q['book'],q['observed_at'],price]))

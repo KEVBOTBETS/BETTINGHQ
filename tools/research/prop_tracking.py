@@ -14,14 +14,14 @@ def freeze(archive, rows, now):
         if key not in best or q['decimal']>best[key]['decimal']:best[key]=q
     for contract,q in best.items():
         for model in ['opportunity','current']:
-            key=str(seed([*contract,model,'prop-v2']))
+            key=str(seed([*contract,model,'prop-v3']))
             if key in saved:continue
             if model=='opportunity':p=q['probability'];win,push=p['win'],p['push']
             else:
                 win=number(q.get('model_prob'));push=number(q.get('push_prob')) or 0
                 if win is None:continue
             if not 0<=win<=1 or not 0<=push<1 or win+push>1+1e-8:continue
-            saved[key]={'id':key,'sport':q['sport'],'event_id':q['event_id'],'player':q['player'],'market':q['market'],'side':q['side'],'line':q['line'],'start':q['start'],'matchup':q.get('matchup'),'model':model,'version':'prop-v2','p_win':win,'p_push':push,'p_no_push':win/(1-push),'price_decimal':q['decimal'],'book':q['book'],'quote_observed_at':q['observed_at'],'captured_at':now.isoformat(),'result':None}
+            saved[key]={'id':key,'sport':q['sport'],'event_id':q['event_id'],'player':q['player'],'market':q['market'],'side':q['side'],'line':q['line'],'start':q['start'],'matchup':q.get('matchup'),'model':model,'version':'prop-v3','p_win':win,'p_push':push,'p_no_push':win/(1-push),'price_decimal':q['decimal'],'book':q['book'],'quote_observed_at':q['observed_at'],'captured_at':now.isoformat(),'result':None}
     return list(saved.values())
 
 def settle(archive, dataset, schedule_path, now):

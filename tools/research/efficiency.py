@@ -4,6 +4,8 @@ import math
 import numpy as np
 from .common import instant, number, key_team, margin_distribution, summary, cover
 
+def season_of(day):return int(day[:4]) if int(day[5:7])>=8 else int(day[:4])-1
+
 FEATURES=['pass efficiency','rush efficiency','success rate','explosive rate','home field','pace difference']
 
 def profiles(rows, day):
@@ -12,9 +14,10 @@ def profiles(rows, day):
     for r in sorted(eligible,key=lambda x:x['date']):latest[r['team']].append(r)
     raw={}
     for team,history in latest.items():
-        history=history[-12:]; weights=[.85**(len(history)-i-1) for i in range(len(history))]
+        history=history[-12:]; season=season_of(day)
+        weights=[.85**(len(history)-i-1)*(1 if season_of(r['date'])==season else .35) for i,r in enumerate(history)]
         total=sum(w*r['plays'] for w,r in zip(weights,history))
-        value={'games':len(history),'plays':total,'pace':sum(w*r['plays'] for w,r in zip(weights,history))/sum(weights)}
+        value={'current_season_games':sum(season_of(r['date'])==season for r in history),'prior_season_weight':.35,'efficiency_data_weight':total/(total+200),'games':len(history),'plays':total,'pace':sum(w*r['plays'] for w,r in zip(weights,history))/sum(weights)}
         for field in ['pass','rush']:
             n=sum(w*r[field+'_plays'] for w,r in zip(weights,history))
             value[field]=sum(w*r[field+'_epa'] for w,r in zip(weights,history))/(n+150)
@@ -27,8 +30,9 @@ def profiles(rows, day):
         if r['opponent'] in raw:allowed[r['opponent']].append(r)
     for t,p in raw.items():
         recent=allowed[t][-12:]
+        weights=[.85**(len(recent)-i-1)*(1 if season_of(r['date'])==season else .35) for i,r in enumerate(recent)]
         for f in ['pass','rush']:
-            p['allow_'+f]=sum(r[f+'_epa'] for r in recent)/(sum(r[f+'_plays'] for r in recent)+150)
+            p['allow_'+f]=sum(w*r[f+'_epa'] for w,r in zip(weights,recent))/(sum(w*r[f+'_plays'] for w,r in zip(weights,recent))+150)
     for t,p in raw.items():
         # Remove a conservative part of the quality of opponents faced.
         opponents=[raw[r['opponent']] for r in latest[t][-12:] if r['opponent'] in raw]
@@ -44,9 +48,11 @@ def vector(home,away,p,neutral=False):
 def fit(rows, cutoff=None):
     if cutoff:rows=[r for r in rows if r['date']<cutoff]
     rows=[r for r in rows if r.get('result_verified')]
-    games={r['game_id']:r for r in rows}; xs=[];ys=[];dates=[]
+    games={r['game_id']:r for r in rows}; xs=[];ys=[];dates=[];cache={}
     for r in sorted(games.values(),key=lambda x:x['date']):
-        p=profiles(rows,r['date']);x=vector(r['home'],r['away'],p,r.get('neutral',False))
+        p=cache.setdefault(r['date'],None)
+        if p is None:p=profiles(rows,r['date']);cache[r['date']]=p
+        x=vector(r['home'],r['away'],p,r.get('neutral',False))
         if x is None:continue
         xs.append(x);ys.append(r['home_score']-r['away_score']);dates.append(r['date'])
     if len(xs)<60:return None
@@ -75,5 +81,5 @@ def forecast(game, dataset, model, now):
     if x is None:return None
     contributions=x/model['scale']*model['beta'];mu=float(sum(contributions));dist=margin_distribution(mu,model['sd'],model['residuals']);out=summary(dist)
     line=number((game.get('odds') or {}).get('spread_home'))
-    out.update(version='nfl-efficiency-v1',mode='shadow',training_games=model['games'],training_through=model['last_date'],source_observed_at=dataset['observed_at'],margin=mu,sd=model['sd'],cover=cover(dist,line) if line is not None else None,home_spread=line,factors=[{'name':name,'points':float(v)} for name,v in zip(FEATURES,contributions)],profiles={'home':p[h],'away':p[a]},replay=model['replay'],actionable=False)
+    out.update(version='nfl-efficiency-v2',mode='shadow',training_games=model['games'],training_through=model['last_date'],source_observed_at=dataset['observed_at'],margin=mu,sd=model['sd'],cover=cover(dist,line) if line is not None else None,home_spread=line,factors=[{'name':name,'points':float(v)} for name,v in zip(FEATURES,contributions)],profiles={'home':p[h],'away':p[a]},replay=model['replay'],actionable=False)
     return out
