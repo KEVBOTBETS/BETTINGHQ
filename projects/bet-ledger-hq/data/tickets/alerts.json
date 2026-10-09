@@ -1,29 +1,43 @@
 {
   "schema": 1,
-  "checked_at": "2026-10-09T10:52:24.600Z",
+  "checked_at": "2026-10-09T11:21:18.827Z",
   "coverage": {
-    "nhl": {
-      "status": "available",
-      "reports": 39,
-      "checked_at": "2026-10-09T10:52:24.600Z"
-    },
     "ncaaf": {
       "status": "empty",
       "reports": 0,
-      "checked_at": "2026-10-09T10:52:24.600Z"
+      "checked_at": "2026-10-09T11:21:18.827Z"
+    },
+    "nhl": {
+      "status": "available",
+      "reports": 39,
+      "checked_at": "2026-10-09T11:21:18.827Z"
     },
     "mlb": {
       "status": "available",
       "reports": 5,
-      "checked_at": "2026-10-09T10:52:24.600Z"
+      "checked_at": "2026-10-09T11:21:18.827Z"
     },
     "nfl": {
       "status": "available",
       "reports": 387,
-      "checked_at": "2026-10-09T10:52:24.600Z"
+      "checked_at": "2026-10-09T11:21:18.827Z"
     }
   },
   "events": [
+    {
+      "id": "injury|nfl:3:Anthony Johnson Jr.|2026-10-09T11:21:18.827Z",
+      "kind": "injury",
+      "observed_at": "2026-10-09T11:21:18.827Z",
+      "sport": "nfl",
+      "title": "Player availability changed",
+      "event": "Chicago Bears",
+      "pick": "Anthony Johnson Jr.",
+      "before": "Out · Undisclosed",
+      "after": "Injured Reserve · Undisclosed",
+      "source_quote_at": "2026-10-09T11:00Z",
+      "source": "ESPN injuries",
+      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
+    },
     {
       "id": "odds|props|401872987|2026-10-11T17:00Z|Passing yards|Tyler Shough|over|theScore Bet|2026-10-09T09:46:36.177Z",
       "kind": "odds",
@@ -2924,20 +2938,6 @@
       "before": "Not in the previous dated report",
       "after": "Questionable · Shoulder",
       "source_quote_at": "2026-10-08T17:56Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:3:Anthony Johnson Jr.|2026-10-08T18:24:17.092Z",
-      "kind": "injury",
-      "observed_at": "2026-10-08T18:24:17.092Z",
-      "sport": "nfl",
-      "title": "Player availability changed",
-      "event": "Chicago Bears",
-      "pick": "Anthony Johnson Jr.",
-      "before": "Out · Undisclosed",
-      "after": "Injured Reserve · Undisclosed",
-      "source_quote_at": "2026-10-08T18:00Z",
       "source": "ESPN injuries",
       "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
     }
