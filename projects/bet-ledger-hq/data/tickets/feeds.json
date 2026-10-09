@@ -29,9 +29,6 @@
         "total_sigma": 15.689
       }
     },
-    "accuracy": {
-      "generated_at": "2026-10-09T09:45:58.969815+00:00"
-    },
     "board": [
       {
         "tier": "GOOD",
@@ -262,13 +259,16 @@
         "odds_fetched_at": "2026-10-09T09:45:57+00:00"
       }
     ],
-    "lastGoodAt": "2026-10-09T11:50:13.668Z"
+    "accuracy": {
+      "generated_at": "2026-10-09T09:45:58.969815+00:00"
+    },
+    "lastGoodAt": "2026-10-09T12:26:00.463Z"
   },
   "ladder": {
     "accuracy": {
       "generated_at": "2026-10-09T09:46:03.984684+00:00"
     },
-    "lastGoodAt": "2026-10-09T11:50:13.668Z"
+    "lastGoodAt": "2026-10-09T12:26:00.463Z"
   },
   "props": {
     "meta": {
@@ -4339,7 +4339,7 @@
         "roster_verified": true
       }
     ],
-    "lastGoodAt": "2026-10-09T11:50:13.668Z"
+    "lastGoodAt": "2026-10-09T12:26:00.463Z"
   },
   "nfl": {
     "meta": {
@@ -11500,7 +11500,7 @@
         "odds_observed_at": "2026-10-09T09:41:29.246465+00:00"
       }
     ],
-    "lastGoodAt": "2026-10-09T11:50:13.668Z"
+    "lastGoodAt": "2026-10-09T12:26:00.463Z"
   },
   "ncaaf": {
     "meta": {
@@ -19703,13 +19703,9 @@
         "odds_observed_at": "2026-10-09T09:42:17.600803+00:00"
       }
     ],
-    "lastGoodAt": "2026-10-09T11:50:13.668Z"
+    "lastGoodAt": "2026-10-09T12:26:00.463Z"
   },
   "mlb": {
-    "slate": {
-      "generated_at": "2026-10-09T09:42:22+00:00",
-      "games": []
-    },
     "meta": {
       "generated_at": "2026-10-09T09:45:25+00:00",
       "day_summary": {
@@ -19890,14 +19886,18 @@
         }
       }
     },
+    "slate": {
+      "generated_at": "2026-10-09T09:42:22+00:00",
+      "games": []
+    },
     "accuracy": {
       "generated_at": "2026-10-09T09:45:25+00:00"
     },
-    "lastGoodAt": "2026-10-09T11:50:13.668Z"
+    "lastGoodAt": "2026-10-09T12:26:00.463Z"
   },
   "nhl": {
     "meta": {
-      "generated_at": "2026-10-09T11:49:47.718126+00:00",
+      "generated_at": "2026-10-09T12:25:31.437214+00:00",
       "model_version": "nhl-poisson-1.0",
       "season": 2027,
       "timezone": "America/Toronto",
@@ -19924,22 +19924,22 @@
         },
         "nhl-schedule-2026-10-09": {
           "status": "ok",
-          "observed_at": "2026-10-09T11:49:47.718126+00:00",
+          "observed_at": "2026-10-09T12:25:31.437214+00:00",
           "url": "https://api-web.nhle.com/v1/schedule/2026-10-09"
         },
         "nhl-schedule-2026-09-25": {
           "status": "ok",
-          "observed_at": "2026-10-09T11:49:47.718126+00:00",
+          "observed_at": "2026-10-09T12:25:31.437214+00:00",
           "url": "https://api-web.nhle.com/v1/schedule/2026-09-25"
         },
         "nhl-schedule-2026-10-02": {
           "status": "ok",
-          "observed_at": "2026-10-09T11:49:47.718126+00:00",
+          "observed_at": "2026-10-09T12:25:31.437214+00:00",
           "url": "https://api-web.nhle.com/v1/schedule/2026-10-02"
         },
         "nhl-schedule-2026-10-16": {
           "status": "ok",
-          "observed_at": "2026-10-09T11:49:47.718126+00:00",
+          "observed_at": "2026-10-09T12:25:31.437214+00:00",
           "url": "https://api-web.nhle.com/v1/schedule/2026-10-16"
         },
         "standings-2027": {
@@ -19955,8 +19955,8 @@
           "error": "HTTPError"
         },
         "nhl-official": {
-          "status": "cached",
-          "observed_at": "2026-10-09T11:20:54.425687+00:00",
+          "status": "ok",
+          "observed_at": "2026-10-09T12:25:31.437214+00:00",
           "url": "https://api-web.nhle.com/v1/standings/now"
         },
         "nhl-team-summary-2026": {
@@ -19970,12 +19970,12 @@
           "url": "https://api.nhle.com/stats/rest/en/goalie/summary?isAggregate=false&isGame=false&start=0&limit=1000&cayenneExp=seasonId=20252026%20and%20gameTypeId=2"
         },
         "nhl-team-summary-2027": {
-          "status": "ok",
+          "status": "cached",
           "observed_at": "2026-10-09T11:49:47.718126+00:00",
           "url": "https://api.nhle.com/stats/rest/en/team/summary?isAggregate=false&isGame=false&start=0&limit=100&cayenneExp=seasonId=20262027%20and%20gameTypeId=2"
         },
         "nhl-goalies-2027": {
-          "status": "ok",
+          "status": "cached",
           "observed_at": "2026-10-09T11:49:47.718126+00:00",
           "url": "https://api.nhle.com/stats/rest/en/goalie/summary?isAggregate=false&isGame=false&start=0&limit=1000&cayenneExp=seasonId=20262027%20and%20gameTypeId=2"
         },
@@ -20019,8 +20019,8 @@
     },
     "board": [],
     "accuracy": {
-      "generated_at": "2026-10-09T11:49:47.718126+00:00"
+      "generated_at": "2026-10-09T12:25:31.437214+00:00"
     },
-    "lastGoodAt": "2026-10-09T11:50:13.668Z"
+    "lastGoodAt": "2026-10-09T12:26:00.463Z"
   }
 }
