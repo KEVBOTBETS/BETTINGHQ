@@ -1,29 +1,91 @@
 {
   "schema": 1,
-  "checked_at": "2026-10-09T15:52:52.424Z",
+  "checked_at": "2026-10-09T16:04:47.746Z",
   "coverage": {
     "nhl": {
       "status": "available",
       "reports": 35,
-      "checked_at": "2026-10-09T15:52:52.424Z"
-    },
-    "mlb": {
-      "status": "available",
-      "reports": 5,
-      "checked_at": "2026-10-09T15:52:52.424Z"
-    },
-    "ncaaf": {
-      "status": "empty",
-      "reports": 0,
-      "checked_at": "2026-10-09T15:52:52.424Z"
+      "checked_at": "2026-10-09T16:04:47.746Z"
     },
     "nfl": {
       "status": "available",
       "reports": 387,
-      "checked_at": "2026-10-09T15:52:52.424Z"
+      "checked_at": "2026-10-09T16:04:47.746Z"
+    },
+    "ncaaf": {
+      "status": "empty",
+      "reports": 0,
+      "checked_at": "2026-10-09T16:04:47.746Z"
+    },
+    "mlb": {
+      "status": "available",
+      "reports": 5,
+      "checked_at": "2026-10-09T16:04:47.746Z"
     }
   },
   "events": [
+    {
+      "id": "odds|ncaaf|401856714|2026-10-10T16:45Z|TOTAL||over|Draft Kings|2026-10-09T16:04:47.746Z",
+      "kind": "odds",
+      "observed_at": "2026-10-09T16:04:47.746Z",
+      "sport": "ncaaf",
+      "event": "SC @ FLA",
+      "start": "2026-10-10T16:45Z",
+      "pick": "Over 62.5",
+      "title": "Published odds changed",
+      "before": "-105 · line 59.5",
+      "after": "-115 · line 58.5",
+      "book": "Draft Kings",
+      "source_quote_at": "2026-10-09T16:03:39.817799+00:00",
+      "source": "Existing NCAAF board",
+      "note": "Your ticket keeps its original odds. Recheck the live book before placing a new wager."
+    },
+    {
+      "id": "odds|ncaaf|401858487|2026-10-10T01:00Z|ATS||away|Draft Kings|2026-10-09T16:04:47.746Z",
+      "kind": "odds",
+      "observed_at": "2026-10-09T16:04:47.746Z",
+      "sport": "ncaaf",
+      "event": "IOWA @ WASH",
+      "start": "2026-10-10T01:00Z",
+      "pick": "IOWA +1.5",
+      "title": "Published odds changed",
+      "before": "-108 · line 3",
+      "after": "-102 · line 2.5",
+      "book": "Draft Kings",
+      "source_quote_at": "2026-10-09T16:03:39.817799+00:00",
+      "source": "Existing NCAAF board",
+      "note": "Your ticket keeps its original odds. Recheck the live book before placing a new wager."
+    },
+    {
+      "id": "odds|ncaaf|401858254|2026-10-09T23:00Z|TOTAL||over|Draft Kings|2026-10-09T16:04:47.746Z",
+      "kind": "odds",
+      "observed_at": "2026-10-09T16:04:47.746Z",
+      "sport": "ncaaf",
+      "event": "FSU @ LOU",
+      "start": "2026-10-09T23:00Z",
+      "pick": "Over 59.5",
+      "title": "Published odds changed",
+      "before": "-105 · line 59.5",
+      "after": "-112 · line 59.5",
+      "book": "Draft Kings",
+      "source_quote_at": "2026-10-09T16:03:39.817799+00:00",
+      "source": "Existing NCAAF board",
+      "note": "Your ticket keeps its original odds. Recheck the live book before placing a new wager."
+    },
+    {
+      "id": "injury|nhl:30:Nick Foligno|2026-10-09T16:04:47.746Z",
+      "kind": "injury",
+      "observed_at": "2026-10-09T16:04:47.746Z",
+      "sport": "nhl",
+      "title": "Player availability changed",
+      "event": "Minnesota Wild",
+      "pick": "Nick Foligno",
+      "before": "Out · Upper Body",
+      "after": "Injured Reserve · Upper Body",
+      "source_quote_at": "2026-10-09T15:50Z",
+      "source": "ESPN injuries",
+      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
+    },
     {
       "id": "odds|props|401872985|2026-10-11T17:00Z|Receiving yards|Pat Freiermuth|over|theScore Bet|2026-10-09T15:45:00.697Z",
       "kind": "odds",
@@ -2872,62 +2934,6 @@
       "before": "Active · Olave was present and involved throughout Thursday's practice, Ross Jackson of LouisianaSports.net reports.",
       "after": "Questionable · Foot",
       "source_quote_at": "2026-10-08T20:28Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:28:Ben Sinnott|2026-10-08T20:52:44.666Z",
-      "kind": "injury",
-      "observed_at": "2026-10-08T20:52:44.666Z",
-      "sport": "nfl",
-      "title": "Player availability changed",
-      "event": "Washington Commanders",
-      "pick": "Ben Sinnott",
-      "before": "Questionable · Ribs",
-      "after": "Active",
-      "source_quote_at": "2026-10-08T20:44Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:33:Rashod Bateman|2026-10-08T20:22:54.722Z",
-      "kind": "injury",
-      "observed_at": "2026-10-08T20:22:54.722Z",
-      "sport": "nfl",
-      "title": "Player availability changed",
-      "event": "Baltimore Ravens",
-      "pick": "Rashod Bateman",
-      "before": "Questionable · Shoulder",
-      "after": "Active · Bateman (shoulder) was a full participant in Thursday's practice.",
-      "source_quote_at": "2026-10-08T20:09Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:33:Ronnie Stanley|2026-10-08T20:22:54.722Z",
-      "kind": "injury",
-      "observed_at": "2026-10-08T20:22:54.722Z",
-      "sport": "nfl",
-      "title": "New availability report",
-      "event": "Baltimore Ravens",
-      "pick": "Ronnie Stanley",
-      "before": "Not in the previous dated report",
-      "after": "Active",
-      "source_quote_at": "2026-10-08T20:05Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:33:Kyle Hamilton|2026-10-08T20:22:54.722Z",
-      "kind": "injury",
-      "observed_at": "2026-10-08T20:22:54.722Z",
-      "sport": "nfl",
-      "title": "Player availability changed",
-      "event": "Baltimore Ravens",
-      "pick": "Kyle Hamilton",
-      "before": "Questionable · Groin",
-      "after": "Active",
-      "source_quote_at": "2026-10-08T20:03Z",
       "source": "ESPN injuries",
       "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
     }
