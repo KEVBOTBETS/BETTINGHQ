@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-09T09:45:56.752891+00:00",
+  "generated_at": "2026-10-09T12:48:33.832157+00:00",
   "provider_priority": [
     "Covers public comparison (no key)",
     "Optional odds providers",
@@ -14,30 +14,32 @@
     "covers_keyless": true
   },
   "counts": {
-    "priced_quotes": 335,
-    "eligible_priced_quotes": 335,
-    "qualified_options": 42,
-    "held_options": 34,
-    "board": 167,
-    "actionable": 8,
+    "priced_quotes": 0,
+    "eligible_priced_quotes": 0,
+    "qualified_options": 0,
+    "held_options": 0,
+    "board": 0,
+    "actionable": 0,
     "best": 0,
     "good": 0,
-    "leans": 42,
+    "leans": 0,
     "projections": 6914,
     "injury_report": 760,
     "ruled_out": 93,
-    "book_lines": 1894,
-    "legs_on_book_lines": 1198,
-    "legs": 4125,
-    "book_priced_legs": 165,
-    "parlays": 162
+    "book_lines": 1927,
+    "legs_on_book_lines": 1289,
+    "legs": 4051,
+    "book_priced_legs": 0,
+    "parlays": 143
   },
   "source_by_sport": {
     "NFL": {
-      "source": "Covers public comparison + ESPN regular-season projections",
-      "priced_quotes": 335,
+      "source": "ESPN regular-season statistics",
+      "priced_quotes": 0,
       "projections": 6914,
-      "errors": []
+      "errors": [
+        "Covers public prop comparison request failed (no matchable NFL prop prices (100 cards, 96 recognized prop cards, 96 scheduled-player matches))"
+      ]
     }
   },
   "workflow_url": "https://github.com/KEVBOTBETS/BETTINGHQ/actions/workflows/release.yml",
@@ -50,7 +52,7 @@
     "window": {
       "NFL": {
         "next_kickoff": "2026-10-11T13:30Z",
-        "hours_to_kickoff": 51.7,
+        "hours_to_kickoff": 48.7,
         "window_hours": 36.0,
         "inside_window": false
       }
@@ -67,7 +69,7 @@
     "line_source": "DraftKings lines via ESPN"
   },
   "accuracy": {
-    "legs": 5153,
+    "legs": 5155,
     "settled": 2586,
     "record": "1743-843-2",
     "hit_rate": 0.674,
@@ -199,10 +201,10 @@
     },
     "calibration_shrink": 1.0,
     "calibration_active": false,
-    "updated_at": "2026-10-09T09:45:50.275299+00:00",
+    "updated_at": "2026-10-09T12:48:27.673265+00:00",
     "calibration_note": "Calibration is diagnostic only; no automatic refit.",
-    "total_logged": 32590,
-    "pending": 2565,
+    "total_logged": 32639,
+    "pending": 2567,
     "independent_events": 48,
     "legacy_excluded": 17,
     "method": "One first pregame preferred leg per event/player/market. Full side/line audit retained separately. No wager ROI at estimated prices."
@@ -210,13 +212,13 @@
   "parlay_record": {
     "Win": 89,
     "Loss": 4221,
-    "Pending": 2121,
+    "Pending": 2262,
     "Void": 0,
     "Review": 0,
-    "total": 6431,
+    "total": 6572,
     "hit_rate": 0.020649651972157772
   },
   "max_odds_age_hours": 12,
-  "price_source_status": "available",
-  "estimated_prices": false
+  "price_source_status": "unavailable",
+  "estimated_prices": true
 }
