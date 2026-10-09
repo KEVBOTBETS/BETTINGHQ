@@ -1,18 +1,18 @@
 {
-  "generated_at": "2026-10-09T01:51:22.744207+00:00",
+  "generated_at": "2026-10-09T02:20:10.604169+00:00",
   "scope": {
     "season": "2026-27",
     "season_type_label": "Regular season + playoffs \u00b7 forward-only"
   },
   "games": {
     "winner": {
-      "n": 60,
-      "correct": 37,
-      "accuracy": 0.6166666666666667,
-      "brier": 0.23778487148356667
+      "n": 61,
+      "correct": 38,
+      "accuracy": 0.6229508196721312,
+      "brier": 0.236963856590541
     }
   },
-  "pending": 59,
+  "pending": 58,
   "model_version": "nhl-poisson-1.0",
   "records": [
     {
@@ -9279,7 +9279,12 @@
         "prior_weight": 1.0
       },
       "model_version": "nhl-poisson-1.0",
-      "result": null,
+      "result": {
+        "home": 4.0,
+        "away": 1.0,
+        "home_won": true,
+        "verified_at": "2026-10-09T02:20:10.604169+00:00"
+      },
       "nhl_game_id": "2026020062"
     },
     {

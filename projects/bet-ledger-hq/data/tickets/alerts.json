@@ -1,29 +1,43 @@
 {
   "schema": 1,
-  "checked_at": "2026-10-09T01:51:48.340Z",
+  "checked_at": "2026-10-09T02:20:37.593Z",
   "coverage": {
+    "mlb": {
+      "status": "available",
+      "reports": 5,
+      "checked_at": "2026-10-09T02:20:37.593Z"
+    },
     "ncaaf": {
       "status": "empty",
       "reports": 0,
-      "checked_at": "2026-10-09T01:51:48.340Z"
+      "checked_at": "2026-10-09T02:20:37.593Z"
     },
     "nhl": {
       "status": "available",
       "reports": 37,
-      "checked_at": "2026-10-09T01:51:48.340Z"
+      "checked_at": "2026-10-09T02:20:37.593Z"
     },
     "nfl": {
       "status": "available",
-      "reports": 421,
-      "checked_at": "2026-10-09T01:51:48.340Z"
-    },
-    "mlb": {
-      "status": "available",
-      "reports": 5,
-      "checked_at": "2026-10-09T01:51:48.340Z"
+      "reports": 415,
+      "checked_at": "2026-10-09T02:20:37.593Z"
     }
   },
   "events": [
+    {
+      "id": "injury|nfl:3:Anthony Johnson Jr.|2026-10-09T02:20:37.593Z",
+      "kind": "injury",
+      "observed_at": "2026-10-09T02:20:37.593Z",
+      "sport": "nfl",
+      "title": "Player availability changed",
+      "event": "Chicago Bears",
+      "pick": "Anthony Johnson Jr.",
+      "before": "Out · Undisclosed",
+      "after": "Injured Reserve · Undisclosed",
+      "source_quote_at": "2026-10-09T02:00Z",
+      "source": "ESPN injuries",
+      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
+    },
     {
       "id": "injury|nfl:3:Anthony Johnson Jr.|2026-10-09T01:22:24.795Z",
       "kind": "injury",
@@ -2956,20 +2970,6 @@
       "before": "Not in the previous dated report",
       "after": "Day-To-Day · Lower Body",
       "source_quote_at": "2026-10-07T02:34Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nhl:4:Andrew Mangiapane|2026-10-08T17:03:50.324Z",
-      "kind": "injury",
-      "observed_at": "2026-10-08T17:03:50.324Z",
-      "sport": "nhl",
-      "title": "Player availability changed",
-      "event": "Chicago Blackhawks",
-      "pick": "Andrew Mangiapane",
-      "before": "Out · Lower Body",
-      "after": "Injured Reserve · Lower Body",
-      "source_quote_at": "2026-10-07T15:40Z",
       "source": "ESPN injuries",
       "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
     }
