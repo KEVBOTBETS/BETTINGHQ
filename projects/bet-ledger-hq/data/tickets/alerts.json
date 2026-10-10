@@ -1,29 +1,77 @@
 {
   "schema": 1,
-  "checked_at": "2026-10-10T05:05:41.679Z",
+  "checked_at": "2026-10-10T05:12:27.765Z",
   "coverage": {
-    "ncaaf": {
-      "status": "empty",
-      "reports": 0,
-      "checked_at": "2026-10-10T05:05:41.679Z"
-    },
     "nhl": {
       "status": "available",
       "reports": 41,
-      "checked_at": "2026-10-10T05:05:41.679Z"
+      "checked_at": "2026-10-10T05:12:27.765Z"
     },
     "mlb": {
       "status": "available",
       "reports": 10,
-      "checked_at": "2026-10-10T05:05:41.679Z"
+      "checked_at": "2026-10-10T05:12:27.765Z"
+    },
+    "ncaaf": {
+      "status": "empty",
+      "reports": 0,
+      "checked_at": "2026-10-10T05:12:27.765Z"
     },
     "nfl": {
       "status": "available",
       "reports": 340,
-      "checked_at": "2026-10-10T05:05:41.679Z"
+      "checked_at": "2026-10-10T05:12:27.765Z"
     }
   },
   "events": [
+    {
+      "id": "odds|props|401872989|2026-10-11T20:05Z|Rushing yards|Omarion Hampton|over|Fanatics Sportsbook|2026-10-10T05:12:27.765Z",
+      "kind": "odds",
+      "observed_at": "2026-10-10T05:12:27.765Z",
+      "sport": "props",
+      "event": "Denver Broncos @ Los Angeles Chargers",
+      "start": "2026-10-11T20:05Z",
+      "pick": "Omarion Hampton — Over 40.5 Rushing yards",
+      "title": "Published odds changed",
+      "before": "-105 · line 40.5",
+      "after": "-140 · line 35.5",
+      "book": "Fanatics Sportsbook",
+      "source_quote_at": "2026-10-10T05:11:03.672090+00:00",
+      "source": "Existing Props board",
+      "note": "Your ticket keeps its original odds. Recheck the live book before placing a new wager."
+    },
+    {
+      "id": "odds|props|401872984|2026-10-11T17:00Z|Rushing yards|Tony Pollard|over|theScore Bet|2026-10-10T05:12:27.765Z",
+      "kind": "odds",
+      "observed_at": "2026-10-10T05:12:27.765Z",
+      "sport": "props",
+      "event": "Houston Texans @ Tennessee Titans",
+      "start": "2026-10-11T17:00Z",
+      "pick": "Tony Pollard — Over 49.5 Rushing yards",
+      "title": "Published odds changed",
+      "before": "-110 · line 49.5",
+      "after": "-105 · line 49.5",
+      "book": "theScore Bet",
+      "source_quote_at": "2026-10-10T05:11:03.672090+00:00",
+      "source": "Existing Props board",
+      "note": "Your ticket keeps its original odds. Recheck the live book before placing a new wager."
+    },
+    {
+      "id": "odds|ncaaf|401856712|2026-10-10T23:30Z|TOTAL||over|DraftKings|2026-10-10T05:12:27.765Z",
+      "kind": "odds",
+      "observed_at": "2026-10-10T05:12:27.765Z",
+      "sport": "ncaaf",
+      "event": "UGA @ ALA",
+      "start": "2026-10-10T23:30Z",
+      "pick": "Over 51.5",
+      "title": "Published odds changed",
+      "before": "-105 · line 51.5",
+      "after": "-108 · line 51.5",
+      "book": "DraftKings",
+      "source_quote_at": "2026-10-10T05:10:10.658588+00:00",
+      "source": "Existing NCAAF board",
+      "note": "Your ticket keeps its original odds. Recheck the live book before placing a new wager."
+    },
     {
       "id": "odds|props|401872992|2026-10-11T20:25Z|Rushing yards|Brock Purdy|over|theScore Bet|2026-10-10T05:05:41.679Z",
       "kind": "odds",
@@ -2909,48 +2957,6 @@
       "before": "Questionable · Knee",
       "after": "Active",
       "source_quote_at": "2026-10-09T20:30Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:15:Robert Beal Jr.|2026-10-09T20:51:34.309Z",
-      "kind": "injury",
-      "observed_at": "2026-10-09T20:51:34.309Z",
-      "sport": "nfl",
-      "title": "New availability report",
-      "event": "Miami Dolphins",
-      "pick": "Robert Beal Jr.",
-      "before": "Not in the previous dated report",
-      "after": "Out · Hamstring",
-      "source_quote_at": "2026-10-09T20:30Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:15:Dante Trader Jr.|2026-10-09T20:51:34.309Z",
-      "kind": "injury",
-      "observed_at": "2026-10-09T20:51:34.309Z",
-      "sport": "nfl",
-      "title": "Player availability changed",
-      "event": "Miami Dolphins",
-      "pick": "Dante Trader Jr.",
-      "before": "Questionable · Shin",
-      "after": "Active",
-      "source_quote_at": "2026-10-09T20:30Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:19:Isaiah Likely|2026-10-09T20:51:34.309Z",
-      "kind": "injury",
-      "observed_at": "2026-10-09T20:51:34.309Z",
-      "sport": "nfl",
-      "title": "Player availability changed",
-      "event": "New York Giants",
-      "pick": "Isaiah Likely",
-      "before": "Questionable · Knee",
-      "after": "Active · Likely (knee/groin) doesn't carry an injury designation into Sunday's game at Washington, Dan Salomone of the Giants' official site reports.",
-      "source_quote_at": "2026-10-09T20:42Z",
       "source": "ESPN injuries",
       "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
     }
