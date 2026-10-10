@@ -1,29 +1,85 @@
 {
   "schema": 1,
-  "checked_at": "2026-10-10T23:00:36.041Z",
+  "checked_at": "2026-10-10T23:18:51.067Z",
   "coverage": {
-    "ncaaf": {
-      "status": "empty",
-      "reports": 0,
-      "checked_at": "2026-10-10T23:00:36.041Z"
-    },
-    "nhl": {
-      "status": "available",
-      "reports": 38,
-      "checked_at": "2026-10-10T23:00:36.041Z"
-    },
-    "nfl": {
-      "status": "available",
-      "reports": 345,
-      "checked_at": "2026-10-10T23:00:36.041Z"
-    },
     "mlb": {
       "status": "available",
       "reports": 8,
-      "checked_at": "2026-10-10T23:00:36.041Z"
+      "checked_at": "2026-10-10T23:18:51.067Z"
+    },
+    "nhl": {
+      "status": "available",
+      "reports": 39,
+      "checked_at": "2026-10-10T23:18:51.067Z"
+    },
+    "ncaaf": {
+      "status": "empty",
+      "reports": 0,
+      "checked_at": "2026-10-10T23:18:51.067Z"
+    },
+    "nfl": {
+      "status": "available",
+      "reports": 343,
+      "checked_at": "2026-10-10T23:18:51.067Z"
     }
   },
   "events": [
+    {
+      "id": "injury|nhl:14:Cameron Crotty|2026-10-10T23:18:51.067Z",
+      "kind": "injury",
+      "observed_at": "2026-10-10T23:18:51.067Z",
+      "sport": "nhl",
+      "title": "Player availability changed",
+      "event": "Ottawa Senators",
+      "pick": "Cameron Crotty",
+      "before": "Day-To-Day · Illness",
+      "after": "Out · Illness",
+      "source_quote_at": "2026-10-10T22:59Z",
+      "source": "ESPN injuries",
+      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
+    },
+    {
+      "id": "injury|nhl:14:Jake Sanderson|2026-10-10T23:18:51.067Z",
+      "kind": "injury",
+      "observed_at": "2026-10-10T23:18:51.067Z",
+      "sport": "nhl",
+      "title": "Player availability changed",
+      "event": "Ottawa Senators",
+      "pick": "Jake Sanderson",
+      "before": "Day-To-Day · Lower Body",
+      "after": "Out · Lower Body",
+      "source_quote_at": "2026-10-10T22:58Z",
+      "source": "ESPN injuries",
+      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
+    },
+    {
+      "id": "injury|nhl:16:Trevor van Riemsdyk|2026-10-10T23:18:51.067Z",
+      "kind": "injury",
+      "observed_at": "2026-10-10T23:18:51.067Z",
+      "sport": "nhl",
+      "title": "New availability report",
+      "event": "Pittsburgh Penguins",
+      "pick": "Trevor van Riemsdyk",
+      "before": "Not in the previous dated report",
+      "after": "Out · Lower Body",
+      "source_quote_at": "2026-10-10T22:53Z",
+      "source": "ESPN injuries",
+      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
+    },
+    {
+      "id": "injury|nfl:3:Anthony Johnson Jr.|2026-10-10T23:18:51.067Z",
+      "kind": "injury",
+      "observed_at": "2026-10-10T23:18:51.067Z",
+      "sport": "nfl",
+      "title": "Player availability changed",
+      "event": "Chicago Bears",
+      "pick": "Anthony Johnson Jr.",
+      "before": "Injured Reserve · Undisclosed",
+      "after": "Out · Undisclosed",
+      "source_quote_at": "2026-10-10T23:00Z",
+      "source": "ESPN injuries",
+      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
+    },
     {
       "id": "odds|ncaaf|401858263|2026-10-17T23:00Z|TOTAL||over|DraftKings|2026-10-10T23:00:36.041Z",
       "kind": "odds",
@@ -2963,70 +3019,6 @@
       "before": "-115 · line 46.5",
       "after": "-135 · line 46.5",
       "book": "BetMGM",
-      "source_quote_at": "2026-10-10T14:49:47.399467+00:00",
-      "source": "Existing Props board",
-      "note": "Your ticket keeps its original odds. Recheck the live book before placing a new wager."
-    },
-    {
-      "id": "odds|props|401872989|2026-10-11T20:05Z|Rushing yards|Omarion Hampton|over|Fanatics Sportsbook|2026-10-10T14:51:09.608Z",
-      "kind": "odds",
-      "observed_at": "2026-10-10T14:51:09.608Z",
-      "sport": "props",
-      "event": "Denver Broncos @ Los Angeles Chargers",
-      "start": "2026-10-11T20:05Z",
-      "pick": "Omarion Hampton — Over 40.5 Rushing yards",
-      "title": "Published odds changed",
-      "before": "-110 · line 40.5",
-      "after": "-105 · line 40.5",
-      "book": "Fanatics Sportsbook",
-      "source_quote_at": "2026-10-10T14:49:47.399467+00:00",
-      "source": "Existing Props board",
-      "note": "Your ticket keeps its original odds. Recheck the live book before placing a new wager."
-    },
-    {
-      "id": "odds|props|401872982|2026-10-11T17:00Z|Passing yards|Joe Burrow|over|bet365|2026-10-10T14:51:09.608Z",
-      "kind": "odds",
-      "observed_at": "2026-10-10T14:51:09.608Z",
-      "sport": "props",
-      "event": "Cincinnati Bengals @ Miami Dolphins",
-      "start": "2026-10-11T17:00Z",
-      "pick": "Joe Burrow — Over 243.5 Passing yards",
-      "title": "Published odds changed",
-      "before": "-115 · line 249.5",
-      "after": "-115 · line 252.5",
-      "book": "bet365",
-      "source_quote_at": "2026-10-10T14:49:47.399467+00:00",
-      "source": "Existing Props board",
-      "note": "Your ticket keeps its original odds. Recheck the live book before placing a new wager."
-    },
-    {
-      "id": "odds|props|401872982|2026-10-11T17:00Z|Passing yards|Joe Burrow|over|Fanatics Sportsbook|2026-10-10T14:51:09.608Z",
-      "kind": "odds",
-      "observed_at": "2026-10-10T14:51:09.608Z",
-      "sport": "props",
-      "event": "Cincinnati Bengals @ Miami Dolphins",
-      "start": "2026-10-11T17:00Z",
-      "pick": "Joe Burrow — Over 250.5 Passing yards",
-      "title": "Published odds changed",
-      "before": "-120 · line 250.5",
-      "after": "-110 · line 255.5",
-      "book": "Fanatics Sportsbook",
-      "source_quote_at": "2026-10-10T14:49:47.399467+00:00",
-      "source": "Existing Props board",
-      "note": "Your ticket keeps its original odds. Recheck the live book before placing a new wager."
-    },
-    {
-      "id": "odds|props|401872987|2026-10-11T17:00Z|Passing yards|Tyler Shough|over|DraftKings|2026-10-10T14:51:09.608Z",
-      "kind": "odds",
-      "observed_at": "2026-10-10T14:51:09.608Z",
-      "sport": "props",
-      "event": "Minnesota Vikings @ New Orleans Saints",
-      "start": "2026-10-11T17:00Z",
-      "pick": "Tyler Shough — Over 236.5 Passing yards",
-      "title": "Published odds changed",
-      "before": "-113 · line 234.5",
-      "after": "-111 · line 235.5",
-      "book": "DraftKings",
       "source_quote_at": "2026-10-10T14:49:47.399467+00:00",
       "source": "Existing Props board",
       "note": "Your ticket keeps its original odds. Recheck the live book before placing a new wager."
