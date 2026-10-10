@@ -1,29 +1,57 @@
 {
   "schema": 1,
-  "checked_at": "2026-10-10T16:00:13.795Z",
+  "checked_at": "2026-10-10T16:19:39.673Z",
   "coverage": {
     "ncaaf": {
       "status": "empty",
       "reports": 0,
-      "checked_at": "2026-10-10T16:00:13.795Z"
+      "checked_at": "2026-10-10T16:19:39.673Z"
     },
     "nhl": {
       "status": "available",
-      "reports": 39,
-      "checked_at": "2026-10-10T16:00:13.795Z"
+      "reports": 38,
+      "checked_at": "2026-10-10T16:19:39.673Z"
     },
     "mlb": {
       "status": "available",
       "reports": 9,
-      "checked_at": "2026-10-10T16:00:13.795Z"
+      "checked_at": "2026-10-10T16:19:39.673Z"
     },
     "nfl": {
       "status": "available",
-      "reports": 342,
-      "checked_at": "2026-10-10T16:00:13.795Z"
+      "reports": 343,
+      "checked_at": "2026-10-10T16:19:39.673Z"
     }
   },
   "events": [
+    {
+      "id": "injury|nfl:11:Arden Key|2026-10-10T16:19:39.673Z",
+      "kind": "injury",
+      "observed_at": "2026-10-10T16:19:39.673Z",
+      "sport": "nfl",
+      "title": "New availability report",
+      "event": "Indianapolis Colts",
+      "pick": "Arden Key",
+      "before": "Not in the previous dated report",
+      "after": "Injured Reserve · Hamstring",
+      "source_quote_at": "2026-10-10T15:57Z",
+      "source": "ESPN injuries",
+      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
+    },
+    {
+      "id": "injury|nfl:11:Darius Slayton|2026-10-10T16:19:39.673Z",
+      "kind": "injury",
+      "observed_at": "2026-10-10T16:19:39.673Z",
+      "sport": "nfl",
+      "title": "Player availability changed",
+      "event": "Indianapolis Colts",
+      "pick": "Darius Slayton",
+      "before": "Questionable · Knee",
+      "after": "Out · Knee",
+      "source_quote_at": "2026-10-10T15:55Z",
+      "source": "ESPN injuries",
+      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
+    },
     {
       "id": "odds|ncaaf|401866440|2026-10-10T18:00Z|TOTAL||over|DraftKings|2026-10-10T16:00:13.795Z",
       "kind": "odds",
@@ -3007,38 +3035,6 @@
       "source_quote_at": "2026-10-09T21:33Z",
       "source": "ESPN injuries",
       "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "odds|wnba|401918300|2026-10-10T01:30Z|ML||away|DraftKings|2026-10-09T21:41:31.706Z",
-      "kind": "odds",
-      "observed_at": "2026-10-09T21:41:31.706Z",
-      "sport": "wnba",
-      "event": "GS @ LV",
-      "start": "2026-10-10T01:30Z",
-      "pick": "GS ML",
-      "title": "Published odds changed",
-      "before": "+150",
-      "after": "+160",
-      "book": "DraftKings",
-      "source_quote_at": "2026-10-09T21:40:47+00:00",
-      "source": "Existing WNBA board",
-      "note": "Your ticket keeps its original odds. Recheck the live book before placing a new wager."
-    },
-    {
-      "id": "odds|props|401872987|2026-10-11T17:00Z|Passing yards|Tyler Shough|over|BetMGM|2026-10-09T21:41:31.706Z",
-      "kind": "odds",
-      "observed_at": "2026-10-09T21:41:31.706Z",
-      "sport": "props",
-      "event": "Minnesota Vikings @ New Orleans Saints",
-      "start": "2026-10-11T17:00Z",
-      "pick": "Tyler Shough — Over 249.5 Passing yards",
-      "title": "Published odds changed",
-      "before": "-115 · line 245.5",
-      "after": "-115 · line 241.5",
-      "book": "BetMGM",
-      "source_quote_at": "2026-10-09T21:40:19.487308+00:00",
-      "source": "Existing Props board",
-      "note": "Your ticket keeps its original odds. Recheck the live book before placing a new wager."
     }
   ]
 }
