@@ -107,7 +107,7 @@ def _compact(value: str) -> str:
 
 
 def _clean(value: str) -> str:
-    return re.sub(r"\s+", " ", str(value or "").replace("\xa0", " ")).strip()
+    return re.sub(r"\s+", " ", str(value or "").replace("\xa0", " ").replace("−", "-").replace("–", "-")).strip()
 
 
 def _market_key(value: str) -> str:
@@ -187,7 +187,7 @@ def _heading(token: str) -> str | None:
 
 
 def _book(token: str) -> str | None:
-    value = re.sub(r"\b(?:image|logo|sportsbook)\b", "", token, flags=re.I)
+    value = re.sub(r"\b(?:image|logo|sportsbook|odds)\b", "", token, flags=re.I)
     return BOOKS.get(_compact(value))
 
 
@@ -313,6 +313,7 @@ def parse_html(
                 book=book,
                 provider="Covers public prop comparison",
                 updated_at=observed_at,
+                source_url=SOURCE_URL,
             )
             key = (
                 quote.event_id,
@@ -358,6 +359,7 @@ class CoversProvider:
     def __init__(self, settings: dict[str, Any], timeout: int = 25) -> None:
         self.settings = settings
         self.timeout = timeout
+        self.diagnostics: dict[str, Any] = {}
 
     def fetch(self, sport: str, projections: list[Projection]) -> list[PropQuote]:
         if sport != "NFL":
@@ -379,6 +381,7 @@ class CoversProvider:
                     html = response_text(response, MAX_RESPONSE_BYTES)
                     observed_at = dt.datetime.now(dt.timezone.utc).isoformat()
                     quotes = parse_html(html, projections, observed_at=observed_at)
+                    self.diagnostics = {"shape": _empty_page_details(html, projections), "quotes": len(quotes), "checked_at": observed_at, "source_url": SOURCE_URL}
                     if quotes:
                         return quotes
                     # A public page can briefly return its shell without offers.

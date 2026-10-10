@@ -7,7 +7,7 @@ const q=V.evaluate(row,{sport:'nfl',now,publication});
 assert(q.passes);assert.equal(q.worst,-117);assert(Math.abs(q.stressEV-.05)<1e-10);
 assert(!V.evaluate(row,{sport:'nfl',now,price:-120}).passes);
 assert(!V.evaluate(row,{sport:'nfl',now,line:-4}).passes);
-for(const change of [{model_prob:null},{model_prob:true},{model_prob:1},{price:50},{book:''},{price_source:'model'},{held:true},{odds_verified:false},{push_prob:1},{game_date:'2026-10-09T00:00Z'},{odds_observed_at:null},{odds_observed_at:'2026-10-10T05:00Z'}])assert(!V.evaluate({...row,...change},{sport:'nfl',now}).passes,JSON.stringify(change));
+for(const change of [{quote_status:'retained'},{reference_only:true},{model_prob:null},{model_prob:true},{model_prob:1},{price:50},{book:''},{price_source:'model'},{held:true},{odds_verified:false},{push_prob:1},{game_date:'2026-10-09T00:00Z'},{odds_observed_at:null},{odds_observed_at:'2026-10-10T05:00Z'}])assert(!V.evaluate({...row,...change},{sport:'nfl',now}).passes,JSON.stringify(change));
 assert(!V.evaluate(row,{sport:'nfl',now,publication:'2026-10-09T03:00Z'}).passes);
 // Minimum price must survive integer rounding on either side of even money.
 for(const p of [.2,.4,.53,.55,.7,.9]){
@@ -47,10 +47,10 @@ try{
  for(const repo of ['nfl-edge-lab','ncaaf-edge-lab','props-edge','nhl-edge-lab','wnba-edge-lab']){
   const dir=path.join(temp,repo,'data');mkdirSync(dir,{recursive:true});
   const at=new Date().toISOString(),bad={...row,game_date:new Date(Date.now()+86400000).toISOString(),odds_observed_at:at,price:-150};
-  writeFileSync(path.join(dir,'meta.json'),JSON.stringify({generated_at:at,counts:{qualified:1,actionable:1}}));
+  writeFileSync(path.join(dir,'meta.json'),JSON.stringify({generated_at:at,counts:{qualified:1,actionable:1},quote_health:{markets:{ATS:{qualified:1}},board_reasons:{qualified:1}}}));
   writeFileSync(path.join(dir,'board.json'),JSON.stringify([bad]));if(repo==='props-edge')writeFileSync(path.join(dir,'legs.json'),'[]');
  }
  execFileSync(process.execPath,[new URL('../../../tools/apply_value_policy.mjs',import.meta.url).pathname,temp]);
- const meta=JSON.parse(readFileSync(path.join(temp,'nfl-edge-lab/data/meta.json')));assert.equal(meta.counts.qualified,0);assert.equal(meta.source_counts.qualified,1);assert.equal(meta.value_policy.source_qualified,1);
+ const meta=JSON.parse(readFileSync(path.join(temp,'nfl-edge-lab/data/meta.json')));assert.equal(meta.counts.qualified,0);assert.equal(meta.source_counts.qualified,1);assert.equal(meta.value_policy.source_qualified,1);assert.equal(meta.quote_health.markets.ATS.qualified,0);assert.equal(meta.quote_health.board_reasons.qualified,0);assert.equal(meta.quote_health.board_reasons['additional price stress failures'],1);
 }finally{rmSync(temp,{recursive:true,force:true});}
 console.log('Public qualification counters match stress-gated rows and preserve source counters');

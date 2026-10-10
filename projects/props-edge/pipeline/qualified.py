@@ -425,6 +425,10 @@ def quote_block_reason(quote: PropQuote, cfg: dict, now: datetime | None = None)
         return "Odds timestamp is in the future"
     if age >= float(cfg.get("max_odds_age_hours", 12)):
         return "Odds are stale; waiting for a live price refresh"
+    if quote.quote_status != "observed":
+        return "Retained quote during a feed outage; confirm a current sportsbook price"
+    if quote.reference_only:
+        return "Public regional reference price; confirm the offer and settlement rules at your sportsbook"
     return None
 
 

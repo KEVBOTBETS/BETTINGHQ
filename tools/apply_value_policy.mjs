@@ -29,5 +29,12 @@ for(const [repo,sport] of [['nfl-edge-lab','nfl'],['ncaaf-edge-lab','ncaaf'],['p
     meta.board_diagnosis={...meta.board_diagnosis,qualified:qualified.length,headline:qualified.length+' play(s) cleared model and price stress checks',
       reasons:{...meta.board_diagnosis.reasons,'Additional price stress failures':board.filter(r=>!r.value_policy.passes&&['LEAN','GOOD','BEST','BEST BET'].includes(r.source_tier)).length}};
   }
+  if(meta.quote_health){
+    for(const [market,coverage] of Object.entries(meta.quote_health.markets||{}))coverage.qualified=qualified.filter(r=>r.market===market).length;
+    const reasons={...meta.quote_health.board_reasons};
+    reasons.qualified=qualified.length;
+    reasons['additional price stress failures']=board.filter(r=>!r.value_policy.passes&&['LEAN','GOOD','BEST','BEST BET'].includes(r.source_tier)&&!r.held&&!r.filtered).length;
+    meta.quote_health.board_reasons=reasons;
+  }
   await writeFile(path.join(data,'meta.json'),JSON.stringify(meta)+'\n');
 }

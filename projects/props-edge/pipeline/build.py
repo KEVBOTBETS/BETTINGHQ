@@ -14,6 +14,8 @@ from .parlays import build_parlays
 from .parlay_history import update as update_parlay_history
 from .qualified import evaluate_quotes, evaluate_quotes_against_projections, merge_boards, select_portfolio, eligible_book_key
 from .providers.covers import CoversProvider
+from .providers.draftkings_network import DraftKingsNetworkProvider
+from .price_store import recover
 from .providers.espn_recovered import EspnProjectionProvider as RecoveredProjectionProvider
 from . import accuracy as projection_accuracy
 from .providers.espn import EspnProjectionProvider
@@ -67,6 +69,8 @@ def build() -> dict[str, Any]:
     quotes = []
     projections = []
     source_by_sport: dict[str, dict[str, Any]] = {}
+    price_sources = {}
+    failed_sources = set()
     feed = settings.get("odds_feed", {})
     window_hours = float(feed.get("window_hours") or 0)
     now = dt.datetime.now(dt.timezone.utc)
@@ -89,11 +93,27 @@ def build() -> dict[str, Any]:
                 errors.append(str(exc))
         source = projections_provider.name if sport_projections else "No source available"
         if sport_projections:
+            covers = CoversProvider(qualification)
             try:
-                sport_quotes = CoversProvider(qualification).fetch(sport, sport_projections)
+                sport_quotes = covers.fetch(sport, sport_projections)
                 if sport_quotes: source = "Covers public comparison + ESPN regular-season projections"
+                price_sources[covers.name] = {"status": "available" if sport_quotes else "empty", "quotes": len(sport_quotes), **covers.diagnostics}
             except ProviderError as exc:
                 errors.append(str(exc))
+                failed_sources.add(covers.name)
+                price_sources[covers.name] = {"status": "unavailable", "error": str(exc), **covers.diagnostics}
+            fallback = DraftKingsNetworkProvider(qualification)
+            if not sport_quotes:
+                try:
+                    sport_quotes = fallback.fetch(sport, sport_projections)
+                    if sport_quotes: source = fallback.name + " + ESPN regular-season projections"
+                    price_sources[fallback.name] = {"status": "reference" if sport_quotes else "empty", "quotes": len(sport_quotes), **fallback.diagnostics}
+                except ProviderError as exc:
+                    errors.append(str(exc))
+                    failed_sources.add(fallback.name)
+                    price_sources[fallback.name] = {"status": "unavailable", "error": str(exc), **fallback.diagnostics}
+            else:
+                price_sources[fallback.name] = {"status": "standby", "quotes": 0}
 
         # Only games that have not kicked off yet decide the odds window.
         stamp_now = now.isoformat()
@@ -140,6 +160,16 @@ def build() -> dict[str, Any]:
     if not projections and any(info["errors"] for info in source_by_sport.values()):
         raise ProviderError("Projection refresh failed; previous published data retained")
     quotes = [q for q in quotes if eligible_book_key(q.book, qualification)]
+    cache_path = ROOT / "state/price_quotes.json"
+    try:
+        previous_quotes = json.loads(cache_path.read_text())
+    except (OSError, ValueError):
+        # The last published feed is a safe bootstrap; its timestamps are retained.
+        try:
+            previous_quotes = {"quotes": json.loads((ROOT / "site/data/quotes.json").read_text())}
+        except (OSError, ValueError):
+            previous_quotes = {}
+    quotes, quote_state, quote_health = recover(quotes, previous_quotes, projections, qualification, failed_sources, dt.datetime.now(dt.timezone.utc))
     board = select_portfolio(merge_boards(
         evaluate_quotes(quotes, qualification),
         evaluate_quotes_against_projections(quotes, projections, qualification),
@@ -178,14 +208,15 @@ def build() -> dict[str, Any]:
     repository = os.getenv("GITHUB_REPOSITORY", "").strip()
     meta = {
         "generated_at": now,
-        "provider_priority": ["Covers public comparison (no key)", "Optional odds providers", "ESPN regular-season statistics"],
+        "provider_priority": ["Covers public comparison (no key)", "DraftKings Network public reference (no key)", "Optional odds providers", "ESPN regular-season statistics"],
         "target_book": settings["bookmakers"]["target"],
         "keyless_fallback": True,
         "configured": {
             "odds_api_io": bool(primary_key),
             "the_odds_api": bool(secondary_key),
             "espn_keyless": True,
-            "covers_keyless": True
+            "covers_keyless": True,
+            "draftkings_network_keyless": True
         },
         "counts": {
             "priced_quotes": len(quotes),
@@ -218,7 +249,26 @@ def build() -> dict[str, Any]:
     meta["accuracy"] = accuracy
     meta["parlay_record"] = parlay_record
     meta["max_odds_age_hours"] = qualification["projection_model"]["max_odds_age_hours"]
-    meta["price_source_status"] = "available" if quotes else "unavailable"
+    meta["price_source_status"] = "available" if quote_health["observed"] else "retained" if quote_health["retained"] else "reference" if quote_health["reference"] else "unavailable"
+    meta["quote_health"] = {**quote_health, "sources": price_sources}
+    reasons = {}
+    for row in board:
+        reason = row.get("reason") or "No reason supplied"
+        category = "retained / confirmation" if row.get("quote_status", "observed") != "observed" else "reference / confirmation" if row.get("reference_only") else "qualified" if row.get("tier") != "PASS" and not row.get("held") else "portfolio hold" if row.get("held") else "insufficient sample" if "sample" in reason.lower() else "insufficient edge / model filters"
+        reasons[category] = reasons.get(category, 0) + 1
+    meta["quote_health"]["board_reasons"] = reasons
+    market_coverage = {}
+    for projection in projections:
+        group = market_coverage.setdefault(projection.market, {"projections": 0, "observed": 0, "retained": 0, "reference": 0, "expired": 0, "qualified": 0})
+        group["projections"] += 1
+    for data in quote_state["quotes"]:
+        group = market_coverage.setdefault(data["market"], {"projections": 0, "observed": 0, "retained": 0, "reference": 0, "expired": 0, "qualified": 0})
+        status = "expired" if data["quote_status"] == "expired" else "retained" if data["quote_status"] == "retained" else "reference" if data["reference_only"] else "observed"
+        group[status] += 1
+    for row in board:
+        if row.get("tier") != "PASS" and not row.get("held"):
+            market_coverage[row["market"]]["qualified"] += 1
+    meta["quote_health"]["markets"] = market_coverage
     meta["counts"]["injury_report"] = len(injuries)
     meta["counts"]["ruled_out"] = sum(row.get("blocking") == "yes" for row in injuries.values())
     meta["counts"]["book_lines"] = len(book_lines)
@@ -235,6 +285,11 @@ def build() -> dict[str, Any]:
     _write_json("quotes.json", [quote.to_dict() for quote in quotes])
     _write_json("projections.json", projection_rows)
     _write_json("meta.json", meta)
+    _write_json("quote-history.json", quote_state)
+    cache_path.parent.mkdir(parents=True, exist_ok=True)
+    cache_temp = cache_path.with_suffix(".json.tmp")
+    cache_temp.write_text(json.dumps(quote_state, indent=2, allow_nan=False) + "\n")
+    cache_temp.replace(cache_path)
     return meta
 
 

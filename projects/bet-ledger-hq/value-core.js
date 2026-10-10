@@ -34,6 +34,8 @@
     if(options.publication!==undefined&&!fresh(options.publication,now,6))reasons.push('Forecast publication stale or unavailable');
     if(options.line!==undefined&&number(options.line)!==number(row.line))reasons.push('Changed line requires a new forecast');
     if(row.held)reasons.push('Held by source model');
+    if(row.quote_status&&row.quote_status!=='observed')reasons.push('Retained quote requires current sportsbook confirmation');
+    if(row.reference_only===true)reasons.push('Reference price requires current sportsbook confirmation');
     if(row.filtered)reasons.push(String(row.filtered));
     const stressed=p?Math.max(0,p.conditional-POLICY.reserve):null;
     const ev=p&&dec!==null?(1-p.push)*(p.conditional*dec-1):null;

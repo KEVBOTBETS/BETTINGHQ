@@ -389,13 +389,16 @@ def legs_from_board(board: list[dict[str, Any]], settings: dict[str, Any]) -> li
                 edge=row.get("edge"),
                 action_edge=row.get("action_edge"),
                 updated_at=row.get("updated_at"),
-                held=bool(row.get("held")),
+                held=bool(row.get("held")) or row.get("quote_status", "observed") != "observed" or bool(row.get("reference_only")),
+                quote_status=row.get("quote_status", "observed"),
+                reference_only=bool(row.get("reference_only")),
+                source_url=row.get("source_url"),
                 samples=int(row.get("projection_samples") or 0),
                 projection=row.get("projection"),
                 recent=[],
                 confidence=row.get("confidence"),
                 tier=row.get("tier"),
-                reason=(
+                reason=row.get("reason") or (
                     f"{row.get('book')} price {row.get('price_american')} versus a model probability of "
                     f"{round(float(probability) * 100)}%."
                 ),

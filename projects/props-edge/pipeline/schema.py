@@ -19,6 +19,9 @@ class PropQuote:
     book: str
     provider: str
     updated_at: str | None = None
+    source_url: str | None = None
+    quote_status: str = "observed"
+    reference_only: bool = False
 
     def to_dict(self) -> dict[str, Any]:
         return asdict(self)

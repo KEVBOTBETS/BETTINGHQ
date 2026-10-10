@@ -101,6 +101,7 @@
         market:r.market||"",line,sourceLine:rawLine,price,book:r.book||"Unspecified book",
         tier:t,score:number(r.action_edge??r.edge_real??r.edge),quote:quote||null,
         review,value,probability,fair:fairPrice(probability),worst,minReturn,
+        quoteStatus:r.quote_status||'observed',referenceOnly:r.reference_only===true,sourceUrl:r.source_url||null,
         worstReached:worst!=null&&implied(price)>implied(worst),
         move:movement(key,r,side,line,price),source:LABELS[key]});
     }
