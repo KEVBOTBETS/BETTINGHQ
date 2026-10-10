@@ -385,6 +385,8 @@ def legs_from_board(board: list[dict[str, Any]], settings: dict[str, Any]) -> li
                 price_source="book",
                 book=row.get("book") or "",
                 model_prob=round(float(probability), 4),
+                push_prob=row.get("push_prob",0),
+                model_prob_no_push=row.get("model_prob_no_push"),
                 fair_american=decimal_to_american(1 / float(probability)),
                 edge=row.get("edge"),
                 action_edge=row.get("action_edge"),
@@ -398,6 +400,7 @@ def legs_from_board(board: list[dict[str, Any]], settings: dict[str, Any]) -> li
                 recent=[],
                 confidence=row.get("confidence"),
                 tier=row.get("tier"),
+                tier_version=row.get("tier_version", "props-current-v1"),
                 reason=row.get("reason") or (
                     f"{row.get('book')} price {row.get('price_american')} versus a model probability of "
                     f"{round(float(probability) * 100)}%."

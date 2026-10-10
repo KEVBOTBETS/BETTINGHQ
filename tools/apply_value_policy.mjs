@@ -4,15 +4,29 @@ import path from 'node:path';
 import {createRequire} from 'node:module';
 const require=createRequire(import.meta.url),V=require('../projects/bet-ledger-hq/value-core.js');
 const root=path.resolve(process.argv[2]),now=Date.now();
+let validation;
+try{validation=JSON.parse(await readFile(path.join(root,'bet-ledger-hq/data/validation.json'),'utf8'));}catch(e){if(e.code!=='ENOENT')throw e;}
+function control(row,sport,meta){
+  const league=sport==='props'?'nfl':sport,version=meta.model_version||row.tier_version||'current-v1';
+  const m=validation?.markets.find(m=>m.sport===league&&m.market===row.market&&m.baseline_version===version);
+  return {...row,validation_policy:{status:m?.status||'building-evidence',paused:m?.recommendations_paused===true,reason:m?.reasons.join('; ')||'Forward evidence is still being collected',contracts:m?.contracts||0,events:m?.events||0,days:m?.days||0}};
+}
 for(const [repo,sport] of [['nfl-edge-lab','nfl'],['ncaaf-edge-lab','ncaaf'],['props-edge','props'],['nhl-edge-lab','nhl'],['wnba-edge-lab','wnba']]){
   const data=path.join(root,repo,'data'),meta=JSON.parse(await readFile(path.join(data,'meta.json'),'utf8'));
   let board=[];
   for(const name of sport==='props'?['board','legs']:['board']){
     const file=path.join(data,name+'.json'),rows=JSON.parse(await readFile(file,'utf8'));
     if(!Array.isArray(rows))throw Error('Invalid board '+file);
-    const annotated=rows.map(r=>V.annotate(r,sport,meta.generated_at,now));
+    const annotated=rows.map(r=>V.annotate(control(r,sport,meta),sport,meta.generated_at,now));
     if(name==='board')board=annotated;
     await writeFile(file,JSON.stringify(annotated)+'\n');
+  }
+  meta.validation={markets:validation?.markets.filter(m=>m.sport===(sport==='props'?'nfl':sport))||[],research_available:true};
+  if(sport==='props'&&validation){
+    const file=path.join(data,'parlays.json'),parlays=JSON.parse(await readFile(file,'utf8'));
+    for(const ticket of parlays.tickets||[])ticket.legs=ticket.legs.map(r=>control(r,sport,meta));
+    parlays.tickets=(parlays.tickets||[]).filter(t=>t.profile!=='core'||!t.legs.some(r=>r.validation_policy.paused));
+    await writeFile(file,JSON.stringify(parlays)+'\n');
   }
   const qualified=board.filter(r=>['LEAN','GOOD','BEST','BEST BET'].includes(r.tier)&&!r.held&&!r.filtered);
   meta.value_policy={...V.POLICY,qualified:qualified.length,source_qualified:board.filter(r=>['LEAN','GOOD','BEST','BEST BET'].includes(r.source_tier)).length,

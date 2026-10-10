@@ -4,7 +4,7 @@ from .common import instant, number, decimal, seed
 
 def normalize(raw, now):
     q=dict(raw)
-    if q.get('price_source')=='model':return None
+    if q.get('price_source')=='model' or q.get('quote_status','observed')!='observed' or q.get('reference_only'):return None
     aliases={'draft kings':'DraftKings','draftkings':'DraftKings','bet 365':'bet365','bet365':'bet365','fan duel':'FanDuel','fanduel':'FanDuel'}
     q['book']=aliases.get(str(q.get('book','')).strip().lower(),str(q.get('book','')).strip())
     q['rules']=str(q.get('rules') or 'full-game').strip().lower()

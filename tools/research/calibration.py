@@ -10,7 +10,7 @@ import json
 import numpy as np
 from .common import instant, number, seed, decimal
 
-VERSION='market-calibration-v1'
+VERSION='market-calibration-v2'
 MIN_GAMES=100
 MIN_CONTRACTS=200
 
@@ -31,7 +31,7 @@ def training(archive,key,now):
     for r in sorted(archive,key=lambda x:x.get('captured_at','')):
         at=instant(r.get('captured_at'));start=instant(r.get('start'))
         result=r.get('result');verified=instant((result or {}).get('observed_at'))
-        if group(r)!=key or not at or not start or not at<start or not verified or not verified<now or result.get('outcome') not in ['win','loss']:continue
+        if r.get('version')!=VERSION or group(r)!=key or not at or not start or not at<start or not verified or not start<=verified<now or result.get('outcome') not in ['win','loss']:continue
         rows.setdefault((r['event_id'],r.get('player_id') or r.get('player','')),r)
     return list(rows.values())
 
@@ -50,8 +50,9 @@ def freeze(archive,candidates,now):
         start,observed=instant(q.get('start')),instant(q.get('observed_at'))
         generated=instant(q.get('generated_at'));p=number(q.get('p_win'));push=number(q.get('p_push')) or 0
         price=decimal(q.get('price'))
-        if not q.get('book') or q.get('price_source')=='model':continue
-        if not start or not observed or not generated or not generated<=now<start or not observed<=now or (now-generated).total_seconds()>12*3600 or (now-observed).total_seconds()>12*3600:continue
+        if not q.get('book') or q.get('price_source')=='model' or q.get('quote_status','observed')!='observed' or q.get('reference_only'):continue
+        if not start or not observed or not generated or not generated<=now<start or not observed<=now or (now-generated).total_seconds()>6*3600 or (now-observed).total_seconds()>4*3600:continue
+        if q.get('probability_basis')=='conditional' and p is not None:p=p*(1-push)
         if p is None or not 0<=p<=1 or not 0<=push<1 or p+push>1+1e-7 or price is None:continue
         contract=[q['sport'],str(q['event_id']),q['market'],q.get('player_id') or q.get('player',''),q.get('line'),q.get('side'),q.get('rules','full-game'),q.get('baseline_version')]
         identity=hashlib.sha256(json.dumps([*contract,VERSION],separators=(',',':')).encode()).hexdigest()
@@ -91,7 +92,8 @@ def attach_props(archive,props,now):
 
 def report(archive,now):
     groups=defaultdict(list)
-    for r in archive:groups[group(r)].append(r)
+    for r in archive:
+        if r.get('version')==VERSION:groups[group(r)].append(r)
     out=[]
     for key,rows in sorted(groups.items()):
         # Same player/market alternates do not inflate a calibration evaluation.

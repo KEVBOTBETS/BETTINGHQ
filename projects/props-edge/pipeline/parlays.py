@@ -312,13 +312,19 @@ def build_parlays(legs: list[dict[str, Any]], settings: dict[str, Any], now: dt.
         by_game.setdefault(str(leg["event_id"]), []).append(leg)
     for event_id, rows in by_game.items():
         game_pool = _pool(rows, settings)
-        if len(game_pool) < 3:
+        if len(game_pool) < 2:
             continue
         label = rows[0].get("matchup") or event_id
         for target in cfg["sgp_targets"]:
-            for ticket_legs in _find(game_pool, float(target), settings, sgp_limits):
+            target_limits={**sgp_limits, "min_legs": 2 if int(target)==500 else int(cfg["sgp_min_legs"])}
+            for ticket_legs in _find(game_pool, float(target), settings, target_limits):
                 if not keep(ticket_legs):
-                    continue
+                    # Prefer the specific game scope for a same-game combination;
+                    # do not count the same legs twice as separate opportunities.
+                    signature=frozenset(leg["id"] for leg in ticket_legs)
+                    duplicate=next((t for t in tickets if t["same_game"] and frozenset(l["id"] for l in t["legs"])==signature),None)
+                    if duplicate is None:continue
+                    tickets.remove(duplicate)
                 tickets.append(_ticket(ticket_legs, "game", label, int(target), settings))
 
     for ticket in tickets:
@@ -330,7 +336,7 @@ def build_parlays(legs: list[dict[str, Any]], settings: dict[str, Any], now: dt.
     return {
         "generated_at": now.isoformat(),
         "targets": list(cfg["targets"]),
-        "profiles": {"core":{"label":"Core · 2–3 legs","targets":cfg.get("core_targets",[200,500,1000])},"longshot":{"label":"Longshot · maximum payout","targets":list(cfg["targets"])}},
+        "profiles": {"core":{"label":"Core · 2–3 legs","targets":cfg.get("core_targets",[200,500,1000])},"longshot":{"label":"Moonshots · +500 to +50,000","targets":list(cfg["targets"])}},
         "counts": {
             scope: sum(ticket["scope"] == scope for ticket in tickets) for scope in ("slate", "day", "game")
         },

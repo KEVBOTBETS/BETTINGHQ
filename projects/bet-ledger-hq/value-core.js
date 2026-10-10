@@ -33,6 +33,7 @@
     if(!fresh(quote,now,4))reasons.push('Quote stale or observation time unavailable');
     if(options.publication!==undefined&&!fresh(options.publication,now,6))reasons.push('Forecast publication stale or unavailable');
     if(options.line!==undefined&&number(options.line)!==number(row.line))reasons.push('Changed line requires a new forecast');
+    if(row.validation_policy?.paused)reasons.push('Market validation paused recommendations: '+(row.validation_policy.reason||'Prospective evidence weakened'));
     if(row.held)reasons.push('Held by source model');
     if(row.quote_status&&row.quote_status!=='observed')reasons.push('Retained quote requires current sportsbook confirmation');
     if(row.reference_only===true)reasons.push('Reference price requires current sportsbook confirmation');

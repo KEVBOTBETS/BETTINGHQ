@@ -7,7 +7,7 @@ const q=V.evaluate(row,{sport:'nfl',now,publication});
 assert(q.passes);assert.equal(q.worst,-117);assert(Math.abs(q.stressEV-.05)<1e-10);
 assert(!V.evaluate(row,{sport:'nfl',now,price:-120}).passes);
 assert(!V.evaluate(row,{sport:'nfl',now,line:-4}).passes);
-for(const change of [{quote_status:'retained'},{reference_only:true},{model_prob:null},{model_prob:true},{model_prob:1},{price:50},{book:''},{price_source:'model'},{held:true},{odds_verified:false},{push_prob:1},{game_date:'2026-10-09T00:00Z'},{odds_observed_at:null},{odds_observed_at:'2026-10-10T05:00Z'}])assert(!V.evaluate({...row,...change},{sport:'nfl',now}).passes,JSON.stringify(change));
+for(const change of [{validation_policy:{paused:true,reason:'Weakened evidence'}},{quote_status:'retained'},{reference_only:true},{model_prob:null},{model_prob:true},{model_prob:1},{price:50},{book:''},{price_source:'model'},{held:true},{odds_verified:false},{push_prob:1},{game_date:'2026-10-09T00:00Z'},{odds_observed_at:null},{odds_observed_at:'2026-10-10T05:00Z'}])assert(!V.evaluate({...row,...change},{sport:'nfl',now}).passes,JSON.stringify(change));
 assert(!V.evaluate(row,{sport:'nfl',now,publication:'2026-10-09T03:00Z'}).passes);
 // Minimum price must survive integer rounding on either side of even money.
 for(const p of [.2,.4,.53,.55,.7,.9]){
@@ -52,5 +52,13 @@ try{
  }
  execFileSync(process.execPath,[new URL('../../../tools/apply_value_policy.mjs',import.meta.url).pathname,temp]);
  const meta=JSON.parse(readFileSync(path.join(temp,'nfl-edge-lab/data/meta.json')));assert.equal(meta.counts.qualified,0);assert.equal(meta.source_counts.qualified,1);assert.equal(meta.value_policy.source_qualified,1);assert.equal(meta.quote_health.markets.ATS.qualified,0);assert.equal(meta.quote_health.board_reasons.qualified,0);assert.equal(meta.quote_health.board_reasons['additional price stress failures'],1);
+
+ const validationDir=path.join(temp,'bet-ledger-hq/data');mkdirSync(validationDir,{recursive:true});writeFileSync(path.join(validationDir,'validation.json'),JSON.stringify({markets:[{sport:'nfl',market:'ATS',baseline_version:'current-v1',status:'paused',recommendations_paused:true,reasons:['Prospective market error'],contracts:220,events:120,days:35}]}));
+ const fresh=new Date().toISOString(),good={...row,game_date:new Date(Date.now()+86400000).toISOString(),odds_observed_at:fresh,tier:'GOOD'};
+ for(const repo of ['nfl-edge-lab','props-edge']){const dir=path.join(temp,repo,'data');writeFileSync(path.join(dir,'board.json'),JSON.stringify([good]));const m=JSON.parse(readFileSync(path.join(dir,'meta.json')));m.generated_at=fresh;writeFileSync(path.join(dir,'meta.json'),JSON.stringify(m));}
+ const parlayFile=path.join(temp,'props-edge/data/parlays.json');writeFileSync(parlayFile,JSON.stringify({tickets:[{profile:'core',legs:[good]},{profile:'longshot',legs:[good],actionable:false}]}));
+ execFileSync(process.execPath,[new URL('../../../tools/apply_value_policy.mjs',import.meta.url).pathname,temp]);
+ const paused=JSON.parse(readFileSync(path.join(temp,'nfl-edge-lab/data/board.json')))[0];assert(paused.validation_policy.paused);assert.equal(paused.tier,'PASS');assert.equal(paused.stake,0);assert.equal(paused.model_prob,row.model_prob);
+ const research=JSON.parse(readFileSync(parlayFile));assert.equal(research.tickets.length,1);assert.equal(research.tickets[0].profile,'longshot');assert(research.tickets[0].legs[0].validation_policy.paused);assert.equal(good.tier,'GOOD');
 }finally{rmSync(temp,{recursive:true,force:true});}
 console.log('Public qualification counters match stress-gated rows and preserve source counters');

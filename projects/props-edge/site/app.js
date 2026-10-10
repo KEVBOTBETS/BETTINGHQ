@@ -80,9 +80,9 @@
 
   /* ---------- parlay lab ---------- */
   function targets() {
-    if (state.profile == null) state.profile = state.parlays.profiles ? 'core' : 'longshot';
+    if (state.profile == null) state.profile = 'longshot';
     $('#parlay-profile').value = state.profile;
-    const list = (state.parlays.profiles?.[state.profile]?.targets || state.parlays.targets || [1000, 5000, 10000, 30000, 50000]);
+    const list = (state.parlays.profiles?.[state.profile]?.targets || state.parlays.targets || [500, 1000, 5000, 10000, 30000, 50000]);
     if (!list.includes(state.target)) state.target = list[0];
     $('#targets').innerHTML = list.map((target) => {
       const count = (state.parlays.tickets || []).filter((ticket) => ticket.target === target && ticket.scope === state.scope && (ticket.profile || 'longshot') === state.profile).length;
@@ -120,7 +120,7 @@
     const market = leg.market === 'Anytime touchdown' ? 'Anytime touchdown scorer' : `${leg.side === 'over' ? 'Over' : leg.side === 'under' ? 'Under' : leg.side} ${leg.line ?? ''} ${leg.market.toLowerCase()}`;
     return `<li><span class="pip"></span><div class="leg-main"><b>${esc(leg.player)}</b>${legTags(leg)}<span class="market">${esc(market)}</span>
       <span class="meta">${esc(leg.matchup)} · ${esc(clock(leg.start_time))} · ${esc(leg.book)}${leg.imported ? ' · your price' : ''}</span>
-      ${leg.reason ? `<p class="why">${esc(leg.reason)}</p>` : ''}</div>
+      ${leg.validation_policy?.paused?'<p class="why">Market recommendations paused; this leg remains research/manual.</p>':''}${leg.reason ? `<p class="why">${esc(leg.reason)}</p>` : ''}</div>
       <div class="leg-right"><span class="leg-odds">${odds(leg.price_american)}</span><span class="hit${tone}">${pct(leg.model_prob)} model</span>${leg.price_source === 'model' ? `<span class="est">EST PRICE${leg.line_source ? ' · REAL LINE' : ''}</span>` : ''}</div></li>`;
   }
 

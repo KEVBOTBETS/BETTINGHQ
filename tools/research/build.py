@@ -43,6 +43,20 @@ def quotes_for_games(sport,games):
                     if q.get(key) is not None:rows.append({**common,'market':kind,'line':line,'side':side,'price':q[key]})
     return rows
 
+def attach_market_benchmarks(candidates,by_event,now):
+    """Freeze an exact paired benchmark, never infer a missing opposite price."""
+    enriched=[]
+    for original in candidates:
+        q=dict(original);q.pop('market_no_push',None);enriched.append(q)
+        normalized=market.normalize(q,now)
+        if not normalized:continue
+        for group in by_event.get((q['sport'],q['event_id']),[]):
+            if group['contract']!=normalized['contract']:continue
+            pair=next((p for p in group['devig_pairs'] if p['book']==normalized['book']),None)
+            same=next((r for r in group['quotes'] if r['book']==normalized['book'] and r['side']==q['side'] and r['observed_at']==normalized['observed_at'] and r['price']==normalized['price']),None)
+            if pair and same:q['market_no_push']=pair['probabilities'].get(q['side'])
+    return enriched
+
 def build(root=ROOT,out=None,capture=False,now=None):
     now=now or datetime.now(timezone.utc);old=read(root/ARCHIVE,{'forecasts':[],'quotes':[]});dataset=read(root/'research/inputs/nfl-pbp.json',{})
     dataset=ingest.enrich_workload(dataset,read(root/'research/inputs/nfl-workload.json',{}),now)
@@ -56,7 +70,7 @@ def build(root=ROOT,out=None,capture=False,now=None):
         # Capture canonical home/over probabilities only; opposite sides are not extra samples.
         for q in board:
             if q.get('side') not in ['home','over'] or q.get('market') not in ['ML','ATS','TOTAL']:continue
-            calibration_rows.append({'sport':sport,'event_id':str(q.get('game_id')),'market':q['market'],'side':q['side'],'line':q.get('line') if q['market']!='ML' else None,'p_win':q.get('model_prob'),'p_push':q.get('push_prob',0),'price':q.get('price'),'book':q.get('book'),'start':q.get('game_date'),'observed_at':q.get('odds_observed_at'),'generated_at':meta.get('generated_at'),'baseline_version':meta.get('model_version') or q.get('tier_version','current-v1'),'rules':'full-game'})
+            calibration_rows.append({'sport':sport,'event_id':str(q.get('game_id')),'market':q['market'],'side':q['side'],'line':q.get('line') if q['market']!='ML' else None,'p_win':q.get('model_prob'),'probability_basis':'conditional','p_push':q.get('push_prob',0),'price':q.get('price'),'book':q.get('book'),'start':q.get('game_date'),'observed_at':q.get('odds_observed_at'),'generated_at':meta.get('generated_at'),'baseline_version':meta.get('model_version') or q.get('tier_version','current-v1'),'rules':'full-game'})
         graded=read(folder/f"state/games_{meta.get('season',now.year)}.json",[]) if sport=='nfl' else source
         for g in graded:
             if g.get('completed'):results[sport,str(g['game_id'])]={**g,'result_observed_at':meta.get('generated_at')}
@@ -79,7 +93,7 @@ def build(root=ROOT,out=None,capture=False,now=None):
     board=read(root/'projects/props-edge/site/data/board.json',[]);props_meta=read(root/'projects/props-edge/site/data/meta.json',{})
     diagnostics.append(readiness.health('props',read(root/'projects/props-edge/site/data/meta.json',{}),allgames.get('nfl',[]),board,now))
     for q in board:
-        calibration_rows.append({'sport':'nfl','event_id':str(q.get('event_id')),'market':q['market'],'player':q.get('player'),'side':q['side'],'line':q.get('line'),'p_win':q.get('model_prob'),'p_push':q.get('push_prob',0),'price':q.get('price_american'),'book':q.get('book'),'price_source':q.get('price_source'),'start':q.get('start_time'),'observed_at':q.get('updated_at'),'generated_at':props_meta.get('generated_at'),'baseline_version':q.get('tier_version','props-current-v1'),'rules':'full-game'})
+        calibration_rows.append({'sport':'nfl','event_id':str(q.get('event_id')),'market':q['market'],'player':q.get('player'),'side':q['side'],'line':q.get('line'),'p_win':q.get('model_prob'),'p_push':q.get('push_prob',0),'price':q.get('price_american'),'book':q.get('book'),'price_source':q.get('price_source'),'quote_status':q.get('quote_status','observed'),'reference_only':q.get('reference_only',False),'start':q.get('start_time'),'observed_at':q.get('updated_at'),'generated_at':props_meta.get('generated_at'),'baseline_version':q.get('tier_version','props-current-v1'),'rules':'full-game'})
         prop_raw.append({**q,'sport':'nfl','price':q.get('price_american'),'observed_at':q.get('updated_at'),'start':q.get('start_time'),'rules':'full-game'})
     multisport={}
     for sport in ['nhl','ncaaf']:
@@ -147,6 +161,7 @@ def build(root=ROOT,out=None,capture=False,now=None):
     prop_archive=prop_tracking.freeze(old.get('prop_forecasts',[]),props,now) if capture else old.get('prop_forecasts',[])
     if capture:prop_archive=prop_tracking.settle(prop_archive,dataset,root/'projects/nfl-edge-lab/state/nflverse_games.csv',now)
     state['prop_forecasts']=prop_archive
+    calibration_rows=attach_market_benchmarks(calibration_rows,by_event,now)
     market_archive=calibration.freeze(old.get('market_forecasts',[]),calibration_rows,now) if capture else old.get('market_forecasts',[])
     if capture:market_archive=calibration.attach_props(calibration.settle(market_archive,results,now),prop_archive,now)
     if capture:market_archive=calibration.attach_verified_props(market_archive,read(root/'projects/props-edge/site/data/parlay-results.json',{}).get('records',[]),now)

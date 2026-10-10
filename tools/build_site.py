@@ -8,6 +8,7 @@ from sports_theme import apply as apply_sports_theme
 from performance import build as build_performance
 from challengers import evaluate as evaluate_challengers
 from research.build import build as build_research
+from validation import report as build_validation
 
 ROOT = Path(__file__).resolve().parents[1]
 OUT = ROOT / '_site'
@@ -39,6 +40,9 @@ def main():
             (data/'summary.json').write_text(json.dumps(dict(starting_bankroll=None,
                 current_bankroll=None,wins=0,losses=0,pushes=0,settled=0,pending=0,roi=None,pnl=None))+'\n')
     subprocess.run([sys.executable, 'tools/public_dashboard.py', str(OUT/'ladderbet/index.html')], cwd=PROJECTS/'ladderbet', check=True)
+    archive=ROOT/'projects/bet-ledger-hq/data/research/history.json'
+    validation=build_validation(json.loads(archive.read_text()).get('market_forecasts',[]) if archive.exists() else [])
+    (target/'data/validation.json').write_text(json.dumps(validation,separators=(',',':'),allow_nan=False)+'\n')
     subprocess.run(['node', 'tools/apply_value_policy.mjs', str(OUT)], cwd=ROOT, check=True)
     # Load the same policy helpers in source boards before their existing scripts.
     for repo in ['nfl-edge-lab','ncaaf-edge-lab','props-edge','nhl-edge-lab','wnba-edge-lab']:
@@ -47,6 +51,7 @@ def main():
         html=html.replace('<head>', '<head><script src="../bet-ledger-hq/value-core.js"></script><script src="../bet-ledger-hq/value-view.js"></script>', 1)
         index.write_text(html)
     performance = build_performance(ROOT, target/"data/performance.json")
+    performance['validation'] = validation
     performance['challengers'] = evaluate_challengers(performance['records'])
     (target/'data/performance.json').write_text(json.dumps(performance,separators=(',',':'),allow_nan=False)+'\n')
     build_research(ROOT, target/'data/research/report.json')

@@ -10,12 +10,13 @@
    const quote=d?.odds||g.odds||{},line=number(quote.spread_home),gap=mu==null||line==null?null:mu+line;
    const side=gap>0?'home':gap<0?'away':null,board=(bundle.board||[]).filter(r=>String(r.game_id)===String(g.game_id)&&r.market==='ATS');
    const preferred=board.find(r=>r.side===side),stamp=Date.parse(bundle.meta?.generated_at),start=Date.parse(g.date);
-   const fresh=Number.isFinite(stamp)&&stamp<=now+300000&&now-stamp<24*3600000;
+   const fresh=!bundle.error&&Number.isFinite(stamp)&&stamp<=now+300000&&now-stamp<24*3600000;
    const locked=!Number.isFinite(start)||start<=now||g.completed||g.canceled||g.postponed||/in progress|final|postponed|canceled/i.test(g.status||'');
-   const reason=preferred?.filtered||preferred?.hold_note||preferred?.warning||preferred?.qualification||(!fresh?'Forecast stale':mu==null?'Model projection unavailable':line==null?'Enter your book’s spread and price':'Below model qualification threshold');
+   const paused=preferred?.validation_policy?.paused===true||bundle.meta?.validation?.markets?.some(m=>m.market==='ATS'&&m.recommendations_paused&&m.baseline_version===(bundle.meta?.model_version||preferred?.tier_version||'current-v1'));
+   const reason=paused?'Market validation paused recommendations; manual game options remain available':preferred?.filtered||preferred?.hold_note||preferred?.warning||preferred?.qualification||(!fresh?'Forecast stale':mu==null?'Model projection unavailable':line==null?'Enter your book’s spread and price':'Below model qualification threshold');
    const tier=preferred&&!preferred.filtered&&!preferred.held?preferred.tier:null;
-   const rating=!fresh||mu==null||line==null||preferred?.filtered||preferred?.held?'AVOID':['BEST BET','GOOD','LEAN'].includes(tier)?tier:preferred?.ev<0?'BAD':'LEAN';
-   return {...g,key,sport,forecast_at:bundle.meta?.generated_at,mu,line,gap,side,rating,reason,fresh,locked,quote,board};
+   const rating=paused||!fresh||mu==null||line==null||preferred?.filtered||preferred?.held?'AVOID':['BEST BET','GOOD','LEAN'].includes(tier)?tier:preferred?.ev<0?'BAD':'LEAN';
+   return {...g,key,sport,validationPaused:paused,optionSide:side||(mu===null||mu===0?null:mu>0?'home':'away'),optionBasis:side?'Spread research lean':mu===null?'Choose either side; model unavailable':mu===0?'No model preference; choose either side':'Model winner direction; enter a spread to reassess',forecast_at:bundle.meta?.generated_at,mu,line,gap,side,rating,reason,fresh,locked,quote,board};
   }).sort((a,b)=>Date.parse(a.date)-Date.parse(b.date));
  }
  function selection(row,side,line,price,book,now=Date.now()){
