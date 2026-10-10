@@ -1,85 +1,85 @@
 {
  "schema": 1,
- "generated_at": "2026-10-10T15:41:17.334894+00:00",
+ "generated_at": "2026-10-10T16:28:59.542717+00:00",
  "label": "Ladder screened-option accuracy",
  "method": "Every screened option is saved before the event, whether or not you choose it. Probabilities here are de-vigged market estimates, not an independent sports model. First pre-event snapshot, frozen line and price. All model picks, including PASS/AVOID and unstaked picks. One preferred side per event/market in pick statistics; the complete priced-side audit is separate. One hypothetical unit per pick; no actual wagers are created. Missing results remain pending.",
  "overall": {
-  "logged": 267,
-  "wins": 104,
+  "logged": 268,
+  "wins": 105,
   "losses": 57,
   "pushes": 0,
   "voids": 0,
-  "settled": 161,
+  "settled": 162,
   "pending": 106,
-  "win_rate": 0.6459627329192547,
-  "units": -1.335,
-  "roi": -0.008292434782608693,
-  "brier": 0.22784
+  "win_rate": 0.6481481481481481,
+  "units": -0.668,
+  "roi": -0.004126018518518517,
+  "brier": 0.22757
  },
  "all_calls": {
-  "logged": 267,
-  "wins": 104,
+  "logged": 268,
+  "wins": 105,
   "losses": 57,
   "pushes": 0,
   "voids": 0,
-  "settled": 161,
+  "settled": 162,
   "pending": 106,
-  "win_rate": 0.6459627329192547,
-  "units": -1.335,
-  "roi": -0.008292434782608693,
-  "brier": 0.22784
+  "win_rate": 0.6481481481481481,
+  "units": -0.668,
+  "roi": -0.004126018518518517,
+  "brier": 0.22757
  },
  "by_tier": {
   "SCREENED": {
-   "logged": 267,
-   "wins": 104,
+   "logged": 268,
+   "wins": 105,
    "losses": 57,
    "pushes": 0,
    "voids": 0,
-   "settled": 161,
+   "settled": 162,
    "pending": 106,
-   "win_rate": 0.6459627329192547,
-   "units": -1.335,
-   "roi": -0.008292434782608693,
-   "brier": 0.22784
+   "win_rate": 0.6481481481481481,
+   "units": -0.668,
+   "roi": -0.004126018518518517,
+   "brier": 0.22757
   }
  },
  "by_market": {
   "ML": {
-   "logged": 267,
-   "wins": 104,
+   "logged": 268,
+   "wins": 105,
    "losses": 57,
    "pushes": 0,
    "voids": 0,
-   "settled": 161,
+   "settled": 162,
    "pending": 106,
-   "win_rate": 0.6459627329192547,
-   "units": -1.335,
-   "roi": -0.008292434782608693,
-   "brier": 0.22784
+   "win_rate": 0.6481481481481481,
+   "units": -0.668,
+   "roi": -0.004126018518518517,
+   "brier": 0.22757
   }
  },
  "by_version": {
   "2026-09-06-ev2": {
-   "logged": 267,
-   "wins": 104,
+   "logged": 268,
+   "wins": 105,
    "losses": 57,
    "pushes": 0,
    "voids": 0,
-   "settled": 161,
+   "settled": 162,
    "pending": 106,
-   "win_rate": 0.6459627329192547,
-   "units": -1.335,
-   "roi": -0.008292434782608693,
-   "brier": 0.22784
+   "win_rate": 0.6481481481481481,
+   "units": -0.668,
+   "roi": -0.004126018518518517,
+   "brier": 0.22757
   }
  },
  "calibration": [
   {
    "bucket": "50\u201360%",
-   "n": 56,
-   "predicted": 0.58728,
-   "actual": 0.51786
+   "n": 57,
+   "predicted": 0.58699,
+   "actual": 0.52632
   },
   {
    "bucket": "60\u201370%",
@@ -141,6 +141,27 @@
    "selected": true,
    "id": "call:nfl:401872993::ML:home",
    "captured_at": "2026-10-10T00:54:18.327132+00:00",
+   "result": "Pending",
+   "version": "2026-09-06-ev2"
+  },
+  {
+   "kind": "call",
+   "league": "nhl",
+   "event_id": "401892484",
+   "start": "2026-10-11T23:00Z",
+   "matchup": "Carolina Hurricanes @ Philadelphia Flyers",
+   "pick": "Carolina Hurricanes",
+   "market": "ML",
+   "side": "away",
+   "price": -155.0,
+   "probability": 0.583,
+   "tier": "SCREENED",
+   "edge": 0,
+   "book": "Draft Kings",
+   "three_way": false,
+   "selected": true,
+   "id": "call:nhl:401892484::ML:away",
+   "captured_at": "2026-10-10T16:28:55.565688+00:00",
    "result": "Pending",
    "version": "2026-09-06-ev2"
   },
@@ -897,8 +918,13 @@
    "selected": true,
    "id": "call:epl:401878775::ML:home",
    "captured_at": "2026-10-09T06:50:38.300150+00:00",
-   "result": "Pending",
-   "version": "2026-09-06-ev2"
+   "result": "Win",
+   "version": "2026-09-06-ev2",
+   "units": 0.666667,
+   "actual": null,
+   "final_home": 5.0,
+   "final_away": 1.0,
+   "graded_at": "2026-10-10T16:28:59.538452+00:00"
   },
   {
    "kind": "call",
