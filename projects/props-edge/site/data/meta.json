@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-10T00:54:11.801640+00:00",
+  "generated_at": "2026-10-10T03:43:19.050495+00:00",
   "provider_priority": [
     "Covers public comparison (no key)",
     "Optional odds providers",
@@ -14,32 +14,30 @@
     "covers_keyless": true
   },
   "counts": {
-    "priced_quotes": 0,
-    "eligible_priced_quotes": 0,
-    "qualified_options": 0,
-    "held_options": 0,
-    "board": 0,
-    "actionable": 0,
+    "priced_quotes": 343,
+    "eligible_priced_quotes": 343,
+    "qualified_options": 49,
+    "held_options": 41,
+    "board": 170,
+    "actionable": 8,
     "best": 0,
     "good": 0,
-    "leans": 0,
+    "leans": 49,
     "projections": 6918,
     "injury_report": 760,
     "ruled_out": 150,
-    "book_lines": 2029,
-    "legs_on_book_lines": 1367,
-    "legs": 3875,
-    "book_priced_legs": 0,
-    "parlays": 140
+    "book_lines": 2026,
+    "legs_on_book_lines": 1282,
+    "legs": 3951,
+    "book_priced_legs": 168,
+    "parlays": 160
   },
   "source_by_sport": {
     "NFL": {
-      "source": "ESPN regular-season statistics",
-      "priced_quotes": 0,
+      "source": "Covers public comparison + ESPN regular-season projections",
+      "priced_quotes": 343,
       "projections": 6918,
-      "errors": [
-        "Covers public prop comparison request failed (no matchable NFL prop prices (100 cards, 96 recognized prop cards, 96 scheduled-player matches))"
-      ]
+      "errors": []
     }
   },
   "workflow_url": "https://github.com/KEVBOTBETS/BETTINGHQ/actions/workflows/release.yml",
@@ -52,9 +50,9 @@
     "window": {
       "NFL": {
         "next_kickoff": "2026-10-11T13:30Z",
-        "hours_to_kickoff": 36.6,
+        "hours_to_kickoff": 33.8,
         "window_hours": 36.0,
-        "inside_window": false
+        "inside_window": true
       }
     },
     "markets": [
@@ -201,9 +199,9 @@
     },
     "calibration_shrink": 1.0,
     "calibration_active": false,
-    "updated_at": "2026-10-10T00:54:04.372031+00:00",
+    "updated_at": "2026-10-10T03:43:11.874928+00:00",
     "calibration_note": "Calibration is diagnostic only; no automatic refit.",
-    "total_logged": 33298,
+    "total_logged": 33328,
     "pending": 2583,
     "independent_events": 48,
     "legacy_excluded": 17,
@@ -212,13 +210,13 @@
   "parlay_record": {
     "Win": 89,
     "Loss": 4221,
-    "Pending": 3693,
+    "Pending": 3795,
     "Void": 0,
     "Review": 0,
-    "total": 8003,
+    "total": 8105,
     "hit_rate": 0.020649651972157772
   },
   "max_odds_age_hours": 12,
-  "price_source_status": "unavailable",
-  "estimated_prices": true
+  "price_source_status": "available",
+  "estimated_prices": false
 }

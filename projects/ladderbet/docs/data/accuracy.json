@@ -1,91 +1,91 @@
 {
  "schema": 1,
- "generated_at": "2026-10-10T00:54:22.569779+00:00",
+ "generated_at": "2026-10-10T03:43:29.992274+00:00",
  "label": "Ladder screened-option accuracy",
  "method": "Every screened option is saved before the event, whether or not you choose it. Probabilities here are de-vigged market estimates, not an independent sports model. First pre-event snapshot, frozen line and price. All model picks, including PASS/AVOID and unstaked picks. One preferred side per event/market in pick statistics; the complete priced-side audit is separate. One hypothetical unit per pick; no actual wagers are created. Missing results remain pending.",
  "overall": {
-  "logged": 261,
-  "wins": 102,
-  "losses": 56,
+  "logged": 263,
+  "wins": 103,
+  "losses": 57,
   "pushes": 0,
   "voids": 0,
-  "settled": 158,
+  "settled": 160,
   "pending": 103,
-  "win_rate": 0.6455696202531646,
-  "units": -1.299,
-  "roi": -0.008220259493670884,
-  "brier": 0.22835
+  "win_rate": 0.64375,
+  "units": -1.743,
+  "roi": -0.010895281249999998,
+  "brier": 0.22862
  },
  "all_calls": {
-  "logged": 261,
-  "wins": 102,
-  "losses": 56,
+  "logged": 263,
+  "wins": 103,
+  "losses": 57,
   "pushes": 0,
   "voids": 0,
-  "settled": 158,
+  "settled": 160,
   "pending": 103,
-  "win_rate": 0.6455696202531646,
-  "units": -1.299,
-  "roi": -0.008220259493670884,
-  "brier": 0.22835
+  "win_rate": 0.64375,
+  "units": -1.743,
+  "roi": -0.010895281249999998,
+  "brier": 0.22862
  },
  "by_tier": {
   "SCREENED": {
-   "logged": 261,
-   "wins": 102,
-   "losses": 56,
+   "logged": 263,
+   "wins": 103,
+   "losses": 57,
    "pushes": 0,
    "voids": 0,
-   "settled": 158,
+   "settled": 160,
    "pending": 103,
-   "win_rate": 0.6455696202531646,
-   "units": -1.299,
-   "roi": -0.008220259493670884,
-   "brier": 0.22835
+   "win_rate": 0.64375,
+   "units": -1.743,
+   "roi": -0.010895281249999998,
+   "brier": 0.22862
   }
  },
  "by_market": {
   "ML": {
-   "logged": 261,
-   "wins": 102,
-   "losses": 56,
+   "logged": 263,
+   "wins": 103,
+   "losses": 57,
    "pushes": 0,
    "voids": 0,
-   "settled": 158,
+   "settled": 160,
    "pending": 103,
-   "win_rate": 0.6455696202531646,
-   "units": -1.299,
-   "roi": -0.008220259493670884,
-   "brier": 0.22835
+   "win_rate": 0.64375,
+   "units": -1.743,
+   "roi": -0.010895281249999998,
+   "brier": 0.22862
   }
  },
  "by_version": {
   "2026-09-06-ev2": {
-   "logged": 261,
-   "wins": 102,
-   "losses": 56,
+   "logged": 263,
+   "wins": 103,
+   "losses": 57,
    "pushes": 0,
    "voids": 0,
-   "settled": 158,
+   "settled": 160,
    "pending": 103,
-   "win_rate": 0.6455696202531646,
-   "units": -1.299,
-   "roi": -0.008220259493670884,
-   "brier": 0.22835
+   "win_rate": 0.64375,
+   "units": -1.743,
+   "roi": -0.010895281249999998,
+   "brier": 0.22862
   }
  },
  "calibration": [
   {
    "bucket": "50\u201360%",
-   "n": 55,
-   "predicted": 0.58717,
-   "actual": 0.52727
+   "n": 56,
+   "predicted": 0.58728,
+   "actual": 0.51786
   },
   {
    "bucket": "60\u201370%",
-   "n": 103,
-   "predicted": 0.64224,
-   "actual": 0.70874
+   "n": 104,
+   "predicted": 0.64199,
+   "actual": 0.71154
   }
  ],
  "games": {
@@ -183,6 +183,27 @@
    "selected": true,
    "id": "call:nfl:401872992::ML:home",
    "captured_at": "2026-10-09T21:40:52.125481+00:00",
+   "result": "Pending",
+   "version": "2026-09-06-ev2"
+  },
+  {
+   "kind": "call",
+   "league": "nfl",
+   "event_id": "401872991",
+   "start": "2026-10-11T20:25Z",
+   "matchup": "Detroit Lions @ Arizona Cardinals",
+   "pick": "Detroit Lions",
+   "market": "ML",
+   "side": "away",
+   "price": -250.0,
+   "probability": 0.6854,
+   "tier": "SCREENED",
+   "edge": 0,
+   "book": "Draft Kings",
+   "three_way": false,
+   "selected": true,
+   "id": "call:nfl:401872991::ML:away",
+   "captured_at": "2026-10-10T03:43:25.322737+00:00",
    "result": "Pending",
    "version": "2026-09-06-ev2"
   },
@@ -519,6 +540,27 @@
    "selected": true,
    "id": "call:ncaaf:401864518::ML:away",
    "captured_at": "2026-10-09T00:54:21.844458+00:00",
+   "result": "Pending",
+   "version": "2026-09-06-ev2"
+  },
+  {
+   "kind": "call",
+   "league": "nba",
+   "event_id": "401906510",
+   "start": "2026-10-10T23:00Z",
+   "matchup": "Detroit Pistons @ Washington Wizards",
+   "pick": "Detroit Pistons",
+   "market": "ML",
+   "side": "away",
+   "price": -180.0,
+   "probability": 0.6164,
+   "tier": "SCREENED",
+   "edge": 0,
+   "book": "Draft Kings",
+   "three_way": false,
+   "selected": true,
+   "id": "call:nba:401906510::ML:away",
+   "captured_at": "2026-10-10T03:43:25.322737+00:00",
    "result": "Pending",
    "version": "2026-09-06-ev2"
   },
@@ -918,8 +960,13 @@
    "selected": true,
    "id": "call:wnba:401918299::ML:home",
    "captured_at": "2026-10-08T17:01:42.439151+00:00",
-   "result": "Pending",
-   "version": "2026-09-06-ev2"
+   "result": "Loss",
+   "version": "2026-09-06-ev2",
+   "units": -1,
+   "actual": null,
+   "final_home": 83.0,
+   "final_away": 85.0,
+   "graded_at": "2026-10-10T03:43:29.987684+00:00"
   },
   {
    "kind": "call",
@@ -939,8 +986,13 @@
    "selected": true,
    "id": "call:ncaaf:401858254::ML:home",
    "captured_at": "2026-10-08T17:01:42.439151+00:00",
-   "result": "Pending",
-   "version": "2026-09-06-ev2"
+   "result": "Win",
+   "version": "2026-09-06-ev2",
+   "units": 0.555556,
+   "actual": null,
+   "final_home": 44.0,
+   "final_away": 20.0,
+   "graded_at": "2026-10-10T03:43:29.987684+00:00"
   },
   {
    "kind": "call",
