@@ -1,29 +1,57 @@
 {
   "schema": 1,
-  "checked_at": "2026-10-10T14:14:13.652Z",
+  "checked_at": "2026-10-10T14:19:09.271Z",
   "coverage": {
+    "nhl": {
+      "status": "available",
+      "reports": 41,
+      "checked_at": "2026-10-10T14:19:09.271Z"
+    },
     "ncaaf": {
       "status": "empty",
       "reports": 0,
-      "checked_at": "2026-10-10T14:14:13.652Z"
+      "checked_at": "2026-10-10T14:19:09.271Z"
     },
     "mlb": {
       "status": "available",
       "reports": 9,
-      "checked_at": "2026-10-10T14:14:13.652Z"
+      "checked_at": "2026-10-10T14:19:09.271Z"
     },
     "nfl": {
       "status": "available",
       "reports": 342,
-      "checked_at": "2026-10-10T14:14:13.652Z"
-    },
-    "nhl": {
-      "status": "available",
-      "reports": 41,
-      "checked_at": "2026-10-10T14:14:13.652Z"
+      "checked_at": "2026-10-10T14:19:09.271Z"
     }
   },
   "events": [
+    {
+      "id": "injury|nfl:33:Tyler Huntley|2026-10-10T14:19:09.271Z",
+      "kind": "injury",
+      "observed_at": "2026-10-10T14:19:09.271Z",
+      "sport": "nfl",
+      "title": "Player availability changed",
+      "event": "Baltimore Ravens",
+      "pick": "Tyler Huntley",
+      "before": "Active · Huntley will start Sunday night's game against the Falcons after Lamar Jackson (ankle) was ruled out Friday, Jeff Zrebiec of The Athletic Zrebiec reports.",
+      "after": "Active · Huntley will start Sunday night's game against the Falcons after Lamar Jackson (ankle) was ruled out Friday, Jeff Zrebiec of The Athletic reports.",
+      "source_quote_at": "2026-10-09T17:40Z",
+      "source": "ESPN injuries",
+      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
+    },
+    {
+      "id": "injury|nfl:18:Noah Fant|2026-10-10T14:19:09.271Z",
+      "kind": "injury",
+      "observed_at": "2026-10-10T14:19:09.271Z",
+      "sport": "nfl",
+      "title": "Player availability changed",
+      "event": "New Orleans Saints",
+      "pick": "Noah Fant",
+      "before": "Active · Fant (abdomen) was a limited participant in Thursday's practice.",
+      "after": "Active · Fant (abdomen) does not carry an injury designation into Sunday's game against the Vikings.",
+      "source_quote_at": "2026-10-10T14:05Z",
+      "source": "ESPN injuries",
+      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
+    },
     {
       "id": "odds|mlb|849831|2026-10-11T00:00:00Z|TOTAL||over|DraftKings|2026-10-10T14:14:13.652Z",
       "kind": "odds",
@@ -2963,36 +2991,6 @@
       "source_quote_at": "2026-10-09T21:01:57.435947+00:00",
       "source": "Existing NCAAF board",
       "note": "Your ticket keeps its original odds. Recheck the live book before placing a new wager."
-    },
-    {
-      "id": "odds|ncaaf|401858487|2026-10-10T01:00Z|ATS||away|Draft Kings|2026-10-09T21:03:35.701Z",
-      "kind": "odds",
-      "observed_at": "2026-10-09T21:03:35.701Z",
-      "sport": "ncaaf",
-      "event": "IOWA @ WASH",
-      "start": "2026-10-10T01:00Z",
-      "pick": "IOWA +1.5",
-      "title": "Published odds changed",
-      "before": "-102 · line 2.5",
-      "after": "-118 · line 3",
-      "book": "Draft Kings",
-      "source_quote_at": "2026-10-09T21:01:57.312069+00:00",
-      "source": "Existing NCAAF board",
-      "note": "Your ticket keeps its original odds. Recheck the live book before placing a new wager."
-    },
-    {
-      "id": "injury|nfl:5:Mekhi Blackmon|2026-10-09T21:03:35.701Z",
-      "kind": "injury",
-      "observed_at": "2026-10-09T21:03:35.701Z",
-      "sport": "nfl",
-      "title": "Player availability changed",
-      "event": "Cleveland Browns",
-      "pick": "Mekhi Blackmon",
-      "before": "Questionable · Back",
-      "after": "Active",
-      "source_quote_at": "2026-10-09T20:52Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
     }
   ]
 }
