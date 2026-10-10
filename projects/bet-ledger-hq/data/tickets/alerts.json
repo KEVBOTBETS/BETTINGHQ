@@ -1,29 +1,85 @@
 {
   "schema": 1,
-  "checked_at": "2026-10-10T01:21:25.507Z",
+  "checked_at": "2026-10-10T01:50:32.488Z",
   "coverage": {
-    "mlb": {
+    "nhl": {
       "status": "available",
-      "reports": 9,
-      "checked_at": "2026-10-10T01:21:25.507Z"
+      "reports": 41,
+      "checked_at": "2026-10-10T01:50:32.488Z"
+    },
+    "nfl": {
+      "status": "available",
+      "reports": 348,
+      "checked_at": "2026-10-10T01:50:32.488Z"
     },
     "ncaaf": {
       "status": "empty",
       "reports": 0,
-      "checked_at": "2026-10-10T01:21:25.507Z"
+      "checked_at": "2026-10-10T01:50:32.488Z"
     },
-    "nfl": {
+    "mlb": {
       "status": "available",
-      "reports": 361,
-      "checked_at": "2026-10-10T01:21:25.507Z"
-    },
-    "nhl": {
-      "status": "available",
-      "reports": 41,
-      "checked_at": "2026-10-10T01:21:25.507Z"
+      "reports": 10,
+      "checked_at": "2026-10-10T01:50:32.488Z"
     }
   },
   "events": [
+    {
+      "id": "injury|nfl:22:Dadrion Taylor-Demerson|2026-10-10T01:50:32.488Z",
+      "kind": "injury",
+      "observed_at": "2026-10-10T01:50:32.488Z",
+      "sport": "nfl",
+      "title": "Player availability changed",
+      "event": "Arizona Cardinals",
+      "pick": "Dadrion Taylor-Demerson",
+      "before": "Active",
+      "after": "Active · Taylor-Demerson (back) does not have an injury designation against the Lions on Sunday, Zach Gershman of the Cardinals' official site reports.",
+      "source_quote_at": "2026-10-10T01:17Z",
+      "source": "ESPN injuries",
+      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
+    },
+    {
+      "id": "injury|nfl:26:Leonard Williams|2026-10-10T01:50:32.488Z",
+      "kind": "injury",
+      "observed_at": "2026-10-10T01:50:32.488Z",
+      "sport": "nfl",
+      "title": "Player availability changed",
+      "event": "Seattle Seahawks",
+      "pick": "Leonard Williams",
+      "before": "Active · Williams (ankle) did not participate at the Seahawks' practice Thursday, John Boyle of the team's official site reports.",
+      "after": "Active · Williams (ankle) does not have an injury designation for Sunday's game against the 49ers, Bob Condotta of The Seattle Times reports.",
+      "source_quote_at": "2026-10-10T01:30Z",
+      "source": "ESPN injuries",
+      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
+    },
+    {
+      "id": "injury|nfl:28:Frankie Luvu|2026-10-10T01:50:32.488Z",
+      "kind": "injury",
+      "observed_at": "2026-10-10T01:50:32.488Z",
+      "sport": "nfl",
+      "title": "Player availability changed",
+      "event": "Washington Commanders",
+      "pick": "Frankie Luvu",
+      "before": "Active",
+      "after": "Active · Luvu (groin) does not have any injury designation ahead of Sunday's game against the Giants.",
+      "source_quote_at": "2026-10-10T01:16Z",
+      "source": "ESPN injuries",
+      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
+    },
+    {
+      "id": "injury|mlb:2:Garrett Whitlock|2026-10-10T01:50:32.488Z",
+      "kind": "injury",
+      "observed_at": "2026-10-10T01:50:32.488Z",
+      "sport": "mlb",
+      "title": "New availability report",
+      "event": "Boston Red Sox",
+      "pick": "Garrett Whitlock",
+      "before": "Not in the previous dated report",
+      "after": "Out · Leg",
+      "source_quote_at": "2026-10-10T01:08Z",
+      "source": "ESPN injuries",
+      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
+    },
     {
       "id": "injury|nfl:3:Anthony Johnson Jr.|2026-10-10T01:21:25.507Z",
       "kind": "injury",
@@ -2867,62 +2923,6 @@
       "before": "Questionable · Foot",
       "after": "Questionable · questionable",
       "source_quote_at": "2026-10-07T23:14Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:30:Anton Harrison|2026-10-09T20:19:48.450Z",
-      "kind": "injury",
-      "observed_at": "2026-10-09T20:19:48.450Z",
-      "sport": "nfl",
-      "title": "Player availability changed",
-      "event": "Jacksonville Jaguars",
-      "pick": "Anton Harrison",
-      "before": "Questionable · Elbow",
-      "after": "Questionable · questionable",
-      "source_quote_at": "2026-10-07T23:14Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:21:Saquon Barkley|2026-10-09T20:19:48.450Z",
-      "kind": "injury",
-      "observed_at": "2026-10-09T20:19:48.450Z",
-      "sport": "nfl",
-      "title": "Player availability changed",
-      "event": "Philadelphia Eagles",
-      "pick": "Saquon Barkley",
-      "before": "Questionable · Hamstring",
-      "after": "Out · Hamstring",
-      "source_quote_at": "2026-10-09T20:01Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:21:Hollywood Brown|2026-10-09T20:19:48.450Z",
-      "kind": "injury",
-      "observed_at": "2026-10-09T20:19:48.450Z",
-      "sport": "nfl",
-      "title": "Player availability changed",
-      "event": "Philadelphia Eagles",
-      "pick": "Hollywood Brown",
-      "before": "Questionable · Ankle",
-      "after": "Out · Ankle",
-      "source_quote_at": "2026-10-09T20:01Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:21:DeVonta Smith|2026-10-09T20:19:48.450Z",
-      "kind": "injury",
-      "observed_at": "2026-10-09T20:19:48.450Z",
-      "sport": "nfl",
-      "title": "Player availability changed",
-      "event": "Philadelphia Eagles",
-      "pick": "DeVonta Smith",
-      "before": "Questionable · Hamstring",
-      "after": "Out · Hamstring",
-      "source_quote_at": "2026-10-09T15:34Z",
       "source": "ESPN injuries",
       "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
     }
