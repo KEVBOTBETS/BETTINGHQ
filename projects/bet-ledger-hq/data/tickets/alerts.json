@@ -1,29 +1,71 @@
 {
   "schema": 1,
-  "checked_at": "2026-10-10T19:04:30.090Z",
+  "checked_at": "2026-10-10T19:19:07.919Z",
   "coverage": {
-    "nhl": {
-      "status": "available",
-      "reports": 40,
-      "checked_at": "2026-10-10T19:04:30.090Z"
-    },
     "ncaaf": {
       "status": "empty",
       "reports": 0,
-      "checked_at": "2026-10-10T19:04:30.090Z"
-    },
-    "nfl": {
-      "status": "available",
-      "reports": 344,
-      "checked_at": "2026-10-10T19:04:30.090Z"
+      "checked_at": "2026-10-10T19:19:07.919Z"
     },
     "mlb": {
       "status": "available",
       "reports": 9,
-      "checked_at": "2026-10-10T19:04:30.090Z"
+      "checked_at": "2026-10-10T19:19:07.919Z"
+    },
+    "nfl": {
+      "status": "available",
+      "reports": 344,
+      "checked_at": "2026-10-10T19:19:07.919Z"
+    },
+    "nhl": {
+      "status": "available",
+      "reports": 40,
+      "checked_at": "2026-10-10T19:19:07.919Z"
     }
   },
   "events": [
+    {
+      "id": "injury|nfl:3:Anthony Johnson Jr.|2026-10-10T19:19:07.919Z",
+      "kind": "injury",
+      "observed_at": "2026-10-10T19:19:07.919Z",
+      "sport": "nfl",
+      "title": "Player availability changed",
+      "event": "Chicago Bears",
+      "pick": "Anthony Johnson Jr.",
+      "before": "Injured Reserve · Undisclosed",
+      "after": "Out · Undisclosed",
+      "source_quote_at": "2026-10-10T19:06Z",
+      "source": "ESPN injuries",
+      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
+    },
+    {
+      "id": "injury|nfl:3:Noah Sewell|2026-10-10T19:19:07.919Z",
+      "kind": "injury",
+      "observed_at": "2026-10-10T19:19:07.919Z",
+      "sport": "nfl",
+      "title": "Player availability changed",
+      "event": "Chicago Bears",
+      "pick": "Noah Sewell",
+      "before": "Active",
+      "after": "Questionable · Achilles",
+      "source_quote_at": "2026-10-10T18:58Z",
+      "source": "ESPN injuries",
+      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
+    },
+    {
+      "id": "injury|nhl:10:Oliver Kapanen|2026-10-10T19:19:07.919Z",
+      "kind": "injury",
+      "observed_at": "2026-10-10T19:19:07.919Z",
+      "sport": "nhl",
+      "title": "Player availability changed",
+      "event": "Montreal Canadiens",
+      "pick": "Oliver Kapanen",
+      "before": "Day-To-Day · Lower Body",
+      "after": "Out · Lower Body",
+      "source_quote_at": "2026-10-10T18:56Z",
+      "source": "ESPN injuries",
+      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
+    },
     {
       "id": "odds|ncaaf|401860902|2026-10-10T22:00Z|TOTAL||under|Draft Kings|2026-10-10T19:04:30.090Z",
       "kind": "odds",
@@ -3005,48 +3047,6 @@
       "source_quote_at": "2026-10-09T23:59:45.505638+00:00",
       "source": "Existing NCAAF board",
       "note": "Your ticket keeps its original odds. Recheck the live book before placing a new wager."
-    },
-    {
-      "id": "injury|nfl:1:Za'Darius Smith|2026-10-10T00:02:32.429Z",
-      "kind": "injury",
-      "observed_at": "2026-10-10T00:02:32.429Z",
-      "sport": "nfl",
-      "title": "New availability report",
-      "event": "Atlanta Falcons",
-      "pick": "Za'Darius Smith",
-      "before": "Not in the previous dated report",
-      "after": "Questionable · Concussion",
-      "source_quote_at": "2026-10-09T23:44Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:14:Colby Parkinson|2026-10-10T00:02:32.429Z",
-      "kind": "injury",
-      "observed_at": "2026-10-10T00:02:32.429Z",
-      "sport": "nfl",
-      "title": "Player availability changed",
-      "event": "Los Angeles Rams",
-      "pick": "Colby Parkinson",
-      "before": "Active · Parkinson (shoulder/knee) practiced fully Friday, Sarah Barshop of ESPN.com reports.",
-      "after": "Active · Parkinson (shoulder/knee) was limited in Thursday's practice, Sarah Barshop of ESPN.com reports.",
-      "source_quote_at": "2026-10-09T00:13Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:24:Rashawn Slater|2026-10-09T23:48:52.294Z",
-      "kind": "injury",
-      "observed_at": "2026-10-09T23:48:52.294Z",
-      "sport": "nfl",
-      "title": "New availability report",
-      "event": "Los Angeles Chargers",
-      "pick": "Rashawn Slater",
-      "before": "Not in the previous dated report",
-      "after": "Injured Reserve · Ankle",
-      "source_quote_at": "2026-10-09T23:10Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
     }
   ]
 }
