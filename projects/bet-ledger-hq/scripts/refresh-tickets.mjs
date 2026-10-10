@@ -6,6 +6,7 @@ import {createRequire} from 'node:module';
 const require=createRequire(import.meta.url),C=require('../today-core.js'),T=require('../ticket-core.js');
 const A=require('../alerts-core.js');
 const H=require('../pick-history.js');
+const P=require('../price-core.js');
 const root=path.resolve(new URL('..',import.meta.url).pathname),dir=path.join(root,'data/tickets');
 const now=Date.now(),stamp=new Date(now).toISOString(),base=new URL('bet-ledger-hq/', 'file://'+path.resolve(process.env.LOCAL_SITE_ROOT||path.join(root,'../../_site'))+'/').href;
 const registry=JSON.parse(await fs.readFile(path.join(root,'sports.json'),'utf8'));
@@ -28,7 +29,7 @@ await Promise.all(registry.filter(s=>s.active).map(async sport=>{
     const data=await get(new URL(sport.path+'data/'+file+'.json',base));
     if(field==='board'&&!Array.isArray(data))throw Error('Board schema');if(field==='slate'&&!Array.isArray(data.games))throw Error('Slate schema');
     bundle[field]=data;
-  }catch(e){failures.push(field);if(field!=='accuracy'||sport.key==='ladder')failed=true;}}));
+  }catch(e){failures.push(field);if(field!=='quotes'&&(field!=='accuracy'||sport.key==='ladder'))failed=true;}}));
   const previous=cache[sport.key];
   if(failed)bundles[sport.key]={...(previous||{}),error:true};else {bundle.lastGoodAt=stamp;bundles[sport.key]=bundle;cache[sport.key]=bundle;}
   const h=C.health(sport.key,bundles[sport.key],now);health.feeds[sport.key]={status:h.status,freshness:h.freshness,coverage:h.coverage,failed_fields:failures,published_at:h.stamp,last_good_at:cache[sport.key]?.lastGoodAt||null,warnings:h.warnings};
@@ -49,11 +50,9 @@ for(const day of days){
   }
 }
 // Quote tracking includes a previously published pick even when its tier later drops.
-const quotes=Object.entries(bundles).flatMap(([key,b])=>{
-  const force=r=>({...r,tier:'GOOD',stake:1,recommended_stake:1,held:false});
-  const all={...b,board:b.board?.map(force),slate:b.slate?{...b.slate,games:b.slate.games?.map(g=>({...g,bets:g.bets?.map(force)}))}:undefined};
-  return C.plays(key,all,now);
-});
+const quotes=P.latest(Object.entries(bundles).flatMap(([key,b])=>P.collect(C,key,b,now)),now);
+await write('quotes.json',{schema:1,checked_at:stamp,quotes:quotes.filter(q=>P.valid(q,now))});
+await write('pregame-prices.json',P.observe(await read('pregame-prices.json',null),quotes,stamp));
 for(const e of Object.values(state.entries)){
   if(Date.parse(e.pick.start)<=now)continue;
   const candidates=quotes.filter(q=>T.selectionKey(q)===T.selectionKey(e.pick)&&q.book===e.pick.book).sort((a,b)=>Date.parse(b.quote)-Date.parse(a.quote));
@@ -123,5 +122,5 @@ console.log(JSON.stringify({snapshots:index.tickets.length,unique_picks:Object.k
 // Model-feed failures block publication. A result lookup that fails (e.g. a live game's summary
 // hiccups) only leaves that pick Pending; it is recorded in health.json, shown on the archive page,
 // and retried on the next scheduled run instead of blocking the whole site.
-if(Object.values(health.feeds).some(f=>f.failed_fields.some(x=>x!=='accuracy'))){process.exitCode=2;}
+if(Object.values(health.feeds).some(f=>f.failed_fields.some(x=>!['accuracy','quotes'].includes(x)))){process.exitCode=2;}
 else if(health.result_failures.length){console.warn('::warning::'+health.result_failures.length+' result lookup(s) failed; picks stay Pending until the next run.');}

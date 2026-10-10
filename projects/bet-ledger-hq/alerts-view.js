@@ -1,11 +1,11 @@
 (()=>{'use strict';
   const $=s=>document.querySelector(s),esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-  const supported=new Set(['mlb','nfl','ncaaf','nhl']);
+  const supported=new Set(['mlb','nfl','ncaaf','nhl','wnba','props']);
   let data=null,error='',busy=false,read=new Set();try{read=new Set(JSON.parse(localStorage.getItem('kevbot.alerts-read.v1')||'[]'));}catch(_){}
   function render(){const host=$('#alerts-list');if(!host)return;const sport=$('#alerts-sport').value,kind=$('#alerts-kind').value;
     const stale=!data||Date.now()-Date.parse(data.checked_at)>4*3600000,offline=navigator.onLine===false;
     $('#alerts-status').textContent=error||(data?'Checked '+new Date(data.checked_at).toLocaleString()+(stale?' · Alert collection is delayed.':' · Scheduled observations; not a live injury wire.'):'Loading alerts…');
-    const rows=(data?.events||[]).filter(e=>supported.has(e.sport)&&(sport==='all'||e.sport===sport)&&(kind==='all'||(kind==='availability'?e.kind!=='odds':e.kind===kind)));
+    const rows=(data?.events||[]).filter(e=>supported.has(e.sport)&&(sport==='all'||e.sport===sport)&&(kind==='all'||(kind==='availability'?!['odds','price-limit'].includes(e.kind):kind==='odds'?['odds','price-limit'].includes(e.kind):e.kind===kind)));
     $('#alerts-count').textContent=(data?.events||[]).filter(e=>supported.has(e.sport)&&!read.has(e.id)).length+' unread';
     host.innerHTML=(offline?'<p class="warning">Offline. These are previously observed changes; current availability and odds cannot be checked.</p>':'')+(rows.length?rows.slice(0,60).map(e=>'<article class="card"><span class="tag '+(read.has(e.id)?'':'review')+'">'+(read.has(e.id)?'Read':'New')+'</span> <span class="tag">'+esc(e.sport.toUpperCase())+'</span><h3>'+esc(e.title)+'</h3><p><b>'+esc(e.pick||e.event)+'</b>'+(e.pick?'<br>'+esc(e.event):'')+'</p><p>'+esc(e.before)+' → <strong>'+esc(e.after)+'</strong></p><p class="note">'+esc(e.book||e.source)+' · Observed '+esc(new Date(e.observed_at).toLocaleString())+'<br>Source time: '+esc(e.source_quote_at||'not supplied')+'</p>'+(e.note?'<p class="note">'+esc(e.note)+'</p>':'')+'<a href="./#'+esc(e.sport)+'" target="_top">Review board →</a></article>').join(''):'<div class="empty">No observed changes for this filter. A first successful check establishes the baseline; it does not mean there are no injuries.</div>');
     $('#alerts-coverage').textContent=Object.entries(data?.coverage||{}).filter(([sport])=>supported.has(sport)).map(([sport,c])=>sport.toUpperCase()+': '+(c.status==='available'?c.reports+' dated reports':c.status==='empty'?'no recent dated reports':'feed unavailable')).join(' · ');

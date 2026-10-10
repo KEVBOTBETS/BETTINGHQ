@@ -35,11 +35,12 @@ for repo in ['nfl-edge-lab','ncaaf-edge-lab','mlb-edge']:
     for file in ['test_ledger.mjs','test_sync.mjs','test_staking.mjs','test_matchups.js','test_simulator.js','test_schedule.mjs','test_sim_gate.mjs']:
         if (ROOT/'projects'/repo/'tests'/file).exists():run(repo,['node','tests/'+file])
 run('mlb-edge',['node','tests/test_sim.mjs','docs/data'])
-for file in ['test_value_execution.mjs','test_all_spreads.mjs','test_spread_core.mjs','test_performance.mjs','test_betsync.mjs','test_server.mjs','test_alerts_app.mjs','test_recovery_history.mjs','test_tickets.mjs','test_today.mjs','test_nhl.mjs','test_moneyline.mjs','test_football.mjs','test_props_dom.mjs','test_night_football.mjs']:
+for file in ['test_professional.mjs','test_value_execution.mjs','test_all_spreads.mjs','test_spread_core.mjs','test_performance.mjs','test_betsync.mjs','test_server.mjs','test_alerts_app.mjs','test_recovery_history.mjs','test_tickets.mjs','test_today.mjs','test_nhl.mjs','test_moneyline.mjs','test_football.mjs','test_props_dom.mjs','test_night_football.mjs']:
     run('bet-ledger-hq',['node','tests/'+file])
 run('',[sys.executable,'tools/build_site.py'])
 run('',[sys.executable,'-m','unittest','discover','-s','tests'])
 if args.browser:
+    run('bet-ledger-hq',['node','tests/test_professional_browser.mjs'])
     run('bet-ledger-hq',['node','tests/test_value_execution_browser.mjs'])
     run('bet-ledger-hq',['node','tests/test_night_football_browser.mjs'])
     run('bet-ledger-hq',['node','tests/test_refresh_recovery_browser.mjs'])

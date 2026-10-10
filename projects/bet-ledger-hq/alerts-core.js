@@ -1,5 +1,5 @@
 /* Only explicit, fresh changes become alerts. Missing reports never mean healthy. */
-(function(root,factory){const api=factory();if(typeof module==='object'&&module.exports)module.exports=api;if(root)root.KevAlerts=api;})(typeof self!=='undefined'?self:this,function(){
+(function(root,factory){const api=factory(typeof module==='object'?require('./price-core.js'):root.BetPrices);if(typeof module==='object'&&module.exports)module.exports=api;if(root)root.KevAlerts=api;})(typeof self!=='undefined'?self:this,function(P){
   const num=v=>v==null||v===''||!Number.isFinite(Number(v))?null:Number(v);
   const recent=(time,now,hours)=>Number.isFinite(Date.parse(time))&&now-Date.parse(time)>=-300000&&now-Date.parse(time)<=hours*3600000;
   const key=r=>[r.key,r.eventId,r.start,r.market,r.playerId||r.player||'',r.side||r.pick,r.book].join('|');
@@ -33,6 +33,8 @@
     for(const q of input.quotes||[]){const id=key(q),pick=tracked.get(id);if(!pick)continue;const before=old.quotes?.[id]||pick;
       if(num(q.price)==null||Math.abs(q.price)<100)continue;
       if(num(before.price)!==num(q.price)||num(before.line)!==num(q.line))emit('odds',id,{sport:q.key,event:q.event,start:q.start,pick:pick.pick,title:'Published odds changed',before:price(before.price)+(before.line!=null?' · line '+before.line:''),after:price(q.price)+(q.line!=null?' · line '+q.line:''),book:q.book,source_quote_at:q.quote||null,source:'Existing '+q.source+' board',note:'Your ticket keeps its original odds. Recheck the live book before placing a new wager.'});
+      const crossing=P&&P.valid(q,now)?P.crossing(pick,before,q):null;
+      if(crossing)emit('price-limit',id,{sport:q.key,event:q.event,start:q.start,pick:pick.pick,title:crossing==='lost'?'Price below published minimum':'Price back above published minimum',before:price(before.price),after:price(q.price),book:q.book,source_quote_at:q.quote,source:'Published price policy',note:'Minimum '+price(pick.value?.worst??pick.worst)+' at unchanged line '+(pick.line??'none')+'. Uses the saved forecast, not a new model approval. Confirm current odds and qualification; scheduled observations can miss intervening moves.'});
       state.quotes[id]={...q};
     }
     for(const [id,g] of Object.entries(input.lineups||{})){const before=old.lineups?.[id];

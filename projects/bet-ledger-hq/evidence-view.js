@@ -1,0 +1,11 @@
+(function(root){
+ 'use strict';
+ const esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+ const pct=v=>v==null?'—':(100*v).toFixed(1)+'%',money=v=>new Intl.NumberFormat('en-CA',{style:'currency',currency:'CAD'}).format(v);
+ function render(rows,settings){const groups=root.BetEvidence.score(rows,settings);return '<p class="note muted">Confirmed receipts only, grouped by sport and market. Returns use accepted odds, stakes and sportsbook results. A 95% date-clustered bootstrap interval appears after 100 settled receipts across 28 game dates; these review thresholds do not prove an edge. Repeated bets within a date stay together. Last-observed price movement is separate from profit and is not no-vig CLV.</p>'+(groups.length?'<div class="scroll table-scroll"><table><thead><tr><th>Sport / market</th><th>Confirmed / settled</th><th>Pending / void</th><th>Actual P/L</th><th>Actual ROI</th><th>95% ROI interval / dates</th><th>Pregame price movement / observations</th></tr></thead><tbody>'+groups.map(g=>'<tr><td>'+esc(g.label)+'</td><td>'+g.confirmed+' / '+g.settled+'</td><td>'+g.pending+' / '+g.voids+'</td><td>'+money(g.pnl)+'</td><td>'+pct(g.roi)+'</td><td>'+(g.range?pct(g.range[0])+' to '+pct(g.range[1]):'Insufficient sample')+' / '+g.days+'</td><td>'+pct(g.movement)+' / '+g.closes+'</td></tr>').join('')+'</tbody></table></div>':'<p class="note muted">No confirmed receipts yet. Confirm accepted bets and results in Ledger to begin the actual-return record.</p>');}
+ root.BetEvidenceView={render};
+ async function load(){const host=document.querySelector('#actual-evidence');if(!host)return;const cfg=root.BetSync.loadConfig();if(!cfg){host.innerHTML='<p class="muted">Connect your private sheet in Ledger to see actual receipts here.</p>';return;}
+  host.textContent='Reading private confirmed receipts…';try{const data=await root.BetSync.pullAll(cfg);host.innerHTML=render(data.rows||[],data.settings||{});}catch{host.textContent='Private sheet unavailable. Actual-return figures cannot be verified; reconnect in Ledger.';}
+ }
+ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',load);else load();
+})(window);

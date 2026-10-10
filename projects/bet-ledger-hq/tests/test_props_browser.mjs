@@ -249,6 +249,8 @@ try {
     await page.locator('#game-view').selectOption('saved');
     assert.equal(await page.locator('.game-props-card').count(),1);
     assert.match(await page.locator('.game-ticket-record').textContent(),/1 WIN · 1 LOSS/);
+    // Force the component to initialize after the app restores #games.
+    await page.route('**/game-props.js',async route=>{const response=await route.fetch();await new Promise(r=>setTimeout(r,400));await route.fulfill({response});});
     await page.reload();
     await page.locator('.game-ticket-record').waitFor();
     assert.match(await page.locator('.game-ticket-record').textContent(),/1 WIN · 1 LOSS/,'results survive reload');

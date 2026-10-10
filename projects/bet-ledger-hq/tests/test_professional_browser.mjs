@@ -1,0 +1,30 @@
+import assert from 'node:assert/strict';
+import {chromium} from 'playwright';
+import {createServer} from 'node:http';
+import {readFile,mkdir} from 'node:fs/promises';
+import {createRequire} from 'node:module';
+import path from 'node:path';
+const require=createRequire(import.meta.url),X=require('../execution-core.js'),root=path.resolve('../../_site');
+const server=createServer(async(req,res)=>{let f=path.resolve(root,'.'+new URL(req.url,'http://localhost').pathname);if(req.url.endsWith('/'))f=path.join(f,'index.html');try{res.setHeader('Content-Type',({'.js':'application/javascript','.css':'text/css','.json':'application/json'})[path.extname(f)]||'text/html');res.end(await readFile(f));}catch{res.writeHead(404).end();}});
+await new Promise(r=>server.listen(0,'127.0.0.1',r));const origin='http://127.0.0.1:'+server.address().port,browser=await chromium.launch({headless:true});
+const stamp='2026-10-10T18:00:00Z',now=Date.parse(stamp),start='2026-10-10T19:00:00Z';
+const row={id:'nfl-lab:one',app:'nfl-lab',sport:'NFL',event:'AAA @ BBB',event_date:'2026-10-10',selection:'AAA +3.5',market:'ATS',side:'away',line:-3.5,price:-110,book:'Book A',native:{game_date:start},stake:10,status:'Pending'};
+const receipt=X.confirm(row,{book:'Book A',price:-110,line:3.5,stake:10,placed_at:'2026-10-10T17:00:00Z',status:'Win'},null,stamp);
+try{for(const width of [1440,393]){
+ const context=await browser.newContext({viewport:{width,height:1000},timezoneId:width===393?'America/Toronto':'UTC',serviceWorkers:'block'}),page=await context.newPage(),errors=[];let settings={[X.key(row.id)]:JSON.stringify(receipt)},writes=[];
+ page.on('pageerror',e=>errors.push(e.message));await page.clock.install({time:now});
+ await context.addInitScript(()=>localStorage.setItem('betsync.config.v1',JSON.stringify({url:'https://script.google.com/macros/s/fixture/exec',token:'fixture',device:'Fixture'})));
+ await context.route('https://**/*',async route=>{if(route.request().url().startsWith('https://script.google.com/')){const body=JSON.parse(route.request().postData());if(body.action==='push'){writes.push(body);settings={...settings,...body.settings};}return route.fulfill({contentType:'application/json',body:JSON.stringify({ok:true,rows:[row],settings,full:true,server_time:stamp})});}return route.abort();});
+ await page.goto(origin+'/bet-ledger-hq/ledger.html',{waitUntil:'networkidle'});await page.getByText('Actual evidence by sport and market',{exact:true}).waitFor();
+ await page.getByText('Record same-book pregame observations',{exact:true}).click();
+ assert.equal(await page.getByLabel('Observed selection line',{exact:true}).inputValue(),'3.5');
+ await page.getByLabel('Observed odds',{exact:true}).fill('-125');await page.getByLabel('Observed pregame time',{exact:true}).fill(width===393?'2026-10-10T13:55':'2026-10-10T17:55');await page.getByLabel('Same selection and settlement rules',{exact:true}).check();await page.getByLabel('Observed sportsbook',{exact:true}).fill('Wrong Book');
+ await page.locator('[data-act="save-receipt-close"]').click();await page.locator('.close-error').waitFor();assert.equal(writes.length,0);
+ await page.getByLabel('Observed sportsbook',{exact:true}).fill('Book A');await page.locator('[data-act="save-receipt-close"]').click();await page.waitForFunction(()=>document.querySelector('#main').textContent.includes('65 min before kickoff'));
+ assert.equal(writes.length,1);assert.deepEqual(writes[0].rows,[]);assert.equal(JSON.parse(settings[X.closeKey(row.id)]).line,3.5);assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+2));
+ await page.goto(origin+'/bet-ledger-hq/accuracy.html',{waitUntil:'networkidle'});await page.waitForFunction(()=>document.querySelector('#actual-evidence').textContent.includes('NFL / ATS'));assert.match(await page.locator('#actual-evidence').innerText(),/Insufficient sample/);assert.match(await page.locator('#actual-evidence').innerText(),/90\.9%/);assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+2));
+ const q={game_id:'one',game_date:start,matchup:'AAA @ BBB',market:'ATS',side:'away',pick:'AAA +3.5',line:-3.5,price:-110,book:'Book A',stake:1,tier:'GOOD',model_prob:.58,odds_observed_at:stamp};
+ await page.route('**/nfl-edge-lab/data/*.json*',route=>{const file=new URL(route.request().url()).pathname.split('/').pop();return route.fulfill({contentType:'application/json',body:JSON.stringify(file==='meta.json'?{generated_at:stamp}:file==='board.json'?[q,{...q,book:'Book B',price:105},{...q,book:'Wrong Line',line:-4,price:150}]:[])});});
+ await page.goto(origin+'/bet-ledger-hq/today.html',{waitUntil:'networkidle'});await page.locator('[data-play-sport="nfl"] .price-comparison').first().waitFor();await page.locator('[data-play-sport="nfl"] .price-comparison summary').first().click();const comparison=page.locator('[data-play-sport="nfl"] .price-comparison').first();assert.match(await comparison.innerText(),/Best observed price: \+105 at Book B/);assert.match(await comparison.innerText(),/2 book\(s\)/);assert.doesNotMatch(await comparison.innerText(),/Wrong Line/);assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+2));
+ await mkdir('test-results/professional',{recursive:true});await page.screenshot({path:`test-results/professional/prices-${width}.png`});assert.deepEqual(errors,[]);await context.close();console.log(`Exact price comparison, private receipt closes and scorecard passed at ${width}px`);
+}}finally{await browser.close();await new Promise(r=>server.close(r));}

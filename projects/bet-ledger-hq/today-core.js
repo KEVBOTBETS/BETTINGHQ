@@ -65,14 +65,14 @@
     if(meta.odds_health?.healthy===false||["failed","unavailable","error"].includes(meta.odds_health?.status))warnings.push("Odds coverage needs attention.");
     return {key,label:LABELS[key],stamp:stamp||null,age,freshness:age.status,coverage:warnings.length?"review":"complete",status:bundle.error?"unavailable":age.status==="stale"?"stale":warnings.length?"review":"recent",warnings};
   }
-  function plays(key,bundle,now=Date.now()){
+  function plays(key,bundle,now=Date.now(),options={}){
     const rows=[],meta=bundle.meta||{},published=meta.generated_at||bundle.slate?.generated_at;
     function add(r,game){
       const t=tier(r.tier),start=r.start_time||r.tipoff||r.game_date||game?.start;
-      if(!["BEST BET","GOOD","LEAN"].includes(t)||r.held||r.odds_verified===false)return;
-      if(key==="mlb"&&!(number(r.stake)>0))return;
-      if(["nfl","wnba","nhl"].includes(key)&&!(number(r.stake)>0))return;
-      if(key==="props"&&!(number(r.recommended_stake)>0))return;
+      if((!options.quotes&&(!["BEST BET","GOOD","LEAN"].includes(t)||r.held))||r.odds_verified===false)return;
+      if(!options.quotes&&key==="mlb"&&!(number(r.stake)>0))return;
+      if(!options.quotes&&["nfl","wnba","nhl"].includes(key)&&!(number(r.stake)>0))return;
+      if(!options.quotes&&key==="props"&&!(number(r.recommended_stake)>0))return;
       if(["Final","Postponed","Cancelled","Canceled","Suspended","In Progress"].includes(game?.status))return;
       const when=instant(start),price=american(r.price_american??r.price);
       if(when==null||when<=now||price==null)return;
@@ -91,7 +91,7 @@
       const selection=String(r.selection||"").toLowerCase();
       const side=r.side||(game?(selection===String(game.home).toLowerCase()?"home":selection===String(game.away).toLowerCase()?"away":["over","under"].includes(selection)?selection:""):"");
       const rawLine=number(r.line),line=rawLine!=null&&["nfl","ncaaf","mlb"].includes(key)&&["ATS","RL"].includes(r.market)&&side==="away"?-rawLine:rawLine;
-      const value=r.value_policy?(typeof module==='object'?require('./value-core.js'):self.BetValue).evaluate(r,{sport:key,publication:published,now}):null;
+      const value=r.value_policy&&!options.quotes?(typeof module==='object'?require('./value-core.js'):self.BetValue).evaluate(r,{sport:key,publication:published,now}):null;
       if(value&&!value.passes)return;
       const probability=number(r.model_prob??r.p_final),minReturn=number(meta.settings?.tiers?.lean)??0.02;
       const worst=value?value.worst:worstPrice(probability,minReturn);
@@ -107,7 +107,8 @@
     if(key==="mlb")(bundle.slate?.games||[]).forEach(g=>(g.bets||[]).forEach(r=>add(r,g)));
     else (Array.isArray(bundle.board)?bundle.board:[]).forEach(r=>add(r));
     const seen=new Set();
-    return rows.filter(r=>{const id=[r.key,r.eventId,r.start,r.market,r.pick,r.line].join("|");if(seen.has(id))return false;seen.add(id);return true;});
+    if(options.quotes)return rows;
+    return rows.filter(r=>{const id=[r.key,r.eventId,r.start,r.market,r.pick,r.line,options.quotes?r.book:''].join("|");if(seen.has(id))return false;seen.add(id);return true;});
   }
   function sortPlays(rows,mode="tier"){
     const order={"BEST BET":0,GOOD:1,LEAN:2};

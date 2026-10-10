@@ -230,6 +230,9 @@ def build() -> dict[str, Any]:
     _write_json("legs.json", legs)
     _write_json("parlays.json", parlays)
     _write_json("board.json", board)
+    # Preserve every eligible observed offer for exact-line comparison. Portfolio
+    # selection deliberately chooses one contract; comparison must not invent books.
+    _write_json("quotes.json", [quote.to_dict() for quote in quotes])
     _write_json("projections.json", projection_rows)
     _write_json("meta.json", meta)
     return meta

@@ -80,5 +80,8 @@
   for(const [id,delta] of [['game-week-prev',-1],['game-week-next',1]])$(id.startsWith('#')?id:'#'+id).addEventListener('click',()=>{const s=$('#game-week');s.selectedIndex=Math.max(0,Math.min(s.options.length-1,s.selectedIndex+delta));render();});
   window.addEventListener('props:tab',async ev=>{if(ev.detail==='games'){await load();await refreshResults();render();}});
   window.addEventListener('props:data',async()=>{if(ready){await load();render();refreshResults();}});
+  // Fast cached feeds can restore this tab before this deferred panel registers.
+  // Reconcile the already-selected tab after the panel and listeners exist.
+  if(document.querySelector('[data-tab="games"][aria-selected="true"]'))A.showTab('games');
   setInterval(()=>{if(!document.hidden&&!panel.hidden){render();refreshResults();}},60000);
 })();

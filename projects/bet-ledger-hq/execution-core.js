@@ -2,6 +2,7 @@
 (function(root,factory){const api=factory(typeof module==='object'?require('./value-core.js'):root.BetValue);if(typeof module==='object'&&module.exports)module.exports=api;else root.BetExecution=api;})(typeof self!=='undefined'?self:this,function(V){
   'use strict';
   const key=id=>'kevbot_execution_v1_'+encodeURIComponent(id);
+  const closeKey=id=>'kevbot_receipt_close_v1_'+encodeURIComponent(id);
   const statuses=['Pending','Win','Loss','Push','Void'];
   function get(settings,id){try{const x=JSON.parse(settings[key(id)]||'null');const a=x?.accepted;return x?.schema===1&&x.id===id&&x.confirmed===true&&x.reference&&a&&V.decimal(a.price)!==null&&V.number(a.stake)>0&&statuses.includes(a.status)&&typeof a.book==='string'&&V.instant(a.placed_at)!==null?x:null;}catch{return null;}}
   function selectionLine(row){return V.selectionLine(row,({'nfl-lab':'nfl','ncaaf-lab':'ncaaf'})[row.app]||'other');}
@@ -44,5 +45,24 @@
     const q=v=>{const s=String(v??'');return '"'+s.replace(/"/g,'""')+'"';};
     return [cols.join(',')].concat(rows.filter(r=>!r.deleted).flatMap(r=>{const x=get(settings,r.id);if(!x)return [];const a=x.accepted;return [[r.id,x.reference.event,x.reference.selection,x.reference.market,x.reference.price,x.reference.line,a.price,a.line,a.book,a.stake,a.placed_at,a.status,pnl(x),x.reference.captured_at].map(q).join(',')];})).join('\n');
   }
-  return {key,get,selectionLine,snapshot,confirm,pnl,summary,comparison,csv};
+  const binding=x=>JSON.stringify([x.id,x.reference.event,x.reference.market,x.reference.selection,x.reference.side,x.accepted.book,x.accepted.line,x.accepted.price,x.accepted.placed_at]);
+  function start(row){const n=row.native||{};return [n.start_time,n.tipoff,n.game_date,n.start,row.start_time,row.tipoff].find(v=>V.instant(v)!==null)||null;}
+  function closing(settings,id){try{return JSON.parse(settings[closeKey(id)]||'null');}catch{return null;}}
+  function confirmClose(row,receipt,input,at=new Date().toISOString()){
+    if(!receipt)throw Error('Confirm an accepted receipt first.');
+    const price=V.number(input.price),line=V.number(input.line),observed=V.instant(input.observed_at),kickoff=V.instant(start(row)||input.start),book=String(input.book||'').trim();
+    if(V.decimal(price)===null||!Number.isInteger(price))throw Error('Enter valid whole-number American odds.');
+    if(!input.same_contract)throw Error('Confirm the same selection and settlement rules at this book.');
+    if(book.toLowerCase()!==receipt.accepted.book.trim().toLowerCase())throw Error('Use the sportsbook on the accepted receipt.');
+    if(input.line!==''&&input.line!=null&&line===null)throw Error('Enter a valid selection line.');
+    if(line!==V.number(receipt.accepted.line))throw Error('The observed line must equal the accepted selection line.');
+    if(kickoff===null||observed===null||observed>=kickoff||observed<Date.parse(receipt.accepted.placed_at)||observed>Date.parse(at))throw Error('Enter a quote observed after acceptance and strictly before kickoff, no later than now.');
+    return {schema:1,id:row.id,binding:binding(receipt),price,line,book,observed_at:new Date(observed).toISOString(),start:new Date(kickoff).toISOString(),same_contract:true,recorded_at:at,source:'Manually confirmed sportsbook observation',start_source:start(row)?'ledger event time':'user confirmed event time'};
+  }
+  function closeComparison(receipt,quote){
+    if(!receipt||!quote)return {comparable:false,note:'Awaiting receipt and same-book pregame observation'};
+    if(quote.schema!==1||quote.binding!==binding(receipt)||quote.same_contract!==true||V.decimal(quote.price)===null||quote.line!==receipt.accepted.line||typeof quote.book!=='string'||quote.book.trim().toLowerCase()!==receipt.accepted.book.trim().toLowerCase()||V.instant(quote.observed_at)===null||V.instant(quote.start)===null||Date.parse(quote.observed_at)>=Date.parse(quote.start)||Date.parse(quote.observed_at)<Date.parse(receipt.accepted.placed_at))return {comparable:false,note:'Receipt changed or contract/time mismatch; reconfirm observation'};
+    return {comparable:true,movement:V.decimal(receipt.accepted.price)/V.decimal(quote.price)-1,minutes:(Date.parse(quote.start)-Date.parse(quote.observed_at))/60000,note:'Last observed pregame price; not certified close or no-vig CLV'};
+  }
+  return {key,get,selectionLine,snapshot,confirm,pnl,summary,comparison,csv,closeKey,start,closing,confirmClose,closeComparison};
 });

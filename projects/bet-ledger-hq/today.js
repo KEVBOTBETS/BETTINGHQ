@@ -5,7 +5,7 @@
   const sources={
     nhl:{meta:"../nhl-edge-lab/data/meta.json",board:"../nhl-edge-lab/data/board.json",accuracy:"../nhl-edge-lab/data/accuracy.json"},
     wnba:{meta:"../wnba-edge-lab/data/meta.json",board:"../wnba-edge-lab/data/board.json",accuracy:"../wnba-edge-lab/data/accuracy.json"},
-    props:{meta:"../props-edge/data/meta.json",board:"../props-edge/data/board.json",accuracy:"../props-edge/data/accuracy-summary.json"},
+    props:{meta:"../props-edge/data/meta.json",board:"../props-edge/data/board.json",quotes:"../props-edge/data/quotes.json",accuracy:"../props-edge/data/accuracy-summary.json"},
     ladder:{accuracy:"../ladderbet/data/accuracy.json"},
     mlb:{meta:"../mlb-edge/data/index.json",slate:"../mlb-edge/data/latest.json",accuracy:"../mlb-edge/data/predictions.json"},
     nfl:{meta:"../nfl-edge-lab/data/meta.json",board:"../nfl-edge-lab/data/board.json",accuracy:"../nfl-edge-lab/data/accuracy.json"},
@@ -88,11 +88,16 @@
   }
   function renderPlays(){
     const rows=C.sortPlays(chosen(),$("#sort").value),risk=S.sheet?C.exposure(S.sheet.rows):null;
+    const quotes=Object.entries(S.feeds).flatMap(([k,b])=>window.BetPrices.collect(C,k,b));
     $("#play-count").textContent=rows.length+" available";
     $("#plays").innerHTML=rows.length?rows.map(r=>{
       const group=risk?.groups.find(g=>g.key===C.eventKey({sport:r.sport,event:r.event,start:r.start}));
-      return '<article class="card" data-play-sport="'+esc(r.key)+'"><span class="tag">'+esc(r.source)+'</span><span class="tag '+(r.review.length?"review":"recent")+'">'+esc(r.tier)+'</span><h3>'+esc(r.pick)+'</h3><p>'+esc(r.event)+'<br><small>'+esc(time(r.start))+' ET</small></p>'+numbers(r)+moveLine(r)+'<p class="quote-line"><small>'+esc(r.book)+' · quote '+esc(r.quote?elapsed(r.quote):"time not supplied")+'</small></p>'+r.review.map(t=>'<p class="warning">'+esc(t)+'</p>').join("")+(group?'<p class="warning">Already exposed to this game: '+money(group.stake)+' across '+group.rows.length+' bet(s).</p>':"")+link(r.key,"Review odds and stake")+'</article>';
+      return '<article class="card" data-play-sport="'+esc(r.key)+'"><span class="tag">'+esc(r.source)+'</span><span class="tag '+(r.review.length?"review":"recent")+'">'+esc(r.tier)+'</span><h3>'+esc(r.pick)+'</h3><p>'+esc(r.event)+'<br><small>'+esc(time(r.start))+' ET</small></p>'+numbers(r)+moveLine(r)+'<p class="quote-line"><small>'+esc(r.book)+' · quote '+esc(r.quote?elapsed(r.quote):"time not supplied")+'</small></p>'+priceDetails(r,quotes)+r.review.map(t=>'<p class="warning">'+esc(t)+'</p>').join("")+(group?'<p class="warning">Already exposed to this game: '+money(group.stake)+' across '+group.rows.length+' bet(s).</p>':"")+link(r.key,"Review odds and stake")+'</article>';
     }).join(""):empty(S.busy?"Loading board-qualified plays…":"No current qualified plays for this date and filter. This may mean no edge, no prices, or stale/unavailable data—see Data health below.");
+  }
+  function priceDetails(r,quotes){
+    const c=window.BetPrices.compare(r,quotes);
+    return '<details class="price-comparison"><summary>Compare observed prices · '+c.coverage+' book(s)</summary>'+(c.best?'<p>Best observed price: <b>'+esc(odds(c.best.price))+'</b> at '+esc(c.best.book)+'</p>':'<p>No fresh comparable quote.</p>')+c.rows.map(q=>'<p>'+esc(q.book)+' · '+esc(odds(q.price))+' · '+esc(time(q.quote))+' ET</p>').join('')+'<p class="note">Same board contract, selection and line '+esc(r.line??'none')+'. Coverage is limited to observed public quotes, not every book. Verify player, settlement rules and current price at a book you can use. Alternative odds do not transfer a book-specific model probability or guarantee qualification.</p></details>';
   }
   function renderHealth(){
     $("#health").innerHTML=Object.keys(sources).map(key=>{
@@ -166,7 +171,7 @@
     const sheet=readSheet();
     await Promise.all(Object.entries(sources).map(async([key,paths])=>{
       const b={};await Promise.all(Object.entries(paths).map(async([field,url])=>{
-        try{b[field]=await get(url);}catch(_){if(field!=="accuracy"||key==="ladder")b.error=true;}
+        try{b[field]=await get(url);}catch(_){if(field!=="quotes"&&(field!=="accuracy"||key==="ladder"))b.error=true;}
       }));
       const cacheKey="kevbot.feed.v1."+key;
       if(b.error){let prior=S.feeds[key];try{prior=prior||JSON.parse(localStorage.getItem(cacheKey)||"null");}catch(_){}

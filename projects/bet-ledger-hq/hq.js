@@ -431,7 +431,7 @@
       '<h2>Bankroll</h2>' + (bankrollCurve(rows, S.settings.starting_bankroll) ||
         '<div class="card empty">The curve appears once two bets have settled.</div>') +
       '<h2>By board</h2>' + (boardBars(rows) || '<div class="card empty">No bets yet.</div>') +
-      executionDetails(rows) +
+      executionDetails(rows) + '<h2>Actual evidence by sport and market</h2>'+window.BetEvidenceView.render(rows,S.settings) +
       openBets(rows) +
       breakdown(rows, "app", "Board") +
       breakdown(rows, "tier", "Tier", ["BEST BET", "GOOD", "LEAN", "PASS"]) +
@@ -482,10 +482,11 @@
   }
 
   function closingDetails(rows) {
-    return '<h2>Closing lines and prices</h2><p class="note">Save the same book’s last pregame quote. Price comparisons require an unchanged line. These observations do not change a wager or settle it.</p><div class="card scroll"><table><thead><tr><th>Pick</th><th>Original</th><th>Closing line</th><th>Closing odds</th><th>Observed (local time)</th><th></th></tr></thead><tbody>'+rows.slice().sort(function(a,b){return String(b.event_date).localeCompare(String(a.event_date));}).slice(0,100).map(function(r){
-      var c=D.closing(S.settings,r.id)||{},localTime=c.observed_at?new Date(Date.parse(c.observed_at)-new Date(c.observed_at).getTimezoneOffset()*60000).toISOString().slice(0,16):'';
-      return '<tr data-detail-id="'+esc(r.id)+'"><td>'+esc(r.selection)+'<br><small>'+esc(r.book||'Book unknown')+'</small></td><td>'+american(r.price)+(r.line!=null?' · '+esc(r.line):'')+'</td><td><input aria-label="Closing line" class="num" data-detail="line" type="number" step="0.5" value="'+esc(c.line??'')+'"></td><td><input aria-label="Closing odds" class="num" data-detail="price" type="number" step="1" value="'+esc(c.price??r.closing_price??'')+'"></td><td><input aria-label="Quote observed time" data-detail="observed" type="datetime-local" value="'+esc(localTime)+'"></td><td><button class="btn sm" data-act="save-close">Save quote</button></td></tr>';
-    }).join('')+'</tbody></table></div>';
+    var local=function(v){return v?new Date(Date.parse(v)-new Date(v).getTimezoneOffset()*60000).toISOString().slice(0,16):'';};
+    return '<h2>Closing-price tracking</h2><p class="note">Record the accepted book’s last observed pregame quote at the same selection line and settlement rules. Positive movement means your accepted decimal odds were better. This is observed price movement, not a certified closing price or no-vig CLV. The time gap to kickoff remains visible. Older unverified closing entries are retained in the sheet but do not enter this receipt comparison.</p><details><summary class="btn">Record same-book pregame observations</summary><div class="card scroll"><table><thead><tr><th>Pick / accepted receipt</th><th>Book</th><th>Selection line</th><th>Observed odds</th><th>Observed time (local)</th><th>Kickoff (local)</th><th>Contract check</th><th>Movement / coverage</th><th></th></tr></thead><tbody>'+rows.filter(function(r){return X.get(S.settings,r.id);}).slice().sort(function(a,b){return String(b.event_date).localeCompare(String(a.event_date));}).slice(0,100).map(function(r){
+      var receipt=X.get(S.settings,r.id),c=X.closing(S.settings,r.id)||{},comparison=X.closeComparison(receipt,X.closing(S.settings,r.id)),a=receipt.accepted;
+      return '<tr data-receipt-close-id="'+esc(r.id)+'"><td>'+esc(r.selection)+'<br><small>Accepted '+american(a.price)+' · '+esc(a.line??'No line')+'</small></td><td><input aria-label="Observed sportsbook" data-close="book" value="'+esc(c.book||a.book)+'"></td><td><input aria-label="Observed selection line" type="number" step="0.5" data-close="line" value="'+esc(c.line??a.line??'')+'"></td><td><input aria-label="Observed odds" type="number" step="1" data-close="price" value="'+esc(c.price??'')+'"></td><td><input aria-label="Observed pregame time" type="datetime-local" data-close="observed" value="'+esc(local(c.observed_at))+'"></td><td><input aria-label="Confirmed kickoff time" type="datetime-local" data-close="start"'+(X.start(r)?' readonly':'')+' value="'+esc(local(X.start(r)||c.start))+'"></td><td><label><input type="checkbox" data-close="same" aria-label="Same selection and settlement rules"> Same selection and settlement rules</label></td><td>'+(comparison.comparable?signed(comparison.movement*100)+'% · '+Math.round(comparison.minutes)+' min before kickoff':esc(comparison.note))+'</td><td><button class="btn sm" data-act="save-receipt-close">Save observation</button></td></tr>';
+    }).join('')+'</tbody></table></div></details>';
   }
   function hasAudit(){return S.features.indexOf('audit-v2')>=0;}
   function auditChanges(entry, reverse){
@@ -675,6 +676,15 @@
       Object.assign(patch,D.historySetting({id:row.id,selection:row.selection,device:BS.deviceName(),observed_at:receipt.updated_at,changes:[{field:'accepted receipt',from:previous?JSON.stringify(previous.accepted):null,to:JSON.stringify(receipt.accepted)}]},crypto.randomUUID()));
       S.busy=true;t.disabled=true;
       return BS.pushRows(BS.loadConfig(),[],patch).then(async function(res){S.settings=res.settings||S.settings;await loadAudit(false);S.busy=false;S.error='';render();}).catch(function(err){S.busy=false;S.error=BS.friendlyError(err);render();});
+    }
+    if (act === "save-receipt-close") {
+      if(S.busy)return;
+      var tr=t.closest('[data-receipt-close-id]'),row=find(tr.dataset.receiptCloseId),read=function(k){return tr.querySelector('[data-close="'+k+'"]').value;},value;
+      try{value=X.confirmClose(row,X.get(S.settings,row.id),{book:read('book'),line:read('line'),price:read('price'),observed_at:read('observed')?new Date(read('observed')).toISOString():'',start:read('start')?new Date(read('start')).toISOString():'',same_contract:tr.querySelector('[data-close="same"]').checked});}
+      catch(err){var error=tr.closest('details').querySelector('.close-error');if(!error){error=document.createElement('p');error.className='err close-error';tr.closest('details').prepend(error);}error.textContent=err.message;return;}
+      var patch={};patch[X.closeKey(row.id)]=JSON.stringify(value);
+      Object.assign(patch,D.historySetting({id:row.id,selection:row.selection,device:BS.deviceName(),observed_at:value.recorded_at,changes:[{field:'receipt pregame observation',from:JSON.stringify(X.closing(S.settings,row.id)),to:JSON.stringify(value)}]},crypto.randomUUID()));
+      S.busy=true;t.disabled=true;return BS.pushRows(BS.loadConfig(),[],patch).then(async function(res){S.settings=res.settings||S.settings;await loadAudit(false);S.busy=false;S.error='';render();}).catch(function(err){S.busy=false;S.error=BS.friendlyError(err);render();});
     }
     if (act === "save-close") {
       if(S.busy)return;
