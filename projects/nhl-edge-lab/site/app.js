@@ -10,6 +10,7 @@
   const time=v=>v&&!Number.isNaN(Date.parse(v))?new Intl.DateTimeFormat('en-CA',{timeZone:'America/Toronto',month:'short',day:'numeric',hour:'numeric',minute:'2-digit'}).format(new Date(v)):'Unknown';
   const metric=(value,label,note='')=>'<div class="metric"><span>'+esc(label)+'</span><strong>'+esc(value)+'</strong><small>'+esc(note)+'</small></div>';
   let data={},loading=false,failed=false,pending=null;
+  const manualOpen=g=>open(g)&&!g.canceled&&!g.postponed&&g.status!=='Postponed'&&g.status!=='Canceled';
   const recent=()=>data.meta&&Date.now()-Date.parse(data.meta.generated_at)<6*3600000&&Date.now()>=Date.parse(data.meta.generated_at)-300000&&!failed;
   const open=g=>g.state==='pre'&&Date.parse(g.date)>Date.now();
   const actionable=r=>recent()&&r.odds_verified&&Number.isFinite(Date.parse(r.odds_observed_at))&&Date.now()-Date.parse(r.odds_observed_at)<=90*60000&&Date.now()>=Date.parse(r.odds_observed_at)-300000&&Date.parse(r.start_time)>Date.now()&&data.games?.some(g=>g.game_id===r.game_id&&open(g));
@@ -18,15 +19,16 @@
   function card(g){
     const p=g.projection||{},known=p.ratings_known,rows=data.board.filter(r=>r.game_id===g.game_id);
     const pick=rows.find(qualified),locked=!open(g),ph=g.p_home;
+    const lean=known&&Number.isFinite(ph)?(ph>=.5?g.home:g.away):null;
     const score=g.state==='pre'?(known?fmt(p.away_goals)+' : '+fmt(p.home_goals):'— : —'):fmt(g.away_score,0)+' : '+fmt(g.home_score,0);
-    const pairs=['ML','ATS','TOTAL'].map(m=>rows.filter(r=>r.market===m)).filter(r=>r.length);
+    const pairs=['ML','ATS','TOTAL'].map(m=>(m==='TOTAL'?['over','under']:['away','home']).map(side=>rows.filter(r=>r.market===m&&r.side===side).sort((a,b)=>Number(actionable(b))-Number(actionable(a))||b.price-a.price)[0]).filter(Boolean)).filter(r=>r.length);
     const stats=side=>{const t=g[side+'_stats']||{};return t.current?.gp?t.current:t.prior||{};};
     const extra=side=>g[side+'_stats']?.extra||{};
     const comparisons=[['Goals / game',stats('away').gf_pg,stats('home').gf_pg],['Allowed / game',stats('away').ga_pg,stats('home').ga_pg],['Shots / game',extra('away').shots_pg,extra('home').shots_pg],['Shots allowed / game',extra('away').shots_against_pg,extra('home').shots_against_pg],['Save %',extra('away').save_pct==null?null:extra('away').save_pct*100,extra('home').save_pct==null?null:extra('home').save_pct*100],['Shooting %',extra('away').shooting_pct,extra('home').shooting_pct],['Faceoff %',extra('away').faceoff_pct,extra('home').faceoff_pct],['Power-play %',extra('away').pp_pct==null?null:extra('away').pp_pct*100,extra('home').pp_pct==null?null:extra('home').pp_pct*100],['Penalty kill %',extra('away').pk_pct==null?null:extra('away').pk_pct*100,extra('home').pk_pct==null?null:extra('home').pk_pct*100],['Power-play goals',extra('away').pp_goals,extra('home').pp_goals],['Short-handed goals',extra('away').sh_goals,extra('home').sh_goals],['Penalty min / game',extra('away').penalty_minutes_pg,extra('home').penalty_minutes_pg]];
     return '<article class="game-card" data-game="'+esc(g.game_id)+'"><div class="game-top"><span>'+esc(time(g.date))+'</span><span class="pill '+(pick?'gold':'')+'">'+esc(pick?pick.tier:g.season_type===1?'PRESEASON':g.status_detail||g.status)+'</span></div><div class="faceoff">'+team('away')+'<div class="score"><strong>'+esc(score)+'</strong><small>'+esc(g.state==='pre'?'projected goals':g.status)+'</small></div>'+team('home')+'</div>'+
     (known?'<div class="win-chance" role="img" aria-label="Model win probability '+esc(g.away)+' '+pct(1-ph)+', '+esc(g.home)+' '+pct(ph)+'"><div class="win-label"><span>'+esc(g.away)+' '+pct(1-ph)+'</span><span>'+pct(ph)+' '+esc(g.home)+'</span></div><div class="bar"><i style="width:'+((1-ph)*100)+'%"></i><i style="width:'+(ph*100)+'%"></i></div></div>':'<p class="note" style="padding:0 18px">Forecast unavailable: '+esc(p.reason||'insufficient data')+'</p>')+
-    '<div class="context-row">'+['away','home'].map(side=>{const q=g[side+'_goalie']||{};return '<div class="goalie">'+image(q.headshot,'')+'<div><small>'+esc(g[side])+' · GOALIE</small><b>'+esc(q.name||'Not announced')+'</b><small>'+esc(q.confirmed?'Confirmed':q.status||'Unknown')+' · '+esc(g[side+'_rest']==null?'Rest unknown':g[side+'_rest']===0?'Back-to-back':g[side+'_rest']+' rest days')+'</small></div></div>';}).join('')+'</div><div class="markets">'+
-    (pairs.length?pairs.map(pair=>'<div class="market-row">'+pair.slice(0,2).map(r=>'<div class="market '+(qualified(r)?'qualifies':'')+'"><div><b>'+esc(r.pick)+'</b><strong>'+odd(r.price)+'</strong></div><small>'+esc(r.book)+' · '+esc(r.market==='ATS'?'Puck line':r.market==='TOTAL'?'Total':'Moneyline')+'</small><small class="edge">Blended '+pct(r.model_prob)+' · EV '+pct(r.edge)+'</small><small>'+esc(qualified(r)?r.tier:(r.reasons||[])[0]||'Price check required')+'</small><button data-bet="'+esc(data.board.indexOf(r))+'" '+(!actionable(r)?'disabled':'')+'>Add my wager</button></div>').join('')+'</div>').join(''):'<p class="note">No complete two-sided prices published. Winner forecasts can still appear on Moneyline.</p>')+'</div><details><summary>Matchup lab · stats, scoring map & context</summary><div class="deep-dive"><p class="note">'+esc(g.venue||'Venue unavailable')+(g.broadcast?' · '+esc(g.broadcast):'')+'</p><p class="note">Goal rates: '+['away','home'].map(side=>esc(g[side])+' '+(g[side+'_stats']?.current?.gp?'current season':'prior season')+' ('+fmt(stats(side).gp,0)+' games)').join(' · ')+'</p><div class="comparison"><b>'+esc(g.away)+'</b><span>TEAM COMPARISON</span><b>'+esc(g.home)+'</b></div>'+comparisons.map(([label,a,h])=>'<div class="comparison"><b>'+fmt(a)+'</b><span>'+esc(label)+'</span><b>'+fmt(h)+'</b></div>').join('')+
+    (open(g)?'<div class="research-pick"><div><small>'+esc(pick?'QUALIFIED PICK':'MODEL LEAN · RESEARCH')+'</small><b>'+esc(pick?pick.pick:lean?lean+' moneyline':'Choose your game selection')+'</b><span>'+esc(pick?'Fresh quoted edge':lean?pct(Math.max(ph,1-ph))+' estimated win chance · confirm price':'Forecast unavailable; enter your own book selection')+'</span></div><button data-manual="'+esc(g.game_id)+'">Add my wager</button></div>':'')+'<div class="context-row">'+['away','home'].map(side=>{const q=g[side+'_goalie']||{};return '<div class="goalie">'+image(q.headshot,'')+'<div><small>'+esc(g[side])+' · GOALIE</small><b>'+esc(q.name||'Not announced')+'</b><small>'+esc(q.confirmed?'Confirmed':q.status||'Unknown')+' · '+esc(g[side+'_rest']==null?'Rest unknown':g[side+'_rest']===0?'Back-to-back':g[side+'_rest']+' rest days')+'</small></div></div>';}).join('')+'</div><div class="markets">'+
+    (pairs.length?pairs.map(pair=>'<div class="market-row">'+pair.slice(0,2).map(r=>'<div class="market '+(qualified(r)?'qualifies':'')+'"><div><b>'+esc(r.pick)+'</b><strong>'+odd(r.price)+'</strong></div><small>'+esc(r.book)+' · '+esc(r.market==='ATS'?'Puck line':r.market==='TOTAL'?'Total':'Moneyline')+'</small><small class="edge">Blended '+pct(r.model_prob)+' · EV '+pct(r.edge)+'</small><small>'+esc(qualified(r)?r.tier:(r.reasons||[])[0]||'Price check required')+'</small><button data-bet="'+esc(data.board.indexOf(r))+'" '+(!actionable(r)?'disabled':'')+'>Add my wager</button></div>').join('')+'</div>').join(''):'<p class="note">Public prices unavailable. Use Add my wager to enter a real moneyline, puck line or total from your book.</p>')+'</div><details><summary>Matchup lab · stats, scoring map & context</summary><div class="deep-dive"><p class="note">'+esc(g.venue||'Venue unavailable')+(g.broadcast?' · '+esc(g.broadcast):'')+'</p><p class="note">Goal rates: '+['away','home'].map(side=>esc(g[side])+' '+(g[side+'_stats']?.current?.gp?'current season':'prior season')+' ('+fmt(stats(side).gp,0)+' games)').join(' · ')+'</p><div class="comparison"><b>'+esc(g.away)+'</b><span>TEAM COMPARISON</span><b>'+esc(g.home)+'</b></div>'+comparisons.map(([label,a,h])=>'<div class="comparison"><b>'+fmt(a)+'</b><span>'+esc(label)+'</span><b>'+fmt(h)+'</b></div>').join('')+
     (known?'<p class="note">Most likely final scores · away–home. Goal-rate estimate; not shot-based xG.</p><div class="scorelines">'+p.scores.slice(0,5).map(s=>'<span>'+s.away+'–'+s.home+' <b>'+pct(s.probability)+'</b></span>').join('')+'</div><p class="note">Score map: columns '+esc(g.home)+' 0–7 · rows '+esc(g.away)+' 0–7. Darker means less likely. Outcomes of 8+ goals are outside this view.</p><div class="distribution" role="img" aria-label="Final score probability grid">'+p.matrix.flatMap((row,a)=>row.map((value,h)=>'<span title="'+esc(g.away)+' '+a+'–'+h+' '+esc(g.home)+': '+pct(value)+'" style="background:rgba(72,211,219,'+Math.min(.85,value*12)+')">'+(value>=.005?Math.round(value*100)+'%':'·')+'</span>')).join('')+'</div><p class="note">Projected final total '+fmt(p.total)+' · Regulation tie '+pct(p.overtime_prob)+' · Prior-season blend '+pct(p.prior_weight)+'</p>':'')+
     (safe(g.source_url)?'<a href="'+safe(g.source_url)+'" target="_blank" rel="noopener">'+esc(g.source_name||'ESPN')+' game centre ↗</a>':'')+'</div></details></article>';
     function team(side){return '<div class="team">'+image(g[side+'_logo'],g[side+'_name'])+'<strong>'+esc(g[side])+'</strong><small>'+esc(g[side+'_name'])+'</small><small>'+esc(g[side+'_record']||'Record unavailable')+'</small></div>';}
@@ -36,7 +38,9 @@
     const upcoming=data.games.filter(open),picks=data.board.filter(qualified),goalies=upcoming.reduce((n,g)=>n+['home','away'].filter(s=>g[s+'_goalie']?.confirmed).length,0);
     $('#health').textContent=(failed?'Refresh failed · retained publication; picks paused. ':!recent()?'Publication stale · picks paused. ':data.meta.schedule_source==='NHL fallback'?'NHL schedule fallback · ESPN details unavailable · ':'Observed public data · ')+time(data.meta.generated_at);
     $('#health').classList.toggle('bad',!recent());
-    $('#metrics').innerHTML=metric(upcoming.length,'Upcoming games','Rolling 8-day slate')+metric(picks.length,'Qualified picks','Fresh prices + model edge')+metric(goalies,'Confirmed goalies','Across upcoming games')+metric(data.standings.teams.length,'Teams tracked',data.meta.season-1+'–'+String(data.meta.season).slice(-2)+' season');
+    $('#metrics').innerHTML=metric(upcoming.length,'Upcoming games','Rolling 8-day slate')+metric(picks.length,'Qualified picks','Fresh prices + model edge')+metric(goalies,'Confirmed goalies','Missing confirmations hold automatic picks')+metric(data.standings.teams.length,'Teams tracked',data.meta.season-1+'–'+String(data.meta.season).slice(-2)+' season');
+    const todayGames=data.games.filter(g=>g.day===$('#date').value&&open(g));
+    $('#slate-summary').innerHTML='<b>'+todayGames.length+' games open</b><span>'+todayGames.filter(g=>g.projection?.ratings_known).length+' model forecasts</span><span>'+todayGames.filter(g=>data.board.some(r=>r.game_id===g.game_id&&actionable(r))).length+' games with fresh prices</span><a href="../props-edge/multisport.html?sport=NHL">Anytime goal scorers & parlays →</a>';
     let games=data.games.filter(g=>g.day===$('#date').value);
     const filter=$('#filter').value;
     if(filter==='qualified')games=games.filter(g=>picks.some(r=>r.game_id===g.game_id));
@@ -84,6 +88,7 @@
       const next=Object.fromEntries(names.map((n,i)=>[n,values[i]]));
       if(!Array.isArray(next.games)||!Array.isArray(next.board)||!Array.isArray(next.standings?.teams)||!Array.isArray(next.news)||!Array.isArray(next.injuries)||!Number.isFinite(Date.parse(next.meta.generated_at)))throw Error('Invalid publication');
       const check=await fetch('data/meta.json',{cache:'no-store',signal:AbortSignal.timeout(20000)});if(!check.ok||(await check.json()).generated_at!==next.meta.generated_at)throw Error('Publication changed; retry');
+      if(!data.meta&&!next.games.some(g=>g.day===$('#date').value)){const first=next.games.filter(open).sort((a,b)=>a.date.localeCompare(b.date))[0];if(first)$('#date').value=first.day;}
       data=next;failed=false;settle();render();
     }catch(_){failed=true;$('#health').textContent='NHL publication could not be refreshed. Retry shortly.';if(data.meta)render();else $('#games').innerHTML='<p class="empty">The NHL feed is unavailable. No sample picks are substituted.</p>';}
     finally{loading=false;$('#refresh').disabled=false;}
@@ -91,12 +96,36 @@
   document.querySelector('.tabs').addEventListener('click',e=>{const b=e.target.closest('[data-tab]');if(!b)return;document.querySelectorAll('[data-tab]').forEach(x=>x.setAttribute('aria-pressed',String(x===b)));document.querySelectorAll('.panel').forEach(p=>p.hidden=p.id!==b.dataset.tab);});
   $('#date').value=day(Date.now());for(const id of ['date','filter','conference'])$('#'+id).addEventListener('change',render);
   $('#next').addEventListener('click',()=>{const g=data.games?.filter(open).sort((a,b)=>a.date.localeCompare(b.date))[0];if(g){$('#date').value=g.day;$('#filter').value='all';render();}});
-  $('#games').addEventListener('click',e=>{const b=e.target.closest('[data-bet]');if(!b)return;const r=data.board[Number(b.dataset.bet)];if(!r||!actionable(r))return;pending=r;$('#bet-title').textContent=r.pick;$('#bet-detail').textContent=r.matchup+' · '+time(r.start_time)+' · '+(r.reasons?.join('; ')||r.tier);$('#stake').value='';$('#price').value=r.price;$('#book').value=r.book;$('#bet-error').textContent='';$('#bet-dialog').showModal();});
+  function setContract(){
+    if(!pending?.manual)return;
+    const [market,side]=$('#bet-contract').value.split('|');pending.market=market;pending.side=side;
+    $('#line-label').hidden=market==='ML';$('#bet-line').required=market!=='ML';
+    pending.model_prob=market==='ML'&&Number.isFinite(pending.p_home)?(side==='home'?pending.p_home:1-pending.p_home):null;
+  }
+  $('#bet-contract').addEventListener('change',setContract);
+  $('#games').addEventListener('click',e=>{
+    const b=e.target.closest('[data-bet], [data-manual]');if(!b)return;
+    const manual=b.hasAttribute('data-manual'),g=manual?data.games.find(g=>g.game_id===b.dataset.manual):null;
+    const r=manual?(g&&manualOpen(g)?{game_id:g.game_id,start_time:g.date,date:g.day,home:g.home,away:g.away,matchup:g.away+' @ '+g.home,manual:true,p_home:g.projection?.ratings_known?g.p_home:null,tier:'RESEARCH',edge:null}:null):data.board[Number(b.dataset.bet)];
+    if(!r||(!manual&&!actionable(r)))return;pending={...r};
+    $('#bet-title').textContent=manual?r.matchup:r.pick;
+    $('#bet-detail').textContent=r.matchup+' · '+time(r.start_time)+' · '+(manual?'Manual research wager. Enter the exact offer you placed; this is not a qualified model pick.':r.reasons?.join('; ')||r.tier);
+    $('#contract-label').hidden=!manual;
+    $('#bet-contract').innerHTML=manual?['ML|home','ML|away','ATS|home','ATS|away','TOTAL|over','TOTAL|under'].map(v=>{const [m,s]=v.split('|');return '<option value="'+v+'">'+esc((m==='TOTAL'?s+' total':r[s]+' '+(m==='ML'?'moneyline':'puck line')))+'</option>';}).join(''):'';
+    if(manual)$('#bet-contract').value='ML|'+(Number.isFinite(r.p_home)&&r.p_home<.5?'away':'home');
+    $('#line-label').hidden=true;$('#bet-line').required=false;$('#bet-line').value='';setContract();
+    $('#stake').value='';$('#price').value=manual?'':r.price;$('#book').value=manual?'':r.book;$('#bet-error').textContent='';$('#bet-dialog').showModal();
+  });
   $('#cancel-bet').addEventListener('click',()=>$('#bet-dialog').close());
   $('#bet-form').addEventListener('submit',e=>{
     e.preventDefault();const stake=Number($('#stake').value),price=Number($('#price').value),book=$('#book').value.trim();
-    if(!pending||!actionable(pending)){$('#bet-error').textContent='This game or quote is no longer current. Refresh the board.';return;}
+    if(!pending||(pending.manual?!data.games.some(g=>g.game_id===pending.game_id&&manualOpen(g)):!actionable(pending))){$('#bet-error').textContent='This game or quote is no longer current. Refresh the board.';return;}
     if(!(stake>0&&stake<=100000)||Math.abs(price)<100||!Number.isFinite(price)||!book){$('#bet-error').textContent='Enter a positive stake, valid American odds (±100 or beyond), and sportsbook.';return;}
+    if(pending.manual){
+      const line=pending.market==='ML'?null:Number($('#bet-line').value);
+      if(pending.market!=='ML'&&(!$('#bet-line').value||!Number.isFinite(line)||(pending.market==='TOTAL'&&line<=0))){$('#bet-error').textContent='Enter the actual puck line or positive total at your book.';return;}
+      pending.line=line;pending.pick=pending.market==='ML'?pending[pending.side]+' ML':pending.market==='ATS'?pending[pending.side]+' '+(line>0?'+':'')+line:pending.side+' '+line;
+    }
     const entry=L.entryFrom({...pending,tipoff:pending.start_time,price,book},stake),rows=L.load();
     if(rows.some(r=>L.keyOf(r)===L.keyOf(entry))){$('#bet-error').textContent='This selection is already in your ledger. Edit it from Shared ledger.';return;}
     if(!L.save([...rows,entry])){$('#bet-error').textContent='Browser storage failed. Your wager was not saved.';return;}

@@ -4,6 +4,7 @@ from concurrent.futures import ThreadPoolExecutor
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
 from zoneinfo import ZoneInfo
+from . import public_odds
 from . import official as nhl
 from . import challenger
 from .model import VERSION, number, instant, project, candidates, update_accuracy, accuracy_report
@@ -195,6 +196,16 @@ def main():
                     existing['nhl_game_id']=g['nhl_game_id']
                     if not existing['quotes']:existing['quotes']=g['quotes']
                 else:games[g['game_id']]=g
+    upcoming_for_prices=[g for g in games.values() if g['state']=='pre' and instant(g['date'])>now]
+    if any(not g['quotes'] for g in upcoming_for_prices):
+        try:
+            offers=public_odds.fetch(upcoming_for_prices,now)
+            for game_id,quote in offers:
+                existing=games[game_id]['quotes']
+                if not any((q['market'],q['side'],q.get('line'),q['book'])==(quote['market'],quote['side'],quote.get('line'),quote['book']) for q in existing):existing.append(quote)
+            health['public-book-odds']={'status':'ok' if offers else 'no matched prices','observed_at':stamp,'url':offers[0][1]['source_url'] if offers else public_odds.URL,'quotes':len(offers)}
+        except (OSError,ValueError) as exc:
+            health['public-book-odds']={'status':'unavailable','observed_at':None,'url':public_odds.URL,'error':type(exc).__name__}
     board=[];ordered=sorted(games.values(),key=lambda g:g['date'])
     for g in ordered:
         for side in ('home','away'):

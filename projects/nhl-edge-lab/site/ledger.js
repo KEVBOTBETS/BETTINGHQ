@@ -24,9 +24,10 @@
       date: row.date, tipoff: row.tipoff, matchup: row.matchup,
       market: row.market, side: row.side, pick: row.pick,
       line: row.line == null ? null : Number(row.line), price: Number(row.price),
-      book: row.book || null, model_prob: Number(row.model_prob),
+      book: row.book || null, model_prob: row.model_prob == null ? null : Number(row.model_prob),
       market_fair_prob: row.market_fair_prob == null ? null : Number(row.market_fair_prob),
-      breakeven: Number(row.breakeven), edge: Number(row.edge), tier: row.tier,
+      breakeven: row.breakeven == null ? null : Number(row.breakeven), edge: row.edge == null ? null : Number(row.edge), tier: row.tier,
+      manual: Boolean(row.manual), research_only: Boolean(row.manual),
       stake: Math.round(Math.max(0, stake) * 100) / 100,
       added_at: new Date().toISOString(), result: null, profit: null, final_score: null,
     };

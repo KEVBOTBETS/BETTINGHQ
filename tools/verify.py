@@ -52,6 +52,7 @@ if args.browser:
     run('bet-ledger-hq',['node','tests/test_broadcast_browser.mjs'])
     run('bet-ledger-hq',['node','tests/test_sports_browser.mjs'])
     run('bet-ledger-hq',['node','tests/test_nhl_browser.mjs'])
+    run('bet-ledger-hq',['node','tests/test_nhl_goals_browser.mjs'])
     run('bet-ledger-hq',['node','tests/test_moneyline_browser.mjs'])
     run('bet-ledger-hq',['node','tests/test_today_browser.mjs'])
     run('bet-ledger-hq',['node','tests/test_weekly_browser.mjs'])

@@ -16,6 +16,8 @@ from .providers.covers import _TokenParser, _heading, _book, _parse_offer, _comp
 from .providers.espn import parse_summaries
 from .schema import american_to_decimal
 
+from .nhl_goals import forecasts as goal_forecasts, VERSION as GOAL_VERSION
+
 ROOT=Path(__file__).resolve().parents[1]
 MARKETS_NHL={'SHOTS ON GOAL':'Shots on goal','GOALS':'Goals','ASSISTS':'Assists','POINTS':'Points','ANYTIME GOALSCORER':'Anytime goal','ANYTIME GOAL SCORER':'Anytime goal','SAVES':'Saves'}
 NHL_CODES={'TB':'TBL','SJ':'SJS','LA':'LAK','NJ':'NJD','MON':'MTL','MTL':'MTL','WIN':'WPG','VEG':'VGK','NAS':'NSH','UTAH':'UTA'}
@@ -138,11 +140,14 @@ def build(sport,cache,now):
             if not any((p.get('gamesPlayed') or 0)>0 for p in data.get('skaters',[])):
                 stat_season=season-10001
                 data=cache.get(f'https://api-web.nhle.com/v1/club-stats/{api_team}/{stat_season}/2',24) or {}
-            data={**data,'season':stat_season}
+            prior_data=cache.get(f'https://api-web.nhle.com/v1/club-stats/{api_team}/{season-10001}/2',24*7) or {}
+            data={**data,'season':stat_season,'prior':prior_data}
             return team,athletes,data
         with ThreadPoolExecutor(max_workers=6) as pool:
             for team,athletes,data in pool.map(team_data,teams):rosters[team]=athletes;stats[team]=data
-        for g in games:watch.extend(nhl_watchlist(g,rosters,stats,season))
+        for g in games:
+            watch.extend(goal_forecasts(g,rosters,stats,season))
+            watch.extend(nhl_watchlist(g,rosters,stats,season))
     else:
         # Restrict roster/history calls to teams whose cards have current offered markets.
         offered={t for c in parser.cards for t in c[1:4] if t in teams}
@@ -174,10 +179,13 @@ def build(sport,cache,now):
     history={(w['event_id'],w['athlete_id'],w['market']):w for w in watch}
     for q in quotes:
         w=history.get((q['event_id'],q['athlete_id'],q['market']))
-        if w:q.update({k:w[k] for k in ['average','samples','recent','history_season','history_note']})
+        if w:q.update({k:w[k] for k in ['average','samples','recent','history_season','history_note','model_prob','model_version','probability_basis'] if k in w})
     result={'sport':sport,'generated_at':stamp,'source_model_at':json.loads((folder/'site/data/meta.json').read_text()).get('generated_at'),'games':[{k:g.get(k) for k in ['game_id','date','away','home','away_name','home_name','away_logo','home_logo','season_type','venue']} for g in games],'quotes':quotes,'watchlist':watch,'errors':errors,'notes':['Public book offers are matched to one upcoming game and one current roster player.','Player participation, starting goalie and final combined parlay price must be confirmed at the book.','NHL/college history is descriptive research; no calibrated prop win probability is claimed.'],'source_url':url}
     result['diagnostics']={'advertised_game_pages':len(links.links),'index_cards':len(parser.cards),'upcoming_games':len(games),'roster_teams':sum(bool(v) for v in rosters.values()),'statistics_teams':sum(bool(v.get('skaters')) for v in stats.values()),'matched_offers':len(quotes)}
     result['public_game_pages']=links.links
+    if sport=='NHL':
+        result['goal_model']={'version':GOAL_VERSION,'validated':False,'method':'Gamma-Poisson goal-rate shrinkage with bounded matchup adjustment','basis':'Conditional on player participation; regulation and OT goals only; shootout excluded','prior_max_games':30,'baseline_games':12}
+        result['goal_scorers']=[w for w in watch if w['market']=='Anytime goal']
     if games and not quotes:
         if links.links and not parser.cards:errors.append('Covers now advertises separate game odds pages; its index contains no player offer cards.')
         errors.append('No event-matched book offers were extracted. Player statistics and manual book-line entry remain available.')

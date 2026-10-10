@@ -24,3 +24,33 @@ Every first pregame game forecast freezes before puck drop and is later graded f
 ## Checks
 
 `python -m unittest discover -s tests`; hub `tests/test_nhl.mjs` checks cross-league adapters, ticket grading, puck-line orientation and shared sync. `tests/test_nhl_browser.mjs` checks desktop/mobile rendering, NHL moneyline selection/card export, filters, stale-feed behavior and explicit local ledger entry. These checks are included in `tools/verify.py`.
+
+
+### NHL desk and keyless price recovery
+
+Visible full-game Covers tables provide a first independent book-price fallback;
+VegasInsider provides a second. Matches require exact home/away identity and
+scheduled start, complete two-sided prices at one named book, and compatible
+puck lines/totals. Covers publication timestamps stay attached to quotes. Opening
+and consensus columns never become named-book offers. A failed read never renews
+old prices. The board shows the best fresh price on each side; each candidate
+retains its own opposite same-book price for no-vig calculation.
+
+Every future game has a manual research entry for moneyline, puck line or total,
+even without public odds. Exact user prices and lines are required. Research
+entries remain separate from qualified recommendations, and started games lock.
+The shared ledger still settles against official final scores.
+
+NHL Props adds participation-conditional anytime scorer estimates from current
+and prior official club goal counts. Gamma-Poisson shrinkage uses 12 baseline
+games and at most 30 prior club games, a bounded matchup adjustment and a cap on
+team player goal rates. Goalies and players without five historical games are
+excluded. Regulation/OT scoring is modeled; shootout goals are excluded. This
+model has not been prospectively calibrated. Transfers, line deployment and
+injuries require review. Model fair odds are never sportsbook quotes.
+
+Two-, three- and four-to-six-leg scorer research combinations use distinct games
+on the same Eastern calendar day. Products assume independence and are not
+calibrated joint probabilities. Same-game scorer tickets remain manual research
+without a claimed joint chance. Saveable tickets require observed book offers;
+manual anytime offers use a binary Yes contract with no made-up numeric line.

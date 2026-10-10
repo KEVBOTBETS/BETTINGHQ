@@ -43,6 +43,10 @@ try{
   const child=page.frames().find(f=>f.url().endsWith('moneyline.html'));assert.ok(await child.evaluate(()=>document.querySelector('#card-canvas').width===1080));
   await page.screenshot({path:'test-results/nhl-moneyline-'+width+'.png',fullPage:true});
   await page.goto(origin+'/nhl-edge-lab/');await page.locator('#health').filter({hasText:/Observed public data|NHL schedule fallback/}).waitFor();
+  await page.route('**/nhl-edge-lab/data/board.json',r=>r.fulfill({contentType:'application/json',body:'[]'}));
+  await page.locator('#refresh').click();await page.locator('[data-manual]').first().click();
+  await page.locator('#bet-contract').selectOption('ATS|away');await page.locator('#bet-line').fill('1.5');await page.locator('#price').fill('-220');await page.locator('#book').fill('My actual book');await page.locator('#stake').fill('3');await page.getByRole('button',{name:'Save to my ledger'}).click();
+  const manual=await page.evaluate(()=>JSON.parse(localStorage.getItem('nhledge.ledger.v2')).entries.find(r=>r.manual));assert.equal(manual.line,1.5);assert.equal(manual.price,-220);assert.equal(manual.model_prob,null);assert.equal(manual.tier,'RESEARCH');
   await page.route('**/nhl-edge-lab/data/meta.json',r=>r.fulfill({status:503,body:'Unavailable'}));
   await page.getByRole('button',{name:'↻ Refresh',exact:true}).click();await page.locator('#health').filter({hasText:'Refresh failed'}).waitFor();
   assert.equal(await page.locator('[data-bet]:enabled').count(),0);assert.deepEqual(errors,[]);

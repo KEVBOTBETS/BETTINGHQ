@@ -16,6 +16,10 @@ def apply(root):
         for page in (root/directory).glob('*.html'):
             source = page.read_text()
             if not re.search(r'</head>', source, re.I): continue  # Redirect-only aliases.
+            # Reapplying presentation must not duplicate the network navigation.
+            source = re.sub(r'\s+data-kb-(?:sport|page|light)="[^"]*"', '', source)
+            source = re.sub(r'<link\b[^>]*href="[^"]*sports-theme\.css"[^>]*>\s*', '', source, flags=re.I)
+            source = re.sub(r'<nav\b[^>]*class="kb-network"[^>]*>.*?</nav>', '', source, flags=re.I|re.S)
             identity = sport if sport != 'hq' else page.stem
             light = ' data-kb-light="true"' if sport in ('nfl','ncaaf','mlb','wnba') or identity == 'ledger' else ''
             source = re.sub(r'<html\b', '<html data-kb-sport="'+sport+'" data-kb-page="'+identity+'"'+light, source, count=1, flags=re.I)
