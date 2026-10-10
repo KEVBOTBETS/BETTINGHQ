@@ -39,7 +39,7 @@ const voided=X.confirm(row,{...input,status:'Void'},r,'2026-10-10T04:00:00Z');se
 assert.equal(X.comparison(X.confirm(row,{...input,line:-4},r,'2026-10-10T04:00:00Z')),'Different line; forecast EV unavailable');
 assert(X.csv([row],settings).includes('accepted_price'));assert.equal(X.summary([{...row,deleted:true}],settings).count,0);
 for(const change of [{price:50},{stake:-1},{book:''},{line:'bad'},{placed_at:'2026-10-11T03:00Z'},{status:'Winner'}])assert.throws(()=>X.confirm(row,{...input,...change},null,'2026-10-10T04:00:00Z'));
-assert.equal(X.get({[X.key(row.id)]:JSON.stringify({schema:1,id:row.id,confirmed:true})},row.id),null);assert.equal(row.price,-110);console.log('Price stress, rounded minimum odds, push probability bases, source tier retention, runtime gates, frozen receipts, actual P/L, void/push ROI and receipt validation passed');
+assert.equal(X.get({[X.key(row.id)]:JSON.stringify({schema:1,id:row.id,confirmed:true})},row.id),null);assert.equal(X.snapshot({...row,app:'nfl-lab',side:'away'},'2026-10-10').line,3.5);assert.equal(V.selectionLine({...row,side:'away'},'nfl'),3.5);assert.equal(row.price,-110);console.log('Price stress, rounded minimum odds, push probability bases, source tier retention, runtime gates, frozen receipts, actual P/L, void/push ROI and receipt validation passed');
 // Deployment counters must match the recommendation rows, while retaining source counts.
 const {mkdtempSync,mkdirSync,writeFileSync,readFileSync,rmSync}=require('node:fs'),{tmpdir}=require('node:os'),path=require('node:path'),{execFileSync}=require('node:child_process');
 const temp=mkdtempSync(path.join(tmpdir(),'price-policy-'));

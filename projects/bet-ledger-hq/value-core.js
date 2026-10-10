@@ -7,6 +7,7 @@
   const american=d=>!(d>1)?null:Math.ceil((d>=2?(d-1)*100:-100/(d-1))-1e-9);
   const instant=v=>typeof v==='string'&&/(Z|[+-]\d\d(?::?\d\d)?)$/i.test(v)&&Number.isFinite(Date.parse(v))?Date.parse(v):null;
   const fresh=(v,now,hours)=>{const at=instant(v);return at!==null&&at<=now&&now-at<=hours*3600000;};
+  function selectionLine(row,sport){const line=number(row.line);return line!==null&&['nfl','ncaaf'].includes(String(sport||row.sport||'').toLowerCase())&&row.market==='ATS'&&row.side==='away'?-line:line;}
   function probabilities(row,sport){
     sport=String(sport||row.sport||'').toLowerCase();
     const push=number(row.push_prob)??0,p=number(row.model_prob??row.p_final);
@@ -52,5 +53,5 @@
     }
     return out;
   }
-  return {POLICY,number,decimal,american,instant,fresh,probabilities,evaluate,annotate};
+  return {POLICY,number,decimal,american,instant,fresh,selectionLine,probabilities,evaluate,annotate};
 });

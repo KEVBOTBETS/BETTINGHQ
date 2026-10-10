@@ -4,11 +4,12 @@
   const key=id=>'kevbot_execution_v1_'+encodeURIComponent(id);
   const statuses=['Pending','Win','Loss','Push','Void'];
   function get(settings,id){try{const x=JSON.parse(settings[key(id)]||'null');const a=x?.accepted;return x?.schema===1&&x.id===id&&x.confirmed===true&&x.reference&&a&&V.decimal(a.price)!==null&&V.number(a.stake)>0&&statuses.includes(a.status)&&typeof a.book==='string'&&V.instant(a.placed_at)!==null?x:null;}catch{return null;}}
+  function selectionLine(row){return V.selectionLine(row,({'nfl-lab':'nfl','ncaaf-lab':'ncaaf'})[row.app]||'other');}
   function snapshot(row,at){
     const n=row.native||{};
     return {captured_at:at,provenance:'Ledger reference captured when receipt first confirmed; not necessarily original publication',
       event:row.event,market:row.market,selection:row.selection,side:row.side,price:n.board_price??row.price,
-      line:n.board_line??row.line,book:row.book,model_prob:n.board_model_prob??row.model_prob,
+      line:selectionLine({...row,line:n.board_line??row.line}),line_basis:'selection',book:row.book,model_prob:n.board_model_prob??row.model_prob,
       push_prob:n.push_prob??null,model_prob_no_push:n.model_prob_no_push??null,model_version:n.model_version??null};
   }
   function confirm(row,input,previous,at=new Date().toISOString()){
@@ -43,5 +44,5 @@
     const q=v=>{const s=String(v??'');return '"'+s.replace(/"/g,'""')+'"';};
     return [cols.join(',')].concat(rows.filter(r=>!r.deleted).flatMap(r=>{const x=get(settings,r.id);if(!x)return [];const a=x.accepted;return [[r.id,x.reference.event,x.reference.selection,x.reference.market,x.reference.price,x.reference.line,a.price,a.line,a.book,a.stake,a.placed_at,a.status,pnl(x),x.reference.captured_at].map(q).join(',')];})).join('\n');
   }
-  return {key,get,snapshot,confirm,pnl,summary,comparison,csv};
+  return {key,get,selectionLine,snapshot,confirm,pnl,summary,comparison,csv};
 });
