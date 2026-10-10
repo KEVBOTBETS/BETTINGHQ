@@ -482,6 +482,7 @@ function why(b){
   const p = b.projection || {};
   const lm = b.line_move || {};
   const bits = [];
+  if(window.betValueDetails)bits.push(window.betValueDetails(b,"ncaaf"));
   if (b.qualification) bits.push(esc(b.qualification));
   if (b.market === "ATS")
     bits.push(`Model projects <b>${p.mu >= 0 ? "home by " + p.mu.toFixed(1) : "away by " + Math.abs(p.mu).toFixed(1)}</b> against a line of ${b.line > 0 ? "+" : ""}${b.line}.`);

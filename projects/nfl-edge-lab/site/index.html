@@ -610,6 +610,7 @@ function gameCard(g, cand, plannedStake){
   const pickBlock = cand ? `<div>
       <div class="bigpick">${esc(cand.pick)}<span>${price(cand.price)}</span></div>
       ${winChanceNote(cand)}
+      ${window.betValueDetails?window.betValueDetails(cand,"nfl"):""}
       ${cand.tier_note?`<div class="note" style="margin:8px 0 0;padding:8px 10px;font-size:12px">Why this tier: ${esc(cand.tier_note)}</div>`:""}
       ${cand.held?`<div class="note" style="margin:8px 0 0;padding:8px 10px;font-size:12px;border-left-color:var(--flag)">Priced, not staked yet — ${esc(cand.hold_note||"")}.</div>`:""}
       ${(cand.risk_flags||[]).length?`<div class="note" style="margin:8px 0 0;padding:8px 10px;font-size:12px;border-left-color:var(--flag)">${esc(cand.risk_flags.join(" · "))}</div>`:""}

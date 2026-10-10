@@ -91,14 +91,16 @@
       const selection=String(r.selection||"").toLowerCase();
       const side=r.side||(game?(selection===String(game.home).toLowerCase()?"home":selection===String(game.away).toLowerCase()?"away":["over","under"].includes(selection)?selection:""):"");
       const rawLine=number(r.line),line=rawLine!=null&&["nfl","ncaaf","mlb"].includes(key)&&["ATS","RL"].includes(r.market)&&side==="away"?-rawLine:rawLine;
+      const value=r.value_policy?(typeof module==='object'?require('./value-core.js'):self.BetValue).evaluate(r,{sport:key,publication:published,now}):null;
+      if(value&&!value.passes)return;
       const probability=number(r.model_prob??r.p_final),minReturn=number(meta.settings?.tiers?.lean)??0.02;
-      const worst=worstPrice(probability,minReturn);
+      const worst=value?value.worst:worstPrice(probability,minReturn);
       rows.push({key,app:APP[key],sport:key==="props"?"NFL":LABELS[key],event,
         eventId:String(r.result_event_id||r.game_id||r.event_id||game?.gamePk||""),
         player:r.player||"",playerId:String(r.player_id||""),side,home:r.home||game?.home||"",away:r.away||game?.away||"",version:String(r.model_version||meta.model_version||meta.version||"unversioned"),start,when,day:day(start),pick:r.pick||r.label||r.selection||"",
         market:r.market||"",line,sourceLine:rawLine,price,book:r.book||"Unspecified book",
         tier:t,score:number(r.action_edge??r.edge_real??r.edge),quote:quote||null,
-        review,probability,fair:fairPrice(probability),worst,minReturn,
+        review,value,probability,fair:fairPrice(probability),worst,minReturn,
         worstReached:worst!=null&&implied(price)>implied(worst),
         move:movement(key,r,side,line,price),source:LABELS[key]});
     }

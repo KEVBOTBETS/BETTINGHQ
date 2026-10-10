@@ -206,7 +206,9 @@
     const capped = !!(row.tier_note || row.timing_tier || (row.risk_flags || []).length || row.stake_multiplier < 1);
     if (tier === "BEST BET" && row.tier !== "BEST BET") tier = "GOOD";
     if (capped && RANK[tier] < RANK[row.tier]) tier = row.tier;
-    return { prob: p, breakeven: be, ev, action_edge: action, tier, prob_edge: probEdge };
+    const value=typeof window!=='undefined'&&window.BetValue?window.BetValue.evaluate(row,{sport:"nfl",price:myPrice,line:myLine}):null;
+    if(value&&!value.passes)tier="PASS";
+    return { prob: p, breakeven: be, ev, action_edge: action, tier, prob_edge: probEdge, value };
   }
 
   /* ------------------------------------------------------------- bet dialog */
@@ -244,7 +246,7 @@
       out.innerHTML = `<div class="big"><strong>${q.tier === "PASS" ? "NO BET" : esc(q.tier)}</strong><span>${spct(q.action_edge)} adjusted return</span></div>
         Model win chance <b>${pct(q.prob)}</b> vs break-even <b>${pct(q.breakeven)}</b> at ${esc(am(r.price))} · raw EV ${spct(q.ev)}.
         ${same ? "Same number as the board." : `Board: <b>${esc(row.tier)}</b> at ${spct(row.action_edge ?? row.edge)}${row.market !== "ML" && Number(r.line) !== Number(row.line) ? ` (line ${esc(sgn(bookLine))})` : ""}.`}
-        ${q.tier === "PASS" ? "<br><b>The edge is gone at this number.</b> Wait for a better price or skip it." : ""}`;
+        ${q.value?`<br>Minimum acceptable odds at the published line: <b>${q.value.worst==null?"unavailable":esc(am(q.value.worst))}</b>. Stress return ${q.value.stressEV==null?"unavailable":spct(q.value.stressEV)}. ${esc(q.value.reasons.join("; "))}. 3 percentage-point stress + 2% buffer; not a confidence interval.`:""}${q.tier === "PASS" ? "<br><b>No model recommendation at this contract.</b> Recording a receipt does not endorse it." : ""}`;
     }
     f.addEventListener("input", update); update();
     dlg.onclose = () => {
@@ -254,7 +256,7 @@
       const q = reprice(row, r.price, r.line, settings);
       const pick = row.market === "ML" || r.line === row.line ? row.pick : relabel(row, r.line);
       o.onConfirm({ ...row, pick, price: r.price, line: r.line, model_prob: q.prob, breakeven: q.breakeven,
-        board_price: row.price, board_line: row.line, board_tier: row.tier, taken_ev: q.ev, taken_edge: q.action_edge, taken_tier: q.tier }, stake);
+        board_price: row.price, board_line: row.line, board_model_prob:row.model_prob, board_tier: row.tier, taken_ev: q.ev, taken_edge: q.action_edge, taken_tier: q.tier }, stake);
     };
     dlg.returnValue = "";
     if (typeof dlg.showModal === "function") dlg.showModal(); else dlg.setAttribute("open", "");

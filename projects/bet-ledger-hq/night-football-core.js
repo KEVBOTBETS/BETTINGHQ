@@ -34,7 +34,7 @@
     if(row.held)return 'Held until betting window';
     return 'Fresh published quote';
   }
-  function qualified(row,meta,now=Date.now(),error=false){return quoteState(row,meta,now,error)==='Fresh published quote'&&['LEAN','GOOD','BEST BET'].includes(row.tier)&&!row.filtered;}
+  function qualified(row,meta,now=Date.now(),error=false){if(row.value_policy){const V=typeof module==='object'?require('./value-core.js'):self.BetValue;if(!V.evaluate(row,{sport:row.player?'props':'nfl',publication:meta?.generated_at,now}).passes)return false;}return quoteState(row,meta,now,error)==='Fresh published quote'&&['LEAN','GOOD','BEST BET'].includes(row.tier)&&!row.filtered;}
   function ticketsFor(tickets,games){const ids=new Set(games.map(g=>String(g.game_id)));return (Array.isArray(tickets)?tickets:[]).filter(t=>Array.isArray(t.legs)&&t.legs.length>=2&&t.legs.every(l=>ids.has(eventId(l))));}
   function relatedNews(articles,games,now=Date.now()){
     const tokens=games.flatMap(g=>['home','away'].flatMap(side=>{const t=g[side];return typeof t==='object'?[t.name,t.short,t.abbr]:[g[side+'_name'],t];})).filter(v=>typeof v==='string'&&v.length>=3).map(v=>v.toLowerCase());

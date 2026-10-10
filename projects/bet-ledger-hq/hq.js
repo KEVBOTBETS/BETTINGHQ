@@ -14,7 +14,7 @@
 (function () {
   "use strict";
 
-  var BS = window.BetSync, D = window.KevLedgerDetails;
+  var BS = window.BetSync, D = window.KevLedgerDetails, X = window.BetExecution;
   var baselineReady=false;
   var $ = function (s, r) { return (r || document).querySelector(s); };
   var main = $("#main");
@@ -431,6 +431,7 @@
       '<h2>Bankroll</h2>' + (bankrollCurve(rows, S.settings.starting_bankroll) ||
         '<div class="card empty">The curve appears once two bets have settled.</div>') +
       '<h2>By board</h2>' + (boardBars(rows) || '<div class="card empty">No bets yet.</div>') +
+      executionDetails(rows) +
       openBets(rows) +
       breakdown(rows, "app", "Board") +
       breakdown(rows, "tier", "Tier", ["BEST BET", "GOOD", "LEAN", "PASS"]) +
@@ -457,6 +458,27 @@
     $("#stamp").textContent = S.busy ? "syncing…"
       : S.lastSync ? "synced " + ago(S.lastSync) : "";
     $("#sync").hidden = false;
+  }
+
+  function executionDetails(rows) {
+    var a=X.summary(rows,S.settings);
+    var localDate=function(v){return v?new Date(Date.parse(v)-new Date(v).getTimezoneOffset()*60000).toISOString().slice(0,16):'';};
+    return '<h2>Confirmed actual bets</h2><div class="kpis">'+
+      tile('Confirmed receipts',a.count,a.settled+' settled')+tile('Actual profit / loss',signed(a.pnl),'Accepted odds and stakes',sgn(a.pnl))+
+      tile('Actual ROI',a.roi==null?'—':pct(a.roi),'Settled stakes include pushes; voids excluded',sgn(a.roi))+
+      tile('Actual open exposure',money(a.exposure),'Confirmed pending receipts')+'</div>'+
+      '<p class="note">The board ledger totals above include unconfirmed entries. These actual totals count only receipts you confirm below. Enter the sportsbook result, including voids; a model grade does not confirm an actual result. Your first saved ledger reference is retained, but is not claimed to be the original published forecast. A changed line requires a new forecast; no transferred EV is claimed.</p>'+
+      '<details><summary class="btn">Confirm or reconcile accepted bets</summary><div class="scroll"><table class="execution-table"><thead><tr><th>Pick / reference</th><th>Accepted book</th><th>Accepted odds</th><th>Accepted line</th><th>Actual stake</th><th>Accepted time (local)</th><th>Actual result</th><th></th></tr></thead><tbody>'+rows.slice().sort(function(a,b){return String(b.placed_at||b.event_date).localeCompare(String(a.placed_at||a.event_date));}).slice(0,100).map(function(r){
+      var saved=X.get(S.settings,r.id),a=saved?.accepted||{},ref=saved?.reference;
+      return '<tr data-execution-id="'+esc(r.id)+'"><td>'+esc(r.selection)+'<small style="display:block">Reference '+american(ref?ref.price:r.price)+' · '+esc((ref?ref.line:r.line)??'No line')+'</small><small style="display:block">'+esc(X.comparison(saved))+'</small></td>'+
+        '<td><input aria-label="Accepted sportsbook" data-execution="book" maxlength="120" value="'+esc(a.book||r.book||'')+'"></td>'+
+        '<td><input aria-label="Accepted odds" type="number" step="1" data-execution="price" value="'+esc(a.price??r.price??'')+'"></td>'+
+        '<td><input aria-label="Accepted line" type="number" step="0.5" data-execution="line" value="'+esc(a.line??r.line??'')+'"></td>'+
+        '<td><input aria-label="Actual stake" type="number" min="0.01" step="0.01" data-execution="stake" value="'+esc(a.stake??r.stake??'')+'"></td>'+
+        '<td><input aria-label="Accepted time" type="datetime-local" data-execution="placed" value="'+esc(localDate(a.placed_at||r.placed_at))+'"></td>'+
+        '<td><select aria-label="Actual result" data-execution="status">'+['Pending','Win','Loss','Push','Void'].map(function(v){return '<option'+((a.status||'Pending')===v?' selected':'')+'>'+v+'</option>';}).join('')+'</select></td>'+
+        '<td><button class="btn sm" data-act="save-execution"'+(S.busy?' disabled':'')+'>'+ (saved?'Update receipt':'Confirm receipt')+'</button></td></tr>';
+      }).join('')+'</tbody></table></div></details><button class="btn sm" data-act="execution-csv" style="margin-top:10px">Download confirmed receipts CSV</button>';
   }
 
   function closingDetails(rows) {
@@ -640,6 +662,20 @@
     }
     if (act === "status") { S.status = t.getAttribute("data-status"); return render(); }
 
+    if (act === "execution-csv") {
+      var blob=new Blob([X.csv(live(),S.settings)],{type:'text/csv;charset=utf-8'}),url=URL.createObjectURL(blob),a=document.createElement('a');
+      a.href=url;a.download='confirmed-actual-bets.csv';a.click();setTimeout(function(){URL.revokeObjectURL(url);},1000);return;
+    }
+    if (act === "save-execution") {
+      if(S.busy)return;
+      var tr=t.closest('[data-execution-id]'),row=find(tr.dataset.executionId),read=function(k){return tr.querySelector('[data-execution="'+k+'"]').value;},previous=X.get(S.settings,row.id),receipt;
+      try{receipt=X.confirm(row,{book:read('book'),price:read('price'),line:read('line'),stake:read('stake'),placed_at:read('placed')?new Date(read('placed')).toISOString():'',status:read('status')},previous);}
+      catch(err){S.error=err.message;var error=main.querySelector('.execution-error');if(!error){error=document.createElement('p');error.className='err execution-error';tr.closest('details').prepend(error);}error.textContent=S.error;return;}
+      var patch={};patch[X.key(row.id)]=JSON.stringify(receipt);
+      Object.assign(patch,D.historySetting({id:row.id,selection:row.selection,device:BS.deviceName(),observed_at:receipt.updated_at,changes:[{field:'accepted receipt',from:previous?JSON.stringify(previous.accepted):null,to:JSON.stringify(receipt.accepted)}]},crypto.randomUUID()));
+      S.busy=true;t.disabled=true;
+      return BS.pushRows(BS.loadConfig(),[],patch).then(async function(res){S.settings=res.settings||S.settings;await loadAudit(false);S.busy=false;S.error='';render();}).catch(function(err){S.busy=false;S.error=BS.friendlyError(err);render();});
+    }
     if (act === "save-close") {
       if(S.busy)return;
       var tr=t.closest('[data-detail-id]'),row=find(tr.dataset.detailId),line=tr.querySelector('[data-detail="line"]').value,price=tr.querySelector('[data-detail="price"]').value,observed=tr.querySelector('[data-detail="observed"]').value;

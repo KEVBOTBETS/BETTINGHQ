@@ -77,7 +77,7 @@
     return '<dl class="play-numbers"><dt>Price</dt><dd><b>'+odds(r.price)+'</b></dd>'+
       '<dt>Model win chance</dt><dd>'+pct(r.probability)+'</dd>'+
       '<dt>Fair price</dt><dd>'+odds(r.fair)+'</dd>'+
-      '<dt title="Lowest price that still gives the model at least '+esc(pct(r.minReturn))+' expected return'+(r.market==="ATS"||r.market==="TOTAL"?" at this line":"")+'">Worst price to bet</dt><dd>'+worst+'</dd></dl>';
+      '<dt title="Lowest price that still gives the model at least '+esc(pct(r.minReturn))+' expected return'+(r.market==="ATS"||r.market==="TOTAL"?" at this line":"")+'">Worst price to bet</dt><dd>'+worst+'</dd></dl>'+(r.value?'<p class="note">Stress return '+pct(r.value.stressEV)+' · 3 percentage-point probability stress test + 2% return buffer. Policy settings, not a confidence interval.</p>':'');
   }
   function moveLine(r){
     const m=r.move;if(!m)return "";

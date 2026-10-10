@@ -39,6 +39,13 @@ def main():
             (data/'summary.json').write_text(json.dumps(dict(starting_bankroll=None,
                 current_bankroll=None,wins=0,losses=0,pushes=0,settled=0,pending=0,roi=None,pnl=None))+'\n')
     subprocess.run([sys.executable, 'tools/public_dashboard.py', str(OUT/'ladderbet/index.html')], cwd=PROJECTS/'ladderbet', check=True)
+    subprocess.run(['node', 'tools/apply_value_policy.mjs', str(OUT)], cwd=ROOT, check=True)
+    # Load the same policy helpers in source boards before their existing scripts.
+    for repo in ['nfl-edge-lab','ncaaf-edge-lab','props-edge','nhl-edge-lab','wnba-edge-lab']:
+        index=OUT/repo/'index.html'
+        html=index.read_text()
+        html=html.replace('<head>', '<head><script src="../bet-ledger-hq/value-core.js"></script><script src="../bet-ledger-hq/value-view.js"></script>', 1)
+        index.write_text(html)
     performance = build_performance(ROOT, target/"data/performance.json")
     performance['challengers'] = evaluate_challengers(performance['records'])
     (target/'data/performance.json').write_text(json.dumps(performance,separators=(',',':'),allow_nan=False)+'\n')

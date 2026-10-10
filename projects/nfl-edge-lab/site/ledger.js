@@ -18,7 +18,7 @@
       model_prob:Number(row.model_prob),market_fair_prob:row.market_fair_prob==null?null:Number(row.market_fair_prob),
       breakeven:Number(row.breakeven),edge:Number(row.edge),edge_raw:Number(row.edge_raw),
       tier:row.tier,confidence:row.confidence,stake:Math.round(Math.max(0,stake)*100)/100,
-      board_price:row.board_price==null?null:Number(row.board_price),board_line:row.board_line==null?null:Number(row.board_line),
+      board_model_prob: row.board_model_prob??row.model_prob, push_prob:row.push_prob??0, model_prob_no_push:row.model_prob_no_push??null, model_version:row.model_version??null, board_price:row.board_price==null?null:Number(row.board_price),board_line:row.board_line==null?null:Number(row.board_line),
       taken_edge:row.taken_edge==null?null:Number(row.taken_edge),taken_tier:row.taken_tier||null,
       added_at:new Date().toISOString(),result:null,pnl:null,final_score:null};
   }
