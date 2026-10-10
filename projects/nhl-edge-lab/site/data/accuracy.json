@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-10T03:50:39.584695+00:00",
+  "generated_at": "2026-10-10T04:20:53.795680+00:00",
   "scope": {
     "season": "2026-27",
     "season_type_label": "Regular season + playoffs \u00b7 forward-only"
@@ -12,7 +12,7 @@
       "brier": 0.23819901370479415
     }
   },
-  "pending": 65,
+  "pending": 67,
   "model_version": "nhl-poisson-1.0",
   "records": [
     {
@@ -21839,6 +21839,358 @@
       },
       "result": null,
       "nhl_game_id": "2026020134"
+    },
+    {
+      "game_id": "nhl:2026020135",
+      "season": 2027,
+      "season_type": 2,
+      "start": "2026-10-18T22:00:00+00:00",
+      "frozen_at": "2026-10-10T04:20:53.795680+00:00",
+      "home": "MIN",
+      "away": "CBJ",
+      "p_home": 0.586915,
+      "projection": {
+        "ratings_known": true,
+        "home_goals": 3.254,
+        "away_goals": 2.707,
+        "mu": 0.548,
+        "p_home": 0.586915,
+        "total": 6.125,
+        "overtime_prob": 0.163429,
+        "scores": [
+          {
+            "home": 3,
+            "away": 2,
+            "probability": 0.079223
+          },
+          {
+            "home": 2,
+            "away": 3,
+            "probability": 0.070099
+          },
+          {
+            "home": 4,
+            "away": 3,
+            "probability": 0.064273
+          },
+          {
+            "home": 3,
+            "away": 4,
+            "probability": 0.057575
+          },
+          {
+            "home": 2,
+            "away": 1,
+            "probability": 0.048285
+          },
+          {
+            "home": 4,
+            "away": 2,
+            "probability": 0.04412
+          },
+          {
+            "home": 1,
+            "away": 2,
+            "probability": 0.042071
+          },
+          {
+            "home": 3,
+            "away": 1,
+            "probability": 0.040068
+          }
+        ],
+        "matrix": [
+          [
+            0,
+            0.009674,
+            0.013645,
+            0.014803,
+            0.012043,
+            0.007839,
+            0.004252,
+            0.001977
+          ],
+          [
+            0.008263,
+            0,
+            0.048285,
+            0.040068,
+            0.032599,
+            0.021218,
+            0.011509,
+            0.00535
+          ],
+          [
+            0.00944,
+            0.042071,
+            0,
+            0.079223,
+            0.04412,
+            0.028717,
+            0.015576,
+            0.007241
+          ],
+          [
+            0.008517,
+            0.027719,
+            0.070099,
+            0,
+            0.064273,
+            0.02591,
+            0.014054,
+            0.006534
+          ],
+          [
+            0.005764,
+            0.018758,
+            0.030522,
+            0.057575,
+            0,
+            0.031003,
+            0.00951,
+            0.004421
+          ],
+          [
+            0.00312,
+            0.010155,
+            0.016524,
+            0.017925,
+            0.028053,
+            0,
+            0.009895,
+            0.002394
+          ],
+          [
+            0.001408,
+            0.004581,
+            0.007454,
+            0.008087,
+            0.006579,
+            0.009028,
+            0,
+            0.002241
+          ],
+          [
+            0.000544,
+            0.001771,
+            0.002883,
+            0.003127,
+            0.002544,
+            0.001656,
+            0.002059,
+            0
+          ]
+        ],
+        "prior_weight": 0.87
+      },
+      "model_version": "nhl-poisson-1.0",
+      "market_snapshot": null,
+      "challenger": {
+        "version": "nhl-context-shadow-1.0",
+        "mode": "shadow-only",
+        "observed_at": "2026-10-10T04:20:53.795680+00:00",
+        "p_home": 0.586966,
+        "home_goals": 3.273,
+        "away_goals": 2.7,
+        "ot_home_probability": 0.47619,
+        "adjustments": {
+          "home": {
+            "shots": -0.0028,
+            "special_teams": 0.0217,
+            "opponent_goalie": 0.0,
+            "goalie_sample": null
+          },
+          "away": {
+            "shots": -0.0131,
+            "special_teams": 0.0057,
+            "opponent_goalie": 0.0,
+            "goalie_sample": null
+          }
+        },
+        "missing": [
+          "away: confirmed goalie sample unavailable",
+          "home: confirmed goalie sample unavailable"
+        ],
+        "note": "Prospective experiment, not validated confidence; production picks are unchanged."
+      },
+      "result": null,
+      "nhl_game_id": "2026020135"
+    },
+    {
+      "game_id": "nhl:2026020136",
+      "season": 2027,
+      "season_type": 2,
+      "start": "2026-10-19T00:00:00+00:00",
+      "frozen_at": "2026-10-10T04:20:53.795680+00:00",
+      "home": "CGY",
+      "away": "CAR",
+      "p_home": 0.450392,
+      "projection": {
+        "ratings_known": true,
+        "home_goals": 2.92,
+        "away_goals": 3.236,
+        "mu": -0.316,
+        "p_home": 0.450392,
+        "total": 6.32,
+        "overtime_prob": 0.163202,
+        "scores": [
+          {
+            "home": 2,
+            "away": 3,
+            "probability": 0.074719
+          },
+          {
+            "home": 3,
+            "away": 2,
+            "probability": 0.069736
+          },
+          {
+            "home": 3,
+            "away": 4,
+            "probability": 0.065059
+          },
+          {
+            "home": 4,
+            "away": 3,
+            "probability": 0.061135
+          },
+          {
+            "home": 1,
+            "away": 2,
+            "probability": 0.042429
+          },
+          {
+            "home": 2,
+            "away": 4,
+            "probability": 0.041306
+          },
+          {
+            "home": 2,
+            "away": 1,
+            "probability": 0.039265
+          },
+          {
+            "home": 1,
+            "away": 3,
+            "probability": 0.034965
+          }
+        ],
+        "matrix": [
+          [
+            0,
+            0.00725,
+            0.009038,
+            0.008798,
+            0.006423,
+            0.003752,
+            0.001826,
+            0.000762
+          ],
+          [
+            0.007919,
+            0,
+            0.039265,
+            0.028473,
+            0.020787,
+            0.012141,
+            0.005909,
+            0.002465
+          ],
+          [
+            0.011099,
+            0.042429,
+            0,
+            0.069736,
+            0.033636,
+            0.019646,
+            0.009562,
+            0.003989
+          ],
+          [
+            0.011973,
+            0.034965,
+            0.074719,
+            0,
+            0.061135,
+            0.021193,
+            0.010315,
+            0.004303
+          ],
+          [
+            0.009687,
+            0.028289,
+            0.041306,
+            0.065059,
+            0,
+            0.031824,
+            0.008345,
+            0.003482
+          ],
+          [
+            0.00627,
+            0.01831,
+            0.026735,
+            0.026025,
+            0.033679,
+            0,
+            0.01095,
+            0.002253
+          ],
+          [
+            0.003382,
+            0.009876,
+            0.01442,
+            0.014037,
+            0.010248,
+            0.011535,
+            0,
+            0.002672
+          ],
+          [
+            0.001563,
+            0.004566,
+            0.006667,
+            0.00649,
+            0.004738,
+            0.002767,
+            0.002804,
+            0
+          ]
+        ],
+        "prior_weight": 0.833
+      },
+      "model_version": "nhl-poisson-1.0",
+      "market_snapshot": null,
+      "challenger": {
+        "version": "nhl-context-shadow-1.0",
+        "mode": "shadow-only",
+        "observed_at": "2026-10-10T04:20:53.795680+00:00",
+        "p_home": 0.446804,
+        "home_goals": 2.893,
+        "away_goals": 3.231,
+        "ot_home_probability": 0.5,
+        "adjustments": {
+          "home": {
+            "shots": -0.0234,
+            "special_teams": -0.0034,
+            "opponent_goalie": 0.0,
+            "goalie_sample": null
+          },
+          "away": {
+            "shots": -0.0009,
+            "special_teams": -0.0039,
+            "opponent_goalie": 0.0,
+            "goalie_sample": null
+          }
+        },
+        "missing": [
+          "away: confirmed goalie sample unavailable",
+          "home: confirmed goalie sample unavailable"
+        ],
+        "note": "Prospective experiment, not validated confidence; production picks are unchanged."
+      },
+      "result": null,
+      "nhl_game_id": "2026020136"
     }
   ],
   "note": "Uncalibrated baseline. Game-winner accuracy includes forecasts you did not bet; it is not wager ROI."
