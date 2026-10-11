@@ -160,15 +160,1119 @@
     "accuracy": {
       "generated_at": "2026-10-11T12:49:37.475050+00:00"
     },
-    "lastGoodAt": "2026-10-11T14:21:25.476Z"
+    "lastGoodAt": "2026-10-11T14:30:18.908Z"
   },
   "ladder": {
     "accuracy": {
       "generated_at": "2026-10-11T12:49:45.974243+00:00"
     },
-    "lastGoodAt": "2026-10-11T14:21:25.476Z"
+    "lastGoodAt": "2026-10-11T14:30:18.908Z"
   },
   "props": {
+    "meta": {
+      "generated_at": "2026-10-11T14:17:15.689386+00:00",
+      "provider_priority": [
+        "Covers public comparison (no key)",
+        "DraftKings Network public reference (no key)",
+        "Optional odds providers",
+        "ESPN regular-season statistics"
+      ],
+      "target_book": "DraftKings",
+      "keyless_fallback": true,
+      "configured": {
+        "odds_api_io": false,
+        "the_odds_api": false,
+        "espn_keyless": true,
+        "covers_keyless": true,
+        "draftkings_network_keyless": true
+      },
+      "counts": {
+        "priced_quotes": 407,
+        "eligible_priced_quotes": 407,
+        "qualified_options": 8,
+        "held_options": 0,
+        "board": 187,
+        "actionable": 8,
+        "best": 0,
+        "good": 0,
+        "leans": 8,
+        "projections": 11448,
+        "injury_report": 758,
+        "ruled_out": 147,
+        "book_lines": 2261,
+        "legs_on_book_lines": 1525,
+        "legs": 6933,
+        "book_priced_legs": 185,
+        "parlays": 178
+      },
+      "source_by_sport": {
+        "NFL": {
+          "source": "Covers public comparison + ESPN regular-season projections",
+          "priced_quotes": 407,
+          "projections": 11448,
+          "errors": []
+        }
+      },
+      "workflow_url": "https://github.com/KEVBOTBETS/BETTINGHQ/actions/workflows/release.yml",
+      "notes": [
+        "API credentials are optional and are read only from GitHub Actions secrets.",
+        "If verified keyless prices are unavailable, keep model-price scenarios labeled research. Optional API keys are never required.",
+        "Action Network and OddsShark are not scraped because automated extraction is blocked or prohibited."
+      ],
+      "odds_feed": {
+        "window": {
+          "NFL": {
+            "next_kickoff": "2026-10-11T17:00Z",
+            "hours_to_kickoff": 2.8,
+            "window_hours": 36,
+            "inside_window": true
+          }
+        },
+        "markets": [
+          "player_anytime_td",
+          "player_pass_yds",
+          "player_pass_tds",
+          "player_rush_yds",
+          "player_reception_yds",
+          "player_receptions"
+        ],
+        "quota": {},
+        "line_source": "DraftKings lines via ESPN"
+      },
+      "accuracy": {
+        "legs": 6205,
+        "settled": 2586,
+        "record": "1743-843-2",
+        "hit_rate": 0.674,
+        "average_predicted": 0.6608,
+        "brier": 0.1896,
+        "buckets": [
+          {
+            "from": 0,
+            "to": 0.35,
+            "legs": 213,
+            "predicted": 0.2474,
+            "actual": 0.2113
+          },
+          {
+            "from": 0.35,
+            "to": 0.45,
+            "legs": 36,
+            "predicted": 0.3824,
+            "actual": 0.3333
+          },
+          {
+            "from": 0.45,
+            "to": 0.55,
+            "legs": 236,
+            "predicted": 0.5209,
+            "actual": 0.4619
+          },
+          {
+            "from": 0.55,
+            "to": 0.65,
+            "legs": 443,
+            "predicted": 0.6011,
+            "actual": 0.6321
+          },
+          {
+            "from": 0.65,
+            "to": 0.75,
+            "legs": 802,
+            "predicted": 0.7023,
+            "actual": 0.7456
+          },
+          {
+            "from": 0.75,
+            "to": 1.01,
+            "legs": 856,
+            "predicted": 0.806,
+            "actual": 0.8166
+          }
+        ],
+        "by_market": {
+          "Tackles + assists": {
+            "legs": 497,
+            "wins": 409,
+            "predicted": 0.7543,
+            "hit_rate": 0.8229
+          },
+          "Pass completions": {
+            "legs": 62,
+            "wins": 48,
+            "predicted": 0.7839,
+            "hit_rate": 0.7742
+          },
+          "Pass attempts": {
+            "legs": 61,
+            "wins": 47,
+            "predicted": 0.7797,
+            "hit_rate": 0.7705
+          },
+          "Rush attempts": {
+            "legs": 140,
+            "wins": 99,
+            "predicted": 0.715,
+            "hit_rate": 0.7071
+          },
+          "Passing yards": {
+            "legs": 61,
+            "wins": 51,
+            "predicted": 0.7338,
+            "hit_rate": 0.8361
+          },
+          "Targets": {
+            "legs": 267,
+            "wins": 207,
+            "predicted": 0.7521,
+            "hit_rate": 0.7753
+          },
+          "Receptions": {
+            "legs": 369,
+            "wins": 256,
+            "predicted": 0.6999,
+            "hit_rate": 0.6938
+          },
+          "Rushing yards": {
+            "legs": 180,
+            "wins": 118,
+            "predicted": 0.653,
+            "hit_rate": 0.6556
+          },
+          "Receiving yards": {
+            "legs": 406,
+            "wins": 280,
+            "predicted": 0.6679,
+            "hit_rate": 0.6897
+          },
+          "Sacks": {
+            "legs": 125,
+            "wins": 82,
+            "predicted": 0.6212,
+            "hit_rate": 0.656
+          },
+          "Passing touchdowns": {
+            "legs": 60,
+            "wins": 34,
+            "predicted": 0.6302,
+            "hit_rate": 0.5667
+          },
+          "Pass interceptions": {
+            "legs": 60,
+            "wins": 32,
+            "predicted": 0.6191,
+            "hit_rate": 0.5333
+          },
+          "Anytime touchdown": {
+            "legs": 298,
+            "wins": 80,
+            "predicted": 0.3108,
+            "hit_rate": 0.2685
+          }
+        },
+        "calibration_shrink": 1,
+        "calibration_active": false,
+        "updated_at": "2026-10-11T14:16:36.582719+00:00",
+        "calibration_note": "Calibration is diagnostic only; no automatic refit.",
+        "total_logged": 38005,
+        "pending": 3617,
+        "independent_events": 59,
+        "legacy_excluded": 17,
+        "method": "One first pregame preferred leg per event/player/market. Full side/line audit retained separately. No wager ROI at estimated prices."
+      },
+      "parlay_record": {
+        "Win": 89,
+        "Loss": 4221,
+        "Pending": 6523,
+        "Void": 0,
+        "Review": 0,
+        "total": 10833,
+        "hit_rate": 0.020649651972157772
+      },
+      "max_odds_age_hours": 12,
+      "price_source_status": "available",
+      "quote_health": {
+        "observed": 407,
+        "retained": 0,
+        "reference": 0,
+        "expired": 0,
+        "rejected": 0,
+        "max_age_hours": 4,
+        "sources": {
+          "Covers public prop comparison": {
+            "status": "available",
+            "quotes": 407,
+            "shape": "100 cards, 100 recognized prop cards, 100 scheduled-player matches",
+            "checked_at": "2026-10-11T14:14:24.611180+00:00",
+            "source_url": "https://www.covers.com/sport/football/nfl/player-props"
+          },
+          "DraftKings Network public reference": {
+            "status": "standby",
+            "quotes": 0
+          }
+        },
+        "board_reasons": {
+          "qualified": 8,
+          "portfolio hold": 46,
+          "insufficient edge / model filters": 102,
+          "insufficient sample": 31,
+          "additional price stress failures": 0
+        },
+        "markets": {
+          "Pass + rush + receiving touchdowns": {
+            "projections": 78,
+            "observed": 0,
+            "retained": 0,
+            "reference": 0,
+            "expired": 0,
+            "qualified": 0
+          },
+          "Pass + rush + receiving yards": {
+            "projections": 78,
+            "observed": 0,
+            "retained": 0,
+            "reference": 0,
+            "expired": 0,
+            "qualified": 0
+          },
+          "Pass + rush yards": {
+            "projections": 78,
+            "observed": 0,
+            "retained": 0,
+            "reference": 0,
+            "expired": 0,
+            "qualified": 0
+          },
+          "Pass attempts": {
+            "projections": 78,
+            "observed": 0,
+            "retained": 0,
+            "reference": 0,
+            "expired": 0,
+            "qualified": 0
+          },
+          "Pass completions": {
+            "projections": 78,
+            "observed": 0,
+            "retained": 0,
+            "reference": 0,
+            "expired": 0,
+            "qualified": 0
+          },
+          "Pass interceptions": {
+            "projections": 78,
+            "observed": 0,
+            "retained": 0,
+            "reference": 0,
+            "expired": 0,
+            "qualified": 0
+          },
+          "Passing touchdowns": {
+            "projections": 78,
+            "observed": 0,
+            "retained": 0,
+            "reference": 0,
+            "expired": 0,
+            "qualified": 0
+          },
+          "Passing yards": {
+            "projections": 78,
+            "observed": 59,
+            "retained": 0,
+            "reference": 0,
+            "expired": 0,
+            "qualified": 1
+          },
+          "Sacks": {
+            "projections": 1499,
+            "observed": 0,
+            "retained": 0,
+            "reference": 0,
+            "expired": 0,
+            "qualified": 0
+          },
+          "Solo tackles": {
+            "projections": 1499,
+            "observed": 0,
+            "retained": 0,
+            "reference": 0,
+            "expired": 0,
+            "qualified": 0
+          },
+          "Tackles + assists": {
+            "projections": 1499,
+            "observed": 0,
+            "retained": 0,
+            "reference": 0,
+            "expired": 0,
+            "qualified": 0
+          },
+          "Extra point attempts": {
+            "projections": 54,
+            "observed": 0,
+            "retained": 0,
+            "reference": 0,
+            "expired": 0,
+            "qualified": 0
+          },
+          "Extra points made": {
+            "projections": 54,
+            "observed": 0,
+            "retained": 0,
+            "reference": 0,
+            "expired": 0,
+            "qualified": 0
+          },
+          "Field goal attempts": {
+            "projections": 54,
+            "observed": 0,
+            "retained": 0,
+            "reference": 0,
+            "expired": 0,
+            "qualified": 0
+          },
+          "Field goals made": {
+            "projections": 54,
+            "observed": 0,
+            "retained": 0,
+            "reference": 0,
+            "expired": 0,
+            "qualified": 0
+          },
+          "Kicking points": {
+            "projections": 54,
+            "observed": 0,
+            "retained": 0,
+            "reference": 0,
+            "expired": 0,
+            "qualified": 0
+          },
+          "Anytime touchdown": {
+            "projections": 694,
+            "observed": 16,
+            "retained": 0,
+            "reference": 0,
+            "expired": 0,
+            "qualified": 0
+          },
+          "Receiving touchdowns": {
+            "projections": 587,
+            "observed": 0,
+            "retained": 0,
+            "reference": 0,
+            "expired": 0,
+            "qualified": 0
+          },
+          "Receiving yards": {
+            "projections": 587,
+            "observed": 163,
+            "retained": 0,
+            "reference": 0,
+            "expired": 0,
+            "qualified": 3
+          },
+          "Receptions": {
+            "projections": 587,
+            "observed": 0,
+            "retained": 0,
+            "reference": 0,
+            "expired": 0,
+            "qualified": 0
+          },
+          "Rush + receiving touchdowns": {
+            "projections": 694,
+            "observed": 0,
+            "retained": 0,
+            "reference": 0,
+            "expired": 0,
+            "qualified": 0
+          },
+          "Rush + receiving yards": {
+            "projections": 694,
+            "observed": 0,
+            "retained": 0,
+            "reference": 0,
+            "expired": 0,
+            "qualified": 0
+          },
+          "Rush attempts": {
+            "projections": 311,
+            "observed": 0,
+            "retained": 0,
+            "reference": 0,
+            "expired": 0,
+            "qualified": 0
+          },
+          "Rushing touchdowns": {
+            "projections": 311,
+            "observed": 0,
+            "retained": 0,
+            "reference": 0,
+            "expired": 0,
+            "qualified": 0
+          },
+          "Rushing yards": {
+            "projections": 311,
+            "observed": 169,
+            "retained": 0,
+            "reference": 0,
+            "expired": 0,
+            "qualified": 4
+          },
+          "Targets": {
+            "projections": 587,
+            "observed": 0,
+            "retained": 0,
+            "reference": 0,
+            "expired": 0,
+            "qualified": 0
+          },
+          "Touchdowns scored": {
+            "projections": 694,
+            "observed": 0,
+            "retained": 0,
+            "reference": 0,
+            "expired": 0,
+            "qualified": 0
+          }
+        }
+      },
+      "estimated_prices": false,
+      "validation": {
+        "markets": [
+          {
+            "sport": "nfl",
+            "market": "ATS",
+            "baseline_version": "2026-09-27-clv-gate",
+            "status": "building-evidence",
+            "recommendations_paused": false,
+            "research_available": true,
+            "reasons": [],
+            "contracts": 0,
+            "events": 0,
+            "days": 0,
+            "market_pairs": 0,
+            "predicted": null,
+            "actual": null,
+            "overconfidence_interval": null,
+            "vs_market": {
+              "brier": {
+                "mean": null,
+                "interval": null
+              },
+              "log_loss": {
+                "mean": null,
+                "interval": null
+              }
+            },
+            "calibration": [
+              {
+                "low": 0,
+                "high": 0.2,
+                "n": 0,
+                "predicted": null,
+                "actual": null
+              },
+              {
+                "low": 0.2,
+                "high": 0.4,
+                "n": 0,
+                "predicted": null,
+                "actual": null
+              },
+              {
+                "low": 0.4,
+                "high": 0.6,
+                "n": 0,
+                "predicted": null,
+                "actual": null
+              },
+              {
+                "low": 0.6,
+                "high": 0.8,
+                "n": 0,
+                "predicted": null,
+                "actual": null
+              },
+              {
+                "low": 0.8,
+                "high": 1,
+                "n": 0,
+                "predicted": null,
+                "actual": null
+              }
+            ],
+            "shadow_tests": 0,
+            "shadow_status": "shadow-only",
+            "shadow_vs_current": {
+              "brier": {
+                "mean": null,
+                "interval": null
+              },
+              "log_loss": {
+                "mean": null,
+                "interval": null
+              }
+            },
+            "shadow_vs_market": {
+              "brier": {
+                "mean": null,
+                "interval": null
+              },
+              "log_loss": {
+                "mean": null,
+                "interval": null
+              }
+            },
+            "promotion_enabled": false
+          },
+          {
+            "sport": "nfl",
+            "market": "Anytime touchdown",
+            "baseline_version": "2026-09-06-ev2",
+            "status": "building-evidence",
+            "recommendations_paused": false,
+            "research_available": true,
+            "reasons": [],
+            "contracts": 0,
+            "events": 0,
+            "days": 0,
+            "market_pairs": 0,
+            "predicted": null,
+            "actual": null,
+            "overconfidence_interval": null,
+            "vs_market": {
+              "brier": {
+                "mean": null,
+                "interval": null
+              },
+              "log_loss": {
+                "mean": null,
+                "interval": null
+              }
+            },
+            "calibration": [
+              {
+                "low": 0,
+                "high": 0.2,
+                "n": 0,
+                "predicted": null,
+                "actual": null
+              },
+              {
+                "low": 0.2,
+                "high": 0.4,
+                "n": 0,
+                "predicted": null,
+                "actual": null
+              },
+              {
+                "low": 0.4,
+                "high": 0.6,
+                "n": 0,
+                "predicted": null,
+                "actual": null
+              },
+              {
+                "low": 0.6,
+                "high": 0.8,
+                "n": 0,
+                "predicted": null,
+                "actual": null
+              },
+              {
+                "low": 0.8,
+                "high": 1,
+                "n": 0,
+                "predicted": null,
+                "actual": null
+              }
+            ],
+            "shadow_tests": 0,
+            "shadow_status": "shadow-only",
+            "shadow_vs_current": {
+              "brier": {
+                "mean": null,
+                "interval": null
+              },
+              "log_loss": {
+                "mean": null,
+                "interval": null
+              }
+            },
+            "shadow_vs_market": {
+              "brier": {
+                "mean": null,
+                "interval": null
+              },
+              "log_loss": {
+                "mean": null,
+                "interval": null
+              }
+            },
+            "promotion_enabled": false
+          },
+          {
+            "sport": "nfl",
+            "market": "ML",
+            "baseline_version": "2026-09-27-clv-gate",
+            "status": "building-evidence",
+            "recommendations_paused": false,
+            "research_available": true,
+            "reasons": [],
+            "contracts": 0,
+            "events": 0,
+            "days": 0,
+            "market_pairs": 0,
+            "predicted": null,
+            "actual": null,
+            "overconfidence_interval": null,
+            "vs_market": {
+              "brier": {
+                "mean": null,
+                "interval": null
+              },
+              "log_loss": {
+                "mean": null,
+                "interval": null
+              }
+            },
+            "calibration": [
+              {
+                "low": 0,
+                "high": 0.2,
+                "n": 0,
+                "predicted": null,
+                "actual": null
+              },
+              {
+                "low": 0.2,
+                "high": 0.4,
+                "n": 0,
+                "predicted": null,
+                "actual": null
+              },
+              {
+                "low": 0.4,
+                "high": 0.6,
+                "n": 0,
+                "predicted": null,
+                "actual": null
+              },
+              {
+                "low": 0.6,
+                "high": 0.8,
+                "n": 0,
+                "predicted": null,
+                "actual": null
+              },
+              {
+                "low": 0.8,
+                "high": 1,
+                "n": 0,
+                "predicted": null,
+                "actual": null
+              }
+            ],
+            "shadow_tests": 0,
+            "shadow_status": "shadow-only",
+            "shadow_vs_current": {
+              "brier": {
+                "mean": null,
+                "interval": null
+              },
+              "log_loss": {
+                "mean": null,
+                "interval": null
+              }
+            },
+            "shadow_vs_market": {
+              "brier": {
+                "mean": null,
+                "interval": null
+              },
+              "log_loss": {
+                "mean": null,
+                "interval": null
+              }
+            },
+            "promotion_enabled": false
+          },
+          {
+            "sport": "nfl",
+            "market": "Passing yards",
+            "baseline_version": "2026-09-06-ev2",
+            "status": "building-evidence",
+            "recommendations_paused": false,
+            "research_available": true,
+            "reasons": [],
+            "contracts": 0,
+            "events": 0,
+            "days": 0,
+            "market_pairs": 0,
+            "predicted": null,
+            "actual": null,
+            "overconfidence_interval": null,
+            "vs_market": {
+              "brier": {
+                "mean": null,
+                "interval": null
+              },
+              "log_loss": {
+                "mean": null,
+                "interval": null
+              }
+            },
+            "calibration": [
+              {
+                "low": 0,
+                "high": 0.2,
+                "n": 0,
+                "predicted": null,
+                "actual": null
+              },
+              {
+                "low": 0.2,
+                "high": 0.4,
+                "n": 0,
+                "predicted": null,
+                "actual": null
+              },
+              {
+                "low": 0.4,
+                "high": 0.6,
+                "n": 0,
+                "predicted": null,
+                "actual": null
+              },
+              {
+                "low": 0.6,
+                "high": 0.8,
+                "n": 0,
+                "predicted": null,
+                "actual": null
+              },
+              {
+                "low": 0.8,
+                "high": 1,
+                "n": 0,
+                "predicted": null,
+                "actual": null
+              }
+            ],
+            "shadow_tests": 0,
+            "shadow_status": "shadow-only",
+            "shadow_vs_current": {
+              "brier": {
+                "mean": null,
+                "interval": null
+              },
+              "log_loss": {
+                "mean": null,
+                "interval": null
+              }
+            },
+            "shadow_vs_market": {
+              "brier": {
+                "mean": null,
+                "interval": null
+              },
+              "log_loss": {
+                "mean": null,
+                "interval": null
+              }
+            },
+            "promotion_enabled": false
+          },
+          {
+            "sport": "nfl",
+            "market": "Receiving yards",
+            "baseline_version": "2026-09-06-ev2",
+            "status": "building-evidence",
+            "recommendations_paused": false,
+            "research_available": true,
+            "reasons": [],
+            "contracts": 0,
+            "events": 0,
+            "days": 0,
+            "market_pairs": 0,
+            "predicted": null,
+            "actual": null,
+            "overconfidence_interval": null,
+            "vs_market": {
+              "brier": {
+                "mean": null,
+                "interval": null
+              },
+              "log_loss": {
+                "mean": null,
+                "interval": null
+              }
+            },
+            "calibration": [
+              {
+                "low": 0,
+                "high": 0.2,
+                "n": 0,
+                "predicted": null,
+                "actual": null
+              },
+              {
+                "low": 0.2,
+                "high": 0.4,
+                "n": 0,
+                "predicted": null,
+                "actual": null
+              },
+              {
+                "low": 0.4,
+                "high": 0.6,
+                "n": 0,
+                "predicted": null,
+                "actual": null
+              },
+              {
+                "low": 0.6,
+                "high": 0.8,
+                "n": 0,
+                "predicted": null,
+                "actual": null
+              },
+              {
+                "low": 0.8,
+                "high": 1,
+                "n": 0,
+                "predicted": null,
+                "actual": null
+              }
+            ],
+            "shadow_tests": 0,
+            "shadow_status": "shadow-only",
+            "shadow_vs_current": {
+              "brier": {
+                "mean": null,
+                "interval": null
+              },
+              "log_loss": {
+                "mean": null,
+                "interval": null
+              }
+            },
+            "shadow_vs_market": {
+              "brier": {
+                "mean": null,
+                "interval": null
+              },
+              "log_loss": {
+                "mean": null,
+                "interval": null
+              }
+            },
+            "promotion_enabled": false
+          },
+          {
+            "sport": "nfl",
+            "market": "Rushing yards",
+            "baseline_version": "2026-09-06-ev2",
+            "status": "building-evidence",
+            "recommendations_paused": false,
+            "research_available": true,
+            "reasons": [],
+            "contracts": 0,
+            "events": 0,
+            "days": 0,
+            "market_pairs": 0,
+            "predicted": null,
+            "actual": null,
+            "overconfidence_interval": null,
+            "vs_market": {
+              "brier": {
+                "mean": null,
+                "interval": null
+              },
+              "log_loss": {
+                "mean": null,
+                "interval": null
+              }
+            },
+            "calibration": [
+              {
+                "low": 0,
+                "high": 0.2,
+                "n": 0,
+                "predicted": null,
+                "actual": null
+              },
+              {
+                "low": 0.2,
+                "high": 0.4,
+                "n": 0,
+                "predicted": null,
+                "actual": null
+              },
+              {
+                "low": 0.4,
+                "high": 0.6,
+                "n": 0,
+                "predicted": null,
+                "actual": null
+              },
+              {
+                "low": 0.6,
+                "high": 0.8,
+                "n": 0,
+                "predicted": null,
+                "actual": null
+              },
+              {
+                "low": 0.8,
+                "high": 1,
+                "n": 0,
+                "predicted": null,
+                "actual": null
+              }
+            ],
+            "shadow_tests": 0,
+            "shadow_status": "shadow-only",
+            "shadow_vs_current": {
+              "brier": {
+                "mean": null,
+                "interval": null
+              },
+              "log_loss": {
+                "mean": null,
+                "interval": null
+              }
+            },
+            "shadow_vs_market": {
+              "brier": {
+                "mean": null,
+                "interval": null
+              },
+              "log_loss": {
+                "mean": null,
+                "interval": null
+              }
+            },
+            "promotion_enabled": false
+          },
+          {
+            "sport": "nfl",
+            "market": "TOTAL",
+            "baseline_version": "2026-09-27-clv-gate",
+            "status": "building-evidence",
+            "recommendations_paused": false,
+            "research_available": true,
+            "reasons": [],
+            "contracts": 0,
+            "events": 0,
+            "days": 0,
+            "market_pairs": 0,
+            "predicted": null,
+            "actual": null,
+            "overconfidence_interval": null,
+            "vs_market": {
+              "brier": {
+                "mean": null,
+                "interval": null
+              },
+              "log_loss": {
+                "mean": null,
+                "interval": null
+              }
+            },
+            "calibration": [
+              {
+                "low": 0,
+                "high": 0.2,
+                "n": 0,
+                "predicted": null,
+                "actual": null
+              },
+              {
+                "low": 0.2,
+                "high": 0.4,
+                "n": 0,
+                "predicted": null,
+                "actual": null
+              },
+              {
+                "low": 0.4,
+                "high": 0.6,
+                "n": 0,
+                "predicted": null,
+                "actual": null
+              },
+              {
+                "low": 0.6,
+                "high": 0.8,
+                "n": 0,
+                "predicted": null,
+                "actual": null
+              },
+              {
+                "low": 0.8,
+                "high": 1,
+                "n": 0,
+                "predicted": null,
+                "actual": null
+              }
+            ],
+            "shadow_tests": 0,
+            "shadow_status": "shadow-only",
+            "shadow_vs_current": {
+              "brier": {
+                "mean": null,
+                "interval": null
+              },
+              "log_loss": {
+                "mean": null,
+                "interval": null
+              }
+            },
+            "shadow_vs_market": {
+              "brier": {
+                "mean": null,
+                "interval": null
+              },
+              "log_loss": {
+                "mean": null,
+                "interval": null
+              }
+            },
+            "promotion_enabled": false
+          }
+        ],
+        "research_available": true
+      },
+      "value_policy": {
+        "version": "price-stress-v1",
+        "reserve": 0.03,
+        "minReturn": 0.02,
+        "qualified": 8,
+        "source_qualified": 54,
+        "note": "Additional price sensitivity gate. Original model counts retained in source_counts; not a confidence interval."
+      },
+      "source_counts": {
+        "priced_quotes": 407,
+        "eligible_priced_quotes": 407,
+        "qualified_options": 54,
+        "held_options": 46,
+        "board": 187,
+        "actionable": 8,
+        "best": 0,
+        "good": 0,
+        "leans": 54,
+        "projections": 11448,
+        "injury_report": 758,
+        "ruled_out": 147,
+        "book_lines": 2261,
+        "legs_on_book_lines": 1525,
+        "legs": 6933,
+        "book_priced_legs": 185,
+        "parlays": 178
+      }
+    },
     "accuracy": {
       "generated_at": "2026-10-11T14:17:11.309454+00:00"
     },
@@ -11803,1111 +12907,7 @@
         "roster_verified": true
       }
     ],
-    "meta": {
-      "generated_at": "2026-10-11T14:17:15.689386+00:00",
-      "provider_priority": [
-        "Covers public comparison (no key)",
-        "DraftKings Network public reference (no key)",
-        "Optional odds providers",
-        "ESPN regular-season statistics"
-      ],
-      "target_book": "DraftKings",
-      "keyless_fallback": true,
-      "configured": {
-        "odds_api_io": false,
-        "the_odds_api": false,
-        "espn_keyless": true,
-        "covers_keyless": true,
-        "draftkings_network_keyless": true
-      },
-      "counts": {
-        "priced_quotes": 407,
-        "eligible_priced_quotes": 407,
-        "qualified_options": 8,
-        "held_options": 0,
-        "board": 187,
-        "actionable": 8,
-        "best": 0,
-        "good": 0,
-        "leans": 8,
-        "projections": 11448,
-        "injury_report": 758,
-        "ruled_out": 147,
-        "book_lines": 2261,
-        "legs_on_book_lines": 1525,
-        "legs": 6933,
-        "book_priced_legs": 185,
-        "parlays": 178
-      },
-      "source_by_sport": {
-        "NFL": {
-          "source": "Covers public comparison + ESPN regular-season projections",
-          "priced_quotes": 407,
-          "projections": 11448,
-          "errors": []
-        }
-      },
-      "workflow_url": "https://github.com/KEVBOTBETS/BETTINGHQ/actions/workflows/release.yml",
-      "notes": [
-        "API credentials are optional and are read only from GitHub Actions secrets.",
-        "If verified keyless prices are unavailable, keep model-price scenarios labeled research. Optional API keys are never required.",
-        "Action Network and OddsShark are not scraped because automated extraction is blocked or prohibited."
-      ],
-      "odds_feed": {
-        "window": {
-          "NFL": {
-            "next_kickoff": "2026-10-11T17:00Z",
-            "hours_to_kickoff": 2.8,
-            "window_hours": 36,
-            "inside_window": true
-          }
-        },
-        "markets": [
-          "player_anytime_td",
-          "player_pass_yds",
-          "player_pass_tds",
-          "player_rush_yds",
-          "player_reception_yds",
-          "player_receptions"
-        ],
-        "quota": {},
-        "line_source": "DraftKings lines via ESPN"
-      },
-      "accuracy": {
-        "legs": 6205,
-        "settled": 2586,
-        "record": "1743-843-2",
-        "hit_rate": 0.674,
-        "average_predicted": 0.6608,
-        "brier": 0.1896,
-        "buckets": [
-          {
-            "from": 0,
-            "to": 0.35,
-            "legs": 213,
-            "predicted": 0.2474,
-            "actual": 0.2113
-          },
-          {
-            "from": 0.35,
-            "to": 0.45,
-            "legs": 36,
-            "predicted": 0.3824,
-            "actual": 0.3333
-          },
-          {
-            "from": 0.45,
-            "to": 0.55,
-            "legs": 236,
-            "predicted": 0.5209,
-            "actual": 0.4619
-          },
-          {
-            "from": 0.55,
-            "to": 0.65,
-            "legs": 443,
-            "predicted": 0.6011,
-            "actual": 0.6321
-          },
-          {
-            "from": 0.65,
-            "to": 0.75,
-            "legs": 802,
-            "predicted": 0.7023,
-            "actual": 0.7456
-          },
-          {
-            "from": 0.75,
-            "to": 1.01,
-            "legs": 856,
-            "predicted": 0.806,
-            "actual": 0.8166
-          }
-        ],
-        "by_market": {
-          "Tackles + assists": {
-            "legs": 497,
-            "wins": 409,
-            "predicted": 0.7543,
-            "hit_rate": 0.8229
-          },
-          "Pass completions": {
-            "legs": 62,
-            "wins": 48,
-            "predicted": 0.7839,
-            "hit_rate": 0.7742
-          },
-          "Pass attempts": {
-            "legs": 61,
-            "wins": 47,
-            "predicted": 0.7797,
-            "hit_rate": 0.7705
-          },
-          "Rush attempts": {
-            "legs": 140,
-            "wins": 99,
-            "predicted": 0.715,
-            "hit_rate": 0.7071
-          },
-          "Passing yards": {
-            "legs": 61,
-            "wins": 51,
-            "predicted": 0.7338,
-            "hit_rate": 0.8361
-          },
-          "Targets": {
-            "legs": 267,
-            "wins": 207,
-            "predicted": 0.7521,
-            "hit_rate": 0.7753
-          },
-          "Receptions": {
-            "legs": 369,
-            "wins": 256,
-            "predicted": 0.6999,
-            "hit_rate": 0.6938
-          },
-          "Rushing yards": {
-            "legs": 180,
-            "wins": 118,
-            "predicted": 0.653,
-            "hit_rate": 0.6556
-          },
-          "Receiving yards": {
-            "legs": 406,
-            "wins": 280,
-            "predicted": 0.6679,
-            "hit_rate": 0.6897
-          },
-          "Sacks": {
-            "legs": 125,
-            "wins": 82,
-            "predicted": 0.6212,
-            "hit_rate": 0.656
-          },
-          "Passing touchdowns": {
-            "legs": 60,
-            "wins": 34,
-            "predicted": 0.6302,
-            "hit_rate": 0.5667
-          },
-          "Pass interceptions": {
-            "legs": 60,
-            "wins": 32,
-            "predicted": 0.6191,
-            "hit_rate": 0.5333
-          },
-          "Anytime touchdown": {
-            "legs": 298,
-            "wins": 80,
-            "predicted": 0.3108,
-            "hit_rate": 0.2685
-          }
-        },
-        "calibration_shrink": 1,
-        "calibration_active": false,
-        "updated_at": "2026-10-11T14:16:36.582719+00:00",
-        "calibration_note": "Calibration is diagnostic only; no automatic refit.",
-        "total_logged": 38005,
-        "pending": 3617,
-        "independent_events": 59,
-        "legacy_excluded": 17,
-        "method": "One first pregame preferred leg per event/player/market. Full side/line audit retained separately. No wager ROI at estimated prices."
-      },
-      "parlay_record": {
-        "Win": 89,
-        "Loss": 4221,
-        "Pending": 6523,
-        "Void": 0,
-        "Review": 0,
-        "total": 10833,
-        "hit_rate": 0.020649651972157772
-      },
-      "max_odds_age_hours": 12,
-      "price_source_status": "available",
-      "quote_health": {
-        "observed": 407,
-        "retained": 0,
-        "reference": 0,
-        "expired": 0,
-        "rejected": 0,
-        "max_age_hours": 4,
-        "sources": {
-          "Covers public prop comparison": {
-            "status": "available",
-            "quotes": 407,
-            "shape": "100 cards, 100 recognized prop cards, 100 scheduled-player matches",
-            "checked_at": "2026-10-11T14:14:24.611180+00:00",
-            "source_url": "https://www.covers.com/sport/football/nfl/player-props"
-          },
-          "DraftKings Network public reference": {
-            "status": "standby",
-            "quotes": 0
-          }
-        },
-        "board_reasons": {
-          "qualified": 8,
-          "portfolio hold": 46,
-          "insufficient edge / model filters": 102,
-          "insufficient sample": 31,
-          "additional price stress failures": 0
-        },
-        "markets": {
-          "Pass + rush + receiving touchdowns": {
-            "projections": 78,
-            "observed": 0,
-            "retained": 0,
-            "reference": 0,
-            "expired": 0,
-            "qualified": 0
-          },
-          "Pass + rush + receiving yards": {
-            "projections": 78,
-            "observed": 0,
-            "retained": 0,
-            "reference": 0,
-            "expired": 0,
-            "qualified": 0
-          },
-          "Pass + rush yards": {
-            "projections": 78,
-            "observed": 0,
-            "retained": 0,
-            "reference": 0,
-            "expired": 0,
-            "qualified": 0
-          },
-          "Pass attempts": {
-            "projections": 78,
-            "observed": 0,
-            "retained": 0,
-            "reference": 0,
-            "expired": 0,
-            "qualified": 0
-          },
-          "Pass completions": {
-            "projections": 78,
-            "observed": 0,
-            "retained": 0,
-            "reference": 0,
-            "expired": 0,
-            "qualified": 0
-          },
-          "Pass interceptions": {
-            "projections": 78,
-            "observed": 0,
-            "retained": 0,
-            "reference": 0,
-            "expired": 0,
-            "qualified": 0
-          },
-          "Passing touchdowns": {
-            "projections": 78,
-            "observed": 0,
-            "retained": 0,
-            "reference": 0,
-            "expired": 0,
-            "qualified": 0
-          },
-          "Passing yards": {
-            "projections": 78,
-            "observed": 59,
-            "retained": 0,
-            "reference": 0,
-            "expired": 0,
-            "qualified": 1
-          },
-          "Sacks": {
-            "projections": 1499,
-            "observed": 0,
-            "retained": 0,
-            "reference": 0,
-            "expired": 0,
-            "qualified": 0
-          },
-          "Solo tackles": {
-            "projections": 1499,
-            "observed": 0,
-            "retained": 0,
-            "reference": 0,
-            "expired": 0,
-            "qualified": 0
-          },
-          "Tackles + assists": {
-            "projections": 1499,
-            "observed": 0,
-            "retained": 0,
-            "reference": 0,
-            "expired": 0,
-            "qualified": 0
-          },
-          "Extra point attempts": {
-            "projections": 54,
-            "observed": 0,
-            "retained": 0,
-            "reference": 0,
-            "expired": 0,
-            "qualified": 0
-          },
-          "Extra points made": {
-            "projections": 54,
-            "observed": 0,
-            "retained": 0,
-            "reference": 0,
-            "expired": 0,
-            "qualified": 0
-          },
-          "Field goal attempts": {
-            "projections": 54,
-            "observed": 0,
-            "retained": 0,
-            "reference": 0,
-            "expired": 0,
-            "qualified": 0
-          },
-          "Field goals made": {
-            "projections": 54,
-            "observed": 0,
-            "retained": 0,
-            "reference": 0,
-            "expired": 0,
-            "qualified": 0
-          },
-          "Kicking points": {
-            "projections": 54,
-            "observed": 0,
-            "retained": 0,
-            "reference": 0,
-            "expired": 0,
-            "qualified": 0
-          },
-          "Anytime touchdown": {
-            "projections": 694,
-            "observed": 16,
-            "retained": 0,
-            "reference": 0,
-            "expired": 0,
-            "qualified": 0
-          },
-          "Receiving touchdowns": {
-            "projections": 587,
-            "observed": 0,
-            "retained": 0,
-            "reference": 0,
-            "expired": 0,
-            "qualified": 0
-          },
-          "Receiving yards": {
-            "projections": 587,
-            "observed": 163,
-            "retained": 0,
-            "reference": 0,
-            "expired": 0,
-            "qualified": 3
-          },
-          "Receptions": {
-            "projections": 587,
-            "observed": 0,
-            "retained": 0,
-            "reference": 0,
-            "expired": 0,
-            "qualified": 0
-          },
-          "Rush + receiving touchdowns": {
-            "projections": 694,
-            "observed": 0,
-            "retained": 0,
-            "reference": 0,
-            "expired": 0,
-            "qualified": 0
-          },
-          "Rush + receiving yards": {
-            "projections": 694,
-            "observed": 0,
-            "retained": 0,
-            "reference": 0,
-            "expired": 0,
-            "qualified": 0
-          },
-          "Rush attempts": {
-            "projections": 311,
-            "observed": 0,
-            "retained": 0,
-            "reference": 0,
-            "expired": 0,
-            "qualified": 0
-          },
-          "Rushing touchdowns": {
-            "projections": 311,
-            "observed": 0,
-            "retained": 0,
-            "reference": 0,
-            "expired": 0,
-            "qualified": 0
-          },
-          "Rushing yards": {
-            "projections": 311,
-            "observed": 169,
-            "retained": 0,
-            "reference": 0,
-            "expired": 0,
-            "qualified": 4
-          },
-          "Targets": {
-            "projections": 587,
-            "observed": 0,
-            "retained": 0,
-            "reference": 0,
-            "expired": 0,
-            "qualified": 0
-          },
-          "Touchdowns scored": {
-            "projections": 694,
-            "observed": 0,
-            "retained": 0,
-            "reference": 0,
-            "expired": 0,
-            "qualified": 0
-          }
-        }
-      },
-      "estimated_prices": false,
-      "validation": {
-        "markets": [
-          {
-            "sport": "nfl",
-            "market": "ATS",
-            "baseline_version": "2026-09-27-clv-gate",
-            "status": "building-evidence",
-            "recommendations_paused": false,
-            "research_available": true,
-            "reasons": [],
-            "contracts": 0,
-            "events": 0,
-            "days": 0,
-            "market_pairs": 0,
-            "predicted": null,
-            "actual": null,
-            "overconfidence_interval": null,
-            "vs_market": {
-              "brier": {
-                "mean": null,
-                "interval": null
-              },
-              "log_loss": {
-                "mean": null,
-                "interval": null
-              }
-            },
-            "calibration": [
-              {
-                "low": 0,
-                "high": 0.2,
-                "n": 0,
-                "predicted": null,
-                "actual": null
-              },
-              {
-                "low": 0.2,
-                "high": 0.4,
-                "n": 0,
-                "predicted": null,
-                "actual": null
-              },
-              {
-                "low": 0.4,
-                "high": 0.6,
-                "n": 0,
-                "predicted": null,
-                "actual": null
-              },
-              {
-                "low": 0.6,
-                "high": 0.8,
-                "n": 0,
-                "predicted": null,
-                "actual": null
-              },
-              {
-                "low": 0.8,
-                "high": 1,
-                "n": 0,
-                "predicted": null,
-                "actual": null
-              }
-            ],
-            "shadow_tests": 0,
-            "shadow_status": "shadow-only",
-            "shadow_vs_current": {
-              "brier": {
-                "mean": null,
-                "interval": null
-              },
-              "log_loss": {
-                "mean": null,
-                "interval": null
-              }
-            },
-            "shadow_vs_market": {
-              "brier": {
-                "mean": null,
-                "interval": null
-              },
-              "log_loss": {
-                "mean": null,
-                "interval": null
-              }
-            },
-            "promotion_enabled": false
-          },
-          {
-            "sport": "nfl",
-            "market": "Anytime touchdown",
-            "baseline_version": "2026-09-06-ev2",
-            "status": "building-evidence",
-            "recommendations_paused": false,
-            "research_available": true,
-            "reasons": [],
-            "contracts": 0,
-            "events": 0,
-            "days": 0,
-            "market_pairs": 0,
-            "predicted": null,
-            "actual": null,
-            "overconfidence_interval": null,
-            "vs_market": {
-              "brier": {
-                "mean": null,
-                "interval": null
-              },
-              "log_loss": {
-                "mean": null,
-                "interval": null
-              }
-            },
-            "calibration": [
-              {
-                "low": 0,
-                "high": 0.2,
-                "n": 0,
-                "predicted": null,
-                "actual": null
-              },
-              {
-                "low": 0.2,
-                "high": 0.4,
-                "n": 0,
-                "predicted": null,
-                "actual": null
-              },
-              {
-                "low": 0.4,
-                "high": 0.6,
-                "n": 0,
-                "predicted": null,
-                "actual": null
-              },
-              {
-                "low": 0.6,
-                "high": 0.8,
-                "n": 0,
-                "predicted": null,
-                "actual": null
-              },
-              {
-                "low": 0.8,
-                "high": 1,
-                "n": 0,
-                "predicted": null,
-                "actual": null
-              }
-            ],
-            "shadow_tests": 0,
-            "shadow_status": "shadow-only",
-            "shadow_vs_current": {
-              "brier": {
-                "mean": null,
-                "interval": null
-              },
-              "log_loss": {
-                "mean": null,
-                "interval": null
-              }
-            },
-            "shadow_vs_market": {
-              "brier": {
-                "mean": null,
-                "interval": null
-              },
-              "log_loss": {
-                "mean": null,
-                "interval": null
-              }
-            },
-            "promotion_enabled": false
-          },
-          {
-            "sport": "nfl",
-            "market": "ML",
-            "baseline_version": "2026-09-27-clv-gate",
-            "status": "building-evidence",
-            "recommendations_paused": false,
-            "research_available": true,
-            "reasons": [],
-            "contracts": 0,
-            "events": 0,
-            "days": 0,
-            "market_pairs": 0,
-            "predicted": null,
-            "actual": null,
-            "overconfidence_interval": null,
-            "vs_market": {
-              "brier": {
-                "mean": null,
-                "interval": null
-              },
-              "log_loss": {
-                "mean": null,
-                "interval": null
-              }
-            },
-            "calibration": [
-              {
-                "low": 0,
-                "high": 0.2,
-                "n": 0,
-                "predicted": null,
-                "actual": null
-              },
-              {
-                "low": 0.2,
-                "high": 0.4,
-                "n": 0,
-                "predicted": null,
-                "actual": null
-              },
-              {
-                "low": 0.4,
-                "high": 0.6,
-                "n": 0,
-                "predicted": null,
-                "actual": null
-              },
-              {
-                "low": 0.6,
-                "high": 0.8,
-                "n": 0,
-                "predicted": null,
-                "actual": null
-              },
-              {
-                "low": 0.8,
-                "high": 1,
-                "n": 0,
-                "predicted": null,
-                "actual": null
-              }
-            ],
-            "shadow_tests": 0,
-            "shadow_status": "shadow-only",
-            "shadow_vs_current": {
-              "brier": {
-                "mean": null,
-                "interval": null
-              },
-              "log_loss": {
-                "mean": null,
-                "interval": null
-              }
-            },
-            "shadow_vs_market": {
-              "brier": {
-                "mean": null,
-                "interval": null
-              },
-              "log_loss": {
-                "mean": null,
-                "interval": null
-              }
-            },
-            "promotion_enabled": false
-          },
-          {
-            "sport": "nfl",
-            "market": "Passing yards",
-            "baseline_version": "2026-09-06-ev2",
-            "status": "building-evidence",
-            "recommendations_paused": false,
-            "research_available": true,
-            "reasons": [],
-            "contracts": 0,
-            "events": 0,
-            "days": 0,
-            "market_pairs": 0,
-            "predicted": null,
-            "actual": null,
-            "overconfidence_interval": null,
-            "vs_market": {
-              "brier": {
-                "mean": null,
-                "interval": null
-              },
-              "log_loss": {
-                "mean": null,
-                "interval": null
-              }
-            },
-            "calibration": [
-              {
-                "low": 0,
-                "high": 0.2,
-                "n": 0,
-                "predicted": null,
-                "actual": null
-              },
-              {
-                "low": 0.2,
-                "high": 0.4,
-                "n": 0,
-                "predicted": null,
-                "actual": null
-              },
-              {
-                "low": 0.4,
-                "high": 0.6,
-                "n": 0,
-                "predicted": null,
-                "actual": null
-              },
-              {
-                "low": 0.6,
-                "high": 0.8,
-                "n": 0,
-                "predicted": null,
-                "actual": null
-              },
-              {
-                "low": 0.8,
-                "high": 1,
-                "n": 0,
-                "predicted": null,
-                "actual": null
-              }
-            ],
-            "shadow_tests": 0,
-            "shadow_status": "shadow-only",
-            "shadow_vs_current": {
-              "brier": {
-                "mean": null,
-                "interval": null
-              },
-              "log_loss": {
-                "mean": null,
-                "interval": null
-              }
-            },
-            "shadow_vs_market": {
-              "brier": {
-                "mean": null,
-                "interval": null
-              },
-              "log_loss": {
-                "mean": null,
-                "interval": null
-              }
-            },
-            "promotion_enabled": false
-          },
-          {
-            "sport": "nfl",
-            "market": "Receiving yards",
-            "baseline_version": "2026-09-06-ev2",
-            "status": "building-evidence",
-            "recommendations_paused": false,
-            "research_available": true,
-            "reasons": [],
-            "contracts": 0,
-            "events": 0,
-            "days": 0,
-            "market_pairs": 0,
-            "predicted": null,
-            "actual": null,
-            "overconfidence_interval": null,
-            "vs_market": {
-              "brier": {
-                "mean": null,
-                "interval": null
-              },
-              "log_loss": {
-                "mean": null,
-                "interval": null
-              }
-            },
-            "calibration": [
-              {
-                "low": 0,
-                "high": 0.2,
-                "n": 0,
-                "predicted": null,
-                "actual": null
-              },
-              {
-                "low": 0.2,
-                "high": 0.4,
-                "n": 0,
-                "predicted": null,
-                "actual": null
-              },
-              {
-                "low": 0.4,
-                "high": 0.6,
-                "n": 0,
-                "predicted": null,
-                "actual": null
-              },
-              {
-                "low": 0.6,
-                "high": 0.8,
-                "n": 0,
-                "predicted": null,
-                "actual": null
-              },
-              {
-                "low": 0.8,
-                "high": 1,
-                "n": 0,
-                "predicted": null,
-                "actual": null
-              }
-            ],
-            "shadow_tests": 0,
-            "shadow_status": "shadow-only",
-            "shadow_vs_current": {
-              "brier": {
-                "mean": null,
-                "interval": null
-              },
-              "log_loss": {
-                "mean": null,
-                "interval": null
-              }
-            },
-            "shadow_vs_market": {
-              "brier": {
-                "mean": null,
-                "interval": null
-              },
-              "log_loss": {
-                "mean": null,
-                "interval": null
-              }
-            },
-            "promotion_enabled": false
-          },
-          {
-            "sport": "nfl",
-            "market": "Rushing yards",
-            "baseline_version": "2026-09-06-ev2",
-            "status": "building-evidence",
-            "recommendations_paused": false,
-            "research_available": true,
-            "reasons": [],
-            "contracts": 0,
-            "events": 0,
-            "days": 0,
-            "market_pairs": 0,
-            "predicted": null,
-            "actual": null,
-            "overconfidence_interval": null,
-            "vs_market": {
-              "brier": {
-                "mean": null,
-                "interval": null
-              },
-              "log_loss": {
-                "mean": null,
-                "interval": null
-              }
-            },
-            "calibration": [
-              {
-                "low": 0,
-                "high": 0.2,
-                "n": 0,
-                "predicted": null,
-                "actual": null
-              },
-              {
-                "low": 0.2,
-                "high": 0.4,
-                "n": 0,
-                "predicted": null,
-                "actual": null
-              },
-              {
-                "low": 0.4,
-                "high": 0.6,
-                "n": 0,
-                "predicted": null,
-                "actual": null
-              },
-              {
-                "low": 0.6,
-                "high": 0.8,
-                "n": 0,
-                "predicted": null,
-                "actual": null
-              },
-              {
-                "low": 0.8,
-                "high": 1,
-                "n": 0,
-                "predicted": null,
-                "actual": null
-              }
-            ],
-            "shadow_tests": 0,
-            "shadow_status": "shadow-only",
-            "shadow_vs_current": {
-              "brier": {
-                "mean": null,
-                "interval": null
-              },
-              "log_loss": {
-                "mean": null,
-                "interval": null
-              }
-            },
-            "shadow_vs_market": {
-              "brier": {
-                "mean": null,
-                "interval": null
-              },
-              "log_loss": {
-                "mean": null,
-                "interval": null
-              }
-            },
-            "promotion_enabled": false
-          },
-          {
-            "sport": "nfl",
-            "market": "TOTAL",
-            "baseline_version": "2026-09-27-clv-gate",
-            "status": "building-evidence",
-            "recommendations_paused": false,
-            "research_available": true,
-            "reasons": [],
-            "contracts": 0,
-            "events": 0,
-            "days": 0,
-            "market_pairs": 0,
-            "predicted": null,
-            "actual": null,
-            "overconfidence_interval": null,
-            "vs_market": {
-              "brier": {
-                "mean": null,
-                "interval": null
-              },
-              "log_loss": {
-                "mean": null,
-                "interval": null
-              }
-            },
-            "calibration": [
-              {
-                "low": 0,
-                "high": 0.2,
-                "n": 0,
-                "predicted": null,
-                "actual": null
-              },
-              {
-                "low": 0.2,
-                "high": 0.4,
-                "n": 0,
-                "predicted": null,
-                "actual": null
-              },
-              {
-                "low": 0.4,
-                "high": 0.6,
-                "n": 0,
-                "predicted": null,
-                "actual": null
-              },
-              {
-                "low": 0.6,
-                "high": 0.8,
-                "n": 0,
-                "predicted": null,
-                "actual": null
-              },
-              {
-                "low": 0.8,
-                "high": 1,
-                "n": 0,
-                "predicted": null,
-                "actual": null
-              }
-            ],
-            "shadow_tests": 0,
-            "shadow_status": "shadow-only",
-            "shadow_vs_current": {
-              "brier": {
-                "mean": null,
-                "interval": null
-              },
-              "log_loss": {
-                "mean": null,
-                "interval": null
-              }
-            },
-            "shadow_vs_market": {
-              "brier": {
-                "mean": null,
-                "interval": null
-              },
-              "log_loss": {
-                "mean": null,
-                "interval": null
-              }
-            },
-            "promotion_enabled": false
-          }
-        ],
-        "research_available": true
-      },
-      "value_policy": {
-        "version": "price-stress-v1",
-        "reserve": 0.03,
-        "minReturn": 0.02,
-        "qualified": 8,
-        "source_qualified": 54,
-        "note": "Additional price sensitivity gate. Original model counts retained in source_counts; not a confidence interval."
-      },
-      "source_counts": {
-        "priced_quotes": 407,
-        "eligible_priced_quotes": 407,
-        "qualified_options": 54,
-        "held_options": 46,
-        "board": 187,
-        "actionable": 8,
-        "best": 0,
-        "good": 0,
-        "leans": 54,
-        "projections": 11448,
-        "injury_report": 758,
-        "ruled_out": 147,
-        "book_lines": 2261,
-        "legs_on_book_lines": 1525,
-        "legs": 6933,
-        "book_priced_legs": 185,
-        "parlays": 178
-      }
-    },
-    "lastGoodAt": "2026-10-11T14:21:25.476Z"
+    "lastGoodAt": "2026-10-11T14:30:18.908Z"
   },
   "nfl": {
     "meta": {
@@ -20805,7 +20805,7 @@
         "odds_observed_at": "2026-10-11T14:13:22.326495+00:00"
       }
     ],
-    "lastGoodAt": "2026-10-11T14:21:25.476Z"
+    "lastGoodAt": "2026-10-11T14:30:18.908Z"
   },
   "ncaaf": {
     "meta": {
@@ -23704,105 +23704,9 @@
         "odds_observed_at": "2026-10-11T14:13:48.346042+00:00"
       }
     ],
-    "lastGoodAt": "2026-10-11T14:21:25.476Z"
+    "lastGoodAt": "2026-10-11T14:30:18.908Z"
   },
   "mlb": {
-    "slate": {
-      "generated_at": "2026-10-11T12:48:11+00:00",
-      "games": [
-        {
-          "gamePk": 849809,
-          "home": "MIL",
-          "away": "LAD",
-          "start": "2026-10-12T00:00:00Z",
-          "status": "Scheduled",
-          "lineups_confirmed": false,
-          "odds": {
-            "fetched_at": "2026-10-11T12:46:48.120694+00:00"
-          },
-          "bets": [
-            {
-              "tier": "LEAN",
-              "stake": 1,
-              "market": "TOTAL",
-              "label": "Under 6.0",
-              "selection": "Under",
-              "line": 6,
-              "price": -108,
-              "book": "DraftKings",
-              "edge_real": 0.0124,
-              "edge": 0.0395,
-              "p_final": 0.5259
-            },
-            {
-              "tier": "PASS",
-              "stake": 0,
-              "market": "ML",
-              "label": "MIL ML",
-              "selection": "MIL",
-              "line": null,
-              "price": -113,
-              "book": "DraftKings",
-              "edge_real": -0.0178,
-              "edge": 0.0251,
-              "p_final": 0.5207
-            },
-            {
-              "tier": "PASS",
-              "stake": 0,
-              "market": "RL",
-              "label": "MIL +1.5",
-              "selection": "MIL",
-              "line": 1.5,
-              "price": -203,
-              "book": "DraftKings",
-              "edge_real": -0.0062,
-              "edge": 0.0224,
-              "p_final": 0.6658
-            },
-            {
-              "tier": "PASS",
-              "stake": 0,
-              "market": "ML",
-              "label": "LAD ML",
-              "selection": "LAD",
-              "line": null,
-              "price": -107,
-              "book": "DraftKings",
-              "edge_real": -0.0477,
-              "edge": -0.0257,
-              "p_final": 0.4793
-            },
-            {
-              "tier": "PASS",
-              "stake": 0,
-              "market": "RL",
-              "label": "LAD -1.5",
-              "selection": "LAD",
-              "line": 1.5,
-              "price": 166,
-              "book": "DraftKings",
-              "edge_real": -0.0531,
-              "edge": -0.0366,
-              "p_final": 0.3342
-            },
-            {
-              "tier": "PASS",
-              "stake": 0,
-              "market": "TOTAL",
-              "label": "Over 6.0",
-              "selection": "Over",
-              "line": 6,
-              "price": -112,
-              "book": "DraftKings",
-              "edge_real": -0.0441,
-              "edge": -0.0393,
-              "p_final": 0.4741
-            }
-          ]
-        }
-      ]
-    },
     "meta": {
       "generated_at": "2026-10-11T12:48:51+00:00",
       "day_summary": {
@@ -23985,14 +23889,110 @@
         }
       }
     },
+    "slate": {
+      "generated_at": "2026-10-11T12:48:11+00:00",
+      "games": [
+        {
+          "gamePk": 849809,
+          "home": "MIL",
+          "away": "LAD",
+          "start": "2026-10-12T00:00:00Z",
+          "status": "Scheduled",
+          "lineups_confirmed": false,
+          "odds": {
+            "fetched_at": "2026-10-11T12:46:48.120694+00:00"
+          },
+          "bets": [
+            {
+              "tier": "LEAN",
+              "stake": 1,
+              "market": "TOTAL",
+              "label": "Under 6.0",
+              "selection": "Under",
+              "line": 6,
+              "price": -108,
+              "book": "DraftKings",
+              "edge_real": 0.0124,
+              "edge": 0.0395,
+              "p_final": 0.5259
+            },
+            {
+              "tier": "PASS",
+              "stake": 0,
+              "market": "ML",
+              "label": "MIL ML",
+              "selection": "MIL",
+              "line": null,
+              "price": -113,
+              "book": "DraftKings",
+              "edge_real": -0.0178,
+              "edge": 0.0251,
+              "p_final": 0.5207
+            },
+            {
+              "tier": "PASS",
+              "stake": 0,
+              "market": "RL",
+              "label": "MIL +1.5",
+              "selection": "MIL",
+              "line": 1.5,
+              "price": -203,
+              "book": "DraftKings",
+              "edge_real": -0.0062,
+              "edge": 0.0224,
+              "p_final": 0.6658
+            },
+            {
+              "tier": "PASS",
+              "stake": 0,
+              "market": "ML",
+              "label": "LAD ML",
+              "selection": "LAD",
+              "line": null,
+              "price": -107,
+              "book": "DraftKings",
+              "edge_real": -0.0477,
+              "edge": -0.0257,
+              "p_final": 0.4793
+            },
+            {
+              "tier": "PASS",
+              "stake": 0,
+              "market": "RL",
+              "label": "LAD -1.5",
+              "selection": "LAD",
+              "line": 1.5,
+              "price": 166,
+              "book": "DraftKings",
+              "edge_real": -0.0531,
+              "edge": -0.0366,
+              "p_final": 0.3342
+            },
+            {
+              "tier": "PASS",
+              "stake": 0,
+              "market": "TOTAL",
+              "label": "Over 6.0",
+              "selection": "Over",
+              "line": 6,
+              "price": -112,
+              "book": "DraftKings",
+              "edge_real": -0.0441,
+              "edge": -0.0393,
+              "p_final": 0.4741
+            }
+          ]
+        }
+      ]
+    },
     "accuracy": {
       "generated_at": "2026-10-11T12:48:51+00:00"
     },
-    "lastGoodAt": "2026-10-11T14:21:25.476Z"
+    "lastGoodAt": "2026-10-11T14:30:18.908Z"
   },
   "nhl": {
     "meta": {
-      "generated_at": "2026-10-11T13:49:29.879312+00:00",
+      "generated_at": "2026-10-11T14:29:39.892721+00:00",
       "model_version": "nhl-poisson-1.0",
       "season": 2027,
       "timezone": "America/Toronto",
@@ -24019,22 +24019,22 @@
         },
         "nhl-schedule-2026-10-11": {
           "status": "ok",
-          "observed_at": "2026-10-11T13:49:29.879312+00:00",
+          "observed_at": "2026-10-11T14:29:39.892721+00:00",
           "url": "https://api-web.nhle.com/v1/schedule/2026-10-11"
         },
         "nhl-schedule-2026-09-27": {
           "status": "ok",
-          "observed_at": "2026-10-11T13:49:29.879312+00:00",
+          "observed_at": "2026-10-11T14:29:39.892721+00:00",
           "url": "https://api-web.nhle.com/v1/schedule/2026-09-27"
         },
         "nhl-schedule-2026-10-04": {
           "status": "ok",
-          "observed_at": "2026-10-11T13:49:29.879312+00:00",
+          "observed_at": "2026-10-11T14:29:39.892721+00:00",
           "url": "https://api-web.nhle.com/v1/schedule/2026-10-04"
         },
         "nhl-schedule-2026-10-18": {
           "status": "ok",
-          "observed_at": "2026-10-11T13:49:29.879312+00:00",
+          "observed_at": "2026-10-11T14:29:39.892721+00:00",
           "url": "https://api-web.nhle.com/v1/schedule/2026-10-18"
         },
         "standings-2027": {
@@ -24051,7 +24051,7 @@
         },
         "nhl-official": {
           "status": "ok",
-          "observed_at": "2026-10-11T13:49:29.879312+00:00",
+          "observed_at": "2026-10-11T14:29:39.892721+00:00",
           "url": "https://api-web.nhle.com/v1/standings/now"
         },
         "nhl-team-summary-2026": {
@@ -24065,18 +24065,18 @@
           "url": "https://api.nhle.com/stats/rest/en/goalie/summary?isAggregate=false&isGame=false&start=0&limit=1000&cayenneExp=seasonId=20252026%20and%20gameTypeId=2"
         },
         "nhl-team-summary-2027": {
-          "status": "ok",
+          "status": "cached",
           "observed_at": "2026-10-11T13:49:29.879312+00:00",
           "url": "https://api.nhle.com/stats/rest/en/team/summary?isAggregate=false&isGame=false&start=0&limit=100&cayenneExp=seasonId=20262027%20and%20gameTypeId=2"
         },
         "nhl-goalies-2027": {
-          "status": "ok",
+          "status": "cached",
           "observed_at": "2026-10-11T13:49:29.879312+00:00",
           "url": "https://api.nhle.com/stats/rest/en/goalie/summary?isAggregate=false&isGame=false&start=0&limit=1000&cayenneExp=seasonId=20262027%20and%20gameTypeId=2"
         },
         "public-book-odds": {
           "status": "ok",
-          "observed_at": "2026-10-11T13:49:29.879312+00:00",
+          "observed_at": "2026-10-11T14:29:39.892721+00:00",
           "url": "https://www.covers.com/sport/hockey/nhl/odds",
           "quotes": 108
         },
@@ -24155,7 +24155,7 @@
         "book": "BetMGM",
         "edge": 0.008177,
         "model_prob": 0.315055,
-        "odds_observed_at": "2026-10-11T13:49:00+00:00",
+        "odds_observed_at": "2026-10-11T14:29:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -24177,7 +24177,7 @@
         "book": "BetMGM",
         "edge": -0.065985,
         "model_prob": 0.684945,
-        "odds_observed_at": "2026-10-11T13:49:00+00:00",
+        "odds_observed_at": "2026-10-11T14:29:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -24199,7 +24199,7 @@
         "book": "bet365",
         "edge": 0.005242,
         "model_prob": 0.319124,
-        "odds_observed_at": "2026-10-11T13:49:00+00:00",
+        "odds_observed_at": "2026-10-11T14:29:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -24221,7 +24221,7 @@
         "book": "bet365",
         "edge": -0.06219,
         "model_prob": 0.680876,
-        "odds_observed_at": "2026-10-11T13:49:00+00:00",
+        "odds_observed_at": "2026-10-11T14:29:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -24243,7 +24243,7 @@
         "book": "DraftKings",
         "edge": 0.005242,
         "model_prob": 0.319124,
-        "odds_observed_at": "2026-10-11T13:49:00+00:00",
+        "odds_observed_at": "2026-10-11T14:29:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -24265,7 +24265,7 @@
         "book": "DraftKings",
         "edge": -0.06219,
         "model_prob": 0.680876,
-        "odds_observed_at": "2026-10-11T13:49:00+00:00",
+        "odds_observed_at": "2026-10-11T14:29:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -24287,7 +24287,7 @@
         "book": "FanDuel",
         "edge": 0.005242,
         "model_prob": 0.319124,
-        "odds_observed_at": "2026-10-11T13:49:00+00:00",
+        "odds_observed_at": "2026-10-11T14:29:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -24309,7 +24309,7 @@
         "book": "FanDuel",
         "edge": -0.06219,
         "model_prob": 0.680876,
-        "odds_observed_at": "2026-10-11T13:49:00+00:00",
+        "odds_observed_at": "2026-10-11T14:29:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -24331,7 +24331,7 @@
         "book": "Fanatics Sportsbook",
         "edge": 0.008177,
         "model_prob": 0.315055,
-        "odds_observed_at": "2026-10-11T13:49:00+00:00",
+        "odds_observed_at": "2026-10-11T14:29:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -24353,7 +24353,7 @@
         "book": "Fanatics Sportsbook",
         "edge": -0.065985,
         "model_prob": 0.684945,
-        "odds_observed_at": "2026-10-11T13:49:00+00:00",
+        "odds_observed_at": "2026-10-11T14:29:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -24375,7 +24375,7 @@
         "book": "BetRivers",
         "edge": 0.018557,
         "model_prob": 0.308654,
-        "odds_observed_at": "2026-10-11T13:49:00+00:00",
+        "odds_observed_at": "2026-10-11T14:29:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -24397,7 +24397,7 @@
         "book": "BetRivers",
         "edge": -0.066924,
         "model_prob": 0.691346,
-        "odds_observed_at": "2026-10-11T13:49:00+00:00",
+        "odds_observed_at": "2026-10-11T14:29:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -24419,7 +24419,7 @@
         "book": "Caesars Odds",
         "edge": 0.005242,
         "model_prob": 0.319124,
-        "odds_observed_at": "2026-10-11T13:49:00+00:00",
+        "odds_observed_at": "2026-10-11T14:29:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -24441,7 +24441,7 @@
         "book": "Caesars Odds",
         "edge": -0.06219,
         "model_prob": 0.680876,
-        "odds_observed_at": "2026-10-11T13:49:00+00:00",
+        "odds_observed_at": "2026-10-11T14:29:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -24459,11 +24459,11 @@
         "away": "VAN",
         "pick": "VAN ML",
         "line": null,
-        "price": 225,
+        "price": 230,
         "book": "theScore Bet",
-        "edge": 0.016037,
-        "model_prob": 0.312627,
-        "odds_observed_at": "2026-10-11T13:49:00+00:00",
+        "edge": 0.021383,
+        "model_prob": 0.30951,
+        "odds_observed_at": "2026-10-11T14:29:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -24481,11 +24481,11 @@
         "away": "VAN",
         "pick": "NYR ML",
         "line": null,
-        "price": -275,
+        "price": -280,
         "book": "theScore Bet",
-        "edge": -0.062673,
-        "model_prob": 0.687373,
-        "odds_observed_at": "2026-10-11T13:49:00+00:00",
+        "edge": -0.062907,
+        "model_prob": 0.69049,
+        "odds_observed_at": "2026-10-11T14:29:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -24507,7 +24507,7 @@
         "book": "Hard Rock Bet",
         "edge": 0.004684,
         "model_prob": 0.309134,
-        "odds_observed_at": "2026-10-11T13:49:00+00:00",
+        "odds_observed_at": "2026-10-11T14:29:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -24529,7 +24529,7 @@
         "book": "Hard Rock Bet",
         "edge": -0.078845,
         "model_prob": 0.690866,
-        "odds_observed_at": "2026-10-11T13:49:00+00:00",
+        "odds_observed_at": "2026-10-11T14:29:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -24551,7 +24551,7 @@
         "book": "BetMGM",
         "edge": 0.004403,
         "model_prob": 0.526116,
-        "odds_observed_at": "2026-10-11T13:49:00+00:00",
+        "odds_observed_at": "2026-10-11T14:29:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -24573,7 +24573,7 @@
         "book": "BetMGM",
         "edge": -0.095312,
         "model_prob": 0.473884,
-        "odds_observed_at": "2026-10-11T13:49:00+00:00",
+        "odds_observed_at": "2026-10-11T14:29:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -24595,7 +24595,7 @@
         "book": "bet365",
         "edge": -0.003963,
         "model_prob": 0.539139,
-        "odds_observed_at": "2026-10-11T13:49:00+00:00",
+        "odds_observed_at": "2026-10-11T14:29:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -24617,7 +24617,7 @@
         "book": "bet365",
         "edge": -0.087315,
         "model_prob": 0.460861,
-        "odds_observed_at": "2026-10-11T13:49:00+00:00",
+        "odds_observed_at": "2026-10-11T14:29:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -24639,7 +24639,7 @@
         "book": "DraftKings",
         "edge": -0.0012,
         "model_prob": 0.534242,
-        "odds_observed_at": "2026-10-11T13:49:00+00:00",
+        "odds_observed_at": "2026-10-11T14:29:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -24661,7 +24661,7 @@
         "book": "DraftKings",
         "edge": -0.090662,
         "model_prob": 0.465758,
-        "odds_observed_at": "2026-10-11T13:49:00+00:00",
+        "odds_observed_at": "2026-10-11T14:29:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -24683,7 +24683,7 @@
         "book": "FanDuel",
         "edge": -0.010426,
         "model_prob": 0.54382,
-        "odds_observed_at": "2026-10-11T13:49:00+00:00",
+        "odds_observed_at": "2026-10-11T14:29:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -24705,7 +24705,7 @@
         "book": "FanDuel",
         "edge": -0.08764,
         "model_prob": 0.45618,
-        "odds_observed_at": "2026-10-11T13:49:00+00:00",
+        "odds_observed_at": "2026-10-11T14:29:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -24727,7 +24727,7 @@
         "book": "Fanatics Sportsbook",
         "edge": -0.0012,
         "model_prob": 0.534242,
-        "odds_observed_at": "2026-10-11T13:49:00+00:00",
+        "odds_observed_at": "2026-10-11T14:29:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -24749,7 +24749,7 @@
         "book": "Fanatics Sportsbook",
         "edge": -0.090662,
         "model_prob": 0.465758,
-        "odds_observed_at": "2026-10-11T13:49:00+00:00",
+        "odds_observed_at": "2026-10-11T14:29:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -24767,11 +24767,11 @@
         "away": "VAN",
         "pick": "VAN +1.5",
         "line": 1.5,
-        "price": -115,
+        "price": -117,
         "book": "BetRivers",
-        "edge": -0.005981,
-        "model_prob": 0.531685,
-        "odds_observed_at": "2026-10-11T13:49:00+00:00",
+        "edge": -0.009551,
+        "model_prob": 0.534021,
+        "odds_observed_at": "2026-10-11T14:29:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -24789,11 +24789,11 @@
         "away": "VAN",
         "pick": "NYR -1.5",
         "line": -1.5,
-        "price": -108,
+        "price": -107,
         "book": "BetRivers",
-        "edge": -0.098059,
-        "model_prob": 0.468315,
-        "odds_observed_at": "2026-10-11T13:49:00+00:00",
+        "edge": -0.098527,
+        "model_prob": 0.465979,
+        "odds_observed_at": "2026-10-11T14:29:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -24815,7 +24815,7 @@
         "book": "Caesars Odds",
         "edge": -0.001417,
         "model_prob": 0.538406,
-        "odds_observed_at": "2026-10-11T13:49:00+00:00",
+        "odds_observed_at": "2026-10-11T14:29:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -24837,7 +24837,7 @@
         "book": "Caesars Odds",
         "edge": -0.085863,
         "model_prob": 0.461594,
-        "odds_observed_at": "2026-10-11T13:49:00+00:00",
+        "odds_observed_at": "2026-10-11T14:29:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -24859,7 +24859,7 @@
         "book": "theScore Bet",
         "edge": 0.011314,
         "model_prob": 0.51799,
-        "odds_observed_at": "2026-10-11T13:49:00+00:00",
+        "odds_observed_at": "2026-10-11T14:29:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -24881,7 +24881,7 @@
         "book": "theScore Bet",
         "edge": -0.098852,
         "model_prob": 0.48201,
-        "odds_observed_at": "2026-10-11T13:49:00+00:00",
+        "odds_observed_at": "2026-10-11T14:29:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -24903,7 +24903,7 @@
         "book": "Hard Rock Bet",
         "edge": 0.011314,
         "model_prob": 0.51799,
-        "odds_observed_at": "2026-10-11T13:49:00+00:00",
+        "odds_observed_at": "2026-10-11T14:29:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -24925,7 +24925,7 @@
         "book": "Hard Rock Bet",
         "edge": -0.098852,
         "model_prob": 0.48201,
-        "odds_observed_at": "2026-10-11T13:49:00+00:00",
+        "odds_observed_at": "2026-10-11T14:29:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -24947,7 +24947,7 @@
         "book": "BetMGM",
         "edge": -0.03459,
         "model_prob": 0.524181,
-        "odds_observed_at": "2026-10-11T13:49:00+00:00",
+        "odds_observed_at": "2026-10-11T14:29:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -24969,7 +24969,7 @@
         "book": "BetMGM",
         "edge": -0.042893,
         "model_prob": 0.475819,
-        "odds_observed_at": "2026-10-11T13:49:00+00:00",
+        "odds_observed_at": "2026-10-11T14:29:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -24991,7 +24991,7 @@
         "book": "bet365",
         "edge": -0.03459,
         "model_prob": 0.524181,
-        "odds_observed_at": "2026-10-11T13:49:00+00:00",
+        "odds_observed_at": "2026-10-11T14:29:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -25013,7 +25013,7 @@
         "book": "bet365",
         "edge": -0.042893,
         "model_prob": 0.475819,
-        "odds_observed_at": "2026-10-11T13:49:00+00:00",
+        "odds_observed_at": "2026-10-11T14:29:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -25031,11 +25031,11 @@
         "away": "VAN",
         "pick": "Over 6.5",
         "line": 6.5,
-        "price": 114,
+        "price": 110,
         "book": "DraftKings",
-        "edge": -0.027865,
-        "model_prob": 0.454269,
-        "odds_observed_at": "2026-10-11T13:49:00+00:00",
+        "edge": -0.032337,
+        "model_prob": 0.460792,
+        "odds_observed_at": "2026-10-11T14:29:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -25053,11 +25053,11 @@
         "away": "VAN",
         "pick": "Under 6.5",
         "line": 6.5,
-        "price": -135,
+        "price": -130,
         "book": "DraftKings",
-        "edge": -0.050024,
-        "model_prob": 0.545731,
-        "odds_observed_at": "2026-10-11T13:49:00+00:00",
+        "edge": -0.046017,
+        "model_prob": 0.539208,
+        "odds_observed_at": "2026-10-11T14:29:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -25079,7 +25079,7 @@
         "book": "FanDuel",
         "edge": -0.037589,
         "model_prob": 0.522337,
-        "odds_observed_at": "2026-10-11T13:49:00+00:00",
+        "odds_observed_at": "2026-10-11T14:29:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -25101,7 +25101,7 @@
         "book": "FanDuel",
         "edge": -0.047929,
         "model_prob": 0.477663,
-        "odds_observed_at": "2026-10-11T13:49:00+00:00",
+        "odds_observed_at": "2026-10-11T14:29:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -25123,7 +25123,7 @@
         "book": "Fanatics Sportsbook",
         "edge": -0.039577,
         "model_prob": 0.468499,
-        "odds_observed_at": "2026-10-11T13:49:00+00:00",
+        "odds_observed_at": "2026-10-11T14:29:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -25145,7 +25145,7 @@
         "book": "Fanatics Sportsbook",
         "edge": -0.043298,
         "model_prob": 0.531501,
-        "odds_observed_at": "2026-10-11T13:49:00+00:00",
+        "odds_observed_at": "2026-10-11T14:29:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -25167,7 +25167,7 @@
         "book": "BetRivers",
         "edge": -0.04565,
         "model_prob": 0.461039,
-        "odds_observed_at": "2026-10-11T13:49:00+00:00",
+        "odds_observed_at": "2026-10-11T14:29:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -25189,7 +25189,7 @@
         "book": "BetRivers",
         "edge": -0.058829,
         "model_prob": 0.538961,
-        "odds_observed_at": "2026-10-11T13:49:00+00:00",
+        "odds_observed_at": "2026-10-11T14:29:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -25211,7 +25211,7 @@
         "book": "Caesars Odds",
         "edge": -0.037772,
         "model_prob": 0.518232,
-        "odds_observed_at": "2026-10-11T13:49:00+00:00",
+        "odds_observed_at": "2026-10-11T14:29:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -25233,7 +25233,7 @@
         "book": "Caesars Odds",
         "edge": -0.052687,
         "model_prob": 0.481768,
-        "odds_observed_at": "2026-10-11T13:49:00+00:00",
+        "odds_observed_at": "2026-10-11T14:29:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -25255,7 +25255,7 @@
         "book": "theScore Bet",
         "edge": -0.032337,
         "model_prob": 0.460792,
-        "odds_observed_at": "2026-10-11T13:49:00+00:00",
+        "odds_observed_at": "2026-10-11T14:29:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -25277,7 +25277,7 @@
         "book": "theScore Bet",
         "edge": -0.046017,
         "model_prob": 0.539208,
-        "odds_observed_at": "2026-10-11T13:49:00+00:00",
+        "odds_observed_at": "2026-10-11T14:29:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -25299,7 +25299,7 @@
         "book": "Hard Rock Bet",
         "edge": -0.037036,
         "model_prob": 0.44789,
-        "odds_observed_at": "2026-10-11T13:49:00+00:00",
+        "odds_observed_at": "2026-10-11T14:29:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -25321,7 +25321,7 @@
         "book": "Hard Rock Bet",
         "edge": -0.067125,
         "model_prob": 0.55211,
-        "odds_observed_at": "2026-10-11T13:49:00+00:00",
+        "odds_observed_at": "2026-10-11T14:29:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -25339,11 +25339,11 @@
         "away": "CAR",
         "pick": "CAR ML",
         "line": null,
-        "price": -185,
+        "price": -210,
         "book": "BetMGM",
-        "edge": -0.070414,
-        "model_prob": 0.603416,
-        "odds_observed_at": "2026-10-11T13:49:00+00:00",
+        "edge": -0.078473,
+        "model_prob": 0.62426,
+        "odds_observed_at": "2026-10-11T14:29:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -25361,11 +25361,11 @@
         "away": "CAR",
         "pick": "PHI ML",
         "line": null,
-        "price": 150,
+        "price": 170,
         "book": "BetMGM",
-        "edge": -0.008539,
-        "model_prob": 0.396584,
-        "odds_observed_at": "2026-10-11T13:49:00+00:00",
+        "edge": 0.014497,
+        "model_prob": 0.37574,
+        "odds_observed_at": "2026-10-11T14:29:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -25383,11 +25383,11 @@
         "away": "CAR",
         "pick": "CAR ML",
         "line": null,
-        "price": -184,
+        "price": -210,
         "book": "bet365",
-        "edge": -0.064833,
-        "model_prob": 0.605883,
-        "odds_observed_at": "2026-10-11T13:49:00+00:00",
+        "edge": -0.073843,
+        "model_prob": 0.627397,
+        "odds_observed_at": "2026-10-11T14:29:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -25405,11 +25405,11 @@
         "away": "CAR",
         "pick": "PHI ML",
         "line": null,
-        "price": 154,
+        "price": 175,
         "book": "bet365",
-        "edge": 0.001058,
-        "model_prob": 0.394117,
-        "odds_observed_at": "2026-10-11T13:49:00+00:00",
+        "edge": 0.024658,
+        "model_prob": 0.372603,
+        "odds_observed_at": "2026-10-11T14:29:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -25427,11 +25427,11 @@
         "away": "CAR",
         "pick": "CAR ML",
         "line": null,
-        "price": -180,
+        "price": -218,
         "book": "DraftKings",
-        "edge": -0.064026,
-        "model_prob": 0.601698,
-        "odds_observed_at": "2026-10-11T13:49:00+00:00",
+        "edge": -0.077399,
+        "model_prob": 0.632475,
+        "odds_observed_at": "2026-10-11T14:29:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -25449,11 +25449,11 @@
         "away": "CAR",
         "pick": "PHI ML",
         "line": null,
-        "price": 150,
+        "price": 180,
         "book": "DraftKings",
-        "edge": -0.004244,
-        "model_prob": 0.398302,
-        "odds_observed_at": "2026-10-11T13:49:00+00:00",
+        "edge": 0.029069,
+        "model_prob": 0.367525,
+        "odds_observed_at": "2026-10-11T14:29:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -25471,11 +25471,11 @@
         "away": "CAR",
         "pick": "CAR ML",
         "line": null,
-        "price": -184,
+        "price": -205,
         "book": "FanDuel",
-        "edge": -0.069162,
-        "model_prob": 0.603078,
-        "odds_observed_at": "2026-10-11T13:49:00+00:00",
+        "edge": -0.075125,
+        "model_prob": 0.621637,
+        "odds_observed_at": "2026-10-11T14:29:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -25493,11 +25493,11 @@
         "away": "CAR",
         "pick": "PHI ML",
         "line": null,
-        "price": 150,
+        "price": 168,
         "book": "FanDuel",
-        "edge": -0.007696,
-        "model_prob": 0.396922,
-        "odds_observed_at": "2026-10-11T13:49:00+00:00",
+        "edge": 0.014013,
+        "model_prob": 0.378363,
+        "odds_observed_at": "2026-10-11T14:29:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -25515,11 +25515,11 @@
         "away": "CAR",
         "pick": "CAR ML",
         "line": null,
-        "price": -180,
+        "price": -215,
         "book": "Fanatics Sportsbook",
-        "edge": -0.064026,
-        "model_prob": 0.601698,
-        "odds_observed_at": "2026-10-11T13:49:00+00:00",
+        "edge": -0.078912,
+        "model_prob": 0.628679,
+        "odds_observed_at": "2026-10-11T14:29:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -25537,11 +25537,11 @@
         "away": "CAR",
         "pick": "PHI ML",
         "line": null,
-        "price": 150,
+        "price": 175,
         "book": "Fanatics Sportsbook",
-        "edge": -0.004244,
-        "model_prob": 0.398302,
-        "odds_observed_at": "2026-10-11T13:49:00+00:00",
+        "edge": 0.021132,
+        "model_prob": 0.371321,
+        "odds_observed_at": "2026-10-11T14:29:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -25563,7 +25563,7 @@
         "book": "BetRivers",
         "edge": -0.066282,
         "model_prob": 0.607243,
-        "odds_observed_at": "2026-10-11T13:49:00+00:00",
+        "odds_observed_at": "2026-10-11T14:29:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -25585,7 +25585,7 @@
         "book": "BetRivers",
         "edge": 0.00153,
         "model_prob": 0.392757,
-        "odds_observed_at": "2026-10-11T13:49:00+00:00",
+        "odds_observed_at": "2026-10-11T14:29:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -25603,11 +25603,11 @@
         "away": "CAR",
         "pick": "CAR ML",
         "line": null,
-        "price": -179,
+        "price": -205,
         "book": "Caesars Odds",
-        "edge": -0.06271,
-        "model_prob": 0.601344,
-        "odds_observed_at": "2026-10-11T13:49:00+00:00",
+        "edge": -0.073223,
+        "model_prob": 0.622916,
+        "odds_observed_at": "2026-10-11T14:29:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -25625,11 +25625,11 @@
         "away": "CAR",
         "pick": "PHI ML",
         "line": null,
-        "price": 150,
+        "price": 170,
         "book": "Caesars Odds",
-        "edge": -0.00336,
-        "model_prob": 0.398656,
-        "odds_observed_at": "2026-10-11T13:49:00+00:00",
+        "edge": 0.018128,
+        "model_prob": 0.377084,
+        "odds_observed_at": "2026-10-11T14:29:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -25647,11 +25647,11 @@
         "away": "CAR",
         "pick": "CAR ML",
         "line": null,
-        "price": -185,
+        "price": -210,
         "book": "theScore Bet",
-        "edge": -0.065029,
-        "model_prob": 0.606911,
-        "odds_observed_at": "2026-10-11T13:49:00+00:00",
+        "edge": -0.073843,
+        "model_prob": 0.627397,
+        "odds_observed_at": "2026-10-11T14:29:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -25669,11 +25669,11 @@
         "away": "CAR",
         "pick": "PHI ML",
         "line": null,
-        "price": 155,
+        "price": 175,
         "book": "theScore Bet",
-        "edge": 0.002377,
-        "model_prob": 0.393089,
-        "odds_observed_at": "2026-10-11T13:49:00+00:00",
+        "edge": 0.024658,
+        "model_prob": 0.372603,
+        "odds_observed_at": "2026-10-11T14:29:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -25691,11 +25691,11 @@
         "away": "CAR",
         "pick": "CAR ML",
         "line": null,
-        "price": -175,
+        "price": -195,
         "book": "Hard Rock Bet",
-        "edge": -0.062964,
-        "model_prob": 0.596296,
-        "odds_observed_at": "2026-10-11T13:49:00+00:00",
+        "edge": -0.066878,
+        "model_prob": 0.616809,
+        "odds_observed_at": "2026-10-11T14:29:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -25713,11 +25713,11 @@
         "away": "CAR",
         "pick": "PHI ML",
         "line": null,
-        "price": 145,
+        "price": 165,
         "book": "Hard Rock Bet",
-        "edge": -0.010925,
-        "model_prob": 0.403704,
-        "odds_observed_at": "2026-10-11T13:49:00+00:00",
+        "edge": 0.015455,
+        "model_prob": 0.383191,
+        "odds_observed_at": "2026-10-11T14:29:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -25735,11 +25735,11 @@
         "away": "CAR",
         "pick": "CAR -1.5",
         "line": -1.5,
-        "price": 135,
+        "price": 115,
         "book": "BetMGM",
-        "edge": -0.094675,
-        "model_prob": 0.385245,
-        "odds_observed_at": "2026-10-11T13:49:00+00:00",
+        "edge": -0.11558,
+        "model_prob": 0.411358,
+        "odds_observed_at": "2026-10-11T14:29:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -25757,11 +25757,11 @@
         "away": "CAR",
         "pick": "PHI +1.5",
         "line": 1.5,
-        "price": -160,
+        "price": -140,
         "book": "BetMGM",
-        "edge": -0.001023,
-        "model_prob": 0.614755,
-        "odds_observed_at": "2026-10-11T13:49:00+00:00",
+        "edge": 0.0091,
+        "model_prob": 0.588642,
+        "odds_observed_at": "2026-10-11T14:29:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -25779,11 +25779,11 @@
         "away": "CAR",
         "pick": "CAR -1.5",
         "line": -1.5,
-        "price": 145,
+        "price": 131,
         "book": "bet365",
-        "edge": -0.084642,
-        "model_prob": 0.373616,
-        "odds_observed_at": "2026-10-11T13:49:00+00:00",
+        "edge": -0.09876,
+        "model_prob": 0.390147,
+        "odds_observed_at": "2026-10-11T14:29:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -25801,11 +25801,11 @@
         "away": "CAR",
         "pick": "PHI +1.5",
         "line": 1.5,
-        "price": -170,
+        "price": -156,
         "book": "bet365",
-        "edge": -0.005154,
-        "model_prob": 0.626384,
-        "odds_observed_at": "2026-10-11T13:49:00+00:00",
+        "edge": 0.000784,
+        "model_prob": 0.609853,
+        "odds_observed_at": "2026-10-11T14:29:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -25823,11 +25823,11 @@
         "away": "CAR",
         "pick": "CAR -1.5",
         "line": -1.5,
-        "price": 142,
+        "price": 130,
         "book": "DraftKings",
-        "edge": -0.090508,
-        "model_prob": 0.375823,
-        "odds_observed_at": "2026-10-11T13:49:00+00:00",
+        "edge": -0.099788,
+        "model_prob": 0.391397,
+        "odds_observed_at": "2026-10-11T14:29:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -25845,11 +25845,11 @@
         "away": "CAR",
         "pick": "PHI +1.5",
         "line": 1.5,
-        "price": -170,
+        "price": -155,
         "book": "DraftKings",
-        "edge": -0.008661,
-        "model_prob": 0.624177,
-        "odds_observed_at": "2026-10-11T13:49:00+00:00",
+        "edge": 0.001251,
+        "model_prob": 0.608603,
+        "odds_observed_at": "2026-10-11T14:29:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -25867,11 +25867,11 @@
         "away": "CAR",
         "pick": "CAR -1.5",
         "line": -1.5,
-        "price": 144,
+        "price": 134,
         "book": "FanDuel",
-        "edge": -0.093914,
-        "model_prob": 0.371347,
-        "odds_observed_at": "2026-10-11T13:49:00+00:00",
+        "edge": -0.100715,
+        "model_prob": 0.38431,
+        "odds_observed_at": "2026-10-11T14:29:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -25889,11 +25889,11 @@
         "away": "CAR",
         "pick": "PHI +1.5",
         "line": 1.5,
-        "price": -178,
+        "price": -164,
         "book": "FanDuel",
-        "edge": -0.018171,
-        "model_prob": 0.628653,
-        "odds_observed_at": "2026-10-11T13:49:00+00:00",
+        "edge": -0.008889,
+        "model_prob": 0.61569,
+        "odds_observed_at": "2026-10-11T14:29:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -25911,11 +25911,11 @@
         "away": "CAR",
         "pick": "CAR -1.5",
         "line": -1.5,
-        "price": 140,
+        "price": 125,
         "book": "Fanatics Sportsbook",
-        "edge": -0.094447,
-        "model_prob": 0.377314,
-        "odds_observed_at": "2026-10-11T13:49:00+00:00",
+        "edge": -0.104972,
+        "model_prob": 0.39779,
+        "odds_observed_at": "2026-10-11T14:29:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -25933,11 +25933,11 @@
         "away": "CAR",
         "pick": "PHI +1.5",
         "line": 1.5,
-        "price": -170,
+        "price": -150,
         "book": "Fanatics Sportsbook",
-        "edge": -0.011028,
-        "model_prob": 0.622686,
-        "odds_observed_at": "2026-10-11T13:49:00+00:00",
+        "edge": 0.003683,
+        "model_prob": 0.60221,
+        "odds_observed_at": "2026-10-11T14:29:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -25959,7 +25959,7 @@
         "book": "BetRivers",
         "edge": -0.102964,
         "model_prob": 0.376906,
-        "odds_observed_at": "2026-10-11T13:49:00+00:00",
+        "odds_observed_at": "2026-10-11T14:29:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -25981,7 +25981,7 @@
         "book": "BetRivers",
         "edge": -0.020852,
         "model_prob": 0.623094,
-        "odds_observed_at": "2026-10-11T13:49:00+00:00",
+        "odds_observed_at": "2026-10-11T14:29:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -25999,11 +25999,11 @@
         "away": "CAR",
         "pick": "CAR -1.5",
         "line": -1.5,
-        "price": 144,
+        "price": 132,
         "book": "Caesars Odds",
-        "edge": -0.086591,
-        "model_prob": 0.374348,
-        "odds_observed_at": "2026-10-11T13:49:00+00:00",
+        "edge": -0.097734,
+        "model_prob": 0.388908,
+        "odds_observed_at": "2026-10-11T14:29:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -26021,11 +26021,11 @@
         "away": "CAR",
         "pick": "PHI +1.5",
         "line": 1.5,
-        "price": -170,
+        "price": -157,
         "book": "Caesars Odds",
-        "edge": -0.006317,
-        "model_prob": 0.625652,
-        "odds_observed_at": "2026-10-11T13:49:00+00:00",
+        "edge": 0.000323,
+        "model_prob": 0.611092,
+        "odds_observed_at": "2026-10-11T14:29:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -26043,11 +26043,11 @@
         "away": "CAR",
         "pick": "CAR -1.5",
         "line": -1.5,
-        "price": 135,
+        "price": 120,
         "book": "theScore Bet",
-        "edge": -0.094675,
-        "model_prob": 0.385245,
-        "odds_observed_at": "2026-10-11T13:49:00+00:00",
+        "edge": -0.110234,
+        "model_prob": 0.404439,
+        "odds_observed_at": "2026-10-11T14:29:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -26065,11 +26065,11 @@
         "away": "CAR",
         "pick": "PHI +1.5",
         "line": 1.5,
-        "price": -160,
+        "price": -145,
         "book": "theScore Bet",
-        "edge": -0.001023,
-        "model_prob": 0.614755,
-        "odds_observed_at": "2026-10-11T13:49:00+00:00",
+        "edge": 0.006293,
+        "model_prob": 0.595561,
+        "odds_observed_at": "2026-10-11T14:29:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -26087,11 +26087,11 @@
         "away": "CAR",
         "pick": "CAR -1.5",
         "line": -1.5,
-        "price": 140,
+        "price": 130,
         "book": "Hard Rock Bet",
-        "edge": -0.107558,
-        "model_prob": 0.371851,
-        "odds_observed_at": "2026-10-11T13:49:00+00:00",
+        "edge": -0.109855,
+        "model_prob": 0.38702,
+        "odds_observed_at": "2026-10-11T14:29:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -26109,11 +26109,11 @@
         "away": "CAR",
         "pick": "PHI +1.5",
         "line": 1.5,
-        "price": -185,
+        "price": -165,
         "book": "Hard Rock Bet",
-        "edge": -0.032311,
-        "model_prob": 0.628149,
-        "odds_observed_at": "2026-10-11T13:49:00+00:00",
+        "edge": -0.015516,
+        "model_prob": 0.61298,
+        "odds_observed_at": "2026-10-11T14:29:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -26135,7 +26135,7 @@
         "book": "BetMGM",
         "edge": -0.030537,
         "model_prob": 0.528798,
-        "odds_observed_at": "2026-10-11T13:49:00+00:00",
+        "odds_observed_at": "2026-10-11T14:29:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -26157,7 +26157,7 @@
         "book": "BetMGM",
         "edge": -0.057596,
         "model_prob": 0.471202,
-        "odds_observed_at": "2026-10-11T13:49:00+00:00",
+        "odds_observed_at": "2026-10-11T14:29:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -26175,11 +26175,11 @@
         "away": "CAR",
         "pick": "Over 5.5",
         "line": 5.5,
-        "price": -120,
+        "price": -121,
         "book": "bet365",
-        "edge": -0.030537,
-        "model_prob": 0.528798,
-        "odds_observed_at": "2026-10-11T13:49:00+00:00",
+        "edge": -0.031189,
+        "model_prob": 0.530435,
+        "odds_observed_at": "2026-10-11T14:29:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -26197,11 +26197,11 @@
         "away": "CAR",
         "pick": "Under 5.5",
         "line": 5.5,
-        "price": 100,
+        "price": 101,
         "book": "bet365",
-        "edge": -0.057596,
-        "model_prob": 0.471202,
-        "odds_observed_at": "2026-10-11T13:49:00+00:00",
+        "edge": -0.056175,
+        "model_prob": 0.469565,
+        "odds_observed_at": "2026-10-11T14:29:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -26223,7 +26223,7 @@
         "book": "DraftKings",
         "edge": -0.031828,
         "model_prob": 0.532058,
-        "odds_observed_at": "2026-10-11T13:49:00+00:00",
+        "odds_observed_at": "2026-10-11T14:29:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -26245,7 +26245,7 @@
         "book": "DraftKings",
         "edge": -0.054758,
         "model_prob": 0.467942,
-        "odds_observed_at": "2026-10-11T13:49:00+00:00",
+        "odds_observed_at": "2026-10-11T14:29:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -26261,13 +26261,13 @@
         "side": "over",
         "home": "PHI",
         "away": "CAR",
-        "pick": "Over 6",
-        "line": 6,
-        "price": 100,
+        "pick": "Over 5.5",
+        "line": 5.5,
+        "price": -122,
         "book": "FanDuel",
-        "edge": -0.034234,
-        "model_prob": 0.480746,
-        "odds_observed_at": "2026-10-11T13:49:00+00:00",
+        "edge": -0.035215,
+        "model_prob": 0.530197,
+        "odds_observed_at": "2026-10-11T14:29:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -26283,13 +26283,13 @@
         "side": "under",
         "home": "PHI",
         "away": "CAR",
-        "pick": "Under 6",
-        "line": 6,
-        "price": -122,
+        "pick": "Under 5.5",
+        "line": 5.5,
+        "price": 100,
         "book": "FanDuel",
-        "edge": -0.049011,
-        "model_prob": 0.519254,
-        "odds_observed_at": "2026-10-11T13:49:00+00:00",
+        "edge": -0.060395,
+        "model_prob": 0.469803,
+        "odds_observed_at": "2026-10-11T14:29:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -26311,7 +26311,7 @@
         "book": "Fanatics Sportsbook",
         "edge": -0.030537,
         "model_prob": 0.528798,
-        "odds_observed_at": "2026-10-11T13:49:00+00:00",
+        "odds_observed_at": "2026-10-11T14:29:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -26333,7 +26333,7 @@
         "book": "Fanatics Sportsbook",
         "edge": -0.057596,
         "model_prob": 0.471202,
-        "odds_observed_at": "2026-10-11T13:49:00+00:00",
+        "odds_observed_at": "2026-10-11T14:29:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -26355,7 +26355,7 @@
         "book": "BetRivers",
         "edge": -0.04402,
         "model_prob": 0.538522,
-        "odds_observed_at": "2026-10-11T13:49:00+00:00",
+        "odds_observed_at": "2026-10-11T14:29:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -26377,7 +26377,7 @@
         "book": "BetRivers",
         "edge": -0.058584,
         "model_prob": 0.461478,
-        "odds_observed_at": "2026-10-11T13:49:00+00:00",
+        "odds_observed_at": "2026-10-11T14:29:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -26399,7 +26399,7 @@
         "book": "Caesars Odds",
         "edge": -0.038637,
         "model_prob": 0.53409,
-        "odds_observed_at": "2026-10-11T13:49:00+00:00",
+        "odds_observed_at": "2026-10-11T14:29:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -26421,7 +26421,7 @@
         "book": "Caesars Odds",
         "edge": -0.058862,
         "model_prob": 0.46591,
-        "odds_observed_at": "2026-10-11T13:49:00+00:00",
+        "odds_observed_at": "2026-10-11T14:29:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -26443,7 +26443,7 @@
         "book": "theScore Bet",
         "edge": -0.033681,
         "model_prob": 0.536844,
-        "odds_observed_at": "2026-10-11T13:49:00+00:00",
+        "odds_observed_at": "2026-10-11T14:29:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -26465,7 +26465,7 @@
         "book": "theScore Bet",
         "edge": -0.05053,
         "model_prob": 0.463156,
-        "odds_observed_at": "2026-10-11T13:49:00+00:00",
+        "odds_observed_at": "2026-10-11T14:29:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -26487,7 +26487,7 @@
         "book": "Hard Rock Bet",
         "edge": -0.030537,
         "model_prob": 0.528798,
-        "odds_observed_at": "2026-10-11T13:49:00+00:00",
+        "odds_observed_at": "2026-10-11T14:29:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -26509,13 +26509,13 @@
         "book": "Hard Rock Bet",
         "edge": -0.057596,
         "model_prob": 0.471202,
-        "odds_observed_at": "2026-10-11T13:49:00+00:00",
+        "odds_observed_at": "2026-10-11T14:29:00+00:00",
         "model_version": "nhl-poisson-1.0"
       }
     ],
     "accuracy": {
-      "generated_at": "2026-10-11T13:49:29.879312+00:00"
+      "generated_at": "2026-10-11T14:29:39.892721+00:00"
     },
-    "lastGoodAt": "2026-10-11T14:21:25.476Z"
+    "lastGoodAt": "2026-10-11T14:30:18.908Z"
   }
 }
