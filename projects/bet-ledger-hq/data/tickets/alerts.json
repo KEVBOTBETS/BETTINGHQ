@@ -1,29 +1,43 @@
 {
   "schema": 1,
-  "checked_at": "2026-10-11T03:52:40.832Z",
+  "checked_at": "2026-10-11T04:21:44.603Z",
   "coverage": {
     "ncaaf": {
       "status": "empty",
       "reports": 0,
-      "checked_at": "2026-10-11T03:52:40.832Z"
+      "checked_at": "2026-10-11T04:21:44.603Z"
     },
     "nhl": {
       "status": "available",
       "reports": 43,
-      "checked_at": "2026-10-11T03:52:40.832Z"
+      "checked_at": "2026-10-11T04:21:44.603Z"
     },
     "nfl": {
       "status": "available",
-      "reports": 342,
-      "checked_at": "2026-10-11T03:52:40.832Z"
+      "reports": 340,
+      "checked_at": "2026-10-11T04:21:44.603Z"
     },
     "mlb": {
       "status": "available",
       "reports": 8,
-      "checked_at": "2026-10-11T03:52:40.832Z"
+      "checked_at": "2026-10-11T04:21:44.603Z"
     }
   },
   "events": [
+    {
+      "id": "injury|nfl:3:Anthony Johnson Jr.|2026-10-11T04:21:44.603Z",
+      "kind": "injury",
+      "observed_at": "2026-10-11T04:21:44.603Z",
+      "sport": "nfl",
+      "title": "Player availability changed",
+      "event": "Chicago Bears",
+      "pick": "Anthony Johnson Jr.",
+      "before": "Out · Undisclosed",
+      "after": "Injured Reserve · Undisclosed",
+      "source_quote_at": "2026-10-11T04:00Z",
+      "source": "ESPN injuries",
+      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
+    },
     {
       "id": "odds|ncaaf|401858263|2026-10-17T23:00Z|TOTAL||over|DraftKings|2026-10-11T03:45:30.137Z",
       "kind": "odds",
@@ -2980,22 +2994,6 @@
       "source_quote_at": "2026-10-10T16:58Z",
       "source": "ESPN injuries",
       "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "odds|props|401872992|2026-10-11T20:25Z|Rushing yards|Brock Purdy|over|theScore Bet|2026-10-10T17:02:26.331Z",
-      "kind": "odds",
-      "observed_at": "2026-10-10T17:02:26.331Z",
-      "sport": "props",
-      "event": "San Francisco 49ers @ Seattle Seahawks",
-      "start": "2026-10-11T20:25Z",
-      "pick": "Brock Purdy — Over 24.5 Rushing yards",
-      "title": "Published odds changed",
-      "before": "-125 · line 24.5",
-      "after": "-130 · line 24.5",
-      "book": "theScore Bet",
-      "source_quote_at": "2026-10-10T17:01:04.645330+00:00",
-      "source": "Existing Props board",
-      "note": "Your ticket keeps its original odds. Recheck the live book before placing a new wager."
     }
   ]
 }
