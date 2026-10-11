@@ -1,29 +1,43 @@
 {
   "schema": 1,
-  "checked_at": "2026-10-11T04:51:30.450Z",
+  "checked_at": "2026-10-11T05:20:47.468Z",
   "coverage": {
-    "nhl": {
-      "status": "available",
-      "reports": 43,
-      "checked_at": "2026-10-11T04:51:30.450Z"
-    },
     "ncaaf": {
       "status": "empty",
       "reports": 0,
-      "checked_at": "2026-10-11T04:51:30.450Z"
+      "checked_at": "2026-10-11T05:20:47.468Z"
+    },
+    "nhl": {
+      "status": "available",
+      "reports": 43,
+      "checked_at": "2026-10-11T05:20:47.468Z"
     },
     "mlb": {
       "status": "available",
       "reports": 8,
-      "checked_at": "2026-10-11T04:51:30.450Z"
+      "checked_at": "2026-10-11T05:20:47.468Z"
     },
     "nfl": {
       "status": "available",
       "reports": 340,
-      "checked_at": "2026-10-11T04:51:30.450Z"
+      "checked_at": "2026-10-11T05:20:47.468Z"
     }
   },
   "events": [
+    {
+      "id": "injury|nfl:3:Anthony Johnson Jr.|2026-10-11T05:20:47.468Z",
+      "kind": "injury",
+      "observed_at": "2026-10-11T05:20:47.468Z",
+      "sport": "nfl",
+      "title": "Player availability changed",
+      "event": "Chicago Bears",
+      "pick": "Anthony Johnson Jr.",
+      "before": "Injured Reserve · Undisclosed",
+      "after": "Out · Undisclosed",
+      "source_quote_at": "2026-10-11T05:01Z",
+      "source": "ESPN injuries",
+      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
+    },
     {
       "id": "injury|nfl:3:Anthony Johnson Jr.|2026-10-11T04:21:44.603Z",
       "kind": "injury",
@@ -2978,20 +2992,6 @@
       "before": "Day-To-Day · Lower Body",
       "after": "Out · Lower Body",
       "source_quote_at": "2026-10-10T17:01Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nhl:15:Nikita Grebenkin|2026-10-10T17:18:48.070Z",
-      "kind": "injury",
-      "observed_at": "2026-10-10T17:18:48.070Z",
-      "sport": "nhl",
-      "title": "New availability report",
-      "event": "Philadelphia Flyers",
-      "pick": "Nikita Grebenkin",
-      "before": "Not in the previous dated report",
-      "after": "Injured Reserve · Back",
-      "source_quote_at": "2026-10-10T16:58Z",
       "source": "ESPN injuries",
       "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
     }
