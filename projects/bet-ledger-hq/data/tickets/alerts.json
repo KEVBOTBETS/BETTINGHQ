@@ -1,29 +1,43 @@
 {
   "schema": 1,
-  "checked_at": "2026-10-11T08:51:08.486Z",
+  "checked_at": "2026-10-11T09:21:00.788Z",
   "coverage": {
+    "nfl": {
+      "status": "available",
+      "reports": 341,
+      "checked_at": "2026-10-11T09:21:00.788Z"
+    },
     "ncaaf": {
       "status": "empty",
       "reports": 0,
-      "checked_at": "2026-10-11T08:51:08.486Z"
+      "checked_at": "2026-10-11T09:21:00.788Z"
     },
     "nhl": {
       "status": "available",
       "reports": 44,
-      "checked_at": "2026-10-11T08:51:08.486Z"
+      "checked_at": "2026-10-11T09:21:00.788Z"
     },
     "mlb": {
       "status": "available",
       "reports": 8,
-      "checked_at": "2026-10-11T08:51:08.486Z"
-    },
-    "nfl": {
-      "status": "available",
-      "reports": 341,
-      "checked_at": "2026-10-11T08:51:08.486Z"
+      "checked_at": "2026-10-11T09:21:00.788Z"
     }
   },
   "events": [
+    {
+      "id": "injury|nfl:3:Anthony Johnson Jr.|2026-10-11T09:21:00.788Z",
+      "kind": "injury",
+      "observed_at": "2026-10-11T09:21:00.788Z",
+      "sport": "nfl",
+      "title": "Player availability changed",
+      "event": "Chicago Bears",
+      "pick": "Anthony Johnson Jr.",
+      "before": "Injured Reserve · Undisclosed",
+      "after": "Out · Undisclosed",
+      "source_quote_at": "2026-10-11T09:01Z",
+      "source": "ESPN injuries",
+      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
+    },
     {
       "id": "odds|ncaaf|401856721|2026-10-17T19:30Z|ATS||away|Draft Kings|2026-10-11T06:50:02.740Z",
       "kind": "odds",
@@ -2983,22 +2997,6 @@
       "before": "-114 · line 252.5",
       "after": "-113 · line 252.5",
       "book": "FanDuel",
-      "source_quote_at": "2026-10-10T17:59:13.664834+00:00",
-      "source": "Existing Props board",
-      "note": "Your ticket keeps its original odds. Recheck the live book before placing a new wager."
-    },
-    {
-      "id": "odds|props|401872982|2026-10-11T17:00Z|Passing yards|Joe Burrow|over|Fanatics Sportsbook|2026-10-10T18:00:34.708Z",
-      "kind": "odds",
-      "observed_at": "2026-10-10T18:00:34.708Z",
-      "sport": "props",
-      "event": "Cincinnati Bengals @ Miami Dolphins",
-      "start": "2026-10-11T17:00Z",
-      "pick": "Joe Burrow — Over 250.5 Passing yards",
-      "title": "Published odds changed",
-      "before": "-120 · line 250.5",
-      "after": "-115 · line 250.5",
-      "book": "Fanatics Sportsbook",
       "source_quote_at": "2026-10-10T17:59:13.664834+00:00",
       "source": "Existing Props board",
       "note": "Your ticket keeps its original odds. Recheck the live book before placing a new wager."
