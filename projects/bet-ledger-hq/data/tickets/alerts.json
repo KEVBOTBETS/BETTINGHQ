@@ -1,29 +1,57 @@
 {
   "schema": 1,
-  "checked_at": "2026-10-11T00:00:23.792Z",
+  "checked_at": "2026-10-11T00:31:00.041Z",
   "coverage": {
     "nhl": {
       "status": "available",
-      "reports": 39,
-      "checked_at": "2026-10-11T00:00:23.792Z"
-    },
-    "nfl": {
-      "status": "available",
-      "reports": 338,
-      "checked_at": "2026-10-11T00:00:23.792Z"
+      "reports": 40,
+      "checked_at": "2026-10-11T00:31:00.041Z"
     },
     "ncaaf": {
       "status": "empty",
       "reports": 0,
-      "checked_at": "2026-10-11T00:00:23.792Z"
+      "checked_at": "2026-10-11T00:31:00.041Z"
     },
     "mlb": {
       "status": "available",
       "reports": 8,
-      "checked_at": "2026-10-11T00:00:23.792Z"
+      "checked_at": "2026-10-11T00:31:00.041Z"
+    },
+    "nfl": {
+      "status": "available",
+      "reports": 335,
+      "checked_at": "2026-10-11T00:31:00.041Z"
     }
   },
   "events": [
+    {
+      "id": "injury|nhl:21:Chris Tanev|2026-10-11T00:31:00.041Z",
+      "kind": "injury",
+      "observed_at": "2026-10-11T00:31:00.041Z",
+      "sport": "nhl",
+      "title": "New availability report",
+      "event": "Toronto Maple Leafs",
+      "pick": "Chris Tanev",
+      "before": "Not in the previous dated report",
+      "after": "Day-To-Day · Upper Body",
+      "source_quote_at": "2026-10-11T00:12Z",
+      "source": "ESPN injuries",
+      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
+    },
+    {
+      "id": "injury|nfl:20:Tim Patrick|2026-10-11T00:31:00.041Z",
+      "kind": "injury",
+      "observed_at": "2026-10-11T00:31:00.041Z",
+      "sport": "nfl",
+      "title": "Player availability changed",
+      "event": "New York Jets",
+      "pick": "Tim Patrick",
+      "before": "Active · Patrick (groin) is listed as questionable for Sunday's game against the Browns.",
+      "after": "Active · The Jets activated Patrick (groin) from injured reserve Saturday.",
+      "source_quote_at": "2026-10-11T00:24Z",
+      "source": "ESPN injuries",
+      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
+    },
     {
       "id": "odds|props|401872987|2026-10-11T17:00Z|Rushing yards|Tyler Shough|over|Fanatics Sportsbook|2026-10-11T00:00:23.792Z",
       "kind": "odds",
@@ -3000,36 +3028,6 @@
       "source_quote_at": "2026-10-10T15:28:39.451349+00:00",
       "source": "Existing NCAAF board",
       "note": "Your ticket keeps its original odds. Recheck the live book before placing a new wager."
-    },
-    {
-      "id": "odds|ncaaf|401856714|2026-10-10T16:45Z|ATS||away|DraftKings|2026-10-10T15:31:32.925Z",
-      "kind": "odds",
-      "observed_at": "2026-10-10T15:31:32.925Z",
-      "sport": "ncaaf",
-      "event": "SC @ FLA",
-      "start": "2026-10-10T16:45Z",
-      "pick": "SC +14.5",
-      "title": "Published odds changed",
-      "before": "-115 · line 11.5",
-      "after": "-108 · line 10.5",
-      "book": "DraftKings",
-      "source_quote_at": "2026-10-10T15:28:39.450839+00:00",
-      "source": "Existing NCAAF board",
-      "note": "Your ticket keeps its original odds. Recheck the live book before placing a new wager."
-    },
-    {
-      "id": "injury|nfl:22:Marvin Harrison Jr.|2026-10-10T15:31:32.925Z",
-      "kind": "injury",
-      "observed_at": "2026-10-10T15:31:32.925Z",
-      "sport": "nfl",
-      "title": "New availability report",
-      "event": "Arizona Cardinals",
-      "pick": "Marvin Harrison Jr.",
-      "before": "Not in the previous dated report",
-      "after": "Out · Coach's Decision",
-      "source_quote_at": "2026-10-10T15:12Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
     }
   ]
 }
