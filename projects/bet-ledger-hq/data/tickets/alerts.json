@@ -1,29 +1,43 @@
 {
   "schema": 1,
-  "checked_at": "2026-10-11T01:50:12.396Z",
+  "checked_at": "2026-10-11T02:19:36.131Z",
   "coverage": {
     "nhl": {
       "status": "available",
       "reports": 42,
-      "checked_at": "2026-10-11T01:50:12.396Z"
+      "checked_at": "2026-10-11T02:19:36.131Z"
     },
     "mlb": {
       "status": "available",
       "reports": 8,
-      "checked_at": "2026-10-11T01:50:12.396Z"
+      "checked_at": "2026-10-11T02:19:36.131Z"
+    },
+    "nfl": {
+      "status": "available",
+      "reports": 341,
+      "checked_at": "2026-10-11T02:19:36.131Z"
     },
     "ncaaf": {
       "status": "empty",
       "reports": 0,
-      "checked_at": "2026-10-11T01:50:12.396Z"
-    },
-    "nfl": {
-      "status": "available",
-      "reports": 340,
-      "checked_at": "2026-10-11T01:50:12.396Z"
+      "checked_at": "2026-10-11T02:19:36.131Z"
     }
   },
   "events": [
+    {
+      "id": "injury|nfl:26:Irv Charles|2026-10-11T02:19:36.131Z",
+      "kind": "injury",
+      "observed_at": "2026-10-11T02:19:36.131Z",
+      "sport": "nfl",
+      "title": "New availability report",
+      "event": "Seattle Seahawks",
+      "pick": "Irv Charles",
+      "before": "Not in the previous dated report",
+      "after": "Injured Reserve · Knee",
+      "source_quote_at": "2026-10-11T02:02Z",
+      "source": "ESPN injuries",
+      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
+    },
     {
       "id": "injury|nhl:9:Radek Faksa|2026-10-11T01:50:12.396Z",
       "kind": "injury",
@@ -2980,20 +2994,6 @@
       "source_quote_at": "2026-10-10T15:39:02.550175+00:00",
       "source": "Existing NCAAF board",
       "note": "Your ticket keeps its original odds. Recheck the live book before placing a new wager."
-    },
-    {
-      "id": "injury|nhl:10:Florian Xhekaj|2026-10-10T15:42:07.456Z",
-      "kind": "injury",
-      "observed_at": "2026-10-10T15:42:07.456Z",
-      "sport": "nhl",
-      "title": "New availability report",
-      "event": "Montreal Canadiens",
-      "pick": "Florian Xhekaj",
-      "before": "Not in the previous dated report",
-      "after": "Out · Undisclosed",
-      "source_quote_at": "2026-10-10T15:36Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
     }
   ]
 }
