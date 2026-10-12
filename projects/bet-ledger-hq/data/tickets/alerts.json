@@ -1,29 +1,85 @@
 {
   "schema": 1,
-  "checked_at": "2026-10-12T02:23:13.255Z",
+  "checked_at": "2026-10-12T02:53:52.686Z",
   "coverage": {
-    "mlb": {
-      "status": "available",
-      "reports": 10,
-      "checked_at": "2026-10-12T02:23:13.255Z"
-    },
-    "nfl": {
-      "status": "available",
-      "reports": 517,
-      "checked_at": "2026-10-12T02:23:13.255Z"
-    },
     "nhl": {
       "status": "available",
       "reports": 42,
-      "checked_at": "2026-10-12T02:23:13.255Z"
+      "checked_at": "2026-10-12T02:53:52.686Z"
     },
     "ncaaf": {
       "status": "empty",
       "reports": 0,
-      "checked_at": "2026-10-12T02:23:13.255Z"
+      "checked_at": "2026-10-12T02:53:52.686Z"
+    },
+    "nfl": {
+      "status": "available",
+      "reports": 518,
+      "checked_at": "2026-10-12T02:53:52.686Z"
+    },
+    "mlb": {
+      "status": "available",
+      "reports": 10,
+      "checked_at": "2026-10-12T02:53:52.686Z"
     }
   },
   "events": [
+    {
+      "id": "injury|nfl:33:Matt Hibner|2026-10-12T02:53:52.686Z",
+      "kind": "injury",
+      "observed_at": "2026-10-12T02:53:52.686Z",
+      "sport": "nfl",
+      "title": "Player availability changed",
+      "event": "Baltimore Ravens",
+      "pick": "Matt Hibner",
+      "before": "Questionable · Hand",
+      "after": "Active · Hibner (hand) has returned to action Sunday night against the Falcons, Jeff Zrebiec of The Athletic reports.",
+      "source_quote_at": "2026-10-12T02:24Z",
+      "source": "ESPN injuries",
+      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
+    },
+    {
+      "id": "injury|nfl:13:Dylan Laube|2026-10-12T02:53:52.686Z",
+      "kind": "injury",
+      "observed_at": "2026-10-12T02:53:52.686Z",
+      "sport": "nfl",
+      "title": "New availability report",
+      "event": "Las Vegas Raiders",
+      "pick": "Dylan Laube",
+      "before": "Not in the previous dated report",
+      "after": "Active · Laube rushed four times for nine yards and a touchdown while also reeling in all three of his targets for 16 yards during Sunday's 45-17 loss to New England.",
+      "source_quote_at": "2026-10-12T02:33Z",
+      "source": "ESPN injuries",
+      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
+    },
+    {
+      "id": "injury|nfl:15:Kevin Coleman Jr.|2026-10-12T02:53:52.686Z",
+      "kind": "injury",
+      "observed_at": "2026-10-12T02:53:52.686Z",
+      "sport": "nfl",
+      "title": "New availability report",
+      "event": "Miami Dolphins",
+      "pick": "Kevin Coleman Jr.",
+      "before": "Not in the previous dated report",
+      "after": "Active · Coleman caught three of seven targets for 30 yards and a touchdown during Sunday's 31-24 loss to the Bengals.",
+      "source_quote_at": "2026-10-12T02:15Z",
+      "source": "ESPN injuries",
+      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
+    },
+    {
+      "id": "injury|nfl:21:Tyler Steen|2026-10-12T02:53:52.686Z",
+      "kind": "injury",
+      "observed_at": "2026-10-12T02:53:52.686Z",
+      "sport": "nfl",
+      "title": "Player availability changed",
+      "event": "Philadelphia Eagles",
+      "pick": "Tyler Steen",
+      "before": "Active · Steen (shoulder) has returned to Sunday's game against the Jaguars in London, Zach Berman of The Athletic reports.",
+      "after": "Active · Steen (shoulder) is questionable to return to Sunday's game against the Jaguars in London.",
+      "source_quote_at": "2026-10-11T16:15Z",
+      "source": "ESPN injuries",
+      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
+    },
     {
       "id": "injury|nfl:23:Germie Bernard|2026-10-12T02:23:13.255Z",
       "kind": "injury",
@@ -2840,66 +2896,6 @@
       "source_quote_at": "2026-10-11T20:02:04.765141+00:00",
       "source": "Existing NCAAF board",
       "note": "Your ticket keeps its original odds. Recheck the live book before placing a new wager."
-    },
-    {
-      "id": "odds|ncaaf|401856809|2026-10-17T23:30Z|ATS||home|DraftKings|2026-10-11T20:03:37.095Z",
-      "kind": "odds",
-      "observed_at": "2026-10-11T20:03:37.095Z",
-      "sport": "ncaaf",
-      "event": "ND @ BYU",
-      "start": "2026-10-17T23:30Z",
-      "pick": "BYU +12.5",
-      "title": "Published odds changed",
-      "before": "-112 · line 11.5",
-      "after": "-108 · line 10.5",
-      "book": "DraftKings",
-      "source_quote_at": "2026-10-11T20:02:04.162841+00:00",
-      "source": "Existing NCAAF board",
-      "note": "Your ticket keeps its original odds. Recheck the live book before placing a new wager."
-    },
-    {
-      "id": "odds|ncaaf|401858488|2026-10-17T16:00Z|TOTAL||over|DraftKings|2026-10-11T20:03:37.095Z",
-      "kind": "odds",
-      "observed_at": "2026-10-11T20:03:37.095Z",
-      "sport": "ncaaf",
-      "event": "OSU @ IU",
-      "start": "2026-10-17T16:00Z",
-      "pick": "Over 48.5",
-      "title": "Published odds changed",
-      "before": "-110 · line 50.5",
-      "after": "-112 · line 51.5",
-      "book": "DraftKings",
-      "source_quote_at": "2026-10-11T20:02:04.765141+00:00",
-      "source": "Existing NCAAF board",
-      "note": "Your ticket keeps its original odds. Recheck the live book before placing a new wager."
-    },
-    {
-      "id": "injury|nfl:5:Raheim Sanders|2026-10-11T20:03:37.095Z",
-      "kind": "injury",
-      "observed_at": "2026-10-11T20:03:37.095Z",
-      "sport": "nfl",
-      "title": "New availability report",
-      "event": "Cleveland Browns",
-      "pick": "Raheim Sanders",
-      "before": "Not in the previous dated report",
-      "after": "Questionable · Hip",
-      "source_quote_at": "2026-10-11T19:56Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:9:Skyy Moore|2026-10-11T20:03:37.095Z",
-      "kind": "injury",
-      "observed_at": "2026-10-11T20:03:37.095Z",
-      "sport": "nfl",
-      "title": "Player availability changed",
-      "event": "Green Bay Packers",
-      "pick": "Skyy Moore",
-      "before": "Questionable · Ankle",
-      "after": "Out · Ankle",
-      "source_quote_at": "2026-10-11T19:45Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
     }
   ]
 }
