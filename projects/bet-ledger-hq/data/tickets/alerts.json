@@ -1,29 +1,59 @@
 {
   "schema": 1,
-  "checked_at": "2026-10-12T18:02:20.472Z",
+  "checked_at": "2026-10-12T18:08:15.351Z",
   "coverage": {
-    "nfl": {
+    "mlb": {
       "status": "available",
-      "reports": 552,
-      "checked_at": "2026-10-12T18:02:20.472Z"
-    },
-    "ncaaf": {
-      "status": "empty",
-      "reports": 0,
-      "checked_at": "2026-10-12T18:02:20.472Z"
+      "reports": 10,
+      "checked_at": "2026-10-12T18:08:15.351Z"
     },
     "nhl": {
       "status": "available",
       "reports": 43,
-      "checked_at": "2026-10-12T18:02:20.472Z"
+      "checked_at": "2026-10-12T18:08:15.351Z"
     },
-    "mlb": {
+    "ncaaf": {
+      "status": "empty",
+      "reports": 0,
+      "checked_at": "2026-10-12T18:08:15.351Z"
+    },
+    "nfl": {
       "status": "available",
-      "reports": 10,
-      "checked_at": "2026-10-12T18:02:20.472Z"
+      "reports": 552,
+      "checked_at": "2026-10-12T18:08:15.351Z"
     }
   },
   "events": [
+    {
+      "id": "odds|ncaaf|401860923|2026-10-16T00:00Z|TOTAL||over|DraftKings|2026-10-12T18:08:15.351Z",
+      "kind": "odds",
+      "observed_at": "2026-10-12T18:08:15.351Z",
+      "sport": "ncaaf",
+      "event": "CSU @ TXST",
+      "start": "2026-10-16T00:00Z",
+      "pick": "Over 68.5",
+      "title": "Published odds changed",
+      "before": "-105 · line 69.5",
+      "after": "-110 · line 69.5",
+      "book": "DraftKings",
+      "source_quote_at": "2026-10-12T18:06:47.760298+00:00",
+      "source": "Existing NCAAF board",
+      "note": "Your ticket keeps its original odds. Recheck the live book before placing a new wager."
+    },
+    {
+      "id": "injury|nhl:16:Trevor van Riemsdyk|2026-10-12T18:08:15.351Z",
+      "kind": "injury",
+      "observed_at": "2026-10-12T18:08:15.351Z",
+      "sport": "nhl",
+      "title": "Player availability changed",
+      "event": "Pittsburgh Penguins",
+      "pick": "Trevor van Riemsdyk",
+      "before": "Out · Lower Body",
+      "after": "Injured Reserve · Lower Body",
+      "source_quote_at": "2026-10-12T17:51Z",
+      "source": "ESPN injuries",
+      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
+    },
     {
       "id": "odds|ncaaf|401860923|2026-10-16T00:00Z|TOTAL||over|Draft Kings|2026-10-12T18:02:20.472Z",
       "kind": "odds",
@@ -2877,38 +2907,6 @@
       "book": "Fanatics Sportsbook",
       "source_quote_at": "2026-10-12T00:04:27.310975+00:00",
       "source": "Existing Props board",
-      "note": "Your ticket keeps its original odds. Recheck the live book before placing a new wager."
-    },
-    {
-      "id": "odds|props|401872993|2026-10-12T00:20Z|Anytime touchdown|Zay Flowers|yes|bet365|2026-10-12T00:05:50.203Z",
-      "kind": "odds",
-      "observed_at": "2026-10-12T00:05:50.203Z",
-      "sport": "props",
-      "event": "Baltimore Ravens @ Atlanta Falcons",
-      "start": "2026-10-12T00:20Z",
-      "pick": "Zay Flowers — Yes Anytime touchdown",
-      "title": "Published odds changed",
-      "before": "+210",
-      "after": "+205",
-      "book": "bet365",
-      "source_quote_at": "2026-10-12T00:04:27.310975+00:00",
-      "source": "Existing Props board",
-      "note": "Your ticket keeps its original odds. Recheck the live book before placing a new wager."
-    },
-    {
-      "id": "odds|ncaaf|401856809|2026-10-17T23:30Z|ATS||home|DraftKings|2026-10-12T00:05:50.203Z",
-      "kind": "odds",
-      "observed_at": "2026-10-12T00:05:50.203Z",
-      "sport": "ncaaf",
-      "event": "ND @ BYU",
-      "start": "2026-10-17T23:30Z",
-      "pick": "BYU +12.5",
-      "title": "Published odds changed",
-      "before": "-115 · line 10.5",
-      "after": "-110 · line 10.5",
-      "book": "DraftKings",
-      "source_quote_at": "2026-10-12T00:04:12.862212+00:00",
-      "source": "Existing NCAAF board",
       "note": "Your ticket keeps its original odds. Recheck the live book before placing a new wager."
     }
   ]
