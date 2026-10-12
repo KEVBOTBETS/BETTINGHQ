@@ -53,7 +53,7 @@
       }
     }catch(_){}
   }
-  function requested(){let key=location.hash.slice(1).toLowerCase();if(key==="moneyling")key="moneyline";return Object.prototype.hasOwnProperty.call(configs,key)?key:"today";}
+  function requested(){let key=location.hash.slice(1).toLowerCase();if(!key)try{key=JSON.parse(localStorage.getItem('kevbot-last-page-v1')||'""').replace(/^#/,'');}catch(_){}if(key==="moneyling")key="moneyline";return Object.prototype.hasOwnProperty.call(configs,key)?key:"today";}
   function create(key){
     const config=configs[key], panel=document.createElement("section"), frame=document.createElement("iframe");
     panel.className="board-panel";panel.setAttribute("aria-label",config.title);panel.hidden=true;

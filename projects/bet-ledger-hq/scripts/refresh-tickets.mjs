@@ -50,7 +50,20 @@ for(const day of days){
   }
 }
 // Quote tracking includes a previously published pick even when its tier later drops.
-const quotes=P.latest(Object.entries(bundles).flatMap(([key,b])=>P.collect(C,key,b,now)),now);
+// Extend the existing public observation archive to every published game quote
+// and NHL/NCAAF props, including research rows. No private receipt is collected.
+const extra=[];
+try{const inventory=await get(new URL('data/system.json',base));for(const g of inventory.games||[])for(const q of g.selections||[]){
+  if(q.fresh!==true||!q.book)continue;
+  extra.push({key:g.sport,sport:g.sport,eventId:g.event_id,start:g.start,market:q.market,side:q.side,line:q.line,pick:q.pick,price:q.price,book:q.book,quote:q.observed_at,rules:'full-game',player:'',playerId:''});
+}}catch(_){/* Missing inventory keeps prior quote timestamps. */}
+for(const sport of ['nhl','ncaaf'])try{const feed=await get(new URL('../props-edge/data/'+sport+'-props.json',base));
+  if(C.freshness(feed.generated_at,6,now).status!=='recent')continue;
+  for(const q of feed.quotes||[]){if(q.price_source!=='book'||q.reference_only||q.quote_status&&q.quote_status!=='observed')continue;
+    extra.push({key:sport,sport,eventId:String(q.event_id),start:q.start_time,market:q.market,side:q.side,line:q.line,player:q.player,playerId:String(q.athlete_id||q.player_id||''),pick:q.pick||q.player+' '+q.market,price:q.price_american,book:q.book,quote:q.observed_at,rules:'full-game',price_source:'book'});
+  }
+}catch(_){/* Public prop publication unavailable; never renew old quotes. */}
+const quotes=P.latest([...Object.entries(bundles).flatMap(([key,b])=>P.collect(C,key,b,now)),...extra],now);
 await write('quotes.json',{schema:1,checked_at:stamp,quotes:quotes.filter(q=>P.valid(q,now))});
 await write('pregame-prices.json',P.observe(await read('pregame-prices.json',null),quotes,stamp));
 for(const e of Object.values(state.entries)){

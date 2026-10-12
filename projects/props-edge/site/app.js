@@ -137,6 +137,7 @@
         <div><span class="price">${odds(american)}</span><small>${changed ? 'WITH YOUR LINES' : 'MODEL BOARD'}</small></div>
       </div>
       ${placeable}
+      ${window.KevParlayView?.html(legs,null,probability)||''}
       <div class="ticket-stats">
         <div><b>${pct(probability)}</b><span>Model chance</span></div>
         <div><b>1 in ${probability > 0 ? Math.round(1 / probability) : '—'}</b><span>Estimated frequency</span></div>
@@ -539,7 +540,7 @@
       const button = event.target.closest('[data-action=single]'); if (!button) return;
       const leg = pricedLeg(state.legs.find((row) => row.id === button.dataset.id) || {});
       if (!leg.id) return;
-      addEntry({ title: leg.pick, price_american: leg.price_american, legs: [leg.pick], model_prob: leg.model_prob, kind: 'single' });
+      addEntry({ title: leg.pick, price_american: leg.price_american, legs: [leg.pick], model_prob: leg.model_prob, kind: 'single', market:leg.market,event_id:leg.event_id,matchup:leg.matchup,event_date:Q.day(leg.start_time),start_time:leg.start_time,player:leg.player,player_id:leg.player_id,side:leg.side,line:leg.line,model_version:leg.model_version||leg.tier_version,board_price:leg.price_american,board_line:leg.line,board_model_prob:leg.model_prob,push_prob:leg.push_prob,model_prob_no_push:leg.model_prob_no_push });
 
     });
     $('#parlays').addEventListener('click', async (event) => {
@@ -556,6 +557,7 @@
       }
       if (button.dataset.action === 'ledger') {
         try {
+          const audit=window.KevSiteTools?.parlay(legs,null,probability);if(audit?.valid===false)throw Error(audit.errors.join('; '));
           const snapshot=window.PropsParlays.snapshot(ticket,legs);
           addEntry({ title: `${ticket.leg_count}-leg parlay · ${ticket.scope === 'game' ? ticket.label : ticket.scope}`, price_american: american, legs: text, model_prob: probability, kind: 'parlay',parlay_snapshot:snapshot,event_date:Q.day(snapshot.start_time),matchup:ticket.games.join(' / '),settlement_mode:'auto' });
         } catch(error){alert(error.message);}

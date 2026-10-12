@@ -46,7 +46,9 @@ def build(root=ROOT,now=None,staged=None):
     quote_fresh=age(stamp,now,1.5 if sport=='nhl' else 4)
     valid=decimal(price) is not None and book and r.get('odds_verified') is not False and r.get('price_source')!='model' and not r.get('reference_only') and r.get('quote_status') in (None,'observed')
     passed=r.get('value_policy',{}).get('passes',True) and fresh and quote_fresh and valid and not r.get('held') and not r.get('filtered') and not r.get('validation_policy',{}).get('paused') and (number(r.get('stake')) or 0)>0
-    record={'market':r.get('market'),'side':r.get('side'),'line':number(r.get('line')),'pick':r.get('pick') or r.get('selection'),'price':price,'book':book,'observed_at':stamp,
+    selection_line=number(r.get('line'))
+    if sport in ('nfl','ncaaf','mlb') and r.get('market')=='ATS' and r.get('side')=='away' and selection_line is not None:selection_line=-selection_line
+    record={'market':r.get('market'),'side':r.get('side'),'line':selection_line,'pick':r.get('pick') or r.get('selection'),'price':price,'book':book,'observed_at':stamp,
      'probability':number(r.get('model_prob',r.get('p_final'))),'push_prob':number(r.get('push_prob')) or 0,'edge':number(r.get('edge')),'tier':r.get('tier'),'qualified':bool(passed),'fresh':bool(quote_fresh and valid and fresh),
      'reasons':r.get('reasons') or [r.get('value_reason') or r.get('filtered') or ('Source model has not qualified this selection' if not passed else 'Source model qualified; confirm current book offer')],'model_version':r.get('model_version') or meta.get('model_version')}
     observed.append(record)
@@ -74,7 +76,12 @@ def build(root=ROOT,now=None,staged=None):
     side='home' if p>=.5 else 'away';offers=sorted([r for r in observed if r['market']=='ML' and r['side']==side and r['fresh']],key=lambda r:r['price'],reverse=True)
     chosen=offers[0] if offers else {'market':'ML','side':side,'pick':str(home if side=='home' else away)+' ML','price':None,'book':None,'probability':p if side=='home' else 1-p,'qualified':False,'fresh':False,'reasons':['Manual research: no verified current price for this forecast']}
    key=sport+'|'+event
-   games.append({'id':key,'sport':sport,'event_id':event,'start':start,'matchup':matchup,'home':home,'away':away,'p_home':p if ready else None,'margin':margin if fresh else None,'forecast_available':bool(ready),'publication_at':publication,'publication_fresh':fresh,'selections':observed,'best':chosen,'qualified':bool(any(r['qualified'] for r in observed)),
+   news=read(path/'news.json',[])
+   if isinstance(news,dict):news=news.get('articles',news.get('news',[]))
+   news=[{'title':n.get('headline') or n.get('title'),'url':n.get('url') or (n.get('links') or {}).get('web',{}).get('href'),'published_at':n.get('published') or n.get('published_at')} for n in news if isinstance(n,dict)] if isinstance(news,list) else []
+   news=[n for n in news if n['title'] and str(n['url']).startswith('https://')][:5]
+   context={k:g[k] for k in ['venue','broadcast','home_goalie','away_goalie','nhl_game_id'] if k in g}
+   games.append({'id':key,'sport':sport,'event_id':event,'start':start,'matchup':matchup,'home':home,'away':away,'p_home':p if ready else None,'margin':margin if fresh else None,'forecast_available':bool(ready),'publication_at':publication,'publication_fresh':fresh,'selections':observed,'best':chosen,'qualified':bool(any(r['qualified'] for r in observed)),'context':context,'news':news,
     'board_url':'../'+repo+'/' if sport!='mlb' else '../mlb-edge/','model_version':meta.get('model_version'),'manual_available':True,
     'decision':{'why':('Published model leans '+str(home if p>=.5 else away)) if ready else 'Forecast unavailable; review the source board',
      'missing':([ 'Forecast publication stale or unavailable'] if not fresh else [])+(['No verified fresh book price'] if not any(r['fresh'] for r in observed) else []),

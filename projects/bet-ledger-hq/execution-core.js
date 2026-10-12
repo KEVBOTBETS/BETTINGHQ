@@ -5,7 +5,7 @@
   const closeKey=id=>'kevbot_receipt_close_v1_'+encodeURIComponent(id);
   const statuses=['Pending','Win','Loss','Push','Void'];
   function get(settings,id){try{const x=JSON.parse(settings[key(id)]||'null');const a=x?.accepted;return x?.schema===1&&x.id===id&&x.confirmed===true&&x.reference&&a&&V.decimal(a.price)!==null&&V.number(a.stake)>0&&statuses.includes(a.status)&&typeof a.book==='string'&&V.instant(a.placed_at)!==null?x:null;}catch{return null;}}
-  function selectionLine(row){return V.selectionLine(row,({'nfl-lab':'nfl','ncaaf-lab':'ncaaf'})[row.app]||'other');}
+  function selectionLine(row){const n=row.native||{};if(row.app==='mlb-edge'&&row.market==='RL'&&String(row.side).toLowerCase()===String(n.away).toLowerCase()&&n.away){const line=V.number(row.line);return line===null?null:-line;}return V.selectionLine(row,({'nfl-lab':'nfl','ncaaf-lab':'ncaaf'})[row.app]||'other');}
   function snapshot(row,at){
     const n=row.native||{};
     return {captured_at:at,provenance:'Ledger reference captured when receipt first confirmed; not necessarily original publication',

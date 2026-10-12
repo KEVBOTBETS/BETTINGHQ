@@ -16,6 +16,7 @@ def apply(root):
         for page in (root/directory).glob('*.html'):
             source = page.read_text()
             if not re.search(r'</head>', source, re.I): continue  # Redirect-only aliases.
+            source=re.sub(r'<(?:link|script)\b[^>]*data-kb-shared="true"[^>]*>(?:</script>)?\s*','',source,flags=re.I)
             # Reapplying presentation must not duplicate the network navigation.
             source = re.sub(r'\s+data-kb-(?:sport|page|light)="[^"]*"', '', source)
             source = re.sub(r'<link\b[^>]*href="[^"]*sports-theme\.css"[^>]*>\s*', '', source, flags=re.I)
@@ -25,6 +26,19 @@ def apply(root):
             source = re.sub(r'<html\b', '<html data-kb-sport="'+sport+'" data-kb-page="'+identity+'"'+light, source, count=1, flags=re.I)
             href = os.path.relpath(css, page.parent).replace(os.sep, '/')
             source = re.sub(r'</head>', '<link rel="stylesheet" href="'+href+'">\n</head>', source, count=1, flags=re.I)
+            # The same controls reach every generated board on every rebuild.
+            # Never inject twice, and retain the existing board's own scripts.
+            shared=['value-core.js','execution-core.js','betsync.js','site-tools-core.js','site-tools.js']
+            if identity in ('accuracy','ledger'): shared.append('receipt-audit.js')
+            snippets=[]
+            shared_css=os.path.relpath(root/'bet-ledger-hq/site-tools.css',page.parent).replace(os.sep,'/')
+            if 'site-tools.css' not in source: snippets.append('<link data-kb-shared="true" rel="stylesheet" href="'+shared_css+'">')
+            for name in shared:
+                if re.search(r'<script\b[^>]*src="[^"]*(?:/|^)'+re.escape(name)+'"',source):continue
+                if 'src="'+name+'"' in source:continue
+                src=os.path.relpath(root/'bet-ledger-hq'/name,page.parent).replace(os.sep,'/')
+                snippets.append('<script data-kb-shared="true" src="'+src+'" defer></script>')
+            source=re.sub(r'</head>', '\n'.join(snippets)+'\n</head>',source,count=1,flags=re.I)
             if sport != 'hq':
                 home = os.path.relpath(root/'bet-ledger-hq/index.html', page.parent).replace(os.sep, '/')
                 desk = os.path.relpath(root/'bet-ledger-hq/sports-desk.html', page.parent).replace(os.sep, '/')
