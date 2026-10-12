@@ -1,29 +1,71 @@
 {
   "schema": 1,
-  "checked_at": "2026-10-12T15:55:35.096Z",
+  "checked_at": "2026-10-12T16:06:38.308Z",
   "coverage": {
+    "nhl": {
+      "status": "available",
+      "reports": 44,
+      "checked_at": "2026-10-12T16:06:38.308Z"
+    },
     "ncaaf": {
       "status": "empty",
       "reports": 0,
-      "checked_at": "2026-10-12T15:55:35.096Z"
-    },
-    "nfl": {
-      "status": "available",
-      "reports": 538,
-      "checked_at": "2026-10-12T15:55:35.096Z"
-    },
-    "nhl": {
-      "status": "available",
-      "reports": 43,
-      "checked_at": "2026-10-12T15:55:35.096Z"
+      "checked_at": "2026-10-12T16:06:38.308Z"
     },
     "mlb": {
       "status": "available",
       "reports": 10,
-      "checked_at": "2026-10-12T15:55:35.096Z"
+      "checked_at": "2026-10-12T16:06:38.308Z"
+    },
+    "nfl": {
+      "status": "available",
+      "reports": 538,
+      "checked_at": "2026-10-12T16:06:38.308Z"
     }
   },
   "events": [
+    {
+      "id": "injury|nhl:9:Joel Kiviranta|2026-10-12T16:06:38.308Z",
+      "kind": "injury",
+      "observed_at": "2026-10-12T16:06:38.308Z",
+      "sport": "nhl",
+      "title": "New availability report",
+      "event": "Dallas Stars",
+      "pick": "Joel Kiviranta",
+      "before": "Not in the previous dated report",
+      "after": "Day-To-Day · Lower Body",
+      "source_quote_at": "2026-10-12T15:50Z",
+      "source": "ESPN injuries",
+      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
+    },
+    {
+      "id": "injury|nfl:5:Carson Schwesinger|2026-10-12T16:06:38.308Z",
+      "kind": "injury",
+      "observed_at": "2026-10-12T16:06:38.308Z",
+      "sport": "nfl",
+      "title": "Player availability changed",
+      "event": "Cleveland Browns",
+      "pick": "Carson Schwesinger",
+      "before": "Questionable · Lower Leg",
+      "after": "Questionable · Ankle",
+      "source_quote_at": "2026-10-11T22:10Z",
+      "source": "ESPN injuries",
+      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
+    },
+    {
+      "id": "injury|nfl:17:A.J. Brown|2026-10-12T16:06:38.308Z",
+      "kind": "injury",
+      "observed_at": "2026-10-12T16:06:38.308Z",
+      "sport": "nfl",
+      "title": "New availability report",
+      "event": "New England Patriots",
+      "pick": "A.J. Brown",
+      "before": "Not in the previous dated report",
+      "after": "Injured Reserve · Ankle",
+      "source_quote_at": "2026-10-12T15:40Z",
+      "source": "ESPN injuries",
+      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
+    },
     {
       "id": "injury|nfl:19:Dominic Zvada|2026-10-12T15:55:35.096Z",
       "kind": "injury",
@@ -2849,52 +2891,6 @@
       "source_quote_at": "2026-10-11T19:21Z",
       "source": "ESPN injuries",
       "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:25:Deebo Samuel Sr.|2026-10-11T23:19:58.323Z",
-      "kind": "injury",
-      "observed_at": "2026-10-11T23:19:58.323Z",
-      "sport": "nfl",
-      "title": "Player availability changed",
-      "event": "San Francisco 49ers",
-      "pick": "Deebo Samuel Sr.",
-      "before": "Questionable · Hamstring",
-      "after": "Out · Hamstring",
-      "source_quote_at": "2026-10-11T23:06Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "odds|props|401872993|2026-10-12T00:20Z|Receiving yards|Zay Flowers|over|Fanatics Sportsbook|2026-10-11T23:04:17.719Z",
-      "kind": "odds",
-      "observed_at": "2026-10-11T23:04:17.719Z",
-      "sport": "props",
-      "event": "Baltimore Ravens @ Atlanta Falcons",
-      "start": "2026-10-12T00:20Z",
-      "pick": "Zay Flowers — Over 65.5 Receiving yards",
-      "title": "Published odds changed",
-      "before": "-120 · line 65.5",
-      "after": "-125 · line 65.5",
-      "book": "Fanatics Sportsbook",
-      "source_quote_at": "2026-10-11T23:03:01.435271+00:00",
-      "source": "Existing Props board",
-      "note": "Your ticket keeps its original odds. Recheck the live book before placing a new wager."
-    },
-    {
-      "id": "odds|props|401872993|2026-10-12T00:20Z|Receiving yards|Zay Flowers|over|theScore Bet|2026-10-11T23:04:17.719Z",
-      "kind": "odds",
-      "observed_at": "2026-10-11T23:04:17.719Z",
-      "sport": "props",
-      "event": "Baltimore Ravens @ Atlanta Falcons",
-      "start": "2026-10-12T00:20Z",
-      "pick": "Zay Flowers — Over 69.5 Receiving yards",
-      "title": "Published odds changed",
-      "before": "-105 · line 69.5",
-      "after": "-110 · line 69.5",
-      "book": "theScore Bet",
-      "source_quote_at": "2026-10-11T23:03:01.435271+00:00",
-      "source": "Existing Props board",
-      "note": "Your ticket keeps its original odds. Recheck the live book before placing a new wager."
     }
   ]
 }
