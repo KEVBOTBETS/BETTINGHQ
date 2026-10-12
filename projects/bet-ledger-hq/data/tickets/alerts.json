@@ -1,29 +1,43 @@
 {
   "schema": 1,
-  "checked_at": "2026-10-12T03:49:35.925Z",
+  "checked_at": "2026-10-12T03:57:24.132Z",
   "coverage": {
-    "nfl": {
-      "status": "available",
-      "reports": 522,
-      "checked_at": "2026-10-12T03:49:35.925Z"
-    },
-    "nhl": {
-      "status": "available",
-      "reports": 42,
-      "checked_at": "2026-10-12T03:49:35.925Z"
-    },
     "mlb": {
       "status": "available",
       "reports": 10,
-      "checked_at": "2026-10-12T03:49:35.925Z"
+      "checked_at": "2026-10-12T03:57:24.132Z"
     },
     "ncaaf": {
       "status": "empty",
       "reports": 0,
-      "checked_at": "2026-10-12T03:49:35.925Z"
+      "checked_at": "2026-10-12T03:57:24.132Z"
+    },
+    "nhl": {
+      "status": "available",
+      "reports": 42,
+      "checked_at": "2026-10-12T03:57:24.132Z"
+    },
+    "nfl": {
+      "status": "available",
+      "reports": 521,
+      "checked_at": "2026-10-12T03:57:24.132Z"
     }
   },
   "events": [
+    {
+      "id": "injury|nfl:19:Jermaine Eluemunor|2026-10-12T03:57:24.132Z",
+      "kind": "injury",
+      "observed_at": "2026-10-12T03:57:24.132Z",
+      "sport": "nfl",
+      "title": "Player availability changed",
+      "event": "New York Giants",
+      "pick": "Jermaine Eluemunor",
+      "before": "Questionable · questionable",
+      "after": "Questionable · Calf",
+      "source_quote_at": "2026-10-12T03:47Z",
+      "source": "ESPN injuries",
+      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
+    },
     {
       "id": "odds|props|401872994|2026-10-13T00:15Z|Passing yards|Matthew Stafford|over|DraftKings|2026-10-12T03:49:35.925Z",
       "kind": "odds",
@@ -2866,20 +2880,6 @@
       "before": "Active · Hargrave (toe) is active Week 5 against the Bears.",
       "after": "Questionable · Undisclosed",
       "source_quote_at": "2026-10-11T16:12Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:34:David Montgomery|2026-10-11T20:19:41.005Z",
-      "kind": "injury",
-      "observed_at": "2026-10-11T20:19:41.005Z",
-      "sport": "nfl",
-      "title": "Player availability changed",
-      "event": "Houston Texans",
-      "pick": "David Montgomery",
-      "before": "Out · Groin",
-      "after": "Questionable · Groin",
-      "source_quote_at": "2026-10-11T18:45Z",
       "source": "ESPN injuries",
       "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
     }
