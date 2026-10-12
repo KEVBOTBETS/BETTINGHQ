@@ -1,29 +1,45 @@
 {
   "schema": 1,
-  "checked_at": "2026-10-12T09:25:56.651Z",
+  "checked_at": "2026-10-12T09:48:36.786Z",
   "coverage": {
     "ncaaf": {
       "status": "empty",
       "reports": 0,
-      "checked_at": "2026-10-12T09:25:56.651Z"
-    },
-    "nfl": {
-      "status": "available",
-      "reports": 525,
-      "checked_at": "2026-10-12T09:25:56.651Z"
-    },
-    "nhl": {
-      "status": "available",
-      "reports": 42,
-      "checked_at": "2026-10-12T09:25:56.651Z"
+      "checked_at": "2026-10-12T09:48:36.786Z"
     },
     "mlb": {
       "status": "available",
       "reports": 10,
-      "checked_at": "2026-10-12T09:25:56.651Z"
+      "checked_at": "2026-10-12T09:48:36.786Z"
+    },
+    "nhl": {
+      "status": "available",
+      "reports": 42,
+      "checked_at": "2026-10-12T09:48:36.786Z"
+    },
+    "nfl": {
+      "status": "available",
+      "reports": 525,
+      "checked_at": "2026-10-12T09:48:36.786Z"
     }
   },
   "events": [
+    {
+      "id": "odds|mlb|849812|2026-10-12T21:00:00Z|TOTAL||under|DraftKings|2026-10-12T09:48:36.786Z",
+      "kind": "odds",
+      "observed_at": "2026-10-12T09:48:36.786Z",
+      "sport": "mlb",
+      "event": "LAD @ MIL",
+      "start": "2026-10-12T21:00:00Z",
+      "pick": "Under 7.0",
+      "title": "Published odds changed",
+      "before": "-124 · line 7",
+      "after": "+103 · line 6.5",
+      "book": "DraftKings",
+      "source_quote_at": "2026-10-12T09:46:01.184670+00:00",
+      "source": "Existing MLB board",
+      "note": "Your ticket keeps its original odds. Recheck the live book before placing a new wager."
+    },
     {
       "id": "odds|props|401872994|2026-10-13T00:15Z|Passing yards|Matthew Stafford|over|DraftKings|2026-10-12T06:58:49.380Z",
       "kind": "odds",
@@ -2876,20 +2892,6 @@
       "before": "Not in the previous dated report",
       "after": "Active · Smith completed 17 of 30 pass attempts for 182 yards and a touchdown in Sunday's 17-12 win over the Browns. He also rushed five times for seven yards and lost a fumble.",
       "source_quote_at": "2026-10-11T21:29Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:21:Lane Johnson|2026-10-11T21:44:01.809Z",
-      "kind": "injury",
-      "observed_at": "2026-10-11T21:44:01.809Z",
-      "sport": "nfl",
-      "title": "New availability report",
-      "event": "Philadelphia Eagles",
-      "pick": "Lane Johnson",
-      "before": "Not in the previous dated report",
-      "after": "Reserve-Ret · Personal",
-      "source_quote_at": "2026-10-11T12:47Z",
       "source": "ESPN injuries",
       "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
     }
