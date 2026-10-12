@@ -1,0 +1,7 @@
+import assert from 'node:assert/strict';import C from '../opportunity-core.js';import X from '../execution-core.js';
+const storage={v:new Map(),getItem(k){return this.v.get(k)||null},setItem(k,v){this.v.set(k,v)}};assert.deepEqual(C.toggle(storage,'nhl|g'),['nhl|g']);assert.deepEqual(C.toggle(storage,'nhl|g'),[]);
+const row={id:'one',app:'nfl-lab',sport:'NFL',event:'A @ B',market:'ML',selection:'A ML',line:null,price:110,native:{game_id:'g'},event_date:'2026-10-12'};
+const parlay={...row,id:'two',app:'props',native:{legs:[{sport:'NFL',event_id:'g'},{sport:'NHL',event_id:'h'},{sport:'NFL',event_id:'g'}]}};
+const at='2026-10-12T16:00:00Z',input={price:110,stake:10,line:null,book:'Actual Book',placed_at:'2026-10-12T15:30:00Z',status:'Pending'},settings={};for(const r of [row,parlay])settings[X.key(r.id)]=JSON.stringify(X.confirm(r,input,null,at));
+const p=C.portfolio([row,parlay,{...row,id:'unconfirmed'}],settings,15);assert.equal(p.total_stake,20);assert.equal(p.receipts,2);assert.equal(p.unconfirmed,1);assert.equal(p.groups.find(g=>g.key==='nfl|g').stake,20);assert.equal(p.groups.find(g=>g.key==='nfl|g').over_limit,true);assert.equal(p.overlap,1);assert.equal(p.groups.find(g=>g.key==='nhl|h').stake,10);
+assert.deepEqual(C.changes({p_home:.5,best:{market:'ML',side:'home',book:'A',price:110,line:null}},{p_home:.55,best:{market:'ML',side:'home',book:'B',price:120,line:null}}).map(x=>x.label),['Home win estimate']);console.log('Watchlist, accepted-only portfolio, repeated event deduplication and exact-book change comparison passed');

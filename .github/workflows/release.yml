@@ -94,6 +94,13 @@ jobs:
         with:
           path: .validation/browser-certificate
           key: browser-${{ runner.os }}-py312-node22-${{ steps.code.outputs.fingerprint }}
+      - name: Restore bounded public NHL download cache
+        if: github.event_name != 'pull_request'
+        uses: actions/cache/restore@v6
+        with:
+          path: projects/nhl-edge-lab/state/public_research_cache.json
+          key: nhl-public-downloads-${{ runner.os }}-${{ github.run_id }}
+          restore-keys: nhl-public-downloads-${{ runner.os }}-
       - name: Refresh real data
         if: github.event_name != 'pull_request'
         env:
@@ -111,6 +118,12 @@ jobs:
           python tools/refresh.py --sport "$sport"
           node projects/mlb-edge/tests/test_sim.mjs projects/mlb-edge/docs/data
           python -m unittest discover -s tests
+      - name: Save bounded public NHL download cache
+        if: github.event_name != 'pull_request'
+        uses: actions/cache/save@v6
+        with:
+          path: projects/nhl-edge-lab/state/public_research_cache.json
+          key: nhl-public-downloads-${{ runner.os }}-${{ github.run_id }}
       - name: Save public model history
         id: save
         if: github.event_name != 'pull_request'

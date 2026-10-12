@@ -13,6 +13,9 @@ parser.add_argument('--sport',choices=['all','football','mlb','wnba','nhl','prop
 args=parser.parse_args()
 selected={'all':['nfl-edge-lab','ncaaf-edge-lab','mlb-edge','props-edge','wnba-edge-lab','nhl-edge-lab','ladderbet'],'football':['nfl-edge-lab','ncaaf-edge-lab','props-edge'],'mlb':['mlb-edge'],'nhl':['nhl-edge-lab'],'wnba':['wnba-edge-lab'],'props':['props-edge'],'ladder':['ladderbet'],'archive':[]}[args.sport]
 for repo in selected:
+    if repo=='nhl-edge-lab':
+        try:refresh_project(ROOT/'projects'/repo,[sys.executable,'-m','pipeline.public_research'],timeout=600)
+        except (subprocess.CalledProcessError,subprocess.TimeoutExpired):print('::warning::Public NHL research import failed; original timestamps retained.')
     command=['bash','scripts/run_build.sh'] if repo=='mlb-edge' else [sys.executable,'-m','ladder','render','--public','--out','docs/index.html'] if repo=='ladderbet' else [sys.executable,'-m','pipeline.build']
     try:
         refresh_project(ROOT/'projects'/repo,command,timeout=1800)
@@ -24,6 +27,8 @@ if args.sport in ['all','football','nhl','props']:
         subprocess.run([sys.executable,'-m','pipeline.multisport'],cwd=ROOT/'projects/props-edge',check=True,timeout=600)
     except (subprocess.CalledProcessError,subprocess.TimeoutExpired):
         print('::warning::Multisport props refresh failed; prior quote timestamps retained.')
+if args.sport in ['all','football','nhl','props']:
+    subprocess.run([sys.executable,'tools/nhl_tracking.py','--capture'],cwd=ROOT,check=True,timeout=90)
 subprocess.run([sys.executable,'tools/spread_tracking.py'],cwd=ROOT,check=True,timeout=90)
 subprocess.run([sys.executable,'tools/newsletters.py'],cwd=ROOT,check=True,timeout=90)
 if args.sport in ['all','football','props']:

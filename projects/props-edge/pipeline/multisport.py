@@ -16,6 +16,7 @@ from .providers.covers import _TokenParser, _heading, _book, _parse_offer, _comp
 from .providers.espn import parse_summaries
 from .schema import american_to_decimal
 
+from .nhl_opportunity import forecasts as opportunity_forecasts
 from .nhl_goals import forecasts as goal_forecasts, VERSION as GOAL_VERSION
 
 ROOT=Path(__file__).resolve().parents[1]
@@ -128,7 +129,12 @@ def build(sport,cache,now):
     except (OSError,ProviderError):errors.append('Public prop prices unavailable; no prices inferred.')
     parser=_TokenParser();parser.feed(html)
     links=MatchupLinks(sport);links.feed(html)
-    rosters={};stats={};watch=[]
+    rosters={};stats={};watch=[];research_inputs={}
+    if sport=='NHL':
+        try:research_inputs=json.loads((folder/'site/data/public-research.json').read_text())
+        except (OSError,ValueError):pass
+        at=instant(research_inputs.get('generated_at'))
+        if not at or not 0<=(now-at).total_seconds()<=6*3600:research_inputs={}
     if sport=='NHL':
         start_year=now.year if now.month>=7 else now.year-1;season=start_year*10000+start_year+1
         def team_data(team):
@@ -146,8 +152,15 @@ def build(sport,cache,now):
         with ThreadPoolExecutor(max_workers=6) as pool:
             for team,athletes,data in pool.map(team_data,teams):rosters[team]=athletes;stats[team]=data
         for g in games:
-            watch.extend(goal_forecasts(g,rosters,stats,season))
-            watch.extend(nhl_watchlist(g,rosters,stats,season))
+            scorers=goal_forecasts(g,rosters,stats,season)
+            shadows=opportunity_forecasts(g,scorers,research_inputs)
+            for row in scorers:
+                row['shadow']=shadows.get((str(g['game_id']),row['athlete_id']))
+            watch.extend(scorers)
+            history_rows=nhl_watchlist(g,rosters,stats,season)
+            for row in history_rows:
+                if row['market']=='Shots on goal':row['shadow']=shadows.get((str(g['game_id']),row['athlete_id']))
+            watch.extend(history_rows)
     else:
         # Restrict roster/history calls to teams whose cards have current offered markets.
         offered={t for c in parser.cards for t in c[1:4] if t in teams}
@@ -179,13 +192,17 @@ def build(sport,cache,now):
     history={(w['event_id'],w['athlete_id'],w['market']):w for w in watch}
     for q in quotes:
         w=history.get((q['event_id'],q['athlete_id'],q['market']))
-        if w:q.update({k:w[k] for k in ['average','samples','recent','history_season','history_note','model_prob','model_version','probability_basis'] if k in w})
+        if w:q.update({k:w[k] for k in ['average','samples','recent','history_season','history_note','model_prob','model_version','probability_basis','shadow'] if k in w})
     result={'sport':sport,'generated_at':stamp,'source_model_at':json.loads((folder/'site/data/meta.json').read_text()).get('generated_at'),'games':[{k:g.get(k) for k in ['game_id','date','away','home','away_name','home_name','away_logo','home_logo','season_type','venue']} for g in games],'quotes':quotes,'watchlist':watch,'errors':errors,'notes':['Public book offers are matched to one upcoming game and one current roster player.','Player participation, starting goalie and final combined parlay price must be confirmed at the book.','NHL/college history is descriptive research; no calibrated prop win probability is claimed.'],'source_url':url}
     result['diagnostics']={'advertised_game_pages':len(links.links),'index_cards':len(parser.cards),'upcoming_games':len(games),'roster_teams':sum(bool(v) for v in rosters.values()),'statistics_teams':sum(bool(v.get('skaters')) for v in stats.values()),'matched_offers':len(quotes)}
     result['public_game_pages']=links.links
     if sport=='NHL':
         result['goal_model']={'version':GOAL_VERSION,'validated':False,'method':'Gamma-Poisson goal-rate shrinkage with bounded matchup adjustment','basis':'Conditional on player participation; regulation and OT goals only; shootout excluded','prior_max_games':30,'baseline_games':12}
         result['goal_scorers']=[w for w in watch if w['market']=='Anytime goal']
+        result['research_sources']={k:research_inputs.get(k) for k in ['generated_at','credit','usage','sources']}
+        result['nhl_game_ids']={str(g['game_id']):g.get('nhl_game_id') for g in games}
+        try:result['scorer_tracking']=json.loads((folder/'site/data/scorer-tracking.json').read_text())
+        except (OSError,ValueError):result['scorer_tracking']={'models':[],'status':'Collecting new pregame forecasts'}
     if games and not quotes:
         if links.links and not parser.cards:errors.append('Covers now advertises separate game odds pages; its index contains no player offer cards.')
         errors.append('No event-matched book offers were extracted. Player statistics and manual book-line entry remain available.')

@@ -40,10 +40,51 @@ The first valid pregame forecast is frozen for each event/model/version. A later
 
 NFL play data is available without credentials. nflverse historical files may be corrected after games; retrospective replay is labeled exploratory and does not impersonate a vintage backtest. New prospective captures provide the usable test. Source files retain observation timestamps. Failed imports retain previously available season data and source metadata.
 
-NCAAF EPA inputs and NHL ice-time opportunity histories have not been imported. Their new opportunity challengers abstain. Existing NCAAF/NHL forecasts, lineup observations, descriptive player history and exact-price research remain available. No NFL probability distribution or fabricated participation data is applied to those sports.
+NCAAF EPA inputs remain unavailable. NHL public ice-time and role/shot-quality research is available in NHL Props under the release described below. Existing forecasts and exact-price research remain available. No NFL probability distribution or fabricated participation data is applied to hockey or college football.
 
 Before changing model definitions or comparison policy, bump `VERSION` and model versions. Preserve old captures. Do not mix versions into a claimed promotion result. There is no claimed accuracy improvement or guaranteed profitable model in this release.
 
 Sources: [nflverse releases](https://github.com/nflverse/nflverse-data/releases/tag/pbp), [data availability and correction schedule](https://nflverse.nflverse.com/articles/nflverse_data_schedule.html), observed source snapshots from the existing ESPN/NHL/Covers pipelines.
 
 The opportunity and current NFL prop probabilities also have a prospective archive, keyed by exact event/player/market/side/line/model/version. Multiple books count as one contract. Completed player opportunities must match an unambiguous recorded player; missing participation stays ungraded. Pushes are reported but excluded from no-push calibration. Their record is separate from the game-model record.
+
+
+## NHL and whole-system release
+
+The NHL public research importer reads Daily Faceoff's public HTML starter/lineup
+pages and only downloads CSV/ZIP files advertised by MoneyPuck's data page. No
+new API requests are used. Downloaded source timestamps survive failed reads.
+The bounded cache is private to CI and is never published. MoneyPuck receives
+attribution; these inputs are for personal/non-commercial research, and
+commercial use requires permission.
+
+NHL starting-goalie confirmations require exact teams, game start and an explicit
+confirmed report with provenance. Likely/unknown stays separate. The production
+goal-rate baseline remains intact. A versioned shot-quality challenger blends
+current and prior expected-goal rates, handles confirmed goalie GSAx and shows
+unweighted goalie sensitivities. The scorer challenger uses observed ice time,
+shrunk shot-quality/finishing rates, projected roles and conserved team totals.
+Power-play assignments are context rather than an invented fixed boost.
+
+NHL prop tickets can use shared game-pace draws and team shot allocations, with
+goals constrained to be a subset of shots. Missing simulation inputs abstain;
+baseline different-game products remain available. The simulation-precision
+interval does not measure model accuracy. Zero simulation wins does not prove
+zero real probability. Actual combined sportsbook prices are never invented.
+
+`python tools/nhl_tracking.py --capture` freezes first eligible forecasts within
+48 hours before start. Baseline and role/xG versions have separate records. Only
+completed official NHL games joined to exact player game results with positive
+ice time settle. Missing participation remains ungraded. Paired comparisons
+require identical captures; intervals resample games to respect dependence.
+Plain site builds neither backfill forecasts nor alter this archive.
+
+The Opportunity Finder (`#opportunities`) adds five system features within the
+existing hub: an eight-feed source-health overview; a searchable cross-sport
+game inventory; a private browser watchlist; decision/price/change details; and
+accepted-receipt portfolio exposure. Qualification uses the staged public price
+policy and expires in the browser. Research availability remains separate. The
+public system report contains no wagers, credentials or receipt settings.
+Portfolio totals count each accepted ticket once; per-game parlay exposures
+overlap and must not be summed. User-set caps are concentration preferences,
+not stake recommendations or measured correlations.

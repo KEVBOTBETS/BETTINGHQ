@@ -3,6 +3,7 @@
 (() => {
   "use strict";
   const configs = {
+    opportunities:{title:"Opportunity Finder",description:"Every upcoming game, public source health, your watchlist and accepted-receipt exposure.",url:"opportunity-finder.html"},
     "thursday-night":{title:"Thursday Night Football",description:"This night’s NFL matchups, news, lines, bets, props and parlays.",url:"night-football.html?night=thursday"},
     "sunday-night":{title:"Sunday Night Football",description:"This night’s NFL matchups, news, lines, bets, props and parlays.",url:"night-football.html?night=sunday"},
     "monday-night":{title:"Monday Night Football",description:"This night’s NFL matchups, news, lines, bets, props and parlays.",url:"night-football.html?night=monday"},

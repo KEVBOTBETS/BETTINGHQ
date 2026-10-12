@@ -10,3 +10,6 @@ _public_site/
 .env.*
 *.log
 validation.json
+
+# Bounded public-download cache; CI restores it without committing raw inputs.
+projects/nhl-edge-lab/state/public_research_cache.json

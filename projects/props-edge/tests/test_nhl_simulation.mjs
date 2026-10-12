@@ -1,0 +1,6 @@
+import assert from 'node:assert/strict';import S from '../site/nhl-simulation.js';
+const q=(game,id,market='Anytime goal',side='yes',line=null)=>({event_id:game,athlete_id:id,team:'BUF',market,side,line,shadow:{version:'test',model_prob:1-(1+.4/20)**-20,simulation:{goals:.4,shots:3,team_shots:30,pace_shape:20}}});
+let a=q('g','1'),b=q('g','2');assert.deepEqual(S.simulate([a,b]),S.simulate([a,b]));const r=S.simulate([a,b],{draws:20000});assert.ok(r.probability>.08&&r.probability<.16);assert.equal(r.research_only,true);assert.equal(r.validated,false);
+const correlated=S.simulate([a,q('g','1','Shots on goal','over',.5)],{draws:20000});assert.ok(Math.abs(correlated.probability-a.shadow.model_prob)<.015,'A goal implies at least one shot, so conjunction must equal scorer chance');
+assert.equal(S.simulate([a,a]),null);assert.equal(S.simulate([a,{...b,shadow:null}]),null);assert.equal(S.simulate([a,{...b,side:'no'}]),null);
+const low={...q('h','3'),shadow:{version:'test',model_prob:.000001,simulation:{goals:.000001,shots:3,team_shots:30}}};const zero=S.simulate([low,{...low,event_id:'i',athlete_id:'4'}]);assert.equal(zero.probability,0);assert.ok(zero.monte_carlo_interval[1]>0,'Zero observed wins is not proof of zero probability');console.log('NHL shared pace, conserved shots, goal/shot dependence, abstention and zero-count uncertainty passed');

@@ -4,6 +4,7 @@ from concurrent.futures import ThreadPoolExecutor
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
 from zoneinfo import ZoneInfo
+from . import public_research
 from . import public_odds
 from . import official as nhl
 from . import challenger
@@ -179,6 +180,8 @@ def main():
           'ot_wins':extra.get('ot_wins'),'ot_losses':extra.get('ot_losses')}
         return tid,{**base,'current':current.get(tid,{}),'prior':prior.get(tid,{}),'stats_season':stats_season,'extra':extra,'stats_observed_at':observed,'context_features':context}
     with ThreadPoolExecutor(max_workers=4) as pool:teams=dict(pool.map(team_stats,sorted(set(current)|set(prior))))
+    research_inputs=read(OUT/'public-research.json',{})
+    if not public_research.fresh(research_inputs.get('generated_at'),now,6):research_inputs={}
     records=read(STATE/'model_accuracy.json',{})
     known=read(OUT/'games.json',[])+list(records.values());games={}
     for key,raw in boards:
@@ -221,6 +224,9 @@ def main():
         if g['state']!='pre' or instant(g['date'])<=now:
             g['projection']=records.get(g['game_id'],{}).get('projection',{'ratings_known':False,'reason':'No frozen pregame forecast for this game'})
             g['challenger']=records.get(g['game_id'],{}).get('challenger')
+        g['public_context']=public_research.context(g,research_inputs) if research_inputs and g['state']=='pre' else None
+        for side,q in research_inputs.get('goalies',{}).get(str(g['game_id']),{}).items():
+            if side in ('home','away') and (q.get('confirmed') or not g.get(side+'_goalie',{}).get('confirmed')):g[side+'_goalie']={**g.get(side+'_goalie',{}),**q}
         g['p_home']=g['projection'].get('p_home');board.extend(candidates(g,now))
     for record in list(records.values()):
         if record.get('result') or record['game_id'] in games:continue

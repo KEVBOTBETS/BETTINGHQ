@@ -9,6 +9,7 @@ from performance import build as build_performance
 from challengers import evaluate as evaluate_challengers
 from research.build import build as build_research
 from validation import report as build_validation
+from system_report import build as build_system_report
 
 ROOT = Path(__file__).resolve().parents[1]
 OUT = ROOT / '_site'
@@ -55,6 +56,7 @@ def main():
     performance['challengers'] = evaluate_challengers(performance['records'])
     (target/'data/performance.json').write_text(json.dumps(performance,separators=(',',':'),allow_nan=False)+'\n')
     build_research(ROOT, target/'data/research/report.json')
+    (target/'data/system.json').write_text(json.dumps(build_system_report(ROOT,staged=OUT),separators=(',',':'),allow_nan=False)+'\n')
     apply_sports_theme(OUT)
     (OUT/'.nojekyll').touch()
     (OUT/'index.html').write_text('''<!doctype html><html lang="en"><meta charset="utf-8">
