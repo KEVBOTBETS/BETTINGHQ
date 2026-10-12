@@ -1,29 +1,57 @@
 {
   "schema": 1,
-  "checked_at": "2026-10-12T23:23:04.560Z",
+  "checked_at": "2026-10-12T23:50:15.890Z",
   "coverage": {
+    "nhl": {
+      "status": "available",
+      "reports": 43,
+      "checked_at": "2026-10-12T23:50:15.890Z"
+    },
+    "nfl": {
+      "status": "available",
+      "reports": 549,
+      "checked_at": "2026-10-12T23:50:15.890Z"
+    },
     "ncaaf": {
       "status": "empty",
       "reports": 0,
-      "checked_at": "2026-10-12T23:23:04.560Z"
-    },
-    "nhl": {
-      "status": "available",
-      "reports": 42,
-      "checked_at": "2026-10-12T23:23:04.560Z"
+      "checked_at": "2026-10-12T23:50:15.890Z"
     },
     "mlb": {
       "status": "available",
       "reports": 6,
-      "checked_at": "2026-10-12T23:23:04.560Z"
-    },
-    "nfl": {
-      "status": "available",
-      "reports": 551,
-      "checked_at": "2026-10-12T23:23:04.560Z"
+      "checked_at": "2026-10-12T23:50:15.890Z"
     }
   },
   "events": [
+    {
+      "id": "starter|nhl:nhl:2026020089:away|2026-10-12T23:50:15.890Z",
+      "kind": "starter",
+      "observed_at": "2026-10-12T23:50:15.890Z",
+      "sport": "nhl",
+      "event": "VGK @ MIN",
+      "start": "2026-10-13T00:00:00+00:00",
+      "title": "NHL starting goalie updated",
+      "before": "Carter Hart",
+      "after": "Carter Hart · confirmed",
+      "source_quote_at": "2026-10-12T23:49:29.315578+00:00",
+      "source": "NHL board",
+      "note": "Review the matchup after a starter change; the baseline does not price individual goalie talent."
+    },
+    {
+      "id": "injury|nhl:37:Parker Wotherspoon|2026-10-12T23:50:15.890Z",
+      "kind": "injury",
+      "observed_at": "2026-10-12T23:50:15.890Z",
+      "sport": "nhl",
+      "title": "New availability report",
+      "event": "Vegas Golden Knights",
+      "pick": "Parker Wotherspoon",
+      "before": "Not in the previous dated report",
+      "after": "Out · Upper Body",
+      "source_quote_at": "2026-10-12T23:37Z",
+      "source": "ESPN injuries",
+      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
+    },
     {
       "id": "injury|nfl:2:Landon Jackson|2026-10-12T23:23:04.560Z",
       "kind": "injury",
@@ -2847,38 +2875,6 @@
       "book": "DraftKings",
       "source_quote_at": "2026-10-12T17:50:30.985372+00:00",
       "source": "Existing NCAAF board",
-      "note": "Your ticket keeps its original odds. Recheck the live book before placing a new wager."
-    },
-    {
-      "id": "price-limit|ncaaf|401856721|2026-10-17T19:30Z|ATS||away|DraftKings|2026-10-12T17:53:31.438Z",
-      "kind": "price-limit",
-      "observed_at": "2026-10-12T17:53:31.438Z",
-      "sport": "ncaaf",
-      "event": "MIZ @ MISS",
-      "start": "2026-10-17T19:30Z",
-      "pick": "MIZ +6",
-      "title": "Price below published minimum",
-      "before": "-110",
-      "after": "-112",
-      "book": "DraftKings",
-      "source_quote_at": "2026-10-12T17:50:30.985372+00:00",
-      "source": "Published price policy",
-      "note": "Minimum -111 at unchanged line 6. Uses the saved forecast, not a new model approval. Confirm current odds and qualification; scheduled observations can miss intervening moves."
-    },
-    {
-      "id": "odds|mlb|849812|2026-10-12T21:00:00Z|TOTAL||under|DraftKings|2026-10-12T17:41:15.573Z",
-      "kind": "odds",
-      "observed_at": "2026-10-12T17:41:15.573Z",
-      "sport": "mlb",
-      "event": "LAD @ MIL",
-      "start": "2026-10-12T21:00:00Z",
-      "pick": "Under 7.0",
-      "title": "Published odds changed",
-      "before": "-115 · line 7",
-      "after": "-107 · line 7",
-      "book": "DraftKings",
-      "source_quote_at": "2026-10-12T17:38:58.431998+00:00",
-      "source": "Existing MLB board",
       "note": "Your ticket keeps its original odds. Recheck the live book before placing a new wager."
     }
   ]
