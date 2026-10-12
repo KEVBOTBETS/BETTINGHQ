@@ -1,29 +1,120 @@
 {
   "schema": 1,
-  "checked_at": "2026-10-12T21:21:10.430Z",
+  "checked_at": "2026-10-12T21:42:27.478Z",
   "coverage": {
-    "nfl": {
+    "mlb": {
       "status": "available",
-      "reports": 551,
-      "checked_at": "2026-10-12T21:21:10.430Z"
-    },
-    "ncaaf": {
-      "status": "empty",
-      "reports": 0,
-      "checked_at": "2026-10-12T21:21:10.430Z"
+      "reports": 6,
+      "checked_at": "2026-10-12T21:42:27.478Z"
     },
     "nhl": {
       "status": "available",
       "reports": 44,
-      "checked_at": "2026-10-12T21:21:10.430Z"
+      "checked_at": "2026-10-12T21:42:27.478Z"
     },
-    "mlb": {
+    "ncaaf": {
+      "status": "empty",
+      "reports": 0,
+      "checked_at": "2026-10-12T21:42:27.478Z"
+    },
+    "nfl": {
       "status": "available",
-      "reports": 6,
-      "checked_at": "2026-10-12T21:21:10.430Z"
+      "reports": 548,
+      "checked_at": "2026-10-12T21:42:27.478Z"
     }
   },
   "events": [
+    {
+      "id": "odds|mlb|849820|2026-10-13T00:00:00Z|TOTAL||under|DraftKings|2026-10-12T21:42:27.478Z",
+      "kind": "odds",
+      "observed_at": "2026-10-12T21:42:27.478Z",
+      "sport": "mlb",
+      "event": "CLE @ TB",
+      "start": "2026-10-13T00:00:00Z",
+      "pick": "Under 7.0",
+      "title": "Published odds changed",
+      "before": "+100 · line 6.5",
+      "after": "-119 · line 7",
+      "book": "DraftKings",
+      "source_quote_at": "2026-10-12T21:40:44.899215+00:00",
+      "source": "Existing MLB board",
+      "note": "Your ticket keeps its original odds. Recheck the live book before placing a new wager."
+    },
+    {
+      "id": "odds|props|401872994|2026-10-13T00:15Z|Passing yards|Matthew Stafford|over|DraftKings|2026-10-12T21:42:27.478Z",
+      "kind": "odds",
+      "observed_at": "2026-10-12T21:42:27.478Z",
+      "sport": "props",
+      "event": "Buffalo Bills @ Los Angeles Rams",
+      "start": "2026-10-13T00:15Z",
+      "pick": "Matthew Stafford — Over 280.5 Passing yards",
+      "title": "Published odds changed",
+      "before": "-112 · line 283.5",
+      "after": "-111 · line 278.5",
+      "book": "DraftKings",
+      "source_quote_at": "2026-10-12T21:41:00.614486+00:00",
+      "source": "Existing Props board",
+      "note": "Your ticket keeps its original odds. Recheck the live book before placing a new wager."
+    },
+    {
+      "id": "odds|props|401872994|2026-10-13T00:15Z|Passing yards|Matthew Stafford|over|theScore Bet|2026-10-12T21:42:27.478Z",
+      "kind": "odds",
+      "observed_at": "2026-10-12T21:42:27.478Z",
+      "sport": "props",
+      "event": "Buffalo Bills @ Los Angeles Rams",
+      "start": "2026-10-13T00:15Z",
+      "pick": "Matthew Stafford — Over 279.5 Passing yards",
+      "title": "Published odds changed",
+      "before": "-110 · line 284.5",
+      "after": "-110 · line 279.5",
+      "book": "theScore Bet",
+      "source_quote_at": "2026-10-12T21:41:00.614486+00:00",
+      "source": "Existing Props board",
+      "note": "Your ticket keeps its original odds. Recheck the live book before placing a new wager."
+    },
+    {
+      "id": "odds|ncaaf|401864523|2026-10-18T01:00Z|TOTAL||under|Draft Kings|2026-10-12T21:42:27.478Z",
+      "kind": "odds",
+      "observed_at": "2026-10-12T21:42:27.478Z",
+      "sport": "ncaaf",
+      "event": "SJSU @ UTEP",
+      "start": "2026-10-18T01:00Z",
+      "pick": "Under 52.5",
+      "title": "Published odds changed",
+      "before": "-115 · line 48.5",
+      "after": "-115 · line 47.5",
+      "book": "Draft Kings",
+      "source_quote_at": "2026-10-12T21:40:35.720650+00:00",
+      "source": "Existing NCAAF board",
+      "note": "Your ticket keeps its original odds. Recheck the live book before placing a new wager."
+    },
+    {
+      "id": "lineup|849820|2026-10-12T21:42:27.478Z",
+      "kind": "lineup",
+      "observed_at": "2026-10-12T21:42:27.478Z",
+      "sport": "mlb",
+      "event": "CLE @ TB",
+      "start": "2026-10-13T00:00:00Z",
+      "title": "Batting orders confirmed",
+      "before": "Projected batting orders",
+      "after": "Confirmed batting orders",
+      "source_quote_at": "2026-10-12T21:40:47+00:00",
+      "source": "MLB board"
+    },
+    {
+      "id": "injury|nfl:8:Devin White|2026-10-12T21:42:27.478Z",
+      "kind": "injury",
+      "observed_at": "2026-10-12T21:42:27.478Z",
+      "sport": "nfl",
+      "title": "Player availability changed",
+      "event": "Detroit Lions",
+      "pick": "Devin White",
+      "before": "Questionable · Forearm",
+      "after": "Doubtful · Forearm",
+      "source_quote_at": "2026-10-12T00:11Z",
+      "source": "ESPN injuries",
+      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
+    },
     {
       "id": "injury|nfl:3:Anthony Johnson Jr.|2026-10-12T21:21:10.430Z",
       "kind": "injury",
@@ -2782,90 +2873,6 @@
       "before": "Questionable · Groin",
       "after": "Doubtful · Groin",
       "source_quote_at": "2026-10-12T16:33Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:34:Jalen Pitre|2026-10-12T16:44:24.503Z",
-      "kind": "injury",
-      "observed_at": "2026-10-12T16:44:24.503Z",
-      "sport": "nfl",
-      "title": "Player availability changed",
-      "event": "Houston Texans",
-      "pick": "Jalen Pitre",
-      "before": "Questionable · Shoulder",
-      "after": "Doubtful · Shoulder",
-      "source_quote_at": "2026-10-11T20:09Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:24:Cameron Dicker|2026-10-12T16:44:24.503Z",
-      "kind": "injury",
-      "observed_at": "2026-10-12T16:44:24.503Z",
-      "sport": "nfl",
-      "title": "New availability report",
-      "event": "Los Angeles Chargers",
-      "pick": "Cameron Dicker",
-      "before": "Not in the previous dated report",
-      "after": "Active · Dicker made his lone field-goal attempt and both of his extra-point tries during the Chargers' 23-17 loss to the Broncos on Sunday.",
-      "source_quote_at": "2026-10-12T16:15Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:21:Jalen Carter|2026-10-12T16:44:24.503Z",
-      "kind": "injury",
-      "observed_at": "2026-10-12T16:44:24.503Z",
-      "sport": "nfl",
-      "title": "New availability report",
-      "event": "Philadelphia Eagles",
-      "pick": "Jalen Carter",
-      "before": "Not in the previous dated report",
-      "after": "Active · Carter logged five tackles (three solo), including 2.0 sacks, one pass defense and two forced fumbles during the Eagles' 19-17 loss to the Jaguars on Sunday in London.",
-      "source_quote_at": "2026-10-12T16:31Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nhl:30:Marcus Foligno|2026-10-12T16:23:02.195Z",
-      "kind": "injury",
-      "observed_at": "2026-10-12T16:23:02.195Z",
-      "sport": "nhl",
-      "title": "Player availability changed",
-      "event": "Minnesota Wild",
-      "pick": "Marcus Foligno",
-      "before": "Day-To-Day · Lower Body",
-      "after": "Out · Lower Body",
-      "source_quote_at": "2026-10-12T16:17Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nhl:11:Luke Evangelista|2026-10-12T16:23:02.195Z",
-      "kind": "injury",
-      "observed_at": "2026-10-12T16:23:02.195Z",
-      "sport": "nhl",
-      "title": "New availability report",
-      "event": "New Jersey Devils",
-      "pick": "Luke Evangelista",
-      "before": "Not in the previous dated report",
-      "after": "Day-To-Day · Illness",
-      "source_quote_at": "2026-10-12T16:08Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nhl:23:Pierre-Luc Dubois|2026-10-12T16:23:02.195Z",
-      "kind": "injury",
-      "observed_at": "2026-10-12T16:23:02.195Z",
-      "sport": "nhl",
-      "title": "Player availability changed",
-      "event": "Washington Capitals",
-      "pick": "Pierre-Luc Dubois",
-      "before": "Day-To-Day · Illness",
-      "after": "Out · Illness",
-      "source_quote_at": "2026-10-12T16:02Z",
       "source": "ESPN injuries",
       "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
     }
