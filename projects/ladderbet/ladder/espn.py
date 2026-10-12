@@ -123,6 +123,8 @@ def moneylines(comp: dict) -> list[dict]:
     """
     out = []
     for o in comp.get("odds", []) or []:
+        if not isinstance(o, dict):
+            continue  # Public feeds can include null / unavailable providers.
         prov = (o.get("provider") or {}).get("name", "unknown")
         ml = o.get("moneyline") or {}
         home = _side(ml.get("home") or {})

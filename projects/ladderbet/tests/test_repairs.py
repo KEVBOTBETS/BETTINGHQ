@@ -4,6 +4,18 @@ import json
 from pathlib import Path
 
 from ladder import espn, ledger
+
+
+def test_empty_odds_entries_do_not_stop_other_book_prices():
+    valid = {"provider": {"name": "Observed book"},
+             "homeTeamOdds": {"moneyLine": -150},
+             "awayTeamOdds": {"moneyLine": 130}}
+    rows = espn.moneylines({"odds": [None, "unavailable", valid]})
+    assert len(rows) == 1
+    assert rows[0]["provider"] == "Observed book"
+    assert rows[0]["home"] == -150
+    assert rows[0]["away"] == 130
+    assert espn.moneylines({"odds": [None]}) == []
 from ladder.state import Ladder
 
 
