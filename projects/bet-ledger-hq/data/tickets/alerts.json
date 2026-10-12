@@ -1,29 +1,43 @@
 {
   "schema": 1,
-  "checked_at": "2026-10-12T22:02:53.817Z",
+  "checked_at": "2026-10-12T22:21:38.516Z",
   "coverage": {
+    "nhl": {
+      "status": "available",
+      "reports": 44,
+      "checked_at": "2026-10-12T22:21:38.516Z"
+    },
     "ncaaf": {
       "status": "empty",
       "reports": 0,
-      "checked_at": "2026-10-12T22:02:53.817Z"
+      "checked_at": "2026-10-12T22:21:38.516Z"
+    },
+    "nfl": {
+      "status": "available",
+      "reports": 546,
+      "checked_at": "2026-10-12T22:21:38.516Z"
     },
     "mlb": {
       "status": "available",
       "reports": 6,
-      "checked_at": "2026-10-12T22:02:53.817Z"
-    },
-    "nhl": {
-      "status": "available",
-      "reports": 44,
-      "checked_at": "2026-10-12T22:02:53.817Z"
-    },
-    "nfl": {
-      "status": "available",
-      "reports": 548,
-      "checked_at": "2026-10-12T22:02:53.817Z"
+      "checked_at": "2026-10-12T22:21:38.516Z"
     }
   },
   "events": [
+    {
+      "id": "injury|nfl:3:Anthony Johnson Jr.|2026-10-12T22:21:38.516Z",
+      "kind": "injury",
+      "observed_at": "2026-10-12T22:21:38.516Z",
+      "sport": "nfl",
+      "title": "Player availability changed",
+      "event": "Chicago Bears",
+      "pick": "Anthony Johnson Jr.",
+      "before": "Injured Reserve · Undisclosed",
+      "after": "Out · Undisclosed",
+      "source_quote_at": "2026-10-12T22:13Z",
+      "source": "ESPN injuries",
+      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
+    },
     {
       "id": "odds|props|401872994|2026-10-13T00:15Z|Pass interceptions|Josh Allen|under|DraftKings|2026-10-12T22:02:53.817Z",
       "kind": "odds",
@@ -2870,22 +2884,6 @@
       "book": "theScore Bet",
       "source_quote_at": "2026-10-12T16:43:03.095257+00:00",
       "source": "Existing Props board",
-      "note": "Your ticket keeps its original odds. Recheck the live book before placing a new wager."
-    },
-    {
-      "id": "odds|ncaaf|401862800|2026-10-15T23:30Z|TOTAL||under|DraftKings|2026-10-12T16:44:24.503Z",
-      "kind": "odds",
-      "observed_at": "2026-10-12T16:44:24.503Z",
-      "sport": "ncaaf",
-      "event": "ECU @ UAB",
-      "start": "2026-10-15T23:30Z",
-      "pick": "Under 48.5",
-      "title": "Published odds changed",
-      "before": "-105 · line 48.5",
-      "after": "-110 · line 48.5",
-      "book": "DraftKings",
-      "source_quote_at": "2026-10-12T16:42:14.043488+00:00",
-      "source": "Existing NCAAF board",
       "note": "Your ticket keeps its original odds. Recheck the live book before placing a new wager."
     }
   ]
