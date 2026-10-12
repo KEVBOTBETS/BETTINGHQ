@@ -1,29 +1,61 @@
 {
   "schema": 1,
-  "checked_at": "2026-10-12T17:41:15.573Z",
+  "checked_at": "2026-10-12T17:53:31.438Z",
   "coverage": {
     "nhl": {
       "status": "available",
       "reports": 43,
-      "checked_at": "2026-10-12T17:41:15.573Z"
-    },
-    "mlb": {
-      "status": "available",
-      "reports": 10,
-      "checked_at": "2026-10-12T17:41:15.573Z"
-    },
-    "nfl": {
-      "status": "available",
-      "reports": 551,
-      "checked_at": "2026-10-12T17:41:15.573Z"
+      "checked_at": "2026-10-12T17:53:31.438Z"
     },
     "ncaaf": {
       "status": "empty",
       "reports": 0,
-      "checked_at": "2026-10-12T17:41:15.573Z"
+      "checked_at": "2026-10-12T17:53:31.438Z"
+    },
+    "nfl": {
+      "status": "available",
+      "reports": 551,
+      "checked_at": "2026-10-12T17:53:31.438Z"
+    },
+    "mlb": {
+      "status": "available",
+      "reports": 10,
+      "checked_at": "2026-10-12T17:53:31.438Z"
     }
   },
   "events": [
+    {
+      "id": "odds|ncaaf|401856721|2026-10-17T19:30Z|ATS||away|DraftKings|2026-10-12T17:53:31.438Z",
+      "kind": "odds",
+      "observed_at": "2026-10-12T17:53:31.438Z",
+      "sport": "ncaaf",
+      "event": "MIZ @ MISS",
+      "start": "2026-10-17T19:30Z",
+      "pick": "MIZ +6",
+      "title": "Published odds changed",
+      "before": "-110 · line 6",
+      "after": "-112 · line 6",
+      "book": "DraftKings",
+      "source_quote_at": "2026-10-12T17:50:30.985372+00:00",
+      "source": "Existing NCAAF board",
+      "note": "Your ticket keeps its original odds. Recheck the live book before placing a new wager."
+    },
+    {
+      "id": "price-limit|ncaaf|401856721|2026-10-17T19:30Z|ATS||away|DraftKings|2026-10-12T17:53:31.438Z",
+      "kind": "price-limit",
+      "observed_at": "2026-10-12T17:53:31.438Z",
+      "sport": "ncaaf",
+      "event": "MIZ @ MISS",
+      "start": "2026-10-17T19:30Z",
+      "pick": "MIZ +6",
+      "title": "Price below published minimum",
+      "before": "-110",
+      "after": "-112",
+      "book": "DraftKings",
+      "source_quote_at": "2026-10-12T17:50:30.985372+00:00",
+      "source": "Published price policy",
+      "note": "Minimum -111 at unchanged line 6. Uses the saved forecast, not a new model approval. Confirm current odds and qualification; scheduled observations can miss intervening moves."
+    },
     {
       "id": "odds|mlb|849812|2026-10-12T21:00:00Z|TOTAL||under|DraftKings|2026-10-12T17:41:15.573Z",
       "kind": "odds",
@@ -2882,34 +2914,6 @@
       "source_quote_at": "2026-10-12T00:02:38.868023+00:00",
       "source": "Existing NFL board",
       "note": "Your ticket keeps its original odds. Recheck the live book before placing a new wager."
-    },
-    {
-      "id": "injury|nfl:4:Mike Gesicki|2026-10-12T00:05:50.203Z",
-      "kind": "injury",
-      "observed_at": "2026-10-12T00:05:50.203Z",
-      "sport": "nfl",
-      "title": "New availability report",
-      "event": "Cincinnati Bengals",
-      "pick": "Mike Gesicki",
-      "before": "Not in the previous dated report",
-      "after": "Active · Gesicki brought in one of two targets for a four-yard touchdown in the Bengals' 31-24 win over the Dolphins on Sunday.",
-      "source_quote_at": "2026-10-11T23:58Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:11:Josh Downs|2026-10-12T00:05:50.203Z",
-      "kind": "injury",
-      "observed_at": "2026-10-12T00:05:50.203Z",
-      "sport": "nfl",
-      "title": "New availability report",
-      "event": "Indianapolis Colts",
-      "pick": "Josh Downs",
-      "before": "Not in the previous dated report",
-      "after": "Active · Downs caught three of six targets for 47 yards in Sunday's 34-22 loss to the Steelers.",
-      "source_quote_at": "2026-10-11T23:56Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
     }
   ]
 }
