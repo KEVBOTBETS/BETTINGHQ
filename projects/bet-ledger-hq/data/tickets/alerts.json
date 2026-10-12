@@ -1,29 +1,43 @@
 {
   "schema": 1,
-  "checked_at": "2026-10-12T18:08:15.351Z",
+  "checked_at": "2026-10-12T18:25:00.422Z",
   "coverage": {
-    "mlb": {
-      "status": "available",
-      "reports": 10,
-      "checked_at": "2026-10-12T18:08:15.351Z"
+    "ncaaf": {
+      "status": "empty",
+      "reports": 0,
+      "checked_at": "2026-10-12T18:25:00.422Z"
     },
     "nhl": {
       "status": "available",
       "reports": 43,
-      "checked_at": "2026-10-12T18:08:15.351Z"
+      "checked_at": "2026-10-12T18:25:00.422Z"
     },
-    "ncaaf": {
-      "status": "empty",
-      "reports": 0,
-      "checked_at": "2026-10-12T18:08:15.351Z"
+    "mlb": {
+      "status": "available",
+      "reports": 8,
+      "checked_at": "2026-10-12T18:25:00.422Z"
     },
     "nfl": {
       "status": "available",
-      "reports": 552,
-      "checked_at": "2026-10-12T18:08:15.351Z"
+      "reports": 553,
+      "checked_at": "2026-10-12T18:25:00.422Z"
     }
   },
   "events": [
+    {
+      "id": "injury|nfl:5:Dylan Sampson|2026-10-12T18:25:00.422Z",
+      "kind": "injury",
+      "observed_at": "2026-10-12T18:25:00.422Z",
+      "sport": "nfl",
+      "title": "New availability report",
+      "event": "Cleveland Browns",
+      "pick": "Dylan Sampson",
+      "before": "Not in the previous dated report",
+      "after": "Injured Reserve · Knee",
+      "source_quote_at": "2026-10-12T18:08Z",
+      "source": "ESPN injuries",
+      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
+    },
     {
       "id": "odds|ncaaf|401860923|2026-10-16T00:00Z|TOTAL||over|DraftKings|2026-10-12T18:08:15.351Z",
       "kind": "odds",
@@ -2892,22 +2906,6 @@
       "source_quote_at": "2026-10-12T00:02Z",
       "source": "ESPN injuries",
       "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "odds|props|401872993|2026-10-12T00:20Z|Receiving yards|Zay Flowers|over|Fanatics Sportsbook|2026-10-12T00:05:50.203Z",
-      "kind": "odds",
-      "observed_at": "2026-10-12T00:05:50.203Z",
-      "sport": "props",
-      "event": "Baltimore Ravens @ Atlanta Falcons",
-      "start": "2026-10-12T00:20Z",
-      "pick": "Zay Flowers — Over 65.5 Receiving yards",
-      "title": "Published odds changed",
-      "before": "-125 · line 65.5",
-      "after": "-120 · line 65.5",
-      "book": "Fanatics Sportsbook",
-      "source_quote_at": "2026-10-12T00:04:27.310975+00:00",
-      "source": "Existing Props board",
-      "note": "Your ticket keeps its original odds. Recheck the live book before placing a new wager."
     }
   ]
 }
