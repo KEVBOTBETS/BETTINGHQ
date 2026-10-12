@@ -160,13 +160,13 @@
     "accuracy": {
       "generated_at": "2026-10-11T21:42:58.919177+00:00"
     },
-    "lastGoodAt": "2026-10-12T00:05:50.203Z"
+    "lastGoodAt": "2026-10-12T00:32:42.304Z"
   },
   "ladder": {
     "accuracy": {
       "generated_at": "2026-10-11T21:43:13.843991+00:00"
     },
-    "lastGoodAt": "2026-10-12T00:05:50.203Z"
+    "lastGoodAt": "2026-10-12T00:32:42.304Z"
   },
   "props": {
     "meta": {
@@ -189,13 +189,13 @@
       "counts": {
         "priced_quotes": 322,
         "eligible_priced_quotes": 322,
-        "qualified_options": 4,
+        "qualified_options": 3,
         "held_options": 0,
         "board": 108,
-        "actionable": 4,
+        "actionable": 3,
         "best": 0,
         "good": 0,
-        "leans": 4,
+        "leans": 3,
         "projections": 6910,
         "injury_report": 755,
         "ruled_out": 232,
@@ -412,11 +412,11 @@
           }
         },
         "board_reasons": {
-          "qualified": 4,
+          "qualified": 3,
           "portfolio hold": 12,
           "insufficient edge / model filters": 69,
           "insufficient sample": 22,
-          "additional price stress failures": 1
+          "additional price stress failures": 2
         },
         "markets": {
           "Anytime touchdown": {
@@ -441,7 +441,7 @@
             "retained": 0,
             "reference": 0,
             "expired": 0,
-            "qualified": 1
+            "qualified": 0
           },
           "Receptions": {
             "projections": 352,
@@ -1593,7 +1593,7 @@
         "version": "price-stress-v1",
         "reserve": 0.03,
         "minReturn": 0.02,
-        "qualified": 4,
+        "qualified": 3,
         "source_qualified": 17,
         "note": "Additional price sensitivity gate. Original model counts retained in source_counts; not a confidence interval."
       },
@@ -7489,8 +7489,8 @@
         "roster_verified": true
       },
       {
-        "tier": "LEAN",
-        "recommended_stake": 2,
+        "tier": "PASS",
+        "recommended_stake": 0,
         "held": false,
         "start_time": "2026-10-12T00:20Z",
         "event_id": "401872993",
@@ -9904,7 +9904,7 @@
         "roster_verified": true
       }
     ],
-    "lastGoodAt": "2026-10-12T00:05:50.203Z"
+    "lastGoodAt": "2026-10-12T00:32:42.304Z"
   },
   "nfl": {
     "meta": {
@@ -16781,7 +16781,7 @@
         "odds_observed_at": "2026-10-12T00:02:38.868525+00:00"
       }
     ],
-    "lastGoodAt": "2026-10-12T00:05:50.203Z"
+    "lastGoodAt": "2026-10-12T00:32:42.304Z"
   },
   "ncaaf": {
     "meta": {
@@ -24602,7 +24602,7 @@
         "odds_observed_at": "2026-10-12T00:04:12.862212+00:00"
       }
     ],
-    "lastGoodAt": "2026-10-12T00:05:50.203Z"
+    "lastGoodAt": "2026-10-12T00:32:42.304Z"
   },
   "mlb": {
     "meta": {
@@ -24886,12 +24886,11 @@
     "accuracy": {
       "generated_at": "2026-10-11T21:42:22+00:00"
     },
-    "lastGoodAt": "2026-10-12T00:05:50.203Z"
+    "lastGoodAt": "2026-10-12T00:32:42.304Z"
   },
   "nhl": {
-    "board": [],
     "meta": {
-      "generated_at": "2026-10-11T23:48:20.258404+00:00",
+      "generated_at": "2026-10-12T00:32:08.232971+00:00",
       "model_version": "nhl-poisson-1.0",
       "season": 2027,
       "timezone": "America/Toronto",
@@ -24918,22 +24917,22 @@
         },
         "nhl-schedule-2026-10-11": {
           "status": "ok",
-          "observed_at": "2026-10-11T23:48:20.258404+00:00",
+          "observed_at": "2026-10-12T00:32:08.232971+00:00",
           "url": "https://api-web.nhle.com/v1/schedule/2026-10-11"
         },
         "nhl-schedule-2026-09-27": {
           "status": "ok",
-          "observed_at": "2026-10-11T23:48:20.258404+00:00",
+          "observed_at": "2026-10-12T00:32:08.232971+00:00",
           "url": "https://api-web.nhle.com/v1/schedule/2026-09-27"
         },
         "nhl-schedule-2026-10-04": {
           "status": "ok",
-          "observed_at": "2026-10-11T23:48:20.258404+00:00",
+          "observed_at": "2026-10-12T00:32:08.232971+00:00",
           "url": "https://api-web.nhle.com/v1/schedule/2026-10-04"
         },
         "nhl-schedule-2026-10-18": {
           "status": "ok",
-          "observed_at": "2026-10-11T23:48:20.258404+00:00",
+          "observed_at": "2026-10-12T00:32:08.232971+00:00",
           "url": "https://api-web.nhle.com/v1/schedule/2026-10-18"
         },
         "standings-2027": {
@@ -24949,8 +24948,8 @@
           "error": "HTTPError"
         },
         "nhl-official": {
-          "status": "cached",
-          "observed_at": "2026-10-11T23:19:15.542140+00:00",
+          "status": "ok",
+          "observed_at": "2026-10-12T00:32:08.232971+00:00",
           "url": "https://api-web.nhle.com/v1/standings/now"
         },
         "nhl-team-summary-2026": {
@@ -24975,7 +24974,7 @@
         },
         "public-book-odds": {
           "status": "no matched prices",
-          "observed_at": "2026-10-11T23:48:20.258404+00:00",
+          "observed_at": "2026-10-12T00:32:08.232971+00:00",
           "url": "https://www.covers.com/sport/hockey/nhl/odds",
           "quotes": 0
         },
@@ -25034,9 +25033,10 @@
         "teams": 32
       }
     },
+    "board": [],
     "accuracy": {
-      "generated_at": "2026-10-11T23:48:20.258404+00:00"
+      "generated_at": "2026-10-12T00:32:08.232971+00:00"
     },
-    "lastGoodAt": "2026-10-12T00:05:50.203Z"
+    "lastGoodAt": "2026-10-12T00:32:42.304Z"
   }
 }
