@@ -1,29 +1,85 @@
 {
   "schema": 1,
-  "checked_at": "2026-10-12T22:21:38.516Z",
+  "checked_at": "2026-10-12T22:52:25.035Z",
   "coverage": {
     "nhl": {
       "status": "available",
-      "reports": 44,
-      "checked_at": "2026-10-12T22:21:38.516Z"
+      "reports": 43,
+      "checked_at": "2026-10-12T22:52:25.035Z"
     },
     "ncaaf": {
       "status": "empty",
       "reports": 0,
-      "checked_at": "2026-10-12T22:21:38.516Z"
+      "checked_at": "2026-10-12T22:52:25.035Z"
     },
     "nfl": {
       "status": "available",
-      "reports": 546,
-      "checked_at": "2026-10-12T22:21:38.516Z"
+      "reports": 545,
+      "checked_at": "2026-10-12T22:52:25.035Z"
     },
     "mlb": {
       "status": "available",
       "reports": 6,
-      "checked_at": "2026-10-12T22:21:38.516Z"
+      "checked_at": "2026-10-12T22:52:25.035Z"
     }
   },
   "events": [
+    {
+      "id": "injury|nhl:30:Marcus Foligno|2026-10-12T22:52:25.035Z",
+      "kind": "injury",
+      "observed_at": "2026-10-12T22:52:25.035Z",
+      "sport": "nhl",
+      "title": "Player availability changed",
+      "event": "Minnesota Wild",
+      "pick": "Marcus Foligno",
+      "before": "Out · Lower Body",
+      "after": "Injured Reserve · Lower Body",
+      "source_quote_at": "2026-10-12T22:12Z",
+      "source": "ESPN injuries",
+      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
+    },
+    {
+      "id": "injury|nhl:11:Luke Evangelista|2026-10-12T22:52:25.035Z",
+      "kind": "injury",
+      "observed_at": "2026-10-12T22:52:25.035Z",
+      "sport": "nhl",
+      "title": "Player availability changed",
+      "event": "New Jersey Devils",
+      "pick": "Luke Evangelista",
+      "before": "Day-To-Day · Illness",
+      "after": "Day-To-Day · Evangelista is considered a game-time decision for Monday's game against the Senators due to an illness, Kristy Flannery of The Hockey News reports.",
+      "source_quote_at": "2026-10-12T16:08Z",
+      "source": "ESPN injuries",
+      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
+    },
+    {
+      "id": "injury|nfl:2:DJ Moore|2026-10-12T22:52:25.035Z",
+      "kind": "injury",
+      "observed_at": "2026-10-12T22:52:25.035Z",
+      "sport": "nfl",
+      "title": "Player availability changed",
+      "event": "Buffalo Bills",
+      "pick": "DJ Moore",
+      "before": "Questionable · Shoulder - AC Joint",
+      "after": "Out · Shoulder - AC Joint",
+      "source_quote_at": "2026-10-12T22:47Z",
+      "source": "ESPN injuries",
+      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
+    },
+    {
+      "id": "injury|nfl:23:Ben Skowronek|2026-10-12T22:52:25.035Z",
+      "kind": "injury",
+      "observed_at": "2026-10-12T22:52:25.035Z",
+      "sport": "nfl",
+      "title": "Player availability changed",
+      "event": "Pittsburgh Steelers",
+      "pick": "Ben Skowronek",
+      "before": "Out · Leg",
+      "after": "Out · Calf",
+      "source_quote_at": "2026-10-12T22:08Z",
+      "source": "ESPN injuries",
+      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
+    },
     {
       "id": "injury|nfl:3:Anthony Johnson Jr.|2026-10-12T22:21:38.516Z",
       "kind": "injury",
@@ -2825,66 +2881,6 @@
       "source_quote_at": "2026-10-12T16:36Z",
       "source": "ESPN injuries",
       "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nhl:3:Samuel Honzek|2026-10-12T17:04:26.852Z",
-      "kind": "injury",
-      "observed_at": "2026-10-12T17:04:26.852Z",
-      "sport": "nhl",
-      "title": "Player availability changed",
-      "event": "Calgary Flames",
-      "pick": "Samuel Honzek",
-      "before": "Day-To-Day · Undisclosed",
-      "after": "Out · Lower Body",
-      "source_quote_at": "2026-10-12T16:39Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nhl:9:Matt Duchene|2026-10-12T16:52:34.941Z",
-      "kind": "injury",
-      "observed_at": "2026-10-12T16:52:34.941Z",
-      "sport": "nhl",
-      "title": "New availability report",
-      "event": "Dallas Stars",
-      "pick": "Matt Duchene",
-      "before": "Not in the previous dated report",
-      "after": "Injured Reserve · Abdomen",
-      "source_quote_at": "2026-10-12T16:46Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "odds|mlb|849812|2026-10-12T21:00:00Z|TOTAL||under|DraftKings|2026-10-12T16:44:24.503Z",
-      "kind": "odds",
-      "observed_at": "2026-10-12T16:44:24.503Z",
-      "sport": "mlb",
-      "event": "LAD @ MIL",
-      "start": "2026-10-12T21:00:00Z",
-      "pick": "Under 7.0",
-      "title": "Published odds changed",
-      "before": "-118 · line 7",
-      "after": "-115 · line 7",
-      "book": "DraftKings",
-      "source_quote_at": "2026-10-12T16:42:19.124887+00:00",
-      "source": "Existing MLB board",
-      "note": "Your ticket keeps its original odds. Recheck the live book before placing a new wager."
-    },
-    {
-      "id": "odds|props|401872994|2026-10-13T00:15Z|Passing yards|Matthew Stafford|over|theScore Bet|2026-10-12T16:44:24.503Z",
-      "kind": "odds",
-      "observed_at": "2026-10-12T16:44:24.503Z",
-      "sport": "props",
-      "event": "Buffalo Bills @ Los Angeles Rams",
-      "start": "2026-10-13T00:15Z",
-      "pick": "Matthew Stafford — Over 279.5 Passing yards",
-      "title": "Published odds changed",
-      "before": "-125 · line 279.5",
-      "after": "-110 · line 284.5",
-      "book": "theScore Bet",
-      "source_quote_at": "2026-10-12T16:43:03.095257+00:00",
-      "source": "Existing Props board",
-      "note": "Your ticket keeps its original odds. Recheck the live book before placing a new wager."
     }
   ]
 }
