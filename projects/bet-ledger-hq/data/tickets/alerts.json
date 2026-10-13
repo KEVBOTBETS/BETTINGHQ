@@ -1,29 +1,85 @@
 {
   "schema": 1,
-  "checked_at": "2026-10-13T22:29:34.567Z",
+  "checked_at": "2026-10-13T23:02:25.001Z",
   "coverage": {
-    "ncaaf": {
-      "status": "empty",
-      "reports": 0,
-      "checked_at": "2026-10-13T22:29:34.567Z"
-    },
     "nhl": {
       "status": "available",
-      "reports": 39,
-      "checked_at": "2026-10-13T22:29:34.567Z"
+      "reports": 38,
+      "checked_at": "2026-10-13T23:02:25.001Z"
     },
     "mlb": {
       "status": "available",
       "reports": 5,
-      "checked_at": "2026-10-13T22:29:34.567Z"
+      "checked_at": "2026-10-13T23:02:25.001Z"
     },
     "nfl": {
       "status": "available",
       "reports": 531,
-      "checked_at": "2026-10-13T22:29:34.567Z"
+      "checked_at": "2026-10-13T23:02:25.001Z"
+    },
+    "ncaaf": {
+      "status": "empty",
+      "reports": 0,
+      "checked_at": "2026-10-13T23:02:25.001Z"
     }
   },
   "events": [
+    {
+      "id": "starter|nhl:nhl:2026020095:away|2026-10-13T23:02:25.001Z",
+      "kind": "starter",
+      "observed_at": "2026-10-13T23:02:25.001Z",
+      "sport": "nhl",
+      "event": "TB @ NYR",
+      "start": "2026-10-13T23:15:00+00:00",
+      "title": "NHL starting goalie updated",
+      "before": "Andrei Vasilevskiy",
+      "after": "Andrei Vasilevskiy · confirmed",
+      "source_quote_at": "2026-10-13T23:00:59.808499+00:00",
+      "source": "NHL board",
+      "note": "Review the matchup after a starter change; the baseline does not price individual goalie talent."
+    },
+    {
+      "id": "injury|nhl:20:Dennis Hildeby|2026-10-13T23:02:25.001Z",
+      "kind": "injury",
+      "observed_at": "2026-10-13T23:02:25.001Z",
+      "sport": "nhl",
+      "title": "Player availability changed",
+      "event": "Tampa Bay Lightning",
+      "pick": "Dennis Hildeby",
+      "before": "Day-To-Day · Undisclosed",
+      "after": "Out · Undisclosed",
+      "source_quote_at": "2026-10-13T22:46Z",
+      "source": "ESPN injuries",
+      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
+    },
+    {
+      "id": "injury|nfl:7:Sai'vion Jones|2026-10-13T23:02:25.001Z",
+      "kind": "injury",
+      "observed_at": "2026-10-13T23:02:25.001Z",
+      "sport": "nfl",
+      "title": "Player availability changed",
+      "event": "Denver Broncos",
+      "pick": "Sai'vion Jones",
+      "before": "Questionable · questionable",
+      "after": "Active",
+      "source_quote_at": "2026-10-13T22:21Z",
+      "source": "ESPN injuries",
+      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
+    },
+    {
+      "id": "injury|nfl:28:Van Jefferson|2026-10-13T23:02:25.001Z",
+      "kind": "injury",
+      "observed_at": "2026-10-13T23:02:25.001Z",
+      "sport": "nfl",
+      "title": "Player availability changed",
+      "event": "Washington Commanders",
+      "pick": "Van Jefferson",
+      "before": "Active · The Commanders reverted Jefferson to their practice squad Monday, per the NFL's transaction log.",
+      "after": "Active · Jefferson reverted to the Commanders' practice squad Monday.",
+      "source_quote_at": "2026-10-13T04:19Z",
+      "source": "ESPN injuries",
+      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
+    },
     {
       "id": "starter|nhl:nhl:2026020092:away|2026-10-13T22:29:34.567Z",
       "kind": "starter",
@@ -2790,62 +2846,6 @@
       "before": "Kevin Lankinen",
       "after": "Leevi Merilainen · Unknown",
       "source_quote_at": "2026-10-13T11:23:30.344844+00:00",
-      "source": "NHL board",
-      "note": "Review the matchup after a starter change; the baseline does not price individual goalie talent."
-    },
-    {
-      "id": "starter|nhl:nhl:2026020098:away|2026-10-13T11:24:18.876Z",
-      "kind": "starter",
-      "observed_at": "2026-10-13T11:24:18.876Z",
-      "sport": "nhl",
-      "event": "PIT @ CHI",
-      "start": "2026-10-14T00:00:00+00:00",
-      "title": "NHL starting goalie updated",
-      "before": "Arturs Silovs",
-      "after": "Sergei Murashov · Unknown",
-      "source_quote_at": "2026-10-13T11:23:30.344844+00:00",
-      "source": "NHL board",
-      "note": "Review the matchup after a starter change; the baseline does not price individual goalie talent."
-    },
-    {
-      "id": "starter|nhl:nhl:2026020103:home|2026-10-13T11:24:18.876Z",
-      "kind": "starter",
-      "observed_at": "2026-10-13T11:24:18.876Z",
-      "sport": "nhl",
-      "event": "CGY @ ANA",
-      "start": "2026-10-14T01:45:00+00:00",
-      "title": "NHL starting goalie updated",
-      "before": "Ville Husso",
-      "after": "Lukas Dostal · Unknown",
-      "source_quote_at": "2026-10-13T11:23:30.344844+00:00",
-      "source": "NHL board",
-      "note": "Review the matchup after a starter change; the baseline does not price individual goalie talent."
-    },
-    {
-      "id": "injury|nfl:3:Anthony Johnson Jr.|2026-10-13T11:24:18.876Z",
-      "kind": "injury",
-      "observed_at": "2026-10-13T11:24:18.876Z",
-      "sport": "nfl",
-      "title": "Player availability changed",
-      "event": "Chicago Bears",
-      "pick": "Anthony Johnson Jr.",
-      "before": "Out · Undisclosed",
-      "after": "Injured Reserve · Undisclosed",
-      "source_quote_at": "2026-10-13T11:01Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "starter|nhl:nhl:2026020090:home|2026-10-13T10:55:44.670Z",
-      "kind": "starter",
-      "observed_at": "2026-10-13T10:55:44.670Z",
-      "sport": "nhl",
-      "event": "NJ @ DET",
-      "start": "2026-10-13T22:00:00+00:00",
-      "title": "NHL starting goalie updated",
-      "before": "John Gibson",
-      "after": "Daniil Tarasov · Unknown",
-      "source_quote_at": "2026-10-13T10:54:52.414292+00:00",
       "source": "NHL board",
       "note": "Review the matchup after a starter change; the baseline does not price individual goalie talent."
     }
