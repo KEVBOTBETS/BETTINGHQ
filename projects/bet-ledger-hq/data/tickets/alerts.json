@@ -1,29 +1,85 @@
 {
   "schema": 1,
-  "checked_at": "2026-10-13T13:59:13.904Z",
+  "checked_at": "2026-10-13T14:26:46.578Z",
   "coverage": {
-    "nhl": {
+    "mlb": {
       "status": "available",
-      "reports": 45,
-      "checked_at": "2026-10-13T13:59:13.904Z"
+      "reports": 5,
+      "checked_at": "2026-10-13T14:26:46.578Z"
     },
     "ncaaf": {
       "status": "empty",
       "reports": 0,
-      "checked_at": "2026-10-13T13:59:13.904Z"
+      "checked_at": "2026-10-13T14:26:46.578Z"
+    },
+    "nhl": {
+      "status": "available",
+      "reports": 45,
+      "checked_at": "2026-10-13T14:26:46.578Z"
     },
     "nfl": {
       "status": "available",
-      "reports": 538,
-      "checked_at": "2026-10-13T13:59:13.904Z"
-    },
-    "mlb": {
-      "status": "available",
-      "reports": 5,
-      "checked_at": "2026-10-13T13:59:13.904Z"
+      "reports": 537,
+      "checked_at": "2026-10-13T14:26:46.578Z"
     }
   },
   "events": [
+    {
+      "id": "starter|nhl:nhl:2026020091:home|2026-10-13T14:26:46.578Z",
+      "kind": "starter",
+      "observed_at": "2026-10-13T14:26:46.578Z",
+      "sport": "nhl",
+      "event": "FLA @ CBJ",
+      "start": "2026-10-13T22:15:00+00:00",
+      "title": "NHL starting goalie updated",
+      "before": "Cam Talbot",
+      "after": "Cam Talbot · confirmed",
+      "source_quote_at": "2026-10-13T14:25:46.804896+00:00",
+      "source": "NHL board",
+      "note": "Review the matchup after a starter change; the baseline does not price individual goalie talent."
+    },
+    {
+      "id": "starter|nhl:nhl:2026020092:home|2026-10-13T14:26:46.578Z",
+      "kind": "starter",
+      "observed_at": "2026-10-13T14:26:46.578Z",
+      "sport": "nhl",
+      "event": "BUF @ MTL",
+      "start": "2026-10-13T22:30:00+00:00",
+      "title": "NHL starting goalie updated",
+      "before": "Jacob Fowler",
+      "after": "Jacob Fowler · confirmed",
+      "source_quote_at": "2026-10-13T14:25:46.804896+00:00",
+      "source": "NHL board",
+      "note": "Review the matchup after a starter change; the baseline does not price individual goalie talent."
+    },
+    {
+      "id": "injury|nhl:10:Mike Matheson|2026-10-13T14:26:46.578Z",
+      "kind": "injury",
+      "observed_at": "2026-10-13T14:26:46.578Z",
+      "sport": "nhl",
+      "title": "New availability report",
+      "event": "Montreal Canadiens",
+      "pick": "Mike Matheson",
+      "before": "Not in the previous dated report",
+      "after": "Out · Lower Body",
+      "source_quote_at": "2026-10-13T14:10Z",
+      "source": "ESPN injuries",
+      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
+    },
+    {
+      "id": "injury|nfl:30:Anton Harrison|2026-10-13T14:26:46.578Z",
+      "kind": "injury",
+      "observed_at": "2026-10-13T14:26:46.578Z",
+      "sport": "nfl",
+      "title": "Player availability changed",
+      "event": "Jacksonville Jaguars",
+      "pick": "Anton Harrison",
+      "before": "Questionable · Knee",
+      "after": "Out · Knee",
+      "source_quote_at": "2026-10-13T14:11Z",
+      "source": "ESPN injuries",
+      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
+    },
     {
       "id": "starter|nhl:nhl:2026020090:home|2026-10-13T13:59:13.904Z",
       "kind": "starter",
@@ -2822,62 +2878,6 @@
       "before": "Not in the previous dated report",
       "after": "Out · Hamstring",
       "source_quote_at": "2026-10-12T19:33Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:26:Nick Kallerup|2026-10-12T19:51:54.626Z",
-      "kind": "injury",
-      "observed_at": "2026-10-12T19:51:54.626Z",
-      "sport": "nfl",
-      "title": "Player availability changed",
-      "event": "Seattle Seahawks",
-      "pick": "Nick Kallerup",
-      "before": "Out · Coach's Decision",
-      "after": "Active",
-      "source_quote_at": "2026-10-12T19:38Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:26:Montorie Foster Jr.|2026-10-12T19:51:54.626Z",
-      "kind": "injury",
-      "observed_at": "2026-10-12T19:51:54.626Z",
-      "sport": "nfl",
-      "title": "Player availability changed",
-      "event": "Seattle Seahawks",
-      "pick": "Montorie Foster Jr.",
-      "before": "Out · Coach's Decision",
-      "after": "Active",
-      "source_quote_at": "2026-10-12T19:38Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:26:Robert Henry Jr.|2026-10-12T19:51:54.626Z",
-      "kind": "injury",
-      "observed_at": "2026-10-12T19:51:54.626Z",
-      "sport": "nfl",
-      "title": "Player availability changed",
-      "event": "Seattle Seahawks",
-      "pick": "Robert Henry Jr.",
-      "before": "Out · Coach's Decision",
-      "after": "Active",
-      "source_quote_at": "2026-10-12T19:38Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:26:Jalen Milroe|2026-10-12T19:51:54.626Z",
-      "kind": "injury",
-      "observed_at": "2026-10-12T19:51:54.626Z",
-      "sport": "nfl",
-      "title": "Player availability changed",
-      "event": "Seattle Seahawks",
-      "pick": "Jalen Milroe",
-      "before": "Out · Coach's Decision",
-      "after": "Active",
-      "source_quote_at": "2026-10-12T19:38Z",
       "source": "ESPN injuries",
       "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
     }
