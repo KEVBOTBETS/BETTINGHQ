@@ -1,29 +1,71 @@
 {
   "schema": 1,
-  "checked_at": "2026-10-13T21:05:25.298Z",
+  "checked_at": "2026-10-13T21:30:27.597Z",
   "coverage": {
+    "nhl": {
+      "status": "available",
+      "reports": 40,
+      "checked_at": "2026-10-13T21:30:27.597Z"
+    },
     "ncaaf": {
       "status": "empty",
       "reports": 0,
-      "checked_at": "2026-10-13T21:05:25.298Z"
-    },
-    "nhl": {
-      "status": "available",
-      "reports": 43,
-      "checked_at": "2026-10-13T21:05:25.298Z"
+      "checked_at": "2026-10-13T21:30:27.597Z"
     },
     "mlb": {
       "status": "available",
       "reports": 5,
-      "checked_at": "2026-10-13T21:05:25.298Z"
+      "checked_at": "2026-10-13T21:30:27.597Z"
     },
     "nfl": {
       "status": "available",
-      "reports": 527,
-      "checked_at": "2026-10-13T21:05:25.298Z"
+      "reports": 528,
+      "checked_at": "2026-10-13T21:30:27.597Z"
     }
   },
   "events": [
+    {
+      "id": "starter|nhl:nhl:2026020096:home|2026-10-13T21:30:27.597Z",
+      "kind": "starter",
+      "observed_at": "2026-10-13T21:30:27.597Z",
+      "sport": "nhl",
+      "event": "STL @ OTT",
+      "start": "2026-10-13T23:30:00+00:00",
+      "title": "NHL starting goalie updated",
+      "before": "Samuel Ersson",
+      "after": "Samuel Ersson · confirmed",
+      "source_quote_at": "2026-10-13T21:29:37.513073+00:00",
+      "source": "NHL board",
+      "note": "Review the matchup after a starter change; the baseline does not price individual goalie talent."
+    },
+    {
+      "id": "injury|nfl:11:Pharaoh Brown|2026-10-13T21:30:27.597Z",
+      "kind": "injury",
+      "observed_at": "2026-10-13T21:30:27.597Z",
+      "sport": "nfl",
+      "title": "New availability report",
+      "event": "Indianapolis Colts",
+      "pick": "Pharaoh Brown",
+      "before": "Not in the previous dated report",
+      "after": "Active · Brown was signed to the 53-man roster Tuesday.",
+      "source_quote_at": "2026-10-13T21:17Z",
+      "source": "ESPN injuries",
+      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
+    },
+    {
+      "id": "injury|nfl:14:Alaric Jackson|2026-10-13T21:30:27.597Z",
+      "kind": "injury",
+      "observed_at": "2026-10-13T21:30:27.597Z",
+      "sport": "nfl",
+      "title": "Player availability changed",
+      "event": "Los Angeles Rams",
+      "pick": "Alaric Jackson",
+      "before": "Suspension · Suspension",
+      "after": "Active",
+      "source_quote_at": "2026-10-13T21:06Z",
+      "source": "ESPN injuries",
+      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
+    },
     {
       "id": "injury|nhl:2:Matt Grzelcyk|2026-10-13T21:05:25.298Z",
       "kind": "injury",
@@ -2803,48 +2845,6 @@
       "before": "Not in the previous dated report",
       "after": "Active · Allen completed 12 of 19 passes for 210 yards with one touchdown and one interception while adding 10 carries for 121 yards and another score and a two-point conversion pass in the",
       "source_quote_at": "2026-10-13T04:50Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:14:Tyler Higbee|2026-10-13T05:23:51.111Z",
-      "kind": "injury",
-      "observed_at": "2026-10-13T05:23:51.111Z",
-      "sport": "nfl",
-      "title": "New availability report",
-      "event": "Los Angeles Rams",
-      "pick": "Tyler Higbee",
-      "before": "Not in the previous dated report",
-      "after": "Active · Higbee brought in five of six targets for 83 yards in the Rams' 37-34 overtime loss to the Bills on Monday night.",
-      "source_quote_at": "2026-10-13T05:17Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:14:Blake Corum|2026-10-13T05:23:51.111Z",
-      "kind": "injury",
-      "observed_at": "2026-10-13T05:23:51.111Z",
-      "sport": "nfl",
-      "title": "New availability report",
-      "event": "Los Angeles Rams",
-      "pick": "Blake Corum",
-      "before": "Not in the previous dated report",
-      "after": "Active · Corum rushed five times for 19 yards and a touchdown and brought in three of four targets for 53 yards in the Rams' 37-34 overtime loss to the Bills on Monday night.",
-      "source_quote_at": "2026-10-13T05:13Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:14:Davante Adams|2026-10-13T05:23:51.111Z",
-      "kind": "injury",
-      "observed_at": "2026-10-13T05:23:51.111Z",
-      "sport": "nfl",
-      "title": "New availability report",
-      "event": "Los Angeles Rams",
-      "pick": "Davante Adams",
-      "before": "Not in the previous dated report",
-      "after": "Active · Adams brought in five of seven targets for 51 yards and two touchdowns in the Rams' 37-34 overtime loss to the Bills on Monday night.",
-      "source_quote_at": "2026-10-13T05:08Z",
       "source": "ESPN injuries",
       "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
     }
