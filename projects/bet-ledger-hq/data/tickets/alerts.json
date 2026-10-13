@@ -1,29 +1,99 @@
 {
   "schema": 1,
-  "checked_at": "2026-10-13T10:25:05.466Z",
+  "checked_at": "2026-10-13T10:55:44.670Z",
   "coverage": {
+    "ncaaf": {
+      "status": "empty",
+      "reports": 0,
+      "checked_at": "2026-10-13T10:55:44.670Z"
+    },
     "nhl": {
       "status": "available",
       "reports": 46,
-      "checked_at": "2026-10-13T10:25:05.466Z"
+      "checked_at": "2026-10-13T10:55:44.670Z"
     },
     "mlb": {
       "status": "available",
       "reports": 5,
-      "checked_at": "2026-10-13T10:25:05.466Z"
-    },
-    "ncaaf": {
-      "status": "empty",
-      "reports": 0,
-      "checked_at": "2026-10-13T10:25:05.466Z"
+      "checked_at": "2026-10-13T10:55:44.670Z"
     },
     "nfl": {
       "status": "available",
       "reports": 538,
-      "checked_at": "2026-10-13T10:25:05.466Z"
+      "checked_at": "2026-10-13T10:55:44.670Z"
     }
   },
   "events": [
+    {
+      "id": "starter|nhl:nhl:2026020090:home|2026-10-13T10:55:44.670Z",
+      "kind": "starter",
+      "observed_at": "2026-10-13T10:55:44.670Z",
+      "sport": "nhl",
+      "event": "NJ @ DET",
+      "start": "2026-10-13T22:00:00+00:00",
+      "title": "NHL starting goalie updated",
+      "before": "John Gibson",
+      "after": "Daniil Tarasov · Unknown",
+      "source_quote_at": "2026-10-13T10:54:52.414292+00:00",
+      "source": "NHL board",
+      "note": "Review the matchup after a starter change; the baseline does not price individual goalie talent."
+    },
+    {
+      "id": "starter|nhl:nhl:2026020093:home|2026-10-13T10:55:44.670Z",
+      "kind": "starter",
+      "observed_at": "2026-10-13T10:55:44.670Z",
+      "sport": "nhl",
+      "event": "WSH @ CAR",
+      "start": "2026-10-13T22:45:00+00:00",
+      "title": "NHL starting goalie updated",
+      "before": "Pyotr Kochetkov",
+      "after": "Brandon Bussi · Unknown",
+      "source_quote_at": "2026-10-13T10:54:52.414292+00:00",
+      "source": "NHL board",
+      "note": "Review the matchup after a starter change; the baseline does not price individual goalie talent."
+    },
+    {
+      "id": "starter|nhl:nhl:2026020094:away|2026-10-13T10:55:44.670Z",
+      "kind": "starter",
+      "observed_at": "2026-10-13T10:55:44.670Z",
+      "sport": "nhl",
+      "event": "SEA @ PHI",
+      "start": "2026-10-13T23:00:00+00:00",
+      "title": "NHL starting goalie updated",
+      "before": "Joey Daccord",
+      "after": "Philipp Grubauer · Unknown",
+      "source_quote_at": "2026-10-13T10:54:52.414292+00:00",
+      "source": "NHL board",
+      "note": "Review the matchup after a starter change; the baseline does not price individual goalie talent."
+    },
+    {
+      "id": "starter|nhl:nhl:2026020096:away|2026-10-13T10:55:44.670Z",
+      "kind": "starter",
+      "observed_at": "2026-10-13T10:55:44.670Z",
+      "sport": "nhl",
+      "event": "STL @ OTT",
+      "start": "2026-10-13T23:30:00+00:00",
+      "title": "NHL starting goalie updated",
+      "before": "Jordan Binnington",
+      "after": "Joel Hofer · Unknown",
+      "source_quote_at": "2026-10-13T10:54:52.414292+00:00",
+      "source": "NHL board",
+      "note": "Review the matchup after a starter change; the baseline does not price individual goalie talent."
+    },
+    {
+      "id": "starter|nhl:nhl:2026020096:home|2026-10-13T10:55:44.670Z",
+      "kind": "starter",
+      "observed_at": "2026-10-13T10:55:44.670Z",
+      "sport": "nhl",
+      "event": "STL @ OTT",
+      "start": "2026-10-13T23:30:00+00:00",
+      "title": "NHL starting goalie updated",
+      "before": "Linus Ullmark",
+      "after": "Samuel Ersson · Unknown",
+      "source_quote_at": "2026-10-13T10:54:52.414292+00:00",
+      "source": "NHL board",
+      "note": "Review the matchup after a starter change; the baseline does not price individual goalie talent."
+    },
     {
       "id": "injury|nfl:3:Anthony Johnson Jr.|2026-10-13T10:25:05.466Z",
       "kind": "injury",
@@ -2804,76 +2874,6 @@
       "before": "Out · Coach's Decision",
       "after": "Active",
       "source_quote_at": "2026-10-12T18:58Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:4:Jack Endries|2026-10-12T19:21:04.245Z",
-      "kind": "injury",
-      "observed_at": "2026-10-12T19:21:04.245Z",
-      "sport": "nfl",
-      "title": "Player availability changed",
-      "event": "Cincinnati Bengals",
-      "pick": "Jack Endries",
-      "before": "Out · Coach's Decision",
-      "after": "Active",
-      "source_quote_at": "2026-10-12T18:58Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:4:Connor Lew|2026-10-12T19:21:04.245Z",
-      "kind": "injury",
-      "observed_at": "2026-10-12T19:21:04.245Z",
-      "sport": "nfl",
-      "title": "Player availability changed",
-      "event": "Cincinnati Bengals",
-      "pick": "Connor Lew",
-      "before": "Out · inactive",
-      "after": "Active",
-      "source_quote_at": "2026-10-12T18:58Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:4:Landon Robinson|2026-10-12T19:21:04.245Z",
-      "kind": "injury",
-      "observed_at": "2026-10-12T19:21:04.245Z",
-      "sport": "nfl",
-      "title": "Player availability changed",
-      "event": "Cincinnati Bengals",
-      "pick": "Landon Robinson",
-      "before": "Out · Coach's Decision",
-      "after": "Active",
-      "source_quote_at": "2026-10-12T18:58Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:4:Swayze Bozeman|2026-10-12T19:21:04.245Z",
-      "kind": "injury",
-      "observed_at": "2026-10-12T19:21:04.245Z",
-      "sport": "nfl",
-      "title": "Player availability changed",
-      "event": "Cincinnati Bengals",
-      "pick": "Swayze Bozeman",
-      "before": "Questionable · Arm",
-      "after": "Out · Arm",
-      "source_quote_at": "2026-10-11T19:41Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:5:Taylen Green|2026-10-12T19:21:04.245Z",
-      "kind": "injury",
-      "observed_at": "2026-10-12T19:21:04.245Z",
-      "sport": "nfl",
-      "title": "Player availability changed",
-      "event": "Cleveland Browns",
-      "pick": "Taylen Green",
-      "before": "Out · Coach's Decision",
-      "after": "Active",
-      "source_quote_at": "2026-10-12T19:03Z",
       "source": "ESPN injuries",
       "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
     }
