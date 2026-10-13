@@ -1,29 +1,43 @@
 {
   "schema": 1,
-  "checked_at": "2026-10-13T15:50:00.686Z",
+  "checked_at": "2026-10-13T15:55:48.260Z",
   "coverage": {
-    "nfl": {
-      "status": "available",
-      "reports": 538,
-      "checked_at": "2026-10-13T15:50:00.686Z"
-    },
     "ncaaf": {
       "status": "empty",
       "reports": 0,
-      "checked_at": "2026-10-13T15:50:00.686Z"
+      "checked_at": "2026-10-13T15:55:48.260Z"
     },
     "mlb": {
       "status": "available",
       "reports": 5,
-      "checked_at": "2026-10-13T15:50:00.686Z"
+      "checked_at": "2026-10-13T15:55:48.260Z"
     },
     "nhl": {
       "status": "available",
-      "reports": 47,
-      "checked_at": "2026-10-13T15:50:00.686Z"
+      "reports": 45,
+      "checked_at": "2026-10-13T15:55:48.260Z"
+    },
+    "nfl": {
+      "status": "available",
+      "reports": 538,
+      "checked_at": "2026-10-13T15:55:48.260Z"
     }
   },
   "events": [
+    {
+      "id": "injury|nfl:4:Tanner Hudson|2026-10-13T15:55:48.260Z",
+      "kind": "injury",
+      "observed_at": "2026-10-13T15:55:48.260Z",
+      "sport": "nfl",
+      "title": "Player availability changed",
+      "event": "Cincinnati Bengals",
+      "pick": "Tanner Hudson",
+      "before": "Questionable · Pectoral",
+      "after": "Out · Pectoral",
+      "source_quote_at": "2026-10-12T22:03Z",
+      "source": "ESPN injuries",
+      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
+    },
     {
       "id": "odds|ncaaf|401866478|2026-10-17T19:30Z|TOTAL||over|DraftKings|2026-10-13T15:50:00.686Z",
       "kind": "odds",
@@ -2876,20 +2890,6 @@
       "before": "Out · Coach's Decision",
       "after": "Active",
       "source_quote_at": "2026-10-12T19:27Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:18:Mike Reid|2026-10-12T19:51:54.626Z",
-      "kind": "injury",
-      "observed_at": "2026-10-12T19:51:54.626Z",
-      "sport": "nfl",
-      "title": "Player availability changed",
-      "event": "New Orleans Saints",
-      "pick": "Mike Reid",
-      "before": "Out · Coach's Decision",
-      "after": "Active",
-      "source_quote_at": "2026-10-12T19:29Z",
       "source": "ESPN injuries",
       "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
     }
