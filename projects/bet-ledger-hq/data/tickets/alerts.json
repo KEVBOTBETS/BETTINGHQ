@@ -1,29 +1,85 @@
 {
   "schema": 1,
-  "checked_at": "2026-10-13T19:05:26.450Z",
+  "checked_at": "2026-10-13T19:33:56.247Z",
   "coverage": {
+    "mlb": {
+      "status": "available",
+      "reports": 5,
+      "checked_at": "2026-10-13T19:33:56.247Z"
+    },
     "nhl": {
       "status": "available",
       "reports": 41,
-      "checked_at": "2026-10-13T19:05:26.450Z"
+      "checked_at": "2026-10-13T19:33:56.247Z"
     },
     "ncaaf": {
       "status": "empty",
       "reports": 0,
-      "checked_at": "2026-10-13T19:05:26.450Z"
-    },
-    "mlb": {
-      "status": "available",
-      "reports": 5,
-      "checked_at": "2026-10-13T19:05:26.450Z"
+      "checked_at": "2026-10-13T19:33:56.247Z"
     },
     "nfl": {
       "status": "available",
-      "reports": 533,
-      "checked_at": "2026-10-13T19:05:26.450Z"
+      "reports": 531,
+      "checked_at": "2026-10-13T19:33:56.247Z"
     }
   },
   "events": [
+    {
+      "id": "starter|nhl:nhl:2026020098:home|2026-10-13T19:33:56.247Z",
+      "kind": "starter",
+      "observed_at": "2026-10-13T19:33:56.247Z",
+      "sport": "nhl",
+      "event": "PIT @ CHI",
+      "start": "2026-10-14T00:00:00+00:00",
+      "title": "NHL starting goalie updated",
+      "before": "Spencer Knight",
+      "after": "Spencer Knight · confirmed",
+      "source_quote_at": "2026-10-13T19:32:53.425159+00:00",
+      "source": "NHL board",
+      "note": "Review the matchup after a starter change; the baseline does not price individual goalie talent."
+    },
+    {
+      "id": "starter|nhl:nhl:2026020105:away|2026-10-13T19:33:56.247Z",
+      "kind": "starter",
+      "observed_at": "2026-10-13T19:33:56.247Z",
+      "sport": "nhl",
+      "event": "BOS @ SJ",
+      "start": "2026-10-14T03:00:00+00:00",
+      "title": "NHL starting goalie updated",
+      "before": "Jeremy Swayman",
+      "after": "Jeremy Swayman · confirmed",
+      "source_quote_at": "2026-10-13T19:32:53.425159+00:00",
+      "source": "NHL board",
+      "note": "Review the matchup after a starter change; the baseline does not price individual goalie talent."
+    },
+    {
+      "id": "injury|nhl:10:Florian Xhekaj|2026-10-13T19:33:56.247Z",
+      "kind": "injury",
+      "observed_at": "2026-10-13T19:33:56.247Z",
+      "sport": "nhl",
+      "title": "Player availability changed",
+      "event": "Montreal Canadiens",
+      "pick": "Florian Xhekaj",
+      "before": "Day-To-Day · Undisclosed",
+      "after": "Out · Undisclosed",
+      "source_quote_at": "2026-10-13T19:27Z",
+      "source": "ESPN injuries",
+      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
+    },
+    {
+      "id": "injury|nfl:22:James Conner|2026-10-13T19:33:56.247Z",
+      "kind": "injury",
+      "observed_at": "2026-10-13T19:33:56.247Z",
+      "sport": "nfl",
+      "title": "New availability report",
+      "event": "Arizona Cardinals",
+      "pick": "James Conner",
+      "before": "Not in the previous dated report",
+      "after": "Injured Reserve · Foot",
+      "source_quote_at": "2026-10-13T19:00Z",
+      "source": "ESPN injuries",
+      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
+    },
     {
       "id": "odds|ncaaf|401866478|2026-10-17T19:30Z|TOTAL||over|Draft Kings|2026-10-13T18:56:01.098Z",
       "kind": "odds",
@@ -2791,62 +2847,6 @@
       "before": "Active · Holani (ribs/knee) is active for Sunday's Week 5 matchup against the 49ers.",
       "after": "Active · Holani rushed four times for seven yards and lost a fumble while reeling in all four of his targets for 24 yards during Sunday's 32-29 loss to the 49ers.",
       "source_quote_at": "2026-10-13T02:04Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nhl:19:Torey Krug|2026-10-13T01:54:31.273Z",
-      "kind": "injury",
-      "observed_at": "2026-10-13T01:54:31.273Z",
-      "sport": "nhl",
-      "title": "New availability report",
-      "event": "St. Louis Blues",
-      "pick": "Torey Krug",
-      "before": "Not in the previous dated report",
-      "after": "Injured Reserve · Ankle",
-      "source_quote_at": "2026-10-13T01:42Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:5:Jerry Jeudy|2026-10-13T01:54:31.273Z",
-      "kind": "injury",
-      "observed_at": "2026-10-13T01:54:31.273Z",
-      "sport": "nfl",
-      "title": "New availability report",
-      "event": "Cleveland Browns",
-      "pick": "Jerry Jeudy",
-      "before": "Not in the previous dated report",
-      "after": "Active · Jeudy hauled in three of seven targets for 19 yards during Sunday's 17-12 loss against the Jets.",
-      "source_quote_at": "2026-10-13T01:42Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:34:Kayshon Boutte|2026-10-13T01:54:31.273Z",
-      "kind": "injury",
-      "observed_at": "2026-10-13T01:54:31.273Z",
-      "sport": "nfl",
-      "title": "New availability report",
-      "event": "Houston Texans",
-      "pick": "Kayshon Boutte",
-      "before": "Not in the previous dated report",
-      "after": "Active · Boutte caught three of five targets for 38 yards during Sunday's 26-3 win over the Titans.",
-      "source_quote_at": "2026-10-13T01:42Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:26:Tory Horton|2026-10-13T01:54:31.273Z",
-      "kind": "injury",
-      "observed_at": "2026-10-13T01:54:31.273Z",
-      "sport": "nfl",
-      "title": "New availability report",
-      "event": "Seattle Seahawks",
-      "pick": "Tory Horton",
-      "before": "Not in the previous dated report",
-      "after": "Active · Horton did not draw any targets during Sunday's 32-29 loss versus the 49ers.",
-      "source_quote_at": "2026-10-13T01:33Z",
       "source": "ESPN injuries",
       "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
     }
