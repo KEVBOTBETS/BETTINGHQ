@@ -1,29 +1,57 @@
 {
   "schema": 1,
-  "checked_at": "2026-10-13T13:29:38.589Z",
+  "checked_at": "2026-10-13T13:59:13.904Z",
   "coverage": {
+    "nhl": {
+      "status": "available",
+      "reports": 45,
+      "checked_at": "2026-10-13T13:59:13.904Z"
+    },
     "ncaaf": {
       "status": "empty",
       "reports": 0,
-      "checked_at": "2026-10-13T13:29:38.589Z"
-    },
-    "nhl": {
-      "status": "available",
-      "reports": 46,
-      "checked_at": "2026-10-13T13:29:38.589Z"
-    },
-    "mlb": {
-      "status": "available",
-      "reports": 5,
-      "checked_at": "2026-10-13T13:29:38.589Z"
+      "checked_at": "2026-10-13T13:59:13.904Z"
     },
     "nfl": {
       "status": "available",
       "reports": 538,
-      "checked_at": "2026-10-13T13:29:38.589Z"
+      "checked_at": "2026-10-13T13:59:13.904Z"
+    },
+    "mlb": {
+      "status": "available",
+      "reports": 5,
+      "checked_at": "2026-10-13T13:59:13.904Z"
     }
   },
   "events": [
+    {
+      "id": "starter|nhl:nhl:2026020090:home|2026-10-13T13:59:13.904Z",
+      "kind": "starter",
+      "observed_at": "2026-10-13T13:59:13.904Z",
+      "sport": "nhl",
+      "event": "NJ @ DET",
+      "start": "2026-10-13T22:00:00+00:00",
+      "title": "NHL starting goalie updated",
+      "before": "Daniil Tarasov",
+      "after": "John Gibson · Likely",
+      "source_quote_at": "2026-10-13T13:58:23.124909+00:00",
+      "source": "NHL board",
+      "note": "Review the matchup after a starter change; the baseline does not price individual goalie talent."
+    },
+    {
+      "id": "starter|nhl:nhl:2026020091:home|2026-10-13T13:59:13.904Z",
+      "kind": "starter",
+      "observed_at": "2026-10-13T13:59:13.904Z",
+      "sport": "nhl",
+      "event": "FLA @ CBJ",
+      "start": "2026-10-13T22:15:00+00:00",
+      "title": "NHL starting goalie updated",
+      "before": "Jet Greaves",
+      "after": "Cam Talbot · Likely",
+      "source_quote_at": "2026-10-13T13:58:23.124909+00:00",
+      "source": "NHL board",
+      "note": "Review the matchup after a starter change; the baseline does not price individual goalie talent."
+    },
     {
       "id": "starter|nhl:nhl:2026020095:home|2026-10-13T13:29:38.589Z",
       "kind": "starter",
@@ -2850,34 +2878,6 @@
       "before": "Out · Coach's Decision",
       "after": "Active",
       "source_quote_at": "2026-10-12T19:38Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:10:Jaylon Jones|2026-10-12T19:51:54.626Z",
-      "kind": "injury",
-      "observed_at": "2026-10-12T19:51:54.626Z",
-      "sport": "nfl",
-      "title": "Player availability changed",
-      "event": "Tennessee Titans",
-      "pick": "Jaylon Jones",
-      "before": "Out · Coach's Decision",
-      "after": "Out · inactive",
-      "source_quote_at": "2026-10-11T15:34Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:10:Jackie Marshall|2026-10-12T19:51:54.626Z",
-      "kind": "injury",
-      "observed_at": "2026-10-12T19:51:54.626Z",
-      "sport": "nfl",
-      "title": "Player availability changed",
-      "event": "Tennessee Titans",
-      "pick": "Jackie Marshall",
-      "before": "Out · Coach's Decision",
-      "after": "Out · inactive",
-      "source_quote_at": "2026-10-11T15:34Z",
       "source": "ESPN injuries",
       "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
     }
