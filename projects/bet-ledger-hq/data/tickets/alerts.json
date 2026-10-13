@@ -1,29 +1,85 @@
 {
   "schema": 1,
-  "checked_at": "2026-10-13T19:33:56.247Z",
+  "checked_at": "2026-10-13T20:03:15.216Z",
   "coverage": {
-    "mlb": {
-      "status": "available",
-      "reports": 5,
-      "checked_at": "2026-10-13T19:33:56.247Z"
-    },
     "nhl": {
       "status": "available",
       "reports": 41,
-      "checked_at": "2026-10-13T19:33:56.247Z"
+      "checked_at": "2026-10-13T20:03:15.216Z"
     },
     "ncaaf": {
       "status": "empty",
       "reports": 0,
-      "checked_at": "2026-10-13T19:33:56.247Z"
+      "checked_at": "2026-10-13T20:03:15.216Z"
     },
     "nfl": {
       "status": "available",
-      "reports": 531,
-      "checked_at": "2026-10-13T19:33:56.247Z"
+      "reports": 528,
+      "checked_at": "2026-10-13T20:03:15.216Z"
+    },
+    "mlb": {
+      "status": "available",
+      "reports": 5,
+      "checked_at": "2026-10-13T20:03:15.216Z"
     }
   },
   "events": [
+    {
+      "id": "starter|nhl:nhl:2026020091:away|2026-10-13T20:03:15.216Z",
+      "kind": "starter",
+      "observed_at": "2026-10-13T20:03:15.216Z",
+      "sport": "nhl",
+      "event": "FLA @ CBJ",
+      "start": "2026-10-13T22:15:00+00:00",
+      "title": "NHL starting goalie updated",
+      "before": "Akira Schmid",
+      "after": "Akira Schmid · confirmed",
+      "source_quote_at": "2026-10-13T20:02:04.727856+00:00",
+      "source": "NHL board",
+      "note": "Review the matchup after a starter change; the baseline does not price individual goalie talent."
+    },
+    {
+      "id": "injury|nhl:26:Radko Gudas|2026-10-13T20:03:15.216Z",
+      "kind": "injury",
+      "observed_at": "2026-10-13T20:03:15.216Z",
+      "sport": "nhl",
+      "title": "New availability report",
+      "event": "Florida Panthers",
+      "pick": "Radko Gudas",
+      "before": "Not in the previous dated report",
+      "after": "Out · Undisclosed",
+      "source_quote_at": "2026-10-13T19:48Z",
+      "source": "ESPN injuries",
+      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
+    },
+    {
+      "id": "injury|nhl:15:Cam York|2026-10-13T20:03:15.216Z",
+      "kind": "injury",
+      "observed_at": "2026-10-13T20:03:15.216Z",
+      "sport": "nhl",
+      "title": "Player availability changed",
+      "event": "Philadelphia Flyers",
+      "pick": "Cam York",
+      "before": "Day-To-Day · Upper Body",
+      "after": "Out · Upper Body",
+      "source_quote_at": "2026-10-13T19:32Z",
+      "source": "ESPN injuries",
+      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
+    },
+    {
+      "id": "injury|nfl:29:Cam Jackson|2026-10-13T20:03:15.216Z",
+      "kind": "injury",
+      "observed_at": "2026-10-13T20:03:15.216Z",
+      "sport": "nfl",
+      "title": "Player availability changed",
+      "event": "Carolina Panthers",
+      "pick": "Cam Jackson",
+      "before": "Injured Reserve · Knee",
+      "after": "Injured Reserve · Shoulder",
+      "source_quote_at": "2026-10-13T15:33Z",
+      "source": "ESPN injuries",
+      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
+    },
     {
       "id": "starter|nhl:nhl:2026020098:home|2026-10-13T19:33:56.247Z",
       "kind": "starter",
@@ -2791,62 +2847,6 @@
       "before": "Not in the previous dated report",
       "after": "Injured Reserve · Knee",
       "source_quote_at": "2026-10-13T02:53Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:3:Anthony Johnson Jr.|2026-10-13T03:23:19.058Z",
-      "kind": "injury",
-      "observed_at": "2026-10-13T03:23:19.058Z",
-      "sport": "nfl",
-      "title": "Player availability changed",
-      "event": "Chicago Bears",
-      "pick": "Anthony Johnson Jr.",
-      "before": "Out · Undisclosed",
-      "after": "Injured Reserve · Undisclosed",
-      "source_quote_at": "2026-10-13T03:00Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:3:Anthony Johnson Jr.|2026-10-13T02:23:25.720Z",
-      "kind": "injury",
-      "observed_at": "2026-10-13T02:23:25.720Z",
-      "sport": "nfl",
-      "title": "Player availability changed",
-      "event": "Chicago Bears",
-      "pick": "Anthony Johnson Jr.",
-      "before": "Injured Reserve · Undisclosed",
-      "after": "Out · Undisclosed",
-      "source_quote_at": "2026-10-13T02:01Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:24:Charlie Kolar|2026-10-13T02:23:25.720Z",
-      "kind": "injury",
-      "observed_at": "2026-10-13T02:23:25.720Z",
-      "sport": "nfl",
-      "title": "Player availability changed",
-      "event": "Los Angeles Chargers",
-      "pick": "Charlie Kolar",
-      "before": "Active · Kolar (forearm) is active for Sunday's game against Denver, Eric Smith of the team's official site reports.",
-      "after": "Active · Kolar reeled in three of four targets for 37 yards during Sunday's 23-17 loss versus the Broncos. He also lost a fumble.",
-      "source_quote_at": "2026-10-13T01:51Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:26:George Holani|2026-10-13T02:23:25.720Z",
-      "kind": "injury",
-      "observed_at": "2026-10-13T02:23:25.720Z",
-      "sport": "nfl",
-      "title": "Player availability changed",
-      "event": "Seattle Seahawks",
-      "pick": "George Holani",
-      "before": "Active · Holani (ribs/knee) is active for Sunday's Week 5 matchup against the 49ers.",
-      "after": "Active · Holani rushed four times for seven yards and lost a fumble while reeling in all four of his targets for 24 yards during Sunday's 32-29 loss to the 49ers.",
-      "source_quote_at": "2026-10-13T02:04Z",
       "source": "ESPN injuries",
       "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
     }
