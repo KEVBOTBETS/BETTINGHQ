@@ -1,29 +1,99 @@
 {
   "schema": 1,
-  "checked_at": "2026-10-13T10:55:44.670Z",
+  "checked_at": "2026-10-13T11:24:18.876Z",
   "coverage": {
-    "ncaaf": {
-      "status": "empty",
-      "reports": 0,
-      "checked_at": "2026-10-13T10:55:44.670Z"
-    },
     "nhl": {
       "status": "available",
       "reports": 46,
-      "checked_at": "2026-10-13T10:55:44.670Z"
+      "checked_at": "2026-10-13T11:24:18.876Z"
     },
     "mlb": {
       "status": "available",
       "reports": 5,
-      "checked_at": "2026-10-13T10:55:44.670Z"
+      "checked_at": "2026-10-13T11:24:18.876Z"
+    },
+    "ncaaf": {
+      "status": "empty",
+      "reports": 0,
+      "checked_at": "2026-10-13T11:24:18.876Z"
     },
     "nfl": {
       "status": "available",
       "reports": 538,
-      "checked_at": "2026-10-13T10:55:44.670Z"
+      "checked_at": "2026-10-13T11:24:18.876Z"
     }
   },
   "events": [
+    {
+      "id": "starter|nhl:nhl:2026020094:home|2026-10-13T11:24:18.876Z",
+      "kind": "starter",
+      "observed_at": "2026-10-13T11:24:18.876Z",
+      "sport": "nhl",
+      "event": "SEA @ PHI",
+      "start": "2026-10-13T23:00:00+00:00",
+      "title": "NHL starting goalie updated",
+      "before": "Joseph Woll",
+      "after": "Dan Vladar · Unknown",
+      "source_quote_at": "2026-10-13T11:23:30.344844+00:00",
+      "source": "NHL board",
+      "note": "Review the matchup after a starter change; the baseline does not price individual goalie talent."
+    },
+    {
+      "id": "starter|nhl:nhl:2026020097:away|2026-10-13T11:24:18.876Z",
+      "kind": "starter",
+      "observed_at": "2026-10-13T11:24:18.876Z",
+      "sport": "nhl",
+      "event": "VAN @ NYI",
+      "start": "2026-10-13T23:45:00+00:00",
+      "title": "NHL starting goalie updated",
+      "before": "Kevin Lankinen",
+      "after": "Leevi Merilainen · Unknown",
+      "source_quote_at": "2026-10-13T11:23:30.344844+00:00",
+      "source": "NHL board",
+      "note": "Review the matchup after a starter change; the baseline does not price individual goalie talent."
+    },
+    {
+      "id": "starter|nhl:nhl:2026020098:away|2026-10-13T11:24:18.876Z",
+      "kind": "starter",
+      "observed_at": "2026-10-13T11:24:18.876Z",
+      "sport": "nhl",
+      "event": "PIT @ CHI",
+      "start": "2026-10-14T00:00:00+00:00",
+      "title": "NHL starting goalie updated",
+      "before": "Arturs Silovs",
+      "after": "Sergei Murashov · Unknown",
+      "source_quote_at": "2026-10-13T11:23:30.344844+00:00",
+      "source": "NHL board",
+      "note": "Review the matchup after a starter change; the baseline does not price individual goalie talent."
+    },
+    {
+      "id": "starter|nhl:nhl:2026020103:home|2026-10-13T11:24:18.876Z",
+      "kind": "starter",
+      "observed_at": "2026-10-13T11:24:18.876Z",
+      "sport": "nhl",
+      "event": "CGY @ ANA",
+      "start": "2026-10-14T01:45:00+00:00",
+      "title": "NHL starting goalie updated",
+      "before": "Ville Husso",
+      "after": "Lukas Dostal · Unknown",
+      "source_quote_at": "2026-10-13T11:23:30.344844+00:00",
+      "source": "NHL board",
+      "note": "Review the matchup after a starter change; the baseline does not price individual goalie talent."
+    },
+    {
+      "id": "injury|nfl:3:Anthony Johnson Jr.|2026-10-13T11:24:18.876Z",
+      "kind": "injury",
+      "observed_at": "2026-10-13T11:24:18.876Z",
+      "sport": "nfl",
+      "title": "Player availability changed",
+      "event": "Chicago Bears",
+      "pick": "Anthony Johnson Jr.",
+      "before": "Out · Undisclosed",
+      "after": "Injured Reserve · Undisclosed",
+      "source_quote_at": "2026-10-13T11:01Z",
+      "source": "ESPN injuries",
+      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
+    },
     {
       "id": "starter|nhl:nhl:2026020090:home|2026-10-13T10:55:44.670Z",
       "kind": "starter",
@@ -2804,76 +2874,6 @@
       "before": "Out · Coach's Decision",
       "after": "Active",
       "source_quote_at": "2026-10-12T18:56Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:1:Malcolm DeWalt IV|2026-10-12T19:21:04.245Z",
-      "kind": "injury",
-      "observed_at": "2026-10-12T19:21:04.245Z",
-      "sport": "nfl",
-      "title": "Player availability changed",
-      "event": "Atlanta Falcons",
-      "pick": "Malcolm DeWalt IV",
-      "before": "Out · Coach's Decision",
-      "after": "Active",
-      "source_quote_at": "2026-10-12T18:56Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:1:Christian Harris|2026-10-12T19:21:04.245Z",
-      "kind": "injury",
-      "observed_at": "2026-10-12T19:21:04.245Z",
-      "sport": "nfl",
-      "title": "Player availability changed",
-      "event": "Atlanta Falcons",
-      "pick": "Christian Harris",
-      "before": "Out · Coach's Decision",
-      "after": "Active",
-      "source_quote_at": "2026-10-12T18:56Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:1:Robert Longerbeam|2026-10-12T19:21:04.245Z",
-      "kind": "injury",
-      "observed_at": "2026-10-12T19:21:04.245Z",
-      "sport": "nfl",
-      "title": "Player availability changed",
-      "event": "Atlanta Falcons",
-      "pick": "Robert Longerbeam",
-      "before": "Out · Coach's Decision",
-      "after": "Active",
-      "source_quote_at": "2026-10-12T18:56Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:4:Tanner Hudson|2026-10-12T19:21:04.245Z",
-      "kind": "injury",
-      "observed_at": "2026-10-12T19:21:04.245Z",
-      "sport": "nfl",
-      "title": "New availability report",
-      "event": "Cincinnati Bengals",
-      "pick": "Tanner Hudson",
-      "before": "Not in the previous dated report",
-      "after": "Questionable · Pectoral",
-      "source_quote_at": "2026-10-12T19:02Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:4:Myles Hinton|2026-10-12T19:21:04.245Z",
-      "kind": "injury",
-      "observed_at": "2026-10-12T19:21:04.245Z",
-      "sport": "nfl",
-      "title": "Player availability changed",
-      "event": "Cincinnati Bengals",
-      "pick": "Myles Hinton",
-      "before": "Out · Coach's Decision",
-      "after": "Active",
-      "source_quote_at": "2026-10-12T18:58Z",
       "source": "ESPN injuries",
       "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
     }
