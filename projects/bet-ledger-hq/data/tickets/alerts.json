@@ -1,29 +1,113 @@
 {
   "schema": 1,
-  "checked_at": "2026-10-13T14:26:46.578Z",
+  "checked_at": "2026-10-13T14:57:45.086Z",
   "coverage": {
-    "mlb": {
+    "nfl": {
       "status": "available",
-      "reports": 5,
-      "checked_at": "2026-10-13T14:26:46.578Z"
+      "reports": 537,
+      "checked_at": "2026-10-13T14:57:45.086Z"
     },
     "ncaaf": {
       "status": "empty",
       "reports": 0,
-      "checked_at": "2026-10-13T14:26:46.578Z"
+      "checked_at": "2026-10-13T14:57:45.086Z"
+    },
+    "mlb": {
+      "status": "available",
+      "reports": 5,
+      "checked_at": "2026-10-13T14:57:45.086Z"
     },
     "nhl": {
       "status": "available",
-      "reports": 45,
-      "checked_at": "2026-10-13T14:26:46.578Z"
-    },
-    "nfl": {
-      "status": "available",
-      "reports": 537,
-      "checked_at": "2026-10-13T14:26:46.578Z"
+      "reports": 46,
+      "checked_at": "2026-10-13T14:57:45.086Z"
     }
   },
   "events": [
+    {
+      "id": "starter|nhl:nhl:2026020090:home|2026-10-13T14:57:45.086Z",
+      "kind": "starter",
+      "observed_at": "2026-10-13T14:57:45.086Z",
+      "sport": "nhl",
+      "event": "NJ @ DET",
+      "start": "2026-10-13T22:00:00+00:00",
+      "title": "NHL starting goalie updated",
+      "before": "John Gibson",
+      "after": "John Gibson · confirmed",
+      "source_quote_at": "2026-10-13T14:56:47.045829+00:00",
+      "source": "NHL board",
+      "note": "Review the matchup after a starter change; the baseline does not price individual goalie talent."
+    },
+    {
+      "id": "starter|nhl:nhl:2026020093:home|2026-10-13T14:57:45.086Z",
+      "kind": "starter",
+      "observed_at": "2026-10-13T14:57:45.086Z",
+      "sport": "nhl",
+      "event": "WSH @ CAR",
+      "start": "2026-10-13T22:45:00+00:00",
+      "title": "NHL starting goalie updated",
+      "before": "Brandon Bussi",
+      "after": "Pyotr Kochetkov · Likely",
+      "source_quote_at": "2026-10-13T14:56:47.045829+00:00",
+      "source": "NHL board",
+      "note": "Review the matchup after a starter change; the baseline does not price individual goalie talent."
+    },
+    {
+      "id": "starter|nhl:nhl:2026020097:home|2026-10-13T14:57:45.086Z",
+      "kind": "starter",
+      "observed_at": "2026-10-13T14:57:45.086Z",
+      "sport": "nhl",
+      "event": "VAN @ NYI",
+      "start": "2026-10-13T23:45:00+00:00",
+      "title": "NHL starting goalie updated",
+      "before": "Ilya Sorokin",
+      "after": "Ilya Sorokin · confirmed",
+      "source_quote_at": "2026-10-13T14:56:47.045829+00:00",
+      "source": "NHL board",
+      "note": "Review the matchup after a starter change; the baseline does not price individual goalie talent."
+    },
+    {
+      "id": "injury|nfl:17:TreVeyon Henderson|2026-10-13T14:57:45.086Z",
+      "kind": "injury",
+      "observed_at": "2026-10-13T14:57:45.086Z",
+      "sport": "nfl",
+      "title": "Player availability changed",
+      "event": "New England Patriots",
+      "pick": "TreVeyon Henderson",
+      "before": "Questionable · Ankle",
+      "after": "Doubtful · Ankle",
+      "source_quote_at": "2026-10-13T14:26Z",
+      "source": "ESPN injuries",
+      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
+    },
+    {
+      "id": "injury|nhl:29:Conor Garland|2026-10-13T14:57:45.086Z",
+      "kind": "injury",
+      "observed_at": "2026-10-13T14:57:45.086Z",
+      "sport": "nhl",
+      "title": "New availability report",
+      "event": "Columbus Blue Jackets",
+      "pick": "Conor Garland",
+      "before": "Not in the previous dated report",
+      "after": "Day-To-Day · Illness",
+      "source_quote_at": "2026-10-13T14:27Z",
+      "source": "ESPN injuries",
+      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
+    },
+    {
+      "id": "injury|nhl:5:J.T. Compher|2026-10-13T14:57:45.086Z",
+      "kind": "injury",
+      "observed_at": "2026-10-13T14:57:45.086Z",
+      "sport": "nhl",
+      "title": "New availability report",
+      "event": "Detroit Red Wings",
+      "pick": "J.T. Compher",
+      "before": "Not in the previous dated report",
+      "after": "Injured Reserve · Undisclosed",
+      "source_quote_at": "2026-10-13T14:14Z",
+      "source": "ESPN injuries",
+      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
+    },
     {
       "id": "starter|nhl:nhl:2026020091:home|2026-10-13T14:26:46.578Z",
       "kind": "starter",
@@ -2794,90 +2878,6 @@
       "before": "Active · Warren carried the ball 15 times for 101 yards and a touchdown and caught all six of his targets for 87 yards and another TD in Sunday's 34-22 win over the Colts.",
       "after": "Active · Head coach Mike McCarthy said Monday that he views Warren as \"our featured player right now,\" Brooke Pryor of ESPN.com reports.",
       "source_quote_at": "2026-10-12T19:27Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:23:Ben Skowronek|2026-10-12T19:51:54.626Z",
-      "kind": "injury",
-      "observed_at": "2026-10-12T19:51:54.626Z",
-      "sport": "nfl",
-      "title": "Player availability changed",
-      "event": "Pittsburgh Steelers",
-      "pick": "Ben Skowronek",
-      "before": "Questionable · Leg",
-      "after": "Out · Leg",
-      "source_quote_at": "2026-10-12T19:23Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:23:Roman Wilson|2026-10-12T19:51:54.626Z",
-      "kind": "injury",
-      "observed_at": "2026-10-12T19:51:54.626Z",
-      "sport": "nfl",
-      "title": "Player availability changed",
-      "event": "Pittsburgh Steelers",
-      "pick": "Roman Wilson",
-      "before": "Doubtful · Finger",
-      "after": "Out · Finger",
-      "source_quote_at": "2026-10-12T19:17Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:25:Tatum Bethune|2026-10-12T19:51:54.626Z",
-      "kind": "injury",
-      "observed_at": "2026-10-12T19:51:54.626Z",
-      "sport": "nfl",
-      "title": "Player availability changed",
-      "event": "San Francisco 49ers",
-      "pick": "Tatum Bethune",
-      "before": "Out · Coach's Decision",
-      "after": "Active",
-      "source_quote_at": "2026-10-12T19:37Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:25:Enrique Cruz Jr.|2026-10-12T19:51:54.626Z",
-      "kind": "injury",
-      "observed_at": "2026-10-12T19:51:54.626Z",
-      "sport": "nfl",
-      "title": "Player availability changed",
-      "event": "San Francisco 49ers",
-      "pick": "Enrique Cruz Jr.",
-      "before": "Out · Coach's Decision",
-      "after": "Active",
-      "source_quote_at": "2026-10-12T19:37Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:25:Kurtis Rourke|2026-10-12T19:51:54.626Z",
-      "kind": "injury",
-      "observed_at": "2026-10-12T19:51:54.626Z",
-      "sport": "nfl",
-      "title": "Player availability changed",
-      "event": "San Francisco 49ers",
-      "pick": "Kurtis Rourke",
-      "before": "Out · Coach's Decision",
-      "after": "Active",
-      "source_quote_at": "2026-10-12T19:37Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:25:Garret Wallow|2026-10-12T19:51:54.626Z",
-      "kind": "injury",
-      "observed_at": "2026-10-12T19:51:54.626Z",
-      "sport": "nfl",
-      "title": "New availability report",
-      "event": "San Francisco 49ers",
-      "pick": "Garret Wallow",
-      "before": "Not in the previous dated report",
-      "after": "Out · Hamstring",
-      "source_quote_at": "2026-10-12T19:33Z",
       "source": "ESPN injuries",
       "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
     }
