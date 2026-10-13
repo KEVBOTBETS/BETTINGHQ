@@ -1,29 +1,127 @@
 {
   "schema": 1,
-  "checked_at": "2026-10-13T22:02:58.665Z",
+  "checked_at": "2026-10-13T22:29:34.567Z",
   "coverage": {
-    "nfl": {
-      "status": "available",
-      "reports": 530,
-      "checked_at": "2026-10-13T22:02:58.665Z"
+    "ncaaf": {
+      "status": "empty",
+      "reports": 0,
+      "checked_at": "2026-10-13T22:29:34.567Z"
     },
     "nhl": {
       "status": "available",
       "reports": 39,
-      "checked_at": "2026-10-13T22:02:58.665Z"
+      "checked_at": "2026-10-13T22:29:34.567Z"
     },
     "mlb": {
       "status": "available",
       "reports": 5,
-      "checked_at": "2026-10-13T22:02:58.665Z"
+      "checked_at": "2026-10-13T22:29:34.567Z"
     },
-    "ncaaf": {
-      "status": "empty",
-      "reports": 0,
-      "checked_at": "2026-10-13T22:02:58.665Z"
+    "nfl": {
+      "status": "available",
+      "reports": 531,
+      "checked_at": "2026-10-13T22:29:34.567Z"
     }
   },
   "events": [
+    {
+      "id": "starter|nhl:nhl:2026020092:away|2026-10-13T22:29:34.567Z",
+      "kind": "starter",
+      "observed_at": "2026-10-13T22:29:34.567Z",
+      "sport": "nhl",
+      "event": "BUF @ MTL",
+      "start": "2026-10-13T22:30:00+00:00",
+      "title": "NHL starting goalie updated",
+      "before": "Ukko-Pekka Luukkonen",
+      "after": "Ukko-Pekka Luukkonen · confirmed",
+      "source_quote_at": "2026-10-13T22:28:33.123274+00:00",
+      "source": "NHL board",
+      "note": "Review the matchup after a starter change; the baseline does not price individual goalie talent."
+    },
+    {
+      "id": "starter|nhl:nhl:2026020093:home|2026-10-13T22:29:34.567Z",
+      "kind": "starter",
+      "observed_at": "2026-10-13T22:29:34.567Z",
+      "sport": "nhl",
+      "event": "WSH @ CAR",
+      "start": "2026-10-13T22:45:00+00:00",
+      "title": "NHL starting goalie updated",
+      "before": "Pyotr Kochetkov",
+      "after": "Pyotr Kochetkov · confirmed",
+      "source_quote_at": "2026-10-13T22:28:33.123274+00:00",
+      "source": "NHL board",
+      "note": "Review the matchup after a starter change; the baseline does not price individual goalie talent."
+    },
+    {
+      "id": "injury|nfl:3:Anthony Johnson Jr.|2026-10-13T22:29:34.567Z",
+      "kind": "injury",
+      "observed_at": "2026-10-13T22:29:34.567Z",
+      "sport": "nfl",
+      "title": "Player availability changed",
+      "event": "Chicago Bears",
+      "pick": "Anthony Johnson Jr.",
+      "before": "Out · Undisclosed",
+      "after": "Injured Reserve · Undisclosed",
+      "source_quote_at": "2026-10-13T22:15Z",
+      "source": "ESPN injuries",
+      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
+    },
+    {
+      "id": "injury|nfl:7:Sai'vion Jones|2026-10-13T22:29:34.567Z",
+      "kind": "injury",
+      "observed_at": "2026-10-13T22:29:34.567Z",
+      "sport": "nfl",
+      "title": "Player availability changed",
+      "event": "Denver Broncos",
+      "pick": "Sai'vion Jones",
+      "before": "Questionable · Shoulder",
+      "after": "Questionable · questionable",
+      "source_quote_at": "2026-10-12T20:52Z",
+      "source": "ESPN injuries",
+      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
+    },
+    {
+      "id": "injury|nfl:34:Jalen Pitre|2026-10-13T22:29:34.567Z",
+      "kind": "injury",
+      "observed_at": "2026-10-13T22:29:34.567Z",
+      "sport": "nfl",
+      "title": "Player availability changed",
+      "event": "Houston Texans",
+      "pick": "Jalen Pitre",
+      "before": "Doubtful · Shoulder",
+      "after": "Doubtful · Shoulder - AC Joint",
+      "source_quote_at": "2026-10-12T16:42Z",
+      "source": "ESPN injuries",
+      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
+    },
+    {
+      "id": "injury|nfl:24:KeAndre Lambert-Smith|2026-10-13T22:29:34.567Z",
+      "kind": "injury",
+      "observed_at": "2026-10-13T22:29:34.567Z",
+      "sport": "nfl",
+      "title": "New availability report",
+      "event": "Los Angeles Chargers",
+      "pick": "KeAndre Lambert-Smith",
+      "before": "Not in the previous dated report",
+      "after": "Injured Reserve · Hamstring",
+      "source_quote_at": "2026-10-13T22:20Z",
+      "source": "ESPN injuries",
+      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
+    },
+    {
+      "id": "injury|nfl:14:Blake Grupe|2026-10-13T22:29:34.567Z",
+      "kind": "injury",
+      "observed_at": "2026-10-13T22:29:34.567Z",
+      "sport": "nfl",
+      "title": "New availability report",
+      "event": "Los Angeles Rams",
+      "pick": "Blake Grupe",
+      "before": "Not in the previous dated report",
+      "after": "Active · The Rams signed Grupe off the Jets' practice squad Tuesday, Mike Garafolo of NFL Network reports.",
+      "source_quote_at": "2026-10-13T18:02Z",
+      "source": "ESPN injuries",
+      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
+    },
     {
       "id": "odds|ncaaf|401860923|2026-10-16T00:00Z|TOTAL||over|Draft Kings|2026-10-13T21:58:19.426Z",
       "kind": "odds",
@@ -2750,104 +2848,6 @@
       "source_quote_at": "2026-10-13T10:54:52.414292+00:00",
       "source": "NHL board",
       "note": "Review the matchup after a starter change; the baseline does not price individual goalie talent."
-    },
-    {
-      "id": "starter|nhl:nhl:2026020093:home|2026-10-13T10:55:44.670Z",
-      "kind": "starter",
-      "observed_at": "2026-10-13T10:55:44.670Z",
-      "sport": "nhl",
-      "event": "WSH @ CAR",
-      "start": "2026-10-13T22:45:00+00:00",
-      "title": "NHL starting goalie updated",
-      "before": "Pyotr Kochetkov",
-      "after": "Brandon Bussi · Unknown",
-      "source_quote_at": "2026-10-13T10:54:52.414292+00:00",
-      "source": "NHL board",
-      "note": "Review the matchup after a starter change; the baseline does not price individual goalie talent."
-    },
-    {
-      "id": "starter|nhl:nhl:2026020094:away|2026-10-13T10:55:44.670Z",
-      "kind": "starter",
-      "observed_at": "2026-10-13T10:55:44.670Z",
-      "sport": "nhl",
-      "event": "SEA @ PHI",
-      "start": "2026-10-13T23:00:00+00:00",
-      "title": "NHL starting goalie updated",
-      "before": "Joey Daccord",
-      "after": "Philipp Grubauer · Unknown",
-      "source_quote_at": "2026-10-13T10:54:52.414292+00:00",
-      "source": "NHL board",
-      "note": "Review the matchup after a starter change; the baseline does not price individual goalie talent."
-    },
-    {
-      "id": "starter|nhl:nhl:2026020096:away|2026-10-13T10:55:44.670Z",
-      "kind": "starter",
-      "observed_at": "2026-10-13T10:55:44.670Z",
-      "sport": "nhl",
-      "event": "STL @ OTT",
-      "start": "2026-10-13T23:30:00+00:00",
-      "title": "NHL starting goalie updated",
-      "before": "Jordan Binnington",
-      "after": "Joel Hofer · Unknown",
-      "source_quote_at": "2026-10-13T10:54:52.414292+00:00",
-      "source": "NHL board",
-      "note": "Review the matchup after a starter change; the baseline does not price individual goalie talent."
-    },
-    {
-      "id": "starter|nhl:nhl:2026020096:home|2026-10-13T10:55:44.670Z",
-      "kind": "starter",
-      "observed_at": "2026-10-13T10:55:44.670Z",
-      "sport": "nhl",
-      "event": "STL @ OTT",
-      "start": "2026-10-13T23:30:00+00:00",
-      "title": "NHL starting goalie updated",
-      "before": "Linus Ullmark",
-      "after": "Samuel Ersson · Unknown",
-      "source_quote_at": "2026-10-13T10:54:52.414292+00:00",
-      "source": "NHL board",
-      "note": "Review the matchup after a starter change; the baseline does not price individual goalie talent."
-    },
-    {
-      "id": "injury|nfl:3:Anthony Johnson Jr.|2026-10-13T10:25:05.466Z",
-      "kind": "injury",
-      "observed_at": "2026-10-13T10:25:05.466Z",
-      "sport": "nfl",
-      "title": "Player availability changed",
-      "event": "Chicago Bears",
-      "pick": "Anthony Johnson Jr.",
-      "before": "Injured Reserve · Undisclosed",
-      "after": "Out · Undisclosed",
-      "source_quote_at": "2026-10-13T10:00Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:3:Anthony Johnson Jr.|2026-10-13T08:26:00.758Z",
-      "kind": "injury",
-      "observed_at": "2026-10-13T08:26:00.758Z",
-      "sport": "nfl",
-      "title": "Player availability changed",
-      "event": "Chicago Bears",
-      "pick": "Anthony Johnson Jr.",
-      "before": "Out · Undisclosed",
-      "after": "Injured Reserve · Undisclosed",
-      "source_quote_at": "2026-10-13T08:01Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:3:Anthony Johnson Jr.|2026-10-13T07:02:47.144Z",
-      "kind": "injury",
-      "observed_at": "2026-10-13T07:02:47.144Z",
-      "sport": "nfl",
-      "title": "Player availability changed",
-      "event": "Chicago Bears",
-      "pick": "Anthony Johnson Jr.",
-      "before": "Injured Reserve · Undisclosed",
-      "after": "Out · Undisclosed",
-      "source_quote_at": "2026-10-13T07:00Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
     }
   ]
 }
