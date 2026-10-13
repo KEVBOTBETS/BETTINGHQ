@@ -1,29 +1,61 @@
 {
   "schema": 1,
-  "checked_at": "2026-10-13T12:29:54.212Z",
+  "checked_at": "2026-10-13T12:56:54.543Z",
   "coverage": {
+    "nfl": {
+      "status": "available",
+      "reports": 538,
+      "checked_at": "2026-10-13T12:56:54.543Z"
+    },
     "ncaaf": {
       "status": "empty",
       "reports": 0,
-      "checked_at": "2026-10-13T12:29:54.212Z"
+      "checked_at": "2026-10-13T12:56:54.543Z"
     },
     "nhl": {
       "status": "available",
       "reports": 46,
-      "checked_at": "2026-10-13T12:29:54.212Z"
+      "checked_at": "2026-10-13T12:56:54.543Z"
     },
     "mlb": {
       "status": "available",
       "reports": 5,
-      "checked_at": "2026-10-13T12:29:54.212Z"
-    },
-    "nfl": {
-      "status": "available",
-      "reports": 538,
-      "checked_at": "2026-10-13T12:29:54.212Z"
+      "checked_at": "2026-10-13T12:56:54.543Z"
     }
   },
   "events": [
+    {
+      "id": "odds|ncaaf|401858488|2026-10-17T16:00Z|TOTAL||over|DraftKings|2026-10-13T12:56:54.543Z",
+      "kind": "odds",
+      "observed_at": "2026-10-13T12:56:54.543Z",
+      "sport": "ncaaf",
+      "event": "OSU @ IU",
+      "start": "2026-10-17T16:00Z",
+      "pick": "Over 48.5",
+      "title": "Published odds changed",
+      "before": "-118 · line 50.5",
+      "after": "+100 · line 51.5",
+      "book": "DraftKings",
+      "source_quote_at": "2026-10-13T12:53:15.726082+00:00",
+      "source": "Existing NCAAF board",
+      "note": "Your ticket keeps its original odds. Recheck the live book before placing a new wager."
+    },
+    {
+      "id": "odds|ncaaf|401864523|2026-10-18T01:00Z|TOTAL||under|DraftKings|2026-10-13T12:56:54.543Z",
+      "kind": "odds",
+      "observed_at": "2026-10-13T12:56:54.543Z",
+      "sport": "ncaaf",
+      "event": "SJSU @ UTEP",
+      "start": "2026-10-18T01:00Z",
+      "pick": "Under 50.5",
+      "title": "Published odds changed",
+      "before": "-115 · line 47.5",
+      "after": "-108 · line 46.5",
+      "book": "DraftKings",
+      "source_quote_at": "2026-10-13T12:53:15.726082+00:00",
+      "source": "Existing NCAAF board",
+      "note": "Your ticket keeps its original odds. Recheck the live book before placing a new wager."
+    },
     {
       "id": "injury|nfl:3:Anthony Johnson Jr.|2026-10-13T12:29:54.212Z",
       "kind": "injury",
@@ -2846,34 +2878,6 @@
       "before": "Not in the previous dated report",
       "after": "Out · Elbow",
       "source_quote_at": "2026-10-12T19:26Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:22:Carson Beck|2026-10-12T19:21:04.245Z",
-      "kind": "injury",
-      "observed_at": "2026-10-12T19:21:04.245Z",
-      "sport": "nfl",
-      "title": "Player availability changed",
-      "event": "Arizona Cardinals",
-      "pick": "Carson Beck",
-      "before": "Active",
-      "after": "Active · Beck (coach's decision) is inactive and is designated as Arizona's emergency third quarterback for Sunday's matchup versus the Lions.",
-      "source_quote_at": "2026-10-11T19:10Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:1:Jack Strand|2026-10-12T19:21:04.245Z",
-      "kind": "injury",
-      "observed_at": "2026-10-12T19:21:04.245Z",
-      "sport": "nfl",
-      "title": "Player availability changed",
-      "event": "Atlanta Falcons",
-      "pick": "Jack Strand",
-      "before": "Out · inactive",
-      "after": "Active",
-      "source_quote_at": "2026-10-12T18:56Z",
       "source": "ESPN injuries",
       "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
     }
