@@ -1,29 +1,85 @@
 {
   "schema": 1,
-  "checked_at": "2026-10-13T13:03:11.800Z",
+  "checked_at": "2026-10-13T13:29:38.589Z",
   "coverage": {
+    "ncaaf": {
+      "status": "empty",
+      "reports": 0,
+      "checked_at": "2026-10-13T13:29:38.589Z"
+    },
     "nhl": {
       "status": "available",
       "reports": 46,
-      "checked_at": "2026-10-13T13:03:11.800Z"
+      "checked_at": "2026-10-13T13:29:38.589Z"
     },
     "mlb": {
       "status": "available",
       "reports": 5,
-      "checked_at": "2026-10-13T13:03:11.800Z"
-    },
-    "ncaaf": {
-      "status": "empty",
-      "reports": 0,
-      "checked_at": "2026-10-13T13:03:11.800Z"
+      "checked_at": "2026-10-13T13:29:38.589Z"
     },
     "nfl": {
       "status": "available",
       "reports": 538,
-      "checked_at": "2026-10-13T13:03:11.800Z"
+      "checked_at": "2026-10-13T13:29:38.589Z"
     }
   },
   "events": [
+    {
+      "id": "starter|nhl:nhl:2026020095:home|2026-10-13T13:29:38.589Z",
+      "kind": "starter",
+      "observed_at": "2026-10-13T13:29:38.589Z",
+      "sport": "nhl",
+      "event": "TB @ NYR",
+      "start": "2026-10-13T23:15:00+00:00",
+      "title": "NHL starting goalie updated",
+      "before": "Dylan Garand",
+      "after": "Dylan Garand · confirmed",
+      "source_quote_at": "2026-10-13T13:28:52.017046+00:00",
+      "source": "NHL board",
+      "note": "Review the matchup after a starter change; the baseline does not price individual goalie talent."
+    },
+    {
+      "id": "starter|nhl:nhl:2026020099:home|2026-10-13T13:29:38.589Z",
+      "kind": "starter",
+      "observed_at": "2026-10-13T13:29:38.589Z",
+      "sport": "nhl",
+      "event": "MIN @ WPG",
+      "start": "2026-10-14T00:15:00+00:00",
+      "title": "NHL starting goalie updated",
+      "before": "Stuart Skinner",
+      "after": "Stuart Skinner · confirmed",
+      "source_quote_at": "2026-10-13T13:28:52.017046+00:00",
+      "source": "NHL board",
+      "note": "Review the matchup after a starter change; the baseline does not price individual goalie talent."
+    },
+    {
+      "id": "injury|nhl:30:Nico Sturm|2026-10-13T13:29:38.589Z",
+      "kind": "injury",
+      "observed_at": "2026-10-13T13:29:38.589Z",
+      "sport": "nhl",
+      "title": "Player availability changed",
+      "event": "Minnesota Wild",
+      "pick": "Nico Sturm",
+      "before": "Out · Upper Body",
+      "after": "Day-To-Day · Upper Body",
+      "source_quote_at": "2026-10-13T13:01Z",
+      "source": "ESPN injuries",
+      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
+    },
+    {
+      "id": "injury|nhl:14:Nikolas Matinpalo|2026-10-13T13:29:38.589Z",
+      "kind": "injury",
+      "observed_at": "2026-10-13T13:29:38.589Z",
+      "sport": "nhl",
+      "title": "Player availability changed",
+      "event": "Ottawa Senators",
+      "pick": "Nikolas Matinpalo",
+      "before": "Out · Upper Body",
+      "after": "Day-To-Day · Upper Body",
+      "source_quote_at": "2026-10-13T13:01Z",
+      "source": "ESPN injuries",
+      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
+    },
     {
       "id": "odds|ncaaf|401858488|2026-10-17T16:00Z|TOTAL||over|DraftKings|2026-10-13T12:56:54.543Z",
       "kind": "odds",
@@ -2822,62 +2878,6 @@
       "before": "Out · Coach's Decision",
       "after": "Out · inactive",
       "source_quote_at": "2026-10-11T15:34Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:10:Brandon Crenshaw-Dickson|2026-10-12T19:51:54.626Z",
-      "kind": "injury",
-      "observed_at": "2026-10-12T19:51:54.626Z",
-      "sport": "nfl",
-      "title": "Player availability changed",
-      "event": "Tennessee Titans",
-      "pick": "Brandon Crenshaw-Dickson",
-      "before": "Out · Coach's Decision",
-      "after": "Out · inactive",
-      "source_quote_at": "2026-10-11T15:34Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:10:Michael Carter|2026-10-12T19:51:54.626Z",
-      "kind": "injury",
-      "observed_at": "2026-10-12T19:51:54.626Z",
-      "sport": "nfl",
-      "title": "Player availability changed",
-      "event": "Tennessee Titans",
-      "pick": "Michael Carter",
-      "before": "Out · Coach's Decision",
-      "after": "Out · inactive",
-      "source_quote_at": "2026-10-11T15:34Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nhl:18:Barclay Goodrow|2026-10-12T19:51:54.626Z",
-      "kind": "injury",
-      "observed_at": "2026-10-12T19:51:54.626Z",
-      "sport": "nhl",
-      "title": "New availability report",
-      "event": "San Jose Sharks",
-      "pick": "Barclay Goodrow",
-      "before": "Not in the previous dated report",
-      "after": "Day-To-Day · Illness",
-      "source_quote_at": "2026-10-12T19:26Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|mlb:28:Jakob Marsee|2026-10-12T19:51:54.626Z",
-      "kind": "injury",
-      "observed_at": "2026-10-12T19:51:54.626Z",
-      "sport": "mlb",
-      "title": "New availability report",
-      "event": "Miami Marlins",
-      "pick": "Jakob Marsee",
-      "before": "Not in the previous dated report",
-      "after": "Out · Elbow",
-      "source_quote_at": "2026-10-12T19:26Z",
       "source": "ESPN injuries",
       "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
     }
