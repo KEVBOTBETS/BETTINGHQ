@@ -1,29 +1,155 @@
 {
   "schema": 1,
-  "checked_at": "2026-10-13T17:52:19.502Z",
+  "checked_at": "2026-10-13T18:28:32.648Z",
   "coverage": {
-    "mlb": {
+    "nfl": {
       "status": "available",
-      "reports": 5,
-      "checked_at": "2026-10-13T17:52:19.502Z"
-    },
-    "nhl": {
-      "status": "available",
-      "reports": 44,
-      "checked_at": "2026-10-13T17:52:19.502Z"
+      "reports": 533,
+      "checked_at": "2026-10-13T18:28:32.648Z"
     },
     "ncaaf": {
       "status": "empty",
       "reports": 0,
-      "checked_at": "2026-10-13T17:52:19.502Z"
+      "checked_at": "2026-10-13T18:28:32.648Z"
     },
-    "nfl": {
+    "nhl": {
       "status": "available",
-      "reports": 533,
-      "checked_at": "2026-10-13T17:52:19.502Z"
+      "reports": 42,
+      "checked_at": "2026-10-13T18:28:32.648Z"
+    },
+    "mlb": {
+      "status": "available",
+      "reports": 5,
+      "checked_at": "2026-10-13T18:28:32.648Z"
     }
   },
   "events": [
+    {
+      "id": "starter|nhl:nhl:2026020098:away|2026-10-13T18:28:32.648Z",
+      "kind": "starter",
+      "observed_at": "2026-10-13T18:28:32.648Z",
+      "sport": "nhl",
+      "event": "PIT @ CHI",
+      "start": "2026-10-14T00:00:00+00:00",
+      "title": "NHL starting goalie updated",
+      "before": "Sergei Murashov",
+      "after": "Sergei Murashov · confirmed",
+      "source_quote_at": "2026-10-13T18:27:34.868220+00:00",
+      "source": "NHL board",
+      "note": "Review the matchup after a starter change; the baseline does not price individual goalie talent."
+    },
+    {
+      "id": "starter|nhl:nhl:2026020104:away|2026-10-13T18:28:32.648Z",
+      "kind": "starter",
+      "observed_at": "2026-10-13T18:28:32.648Z",
+      "sport": "nhl",
+      "event": "EDM @ LA",
+      "start": "2026-10-14T02:30:00+00:00",
+      "title": "NHL starting goalie updated",
+      "before": "Devon Levi",
+      "after": "Devon Levi · confirmed",
+      "source_quote_at": "2026-10-13T18:27:34.868220+00:00",
+      "source": "NHL board",
+      "note": "Review the matchup after a starter change; the baseline does not price individual goalie talent."
+    },
+    {
+      "id": "starter|nhl:nhl:2026020104:home|2026-10-13T18:28:32.648Z",
+      "kind": "starter",
+      "observed_at": "2026-10-13T18:28:32.648Z",
+      "sport": "nhl",
+      "event": "EDM @ LA",
+      "start": "2026-10-14T02:30:00+00:00",
+      "title": "NHL starting goalie updated",
+      "before": "Darcy Kuemper",
+      "after": "Darcy Kuemper · confirmed",
+      "source_quote_at": "2026-10-13T18:27:34.868220+00:00",
+      "source": "NHL board",
+      "note": "Review the matchup after a starter change; the baseline does not price individual goalie talent."
+    },
+    {
+      "id": "starter|nhl:nhl:2026020105:home|2026-10-13T18:28:32.648Z",
+      "kind": "starter",
+      "observed_at": "2026-10-13T18:28:32.648Z",
+      "sport": "nhl",
+      "event": "BOS @ SJ",
+      "start": "2026-10-14T03:00:00+00:00",
+      "title": "NHL starting goalie updated",
+      "before": "Yaroslav Askarov",
+      "after": "Yaroslav Askarov · confirmed",
+      "source_quote_at": "2026-10-13T18:27:34.868220+00:00",
+      "source": "NHL board",
+      "note": "Review the matchup after a starter change; the baseline does not price individual goalie talent."
+    },
+    {
+      "id": "injury|nfl:3:Anthony Johnson Jr.|2026-10-13T18:28:32.648Z",
+      "kind": "injury",
+      "observed_at": "2026-10-13T18:28:32.648Z",
+      "sport": "nfl",
+      "title": "Player availability changed",
+      "event": "Chicago Bears",
+      "pick": "Anthony Johnson Jr.",
+      "before": "Injured Reserve · Undisclosed",
+      "after": "Out · Undisclosed",
+      "source_quote_at": "2026-10-13T18:15Z",
+      "source": "ESPN injuries",
+      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
+    },
+    {
+      "id": "injury|nfl:14:Harrison Mevis|2026-10-13T18:28:32.648Z",
+      "kind": "injury",
+      "observed_at": "2026-10-13T18:28:32.648Z",
+      "sport": "nfl",
+      "title": "New availability report",
+      "event": "Los Angeles Rams",
+      "pick": "Harrison Mevis",
+      "before": "Not in the previous dated report",
+      "after": "Active · The Rams plan to waive Mevis on Tuesday, Mike Garafolo of NFL Network reports.",
+      "source_quote_at": "2026-10-13T17:56Z",
+      "source": "ESPN injuries",
+      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
+    },
+    {
+      "id": "injury|nfl:17:Will Campbell|2026-10-13T18:28:32.648Z",
+      "kind": "injury",
+      "observed_at": "2026-10-13T18:28:32.648Z",
+      "sport": "nfl",
+      "title": "Player availability changed",
+      "event": "New England Patriots",
+      "pick": "Will Campbell",
+      "before": "Doubtful · Knee",
+      "after": "Doubtful · Knee - MCL",
+      "source_quote_at": "2026-10-13T16:15Z",
+      "source": "ESPN injuries",
+      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
+    },
+    {
+      "id": "injury|nhl:6:Jake Walman|2026-10-13T18:28:32.648Z",
+      "kind": "injury",
+      "observed_at": "2026-10-13T18:28:32.648Z",
+      "sport": "nhl",
+      "title": "Player availability changed",
+      "event": "Edmonton Oilers",
+      "pick": "Jake Walman",
+      "before": "Day-To-Day · Upper Body",
+      "after": "Out · Upper Body",
+      "source_quote_at": "2026-10-13T18:20Z",
+      "source": "ESPN injuries",
+      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
+    },
+    {
+      "id": "injury|nhl:6:Zach Hyman|2026-10-13T18:28:32.648Z",
+      "kind": "injury",
+      "observed_at": "2026-10-13T18:28:32.648Z",
+      "sport": "nhl",
+      "title": "Player availability changed",
+      "event": "Edmonton Oilers",
+      "pick": "Zach Hyman",
+      "before": "Day-To-Day · Undisclosed",
+      "after": "Out · Undisclosed",
+      "source_quote_at": "2026-10-13T18:13Z",
+      "source": "ESPN injuries",
+      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
+    },
     {
       "id": "starter|nhl:nhl:2026020093:away|2026-10-13T17:52:19.502Z",
       "kind": "starter",
@@ -2713,134 +2839,6 @@
       "before": "Not in the previous dated report",
       "after": "Questionable · Back",
       "source_quote_at": "2026-10-13T01:15Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:13:Michael Mayer|2026-10-13T01:24:40.779Z",
-      "kind": "injury",
-      "observed_at": "2026-10-13T01:24:40.779Z",
-      "sport": "nfl",
-      "title": "New availability report",
-      "event": "Las Vegas Raiders",
-      "pick": "Michael Mayer",
-      "before": "Not in the previous dated report",
-      "after": "Active · Mayer caught his only target for two yards during Sunday's 45-17 loss to the Patriots.",
-      "source_quote_at": "2026-10-13T01:16Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:24:Keaton Mitchell|2026-10-13T01:24:40.779Z",
-      "kind": "injury",
-      "observed_at": "2026-10-13T01:24:40.779Z",
-      "sport": "nfl",
-      "title": "New availability report",
-      "event": "Los Angeles Chargers",
-      "pick": "Keaton Mitchell",
-      "before": "Not in the previous dated report",
-      "after": "Active · Mitchell took six carries for 11 yards and caught three of four targets for 18 yards during Sunday's 23-17 loss versus the Broncos.",
-      "source_quote_at": "2026-10-13T01:05Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:15:Greg Dulcich|2026-10-13T01:24:40.779Z",
-      "kind": "injury",
-      "observed_at": "2026-10-13T01:24:40.779Z",
-      "sport": "nfl",
-      "title": "New availability report",
-      "event": "Miami Dolphins",
-      "pick": "Greg Dulcich",
-      "before": "Not in the previous dated report",
-      "after": "Active · Dulcich caught four of five targets for 37 yards during Sunday's 31-24 loss to the Bengals.",
-      "source_quote_at": "2026-10-13T01:01Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:20:Isaiah Davis|2026-10-13T01:24:40.779Z",
-      "kind": "injury",
-      "observed_at": "2026-10-13T01:24:40.779Z",
-      "sport": "nfl",
-      "title": "New availability report",
-      "event": "New York Jets",
-      "pick": "Isaiah Davis",
-      "before": "Not in the previous dated report",
-      "after": "Active · Davis rushed twice for eight yards while catching one of two targets for nine yards during Sunday's 17-12 win over the Browns.",
-      "source_quote_at": "2026-10-13T00:50Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:26:Rashid Shaheed|2026-10-13T01:24:40.779Z",
-      "kind": "injury",
-      "observed_at": "2026-10-13T01:24:40.779Z",
-      "sport": "nfl",
-      "title": "New availability report",
-      "event": "Seattle Seahawks",
-      "pick": "Rashid Shaheed",
-      "before": "Not in the previous dated report",
-      "after": "Active · Shaheed caught two of four targets for 23 yards while also adding 86 kickoff-return yards during Sunday's 32-29 loss to the 49ers.",
-      "source_quote_at": "2026-10-13T00:57Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:26:AJ Barner|2026-10-13T01:03:03.610Z",
-      "kind": "injury",
-      "observed_at": "2026-10-13T01:03:03.610Z",
-      "sport": "nfl",
-      "title": "New availability report",
-      "event": "Seattle Seahawks",
-      "pick": "AJ Barner",
-      "before": "Not in the previous dated report",
-      "after": "Active · Barner caught three of five targets for 20 yards during Sunday's 32-29 loss versus the 49ers.",
-      "source_quote_at": "2026-10-13T00:53Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:28:Chig Okonkwo|2026-10-13T01:03:03.610Z",
-      "kind": "injury",
-      "observed_at": "2026-10-13T01:03:03.610Z",
-      "sport": "nfl",
-      "title": "New availability report",
-      "event": "Washington Commanders",
-      "pick": "Chig Okonkwo",
-      "before": "Not in the previous dated report",
-      "after": "Active · Okonkwo caught four of six targets for 60 yards during Sunday's 27-27 tie against the Giants.",
-      "source_quote_at": "2026-10-13T00:41Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "odds|ncaaf|401866478|2026-10-17T19:30Z|TOTAL||over|Draft Kings|2026-10-13T00:58:18.880Z",
-      "kind": "odds",
-      "observed_at": "2026-10-13T00:58:18.880Z",
-      "sport": "ncaaf",
-      "event": "AKR @ M-OH",
-      "start": "2026-10-17T19:30Z",
-      "pick": "Over 46.5",
-      "title": "Published odds changed",
-      "before": "-118 · line 46.5",
-      "after": "-105 · line 47.5",
-      "book": "Draft Kings",
-      "source_quote_at": "2026-10-13T00:55:20.023402+00:00",
-      "source": "Existing NCAAF board",
-      "note": "Your ticket keeps its original odds. Recheck the live book before placing a new wager."
-    },
-    {
-      "id": "injury|nfl:22:Tyler Allgeier|2026-10-13T00:58:18.880Z",
-      "kind": "injury",
-      "observed_at": "2026-10-13T00:58:18.880Z",
-      "sport": "nfl",
-      "title": "New availability report",
-      "event": "Arizona Cardinals",
-      "pick": "Tyler Allgeier",
-      "before": "Not in the previous dated report",
-      "after": "Active · Allgeier rushed three times for seven yards and caught both of his targets for nine yards during Sunday's 45-21 loss to the Lions.",
-      "source_quote_at": "2026-10-13T00:32Z",
       "source": "ESPN injuries",
       "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
     }
