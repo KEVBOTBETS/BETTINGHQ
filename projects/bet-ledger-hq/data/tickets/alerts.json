@@ -1,29 +1,43 @@
 {
   "schema": 1,
-  "checked_at": "2026-10-13T07:55:52.934Z",
+  "checked_at": "2026-10-13T08:26:00.758Z",
   "coverage": {
     "ncaaf": {
       "status": "empty",
       "reports": 0,
-      "checked_at": "2026-10-13T07:55:52.934Z"
+      "checked_at": "2026-10-13T08:26:00.758Z"
     },
     "nhl": {
       "status": "available",
       "reports": 46,
-      "checked_at": "2026-10-13T07:55:52.934Z"
-    },
-    "mlb": {
-      "status": "available",
-      "reports": 5,
-      "checked_at": "2026-10-13T07:55:52.934Z"
+      "checked_at": "2026-10-13T08:26:00.758Z"
     },
     "nfl": {
       "status": "available",
       "reports": 538,
-      "checked_at": "2026-10-13T07:55:52.934Z"
+      "checked_at": "2026-10-13T08:26:00.758Z"
+    },
+    "mlb": {
+      "status": "available",
+      "reports": 5,
+      "checked_at": "2026-10-13T08:26:00.758Z"
     }
   },
   "events": [
+    {
+      "id": "injury|nfl:3:Anthony Johnson Jr.|2026-10-13T08:26:00.758Z",
+      "kind": "injury",
+      "observed_at": "2026-10-13T08:26:00.758Z",
+      "sport": "nfl",
+      "title": "Player availability changed",
+      "event": "Chicago Bears",
+      "pick": "Anthony Johnson Jr.",
+      "before": "Out · Undisclosed",
+      "after": "Injured Reserve · Undisclosed",
+      "source_quote_at": "2026-10-13T08:01Z",
+      "source": "ESPN injuries",
+      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
+    },
     {
       "id": "injury|nfl:3:Anthony Johnson Jr.|2026-10-13T07:02:47.144Z",
       "kind": "injury",
@@ -2860,20 +2874,6 @@
       "before": "Out · Coach's Decision",
       "after": "Active",
       "source_quote_at": "2026-10-12T19:03Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:6:Drew Shelton|2026-10-12T19:21:04.245Z",
-      "kind": "injury",
-      "observed_at": "2026-10-12T19:21:04.245Z",
-      "sport": "nfl",
-      "title": "New availability report",
-      "event": "Dallas Cowboys",
-      "pick": "Drew Shelton",
-      "before": "Not in the previous dated report",
-      "after": "Out · Hamstring",
-      "source_quote_at": "2026-10-12T19:04Z",
       "source": "ESPN injuries",
       "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
     }
