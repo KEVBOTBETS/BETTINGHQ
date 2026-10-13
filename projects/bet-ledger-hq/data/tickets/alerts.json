@@ -1,29 +1,73 @@
 {
   "schema": 1,
-  "checked_at": "2026-10-13T00:34:28.113Z",
+  "checked_at": "2026-10-13T00:58:18.880Z",
   "coverage": {
-    "mlb": {
+    "nhl": {
       "status": "available",
-      "reports": 6,
-      "checked_at": "2026-10-13T00:34:28.113Z"
+      "reports": 43,
+      "checked_at": "2026-10-13T00:58:18.880Z"
     },
     "ncaaf": {
       "status": "empty",
       "reports": 0,
-      "checked_at": "2026-10-13T00:34:28.113Z"
+      "checked_at": "2026-10-13T00:58:18.880Z"
     },
-    "nhl": {
+    "mlb": {
       "status": "available",
-      "reports": 44,
-      "checked_at": "2026-10-13T00:34:28.113Z"
+      "reports": 6,
+      "checked_at": "2026-10-13T00:58:18.880Z"
     },
     "nfl": {
       "status": "available",
-      "reports": 545,
-      "checked_at": "2026-10-13T00:34:28.113Z"
+      "reports": 542,
+      "checked_at": "2026-10-13T00:58:18.880Z"
     }
   },
   "events": [
+    {
+      "id": "odds|ncaaf|401866478|2026-10-17T19:30Z|TOTAL||over|Draft Kings|2026-10-13T00:58:18.880Z",
+      "kind": "odds",
+      "observed_at": "2026-10-13T00:58:18.880Z",
+      "sport": "ncaaf",
+      "event": "AKR @ M-OH",
+      "start": "2026-10-17T19:30Z",
+      "pick": "Over 46.5",
+      "title": "Published odds changed",
+      "before": "-118 · line 46.5",
+      "after": "-105 · line 47.5",
+      "book": "Draft Kings",
+      "source_quote_at": "2026-10-13T00:55:20.023402+00:00",
+      "source": "Existing NCAAF board",
+      "note": "Your ticket keeps its original odds. Recheck the live book before placing a new wager."
+    },
+    {
+      "id": "injury|nfl:22:Tyler Allgeier|2026-10-13T00:58:18.880Z",
+      "kind": "injury",
+      "observed_at": "2026-10-13T00:58:18.880Z",
+      "sport": "nfl",
+      "title": "New availability report",
+      "event": "Arizona Cardinals",
+      "pick": "Tyler Allgeier",
+      "before": "Not in the previous dated report",
+      "after": "Active · Allgeier rushed three times for seven yards and caught both of his targets for nine yards during Sunday's 45-21 loss to the Lions.",
+      "source_quote_at": "2026-10-13T00:32Z",
+      "source": "ESPN injuries",
+      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
+    },
+    {
+      "id": "injury|nfl:16:Jauan Jennings|2026-10-13T00:58:18.880Z",
+      "kind": "injury",
+      "observed_at": "2026-10-13T00:58:18.880Z",
+      "sport": "nfl",
+      "title": "New availability report",
+      "event": "Minnesota Vikings",
+      "pick": "Jauan Jennings",
+      "before": "Not in the previous dated report",
+      "after": "Active · Jennings did not reel in his only target during Sunday's 23-13 win at New Orleans.",
+      "source_quote_at": "2026-10-13T00:43Z",
+      "source": "ESPN injuries",
+      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
+    },
     {
       "id": "injury|nhl:14:Nikolas Matinpalo|2026-10-13T00:34:28.113Z",
       "kind": "injury",
@@ -2834,50 +2878,6 @@
       "source_quote_at": "2026-10-12T18:47:24.544837+00:00",
       "source": "Existing MLB board",
       "note": "Your ticket keeps its original odds. Recheck the live book before placing a new wager."
-    },
-    {
-      "id": "odds|props|401872994|2026-10-13T00:15Z|Pass interceptions|Josh Allen|under|DraftKings|2026-10-12T18:49:29.142Z",
-      "kind": "odds",
-      "observed_at": "2026-10-12T18:49:29.142Z",
-      "sport": "props",
-      "event": "Buffalo Bills @ Los Angeles Rams",
-      "start": "2026-10-13T00:15Z",
-      "pick": "Josh Allen — Under 0.5 Pass interceptions",
-      "title": "Published odds changed",
-      "before": "+103 · line 0.5",
-      "after": "-104 · line 0.5",
-      "book": "DraftKings",
-      "source_quote_at": "2026-10-12T18:48:05.258433+00:00",
-      "source": "Existing Props board",
-      "note": "Your ticket keeps its original odds. Recheck the live book before placing a new wager."
-    },
-    {
-      "id": "injury|nhl:2:Rasmus Dahlin|2026-10-12T18:49:29.142Z",
-      "kind": "injury",
-      "observed_at": "2026-10-12T18:49:29.142Z",
-      "sport": "nhl",
-      "title": "New availability report",
-      "event": "Buffalo Sabres",
-      "pick": "Rasmus Dahlin",
-      "before": "Not in the previous dated report",
-      "after": "Out · Upper Body",
-      "source_quote_at": "2026-10-12T18:35Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:29:Tershawn Wharton|2026-10-12T18:49:29.142Z",
-      "kind": "injury",
-      "observed_at": "2026-10-12T18:49:29.142Z",
-      "sport": "nfl",
-      "title": "New availability report",
-      "event": "Carolina Panthers",
-      "pick": "Tershawn Wharton",
-      "before": "Not in the previous dated report",
-      "after": "Out · Neck",
-      "source_quote_at": "2026-10-12T18:21Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
     }
   ]
 }
