@@ -1,29 +1,113 @@
 {
   "schema": 1,
-  "checked_at": "2026-10-13T23:02:25.001Z",
+  "checked_at": "2026-10-13T23:27:28.725Z",
   "coverage": {
+    "ncaaf": {
+      "status": "empty",
+      "reports": 0,
+      "checked_at": "2026-10-13T23:27:28.725Z"
+    },
     "nhl": {
       "status": "available",
       "reports": 38,
-      "checked_at": "2026-10-13T23:02:25.001Z"
+      "checked_at": "2026-10-13T23:27:28.725Z"
     },
     "mlb": {
       "status": "available",
       "reports": 5,
-      "checked_at": "2026-10-13T23:02:25.001Z"
+      "checked_at": "2026-10-13T23:27:28.725Z"
     },
     "nfl": {
       "status": "available",
-      "reports": 531,
-      "checked_at": "2026-10-13T23:02:25.001Z"
-    },
-    "ncaaf": {
-      "status": "empty",
-      "reports": 0,
-      "checked_at": "2026-10-13T23:02:25.001Z"
+      "reports": 530,
+      "checked_at": "2026-10-13T23:27:28.725Z"
     }
   },
   "events": [
+    {
+      "id": "starter|nhl:nhl:2026020096:away|2026-10-13T23:27:28.725Z",
+      "kind": "starter",
+      "observed_at": "2026-10-13T23:27:28.725Z",
+      "sport": "nhl",
+      "event": "STL @ OTT",
+      "start": "2026-10-13T23:30:00+00:00",
+      "title": "NHL starting goalie updated",
+      "before": "Joel Hofer",
+      "after": "Joel Hofer · confirmed",
+      "source_quote_at": "2026-10-13T23:26:24.132936+00:00",
+      "source": "NHL board",
+      "note": "Review the matchup after a starter change; the baseline does not price individual goalie talent."
+    },
+    {
+      "id": "starter|nhl:nhl:2026020097:away|2026-10-13T23:27:28.725Z",
+      "kind": "starter",
+      "observed_at": "2026-10-13T23:27:28.725Z",
+      "sport": "nhl",
+      "event": "VAN @ NYI",
+      "start": "2026-10-13T23:45:00+00:00",
+      "title": "NHL starting goalie updated",
+      "before": "Leevi Merilainen",
+      "after": "Leevi Merilainen · confirmed",
+      "source_quote_at": "2026-10-13T23:26:24.132936+00:00",
+      "source": "NHL board",
+      "note": "Review the matchup after a starter change; the baseline does not price individual goalie talent."
+    },
+    {
+      "id": "injury|nfl:14:Alaric Jackson|2026-10-13T23:27:28.725Z",
+      "kind": "injury",
+      "observed_at": "2026-10-13T23:27:28.725Z",
+      "sport": "nfl",
+      "title": "Player availability changed",
+      "event": "Los Angeles Rams",
+      "pick": "Alaric Jackson",
+      "before": "Active",
+      "after": "Suspension · Suspension",
+      "source_quote_at": "2026-10-13T23:05Z",
+      "source": "ESPN injuries",
+      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
+    },
+    {
+      "id": "injury|nfl:15:Jared Wayne|2026-10-13T23:27:28.725Z",
+      "kind": "injury",
+      "observed_at": "2026-10-13T23:27:28.725Z",
+      "sport": "nfl",
+      "title": "New availability report",
+      "event": "Miami Dolphins",
+      "pick": "Jared Wayne",
+      "before": "Not in the previous dated report",
+      "after": "Active · Wayne was claimed off waivers by the Dolphins on Tuesday.",
+      "source_quote_at": "2026-10-13T21:58Z",
+      "source": "ESPN injuries",
+      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
+    },
+    {
+      "id": "injury|nfl:17:Rhamondre Stevenson|2026-10-13T23:27:28.725Z",
+      "kind": "injury",
+      "observed_at": "2026-10-13T23:27:28.725Z",
+      "sport": "nfl",
+      "title": "Player availability changed",
+      "event": "New England Patriots",
+      "pick": "Rhamondre Stevenson",
+      "before": "Active · Stevenson carried the ball 13 times for 64 yards and a touchdown and caught all three of his targets for 21 yards in Sunday's 45-17 rout of the Raiders.",
+      "after": "Active · Stevenson is expected to take on a heavier workload for the next few weeks while TreVeyon Henderson recovers from a high-ankle sprain that he sustained in Sunday's 45-17 win over t",
+      "source_quote_at": "2026-10-13T23:07Z",
+      "source": "ESPN injuries",
+      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
+    },
+    {
+      "id": "injury|nfl:19:Dru Phillips|2026-10-13T23:27:28.725Z",
+      "kind": "injury",
+      "observed_at": "2026-10-13T23:27:28.725Z",
+      "sport": "nfl",
+      "title": "New availability report",
+      "event": "New York Giants",
+      "pick": "Dru Phillips",
+      "before": "Not in the previous dated report",
+      "after": "Active · Phillips had five total tackles (five solo) and 2.0 sacks in Sunday's 27-27 tie with the Commanders.",
+      "source_quote_at": "2026-10-13T23:07Z",
+      "source": "ESPN injuries",
+      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
+    },
     {
       "id": "starter|nhl:nhl:2026020095:away|2026-10-13T23:02:25.001Z",
       "kind": "starter",
@@ -2760,94 +2844,6 @@
       "source_quote_at": "2026-10-13T13:01Z",
       "source": "ESPN injuries",
       "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nhl:14:Nikolas Matinpalo|2026-10-13T13:29:38.589Z",
-      "kind": "injury",
-      "observed_at": "2026-10-13T13:29:38.589Z",
-      "sport": "nhl",
-      "title": "Player availability changed",
-      "event": "Ottawa Senators",
-      "pick": "Nikolas Matinpalo",
-      "before": "Out · Upper Body",
-      "after": "Day-To-Day · Upper Body",
-      "source_quote_at": "2026-10-13T13:01Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "odds|ncaaf|401858488|2026-10-17T16:00Z|TOTAL||over|DraftKings|2026-10-13T12:56:54.543Z",
-      "kind": "odds",
-      "observed_at": "2026-10-13T12:56:54.543Z",
-      "sport": "ncaaf",
-      "event": "OSU @ IU",
-      "start": "2026-10-17T16:00Z",
-      "pick": "Over 48.5",
-      "title": "Published odds changed",
-      "before": "-118 · line 50.5",
-      "after": "+100 · line 51.5",
-      "book": "DraftKings",
-      "source_quote_at": "2026-10-13T12:53:15.726082+00:00",
-      "source": "Existing NCAAF board",
-      "note": "Your ticket keeps its original odds. Recheck the live book before placing a new wager."
-    },
-    {
-      "id": "odds|ncaaf|401864523|2026-10-18T01:00Z|TOTAL||under|DraftKings|2026-10-13T12:56:54.543Z",
-      "kind": "odds",
-      "observed_at": "2026-10-13T12:56:54.543Z",
-      "sport": "ncaaf",
-      "event": "SJSU @ UTEP",
-      "start": "2026-10-18T01:00Z",
-      "pick": "Under 50.5",
-      "title": "Published odds changed",
-      "before": "-115 · line 47.5",
-      "after": "-108 · line 46.5",
-      "book": "DraftKings",
-      "source_quote_at": "2026-10-13T12:53:15.726082+00:00",
-      "source": "Existing NCAAF board",
-      "note": "Your ticket keeps its original odds. Recheck the live book before placing a new wager."
-    },
-    {
-      "id": "injury|nfl:3:Anthony Johnson Jr.|2026-10-13T12:29:54.212Z",
-      "kind": "injury",
-      "observed_at": "2026-10-13T12:29:54.212Z",
-      "sport": "nfl",
-      "title": "Player availability changed",
-      "event": "Chicago Bears",
-      "pick": "Anthony Johnson Jr.",
-      "before": "Injured Reserve · Undisclosed",
-      "after": "Out · Undisclosed",
-      "source_quote_at": "2026-10-13T12:00Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "starter|nhl:nhl:2026020094:home|2026-10-13T11:24:18.876Z",
-      "kind": "starter",
-      "observed_at": "2026-10-13T11:24:18.876Z",
-      "sport": "nhl",
-      "event": "SEA @ PHI",
-      "start": "2026-10-13T23:00:00+00:00",
-      "title": "NHL starting goalie updated",
-      "before": "Joseph Woll",
-      "after": "Dan Vladar · Unknown",
-      "source_quote_at": "2026-10-13T11:23:30.344844+00:00",
-      "source": "NHL board",
-      "note": "Review the matchup after a starter change; the baseline does not price individual goalie talent."
-    },
-    {
-      "id": "starter|nhl:nhl:2026020097:away|2026-10-13T11:24:18.876Z",
-      "kind": "starter",
-      "observed_at": "2026-10-13T11:24:18.876Z",
-      "sport": "nhl",
-      "event": "VAN @ NYI",
-      "start": "2026-10-13T23:45:00+00:00",
-      "title": "NHL starting goalie updated",
-      "before": "Kevin Lankinen",
-      "after": "Leevi Merilainen · Unknown",
-      "source_quote_at": "2026-10-13T11:23:30.344844+00:00",
-      "source": "NHL board",
-      "note": "Review the matchup after a starter change; the baseline does not price individual goalie talent."
     }
   ]
 }
