@@ -1,29 +1,114 @@
 {
   "schema": 1,
-  "checked_at": "2026-10-13T21:30:27.597Z",
+  "checked_at": "2026-10-13T21:58:19.426Z",
   "coverage": {
     "nhl": {
       "status": "available",
       "reports": 40,
-      "checked_at": "2026-10-13T21:30:27.597Z"
+      "checked_at": "2026-10-13T21:58:19.426Z"
     },
     "ncaaf": {
       "status": "empty",
       "reports": 0,
-      "checked_at": "2026-10-13T21:30:27.597Z"
+      "checked_at": "2026-10-13T21:58:19.426Z"
     },
     "mlb": {
       "status": "available",
       "reports": 5,
-      "checked_at": "2026-10-13T21:30:27.597Z"
+      "checked_at": "2026-10-13T21:58:19.426Z"
     },
     "nfl": {
       "status": "available",
-      "reports": 528,
-      "checked_at": "2026-10-13T21:30:27.597Z"
+      "reports": 530,
+      "checked_at": "2026-10-13T21:58:19.426Z"
     }
   },
   "events": [
+    {
+      "id": "odds|ncaaf|401860923|2026-10-16T00:00Z|TOTAL||over|Draft Kings|2026-10-13T21:58:19.426Z",
+      "kind": "odds",
+      "observed_at": "2026-10-13T21:58:19.426Z",
+      "sport": "ncaaf",
+      "event": "CSU @ TXST",
+      "start": "2026-10-16T00:00Z",
+      "pick": "Over 67.5",
+      "title": "Published odds changed",
+      "before": "-110 · line 70.5",
+      "after": "-112 · line 69.5",
+      "book": "Draft Kings",
+      "source_quote_at": "2026-10-13T21:53:46.032143+00:00",
+      "source": "Existing NCAAF board",
+      "note": "Your ticket keeps its original odds. Recheck the live book before placing a new wager."
+    },
+    {
+      "id": "lineup|849813|2026-10-13T21:58:19.426Z",
+      "kind": "lineup",
+      "observed_at": "2026-10-13T21:58:19.426Z",
+      "sport": "mlb",
+      "event": "CLE @ TB",
+      "start": "2026-10-14T00:00:00Z",
+      "title": "Batting orders confirmed",
+      "before": "Projected batting orders",
+      "after": "Confirmed batting orders",
+      "source_quote_at": "2026-10-13T21:55:16+00:00",
+      "source": "MLB board"
+    },
+    {
+      "id": "injury|nhl:14:Nikolas Matinpalo|2026-10-13T21:58:19.426Z",
+      "kind": "injury",
+      "observed_at": "2026-10-13T21:58:19.426Z",
+      "sport": "nhl",
+      "title": "Player availability changed",
+      "event": "Ottawa Senators",
+      "pick": "Nikolas Matinpalo",
+      "before": "Day-To-Day · Upper Body",
+      "after": "Out · Upper Body",
+      "source_quote_at": "2026-10-13T21:31Z",
+      "source": "ESPN injuries",
+      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
+    },
+    {
+      "id": "injury|nfl:5:Audric Estime|2026-10-13T21:58:19.426Z",
+      "kind": "injury",
+      "observed_at": "2026-10-13T21:58:19.426Z",
+      "sport": "nfl",
+      "title": "New availability report",
+      "event": "Cleveland Browns",
+      "pick": "Audric Estime",
+      "before": "Not in the previous dated report",
+      "after": "Active · The Browns signed Estime to the 53-man roster Tuesday.",
+      "source_quote_at": "2026-10-13T21:45Z",
+      "source": "ESPN injuries",
+      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
+    },
+    {
+      "id": "injury|nfl:18:Brock Rechsteiner|2026-10-13T21:58:19.426Z",
+      "kind": "injury",
+      "observed_at": "2026-10-13T21:58:19.426Z",
+      "sport": "nfl",
+      "title": "New availability report",
+      "event": "New Orleans Saints",
+      "pick": "Brock Rechsteiner",
+      "before": "Not in the previous dated report",
+      "after": "Active",
+      "source_quote_at": "2026-10-13T21:46Z",
+      "source": "ESPN injuries",
+      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
+    },
+    {
+      "id": "injury|nfl:26:Irv Charles|2026-10-13T21:58:19.426Z",
+      "kind": "injury",
+      "observed_at": "2026-10-13T21:58:19.426Z",
+      "sport": "nfl",
+      "title": "Player availability changed",
+      "event": "Seattle Seahawks",
+      "pick": "Irv Charles",
+      "before": "Active · Charles (knee) was estimated as a full practice participant on Monday's injury report, John Boyle of the Seahawks' official site reports.",
+      "after": "Active · Charles (knee) was activated from injured reserve Tuesday, John Boyle of the team's official site reports.",
+      "source_quote_at": "2026-10-13T21:39Z",
+      "source": "ESPN injuries",
+      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
+    },
     {
       "id": "starter|nhl:nhl:2026020096:home|2026-10-13T21:30:27.597Z",
       "kind": "starter",
@@ -2761,90 +2846,6 @@
       "before": "Injured Reserve · Undisclosed",
       "after": "Out · Undisclosed",
       "source_quote_at": "2026-10-13T07:00Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "starter|nhl:nhl:2026020090:away|2026-10-13T06:29:52.859Z",
-      "kind": "starter",
-      "observed_at": "2026-10-13T06:29:52.859Z",
-      "sport": "nhl",
-      "event": "NJ @ DET",
-      "start": "2026-10-13T22:00:00+00:00",
-      "title": "NHL starting goalie updated",
-      "before": "Not announced",
-      "after": "Jake Allen · confirmed",
-      "source_quote_at": "2026-10-13T06:29:09.532849+00:00",
-      "source": "NHL board",
-      "note": "Review the matchup after a starter change; the baseline does not price individual goalie talent."
-    },
-    {
-      "id": "starter|nhl:nhl:2026020099:away|2026-10-13T06:29:52.859Z",
-      "kind": "starter",
-      "observed_at": "2026-10-13T06:29:52.859Z",
-      "sport": "nhl",
-      "event": "MIN @ WPG",
-      "start": "2026-10-14T00:15:00+00:00",
-      "title": "NHL starting goalie updated",
-      "before": "Not announced",
-      "after": "Calvin Pickard · confirmed",
-      "source_quote_at": "2026-10-13T06:29:09.532849+00:00",
-      "source": "NHL board",
-      "note": "Review the matchup after a starter change; the baseline does not price individual goalie talent."
-    },
-    {
-      "id": "starter|nhl:nhl:2026020100:away|2026-10-13T06:29:52.859Z",
-      "kind": "starter",
-      "observed_at": "2026-10-13T06:29:52.859Z",
-      "sport": "nhl",
-      "event": "COL @ DAL",
-      "start": "2026-10-14T00:30:00+00:00",
-      "title": "NHL starting goalie updated",
-      "before": "Not announced",
-      "after": "Mackenzie Blackwood · confirmed",
-      "source_quote_at": "2026-10-13T06:29:09.532849+00:00",
-      "source": "NHL board",
-      "note": "Review the matchup after a starter change; the baseline does not price individual goalie talent."
-    },
-    {
-      "id": "injury|nfl:2:Dalton Kincaid|2026-10-13T05:53:59.958Z",
-      "kind": "injury",
-      "observed_at": "2026-10-13T05:53:59.958Z",
-      "sport": "nfl",
-      "title": "New availability report",
-      "event": "Buffalo Bills",
-      "pick": "Dalton Kincaid",
-      "before": "Not in the previous dated report",
-      "after": "Active · Kincaid brought in one of two targets for seven yards and recorded a two-point conversion catch in the Bills' 37-34 overtime win over the Rams on Monday night.",
-      "source_quote_at": "2026-10-13T05:27Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:2:Khalil Shakir|2026-10-13T05:53:59.958Z",
-      "kind": "injury",
-      "observed_at": "2026-10-13T05:53:59.958Z",
-      "sport": "nfl",
-      "title": "New availability report",
-      "event": "Buffalo Bills",
-      "pick": "Khalil Shakir",
-      "before": "Not in the previous dated report",
-      "after": "Active · Shakir brought in all three targets for 80 yards in the Bills' 37-34 overtime win over the Rams on Monday night.",
-      "source_quote_at": "2026-10-13T05:22Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:2:Josh Allen|2026-10-13T05:23:51.111Z",
-      "kind": "injury",
-      "observed_at": "2026-10-13T05:23:51.111Z",
-      "sport": "nfl",
-      "title": "New availability report",
-      "event": "Buffalo Bills",
-      "pick": "Josh Allen",
-      "before": "Not in the previous dated report",
-      "after": "Active · Allen completed 12 of 19 passes for 210 yards with one touchdown and one interception while adding 10 carries for 121 yards and another score and a two-point conversion pass in the",
-      "source_quote_at": "2026-10-13T04:50Z",
       "source": "ESPN injuries",
       "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
     }
