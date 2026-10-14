@@ -1,46 +1,5 @@
 {
   "wnba": {
-    "meta": {
-      "league": "WNBA",
-      "season": 2026,
-      "generated_at": "2026-10-14T04:00:25+00:00",
-      "built_for": "2026-10-14",
-      "source": "ESPN schedule, box-score/team efficiency, predictor, injuries and DraftKings prices",
-      "source_status": "live",
-      "live_data": true,
-      "key_required": false,
-      "errors": [],
-      "odds_health": {
-        "status": "partial",
-        "upcoming_games": 3,
-        "priced_games": 1,
-        "provider": "ESPN public feed / DraftKings"
-      },
-      "calibration": {
-        "n": 120,
-        "method": "walk-forward regular-season residuals",
-        "margin_bias": 0.02,
-        "spread_mae": 9.446,
-        "spread_rmse": 12.482,
-        "spread_sigma": 12.482,
-        "total_bias": -1.417,
-        "total_mae": 12.57,
-        "total_rmse": 15.753,
-        "total_sigma": 15.689
-      },
-      "validation": {
-        "markets": [],
-        "research_available": true
-      },
-      "value_policy": {
-        "version": "price-stress-v1",
-        "reserve": 0.03,
-        "minReturn": 0.02,
-        "qualified": 0,
-        "source_qualified": 0,
-        "note": "Additional price sensitivity gate. Original model counts retained in source_counts; not a confidence interval."
-      }
-    },
     "board": [
       {
         "tier": "PASS",
@@ -157,16 +116,57 @@
         "odds_fetched_at": "2026-10-14T04:00:24+00:00"
       }
     ],
+    "meta": {
+      "league": "WNBA",
+      "season": 2026,
+      "generated_at": "2026-10-14T04:00:25+00:00",
+      "built_for": "2026-10-14",
+      "source": "ESPN schedule, box-score/team efficiency, predictor, injuries and DraftKings prices",
+      "source_status": "live",
+      "live_data": true,
+      "key_required": false,
+      "errors": [],
+      "odds_health": {
+        "status": "partial",
+        "upcoming_games": 3,
+        "priced_games": 1,
+        "provider": "ESPN public feed / DraftKings"
+      },
+      "calibration": {
+        "n": 120,
+        "method": "walk-forward regular-season residuals",
+        "margin_bias": 0.02,
+        "spread_mae": 9.446,
+        "spread_rmse": 12.482,
+        "spread_sigma": 12.482,
+        "total_bias": -1.417,
+        "total_mae": 12.57,
+        "total_rmse": 15.753,
+        "total_sigma": 15.689
+      },
+      "validation": {
+        "markets": [],
+        "research_available": true
+      },
+      "value_policy": {
+        "version": "price-stress-v1",
+        "reserve": 0.03,
+        "minReturn": 0.02,
+        "qualified": 0,
+        "source_qualified": 0,
+        "note": "Additional price sensitivity gate. Original model counts retained in source_counts; not a confidence interval."
+      }
+    },
     "accuracy": {
       "generated_at": "2026-10-14T04:00:25.433828+00:00"
     },
-    "lastGoodAt": "2026-10-14T05:06:26.614Z"
+    "lastGoodAt": "2026-10-14T05:33:19.253Z"
   },
   "ladder": {
     "accuracy": {
       "generated_at": "2026-10-14T04:00:35.865417+00:00"
     },
-    "lastGoodAt": "2026-10-14T05:06:26.614Z"
+    "lastGoodAt": "2026-10-14T05:33:19.253Z"
   },
   "props": {
     "meta": {
@@ -9450,7 +9450,7 @@
         "roster_verified": true
       }
     ],
-    "lastGoodAt": "2026-10-14T05:06:26.614Z"
+    "lastGoodAt": "2026-10-14T05:33:19.253Z"
   },
   "nfl": {
     "meta": {
@@ -16203,7 +16203,7 @@
         "odds_observed_at": "2026-10-14T03:58:05.394779+00:00"
       }
     ],
-    "lastGoodAt": "2026-10-14T05:06:26.614Z"
+    "lastGoodAt": "2026-10-14T05:33:19.253Z"
   },
   "ncaaf": {
     "meta": {
@@ -23782,7 +23782,7 @@
         "odds_observed_at": "2026-10-14T03:58:23.683592+00:00"
       }
     ],
-    "lastGoodAt": "2026-10-14T05:06:26.614Z"
+    "lastGoodAt": "2026-10-14T05:33:19.253Z"
   },
   "mlb": {
     "meta": {
@@ -24068,11 +24068,12 @@
     "accuracy": {
       "generated_at": "2026-10-14T03:59:42+00:00"
     },
-    "lastGoodAt": "2026-10-14T05:06:26.614Z"
+    "lastGoodAt": "2026-10-14T05:33:19.253Z"
   },
   "nhl": {
+    "board": [],
     "meta": {
-      "generated_at": "2026-10-14T05:05:18.481850+00:00",
+      "generated_at": "2026-10-14T05:31:58.753769+00:00",
       "model_version": "nhl-poisson-1.0",
       "season": 2027,
       "timezone": "America/Toronto",
@@ -24099,22 +24100,22 @@
         },
         "nhl-schedule-2026-10-14": {
           "status": "ok",
-          "observed_at": "2026-10-14T05:05:18.481850+00:00",
+          "observed_at": "2026-10-14T05:31:58.753769+00:00",
           "url": "https://api-web.nhle.com/v1/schedule/2026-10-14"
         },
         "nhl-schedule-2026-09-30": {
           "status": "ok",
-          "observed_at": "2026-10-14T05:05:18.481850+00:00",
+          "observed_at": "2026-10-14T05:31:58.753769+00:00",
           "url": "https://api-web.nhle.com/v1/schedule/2026-09-30"
         },
         "nhl-schedule-2026-10-07": {
           "status": "ok",
-          "observed_at": "2026-10-14T05:05:18.481850+00:00",
+          "observed_at": "2026-10-14T05:31:58.753769+00:00",
           "url": "https://api-web.nhle.com/v1/schedule/2026-10-07"
         },
         "nhl-schedule-2026-10-21": {
           "status": "ok",
-          "observed_at": "2026-10-14T05:05:18.481850+00:00",
+          "observed_at": "2026-10-14T05:31:58.753769+00:00",
           "url": "https://api-web.nhle.com/v1/schedule/2026-10-21"
         },
         "standings-2027": {
@@ -24130,8 +24131,8 @@
           "error": "HTTPError"
         },
         "nhl-official": {
-          "status": "cached",
-          "observed_at": "2026-10-14T04:36:17.574971+00:00",
+          "status": "ok",
+          "observed_at": "2026-10-14T05:31:58.753769+00:00",
           "url": "https://api-web.nhle.com/v1/standings/now"
         },
         "nhl-team-summary-2026": {
@@ -24156,7 +24157,7 @@
         },
         "public-book-odds": {
           "status": "no matched prices",
-          "observed_at": "2026-10-14T05:05:18.481850+00:00",
+          "observed_at": "2026-10-14T05:31:58.753769+00:00",
           "url": "https://www.covers.com/sport/hockey/nhl/odds",
           "quotes": 0
         },
@@ -24215,10 +24216,9 @@
         "teams": 32
       }
     },
-    "board": [],
     "accuracy": {
-      "generated_at": "2026-10-14T05:05:18.481850+00:00"
+      "generated_at": "2026-10-14T05:31:58.753769+00:00"
     },
-    "lastGoodAt": "2026-10-14T05:06:26.614Z"
+    "lastGoodAt": "2026-10-14T05:33:19.253Z"
   }
 }
