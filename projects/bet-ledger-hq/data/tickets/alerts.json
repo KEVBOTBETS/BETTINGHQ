@@ -1,29 +1,85 @@
 {
   "schema": 1,
-  "checked_at": "2026-10-14T00:41:02.029Z",
+  "checked_at": "2026-10-14T01:11:18.626Z",
   "coverage": {
     "mlb": {
       "status": "available",
       "reports": 6,
-      "checked_at": "2026-10-14T00:41:02.029Z"
-    },
-    "nfl": {
-      "status": "available",
-      "reports": 533,
-      "checked_at": "2026-10-14T00:41:02.029Z"
+      "checked_at": "2026-10-14T01:11:18.626Z"
     },
     "nhl": {
       "status": "available",
       "reports": 42,
-      "checked_at": "2026-10-14T00:41:02.029Z"
+      "checked_at": "2026-10-14T01:11:18.626Z"
     },
     "ncaaf": {
       "status": "empty",
       "reports": 0,
-      "checked_at": "2026-10-14T00:41:02.029Z"
+      "checked_at": "2026-10-14T01:11:18.626Z"
+    },
+    "nfl": {
+      "status": "available",
+      "reports": 531,
+      "checked_at": "2026-10-14T01:11:18.626Z"
     }
   },
   "events": [
+    {
+      "id": "starter|nhl:nhl:2026020103:away|2026-10-14T01:11:18.626Z",
+      "kind": "starter",
+      "observed_at": "2026-10-14T01:11:18.626Z",
+      "sport": "nhl",
+      "event": "CGY @ ANA",
+      "start": "2026-10-14T01:45:00+00:00",
+      "title": "NHL starting goalie updated",
+      "before": "Dustin Wolf",
+      "after": "Dustin Wolf · confirmed",
+      "source_quote_at": "2026-10-14T01:10:00.585182+00:00",
+      "source": "NHL board",
+      "note": "Review the matchup after a starter change; the baseline does not price individual goalie talent."
+    },
+    {
+      "id": "injury|nfl:6:Emari Demercado|2026-10-14T01:11:18.626Z",
+      "kind": "injury",
+      "observed_at": "2026-10-14T01:11:18.626Z",
+      "sport": "nfl",
+      "title": "New availability report",
+      "event": "Dallas Cowboys",
+      "pick": "Emari Demercado",
+      "before": "Not in the previous dated report",
+      "after": "Active · Dallas signed Demercado to its 53-man roster Tuesday, Tommy Yarrish of the Cowboys' official site reports.",
+      "source_quote_at": "2026-10-14T00:51Z",
+      "source": "ESPN injuries",
+      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
+    },
+    {
+      "id": "injury|nfl:28:Treylon Burks|2026-10-14T01:11:18.626Z",
+      "kind": "injury",
+      "observed_at": "2026-10-14T01:11:18.626Z",
+      "sport": "nfl",
+      "title": "New availability report",
+      "event": "Washington Commanders",
+      "pick": "Treylon Burks",
+      "before": "Not in the previous dated report",
+      "after": "Active · Burks caught two passes on five targets for 16 yards during Sunday's 27-27 tie with the Giants.",
+      "source_quote_at": "2026-10-14T00:44Z",
+      "source": "ESPN injuries",
+      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
+    },
+    {
+      "id": "injury|nfl:28:Antonio Williams|2026-10-14T01:11:18.626Z",
+      "kind": "injury",
+      "observed_at": "2026-10-14T01:11:18.626Z",
+      "sport": "nfl",
+      "title": "New availability report",
+      "event": "Washington Commanders",
+      "pick": "Antonio Williams",
+      "before": "Not in the previous dated report",
+      "after": "Active · Williams hauled in all three of his targets for 31 yards and added a two-yard punt return during the Commanders' 27-27 tie with the Giants on Sunday.",
+      "source_quote_at": "2026-10-14T00:36Z",
+      "source": "ESPN injuries",
+      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
+    },
     {
       "id": "starter|nhl:nhl:2026020101:away|2026-10-14T00:41:02.029Z",
       "kind": "starter",
@@ -2786,62 +2842,6 @@
       "before": "Questionable · Ankle",
       "after": "Doubtful · Ankle",
       "source_quote_at": "2026-10-13T15:31Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nhl:7:Jordan Staal|2026-10-13T15:50:00.686Z",
-      "kind": "injury",
-      "observed_at": "2026-10-13T15:50:00.686Z",
-      "sport": "nhl",
-      "title": "Player availability changed",
-      "event": "Carolina Hurricanes",
-      "pick": "Jordan Staal",
-      "before": "Day-To-Day · Lower Body",
-      "after": "Out · Calf",
-      "source_quote_at": "2026-10-13T15:20Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nhl:20:Dennis Hildeby|2026-10-13T15:50:00.686Z",
-      "kind": "injury",
-      "observed_at": "2026-10-13T15:50:00.686Z",
-      "sport": "nhl",
-      "title": "New availability report",
-      "event": "Tampa Bay Lightning",
-      "pick": "Dennis Hildeby",
-      "before": "Not in the previous dated report",
-      "after": "Day-To-Day · Undisclosed",
-      "source_quote_at": "2026-10-13T15:27Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "starter|nhl:nhl:2026020094:home|2026-10-13T15:24:56.265Z",
-      "kind": "starter",
-      "observed_at": "2026-10-13T15:24:56.265Z",
-      "sport": "nhl",
-      "event": "SEA @ PHI",
-      "start": "2026-10-13T23:00:00+00:00",
-      "title": "NHL starting goalie updated",
-      "before": "Dan Vladar",
-      "after": "Dan Vladar · confirmed",
-      "source_quote_at": "2026-10-13T15:24:07.721569+00:00",
-      "source": "NHL board",
-      "note": "Review the matchup after a starter change; the baseline does not price individual goalie talent."
-    },
-    {
-      "id": "injury|nhl:2:Matt Grzelcyk|2026-10-13T15:24:56.265Z",
-      "kind": "injury",
-      "observed_at": "2026-10-13T15:24:56.265Z",
-      "sport": "nhl",
-      "title": "New availability report",
-      "event": "Buffalo Sabres",
-      "pick": "Matt Grzelcyk",
-      "before": "Not in the previous dated report",
-      "after": "Injured Reserve · Undisclosed",
-      "source_quote_at": "2026-10-13T15:03Z",
       "source": "ESPN injuries",
       "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
     }
