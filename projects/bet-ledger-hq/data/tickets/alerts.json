@@ -1,29 +1,43 @@
 {
   "schema": 1,
-  "checked_at": "2026-10-14T05:33:19.253Z",
+  "checked_at": "2026-10-14T06:04:05.982Z",
   "coverage": {
-    "nfl": {
-      "status": "available",
-      "reports": 534,
-      "checked_at": "2026-10-14T05:33:19.253Z"
-    },
     "ncaaf": {
       "status": "empty",
       "reports": 0,
-      "checked_at": "2026-10-14T05:33:19.253Z"
+      "checked_at": "2026-10-14T06:04:05.982Z"
     },
     "nhl": {
       "status": "available",
       "reports": 44,
-      "checked_at": "2026-10-14T05:33:19.253Z"
+      "checked_at": "2026-10-14T06:04:05.982Z"
     },
     "mlb": {
       "status": "available",
       "reports": 6,
-      "checked_at": "2026-10-14T05:33:19.253Z"
+      "checked_at": "2026-10-14T06:04:05.982Z"
+    },
+    "nfl": {
+      "status": "available",
+      "reports": 534,
+      "checked_at": "2026-10-14T06:04:05.982Z"
     }
   },
   "events": [
+    {
+      "id": "starter|nhl:nhl:2026020106:away|2026-10-14T06:04:05.982Z",
+      "kind": "starter",
+      "observed_at": "2026-10-14T06:04:05.982Z",
+      "sport": "nhl",
+      "event": "MTL @ WSH",
+      "start": "2026-10-14T23:30:00+00:00",
+      "title": "NHL starting goalie updated",
+      "before": "Not announced",
+      "after": "Jakub Dobes · confirmed",
+      "source_quote_at": "2026-10-14T06:02:50.466764+00:00",
+      "source": "NHL board",
+      "note": "Review the matchup after a starter change; the baseline does not price individual goalie talent."
+    },
     {
       "id": "injury|nhl:9:Roope Hintz|2026-10-14T04:07:45.457Z",
       "kind": "injury",
@@ -2819,20 +2833,6 @@
       "pick": "David Martin-Robinson",
       "before": "Out · Hamstring",
       "after": "Questionable · Hamstring",
-      "source_quote_at": "2026-10-13T17:10Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:10:Amani Hooker|2026-10-13T17:23:22.332Z",
-      "kind": "injury",
-      "observed_at": "2026-10-13T17:23:22.332Z",
-      "sport": "nfl",
-      "title": "Player availability changed",
-      "event": "Tennessee Titans",
-      "pick": "Amani Hooker",
-      "before": "Out · Concussion",
-      "after": "Questionable · Concussion",
       "source_quote_at": "2026-10-13T17:10Z",
       "source": "ESPN injuries",
       "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
