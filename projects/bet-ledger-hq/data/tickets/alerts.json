@@ -1,29 +1,43 @@
 {
   "schema": 1,
-  "checked_at": "2026-10-16T16:32:31.357Z",
+  "checked_at": "2026-10-16T16:37:57.262Z",
   "coverage": {
+    "mlb": {
+      "status": "available",
+      "reports": 3,
+      "checked_at": "2026-10-16T16:37:57.262Z"
+    },
     "nfl": {
       "status": "available",
       "reports": 353,
-      "checked_at": "2026-10-16T16:32:31.357Z"
-    },
-    "ncaaf": {
-      "status": "empty",
-      "reports": 0,
-      "checked_at": "2026-10-16T16:32:31.357Z"
+      "checked_at": "2026-10-16T16:37:57.262Z"
     },
     "nhl": {
       "status": "available",
       "reports": 51,
-      "checked_at": "2026-10-16T16:32:31.357Z"
+      "checked_at": "2026-10-16T16:37:57.262Z"
     },
-    "mlb": {
-      "status": "available",
-      "reports": 3,
-      "checked_at": "2026-10-16T16:32:31.357Z"
+    "ncaaf": {
+      "status": "empty",
+      "reports": 0,
+      "checked_at": "2026-10-16T16:37:57.262Z"
     }
   },
   "events": [
+    {
+      "id": "injury|nfl:27:Antoine Winfield Jr.|2026-10-16T16:37:57.262Z",
+      "kind": "injury",
+      "observed_at": "2026-10-16T16:37:57.262Z",
+      "sport": "nfl",
+      "title": "Player availability changed",
+      "event": "Tampa Bay Buccaneers",
+      "pick": "Antoine Winfield Jr.",
+      "before": "Doubtful · Ribs",
+      "after": "Out · Ribs",
+      "source_quote_at": "2026-10-16T16:32Z",
+      "source": "ESPN injuries",
+      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
+    },
     {
       "id": "odds|props|401873005|2026-10-18T20:25Z|Receiving yards|Tre Tucker|over|DraftKings|2026-10-16T16:32:31.357Z",
       "kind": "odds",
@@ -2827,20 +2841,6 @@
       "before": "Not in the previous dated report",
       "after": "Questionable · Toe",
       "source_quote_at": "2026-10-14T20:17Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:29:Jalen Coker|2026-10-15T02:32:21.662Z",
-      "kind": "injury",
-      "observed_at": "2026-10-15T02:32:21.662Z",
-      "sport": "nfl",
-      "title": "Player availability changed",
-      "event": "Carolina Panthers",
-      "pick": "Jalen Coker",
-      "before": "Questionable · Quadriceps",
-      "after": "Active · Coker (quadriceps) was listed as a full participant on the Panthers' estimated injury report Wednesday, Darin Gantt of the Panthers' official site reports.",
-      "source_quote_at": "2026-10-14T20:11Z",
       "source": "ESPN injuries",
       "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
     }
