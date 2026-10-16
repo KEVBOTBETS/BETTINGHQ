@@ -1,29 +1,73 @@
 {
   "schema": 1,
-  "checked_at": "2026-10-16T22:04:35.221Z",
+  "checked_at": "2026-10-16T22:16:00.406Z",
   "coverage": {
+    "nhl": {
+      "status": "available",
+      "reports": 48,
+      "checked_at": "2026-10-16T22:16:00.406Z"
+    },
     "mlb": {
       "status": "available",
       "reports": 3,
-      "checked_at": "2026-10-16T22:04:35.221Z"
+      "checked_at": "2026-10-16T22:16:00.406Z"
     },
     "ncaaf": {
       "status": "empty",
       "reports": 0,
-      "checked_at": "2026-10-16T22:04:35.221Z"
-    },
-    "nhl": {
-      "status": "available",
-      "reports": 48,
-      "checked_at": "2026-10-16T22:04:35.221Z"
+      "checked_at": "2026-10-16T22:16:00.406Z"
     },
     "nfl": {
       "status": "available",
       "reports": 333,
-      "checked_at": "2026-10-16T22:04:35.221Z"
+      "checked_at": "2026-10-16T22:16:00.406Z"
     }
   },
   "events": [
+    {
+      "id": "odds|ncaaf|401862802|2026-10-17T16:00Z|TOTAL||over|Draft Kings|2026-10-16T22:16:00.406Z",
+      "kind": "odds",
+      "observed_at": "2026-10-16T22:16:00.406Z",
+      "sport": "ncaaf",
+      "event": "FAU @ ARMY",
+      "start": "2026-10-17T16:00Z",
+      "pick": "Over 55.5",
+      "title": "Published odds changed",
+      "before": "-118 · line 54.5",
+      "after": "-102 · line 55.5",
+      "book": "Draft Kings",
+      "source_quote_at": "2026-10-16T22:13:31.573402+00:00",
+      "source": "Existing NCAAF board",
+      "note": "Your ticket keeps its original odds. Recheck the live book before placing a new wager."
+    },
+    {
+      "id": "injury|nfl:2:Ty Johnson|2026-10-16T22:16:00.406Z",
+      "kind": "injury",
+      "observed_at": "2026-10-16T22:16:00.406Z",
+      "sport": "nfl",
+      "title": "Player availability changed",
+      "event": "Buffalo Bills",
+      "pick": "Ty Johnson",
+      "before": "Active · Johnson (hamstring) was a limited participant at practice Thursday.",
+      "after": "Active · Johnson (hamstring) doesn't have an injury designation for Sunday's game at Las Vegas, Sam Warren of The Athletic reports.",
+      "source_quote_at": "2026-10-16T22:03Z",
+      "source": "ESPN injuries",
+      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
+    },
+    {
+      "id": "injury|nfl:13:Jalen Nailor|2026-10-16T22:16:00.406Z",
+      "kind": "injury",
+      "observed_at": "2026-10-16T22:16:00.406Z",
+      "sport": "nfl",
+      "title": "Player availability changed",
+      "event": "Las Vegas Raiders",
+      "pick": "Jalen Nailor",
+      "before": "Questionable · Nailor (concussion) was a limited participant at practice Thursday.",
+      "after": "Active · Nailor (concussion) was a limited participant at practice Thursday.",
+      "source_quote_at": "2026-10-16T01:24Z",
+      "source": "ESPN injuries",
+      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
+    },
     {
       "id": "injury|nfl:2:Ty Johnson|2026-10-16T22:04:35.221Z",
       "kind": "injury",
@@ -2864,48 +2908,6 @@
       "source_quote_at": "2026-10-16T16:30:48.987193+00:00",
       "source": "NHL board",
       "note": "Review the matchup after a starter change; the baseline does not price individual goalie talent."
-    },
-    {
-      "id": "injury|nfl:7:Courtland Sutton|2026-10-16T16:32:31.357Z",
-      "kind": "injury",
-      "observed_at": "2026-10-16T16:32:31.357Z",
-      "sport": "nfl",
-      "title": "New availability report",
-      "event": "Denver Broncos",
-      "pick": "Courtland Sutton",
-      "before": "Not in the previous dated report",
-      "after": "Active · Sutton brought in two of three targets for 19 yards in the Broncos' 17-14 overtime win over the Seahawks on Thursday.",
-      "source_quote_at": "2026-10-16T05:04Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:7:Jaylen Waddle|2026-10-16T16:32:31.357Z",
-      "kind": "injury",
-      "observed_at": "2026-10-16T16:32:31.357Z",
-      "sport": "nfl",
-      "title": "Player availability changed",
-      "event": "Denver Broncos",
-      "pick": "Jaylen Waddle",
-      "before": "Active · Waddle suffered a shoulder injury in the third quarter of Thursday's game against the Seahawks but was able to return, Parker Gabriel of The Denver Post and Zac Stevens of TheDNVR.",
-      "after": "Active · Waddle secured four of seven targets for 24 yards in the Broncos' 17-14 overtime win over the Seahawks on Thursday.",
-      "source_quote_at": "2026-10-16T04:58Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:7:Bo Nix|2026-10-16T16:32:31.357Z",
-      "kind": "injury",
-      "observed_at": "2026-10-16T16:32:31.357Z",
-      "sport": "nfl",
-      "title": "New availability report",
-      "event": "Denver Broncos",
-      "pick": "Bo Nix",
-      "before": "Not in the previous dated report",
-      "after": "Active · Nix completed 17 of 27 passes for 107 yards with no touchdowns or interceptions and rushed four times for two yards in the Broncos' 17-14 overtime win over the Seahawks on Thursday",
-      "source_quote_at": "2026-10-16T04:54Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
     }
   ]
 }
