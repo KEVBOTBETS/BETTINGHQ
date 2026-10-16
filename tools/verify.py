@@ -40,6 +40,7 @@ for file in ['test_game_parlays.mjs','test_elite_desk.mjs','test_today_desk.mjs'
 run('',[sys.executable,'tools/build_site.py'])
 run('',[sys.executable,'-m','unittest','discover','-s','tests'])
 if args.browser:
+    run('bet-ledger-hq',['node','tests/test_readable_browser.mjs'])
     run('bet-ledger-hq',['node','tests/test_game_parlays_browser.mjs'])
     run('bet-ledger-hq',['node','tests/test_elite_desk_browser.mjs'])
     run('bet-ledger-hq',['node','tests/test_today_desk_browser.mjs'])

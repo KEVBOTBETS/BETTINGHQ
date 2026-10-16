@@ -11,7 +11,7 @@ for(const width of [1440,393,320]){
  const ctx=await browser.newContext({viewport:{width,height:1100},colorScheme:'dark',serviceWorkers:'block'});await ctx.route('https://**/*',r=>r.abort());
  const page=await ctx.newPage(),errors=[];page.on('pageerror',e=>errors.push(e.message));
  await page.goto(origin+'/bet-ledger-hq/accuracy.html');await page.locator('#perf-content:not([hidden])').waitFor();await page.selectOption('#perf-sport','mlb');assert.ok(await page.locator('#perf-records tr').count()>0);assert.ok((await page.locator('#perf-chart circle').count())>0);
- assert.match(await page.locator('#perf-challengers').innerText(),/automatic promotion OFF|Awaiting eligible/);
+ if(!await page.locator('#perf-challengers').isVisible())await page.getByText('Advanced: model controls & experiments',{exact:true}).click();assert.match(await page.locator('#perf-challengers').innerText(),/automatic promotion OFF|Awaiting eligible/);
  await page.selectOption('#perf-sport','nhl');assert.match(await page.locator('#perf-challengers').innerText(),/Frozen NHL context challenger/);await page.selectOption('#perf-sport','mlb');
  const download=page.waitForEvent('download');await page.click('#perf-export');assert.match((await download).suggestedFilename(),/forecast-audit.csv$/);
  assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+2));

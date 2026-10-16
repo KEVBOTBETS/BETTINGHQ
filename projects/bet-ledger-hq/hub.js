@@ -3,6 +3,7 @@
 (() => {
   "use strict";
   const configs = {
+    "moneyline-records":{title:"Moneyline results",description:"Every frozen winner prediction, including games with no recommended bet.",url:"moneyline-records.html"},
     "ncaaf-parlays":{title:"NCAAF Game Parlays",description:"Spread, total and moneyline targets: +500, +1000, +2000 and +10000.",url:"game-parlays.html"},
     opportunities:{title:"Opportunity Finder",description:"Every upcoming game, public source health, your watchlist and accepted-receipt exposure.",url:"opportunity-finder.html"},
     "thursday-night":{title:"Thursday Night Football",description:"This night’s NFL matchups, news, lines, bets, props and parlays.",url:"night-football.html?night=thursday"},
@@ -34,6 +35,7 @@
     props:{title:"NFL Props",description:"NFL player props, the parlay lab and your props ledger.",url:"../props-edge/"},
   };
   const links=[...document.querySelectorAll(".board-link")];
+  const navGroups=[...document.querySelectorAll('.nav-group')],navEntries=navGroups.map(group=>({group,links:[...group.querySelectorAll('.board-link')]})),narrowNav=matchMedia('(max-width:760px)');function arrangeNav(){for(const entry of navEntries){const {group,links}=entry;if(narrowNav.matches){for(const link of links)group.before(link);group.open=false;}else{for(const link of links)group.append(link);group.hidden=false;group.open=!!group.querySelector('[aria-current=page]');}}}arrangeNav();narrowNav.addEventListener('change',arrangeNav);for(const group of navGroups)group.addEventListener('toggle',()=>{if(!narrowNav.matches&&group.open&&!document.querySelector('#kb-nav-search')?.value)for(const other of navGroups)if(other!==group)other.open=false;});
   const workspace=document.querySelector("#workspace"), frames=new Map();
   let active="",ticketPending=false;
   function activate(key){
@@ -91,6 +93,7 @@
     active=key;
     if(!frames.has(key))frames.set(key,create(key));
     frames.forEach((r,k)=>{r.panel.hidden=k!==key;});
+    links.find(link=>link.hash==='#'+key)?.closest('details.nav-group')?.setAttribute('open','');
     links.forEach(link=>{if(link.hash==="#"+key)link.setAttribute("aria-current","page");else link.removeAttribute("aria-current");});
     if(matchMedia('(max-width:760px)').matches){
       const nav=document.querySelector('.boards'),selected=links.find(link=>link.hash==='#'+key);

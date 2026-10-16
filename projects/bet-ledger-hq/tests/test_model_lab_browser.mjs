@@ -15,6 +15,7 @@ try{
     await page.goto(origin+'/bet-ledger-hq/model-lab.html',{waitUntil:'networkidle'});
     await page.locator('#lab-content').waitFor({state:'visible'});
     assert.match(await page.locator('#lab-status').innerText(),/Snapshot generated/);
+    await page.locator('#lab-advanced>summary').click();
     for(const tab of ['competition','efficiency','lineups','prices','props','validation','calibration','weather','health']){
       await page.locator(`[data-tab="${tab}"]`).click();
       assert.equal(await page.locator(`[data-tab="${tab}"]`).getAttribute('aria-selected'),'true');

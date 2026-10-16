@@ -14,3 +14,5 @@
 /* Dynamic props panels must not jump between pointer-down and pointer-up. */
 html[data-kb-sport=props],html[data-kb-sport=props] body{overflow-anchor:none}
 @media(max-width:760px){.sidebar{position:relative;overflow:visible!important}.kb-nav-options{display:none;position:absolute;bottom:calc(100% + 6px);left:8px;right:8px;z-index:30;background:#101b27;border:1px solid #526174;border-radius:12px;padding:10px;box-shadow:0 -8px 24px #0008;grid-template-columns:minmax(0,1fr) 95px;color:#f0f4f8}.kb-nav-options[data-open=true]{display:grid}.kb-nav-toggle{display:block;flex:0 0 62px;min-height:55px;padding:6px 3px;font-size:10px;font-weight:700;background:#142335;color:#f0f4f8;border:1px solid #526174;border-radius:7px}.kb-nav-options .kb-nav-density{grid-row:1}.sidebar .boards,.sidebar .ticket-tool{grid-row:1}.sidebar .newsletter-tools{grid-row:2}}
+
+.kb-utility-tray>summary{cursor:pointer;font-weight:700;padding:4px}.kb-utility-tray[open]>summary{margin-bottom:14px}

@@ -78,7 +78,7 @@ try{
     await frame.getByRole("button",{name:"Exposure",exact:true}).click();
     await frame.getByText("Connect and sync in Ledger").waitFor();
     assert.deepEqual(await page.locator(".board-link").evaluateAll(links=>links.map(a=>a.hash).sort()),
-      ["#ncaaf-parlays","#thursday-night","#sunday-night","#monday-night","#model-lab","#opportunities","#desk","#today","#ledger","#accuracy","#football","#moneyline","#mlb","#nfl","#ncaaf","#nhl","#wnba","#nba","#ncaab","#props","#ladder","#archive","#nfl-newsletter","#ncaaf-newsletter","#ncaaf-props","#nhl-props","#all-spreads","#spread-accuracy"].sort());
+      ["#moneyline-records","#ncaaf-parlays","#thursday-night","#sunday-night","#monday-night","#model-lab","#opportunities","#desk","#today","#ledger","#accuracy","#football","#moneyline","#mlb","#nfl","#ncaaf","#nhl","#wnba","#nba","#ncaab","#props","#ladder","#archive","#nfl-newsletter","#ncaaf-newsletter","#ncaaf-props","#nhl-props","#all-spreads","#spread-accuracy"].sort());
     assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth));
     const child=page.frames().find(f=>f.url().endsWith("today.html"));
     assert.ok(await child.evaluate(()=>document.documentElement.scrollWidth<=innerWidth));
@@ -90,12 +90,13 @@ try{
     await frame.getByRole("button",{name:"Today's board",exact:true}).click();
     await mkdir("test-results",{recursive:true});
     await page.screenshot({path:"test-results/today-"+width+".png"});
+    if(!await page.getByRole("link",{name:"Sports Desk",exact:true}).isVisible())await page.getByText("League boards",{exact:true}).click();
     for(const [name,key] of [["Sports Desk","desk"],["NBA","nba"],["NCAAB","ncaab"]]){
       await page.getByRole("link",{name,exact:true}).click();
       await page.frameLocator("#frame-"+key).locator("#desk-title").waitFor();
       assert.equal(await page.getByRole("link",{name,exact:true}).getAttribute("aria-current"),"page");
     }
-    await page.getByRole('link',{name:'Tickets & results',exact:true}).click();
+    if(!await page.getByRole('link',{name:'Tickets & results',exact:true}).isVisible())await page.getByText('Results & model',{exact:true}).click();await page.getByRole('link',{name:'Tickets & results',exact:true}).click();
     const archive=page.frameLocator('#frame-archive');
     await archive.locator('#archive-select option').first().waitFor({state:'attached'});
     await archive.locator('#archive-select').selectOption({index:0});
