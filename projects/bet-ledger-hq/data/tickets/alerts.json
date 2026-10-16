@@ -1,29 +1,85 @@
 {
   "schema": 1,
-  "checked_at": "2026-10-16T19:35:16.784Z",
+  "checked_at": "2026-10-16T20:00:19.116Z",
   "coverage": {
-    "ncaaf": {
-      "status": "empty",
-      "reports": 0,
-      "checked_at": "2026-10-16T19:35:16.784Z"
-    },
-    "nfl": {
-      "status": "available",
-      "reports": 316,
-      "checked_at": "2026-10-16T19:35:16.784Z"
-    },
     "nhl": {
       "status": "available",
       "reports": 50,
-      "checked_at": "2026-10-16T19:35:16.784Z"
+      "checked_at": "2026-10-16T20:00:19.116Z"
+    },
+    "nfl": {
+      "status": "available",
+      "reports": 318,
+      "checked_at": "2026-10-16T20:00:19.116Z"
+    },
+    "ncaaf": {
+      "status": "empty",
+      "reports": 0,
+      "checked_at": "2026-10-16T20:00:19.116Z"
     },
     "mlb": {
       "status": "available",
       "reports": 3,
-      "checked_at": "2026-10-16T19:35:16.784Z"
+      "checked_at": "2026-10-16T20:00:19.116Z"
     }
   },
   "events": [
+    {
+      "id": "injury|nhl:9:Oskar Back|2026-10-16T20:00:19.116Z",
+      "kind": "injury",
+      "observed_at": "2026-10-16T20:00:19.116Z",
+      "sport": "nhl",
+      "title": "Player availability changed",
+      "event": "Dallas Stars",
+      "pick": "Oskar Back",
+      "before": "Injured Reserve · Upper Body",
+      "after": "Injured Reserve · Finger",
+      "source_quote_at": "2026-10-16T19:32Z",
+      "source": "ESPN injuries",
+      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
+    },
+    {
+      "id": "injury|nfl:7:Jonathon Cooper|2026-10-16T20:00:19.116Z",
+      "kind": "injury",
+      "observed_at": "2026-10-16T20:00:19.116Z",
+      "sport": "nfl",
+      "title": "New availability report",
+      "event": "Denver Broncos",
+      "pick": "Jonathon Cooper",
+      "before": "Not in the previous dated report",
+      "after": "Active",
+      "source_quote_at": "2026-10-16T19:45Z",
+      "source": "ESPN injuries",
+      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
+    },
+    {
+      "id": "injury|nfl:11:Tyler Warren|2026-10-16T20:00:19.116Z",
+      "kind": "injury",
+      "observed_at": "2026-10-16T20:00:19.116Z",
+      "sport": "nfl",
+      "title": "New availability report",
+      "event": "Indianapolis Colts",
+      "pick": "Tyler Warren",
+      "before": "Not in the previous dated report",
+      "after": "Questionable · Groin",
+      "source_quote_at": "2026-10-16T19:49Z",
+      "source": "ESPN injuries",
+      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
+    },
+    {
+      "id": "injury|nfl:24:Quentin Johnston|2026-10-16T20:00:19.116Z",
+      "kind": "injury",
+      "observed_at": "2026-10-16T20:00:19.116Z",
+      "sport": "nfl",
+      "title": "Player availability changed",
+      "event": "Los Angeles Chargers",
+      "pick": "Quentin Johnston",
+      "before": "Active · Johnston (chest) was a limited participant in Thursday's practice.",
+      "after": "Active · Johnston (chest) doesn't have an injury designation for Sunday's game against the Chiefs, Noah Furtado of The Athletic reports.",
+      "source_quote_at": "2026-10-16T19:30Z",
+      "source": "ESPN injuries",
+      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
+    },
     {
       "id": "injury|nfl:24:Ladd McConkey|2026-10-16T19:35:16.784Z",
       "kind": "injury",
@@ -2831,62 +2887,6 @@
       "before": "Questionable · Concussion",
       "after": "Active",
       "source_quote_at": "2026-10-15T19:55Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:11:Josh Downs|2026-10-16T03:04:03.843Z",
-      "kind": "injury",
-      "observed_at": "2026-10-16T03:04:03.843Z",
-      "sport": "nfl",
-      "title": "Player availability changed",
-      "event": "Indianapolis Colts",
-      "pick": "Josh Downs",
-      "before": "Questionable · Hamstring",
-      "after": "Active · Downs (rest/hamstring) upgraded to full participation at Thursday's practice.",
-      "source_quote_at": "2026-10-15T19:55Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:12:Peter Woods|2026-10-16T03:04:03.843Z",
-      "kind": "injury",
-      "observed_at": "2026-10-16T03:04:03.843Z",
-      "sport": "nfl",
-      "title": "New availability report",
-      "event": "Kansas City Chiefs",
-      "pick": "Peter Woods",
-      "before": "Not in the previous dated report",
-      "after": "Questionable · Neck",
-      "source_quote_at": "2026-10-15T21:14Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:13:Folorunso Fatukasi|2026-10-16T03:04:03.843Z",
-      "kind": "injury",
-      "observed_at": "2026-10-16T03:04:03.843Z",
-      "sport": "nfl",
-      "title": "Player availability changed",
-      "event": "Las Vegas Raiders",
-      "pick": "Folorunso Fatukasi",
-      "before": "Questionable · Shoulder",
-      "after": "Active",
-      "source_quote_at": "2026-10-16T00:34Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:13:Brock Bowers|2026-10-16T03:04:03.843Z",
-      "kind": "injury",
-      "observed_at": "2026-10-16T03:04:03.843Z",
-      "sport": "nfl",
-      "title": "Player availability changed",
-      "event": "Las Vegas Raiders",
-      "pick": "Brock Bowers",
-      "before": "Questionable · Knee",
-      "after": "Active · Bowers (knee) practiced fully Thursday. Ryan McFadden of ESPN.com reports.",
-      "source_quote_at": "2026-10-16T00:25Z",
       "source": "ESPN injuries",
       "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
     }
