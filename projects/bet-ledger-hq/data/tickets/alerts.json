@@ -1,29 +1,103 @@
 {
   "schema": 1,
-  "checked_at": "2026-10-16T17:59:27.204Z",
+  "checked_at": "2026-10-16T18:10:30.735Z",
   "coverage": {
-    "ncaaf": {
-      "status": "empty",
-      "reports": 0,
-      "checked_at": "2026-10-16T17:59:27.204Z"
-    },
     "nhl": {
       "status": "available",
       "reports": 49,
-      "checked_at": "2026-10-16T17:59:27.204Z"
+      "checked_at": "2026-10-16T18:10:30.735Z"
+    },
+    "ncaaf": {
+      "status": "empty",
+      "reports": 0,
+      "checked_at": "2026-10-16T18:10:30.735Z"
     },
     "mlb": {
       "status": "available",
       "reports": 3,
-      "checked_at": "2026-10-16T17:59:27.204Z"
+      "checked_at": "2026-10-16T18:10:30.735Z"
     },
     "nfl": {
       "status": "available",
       "reports": 311,
-      "checked_at": "2026-10-16T17:59:27.204Z"
+      "checked_at": "2026-10-16T18:10:30.735Z"
     }
   },
   "events": [
+    {
+      "id": "odds|ncaaf|401858493|2026-10-17T00:00Z|TOTAL||over|Draft Kings|2026-10-16T18:10:30.735Z",
+      "kind": "odds",
+      "observed_at": "2026-10-16T18:10:30.735Z",
+      "sport": "ncaaf",
+      "event": "WASH @ PUR",
+      "start": "2026-10-17T00:00Z",
+      "pick": "Over 50.5",
+      "title": "Published odds changed",
+      "before": "-105 · line 50.5",
+      "after": "-110 · line 50.5",
+      "book": "Draft Kings",
+      "source_quote_at": "2026-10-16T18:07:39.662134+00:00",
+      "source": "Existing NCAAF board",
+      "note": "Your ticket keeps its original odds. Recheck the live book before placing a new wager."
+    },
+    {
+      "id": "price-limit|ncaaf|401858493|2026-10-17T00:00Z|TOTAL||over|Draft Kings|2026-10-16T18:10:30.735Z",
+      "kind": "price-limit",
+      "observed_at": "2026-10-16T18:10:30.735Z",
+      "sport": "ncaaf",
+      "event": "WASH @ PUR",
+      "start": "2026-10-17T00:00Z",
+      "pick": "Over 50.5",
+      "title": "Price below published minimum",
+      "before": "-105",
+      "after": "-110",
+      "book": "Draft Kings",
+      "source_quote_at": "2026-10-16T18:07:39.662134+00:00",
+      "source": "Published price policy",
+      "note": "Minimum -106 at unchanged line 50.5. Uses the saved forecast, not a new model approval. Confirm current odds and qualification; scheduled observations can miss intervening moves."
+    },
+    {
+      "id": "injury|nhl:2:Rasmus Dahlin|2026-10-16T18:10:30.735Z",
+      "kind": "injury",
+      "observed_at": "2026-10-16T18:10:30.735Z",
+      "sport": "nhl",
+      "title": "Player availability changed",
+      "event": "Buffalo Sabres",
+      "pick": "Rasmus Dahlin",
+      "before": "Day-To-Day · Upper Body",
+      "after": "Out · Upper Body",
+      "source_quote_at": "2026-10-16T17:46Z",
+      "source": "ESPN injuries",
+      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
+    },
+    {
+      "id": "injury|nfl:33:Lamar Jackson|2026-10-16T18:10:30.735Z",
+      "kind": "injury",
+      "observed_at": "2026-10-16T18:10:30.735Z",
+      "sport": "nfl",
+      "title": "Player availability changed",
+      "event": "Baltimore Ravens",
+      "pick": "Lamar Jackson",
+      "before": "Questionable · Ankle",
+      "after": "Out · Ankle",
+      "source_quote_at": "2026-10-16T18:04Z",
+      "source": "ESPN injuries",
+      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
+    },
+    {
+      "id": "injury|nfl:21:Joe Milton III|2026-10-16T18:10:30.735Z",
+      "kind": "injury",
+      "observed_at": "2026-10-16T18:10:30.735Z",
+      "sport": "nfl",
+      "title": "New availability report",
+      "event": "Philadelphia Eagles",
+      "pick": "Joe Milton III",
+      "before": "Not in the previous dated report",
+      "after": "Active · The Eagles are signing Milton off the Cowboys' practice squad, NFL reporter Jordan Schultz reports.",
+      "source_quote_at": "2026-10-16T15:37Z",
+      "source": "ESPN injuries",
+      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
+    },
     {
       "id": "odds|mlb|849817|2026-10-17T00:00:00Z|TOTAL||over|DraftKings|2026-10-16T17:59:27.204Z",
       "kind": "odds",
@@ -2797,76 +2871,6 @@
       "before": "Not in the previous dated report",
       "after": "Questionable · Chest",
       "source_quote_at": "2026-10-15T22:38Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:28:Treylon Burks|2026-10-16T03:04:03.843Z",
-      "kind": "injury",
-      "observed_at": "2026-10-16T03:04:03.843Z",
-      "sport": "nfl",
-      "title": "Player availability changed",
-      "event": "Washington Commanders",
-      "pick": "Treylon Burks",
-      "before": "Active · Burks caught two passes on five targets for 16 yards during Sunday's 27-27 tie with the Giants.",
-      "after": "Questionable · Shoulder",
-      "source_quote_at": "2026-10-15T22:27Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:28:Terry McLaurin|2026-10-16T03:04:03.843Z",
-      "kind": "injury",
-      "observed_at": "2026-10-16T03:04:03.843Z",
-      "sport": "nfl",
-      "title": "New availability report",
-      "event": "Washington Commanders",
-      "pick": "Terry McLaurin",
-      "before": "Not in the previous dated report",
-      "after": "Questionable · Hamstring",
-      "source_quote_at": "2026-10-15T22:18Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:28:Jacory Croskey-Merritt|2026-10-16T03:04:03.843Z",
-      "kind": "injury",
-      "observed_at": "2026-10-16T03:04:03.843Z",
-      "sport": "nfl",
-      "title": "New availability report",
-      "event": "Washington Commanders",
-      "pick": "Jacory Croskey-Merritt",
-      "before": "Not in the previous dated report",
-      "after": "Questionable · Groin",
-      "source_quote_at": "2026-10-15T22:10Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nhl:9:Oskar Back|2026-10-15T04:09:46.368Z",
-      "kind": "injury",
-      "observed_at": "2026-10-15T04:09:46.368Z",
-      "sport": "nhl",
-      "title": "New availability report",
-      "event": "Dallas Stars",
-      "pick": "Oskar Back",
-      "before": "Not in the previous dated report",
-      "after": "Day-To-Day · Upper Body",
-      "source_quote_at": "2026-10-15T02:23Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|mlb:5:Colin Holderman|2026-10-15T02:32:21.662Z",
-      "kind": "injury",
-      "observed_at": "2026-10-15T02:32:21.662Z",
-      "sport": "mlb",
-      "title": "New availability report",
-      "event": "Cleveland Guardians",
-      "pick": "Colin Holderman",
-      "before": "Not in the previous dated report",
-      "after": "15-Day-IL · Wrist",
-      "source_quote_at": "2026-10-14T20:05Z",
       "source": "ESPN injuries",
       "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
     }
