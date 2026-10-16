@@ -154,6 +154,7 @@
     </article>`;
   }
 
+  window.addEventListener("kevbot:parlay-tools-ready",()=>{if(state.meta)renderParlays();});
   function renderParlays() {
     targets(); parlayFilters();
     const game = $('#parlay-game').value, day = $('#parlay-day').value;

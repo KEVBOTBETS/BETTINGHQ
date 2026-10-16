@@ -45,7 +45,7 @@ def vector(home,away,p,neutral=False):
     h,a=p[home],p[away]
     return np.array([h['pass_adjusted']+a['allow_pass']-a['pass_adjusted']-h['allow_pass'],h['rush_adjusted']+a['allow_rush']-a['rush_adjusted']-h['allow_rush'],h['success']-a['success'],h['explosive']-a['explosive'],0 if neutral else 1,(h['pace']-a['pace'])/10])
 
-def fit(rows, cutoff=None):
+def fit(rows, cutoff=None, sd_floor=10., sd_prior=14.):
     if cutoff:rows=[r for r in rows if r['date']<cutoff]
     rows=[r for r in rows if r.get('result_verified')]
     games={r['game_id']:r for r in rows}; xs=[];ys=[];dates=[];cache={}
@@ -68,10 +68,10 @@ def fit(rows, cutoff=None):
         past_scale=np.maximum(np.std(x[train],axis=0),.03);past_scale[4]=1
         beta=solve(x[train]/past_scale,y[train])
         residuals.extend(float(y[i]-x[i]/past_scale@beta) for i in test)
-    beta=solve(z,y);sd=max(10.,float(np.std(residuals)) if residuals else 14.)
+    beta=solve(z,y);sd=max(sd_floor,float(np.std(residuals)) if residuals else sd_prior)
     return {'beta':beta,'scale':scale,'sd':sd,'residuals':residuals[-400:],'games':len(xs),'last_date':max(dates),'features':FEATURES,'replay':'Chronological features from corrected data; exploratory.'}
 
-def forecast(game, dataset, model, now):
+def forecast(game, dataset, model, now, sport="nfl"):
     observed=instant(dataset.get('observed_at'));start=instant(game.get('date'))
     live=instant(dataset.get('live_observed_at') or dataset.get('observed_at'))
     if not observed or not observed<=now or not live or not live<=now or not start or start<=now or (now-live).total_seconds()>7*86400 or not model:return None
@@ -81,5 +81,5 @@ def forecast(game, dataset, model, now):
     if x is None:return None
     contributions=x/model['scale']*model['beta'];mu=float(sum(contributions));dist=margin_distribution(mu,model['sd'],model['residuals']);out=summary(dist)
     line=number((game.get('odds') or {}).get('spread_home'))
-    out.update(version='nfl-efficiency-v2',mode='shadow',training_games=model['games'],training_through=model['last_date'],source_observed_at=dataset['observed_at'],margin=mu,sd=model['sd'],cover=cover(dist,line) if line is not None else None,home_spread=line,factors=[{'name':name,'points':float(v)} for name,v in zip(FEATURES,contributions)],profiles={'home':p[h],'away':p[a]},replay=model['replay'],actionable=False)
+    out.update(version='ncaaf-efficiency-v1' if sport=='ncaaf' else 'nfl-efficiency-v2',mode='shadow',training_games=model['games'],training_through=model['last_date'],source_observed_at=dataset['observed_at'],margin=mu,sd=model['sd'],cover=cover(dist,line) if line is not None else None,home_spread=line,factors=[{'name':name,'points':float(v)} for name,v in zip(FEATURES,contributions)],profiles={'home':p[h],'away':p[a]},replay=model['replay'],actionable=False)
     return out

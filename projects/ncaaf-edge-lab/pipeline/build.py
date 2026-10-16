@@ -996,6 +996,14 @@ def main() -> int:
     print("-- confirming the DraftKings quote for each game")
     quote_cache = store.load("quote_cache.json", {})
     quote_health = quotes.enrich(games, cfg, quote_cache)
+    public_odds_health={'status':'Offline · no network request'}
+    if not args.offline:
+        import importlib.util as public_import
+        public_path=__import__('pathlib').Path(__file__).resolve().parents[3]/'tools/football_public_odds.py'
+        spec=public_import.spec_from_file_location('kev_public_football_odds',public_path)
+        module=public_import.module_from_spec(spec);spec.loader.exec_module(module)
+        public_odds_health=module.enrich(games,'ncaaf')
+
     store.save("quote_cache.json", quote_cache)
     store.save(f"games_{season}.json", games)
     print(f"   current season games: {len(games)} ({sum(1 for g in games if g.get('completed'))} final)")

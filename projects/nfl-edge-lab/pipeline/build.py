@@ -696,6 +696,14 @@ def main() -> int:
             print(f"-- rolling fetch {lo} .. {hi}")
         fresh = espn.fetch_range(lo, hi, prio)
     games = merge_games(cache, fresh)
+    public_odds_health={'status':'Offline · no network request'}
+    if not args.offline:
+        import importlib.util as public_import
+        public_path=__import__('pathlib').Path(__file__).resolve().parents[3]/'tools/football_public_odds.py'
+        spec=public_import.spec_from_file_location('kev_public_football_odds',public_path)
+        module=public_import.module_from_spec(spec);spec.loader.exec_module(module)
+        public_odds_health=module.enrich(games,'nfl')
+
     store.save(f"games_{season}.json", games)
     finals = sum(1 for g in games if g.get("completed"))
     print(f"   current season games: {len(games)} ({finals} final)")
@@ -1126,7 +1134,7 @@ def main() -> int:
         "counts": {"board": len(board), **availability, "tracked_calls": len(shadow),
                    "upcoming_without_a_line": no_line,
                    "upcoming": len(upcoming), "all_preseason": all_pre},
-        "odds_health": odds_health,
+        "odds_health": odds_health, "public_odds_health": public_odds_health,
         "horizon_days": int(cfg["data"]["lookahead_days"]),
         "weather_forecast_days": int((cfg.get("weather") or {}).get("forecast_days", 16)),
         "bet_within_days": int(cfg["filters"].get("bet_within_days") or 0),

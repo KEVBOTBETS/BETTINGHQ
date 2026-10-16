@@ -34,10 +34,13 @@ subprocess.run([sys.executable,'tools/newsletters.py'],cwd=ROOT,check=True,timeo
 if args.sport in ['all','football','props']:
     subprocess.run([sys.executable,'tools/night_news.py'],cwd=ROOT,timeout=60,check=False)
     subprocess.run([sys.executable,'-m','tools.research.ingest'],cwd=ROOT,timeout=180,check=False)
+    try:subprocess.run([sys.executable,'-m','tools.research.cfb_ingest'],cwd=ROOT,timeout=240,check=False)
+    except subprocess.TimeoutExpired:print('::warning::College play import timed out; original input timestamps retained.')
 subprocess.run([sys.executable,'-m','tools.research.build','--capture'],cwd=ROOT,check=True,timeout=180)
 subprocess.run([sys.executable,'tools/build_site.py'],cwd=ROOT,check=True)
 subprocess.run([sys.executable,'tools/college_research.py','--capture'],cwd=ROOT,check=True,timeout=180)
 subprocess.run([sys.executable,'tools/moneyline_tracking.py','--capture'],cwd=ROOT,check=True,timeout=90)
+subprocess.run([sys.executable,'-m','tools.research.insights','--capture'],cwd=ROOT,check=True,timeout=90)
 env={**os.environ,'LOCAL_SITE_ROOT':str(ROOT/'_site')}
 subprocess.run(['node','scripts/refresh-tickets.mjs'],cwd=ROOT/'projects/bet-ledger-hq',env=env,check=True,timeout=600)
 health=json.loads((ROOT/'projects/bet-ledger-hq/data/tickets/health.json').read_text())

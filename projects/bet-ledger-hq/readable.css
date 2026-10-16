@@ -6,3 +6,5 @@
 .simple-details .lab-card{overflow-x:auto}.simple-details .lab-grid{max-width:100%}
 
 @media(max-width:600px){.simple-controls{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr)}.simple-controls label{min-width:0}.simple-controls>label:nth-of-type(4){grid-column:1/-1}.simple-controls button{width:100%;white-space:normal}.simple-details .simple-controls{grid-template-columns:minmax(0,1fr)}}
+
+#model-insights{min-width:0;max-width:100%;margin:24px 0;padding:20px;border:1px solid #334354;border-radius:8px;box-sizing:border-box}#model-insights .table-scroll{max-width:100%;overflow:auto}#model-insights .simple-controls label{flex:1 1 180px;min-width:0}#model-insights .simple-controls{align-items:end}#model-insights .muted{font-size:13px;color:#adbdce;line-height:1.6}#model-insights .simple-stats b{font-size:25px}#model-insights p{overflow-wrap:anywhere}#model-insights .simple-controls button{cursor:pointer}@media(max-width:600px){#model-insights{padding:12px}#model-insights .simple-controls{grid-template-columns:minmax(0,1fr)}}

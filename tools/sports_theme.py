@@ -28,7 +28,7 @@ def apply(root):
             source = re.sub(r'</head>', '<link rel="stylesheet" href="'+href+'">\n</head>', source, count=1, flags=re.I)
             # The same controls reach every generated board on every rebuild.
             # Never inject twice, and retain the existing board's own scripts.
-            shared=['value-core.js','execution-core.js','betsync.js','site-tools-core.js','site-tools.js']
+            shared=['value-core.js','execution-core.js','betsync.js','site-tools-core.js','parlay-removal-core.js','site-tools.js']
             if identity in ('accuracy','ledger'): shared.append('receipt-audit.js')
             snippets=[]
             shared_css=os.path.relpath(root/'bet-ledger-hq/site-tools.css',page.parent).replace(os.sep,'/')
