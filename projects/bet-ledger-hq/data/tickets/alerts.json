@@ -1,29 +1,75 @@
 {
   "schema": 1,
-  "checked_at": "2026-10-16T18:10:30.735Z",
+  "checked_at": "2026-10-16T18:17:48.345Z",
   "coverage": {
     "nhl": {
       "status": "available",
       "reports": 49,
-      "checked_at": "2026-10-16T18:10:30.735Z"
-    },
-    "ncaaf": {
-      "status": "empty",
-      "reports": 0,
-      "checked_at": "2026-10-16T18:10:30.735Z"
+      "checked_at": "2026-10-16T18:17:48.345Z"
     },
     "mlb": {
       "status": "available",
       "reports": 3,
-      "checked_at": "2026-10-16T18:10:30.735Z"
+      "checked_at": "2026-10-16T18:17:48.345Z"
+    },
+    "ncaaf": {
+      "status": "empty",
+      "reports": 0,
+      "checked_at": "2026-10-16T18:17:48.345Z"
     },
     "nfl": {
       "status": "available",
       "reports": 311,
-      "checked_at": "2026-10-16T18:10:30.735Z"
+      "checked_at": "2026-10-16T18:17:48.345Z"
     }
   },
   "events": [
+    {
+      "id": "odds|ncaaf|401858493|2026-10-17T00:00Z|TOTAL||over|Draft Kings|2026-10-16T18:17:48.345Z",
+      "kind": "odds",
+      "observed_at": "2026-10-16T18:17:48.345Z",
+      "sport": "ncaaf",
+      "event": "WASH @ PUR",
+      "start": "2026-10-17T00:00Z",
+      "pick": "Over 50.5",
+      "title": "Published odds changed",
+      "before": "-110 · line 50.5",
+      "after": "-105 · line 50.5",
+      "book": "Draft Kings",
+      "source_quote_at": "2026-10-16T18:15:19.307107+00:00",
+      "source": "Existing NCAAF board",
+      "note": "Your ticket keeps its original odds. Recheck the live book before placing a new wager."
+    },
+    {
+      "id": "price-limit|ncaaf|401858493|2026-10-17T00:00Z|TOTAL||over|Draft Kings|2026-10-16T18:17:48.345Z",
+      "kind": "price-limit",
+      "observed_at": "2026-10-16T18:17:48.345Z",
+      "sport": "ncaaf",
+      "event": "WASH @ PUR",
+      "start": "2026-10-17T00:00Z",
+      "pick": "Over 50.5",
+      "title": "Price back above published minimum",
+      "before": "-110",
+      "after": "-105",
+      "book": "Draft Kings",
+      "source_quote_at": "2026-10-16T18:15:19.307107+00:00",
+      "source": "Published price policy",
+      "note": "Minimum -106 at unchanged line 50.5. Uses the saved forecast, not a new model approval. Confirm current odds and qualification; scheduled observations can miss intervening moves."
+    },
+    {
+      "id": "injury|nfl:12:Rashee Rice|2026-10-16T18:17:48.345Z",
+      "kind": "injury",
+      "observed_at": "2026-10-16T18:17:48.345Z",
+      "sport": "nfl",
+      "title": "Player availability changed",
+      "event": "Kansas City Chiefs",
+      "pick": "Rashee Rice",
+      "before": "Questionable · Hamstring",
+      "after": "Out · Hamstring",
+      "source_quote_at": "2026-10-15T18:44Z",
+      "source": "ESPN injuries",
+      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
+    },
     {
       "id": "odds|ncaaf|401858493|2026-10-17T00:00Z|TOTAL||over|Draft Kings|2026-10-16T18:10:30.735Z",
       "kind": "odds",
@@ -2829,48 +2875,6 @@
       "before": "Not in the previous dated report",
       "after": "Questionable · Pectoral",
       "source_quote_at": "2026-10-15T23:16Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:28:Nick Cross|2026-10-16T03:04:03.843Z",
-      "kind": "injury",
-      "observed_at": "2026-10-16T03:04:03.843Z",
-      "sport": "nfl",
-      "title": "Player availability changed",
-      "event": "Washington Commanders",
-      "pick": "Nick Cross",
-      "before": "Questionable · Illness",
-      "after": "Active · Cross (illness) will be a full participant in practices ahead of Monday's game against the 49ers, Tashan Reed of The Washington Post reports.",
-      "source_quote_at": "2026-10-15T22:47Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:28:Jordan Magee|2026-10-16T03:04:03.843Z",
-      "kind": "injury",
-      "observed_at": "2026-10-16T03:04:03.843Z",
-      "sport": "nfl",
-      "title": "New availability report",
-      "event": "Washington Commanders",
-      "pick": "Jordan Magee",
-      "before": "Not in the previous dated report",
-      "after": "Injured Reserve · Hamstring",
-      "source_quote_at": "2026-10-15T22:38Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:28:Austin Ekeler|2026-10-16T03:04:03.843Z",
-      "kind": "injury",
-      "observed_at": "2026-10-16T03:04:03.843Z",
-      "sport": "nfl",
-      "title": "New availability report",
-      "event": "Washington Commanders",
-      "pick": "Austin Ekeler",
-      "before": "Not in the previous dated report",
-      "after": "Questionable · Chest",
-      "source_quote_at": "2026-10-15T22:38Z",
       "source": "ESPN injuries",
       "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
     }
