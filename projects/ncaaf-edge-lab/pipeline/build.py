@@ -999,10 +999,12 @@ def main() -> int:
     public_odds_health={'status':'Offline · no network request'}
     if not args.offline:
         import importlib.util as public_import
-        public_path=__import__('pathlib').Path(__file__).resolve().parents[3]/'tools/football_public_odds.py'
+        public_path=__import__('pathlib').Path(__file__).with_name('public_odds.py')
+        if not public_path.exists():public_path=__import__('pathlib').Path(__file__).resolve().parents[3]/'tools/football_public_odds.py'
         spec=public_import.spec_from_file_location('kev_public_football_odds',public_path)
         module=public_import.module_from_spec(spec);spec.loader.exec_module(module)
-        public_odds_health=module.enrich(games,'ncaaf')
+        public_odds_health=module.enrich(games,'ncaaf',publish=False)
+        store.save('public_odds_health.json',public_odds_health)
 
     store.save("quote_cache.json", quote_cache)
     store.save(f"games_{season}.json", games)
@@ -1206,7 +1208,7 @@ def main() -> int:
         "settings": public_settings(cfg),
         "brier": None,
         "odds_health": odds_health,
-        "quote_coverage": quote_health,
+        "quote_coverage": quote_health, "public_odds_health": public_odds_health,
         "context_health": context_health,
         "fpi_audit": audit_report,
         "fpi": {

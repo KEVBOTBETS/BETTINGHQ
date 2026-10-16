@@ -28,7 +28,7 @@ for repo in ['nfl-edge-lab','ncaaf-edge-lab']:
     patterns += [f'projects/{repo}/state/{name}' for name in [
         'model_accuracy.json','fpi_*.json','games_*.json','history_*.json',
         'lines.json','context_cache.json','quote_cache.json','rank_history.json',
-        'shadow.json','predictions.json','forecasts.json','early_plays.json','qb_quality.json']]
+        'shadow.json','predictions.json','forecasts.json','early_plays.json','qb_quality.json','public_odds_health.json']]
 files=sorted({str(p.relative_to(ROOT)) for pat in patterns for p in ROOT.glob(pat)
               if p.is_file() and p.name not in {'ledger.json','summary.json','ladder.json','multisport_cache.json','public_research_cache.json'}})
 if files: subprocess.run(['git','add','--',*files],cwd=ROOT,check=True)

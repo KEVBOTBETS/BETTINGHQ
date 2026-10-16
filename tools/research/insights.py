@@ -112,6 +112,9 @@ def build(root=ROOT,calls=None,performance=None,research=None,capture=False,now=
    cohort=first(sport_rows,version)
    sections.append({'sport':sport,'version':version or 'all','summary':stats(cohort),'favourites':groups(cohort,price_group),'price_bands':groups(cohort,price_band),'recommendations':groups(cohort,lambda r:r.get('recommendation','Not recorded')),'drift':drift(cohort),'team_bias':team_bias([r for r in performance.get('records',[]) if instant(r.get('start')) and instant(r['start'])<=now and (not instant(r.get('result_at')) or instant(r['start'])<=instant(r['result_at'])<=now)],sport,version),'availability':availability_report([r for r in log if r['sport']==sport and (version is None or r['version']==version)],cohort),'weekly':weekly(cohort,now)})
  source=read(root/'projects/bet-ledger-hq/data/research/football-odds.json',{'leagues':{}})
+ for sport in ('nfl','ncaaf'):
+  published=read(root/f'projects/{sport}-edge-lab/state/public_odds_health.json',None)
+  if published:source.setdefault('leagues',{})[sport]=published
  for report in source.get('leagues',{}).values():
   at=instant(report.get('checked_at'));report['fresh']=bool(at and 0<=(now-at).total_seconds()<=3*3600)
  return {'schema':1,'generated_at':now.isoformat(),'sections':sections,'source_checks':source,'availability_log':sorted(log,key=lambda r:r['captured_at'],reverse=True)[:120],'college':research.get('coverage',{}).get('ncaaf',{}),'policy':'One first pregame call per event in default views; recorded versions can be inspected separately. Price groups require original observed odds, never reconstructed prices. No automatic model promotion, betting, threshold relaxation or profit claim. Team bias is descriptive; availability groups are associations, not causal injury effects.'}

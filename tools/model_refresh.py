@@ -19,6 +19,13 @@ def refresh_project(project, command, timeout=1800):
     with tempfile.TemporaryDirectory(prefix='kevbot-refresh-') as folder:
         work=Path(folder)/project.name
         shutil.copytree(project,work,ignore=shutil.ignore_patterns('.git','node_modules','__pycache__','.venv','*.log','*.tmp','_public_site'))
+        # Football refreshes run outside the repository. Bundle the stdlib-only
+        # reader so quotes and health are written inside the same isolation.
+        if project.name in ('nfl-edge-lab','ncaaf-edge-lab'):
+            shared=Path(__file__).with_name('football_public_odds.py')
+            if shared.exists():
+                (work/'pipeline').mkdir(exist_ok=True)
+                shutil.copy2(shared,work/'pipeline/public_odds.py')
         subprocess.run(command,cwd=work,check=True,timeout=timeout)
         for relative in OUTPUTS[project.name]:
             source=work/relative;destination=project/relative

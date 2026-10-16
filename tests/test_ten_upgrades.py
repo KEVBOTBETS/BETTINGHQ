@@ -42,6 +42,15 @@ class UpgradeTests(unittest.TestCase):
    a=capture_context(root,{'games':[g]},N);b=capture_context(root,{'games':[g]},N+timedelta(minutes=1));self.assertEqual(a,b);self.assertFalse(a[0]['sides'][0]['starter_confirmed']);g['availability']['sides'][0]['role_status']='uncertain';c=capture_context(root,{'games':[g]},N+timedelta(minutes=2));self.assertEqual(len(c),2);self.assertEqual(c[0],a[0])
  def test_weekly_uses_toronto_result_time_not_guessed_start(self):
   r=call(58);r['result']['verified_at']='2026-10-12T01:00Z';s=weekly([r],N);self.assertEqual(s['current']['graded'],0);self.assertEqual(s['previous']['graded'],1);r['result']['verified_at']=None;self.assertEqual(weekly([r],N)['previous']['graded'],0)
+ def test_reader_and_health_are_published_through_isolated_refresh(self):
+  import sys,subprocess
+  from tools.model_refresh import refresh_project
+  with tempfile.TemporaryDirectory() as t:
+   root=Path(t);project=root/'projects/nfl-edge-lab';(project/'pipeline').mkdir(parents=True);(project/'pipeline/__init__.py').write_text('');(project/'state').mkdir();health=project/'state/public_odds_health.json';health.write_text('{"status":"original"}')
+   script="from pipeline import public_odds;from pathlib import Path;assert public_odds.URLS['nfl'].startswith('https://www.covers.com/');Path('state/public_odds_health.json').write_text('{\"status\":\"verified in isolation\"}')"
+   refresh_project(project,[sys.executable,'-c',script]);self.assertEqual(json.loads(health.read_text())['status'],'verified in isolation')
+   with self.assertRaises(subprocess.CalledProcessError):refresh_project(project,[sys.executable,'-c',script+";raise SystemExit(7)"])
+   self.assertEqual(json.loads(health.read_text())['status'],'verified in isolation')
  def test_future_results_do_not_enter_diagnostics(self):
   with tempfile.TemporaryDirectory() as t:
    r=call(2);r['result']['verified_at']=(N+timedelta(days=1)).isoformat();d=build(Path(t),calls={'records':[r]},performance={'records':[]},research={'games':[]},now=N);s=next(x for x in d['sections'] if x['sport']=='nfl' and x['version']=='all');self.assertEqual(s['summary']['graded'],0);self.assertEqual(s['summary']['pending'],1)
