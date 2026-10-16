@@ -66,6 +66,10 @@ def build(root=ROOT,now=None,staged=None):
     ml=next((r for r in observed if r['market']=='ML' and r['probability'] is not None),None)
     if ml:p=ml['probability'] if ml['side']=='home' else 1-ml['probability']
    margin=number(projection.get('mu',projection.get('margin')))
+   score_projection=None
+   if sport in ('nfl','ncaaf') and fresh and not g.get('source_stale') and projection.get('ratings_known') is True:
+    ph,pa,pt=[number(projection.get(k)) for k in ('proj_home_pts','proj_away_pts','proj_total')]
+    if ph is not None and pa is not None and pt is not None and min(ph,pa,pt)>=0:score_projection={'home':ph,'away':pa,'total':pt,'basis':'Published source model scores; not bookmaker totals','observed_at':publication}
    ready=p is not None and fresh and not g.get('source_stale')
    priced+=bool(any(r['fresh'] for r in observed));qualified+=bool(any(r['qualified'] for r in observed));forecasts+=bool(ready)
    for r in observed:
@@ -81,7 +85,7 @@ def build(root=ROOT,now=None,staged=None):
    news=[{'title':n.get('headline') or n.get('title'),'url':n.get('url') or (n.get('links') or {}).get('web',{}).get('href'),'published_at':n.get('published') or n.get('published_at')} for n in news if isinstance(n,dict)] if isinstance(news,list) else []
    news=[n for n in news if n['title'] and str(n['url']).startswith('https://')][:5]
    context={k:g[k] for k in ['venue','broadcast','home_goalie','away_goalie','nhl_game_id'] if k in g}
-   games.append({'id':key,'sport':sport,'event_id':event,'start':start,'matchup':matchup,'home':home,'away':away,'p_home':p if ready else None,'margin':margin if fresh else None,'forecast_available':bool(ready),'publication_at':publication,'publication_fresh':fresh,'selections':observed,'best':chosen,'qualified':bool(any(r['qualified'] for r in observed)),'context':context,'news':news,
+   games.append({'id':key,'sport':sport,'event_id':event,'start':start,'matchup':matchup,'home':home,'away':away,'p_home':p if ready else None,'margin':margin if fresh else None,'forecast_available':bool(ready),'score_projection':score_projection,'publication_at':publication,'publication_fresh':fresh,'selections':observed,'best':chosen,'qualified':bool(any(r['qualified'] for r in observed)),'context':context,'news':news,
     'board_url':'../'+repo+'/' if sport!='mlb' else '../mlb-edge/','model_version':meta.get('model_version'),'manual_available':True,
     'decision':{'why':('Published model leans '+str(home if p>=.5 else away)) if ready else 'Forecast unavailable; review the source board',
      'missing':([ 'Forecast publication stale or unavailable'] if not fresh else [])+(['No verified fresh book price'] if not any(r['fresh'] for r in observed) else []),

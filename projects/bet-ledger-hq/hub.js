@@ -3,6 +3,7 @@
 (() => {
   "use strict";
   const configs = {
+    "ncaaf-parlays":{title:"NCAAF Game Parlays",description:"Spread, total and moneyline targets: +500, +1000, +2000 and +10000.",url:"game-parlays.html"},
     opportunities:{title:"Opportunity Finder",description:"Every upcoming game, public source health, your watchlist and accepted-receipt exposure.",url:"opportunity-finder.html"},
     "thursday-night":{title:"Thursday Night Football",description:"This night’s NFL matchups, news, lines, bets, props and parlays.",url:"night-football.html?night=thursday"},
     "sunday-night":{title:"Sunday Night Football",description:"This night’s NFL matchups, news, lines, bets, props and parlays.",url:"night-football.html?night=sunday"},

@@ -43,6 +43,7 @@ def apply(root):
                 home = os.path.relpath(root/'bet-ledger-hq/index.html', page.parent).replace(os.sep, '/')
                 desk = os.path.relpath(root/'bet-ledger-hq/sports-desk.html', page.parent).replace(os.sep, '/')
                 league = sport if sport in ('nfl','ncaaf','mlb','nhl','wnba') else 'nfl'
-                nav = f'<nav class="kb-network" aria-label="Matchday network"><a href="{home}#today" target="_top">KB / {sport.upper()} LAB</a><a href="{desk}?sport={league}">SPORTS DESK ↗</a><a href="{home}#accuracy" target="_top">PERFORMANCE ↗</a></nav>'
+                parlay_link=f'<a href="{home}#ncaaf-parlays" target="_top">GAME PARLAYS ↗</a>' if sport=='ncaaf' else ''
+                nav = f'<nav class="kb-network" aria-label="Matchday network"><a href="{home}#today" target="_top">KB / {sport.upper()} LAB</a><a href="{desk}?sport={league}">SPORTS DESK ↗</a><a href="{home}#accuracy" target="_top">PERFORMANCE ↗</a>{parlay_link}</nav>'
                 source = re.sub(r'(<body\b[^>]*>)', lambda m:m[0]+nav, source, count=1, flags=re.I)
             page.write_text(source)

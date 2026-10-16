@@ -10,6 +10,7 @@ from challengers import evaluate as evaluate_challengers
 from research.build import build as build_research, read_archive
 from validation import report as build_validation
 from system_report import build as build_system_report
+from college_research import build as build_college_research
 
 ROOT = Path(__file__).resolve().parents[1]
 OUT = ROOT / '_site'
@@ -41,7 +42,8 @@ def main():
             (data/'summary.json').write_text(json.dumps(dict(starting_bankroll=None,
                 current_bankroll=None,wins=0,losses=0,pushes=0,settled=0,pending=0,roi=None,pnl=None))+'\n')
     subprocess.run([sys.executable, 'tools/public_dashboard.py', str(OUT/'ladderbet/index.html')], cwd=PROJECTS/'ladderbet', check=True)
-    validation=build_validation(read_archive(ROOT).get('market_forecasts',[]))
+    history=read_archive(ROOT)
+    validation=build_validation(history.get('market_forecasts',[]))
     (target/'data/validation.json').write_text(json.dumps(validation,separators=(',',':'),allow_nan=False)+'\n')
     subprocess.run(['node', 'tools/apply_value_policy.mjs', str(OUT)], cwd=ROOT, check=True)
     # Load the same policy helpers in source boards before their existing scripts.
@@ -56,6 +58,7 @@ def main():
     (target/'data/performance.json').write_text(json.dumps(performance,separators=(',',':'),allow_nan=False)+'\n')
     build_research(ROOT, target/'data/research/report.json')
     (target/'data/system.json').write_text(json.dumps(build_system_report(ROOT,staged=OUT),separators=(',',':'),allow_nan=False)+'\n')
+    (target/'data/college-research.json').write_text(json.dumps(build_college_research(ROOT,archive=history),separators=(',',':'),allow_nan=False)+'\n')
     apply_sports_theme(OUT)
     (OUT/'.nojekyll').touch()
     (OUT/'index.html').write_text('''<!doctype html><html lang="en"><meta charset="utf-8">

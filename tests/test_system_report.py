@@ -15,3 +15,9 @@ class SystemReport(unittest.TestCase):
  def test_started_cancelled_and_unknown_games_excluded(self):
   with tempfile.TemporaryDirectory() as tmp:
    root=Path(tmp);self.make(root,'nhl','meta',{'generated_at':NOW.isoformat()});self.make(root,'nhl','games',[{'game_id':'g','date':'2026-10-12T15:00Z','state':'pre'},{'game_id':'h','date':'2026-10-12T23:00Z','state':'unknown'}]);self.assertEqual(build(root,NOW)['games'],[])
+
+ def test_scores_are_source_forecasts_not_market_totals(self):
+  with tempfile.TemporaryDirectory() as tmp:
+   root=Path(tmp);self.make(root,'ncaaf','meta',{'generated_at':NOW.isoformat()});g={'game_id':'g','date':'2026-10-12T23:00Z','state':'pre','home':'A','away':'B','p_home':.6,'projection':{'ratings_known':True,'mu':3,'proj_home_pts':28.2,'proj_away_pts':25.2,'proj_total':53.4,'market_total':57}}
+   self.make(root,'ncaaf','games',[g]);r=build(root,NOW)['games'][0];self.assertEqual(r['score_projection']['total'],53.4);self.assertEqual(r['score_projection']['home'],28.2)
+   g['projection']['ratings_known']=False;self.make(root,'ncaaf','games',[g]);self.assertIsNone(build(root,NOW)['games'][0]['score_projection'])
