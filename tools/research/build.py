@@ -10,7 +10,12 @@ from .common import read,write,instant,number,decimal,team,cover,summary,VERSION
 from . import market,lineups,efficiency,experiments,opportunity,prop_tracking,calibration,readiness,weather_review,ingest
 
 ROOT=Path(__file__).resolve().parents[2]
-ARCHIVE=Path('projects/bet-ledger-hq/data/research/history.json')
+LEGACY_ARCHIVE=Path('projects/bet-ledger-hq/data/research/history.json')
+ARCHIVE=LEGACY_ARCHIVE.with_suffix('.json.gz')
+
+def read_archive(root):
+    # Lossless migration: retain every frozen forecast, quote and result.
+    return read(root/ARCHIVE if (root/ARCHIVE).exists() else root/LEGACY_ARCHIVE, {'forecasts':[], 'quotes':[]})
 
 def current_forecast(root,sport,g,meta):
     projection=g.get('projection') or {};mu=number(projection.get('mu'));p=number(g.get('p_home'))
@@ -58,7 +63,7 @@ def attach_market_benchmarks(candidates,by_event,now):
     return enriched
 
 def build(root=ROOT,out=None,capture=False,now=None):
-    now=now or datetime.now(timezone.utc);old=read(root/ARCHIVE,{'forecasts':[],'quotes':[]});dataset=read(root/'research/inputs/nfl-pbp.json',{})
+    now=now or datetime.now(timezone.utc);old=read_archive(root);dataset=read(root/'research/inputs/nfl-pbp.json',{})
     dataset=ingest.enrich_workload(dataset,read(root/'research/inputs/nfl-workload.json',{}),now)
     rows=dataset.get('teams',[]);trained=efficiency.fit(rows,now.date().isoformat()) if rows and instant(dataset.get('observed_at')) and instant(dataset['observed_at'])<=now else None
     raw=[];allgames={};metas={};results={};games=[];forecasts=[];gaps=[];diagnostics=[];weather=[];calibration_rows=[]
@@ -166,7 +171,10 @@ def build(root=ROOT,out=None,capture=False,now=None):
     if capture:market_archive=calibration.attach_props(calibration.settle(market_archive,results,now),prop_archive,now)
     if capture:market_archive=calibration.attach_verified_props(market_archive,read(root/'projects/props-edge/site/data/parlay-results.json',{}).get('records',[]),now)
     state['market_forecasts']=market_archive
-    if capture:write(root/ARCHIVE,state)
+    if capture:
+        write(root/ARCHIVE,state)
+        # Only remove the legacy copy after an atomic compressed write succeeds.
+        (root/LEGACY_ARCHIVE).unlink(missing_ok=True)
     result={'schema':1,'version':VERSION,'generated_at':now.isoformat(),'mode':'Local research · promotion disabled','games':games,'market':prices,'props':props,'workloads':workloads,'tickets':tickets,'lab':experiments.report(frozen,now),'prop_lab':prop_tracking.report(prop_archive,now),'closing_prices':clv,'coverage':{'nfl':{'team_games':len(rows),'player_games':len(dataset.get('players',[])),'observed_at':dataset.get('observed_at'),'efficiency_training_games':trained['games'] if trained else 0,'residual_games':len(trained['residuals']) if trained else 0},**multisport},'upgrades':readiness.completion(),'diagnostics':diagnostics,'weather':weather,'market_calibration':calibration.report(market_archive,now),'workload_coverage':dataset.get('workload_coverage',{}),'notes':['NFL efficiency replay uses corrected public data and is exploratory. Prospective captures provide the real test.','NCAAF EPA remains unavailable. NHL role/shot-quality research and its prospective record are published in NHL Props when eligible public inputs are available.','Lineup sensitivities have no invented availability probabilities and do not add a second injury haircut to production.','All new outputs are shadow research. No automatic model promotion or bet placement. Reports are published by the normal release workflow.'],'sources':[{'name':'nflverse play data','url':'https://github.com/nflverse/nflverse-data/releases/tag/pbp'},{'name':'nflverse update schedule','url':'https://nflverse.nflverse.com/articles/nflverse_data_schedule.html'},{'name':'Observed public prop offers','url':'https://www.covers.com/sport/football/nfl/player-props'}]}
     if out:
         write(out,result)

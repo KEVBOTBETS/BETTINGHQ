@@ -7,7 +7,7 @@ import sys
 from sports_theme import apply as apply_sports_theme
 from performance import build as build_performance
 from challengers import evaluate as evaluate_challengers
-from research.build import build as build_research
+from research.build import build as build_research, read_archive
 from validation import report as build_validation
 from system_report import build as build_system_report
 
@@ -41,8 +41,7 @@ def main():
             (data/'summary.json').write_text(json.dumps(dict(starting_bankroll=None,
                 current_bankroll=None,wins=0,losses=0,pushes=0,settled=0,pending=0,roi=None,pnl=None))+'\n')
     subprocess.run([sys.executable, 'tools/public_dashboard.py', str(OUT/'ladderbet/index.html')], cwd=PROJECTS/'ladderbet', check=True)
-    archive=ROOT/'projects/bet-ledger-hq/data/research/history.json'
-    validation=build_validation(json.loads(archive.read_text()).get('market_forecasts',[]) if archive.exists() else [])
+    validation=build_validation(read_archive(ROOT).get('market_forecasts',[]))
     (target/'data/validation.json').write_text(json.dumps(validation,separators=(',',':'),allow_nan=False)+'\n')
     subprocess.run(['node', 'tools/apply_value_policy.mjs', str(OUT)], cwd=ROOT, check=True)
     # Load the same policy helpers in source boards before their existing scripts.

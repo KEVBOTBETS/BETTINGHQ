@@ -7,6 +7,7 @@ patterns=[
     'projects/bet-ledger-hq/data/newsletters/**/*.json',
     'projects/bet-ledger-hq/data/spreads/**/*.json',
     'projects/bet-ledger-hq/data/research/**/*.json',
+    'projects/bet-ledger-hq/data/research/**/*.json.gz',
     'research/inputs/*.json',
     'projects/mlb-edge/docs/data/*.json',
     'projects/mlb-edge/data/predictions.json',
@@ -31,3 +32,6 @@ for repo in ['nfl-edge-lab','ncaaf-edge-lab']:
 files=sorted({str(p.relative_to(ROOT)) for pat in patterns for p in ROOT.glob(pat)
               if p.is_file() and p.name not in {'ledger.json','summary.json','ladder.json','multisport_cache.json','public_research_cache.json'}})
 if files: subprocess.run(['git','add','--',*files],cwd=ROOT,check=True)
+
+# Include the losslessly migrated legacy archive deletion in the data commit.
+subprocess.run(['git','add','-u','--','projects/bet-ledger-hq/data/research'],cwd=ROOT,check=True)

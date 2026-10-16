@@ -42,11 +42,16 @@
     $("#ticker-track").innerHTML=(items.length?items:[{label:"LIVE WIRE",value:"Scores and news feed temporarily unavailable.",news:true}]).map(x=>'<span class="ticker-item"><b class="ticker-league">'+esc(x.label)+'</b><span class="'+(x.news?"ticker-news":"")+'">'+esc(x.value)+'</span></span>').join("");
     button.disabled=false;
   }
-  const ticketRows=()=>C.topPlays(Object.entries(S.feeds).flatMap(([k,b])=>C.plays(k,b)).filter(r=>r.day===$("#date").value),10);
+  const ticketRows=()=>C.topPlays(Object.entries(S.feeds).flatMap(([k,b])=>C.plays(k,b)).filter(r=>r.day===$("#date").value&&($("#sport").value==="all"||r.key===$("#sport").value)),10);
   function loadImage(src){return new Promise((resolve,reject)=>{const img=new Image();img.onload=()=>resolve(img);img.onerror=reject;img.src=src;});}
   function rounded(ctx,x,y,w,h,r){ctx.beginPath();ctx.moveTo(x+r,y);ctx.arcTo(x+w,y,x+w,y+h,r);ctx.arcTo(x+w,y+h,x,y+h,r);ctx.arcTo(x,y+h,x,y,r);ctx.arcTo(x,y,x+w,y,r);ctx.closePath();}
   function fit(ctx,text,max){let s=String(text||"");while(s.length&&ctx.measureText(s).width>max)s=s.slice(0,-1);return s===String(text||"")?s:s.replace(/[ .,;:-]+$/g,"")+"…";}
   async function buildTicket(fresh=false){
+    if((fresh||!currentTicket)&&!ticketRows().length){
+      document.querySelector('#matchday-games')?.scrollIntoView({behavior:'smooth'});
+      $('#refresh-status').textContent='No qualified picks for the selected date. Choose a game above to build a research draft, or change the Best bets date. No empty ticket was saved.';
+      return;
+    }
     if(fresh||!currentTicket){currentTicket={id:"local-"+crypto.randomUUID(),day:$("#date").value,published_at:new Date().toISOString(),picks:ticketRows()};
       try{window.KevTicketStore.save(currentTicket);}catch(_){currentTicket.saveFailed=true;}
     }
@@ -93,7 +98,7 @@
     $("#plays").innerHTML=rows.length?rows.map(r=>{
       const group=risk?.groups.find(g=>g.key===C.eventKey({sport:r.sport,event:r.event,start:r.start}));
       return '<article class="card" data-play-sport="'+esc(r.key)+'"><span class="tag">'+esc(r.source)+'</span><span class="tag '+(r.review.length?"review":"recent")+'">'+esc(r.tier)+'</span><h3>'+esc(r.pick)+'</h3><p>'+esc(r.event)+'<br><small>'+esc(time(r.start))+' ET</small></p>'+numbers(r)+moveLine(r)+'<p class="quote-line"><small>'+esc(r.book)+' · quote '+esc(r.quote?elapsed(r.quote):"time not supplied")+'</small></p>'+priceDetails(r,quotes)+r.review.map(t=>'<p class="warning">'+esc(t)+'</p>').join("")+(group?'<p class="warning">Already exposed to this game: '+money(group.stake)+' across '+group.rows.length+' bet(s).</p>':"")+link(r.key,"Review odds and stake")+'</article>';
-    }).join(""):empty(S.busy?"Loading board-qualified plays…":"No current qualified plays for this date and filter. This may mean no edge, no prices, or stale/unavailable data—see Data health below.");
+    }).join(""):empty(S.busy?"Loading board-qualified plays…":"No picks meet the model’s rules for this date and filter. Use Find a game above for all NFL, NCAAF and NHL matchups and research tickets. Check Data health for missing or stale prices.");
   }
   function priceDetails(r,quotes){
     const c=window.BetPrices.compare(r,quotes);

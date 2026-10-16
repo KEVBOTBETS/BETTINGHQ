@@ -1,3 +1,4 @@
+import gzip
 import hashlib
 import json
 import math
@@ -21,12 +22,21 @@ def number(value):
     except (ValueError, TypeError): return None
 
 def read(path, default):
-    return json.loads(Path(path).read_text()) if Path(path).exists() else default
+    path = Path(path)
+    if not path.exists(): return default
+    if path.suffix == '.gz':
+        with gzip.open(path, 'rt', encoding='utf-8') as stream: return json.load(stream)
+    return json.loads(path.read_text())
 
 def write(path, data):
     path = Path(path); path.parent.mkdir(parents=True, exist_ok=True)
     temp = path.with_suffix('.tmp')
-    temp.write_text(json.dumps(data, separators=(',', ':'), allow_nan=False)+'\n')
+    if path.suffix == '.gz':
+        with gzip.open(temp, 'wt', encoding='utf-8', compresslevel=6) as stream:
+            json.dump(data, stream, separators=(',', ':'), allow_nan=False)
+            stream.write('\n')
+    else:
+        temp.write_text(json.dumps(data, separators=(',', ':'), allow_nan=False)+'\n')
     temp.replace(path)
 
 def seed(value):
