@@ -3,7 +3,7 @@ from concurrent.futures import ThreadPoolExecutor
 from datetime import datetime, timezone, timedelta
 import requests
 
-from . import espn
+from . import espn, public_availability
 from .model_accuracy import instant, number
 
 STATES = dict(x.split(':') for x in (
@@ -132,6 +132,19 @@ def enrich(games, cfg, cache, now=None):
         injuries, injury_health = parse_availability(injury_payload, season, now)
     except (requests.RequestException, ValueError):
         injuries, injury_health = {}, {'status': 'unavailable', 'checked_at': now.isoformat()}
+    teams={str(g[side]['id']):g[side] for g in current for side in ('home','away')}
+    primary_health=dict(injury_health)
+    public_health={'status':'not needed'}
+    if teams and any(tid not in injuries for tid in teams):
+        try:
+            extra,public_health=public_availability.fetch(list(teams.values()),now)
+            for tid,rows in extra.items():
+                if tid not in injuries:injuries[tid]=rows
+        except (requests.RequestException,ValueError) as exc:
+            public_health={'status':'unavailable','error':type(exc).__name__,'checked_at':now.isoformat(),'source_url':public_availability.URL}
+    injury_health.update(status='partial' if injuries else 'unavailable',current_reports=sum(map(len,injuries.values())),
+        teams_checked=len(teams),teams_with_reports=sum(tid in injuries for tid in teams),
+        sources={'ESPN':primary_health,'Covers':public_health},checked_at=now.isoformat())
     if str(cache.get('season')) != str(season):
         cache.clear()
         cache['season'] = season

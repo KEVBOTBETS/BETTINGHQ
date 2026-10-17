@@ -46,9 +46,9 @@ subprocess.run(['node','scripts/refresh-tickets.mjs'],cwd=ROOT/'projects/bet-led
 health=json.loads((ROOT/'projects/bet-ledger-hq/data/tickets/health.json').read_text())
 summary=['## Public feed health','', '| Feed | Freshness | Coverage | Notes |','| --- | --- | --- | --- |']
 for sport, feed in health.get('feeds',{}).items():
-    notes='; '.join(feed.get('warnings',[])) or 'No reported gaps'
+    notes='; '.join([*feed.get('warnings',[]),*feed.get('notes',[])]) or 'No reported gaps'
     summary.append(f"| {sport.upper()} | {feed.get('freshness','unknown')} | {feed.get('coverage','unknown')} | {notes.replace('|','/')} |")
-    if feed.get('warnings'):print(f'::warning::{sport.upper()}: {notes}')
+    if feed.get('warnings'):print(f'::warning::{sport.upper()}: '+ '; '.join(feed['warnings']))
 if os.environ.get('GITHUB_STEP_SUMMARY'):
     with open(os.environ['GITHUB_STEP_SUMMARY'],'a') as report:report.write('\n'.join(summary)+'\n')
 subprocess.run([sys.executable,'tools/build_site.py'],cwd=ROOT,check=True)

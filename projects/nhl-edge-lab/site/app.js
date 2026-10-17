@@ -66,7 +66,10 @@
     const a=data.accuracy,w=a.games?.winner||{};
     $('#accuracy-metrics').innerHTML=metric(w.n||0,'Settled forecasts','Frozen before puck drop')+metric(pct(w.accuracy),'Winner accuracy','All tracked predictions')+metric(fmt(w.brier,3),'Brier score','Lower is better')+metric(a.pending||0,'Awaiting result','Official finals only');
     $('#accuracy-list').innerHTML=table(['Matchup','Start','Frozen pick','Model probability','Final'],[...(a.records||[])].reverse().slice(0,80).map(r=>[r.away+' @ '+r.home,time(r.start),r.p_home>.5?r.home:r.away,pct(Math.max(r.p_home,1-r.p_home)),r.result?r.result.away+'–'+r.result.home:'Pending']),'Tracking begins with real pregame forecasts. No results yet.');
-    $('#source-list').innerHTML=table(['Source','Status','Observed'],Object.entries(data.meta.sources||{}).map(([k,v])=>[k,v.status,time(v.observed_at)]));
+    const coverage=data.meta.odds_health||{};
+    const sourceRows=Object.entries(data.meta.sources||{}).flatMap(([k,v])=>[[k,v.status,time(v.observed_at)],...(v.attempts||[]).map(a=>[a.url,a.status+(a.quotes!=null?' · '+a.quotes+' quotes':''),a.observed_at?time(a.observed_at):'No matched observation'])]);
+    $('#source-list').innerHTML=(coverage.window_games!=null?'<p class="note">Next 24 hours: '+esc(coverage.window_priced_games)+' of '+esc(coverage.window_games)+' games have fresh paired prices. Moneyline '+esc(coverage.window_markets?.ML||0)+' · puck line '+esc(coverage.window_markets?.ATS||0)+' · total '+esc(coverage.window_markets?.TOTAL||0)+'. '+esc(coverage.later_unpriced_games||0)+' later games have no posted prices yet.</p>':'')+table(['Source','Status','Observed'],sourceRows);
+
     renderLedger();
   }
   function table(headers,rows,empty='No data available.'){

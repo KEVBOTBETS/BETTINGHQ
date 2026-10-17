@@ -106,3 +106,9 @@ test("totals and moneyline movement",()=>{
 });
 test("accuracy passes closing-line value through",()=>assert.equal(C.accuracy("ncaaf",{accuracy:{clv:{forecasts:{spread:{n:3}}},games:{}}}).clv.forecasts.spread.n,3));
 console.log(count+" Today checks passed.");
+
+test("future unposted games are notes while near-term gaps remain warnings",()=>{
+ const meta={generated_at:stamp,odds_health:{status:"ok",upcoming_games:8,priced_games:2,window_games:2,window_priced_games:2,later_unpriced_games:6}};
+ const h=C.health("wnba",{meta},now);assert.equal(h.coverage,"complete");assert.equal(h.warnings.length,0);assert.match(h.notes[0],/6 later games/);
+ const gap=C.health("wnba",{meta:{...meta,odds_health:{...meta.odds_health,status:"partial",window_priced_games:1}}},now);assert.match(gap.warnings[0],/1 of 2 games in the next 24 hours/);
+});

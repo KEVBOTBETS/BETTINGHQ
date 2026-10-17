@@ -42,3 +42,17 @@ class WNBARegressionTests(unittest.TestCase):
                 (state/'games_2026.json').write_text(json.dumps({'games':[]}))
                 later = build.build('2026-09-07', offline=True)
                 self.assertEqual(later['results.json'],output['results.json'])
+
+class PriceWindowCoverageTests(unittest.TestCase):
+    def test_later_unposted_games_and_stale_prices_remain_distinct(self):
+        from datetime import datetime,timezone
+        from pipeline.build import odds_coverage
+        now=datetime(2026,10,17,15,tzinfo=timezone.utc)
+        g={'status':'pre','tipoff':'2026-10-17T19:00:00Z','odds':{'book':'Book','fetched_at':now.isoformat(),'quotes':{'away_ml':{'price':110},'home_ml':{'price':-130}}}}
+        later={**g,'tipoff':'2026-10-20T19:00:00Z','odds':None}
+        report=odds_coverage([g,later],now)
+        self.assertEqual(report['status'],'ok');self.assertEqual(report['later_unpriced_games'],1);self.assertEqual(report['window_games'],1)
+        g['odds']['fetched_at']='2026-10-16T15:00:00Z'
+        self.assertEqual(odds_coverage([g,later],now)['window_priced_games'],0)
+        g['odds']['fetched_at']=now.isoformat();g['odds']['quotes']['away_ml']['price']=True
+        self.assertEqual(odds_coverage([g],now)['window_priced_games'],0)

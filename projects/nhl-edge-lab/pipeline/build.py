@@ -97,6 +97,19 @@ def normalize(event,stamp):
           side+'_record':next((r.get('summary') for r in row.get('records',[]) if r.get('type')=='total'),None)})
     return g
 
+def odds_coverage(games,now):
+    rows=[g for g in games if g.get('state')=='pre' and instant(g.get('date')) and instant(g['date'])>now]
+    near=[g for g in rows if instant(g['date'])<=now+timedelta(hours=24)]
+    markets={g['game_id']:public_odds.covered_markets(g,now) for g in rows}
+    priced=sum(bool(markets[g['game_id']]) for g in near)
+    complete=sum(markets[g['game_id']]=={'ML','ATS','TOTAL'} for g in near)
+    return {'status':'waiting' if not near else 'ok' if complete==len(near) else 'partial',
+        'upcoming_games':len(rows),'priced_games':sum(bool(v) for v in markets.values()),
+        'window_hours':24,'window_games':len(near),'window_priced_games':priced,'window_complete_games':complete,
+        'window_markets':{m:sum(m in markets[g['game_id']] for g in near) for m in ('ML','ATS','TOTAL')},
+        'later_games':len(rows)-len(near),'later_unpriced_games':sum(not markets[g['game_id']] for g in rows if g not in near),
+        'missing_games':[{'game_id':g['game_id'],'matchup':g['away']+' @ '+g['home'],'start':g['date'],'missing_markets':sorted({'ML','ATS','TOTAL'}-markets[g['game_id']])} for g in near if markets[g['game_id']]!={'ML','ATS','TOTAL'}]}
+
 def main():
     now=datetime.now(timezone.utc);stamp=now.isoformat();today=now.astimezone(TORONTO).date()
     STATE.mkdir(exist_ok=True);OUT.mkdir(exist_ok=True)
@@ -199,16 +212,21 @@ def main():
                     existing['nhl_game_id']=g['nhl_game_id']
                     if not existing['quotes']:existing['quotes']=g['quotes']
                 else:games[g['game_id']]=g
-    upcoming_for_prices=[g for g in games.values() if g['state']=='pre' and instant(g['date'])>now]
-    if any(not g['quotes'] for g in upcoming_for_prices):
-        try:
-            offers=public_odds.fetch(upcoming_for_prices,now)
-            for game_id,quote in offers:
-                existing=games[game_id]['quotes']
-                if not any((q['market'],q['side'],q.get('line'),q['book'])==(quote['market'],quote['side'],quote.get('line'),quote['book']) for q in existing):existing.append(quote)
-            health['public-book-odds']={'status':'ok' if offers else 'no matched prices','observed_at':stamp,'url':offers[0][1]['source_url'] if offers else public_odds.URL,'quotes':len(offers)}
-        except (OSError,ValueError) as exc:
-            health['public-book-odds']={'status':'unavailable','observed_at':None,'url':public_odds.URL,'error':type(exc).__name__}
+    upcoming_for_prices=[g for g in games.values() if g['state']=='pre' and instant(g['date']) and now<instant(g['date'])<=now+timedelta(hours=48)]
+    if any(public_odds.covered_markets(g,now)!={'ML','ATS','TOTAL'} for g in upcoming_for_prices):
+        attempts=[]
+        offers=public_odds.fetch(upcoming_for_prices,now,health=attempts)
+        for game_id,quote in offers:
+            existing=games[game_id]['quotes']
+            key=lambda q:(q['market'],q['side'],q.get('line'),q['book'])
+            # The parser supplies both sides together; replace an older identical
+            # contract rather than letting stale primary prices block the fallback.
+            old=next((q for q in existing if key(q)==key(quote)),None)
+            if old and instant(old.get('observed_at')) and instant(old['observed_at'])>=instant(quote['observed_at']):continue
+            existing[:]=[q for q in existing if key(q)!=key(quote)]
+            existing.append(quote)
+        health['public-book-odds']={'status':'ok' if offers else 'unavailable' if attempts and all(a['status']=='unavailable' for a in attempts) else 'no matched prices',
+            'observed_at':max((q['observed_at'] for _,q in offers),default=None),'url':public_odds.URL,'quotes':len(offers),'attempts':attempts}
     board=[];ordered=sorted(games.values(),key=lambda g:g['date'])
     for g in ordered:
         for side in ('home','away'):
@@ -260,8 +278,7 @@ def main():
     upcoming=[g for g in ordered if instant(g['date'])>now and g['state']=='pre']
     meta={'generated_at':stamp,'model_version':VERSION,'season':season,'timezone':'America/Toronto','max_odds_age_hours':1.5,
       'challenger':{'version':challenger.VERSION,'mode':'shadow-only','promotion_enabled':False,'features':['shots','special teams','confirmed goalie performance','shrunk OT/SO outcomes']},
-      'source_status':'partial' if any(v['status']=='unavailable' for v in health.values()) else 'live-data','schedule_source':'ESPN + NHL' if espn_ok else 'NHL fallback','sources':health,'odds_health':{'status':'ok' if all(g['quotes'] for g in upcoming) else 'partial',
-       'upcoming_games':len(upcoming),'priced_games':sum(bool(g['quotes']) for g in upcoming)},
+      'source_status':'partial' if any(v['status']=='unavailable' for v in health.values()) else 'live-data','schedule_source':'ESPN + NHL' if espn_ok else 'NHL fallback','sources':health,'odds_health':odds_coverage(upcoming,now),
       'counts':{'games':len(upcoming),'qualified':sum(not r['held'] for r in board),'teams':len(teams)},
       'settings':{'tiers':{'lean':.03,'good':.05,'best':.08}},'limitations':[
        'Uncalibrated goal-rate model; probabilities are estimates, not measured confidence.',

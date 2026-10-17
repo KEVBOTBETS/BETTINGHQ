@@ -13,7 +13,7 @@ from .model import instant, number
 
 URL='https://www.covers.com/sport/hockey/nhl/odds'
 TORONTO=ZoneInfo('America/Toronto')
-CODES={'CLB':'CBJ','NAS':'NSH','MON':'MTL','CAL':'CGY','VEG':'VGK','UTAH':'UTA','WIN':'WPG','NJ':'NJD','SJ':'SJS','TB':'TBL','LA':'LAK'}
+CODES={'CLB':'CBJ','NAS':'NSH','MON':'MTL','CAL':'CGY','VEG':'VGK','UTAH':'UTA','WIN':'WPG','NJ':'NJD','SJ':'SJS','TB':'TBL','LA':'LAK','LV':'VGK'}
 def code(v):return CODES.get(v,v)
 
 class Node:
@@ -48,7 +48,15 @@ def signed(value):
 def start_time(text,now):
     text=' '.join(text.replace('\xa0',' ').split())
     match=re.fullmatch(r'(Today|Tomorrow),?\s+(\d{1,2}):(\d{2})',text,re.I)
-    if not match:return None
+    if not match:
+        dated=re.fullmatch(r'([A-Za-z]{3}) (\d{1,2}),?\s+(\d{1,2}):(\d{2})',text)
+        if not dated:return None
+        for year in (now.year-1,now.year,now.year+1):
+            try:
+                value=datetime.strptime(f'{year} {dated[1]} {dated[2]} {dated[3]}:{dated[4]}','%Y %b %d %H:%M').replace(tzinfo=TORONTO)
+                if abs((value-now).total_seconds())<30*86400:return value
+            except ValueError:pass
+        return None
     day=now.astimezone(TORONTO).date()+timedelta(days=match[1].lower()=='tomorrow')
     try:return datetime(day.year,day.month,day.day,int(match[2]),int(match[3]),tzinfo=TORONTO)
     except ValueError:return None
@@ -64,6 +72,7 @@ def parse(html,games,now):
         market={'moneyline-table':'ML','spread-table':'ATS','total-table':'TOTAL'}.get(table.attrs.get('id'))
         if not market:continue
         for row in table.find('tr','oddsGameRow'):
+            if row.attrs.get('hidden') is not None or re.search(r'display\s*:\s*none',row.attrs.get('style',''),re.I):continue
             team_nodes=row.find(cls='teams-div');times=row.find(cls='game-time')
             if len(team_nodes)!=1 or len(times)!=1:continue
             names={}
@@ -111,27 +120,49 @@ VEGAS_URL='https://www.vegasinsider.com/nhl/odds/las-vegas/'
 BOOK_NAMES={'Bet365':'bet365','BetMGM':'BetMGM','DraftKings':'DraftKings','Caesars':'Caesars Odds','FanDuel':'FanDuel','HardRock':'Hard Rock Bet','Fanatics':'Fanatics Sportsbook','RiversCasino':'BetRivers'}
 def name(value):return unicodedata.normalize('NFKD',value or '').encode('ascii','ignore').decode().lower()
 
+SCORES_URL='https://www.scoresandodds.com/nhl/odds'
+SCORES_TEAMS=dict(x.split(':') for x in 'ducks:ANA|bruins:BOS|sabres:BUF|flames:CGY|hurricanes:CAR|blackhawks:CHI|avalanche:COL|blue-jackets:CBJ|stars:DAL|red-wings:DET|oilers:EDM|panthers:FLA|kings:LAK|wild:MIN|canadiens:MTL|predators:NSH|devils:NJD|islanders:NYI|rangers:NYR|senators:OTT|flyers:PHI|penguins:PIT|sharks:SJS|kraken:SEA|blues:STL|lightning:TBL|maple-leafs:TOR|mammoth:UTA|canucks:VAN|golden-knights:VGK|capitals:WSH|jets:WPG'.split('|'))
+SCORES_BOOKS={'bet365':'bet365','betmgm':'BetMGM','draftkings':'DraftKings','caesars':'Caesars Odds','fanduel':'FanDuel','fanatics':'Fanatics Sportsbook','betrivers':'BetRivers','hardrock':'Hard Rock Bet'}
+
 def parse_vegas(html,games,now):
+    return parse_grid(html,games,now)
+
+def parse_scores(html,games,now):
+    return parse_grid(html,games,now,scores=True)
+
+def parse_grid(html,games,now,scores=False):
     tree=Tree();tree.feed(html);result={}
     for table in tree.root.find('table'):
         heads=table.find('thead')
         if not heads:continue
-        columns=heads[0].find('th','book-pinup')
-        books=[BOOK_NAMES.get(n.text()) for n in columns]
+        columns=heads[0].find('th','book-logo' if scores else 'book-pinup')
+        books=[SCORES_BOOKS.get(n.find('img')[0].attrs.get('alt','').lower()) if scores and len(n.find('img'))==1 else BOOK_NAMES.get(n.text()) if not scores else None for n in columns]
         for body in table.find('tbody'):
             market={'odds-table-moneyline--0':'ML','odds-table-spread--0':'ATS','odds-table-total--0':'TOTAL'}.get(body.attrs.get('id'))
             if not market:continue
             start=None;pair=[]
             for row in body.find('tr'):
-                times=[n for n in row.find('span') if n.attrs.get('data-role')=='localtime']
+                if row.attrs.get('hidden') is not None or re.search(r'display\s*:\s*none',row.attrs.get('style',''),re.I):continue
+                times=[n for n in row.find() if n.attrs.get('data-role')=='localtime']
                 if times:
-                    start=instant(times[0].attrs.get('data-value'));pair=[];continue
+                    start=instant(times[0].attrs.get('data-value'));pair=[]
                 cells=[n for n in row.children if isinstance(n,Node) and n.tag=='td']
-                if not cells or not cells[0].has('game-team') or not start or start<=now:continue
-                images=cells[0].find('img');team=name(images[0].attrs.get('alt')) if images else ''
-                pair.append((team,cells[1:]))
+                indices=[i for i,c in enumerate(cells) if c.has('game-team')]
+                if len(indices)!=1 or not start or start<=now:continue
+                i=indices[0];images=cells[i].find('img')
+                if scores:
+                    logo=images[0].attrs.get('data-src','') if len(images)==1 else ''
+                    match=re.fullmatch(r'https://static\.sprtactn\.co/teamlogos/nhl/100/([a-z]+)\.png',logo)
+                    logo_team=code(match[1].upper()) if match and match[1]!='tbd' else ''
+                    links=[n.attrs.get('href','').split('/')[-1] for n in cells[i].find('a') if re.fullmatch(r'/nhl/teams/[a-z-]+',n.attrs.get('href',''))]
+                    teams={SCORES_TEAMS[v] for v in links if v in SCORES_TEAMS}
+                    team=next(iter(teams)) if len(teams)==1 else logo_team
+                    if teams and logo_team and logo_team!=team:pair=[];continue
+                else:team=name(images[0].attrs.get('alt')) if images else ''
+                if not team:pair=[];continue
+                pair.append((team,cells[i+1:]))
                 if len(pair)!=2:continue
-                matches=[g for g in games if g.get('state')=='pre' and instant(g.get('date'))==start and all(name(g.get(side+'_name'))==pair[i][0] for i,side in enumerate(('away','home')))]
+                matches=[g for g in games if g.get('state')=='pre' and instant(g.get('date'))==start and all((code(g.get(side)) if scores else name(g.get(side+'_name')))==pair[i][0] for i,side in enumerate(('away','home')))]
                 if len(matches)!=1:pair=[];continue
                 g=matches[0]
                 for col,book in enumerate(books):
@@ -140,7 +171,7 @@ def parse_vegas(html,games,now):
                     for i,(_,cells) in enumerate(pair):
                         cell=cells[col]
                         if market=='ML':
-                            nodes=cell.find('span','data-moneyline');price=signed(nodes[0].text()) if len(nodes)==1 else None
+                            nodes=cell.find('span','data-value' if scores else 'data-moneyline');price=signed(nodes[0].text()) if len(nodes)==1 else None
                             side=('away','home')[i];line=None
                         else:
                             nodes=cell.find('span','data-value');anchors=cell.find('a')
@@ -161,7 +192,7 @@ def parse_vegas(html,games,now):
                     if market=='ATS' and values[0]['line']!=-values[1]['line']:continue
                     if market=='TOTAL' and (values[0]['line']!=values[1]['line'] or {v['side'] for v in values}!={'over','under'}):continue
                     for i,q in enumerate(values):
-                        q.update(market=market,book=book,opposite_price=values[1-i]['price'],observed_at=now.isoformat(),open_price=None,source='VegasInsider public book comparison',source_url=VEGAS_URL)
+                        q.update(market=market,book=book,opposite_price=values[1-i]['price'],observed_at=now.isoformat(),open_price=None,source='ScoresAndOdds public book comparison' if scores else 'VegasInsider public book comparison',source_url=SCORES_URL if scores else VEGAS_URL)
                         result[(g['game_id'],market,q['side'],q['line'],book)]=(g['game_id'],q)
                 pair=[]
     return list(result.values())
@@ -175,10 +206,44 @@ def download(url):
     if re.search(r'access denied|verify that you are human|captcha',html[:10000],re.I):raise ValueError('Public odds access unavailable')
     return html
 
-def fetch(games,now):
-    for url,parser in ((URL,parse),(VEGAS_URL,parse_vegas)):
+def covered_markets(game,now):
+    groups={}
+    for q in game.get('quotes',[]):
+        at=instant(q.get('observed_at'))
+        if not at or not -300<=(now-at).total_seconds()<=90*60 or number(q.get('price')) is None or abs(number(q.get('price')))<100:continue
+        key=(q.get('market'),q.get('book'),q.get('observed_at'))
+        groups.setdefault(key,[]).append(q)
+    covered=set()
+    for (market,book,_),rows in groups.items():
+        if not book:continue
+        for a in rows:
+            for b in rows:
+                if a is b or a.get('opposite_price')!=b.get('price') or b.get('opposite_price')!=a.get('price'):continue
+                if market in ('ML','ATS') and {a.get('side'),b.get('side')}!={'home','away'}:continue
+                if market=='TOTAL' and {a.get('side'),b.get('side')}!={'over','under'}:continue
+                if market=='ATS' and (number(a.get('line')) is None or number(b.get('line')) is None or abs(number(a['line'])+number(b['line']))>1e-8):continue
+                if market=='TOTAL' and (number(a.get('line')) is None or a.get('line')!=b.get('line')):continue
+                if market in ('ML','ATS','TOTAL'):covered.add(market)
+    return covered
+
+def fetch(games,now,health=None):
+    health=health if health is not None else []
+    working=[{**g,'quotes':list(g.get('quotes',[]))} for g in games]
+    result={}
+    for url,parser in ((URL,parse),(VEGAS_URL,parse_vegas),(SCORES_URL,parse_scores)):
+        targets=[g for g in working if covered_markets(g,now)!={'ML','ATS','TOTAL'}]
+        if not targets:break
+        check={'url':url,'checked_at':now.isoformat(),'observed_at':None}
         try:
-            rows=parser(download(url),games,now)
-            if rows:return rows
-        except (OSError,ValueError):continue
-    return []
+            rows=parser(download(url),targets,now)
+            check.update(status='ok' if rows else 'no matched prices',quotes=len(rows),matched_games=len({gid for gid,_ in rows}))
+            if rows:check['observed_at']=max(q['observed_at'] for _,q in rows)
+            for gid,q in rows:
+                key=(gid,q['market'],q['side'],q.get('line'),q['book'])
+                # Earlier source wins for the same book/contract; never mix sides.
+                if key not in result:result[key]=(gid,q)
+            for g in working:
+                g['quotes']=list(g.get('quotes',[]))+[q for gid,q in rows if gid==g['game_id']]
+        except (OSError,ValueError) as exc:check.update(status='unavailable',error=type(exc).__name__)
+        health.append(check)
+    return list(result.values())

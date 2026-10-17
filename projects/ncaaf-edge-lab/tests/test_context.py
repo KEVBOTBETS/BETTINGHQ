@@ -166,3 +166,30 @@ class PublicRefreshTests(unittest.TestCase):
             spec.return_value.loader.exec_module.return_value=None
             with self.assertRaises(ReachedPublicOdds):build.main()
             module.return_value.enrich.assert_called_once_with([game],'ncaaf',publish=False)
+
+class PublicAvailabilityFallbackTests(unittest.TestCase):
+    def page(self,date='Oct 16',title='Oct 17, 2026',team='Alabama Crimson Tide'):
+        return '<title>College Football - Full Injury Report for '+title+'</title><section><div class="covers-CoversMatchups-teamName">'+team+'</div><table><tr><td>J. Player</td><td>QB</td><td><b>Questionable - Head</b>(Fri, '+date+')</td><td><a href="#injuryCollapseOne"></a></td></tr><tr id="injuryCollapseOne"><td colspan="4">Listed as questionable; starter unconfirmed.</td></tr></table></section>'
+    def test_exact_team_dated_source_and_conservative_precision(self):
+        from pipeline import public_availability as P
+        now=datetime(2026,10,17,15,tzinfo=timezone.utc)
+        rows,health=P.parse(self.page(),[{'id':'333','name':'Alabama Crimson Tide'}],now)
+        self.assertEqual(health['status'],'partial');r=rows['333'][0]
+        self.assertEqual(r['reported_at'],'2026-10-16T04:00:00+00:00');self.assertEqual(r['report_time_precision'],'date')
+        self.assertEqual(r['source'],'Covers');self.assertTrue(r['name_abbreviated']);self.assertNotIn('confirmed',r)
+        self.assertEqual(r['detail'],'Listed as questionable; starter unconfirmed.')
+        for text in [self.page(date='Oct 10'),self.page(date='Oct 18'),self.page(title='Oct 10, 2026'),self.page(team='Alabama State Hornets')]:
+            self.assertEqual(P.parse(text,[{'id':'333','name':'Alabama Crimson Tide'}],now)[0],{})
+        self.assertEqual(P.parse(self.page(),[{'id':'1','name':'Alabama Crimson Tide'},{'id':'2','name':'Alabama Crimson Tide'}],now)[0],{})
+    def test_recent_report_on_one_team_does_not_confirm_opponent(self):
+        from unittest.mock import patch
+        from pipeline import public_availability as P
+        now=datetime(2026,10,17,15,tzinfo=timezone.utc)
+        g={'date_utc':'2026-10-17T19:00:00Z','indoor':True,'home':{'id':'333','name':'Alabama Crimson Tide'},'away':{'id':'2','name':'Opponent'}}
+        rows,health=P.parse(self.page(),[g['home'],g['away']],now)
+        with patch.object(C,'get_json',return_value={'season':{'year':2026}}),patch.object(P,'fetch',return_value=(rows,health)):
+            result=C.enrich([g],{'season':2026},{'season':2026,'conferences_checked_at':now.isoformat()},now)
+        self.assertEqual(g['context']['availability']['status'],'partial');self.assertEqual(g['context']['availability']['reports']['away'],[])
+        self.assertEqual(result['availability']['teams_with_reports'],1);self.assertEqual(result['availability']['teams_checked'],2)
+        self.assertIn('Recent QB report',g['context']['review_flags'][0])
+        self.assertFalse(result['scoring_adjustments'])

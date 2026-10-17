@@ -25,8 +25,11 @@ BUILD_DATE="2026-08-23" \
 BUILD_DAYS="3" \
 MLB_BUILD_ATTEMPTS="2" \
 MLB_BUILD_RETRY_SECONDS="0" \
-  bash "${repo_root}/scripts/run_build.sh"
+  bash "${repo_root}/scripts/run_build.sh" > "${tmp_dir}/retry-output.log" 2>&1
 
+# The synthetic failure must still exercise the production warning, while its
+# captured text must not become a real GitHub Actions annotation.
+grep -q '::warning::Slate build exited 1; retrying in 0 seconds' "${tmp_dir}/retry-output.log"
 mapfile -t calls < "${RUNNER_TEST_LOG}"
 expected="-u -m pipeline.build --date 2026-08-23 --days 3"
 [[ "${#calls[@]}" -eq 2 ]]

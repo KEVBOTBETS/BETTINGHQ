@@ -56,14 +56,21 @@
       if((meta.source_by_provider?.the_odds_api?.eligible_priced_quotes||0)===0&&(meta.source_by_provider?.odds_api_io?.eligible_priced_quotes||0)>0)warnings.push("Using the configured fallback odds provider.");
       if(!(meta.counts?.eligible_priced_quotes>0))warnings.push("No verified prop prices; projections are not wagers.");
     }
-    if(meta.source_status==="partial"||Object.values(meta.sources||{}).some(s=>s?.status==="unavailable"))warnings.push("Some source feeds are unavailable; fresh publication does not mean complete coverage.");
-    if(meta.odds_health?.status==="partial")warnings.push("Some games have no usable prices; those games cannot qualify.");
+    if(meta.source_status==="partial"||Object.values(meta.sources||{}).some(s=>s?.status==="unavailable"))warnings.push(key==="nhl"&&meta.schedule_source==="NHL fallback"?"Some source feeds are unavailable. The official NHL schedule fallback is active; optional news and injury coverage may be incomplete.":"Some source feeds are unavailable; fresh publication does not mean complete coverage.");
+    const odds=meta.odds_health||{};
+    if(odds.window_games!=null){
+      const n=number(odds.window_games)||0,p=number(odds.window_priced_games)||0;
+      if(p<n)warnings.push((n-p)+" of "+n+" games in the next 24 hours have no verified prices; those games cannot qualify.");
+      else if(odds.status==="partial")warnings.push("Some markets in the next 24 hours have no verified two-sided prices; check game details.");
+    }else if(odds.status==="partial")warnings.push("Some games have no usable prices; those games cannot qualify.");
     if(number(meta.odds_health?.upcoming_games)>0&&number(meta.odds_health?.priced_games)===0)warnings.push("No upcoming games have verified prices; projections are research only.");
     if(key==="ncaaf"){
-      if(meta.context_health?.availability?.status!=="available")warnings.push("Availability reports missing or incomplete; verify team news.");
+      if(meta.context_health?.availability?.status!=="available")warnings.push(meta.context_health?.availability?.teams_checked!=null?"Availability reports are partial: "+(meta.context_health.availability.teams_with_reports||0)+" of "+meta.context_health.availability.teams_checked+" teams have recent reports. Verify team news; silence does not confirm availability.":"Availability reports missing or incomplete; verify team news.");
     }
     if(meta.odds_health?.healthy===false||["failed","unavailable","error"].includes(meta.odds_health?.status))warnings.push("Odds coverage needs attention.");
-    return {key,label:LABELS[key],stamp:stamp||null,age,freshness:age.status,coverage:warnings.length?"review":"complete",status:bundle.error?"unavailable":age.status==="stale"?"stale":warnings.length?"review":"recent",warnings};
+    const notes=[];
+    if(number(odds.later_unpriced_games)>0)notes.push(odds.later_unpriced_games+" later games have no posted prices yet; these are outside the next 24 hours.");
+    return {key,label:LABELS[key],stamp:stamp||null,notes,age,freshness:age.status,coverage:warnings.length?"review":"complete",status:bundle.error?"unavailable":age.status==="stale"?"stale":warnings.length?"review":"recent",warnings};
   }
   function plays(key,bundle,now=Date.now(),options={}){
     const rows=[],meta=bundle.meta||{},published=meta.generated_at||bundle.slate?.generated_at;

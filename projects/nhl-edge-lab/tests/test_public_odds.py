@@ -36,5 +36,40 @@ class VegasFallback(unittest.TestCase):
   game={**GAME,'home_name':'Boston Bruins','away_name':'Philadelphia Flyers'}
   rows=parse_vegas(html,[game],NOW);self.assertEqual(len(rows),2);self.assertEqual(rows[0][1]['price'],115);self.assertEqual(rows[0][1]['opposite_price'],-135);self.assertEqual(rows[0][1]['book'],'DraftKings')
   self.assertEqual(parse_vegas(html,[{**game,'date':'2026-10-11T17:00Z'}],NOW),[])
-  with patch('pipeline.public_odds.download',side_effect=[OSError('Unavailable'),html]) as read:
+  with patch('pipeline.public_odds.download',side_effect=[OSError('Unavailable'),html,'']) as read:
    self.assertEqual(len(fetch([game],NOW)),2);self.assertEqual(read.call_args_list[1].args[0],VEGAS_URL)
+
+class CoverageFallbackTests(unittest.TestCase):
+ def test_partial_first_source_still_reads_next_source(self):
+  from pipeline.public_odds import parse_scores,SCORES_URL
+  ml=page('moneyline',cell('DraftKings',quote('+115'),quote('-135')))
+  health=[]
+  with patch('pipeline.public_odds.download',side_effect=[ml,'','']) as download:
+   self.assertEqual(len(fetch([GAME],NOW,health)),2)
+   self.assertEqual([c.args[0] for c in download.call_args_list],[URL,VEGAS_URL,SCORES_URL])
+   self.assertEqual(health[0]['matched_games'],1)
+ def test_covers_hidden_rows_and_explicit_dates(self):
+  from pipeline.public_odds import start_time
+  html=page('moneyline',cell('DraftKings',quote('+115'),quote('-135')))
+  self.assertEqual(parse(html.replace('class="oddsGameRow"','class="oddsGameRow" style="display: none"'),[GAME],NOW),[])
+  self.assertEqual(start_time('Oct 10, 13:00',NOW).isoformat(),'2026-10-10T13:00:00-04:00')
+ def test_scores_exact_book_pairs_and_market_semantics(self):
+  from pipeline.public_odds import parse_scores
+  def fixture(market,left,right):
+   return '<table><thead><tr><th class="book-logo"><img alt="DraftKings"></th></tr></thead><tbody id="odds-table-'+market+'--0">'+''.join('<tr>'+('<td class="game-time"><a data-role="localtime" data-value="2026-10-10T17:00:00Z"></a></td>' if i==0 else '')+'<td class="game-team"><img data-src="https://static.sprtactn.co/teamlogos/nhl/100/'+team+'.png"></td><td><a>'+v+'</a></td></tr>' for i,(team,v) in enumerate([('phi',left),('bos',right)]))+'</tbody></table>'
+  val=lambda x:'<span class="data-value">'+x+'</span>'
+  price=lambda x:'<small class="data-odds">'+x+'</small>'
+  html=fixture('moneyline',val('+115'),val('-135'))
+  rows=parse_scores(html,[GAME],NOW);self.assertEqual(len(rows),2);self.assertEqual(rows[0][1]['book'],'DraftKings');self.assertEqual(rows[0][1]['opposite_price'],-135)
+  self.assertEqual(parse_scores(html,[{**GAME,'date':'2026-10-11T17:00Z'}],NOW),[])
+  self.assertEqual(parse_scores(html.replace('alt="DraftKings"','alt="Consensus"'),[GAME],NOW),[])
+  self.assertEqual(parse_scores(fixture('spread',val('+1.5')+price('-150'),val('-2.5')+price('+130')),[GAME],NOW),[])
+  rows=parse_scores(fixture('total',val('o6.5')+price('-110'),val('u6.5')+price('-110')),[GAME],NOW);self.assertEqual({r[1]['side'] for r in rows},{'over','under'})
+ def test_later_games_do_not_create_game_day_price_warning(self):
+  from pipeline.build import odds_coverage
+  rows=parse(page('moneyline',cell('DraftKings',quote('+115'),quote('-135'))),[GAME],NOW)
+  g={**GAME,'quotes':[q for _,q in rows]}
+  future={**g,'game_id':'later','date':'2026-10-14T17:00:00Z','quotes':[]}
+  report=odds_coverage([g,future],NOW)
+  self.assertEqual(report['window_games'],1);self.assertEqual(report['window_priced_games'],1);self.assertEqual(report['later_unpriced_games'],1)
+  self.assertEqual(report['window_markets'],{'ML':1,'ATS':0,'TOTAL':0})

@@ -68,7 +68,7 @@ class NHLSourcesTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as temp:
             state, out = Path(temp)/'state', Path(temp)/'data'; out.mkdir()
             (out/'games.json').write_text(json.dumps([{'game_id': '401234', 'home': 'TOR', 'away': 'MTL', 'date': GAME['startTimeUTC']}]))
-            with patch.object(build, 'STATE', state), patch.object(build, 'OUT', out), patch.object(build, 'fetch', fetch), patch.object(build, 'datetime', FrozenDateTime): build.main()
+            with patch.object(build, 'STATE', state), patch.object(build, 'OUT', out), patch.object(build, 'fetch', fetch), patch.object(build, 'datetime', FrozenDateTime), patch.object(build.public_odds,'fetch',return_value=[]): build.main()
             meta = json.loads((out/'meta.json').read_text()); games = json.loads((out/'games.json').read_text()); board = json.loads((out/'board.json').read_text())
             self.assertEqual(meta['schedule_source'], 'NHL fallback'); self.assertEqual(meta['generated_at'], STAMP)
             self.assertEqual(meta['sources']['scoreboard']['status'], 'unavailable')

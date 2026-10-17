@@ -99,6 +99,34 @@ def settlement_results(previous: list[dict], games: list[dict]) -> list[dict]:
     return sorted(by_id.values(), key=lambda game: (game["date"], str(game["game_id"])))
 
 
+def odds_coverage(games,now):
+    import math
+    def instant(value):
+        try:
+            at=datetime.fromisoformat(str(value).replace('Z','+00:00'))
+            return at if at.tzinfo else None
+        except ValueError:return None
+    def priced(g):
+        odds=g.get('odds') or {};at=instant(odds.get('fetched_at'))
+        if not at or not -300<=(now-at).total_seconds()<=6*3600:return False
+        quotes=odds.get('quotes') or {}
+        for left,right in [('away_ml','home_ml'),('away_spread','home_spread'),('over','under')]:
+            a,b=quotes.get(left) or {},quotes.get(right) or {}
+            prices=[a.get('price'),b.get('price')]
+            if not all(isinstance(v,(int,float)) and not isinstance(v,bool) and math.isfinite(v) and abs(v)>=100 for v in prices):continue
+            if (a.get('book') or odds.get('book'))!=(b.get('book') or odds.get('book')) or not (a.get('book') or odds.get('book')):continue
+            if left=='away_spread' and (a.get('line') is None or b.get('line') is None or a['line']!=-b['line']):continue
+            if left=='over' and (a.get('line') is None or a['line']!=b.get('line')):continue
+            return True
+        return False
+    rows=[g for g in games if g.get('status')=='pre' and instant(g.get('tipoff')) and instant(g['tipoff'])>now]
+    near=[g for g in rows if instant(g['tipoff'])<=now+timedelta(hours=24)]
+    count=sum(priced(g) for g in near)
+    return {'status':'waiting' if not near else 'ok' if count==len(near) else 'partial',
+        'upcoming_games':len(rows),'priced_games':sum(priced(g) for g in rows),'window_hours':24,
+        'window_games':len(near),'window_priced_games':count,'later_games':len(rows)-len(near),
+        'later_unpriced_games':sum(not priced(g) for g in rows if g not in near),'provider':'ESPN public feed / DraftKings'}
+
 def build(target_date: str | None = None, days: int | None = None, offline: bool = False) -> dict:
     cfg = read_json(ROOT / "config" / "settings.json", {})
     season = int(cfg.get("season") or datetime.now(ET).year)
@@ -242,12 +270,7 @@ def build(target_date: str | None = None, days: int | None = None, offline: bool
         "live_data": bool(all_games),
         "key_required": False,
         "errors": errors,
-        "odds_health": {
-            "status": "ok" if upcoming_games and priced_games == upcoming_games else "partial" if priced_games else "waiting",
-            "upcoming_games": upcoming_games,
-            "priced_games": priced_games,
-            "provider": "ESPN public feed / DraftKings",
-        },
+        "odds_health": odds_coverage(published_games,datetime.now(timezone.utc)),
         "calibration": calibration,
     }
     summary = {

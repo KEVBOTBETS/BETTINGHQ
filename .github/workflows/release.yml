@@ -36,7 +36,7 @@ jobs:
     concurrency:
       group: ${{ github.event_name == 'pull_request' && format('kevbot-pr-{0}', github.event.pull_request.number) || 'kevbot-refresh' }}
       cancel-in-progress: false
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 55
     permissions:
       contents: write
@@ -182,7 +182,7 @@ jobs:
       cancel-in-progress: true
     if: github.event_name != 'pull_request' && needs.build.outputs.publish == 'true'
     needs: build
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     permissions:
       pages: write
       id-token: write
