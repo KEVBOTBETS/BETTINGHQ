@@ -160,13 +160,13 @@
     "accuracy": {
       "generated_at": "2026-10-17T01:11:20.854786+00:00"
     },
-    "lastGoodAt": "2026-10-17T03:03:30.952Z"
+    "lastGoodAt": "2026-10-17T03:31:10.238Z"
   },
   "ladder": {
     "accuracy": {
       "generated_at": "2026-10-17T01:11:36.633538+00:00"
     },
-    "lastGoodAt": "2026-10-17T03:03:30.952Z"
+    "lastGoodAt": "2026-10-17T03:31:10.238Z"
   },
   "props": {
     "meta": {
@@ -11061,12 +11061,9 @@
         "roster_verified": true
       }
     ],
-    "lastGoodAt": "2026-10-17T03:03:30.952Z"
+    "lastGoodAt": "2026-10-17T03:31:10.238Z"
   },
   "nfl": {
-    "accuracy": {
-      "generated_at": "2026-10-17T01:09:16.726367+00:00"
-    },
     "meta": {
       "generated_at": "2026-10-17T01:09:16+00:00",
       "season": 2026,
@@ -20809,6 +20806,9 @@
         "all_preseason": false
       }
     },
+    "accuracy": {
+      "generated_at": "2026-10-17T01:09:16.726367+00:00"
+    },
     "board": [
       {
         "season_type": 2,
@@ -27211,7 +27211,7 @@
         "odds_observed_at": "2026-10-17T01:06:09.550086+00:00"
       }
     ],
-    "lastGoodAt": "2026-10-17T03:03:30.952Z"
+    "lastGoodAt": "2026-10-17T03:31:10.238Z"
   },
   "ncaaf": {
     "meta": {
@@ -27893,8 +27893,8 @@
       },
       "board_diagnosis": {
         "priced_lines": 432,
-        "qualified": 2,
-        "headline": "2 play(s) cleared model and price stress checks",
+        "qualified": 0,
+        "headline": "0 play(s) cleared model and price stress checks",
         "reasons": {
           "CIT isn't a full FBS participant this season — model doesn't rate them reliably": 4,
           "CHSO isn't a full FBS participant this season — model doesn't rate them reliably": 4,
@@ -27903,7 +27903,7 @@
           "outside the top 10 plays for this week": 6,
           "edge below the tier threshold": 378,
           "price outside the hard safety range": 16,
-          "Additional price stress failures": 14
+          "Additional price stress failures": 16
         },
         "window": {
           "confidence": 0.75,
@@ -28311,7 +28311,7 @@
         "version": "price-stress-v1",
         "reserve": 0.03,
         "minReturn": 0.02,
-        "qualified": 2,
+        "qualified": 0,
         "source_qualified": 16,
         "note": "Additional price sensitivity gate. Original model counts retained in source_counts; not a confidence interval."
       },
@@ -28395,7 +28395,7 @@
     "board": [
       {
         "season_type": 2,
-        "tier": "GOOD",
+        "tier": "PASS",
         "odds_verified": true,
         "game_date": "2026-10-17T19:30Z",
         "game_id": "401866478",
@@ -28433,7 +28433,7 @@
       },
       {
         "season_type": 2,
-        "tier": "GOOD",
+        "tier": "PASS",
         "odds_verified": true,
         "game_date": "2026-10-17T23:30Z",
         "game_id": "401858265",
@@ -36602,7 +36602,7 @@
         "odds_observed_at": "2026-10-16T23:18:53.572851+00:00"
       }
     ],
-    "lastGoodAt": "2026-10-17T03:03:30.952Z"
+    "lastGoodAt": "2026-10-17T03:31:10.238Z"
   },
   "mlb": {
     "meta": {
@@ -36811,11 +36811,11 @@
     "accuracy": {
       "generated_at": "2026-10-17T01:10:22+00:00"
     },
-    "lastGoodAt": "2026-10-17T03:03:30.952Z"
+    "lastGoodAt": "2026-10-17T03:31:10.238Z"
   },
   "nhl": {
     "meta": {
-      "generated_at": "2026-10-17T03:01:49.796862+00:00",
+      "generated_at": "2026-10-17T03:29:20.963402+00:00",
       "model_version": "nhl-poisson-1.0",
       "season": 2027,
       "timezone": "America/Toronto",
@@ -36842,22 +36842,22 @@
         },
         "nhl-schedule-2026-10-16": {
           "status": "ok",
-          "observed_at": "2026-10-17T03:01:49.796862+00:00",
+          "observed_at": "2026-10-17T03:29:20.963402+00:00",
           "url": "https://api-web.nhle.com/v1/schedule/2026-10-16"
         },
         "nhl-schedule-2026-10-02": {
           "status": "ok",
-          "observed_at": "2026-10-17T03:01:49.796862+00:00",
+          "observed_at": "2026-10-17T03:29:20.963402+00:00",
           "url": "https://api-web.nhle.com/v1/schedule/2026-10-02"
         },
         "nhl-schedule-2026-10-09": {
           "status": "ok",
-          "observed_at": "2026-10-17T03:01:49.796862+00:00",
+          "observed_at": "2026-10-17T03:29:20.963402+00:00",
           "url": "https://api-web.nhle.com/v1/schedule/2026-10-09"
         },
         "nhl-schedule-2026-10-23": {
           "status": "ok",
-          "observed_at": "2026-10-17T03:01:49.796862+00:00",
+          "observed_at": "2026-10-17T03:29:20.963402+00:00",
           "url": "https://api-web.nhle.com/v1/schedule/2026-10-23"
         },
         "standings-2027": {
@@ -36873,7 +36873,7 @@
           "error": "HTTPError"
         },
         "nhl-official": {
-          "status": "ok",
+          "status": "cached",
           "observed_at": "2026-10-17T03:01:49.796862+00:00",
           "url": "https://api-web.nhle.com/v1/standings/now"
         },
@@ -36899,7 +36899,7 @@
         },
         "public-book-odds": {
           "status": "no matched prices",
-          "observed_at": "2026-10-17T03:01:49.796862+00:00",
+          "observed_at": "2026-10-17T03:29:20.963402+00:00",
           "url": "https://www.covers.com/sport/hockey/nhl/odds",
           "quotes": 0
         },
@@ -36960,8 +36960,8 @@
     },
     "board": [],
     "accuracy": {
-      "generated_at": "2026-10-17T03:01:49.796862+00:00"
+      "generated_at": "2026-10-17T03:29:20.963402+00:00"
     },
-    "lastGoodAt": "2026-10-17T03:03:30.952Z"
+    "lastGoodAt": "2026-10-17T03:31:10.238Z"
   }
 }
