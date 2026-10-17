@@ -1,29 +1,43 @@
 {
   "schema": 1,
-  "checked_at": "2026-10-17T15:54:11.446Z",
+  "checked_at": "2026-10-17T16:04:24.515Z",
   "coverage": {
+    "nfl": {
+      "status": "available",
+      "reports": 343,
+      "checked_at": "2026-10-17T16:04:24.515Z"
+    },
     "ncaaf": {
       "status": "empty",
       "reports": 0,
-      "checked_at": "2026-10-17T15:54:11.446Z"
-    },
-    "mlb": {
-      "status": "available",
-      "reports": 3,
-      "checked_at": "2026-10-17T15:54:11.446Z"
+      "checked_at": "2026-10-17T16:04:24.515Z"
     },
     "nhl": {
       "status": "available",
       "reports": 48,
-      "checked_at": "2026-10-17T15:54:11.446Z"
+      "checked_at": "2026-10-17T16:04:24.515Z"
     },
-    "nfl": {
+    "mlb": {
       "status": "available",
-      "reports": 343,
-      "checked_at": "2026-10-17T15:54:11.446Z"
+      "reports": 3,
+      "checked_at": "2026-10-17T16:04:24.515Z"
     }
   },
   "events": [
+    {
+      "id": "injury|nhl:14:Jake Sanderson|2026-10-17T16:04:24.515Z",
+      "kind": "injury",
+      "observed_at": "2026-10-17T16:04:24.515Z",
+      "sport": "nhl",
+      "title": "Player availability changed",
+      "event": "Ottawa Senators",
+      "pick": "Jake Sanderson",
+      "before": "Day-To-Day · Lower Body",
+      "after": "Out · Lower Body",
+      "source_quote_at": "2026-10-17T15:52Z",
+      "source": "ESPN injuries",
+      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
+    },
     {
       "id": "odds|ncaaf|401856832|2026-10-17T23:00Z|TOTAL||under|Draft Kings|2026-10-17T15:54:11.446Z",
       "kind": "odds",
@@ -2907,20 +2921,6 @@
       "title": "Player availability changed",
       "event": "Baltimore Ravens",
       "pick": "Trenton Simpson",
-      "before": "Questionable · Hamstring",
-      "after": "Active",
-      "source_quote_at": "2026-10-16T20:28Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:33:Mike Green|2026-10-16T21:04:37.151Z",
-      "kind": "injury",
-      "observed_at": "2026-10-16T21:04:37.151Z",
-      "sport": "nfl",
-      "title": "Player availability changed",
-      "event": "Baltimore Ravens",
-      "pick": "Mike Green",
       "before": "Questionable · Hamstring",
       "after": "Active",
       "source_quote_at": "2026-10-16T20:28Z",
