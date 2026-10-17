@@ -1,29 +1,127 @@
 {
   "schema": 1,
-  "checked_at": "2026-10-17T16:11:57.581Z",
+  "checked_at": "2026-10-17T16:29:39.820Z",
   "coverage": {
-    "mlb": {
-      "status": "available",
-      "reports": 3,
-      "checked_at": "2026-10-17T16:11:57.581Z"
-    },
     "nhl": {
       "status": "available",
-      "reports": 48,
-      "checked_at": "2026-10-17T16:11:57.581Z"
+      "reports": 46,
+      "checked_at": "2026-10-17T16:29:39.820Z"
     },
     "ncaaf": {
       "status": "empty",
       "reports": 0,
-      "checked_at": "2026-10-17T16:11:57.581Z"
+      "checked_at": "2026-10-17T16:29:39.820Z"
+    },
+    "mlb": {
+      "status": "available",
+      "reports": 3,
+      "checked_at": "2026-10-17T16:29:39.820Z"
     },
     "nfl": {
       "status": "available",
-      "reports": 343,
-      "checked_at": "2026-10-17T16:11:57.581Z"
+      "reports": 345,
+      "checked_at": "2026-10-17T16:29:39.820Z"
     }
   },
   "events": [
+    {
+      "id": "starter|nhl:nhl:2026020128:away|2026-10-17T16:29:39.820Z",
+      "kind": "starter",
+      "observed_at": "2026-10-17T16:29:39.820Z",
+      "sport": "nhl",
+      "event": "OTT @ PHI",
+      "start": "2026-10-17T23:00:00+00:00",
+      "title": "NHL starting goalie updated",
+      "before": "Linus Ullmark",
+      "after": "Linus Ullmark · confirmed",
+      "source_quote_at": "2026-10-17T16:27:42.808607+00:00",
+      "source": "NHL board",
+      "note": "Review the matchup after a starter change; the baseline does not price individual goalie talent."
+    },
+    {
+      "id": "starter|nhl:nhl:2026020129:away|2026-10-17T16:29:39.820Z",
+      "kind": "starter",
+      "observed_at": "2026-10-17T16:29:39.820Z",
+      "sport": "nhl",
+      "event": "NYR @ CBJ",
+      "start": "2026-10-17T23:00:00+00:00",
+      "title": "NHL starting goalie updated",
+      "before": "Dylan Garand",
+      "after": "Dylan Garand · confirmed",
+      "source_quote_at": "2026-10-17T16:27:42.808607+00:00",
+      "source": "NHL board",
+      "note": "Review the matchup after a starter change; the baseline does not price individual goalie talent."
+    },
+    {
+      "id": "starter|nhl:nhl:2026020130:away|2026-10-17T16:29:39.820Z",
+      "kind": "starter",
+      "observed_at": "2026-10-17T16:29:39.820Z",
+      "sport": "nhl",
+      "event": "DAL @ CHI",
+      "start": "2026-10-17T23:00:00+00:00",
+      "title": "NHL starting goalie updated",
+      "before": "Jake Oettinger",
+      "after": "Jake Oettinger · confirmed",
+      "source_quote_at": "2026-10-17T16:27:42.808607+00:00",
+      "source": "NHL board",
+      "note": "Review the matchup after a starter change; the baseline does not price individual goalie talent."
+    },
+    {
+      "id": "injury|nfl:11:Will Mallory|2026-10-17T16:29:39.820Z",
+      "kind": "injury",
+      "observed_at": "2026-10-17T16:29:39.820Z",
+      "sport": "nfl",
+      "title": "Player availability changed",
+      "event": "Indianapolis Colts",
+      "pick": "Will Mallory",
+      "before": "Injured Reserve · Thumb",
+      "after": "Active · Mallory (thumb) is listed as questionable for Sunday's game against the Titans.",
+      "source_quote_at": "2026-10-17T01:17Z",
+      "source": "ESPN injuries",
+      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
+    },
+    {
+      "id": "injury|nfl:23:Pat Freiermuth|2026-10-17T16:29:39.820Z",
+      "kind": "injury",
+      "observed_at": "2026-10-17T16:29:39.820Z",
+      "sport": "nfl",
+      "title": "New availability report",
+      "event": "Pittsburgh Steelers",
+      "pick": "Pat Freiermuth",
+      "before": "Not in the previous dated report",
+      "after": "Questionable · Calf",
+      "source_quote_at": "2026-10-17T16:25Z",
+      "source": "ESPN injuries",
+      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
+    },
+    {
+      "id": "injury|nfl:26:Velus Jones Jr.|2026-10-17T16:29:39.820Z",
+      "kind": "injury",
+      "observed_at": "2026-10-17T16:29:39.820Z",
+      "sport": "nfl",
+      "title": "Player availability changed",
+      "event": "Seattle Seahawks",
+      "pick": "Velus Jones Jr.",
+      "before": "Active · Jones was signed from the practice squad to the active roster ahead of Thursday's game against the Broncos.",
+      "after": "Active · Jones turned four carries into 20 yards and caught his only target for minus-one yard during Thursday's 17-14 overtime loss to the Broncos.",
+      "source_quote_at": "2026-10-17T16:14Z",
+      "source": "ESPN injuries",
+      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
+    },
+    {
+      "id": "injury|nfl:26:Tory Horton|2026-10-17T16:29:39.820Z",
+      "kind": "injury",
+      "observed_at": "2026-10-17T16:29:39.820Z",
+      "sport": "nfl",
+      "title": "New availability report",
+      "event": "Seattle Seahawks",
+      "pick": "Tory Horton",
+      "before": "Not in the previous dated report",
+      "after": "Active · Horton caught one of five targets for 13 yards and returned a punt for 13 yards during the Seahawks' 17-14 overtime loss to the Broncos on Thursday. He also logged one tackle.",
+      "source_quote_at": "2026-10-17T16:10Z",
+      "source": "ESPN injuries",
+      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
+    },
     {
       "id": "odds|ncaaf|401866478|2026-10-17T19:30Z|TOTAL||over|DraftKings|2026-10-17T16:11:57.581Z",
       "kind": "odds",
@@ -2830,108 +2928,6 @@
       "source_quote_at": "2026-10-16T21:14:33.491275+00:00",
       "source": "Existing Props board",
       "note": "Your ticket keeps its original odds. Recheck the live book before placing a new wager."
-    },
-    {
-      "id": "odds|props|401872996|2026-10-18T13:30Z|Receiving yards|Bhayshul Tuten|over|Fanatics Sportsbook|2026-10-16T21:16:56.785Z",
-      "kind": "odds",
-      "observed_at": "2026-10-16T21:16:56.785Z",
-      "sport": "props",
-      "event": "Houston Texans @ Jacksonville Jaguars",
-      "start": "2026-10-18T13:30Z",
-      "pick": "Bhayshul Tuten — Over 10.5 Receiving yards",
-      "title": "Published odds changed",
-      "before": "-110 · line 10.5",
-      "after": "-105 · line 10.5",
-      "book": "Fanatics Sportsbook",
-      "source_quote_at": "2026-10-16T21:14:33.491275+00:00",
-      "source": "Existing Props board",
-      "note": "Your ticket keeps its original odds. Recheck the live book before placing a new wager."
-    },
-    {
-      "id": "odds|ncaaf|401856720|2026-10-17T16:00Z|ATS||away|DraftKings|2026-10-16T21:16:56.785Z",
-      "kind": "odds",
-      "observed_at": "2026-10-16T21:16:56.785Z",
-      "sport": "ncaaf",
-      "event": "MSST @ LSU",
-      "start": "2026-10-17T16:00Z",
-      "pick": "MSST +15.5",
-      "title": "Published odds changed",
-      "before": "-108 · line 15.5",
-      "after": "-115 · line 16.5",
-      "book": "DraftKings",
-      "source_quote_at": "2026-10-16T21:14:18.471474+00:00",
-      "source": "Existing NCAAF board",
-      "note": "Your ticket keeps its original odds. Recheck the live book before placing a new wager."
-    },
-    {
-      "id": "injury|nfl:9:Keisean Nixon|2026-10-16T21:16:56.785Z",
-      "kind": "injury",
-      "observed_at": "2026-10-16T21:16:56.785Z",
-      "sport": "nfl",
-      "title": "Player availability changed",
-      "event": "Green Bay Packers",
-      "pick": "Keisean Nixon",
-      "before": "Questionable · Nixon (groin) was a limited participant at practice Thursday.",
-      "after": "Active · Nixon (groin) was a limited participant at practice Thursday.",
-      "source_quote_at": "2026-10-16T00:32Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:21:Jonathan Greenard|2026-10-16T21:16:56.785Z",
-      "kind": "injury",
-      "observed_at": "2026-10-16T21:16:56.785Z",
-      "sport": "nfl",
-      "title": "Player availability changed",
-      "event": "Philadelphia Eagles",
-      "pick": "Jonathan Greenard",
-      "before": "Questionable · Ankle",
-      "after": "Questionable · Greenard (ankle) was a limited participant at the Eagles' practice Wednesday.",
-      "source_quote_at": "2026-10-15T00:32Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:21:Tyler Steen|2026-10-16T21:16:56.785Z",
-      "kind": "injury",
-      "observed_at": "2026-10-16T21:16:56.785Z",
-      "sport": "nfl",
-      "title": "Player availability changed",
-      "event": "Philadelphia Eagles",
-      "pick": "Tyler Steen",
-      "before": "Questionable · Shoulder",
-      "after": "Questionable · questionable",
-      "source_quote_at": "2026-10-14T23:18Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:33:Rashod Bateman|2026-10-16T21:04:37.151Z",
-      "kind": "injury",
-      "observed_at": "2026-10-16T21:04:37.151Z",
-      "sport": "nfl",
-      "title": "Player availability changed",
-      "event": "Baltimore Ravens",
-      "pick": "Rashod Bateman",
-      "before": "Questionable · Shoulder",
-      "after": "Active · Bateman (shoulder) doesn't have an injury designation for Sunday's game at Cleveland.",
-      "source_quote_at": "2026-10-16T20:31Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:33:Broderick Washington Jr.|2026-10-16T21:04:37.151Z",
-      "kind": "injury",
-      "observed_at": "2026-10-16T21:04:37.151Z",
-      "sport": "nfl",
-      "title": "Player availability changed",
-      "event": "Baltimore Ravens",
-      "pick": "Broderick Washington Jr.",
-      "before": "Questionable · Ankle",
-      "after": "Out · Ankle",
-      "source_quote_at": "2026-10-16T20:28Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
     }
   ]
 }
