@@ -1,29 +1,43 @@
 {
   "schema": 1,
-  "checked_at": "2026-10-17T23:08:48.473Z",
+  "checked_at": "2026-10-17T23:24:07.973Z",
   "coverage": {
     "nhl": {
       "status": "available",
       "reports": 42,
-      "checked_at": "2026-10-17T23:08:48.473Z"
+      "checked_at": "2026-10-17T23:24:07.973Z"
     },
     "mlb": {
       "status": "available",
       "reports": 2,
-      "checked_at": "2026-10-17T23:08:48.473Z"
-    },
-    "nfl": {
-      "status": "available",
-      "reports": 337,
-      "checked_at": "2026-10-17T23:08:48.473Z"
+      "checked_at": "2026-10-17T23:24:07.973Z"
     },
     "ncaaf": {
       "status": "empty",
       "reports": 0,
-      "checked_at": "2026-10-17T23:08:48.473Z"
+      "checked_at": "2026-10-17T23:24:07.973Z"
+    },
+    "nfl": {
+      "status": "available",
+      "reports": 334,
+      "checked_at": "2026-10-17T23:24:07.973Z"
     }
   },
   "events": [
+    {
+      "id": "injury|nfl:11:Will Mallory|2026-10-17T23:24:07.973Z",
+      "kind": "injury",
+      "observed_at": "2026-10-17T23:24:07.973Z",
+      "sport": "nfl",
+      "title": "Player availability changed",
+      "event": "Indianapolis Colts",
+      "pick": "Will Mallory",
+      "before": "Active · Mallory (thumb) is listed as questionable for Sunday's game against the Titans.",
+      "after": "Active · The Colts activated Mallory (thumb) from injured reserve Saturday.",
+      "source_quote_at": "2026-10-17T23:08Z",
+      "source": "ESPN injuries",
+      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
+    },
     {
       "id": "starter|nhl:nhl:2026020125:away|2026-10-17T22:58:07.187Z",
       "kind": "starter",
@@ -2946,20 +2960,6 @@
       "before": "Not in the previous dated report",
       "after": "Questionable · Quadriceps",
       "source_quote_at": "2026-10-17T04:27Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:9:Aaron Banks|2026-10-17T05:03:08.230Z",
-      "kind": "injury",
-      "observed_at": "2026-10-17T05:03:08.230Z",
-      "sport": "nfl",
-      "title": "New availability report",
-      "event": "Green Bay Packers",
-      "pick": "Aaron Banks",
-      "before": "Not in the previous dated report",
-      "after": "Questionable · Toe",
-      "source_quote_at": "2026-10-17T04:24Z",
       "source": "ESPN injuries",
       "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
     }
