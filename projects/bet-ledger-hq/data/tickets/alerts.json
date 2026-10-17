@@ -1,29 +1,43 @@
 {
   "schema": 1,
-  "checked_at": "2026-10-17T20:29:19.275Z",
+  "checked_at": "2026-10-17T21:01:18.914Z",
   "coverage": {
-    "nfl": {
+    "mlb": {
       "status": "available",
-      "reports": 348,
-      "checked_at": "2026-10-17T20:29:19.275Z"
-    },
-    "ncaaf": {
-      "status": "empty",
-      "reports": 0,
-      "checked_at": "2026-10-17T20:29:19.275Z"
+      "reports": 2,
+      "checked_at": "2026-10-17T21:01:18.914Z"
     },
     "nhl": {
       "status": "available",
       "reports": 43,
-      "checked_at": "2026-10-17T20:29:19.275Z"
+      "checked_at": "2026-10-17T21:01:18.914Z"
     },
-    "mlb": {
+    "ncaaf": {
+      "status": "empty",
+      "reports": 0,
+      "checked_at": "2026-10-17T21:01:18.914Z"
+    },
+    "nfl": {
       "status": "available",
-      "reports": 2,
-      "checked_at": "2026-10-17T20:29:19.275Z"
+      "reports": 345,
+      "checked_at": "2026-10-17T21:01:18.914Z"
     }
   },
   "events": [
+    {
+      "id": "injury|nfl:22:Kitan Crawford|2026-10-17T21:01:18.914Z",
+      "kind": "injury",
+      "observed_at": "2026-10-17T21:01:18.914Z",
+      "sport": "nfl",
+      "title": "Player availability changed",
+      "event": "Arizona Cardinals",
+      "pick": "Kitan Crawford",
+      "before": "Injured Reserve · Ankle",
+      "after": "Questionable · Ankle",
+      "source_quote_at": "2026-10-17T20:29Z",
+      "source": "ESPN injuries",
+      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
+    },
     {
       "id": "injury|nfl:33:Ja'Kobi Lane|2026-10-17T20:29:19.275Z",
       "kind": "injury",
@@ -2929,20 +2943,6 @@
       "source_quote_at": "2026-10-17T01:10:30.565887+00:00",
       "source": "Published price policy",
       "note": "Minimum -112 at unchanged line 10.5. Uses the saved forecast, not a new model approval. Confirm current odds and qualification; scheduled observations can miss intervening moves."
-    },
-    {
-      "id": "injury|nfl:3:Anthony Johnson Jr.|2026-10-17T01:13:36.918Z",
-      "kind": "injury",
-      "observed_at": "2026-10-17T01:13:36.918Z",
-      "sport": "nfl",
-      "title": "Player availability changed",
-      "event": "Chicago Bears",
-      "pick": "Anthony Johnson Jr.",
-      "before": "Out · Undisclosed",
-      "after": "Injured Reserve · Undisclosed",
-      "source_quote_at": "2026-10-17T01:01Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
     }
   ]
 }
