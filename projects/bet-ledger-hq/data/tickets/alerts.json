@@ -1,29 +1,85 @@
 {
   "schema": 1,
-  "checked_at": "2026-10-17T22:27:55.697Z",
+  "checked_at": "2026-10-17T22:58:07.187Z",
   "coverage": {
-    "nhl": {
-      "status": "available",
-      "reports": 43,
-      "checked_at": "2026-10-17T22:27:55.697Z"
-    },
-    "nfl": {
-      "status": "available",
-      "reports": 341,
-      "checked_at": "2026-10-17T22:27:55.697Z"
-    },
     "ncaaf": {
       "status": "empty",
       "reports": 0,
-      "checked_at": "2026-10-17T22:27:55.697Z"
+      "checked_at": "2026-10-17T22:58:07.187Z"
+    },
+    "nfl": {
+      "status": "available",
+      "reports": 338,
+      "checked_at": "2026-10-17T22:58:07.187Z"
     },
     "mlb": {
       "status": "available",
       "reports": 2,
-      "checked_at": "2026-10-17T22:27:55.697Z"
+      "checked_at": "2026-10-17T22:58:07.187Z"
+    },
+    "nhl": {
+      "status": "available",
+      "reports": 42,
+      "checked_at": "2026-10-17T22:58:07.187Z"
     }
   },
   "events": [
+    {
+      "id": "starter|nhl:nhl:2026020125:away|2026-10-17T22:58:07.187Z",
+      "kind": "starter",
+      "observed_at": "2026-10-17T22:58:07.187Z",
+      "sport": "nhl",
+      "event": "NYI @ TOR",
+      "start": "2026-10-17T23:00:00+00:00",
+      "title": "NHL starting goalie updated",
+      "before": "Ilya Sorokin",
+      "after": "Ilya Sorokin · confirmed",
+      "source_quote_at": "2026-10-17T22:56:17.558596+00:00",
+      "source": "NHL board",
+      "note": "Review the matchup after a starter change; the baseline does not price individual goalie talent."
+    },
+    {
+      "id": "starter|nhl:nhl:2026020126:away|2026-10-17T22:58:07.187Z",
+      "kind": "starter",
+      "observed_at": "2026-10-17T22:58:07.187Z",
+      "sport": "nhl",
+      "event": "BUF @ MTL",
+      "start": "2026-10-17T23:00:00+00:00",
+      "title": "NHL starting goalie updated",
+      "before": "Ukko-Pekka Luukkonen",
+      "after": "Ukko-Pekka Luukkonen · confirmed",
+      "source_quote_at": "2026-10-17T22:56:17.558596+00:00",
+      "source": "NHL board",
+      "note": "Review the matchup after a starter change; the baseline does not price individual goalie talent."
+    },
+    {
+      "id": "starter|nhl:nhl:2026020129:home|2026-10-17T22:58:07.187Z",
+      "kind": "starter",
+      "observed_at": "2026-10-17T22:58:07.187Z",
+      "sport": "nhl",
+      "event": "NYR @ CBJ",
+      "start": "2026-10-17T23:00:00+00:00",
+      "title": "NHL starting goalie updated",
+      "before": "Jet Greaves",
+      "after": "Jet Greaves · confirmed",
+      "source_quote_at": "2026-10-17T22:56:17.558596+00:00",
+      "source": "NHL board",
+      "note": "Review the matchup after a starter change; the baseline does not price individual goalie talent."
+    },
+    {
+      "id": "injury|nhl:15:Owen Tippett|2026-10-17T22:58:07.187Z",
+      "kind": "injury",
+      "observed_at": "2026-10-17T22:58:07.187Z",
+      "sport": "nhl",
+      "title": "Player availability changed",
+      "event": "Philadelphia Flyers",
+      "pick": "Owen Tippett",
+      "before": "Day-To-Day · Upper Body",
+      "after": "Out · Upper Body",
+      "source_quote_at": "2026-10-17T22:43Z",
+      "source": "ESPN injuries",
+      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
+    },
     {
       "id": "injury|nfl:25:Kaelon Black|2026-10-17T22:02:17.601Z",
       "kind": "injury",
@@ -2904,62 +2960,6 @@
       "before": "Not in the previous dated report",
       "after": "Questionable · Toe",
       "source_quote_at": "2026-10-17T04:24Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:19:Jason Pinnock|2026-10-17T05:03:08.230Z",
-      "kind": "injury",
-      "observed_at": "2026-10-17T05:03:08.230Z",
-      "sport": "nfl",
-      "title": "Player availability changed",
-      "event": "New York Giants",
-      "pick": "Jason Pinnock",
-      "before": "Active",
-      "after": "Active · Pinnock (concussion) doesn't carry an injury designation for Sunday's game against the Saints.",
-      "source_quote_at": "2026-10-17T04:47Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:21:Drew Kendall|2026-10-17T05:03:08.230Z",
-      "kind": "injury",
-      "observed_at": "2026-10-17T05:03:08.230Z",
-      "sport": "nfl",
-      "title": "New availability report",
-      "event": "Philadelphia Eagles",
-      "pick": "Drew Kendall",
-      "before": "Not in the previous dated report",
-      "after": "Questionable · Knee",
-      "source_quote_at": "2026-10-17T04:43Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:17:Charles Woods|2026-10-17T04:31:44.246Z",
-      "kind": "injury",
-      "observed_at": "2026-10-17T04:31:44.246Z",
-      "sport": "nfl",
-      "title": "Player availability changed",
-      "event": "New England Patriots",
-      "pick": "Charles Woods",
-      "before": "Active",
-      "after": "Active · Woods (shoulder) does not have an injury designation for Sunday's game against the Jets.",
-      "source_quote_at": "2026-10-17T04:12Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:3:Anthony Johnson Jr.|2026-10-17T04:08:32.284Z",
-      "kind": "injury",
-      "observed_at": "2026-10-17T04:08:32.284Z",
-      "sport": "nfl",
-      "title": "Player availability changed",
-      "event": "Chicago Bears",
-      "pick": "Anthony Johnson Jr.",
-      "before": "Injured Reserve · Undisclosed",
-      "after": "Out · Undisclosed",
-      "source_quote_at": "2026-10-17T04:00Z",
       "source": "ESPN injuries",
       "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
     }
