@@ -1,29 +1,99 @@
 {
   "schema": 1,
-  "checked_at": "2026-10-17T23:24:07.973Z",
+  "checked_at": "2026-10-17T23:55:31.511Z",
   "coverage": {
+    "ncaaf": {
+      "status": "empty",
+      "reports": 0,
+      "checked_at": "2026-10-17T23:55:31.511Z"
+    },
+    "nfl": {
+      "status": "available",
+      "reports": 332,
+      "checked_at": "2026-10-17T23:55:31.511Z"
+    },
     "nhl": {
       "status": "available",
       "reports": 42,
-      "checked_at": "2026-10-17T23:24:07.973Z"
+      "checked_at": "2026-10-17T23:55:31.511Z"
     },
     "mlb": {
       "status": "available",
       "reports": 2,
-      "checked_at": "2026-10-17T23:24:07.973Z"
-    },
-    "ncaaf": {
-      "status": "empty",
-      "reports": 0,
-      "checked_at": "2026-10-17T23:24:07.973Z"
-    },
-    "nfl": {
-      "status": "available",
-      "reports": 334,
-      "checked_at": "2026-10-17T23:24:07.973Z"
+      "checked_at": "2026-10-17T23:55:31.511Z"
     }
   },
   "events": [
+    {
+      "id": "starter|nhl:nhl:2026020131:home|2026-10-17T23:55:31.511Z",
+      "kind": "starter",
+      "observed_at": "2026-10-17T23:55:31.511Z",
+      "sport": "nhl",
+      "event": "STL @ NSH",
+      "start": "2026-10-18T00:00:00+00:00",
+      "title": "NHL starting goalie updated",
+      "before": "Juuse Saros",
+      "after": "Juuse Saros · confirmed",
+      "source_quote_at": "2026-10-17T23:53:42.001772+00:00",
+      "source": "NHL board",
+      "note": "Review the matchup after a starter change; the baseline does not price individual goalie talent."
+    },
+    {
+      "id": "injury|nfl:3:Zavier Scott|2026-10-17T23:55:31.511Z",
+      "kind": "injury",
+      "observed_at": "2026-10-17T23:55:31.511Z",
+      "sport": "nfl",
+      "title": "New availability report",
+      "event": "Chicago Bears",
+      "pick": "Zavier Scott",
+      "before": "Not in the previous dated report",
+      "after": "Active · The Bears elevated Scott from the practice squad ahead of Sunday's game against the Falcons.",
+      "source_quote_at": "2026-10-17T23:21Z",
+      "source": "ESPN injuries",
+      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
+    },
+    {
+      "id": "injury|nfl:25:Romello Height|2026-10-17T23:55:31.511Z",
+      "kind": "injury",
+      "observed_at": "2026-10-17T23:55:31.511Z",
+      "sport": "nfl",
+      "title": "Player availability changed",
+      "event": "San Francisco 49ers",
+      "pick": "Romello Height",
+      "before": "Questionable · Hand",
+      "after": "Active",
+      "source_quote_at": "2026-10-17T23:37Z",
+      "source": "ESPN injuries",
+      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
+    },
+    {
+      "id": "injury|nhl:1:Pavel Zacha|2026-10-17T23:55:31.511Z",
+      "kind": "injury",
+      "observed_at": "2026-10-17T23:55:31.511Z",
+      "sport": "nhl",
+      "title": "Player availability changed",
+      "event": "Boston Bruins",
+      "pick": "Pavel Zacha",
+      "before": "Day-To-Day · Undisclosed",
+      "after": "Out · Upper Body",
+      "source_quote_at": "2026-10-17T23:52Z",
+      "source": "ESPN injuries",
+      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
+    },
+    {
+      "id": "injury|nhl:27:Mavrik Bourque|2026-10-17T23:55:31.511Z",
+      "kind": "injury",
+      "observed_at": "2026-10-17T23:55:31.511Z",
+      "sport": "nhl",
+      "title": "Player availability changed",
+      "event": "Nashville Predators",
+      "pick": "Mavrik Bourque",
+      "before": "Day-To-Day · Upper Body",
+      "after": "Out · Upper Body",
+      "source_quote_at": "2026-10-17T23:32Z",
+      "source": "ESPN injuries",
+      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
+    },
     {
       "id": "injury|nfl:11:Will Mallory|2026-10-17T23:24:07.973Z",
       "kind": "injury",
@@ -2890,76 +2960,6 @@
       "before": "Not in the previous dated report",
       "after": "Active · Singleton recorded 13 tackles (four solo) in Thursday night's 17-14 overtime win over the Seahawks.",
       "source_quote_at": "2026-10-17T05:06Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:7:Ja'Quan McMillian|2026-10-17T05:29:42.917Z",
-      "kind": "injury",
-      "observed_at": "2026-10-17T05:29:42.917Z",
-      "sport": "nfl",
-      "title": "New availability report",
-      "event": "Denver Broncos",
-      "pick": "Ja'Quan McMillian",
-      "before": "Not in the previous dated report",
-      "after": "Active · McMillian recorded five tackles (five solo), including 1.0 sack, and a pair of pass breakups, including an interception, in Thursday night's 17-14 overtime win over the Seahawks.",
-      "source_quote_at": "2026-10-17T05:04Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:30:Eric Murray|2026-10-17T05:29:42.917Z",
-      "kind": "injury",
-      "observed_at": "2026-10-17T05:29:42.917Z",
-      "sport": "nfl",
-      "title": "Player availability changed",
-      "event": "Jacksonville Jaguars",
-      "pick": "Eric Murray",
-      "before": "Active · Murray (concussion) does not have any injury designation ahead of Sunday's game against the Texans.",
-      "after": "Active · Murray (concussion) does not have an injury designation ahead of Sunday's game against the Texans.",
-      "source_quote_at": "2026-10-17T00:55Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:26:Nick Emmanwori|2026-10-17T05:29:42.917Z",
-      "kind": "injury",
-      "observed_at": "2026-10-17T05:29:42.917Z",
-      "sport": "nfl",
-      "title": "New availability report",
-      "event": "Seattle Seahawks",
-      "pick": "Nick Emmanwori",
-      "before": "Not in the previous dated report",
-      "after": "Active · Emmanwori recorded seven tackles (four solo), including 1.0 sack, in Thursday night's 17-14 overtime loss to the Broncos.",
-      "source_quote_at": "2026-10-17T04:59Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:26:Ernest Jones IV|2026-10-17T05:29:42.917Z",
-      "kind": "injury",
-      "observed_at": "2026-10-17T05:29:42.917Z",
-      "sport": "nfl",
-      "title": "New availability report",
-      "event": "Seattle Seahawks",
-      "pick": "Ernest Jones IV",
-      "before": "Not in the previous dated report",
-      "after": "Active · Jones recorded nine tackles (five solo), including 1.0 sack, in Thursday night's 17-14 overtime loss to the Broncos.",
-      "source_quote_at": "2026-10-17T04:56Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:9:Jacob Monk|2026-10-17T05:03:08.230Z",
-      "kind": "injury",
-      "observed_at": "2026-10-17T05:03:08.230Z",
-      "sport": "nfl",
-      "title": "New availability report",
-      "event": "Green Bay Packers",
-      "pick": "Jacob Monk",
-      "before": "Not in the previous dated report",
-      "after": "Questionable · Quadriceps",
-      "source_quote_at": "2026-10-17T04:27Z",
       "source": "ESPN injuries",
       "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
     }
