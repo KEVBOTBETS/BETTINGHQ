@@ -1,29 +1,91 @@
 {
   "schema": 1,
-  "checked_at": "2026-10-17T16:04:24.515Z",
+  "checked_at": "2026-10-17T16:11:57.581Z",
   "coverage": {
-    "nfl": {
+    "mlb": {
       "status": "available",
-      "reports": 343,
-      "checked_at": "2026-10-17T16:04:24.515Z"
-    },
-    "ncaaf": {
-      "status": "empty",
-      "reports": 0,
-      "checked_at": "2026-10-17T16:04:24.515Z"
+      "reports": 3,
+      "checked_at": "2026-10-17T16:11:57.581Z"
     },
     "nhl": {
       "status": "available",
       "reports": 48,
-      "checked_at": "2026-10-17T16:04:24.515Z"
+      "checked_at": "2026-10-17T16:11:57.581Z"
     },
-    "mlb": {
+    "ncaaf": {
+      "status": "empty",
+      "reports": 0,
+      "checked_at": "2026-10-17T16:11:57.581Z"
+    },
+    "nfl": {
       "status": "available",
-      "reports": 3,
-      "checked_at": "2026-10-17T16:04:24.515Z"
+      "reports": 343,
+      "checked_at": "2026-10-17T16:11:57.581Z"
     }
   },
   "events": [
+    {
+      "id": "odds|ncaaf|401866478|2026-10-17T19:30Z|TOTAL||over|DraftKings|2026-10-17T16:11:57.581Z",
+      "kind": "odds",
+      "observed_at": "2026-10-17T16:11:57.581Z",
+      "sport": "ncaaf",
+      "event": "AKR @ M-OH",
+      "start": "2026-10-17T19:30Z",
+      "pick": "Over 47.5",
+      "title": "Published odds changed",
+      "before": "-108 · line 46.5",
+      "after": "-112 · line 46.5",
+      "book": "DraftKings",
+      "source_quote_at": "2026-10-17T16:09:05.924998+00:00",
+      "source": "Existing NCAAF board",
+      "note": "Your ticket keeps its original odds. Recheck the live book before placing a new wager."
+    },
+    {
+      "id": "odds|ncaaf|401856832|2026-10-17T23:00Z|TOTAL||under|DraftKings|2026-10-17T16:11:57.581Z",
+      "kind": "odds",
+      "observed_at": "2026-10-17T16:11:57.581Z",
+      "sport": "ncaaf",
+      "event": "TCU @ BAY",
+      "start": "2026-10-17T23:00Z",
+      "pick": "Under 51.5",
+      "title": "Published odds changed",
+      "before": "-112 · line 50.5",
+      "after": "-115 · line 50.5",
+      "book": "DraftKings",
+      "source_quote_at": "2026-10-17T16:09:05.925258+00:00",
+      "source": "Existing NCAAF board",
+      "note": "Your ticket keeps its original odds. Recheck the live book before placing a new wager."
+    },
+    {
+      "id": "odds|ncaaf|401856721|2026-10-17T19:30Z|ATS||away|DraftKings|2026-10-17T16:11:57.581Z",
+      "kind": "odds",
+      "observed_at": "2026-10-17T16:11:57.581Z",
+      "sport": "ncaaf",
+      "event": "MIZ @ MISS",
+      "start": "2026-10-17T19:30Z",
+      "pick": "MIZ +6",
+      "title": "Published odds changed",
+      "before": "-108 · line 4.5",
+      "after": "-112 · line 4",
+      "book": "DraftKings",
+      "source_quote_at": "2026-10-17T16:09:05.924671+00:00",
+      "source": "Existing NCAAF board",
+      "note": "Your ticket keeps its original odds. Recheck the live book before placing a new wager."
+    },
+    {
+      "id": "injury|nfl:3:Anthony Johnson Jr.|2026-10-17T16:11:57.581Z",
+      "kind": "injury",
+      "observed_at": "2026-10-17T16:11:57.581Z",
+      "sport": "nfl",
+      "title": "Player availability changed",
+      "event": "Chicago Bears",
+      "pick": "Anthony Johnson Jr.",
+      "before": "Injured Reserve · Undisclosed",
+      "after": "Out · Undisclosed",
+      "source_quote_at": "2026-10-17T16:06Z",
+      "source": "ESPN injuries",
+      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
+    },
     {
       "id": "injury|nhl:14:Jake Sanderson|2026-10-17T16:04:24.515Z",
       "kind": "injury",
@@ -2867,62 +2929,6 @@
       "pick": "Broderick Washington Jr.",
       "before": "Questionable · Ankle",
       "after": "Out · Ankle",
-      "source_quote_at": "2026-10-16T20:28Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:33:Cam Jurgens|2026-10-16T21:04:37.151Z",
-      "kind": "injury",
-      "observed_at": "2026-10-16T21:04:37.151Z",
-      "sport": "nfl",
-      "title": "Player availability changed",
-      "event": "Baltimore Ravens",
-      "pick": "Cam Jurgens",
-      "before": "Questionable · Concussion",
-      "after": "Out · Concussion",
-      "source_quote_at": "2026-10-16T20:28Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:33:John Simpson|2026-10-16T21:04:37.151Z",
-      "kind": "injury",
-      "observed_at": "2026-10-16T21:04:37.151Z",
-      "sport": "nfl",
-      "title": "Player availability changed",
-      "event": "Baltimore Ravens",
-      "pick": "John Simpson",
-      "before": "Questionable · Groin",
-      "after": "Active",
-      "source_quote_at": "2026-10-16T20:28Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:33:Teddye Buchanan|2026-10-16T21:04:37.151Z",
-      "kind": "injury",
-      "observed_at": "2026-10-16T21:04:37.151Z",
-      "sport": "nfl",
-      "title": "Player availability changed",
-      "event": "Baltimore Ravens",
-      "pick": "Teddye Buchanan",
-      "before": "Questionable · Groin",
-      "after": "Active",
-      "source_quote_at": "2026-10-16T20:28Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:33:Trenton Simpson|2026-10-16T21:04:37.151Z",
-      "kind": "injury",
-      "observed_at": "2026-10-16T21:04:37.151Z",
-      "sport": "nfl",
-      "title": "Player availability changed",
-      "event": "Baltimore Ravens",
-      "pick": "Trenton Simpson",
-      "before": "Questionable · Hamstring",
-      "after": "Active",
       "source_quote_at": "2026-10-16T20:28Z",
       "source": "ESPN injuries",
       "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
