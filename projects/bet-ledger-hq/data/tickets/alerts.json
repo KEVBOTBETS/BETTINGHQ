@@ -1,29 +1,141 @@
 {
   "schema": 1,
-  "checked_at": "2026-10-17T16:29:39.820Z",
+  "checked_at": "2026-10-17T17:02:10.304Z",
   "coverage": {
-    "nhl": {
-      "status": "available",
-      "reports": 46,
-      "checked_at": "2026-10-17T16:29:39.820Z"
-    },
     "ncaaf": {
       "status": "empty",
       "reports": 0,
-      "checked_at": "2026-10-17T16:29:39.820Z"
+      "checked_at": "2026-10-17T17:02:10.304Z"
     },
     "mlb": {
       "status": "available",
       "reports": 3,
-      "checked_at": "2026-10-17T16:29:39.820Z"
+      "checked_at": "2026-10-17T17:02:10.304Z"
+    },
+    "nhl": {
+      "status": "available",
+      "reports": 46,
+      "checked_at": "2026-10-17T17:02:10.304Z"
     },
     "nfl": {
       "status": "available",
-      "reports": 345,
-      "checked_at": "2026-10-17T16:29:39.820Z"
+      "reports": 347,
+      "checked_at": "2026-10-17T17:02:10.304Z"
     }
   },
   "events": [
+    {
+      "id": "starter|nhl:nhl:2026020131:away|2026-10-17T17:02:10.304Z",
+      "kind": "starter",
+      "observed_at": "2026-10-17T17:02:10.304Z",
+      "sport": "nhl",
+      "event": "STL @ NSH",
+      "start": "2026-10-18T00:00:00+00:00",
+      "title": "NHL starting goalie updated",
+      "before": "Jordan Binnington",
+      "after": "Jordan Binnington · confirmed",
+      "source_quote_at": "2026-10-17T16:59:32.455713+00:00",
+      "source": "NHL board",
+      "note": "Review the matchup after a starter change; the baseline does not price individual goalie talent."
+    },
+    {
+      "id": "injury|nhl:19:Ross Johnston|2026-10-17T17:02:10.304Z",
+      "kind": "injury",
+      "observed_at": "2026-10-17T17:02:10.304Z",
+      "sport": "nhl",
+      "title": "New availability report",
+      "event": "St. Louis Blues",
+      "pick": "Ross Johnston",
+      "before": "Not in the previous dated report",
+      "after": "Out · Lower Body",
+      "source_quote_at": "2026-10-17T16:55Z",
+      "source": "ESPN injuries",
+      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
+    },
+    {
+      "id": "injury|nfl:7:Marvin Mims Jr.|2026-10-17T17:02:10.304Z",
+      "kind": "injury",
+      "observed_at": "2026-10-17T17:02:10.304Z",
+      "sport": "nfl",
+      "title": "New availability report",
+      "event": "Denver Broncos",
+      "pick": "Marvin Mims Jr.",
+      "before": "Not in the previous dated report",
+      "after": "Active · Mims caught two of four passes for 13 yards, returned one punt for 11 yards and returned one kickoff for 24 yards during the Broncos' 17-14 overtime win over the Seahawks on Thursd",
+      "source_quote_at": "2026-10-17T16:20Z",
+      "source": "ESPN injuries",
+      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
+    },
+    {
+      "id": "injury|nfl:23:DK Metcalf|2026-10-17T17:02:10.304Z",
+      "kind": "injury",
+      "observed_at": "2026-10-17T17:02:10.304Z",
+      "sport": "nfl",
+      "title": "Player availability changed",
+      "event": "Pittsburgh Steelers",
+      "pick": "DK Metcalf",
+      "before": "Questionable · Illness",
+      "after": "Active · The Steelers removed Metcalf (illness) from the injury report Saturday, and the veteran wide receiver will be available for Sunday's game against the Buccaneers, Adam Schefter of E",
+      "source_quote_at": "2026-10-17T16:27Z",
+      "source": "ESPN injuries",
+      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
+    },
+    {
+      "id": "injury|nfl:28:Javontae Jean-Baptiste|2026-10-17T17:02:10.304Z",
+      "kind": "injury",
+      "observed_at": "2026-10-17T17:02:10.304Z",
+      "sport": "nfl",
+      "title": "Player availability changed",
+      "event": "Washington Commanders",
+      "pick": "Javontae Jean-Baptiste",
+      "before": "Questionable · Pectoral",
+      "after": "Out · Pectoral",
+      "source_quote_at": "2026-10-17T16:48Z",
+      "source": "ESPN injuries",
+      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
+    },
+    {
+      "id": "injury|nfl:28:Marcus Mariota|2026-10-17T17:02:10.304Z",
+      "kind": "injury",
+      "observed_at": "2026-10-17T17:02:10.304Z",
+      "sport": "nfl",
+      "title": "Player availability changed",
+      "event": "Washington Commanders",
+      "pick": "Marcus Mariota",
+      "before": "Doubtful · Knee - MCL",
+      "after": "Out · Knee - MCL",
+      "source_quote_at": "2026-10-17T16:47Z",
+      "source": "ESPN injuries",
+      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
+    },
+    {
+      "id": "injury|nfl:28:Charles Omenihu|2026-10-17T17:02:10.304Z",
+      "kind": "injury",
+      "observed_at": "2026-10-17T17:02:10.304Z",
+      "sport": "nfl",
+      "title": "New availability report",
+      "event": "Washington Commanders",
+      "pick": "Charles Omenihu",
+      "before": "Not in the previous dated report",
+      "after": "Out · Groin",
+      "source_quote_at": "2026-10-17T16:47Z",
+      "source": "ESPN injuries",
+      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
+    },
+    {
+      "id": "injury|nfl:28:Jacory Croskey-Merritt|2026-10-17T17:02:10.304Z",
+      "kind": "injury",
+      "observed_at": "2026-10-17T17:02:10.304Z",
+      "sport": "nfl",
+      "title": "Player availability changed",
+      "event": "Washington Commanders",
+      "pick": "Jacory Croskey-Merritt",
+      "before": "Questionable · Groin",
+      "after": "Out · Groin",
+      "source_quote_at": "2026-10-17T16:46Z",
+      "source": "ESPN injuries",
+      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
+    },
     {
       "id": "starter|nhl:nhl:2026020128:away|2026-10-17T16:29:39.820Z",
       "kind": "starter",
@@ -2810,124 +2922,6 @@
       "source_quote_at": "2026-10-16T21:15Z",
       "source": "ESPN injuries",
       "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:21:AJ Epenesa|2026-10-16T21:30:28.048Z",
-      "kind": "injury",
-      "observed_at": "2026-10-16T21:30:28.048Z",
-      "sport": "nfl",
-      "title": "Player availability changed",
-      "event": "Philadelphia Eagles",
-      "pick": "AJ Epenesa",
-      "before": "Questionable · Back",
-      "after": "Doubtful · Back",
-      "source_quote_at": "2026-10-16T21:08Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:21:Jonathan Greenard|2026-10-16T21:30:28.048Z",
-      "kind": "injury",
-      "observed_at": "2026-10-16T21:30:28.048Z",
-      "sport": "nfl",
-      "title": "Player availability changed",
-      "event": "Philadelphia Eagles",
-      "pick": "Jonathan Greenard",
-      "before": "Questionable · Greenard (ankle) was a limited participant at the Eagles' practice Wednesday.",
-      "after": "Active",
-      "source_quote_at": "2026-10-16T21:03Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:21:Tyler Steen|2026-10-16T21:30:28.048Z",
-      "kind": "injury",
-      "observed_at": "2026-10-16T21:30:28.048Z",
-      "sport": "nfl",
-      "title": "Player availability changed",
-      "event": "Philadelphia Eagles",
-      "pick": "Tyler Steen",
-      "before": "Questionable · questionable",
-      "after": "Active",
-      "source_quote_at": "2026-10-16T21:03Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:21:Jalyx Hunt|2026-10-16T21:30:28.048Z",
-      "kind": "injury",
-      "observed_at": "2026-10-16T21:30:28.048Z",
-      "sport": "nfl",
-      "title": "New availability report",
-      "event": "Philadelphia Eagles",
-      "pick": "Jalyx Hunt",
-      "before": "Not in the previous dated report",
-      "after": "Out · Ankle",
-      "source_quote_at": "2026-10-16T21:02Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:21:Michael Carter II|2026-10-16T21:30:28.048Z",
-      "kind": "injury",
-      "observed_at": "2026-10-16T21:30:28.048Z",
-      "sport": "nfl",
-      "title": "New availability report",
-      "event": "Philadelphia Eagles",
-      "pick": "Michael Carter II",
-      "before": "Not in the previous dated report",
-      "after": "Out · Abdomen",
-      "source_quote_at": "2026-10-16T21:02Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "odds|props|401873000|2026-10-18T17:00Z|Rushing yards|Cam Skattebo|over|Caesars|2026-10-16T21:16:56.785Z",
-      "kind": "odds",
-      "observed_at": "2026-10-16T21:16:56.785Z",
-      "sport": "props",
-      "event": "New Orleans Saints @ New York Giants",
-      "start": "2026-10-18T17:00Z",
-      "pick": "Cam Skattebo — Over 53.5 Rushing yards",
-      "title": "Published odds changed",
-      "before": "-102 · line 53.5",
-      "after": "-115 · line 53.5",
-      "book": "Caesars",
-      "source_quote_at": "2026-10-16T21:14:33.491275+00:00",
-      "source": "Existing Props board",
-      "note": "Your ticket keeps its original odds. Recheck the live book before placing a new wager."
-    },
-    {
-      "id": "odds|props|401873005|2026-10-18T20:25Z|Receiving yards|Tre Tucker|over|DraftKings|2026-10-16T21:16:56.785Z",
-      "kind": "odds",
-      "observed_at": "2026-10-16T21:16:56.785Z",
-      "sport": "props",
-      "event": "Buffalo Bills @ Las Vegas Raiders",
-      "start": "2026-10-18T20:25Z",
-      "pick": "Tre Tucker — Over 34.5 Receiving yards",
-      "title": "Published odds changed",
-      "before": "-114 · line 38.5",
-      "after": "-109 · line 38.5",
-      "book": "DraftKings",
-      "source_quote_at": "2026-10-16T21:14:33.491275+00:00",
-      "source": "Existing Props board",
-      "note": "Your ticket keeps its original odds. Recheck the live book before placing a new wager."
-    },
-    {
-      "id": "odds|props|401873005|2026-10-18T20:25Z|Receiving yards|Tre Tucker|over|theScore Bet|2026-10-16T21:16:56.785Z",
-      "kind": "odds",
-      "observed_at": "2026-10-16T21:16:56.785Z",
-      "sport": "props",
-      "event": "Buffalo Bills @ Las Vegas Raiders",
-      "start": "2026-10-18T20:25Z",
-      "pick": "Tre Tucker — Over 39.5 Receiving yards",
-      "title": "Published odds changed",
-      "before": "-105 · line 39.5",
-      "after": "+100 · line 39.5",
-      "book": "theScore Bet",
-      "source_quote_at": "2026-10-16T21:14:33.491275+00:00",
-      "source": "Existing Props board",
-      "note": "Your ticket keeps its original odds. Recheck the live book before placing a new wager."
     }
   ]
 }
