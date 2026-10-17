@@ -1,29 +1,99 @@
 {
   "schema": 1,
-  "checked_at": "2026-10-17T14:01:18.264Z",
+  "checked_at": "2026-10-17T14:28:55.819Z",
   "coverage": {
-    "nhl": {
-      "status": "available",
-      "reports": 50,
-      "checked_at": "2026-10-17T14:01:18.264Z"
-    },
     "ncaaf": {
       "status": "empty",
       "reports": 0,
-      "checked_at": "2026-10-17T14:01:18.264Z"
+      "checked_at": "2026-10-17T14:28:55.819Z"
     },
-    "mlb": {
+    "nhl": {
       "status": "available",
-      "reports": 3,
-      "checked_at": "2026-10-17T14:01:18.264Z"
+      "reports": 51,
+      "checked_at": "2026-10-17T14:28:55.819Z"
     },
     "nfl": {
       "status": "available",
       "reports": 346,
-      "checked_at": "2026-10-17T14:01:18.264Z"
+      "checked_at": "2026-10-17T14:28:55.819Z"
+    },
+    "mlb": {
+      "status": "available",
+      "reports": 3,
+      "checked_at": "2026-10-17T14:28:55.819Z"
     }
   },
   "events": [
+    {
+      "id": "starter|nhl:nhl:2026020123:home|2026-10-17T14:28:55.819Z",
+      "kind": "starter",
+      "observed_at": "2026-10-17T14:28:55.819Z",
+      "sport": "nhl",
+      "event": "VAN @ TB",
+      "start": "2026-10-17T20:00:00+00:00",
+      "title": "NHL starting goalie updated",
+      "before": "Andrei Vasilevskiy",
+      "after": "Dennis Hildeby · Unknown",
+      "source_quote_at": "2026-10-17T14:27:08.347109+00:00",
+      "source": "NHL board",
+      "note": "Review the matchup after a starter change; the baseline does not price individual goalie talent."
+    },
+    {
+      "id": "starter|nhl:nhl:2026020124:home|2026-10-17T14:28:55.819Z",
+      "kind": "starter",
+      "observed_at": "2026-10-17T14:28:55.819Z",
+      "sport": "nhl",
+      "event": "SEA @ FLA",
+      "start": "2026-10-17T22:00:00+00:00",
+      "title": "NHL starting goalie updated",
+      "before": "Akira Schmid",
+      "after": "Jacob Markstrom · confirmed",
+      "source_quote_at": "2026-10-17T14:27:08.347109+00:00",
+      "source": "NHL board",
+      "note": "Review the matchup after a starter change; the baseline does not price individual goalie talent."
+    },
+    {
+      "id": "injury|nhl:6:Jake Walman|2026-10-17T14:28:55.819Z",
+      "kind": "injury",
+      "observed_at": "2026-10-17T14:28:55.819Z",
+      "sport": "nhl",
+      "title": "Player availability changed",
+      "event": "Edmonton Oilers",
+      "pick": "Jake Walman",
+      "before": "Day-To-Day · Upper Body",
+      "after": "Day-To-Day · Walman (upper body) will likely play in Saturday's game against the Mammoth, Jason Gregor of Sports 1440 Edmonton reports.",
+      "source_quote_at": "2026-10-16T20:22Z",
+      "source": "ESPN injuries",
+      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
+    },
+    {
+      "id": "injury|nhl:21:Dakota Joshua|2026-10-17T14:28:55.819Z",
+      "kind": "injury",
+      "observed_at": "2026-10-17T14:28:55.819Z",
+      "sport": "nhl",
+      "title": "New availability report",
+      "event": "Toronto Maple Leafs",
+      "pick": "Dakota Joshua",
+      "before": "Not in the previous dated report",
+      "after": "Injured Reserve · Abdomen",
+      "source_quote_at": "2026-10-17T14:02Z",
+      "source": "ESPN injuries",
+      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
+    },
+    {
+      "id": "injury|nfl:3:Anthony Johnson Jr.|2026-10-17T14:28:55.819Z",
+      "kind": "injury",
+      "observed_at": "2026-10-17T14:28:55.819Z",
+      "sport": "nfl",
+      "title": "Player availability changed",
+      "event": "Chicago Bears",
+      "pick": "Anthony Johnson Jr.",
+      "before": "Injured Reserve · Undisclosed",
+      "after": "Out · Undisclosed",
+      "source_quote_at": "2026-10-17T14:00Z",
+      "source": "ESPN injuries",
+      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
+    },
     {
       "id": "injury|nhl:17:Nicolas Roy|2026-10-17T14:01:18.264Z",
       "kind": "injury",
@@ -2820,76 +2890,6 @@
       "before": "Questionable · Hamstring",
       "after": "Active · Wicks (hamstring) doesn't have a designation for Sunday's contest versus the Panthers.",
       "source_quote_at": "2026-10-16T20:34Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:21:DeVonta Smith|2026-10-16T21:04:37.151Z",
-      "kind": "injury",
-      "observed_at": "2026-10-16T21:04:37.151Z",
-      "sport": "nfl",
-      "title": "Player availability changed",
-      "event": "Philadelphia Eagles",
-      "pick": "DeVonta Smith",
-      "before": "Questionable · Smith (hamstring) said Friday that he is \"good\" and that his availability for Week 6 is \"up to the doctors,\" Tim McManus of ESPN.com reports.",
-      "after": "Active · Smith (hamstring) practiced in full Friday and doesn't have a designation for Sunday's game versus the Panthers.",
-      "source_quote_at": "2026-10-16T20:25Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:10:Marcus Harris|2026-10-16T21:04:37.151Z",
-      "kind": "injury",
-      "observed_at": "2026-10-16T21:04:37.151Z",
-      "sport": "nfl",
-      "title": "Player availability changed",
-      "event": "Tennessee Titans",
-      "pick": "Marcus Harris",
-      "before": "Questionable · Ankle",
-      "after": "Active",
-      "source_quote_at": "2026-10-16T20:38Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:10:Jordan Elliott|2026-10-16T21:04:37.151Z",
-      "kind": "injury",
-      "observed_at": "2026-10-16T21:04:37.151Z",
-      "sport": "nfl",
-      "title": "New availability report",
-      "event": "Tennessee Titans",
-      "pick": "Jordan Elliott",
-      "before": "Not in the previous dated report",
-      "after": "Out · Personal",
-      "source_quote_at": "2026-10-16T20:37Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:10:Amani Hooker|2026-10-16T21:04:37.151Z",
-      "kind": "injury",
-      "observed_at": "2026-10-16T21:04:37.151Z",
-      "sport": "nfl",
-      "title": "Player availability changed",
-      "event": "Tennessee Titans",
-      "pick": "Amani Hooker",
-      "before": "Questionable · Concussion",
-      "after": "Active · Hooker (concussion) was a full participant at practice Thursday.",
-      "source_quote_at": "2026-10-15T23:27Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:10:David Martin-Robinson|2026-10-16T21:04:37.151Z",
-      "kind": "injury",
-      "observed_at": "2026-10-16T21:04:37.151Z",
-      "sport": "nfl",
-      "title": "Player availability changed",
-      "event": "Tennessee Titans",
-      "pick": "David Martin-Robinson",
-      "before": "Questionable · Hamstring",
-      "after": "Active · Martin-Robinson (hamstring) was a limited participant at practice Thursday.",
-      "source_quote_at": "2026-10-15T23:22Z",
       "source": "ESPN injuries",
       "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
     }
