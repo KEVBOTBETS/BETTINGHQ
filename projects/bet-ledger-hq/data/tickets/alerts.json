@@ -1,29 +1,71 @@
 {
   "schema": 1,
-  "checked_at": "2026-10-17T01:13:36.918Z",
+  "checked_at": "2026-10-17T01:33:37.950Z",
   "coverage": {
+    "nfl": {
+      "status": "available",
+      "reports": 341,
+      "checked_at": "2026-10-17T01:33:37.950Z"
+    },
     "ncaaf": {
       "status": "empty",
       "reports": 0,
-      "checked_at": "2026-10-17T01:13:36.918Z"
-    },
-    "mlb": {
-      "status": "available",
-      "reports": 3,
-      "checked_at": "2026-10-17T01:13:36.918Z"
+      "checked_at": "2026-10-17T01:33:37.950Z"
     },
     "nhl": {
       "status": "available",
       "reports": 49,
-      "checked_at": "2026-10-17T01:13:36.918Z"
+      "checked_at": "2026-10-17T01:33:37.950Z"
     },
-    "nfl": {
+    "mlb": {
       "status": "available",
-      "reports": 343,
-      "checked_at": "2026-10-17T01:13:36.918Z"
+      "reports": 3,
+      "checked_at": "2026-10-17T01:33:37.950Z"
     }
   },
   "events": [
+    {
+      "id": "injury|nfl:7:Jonathon Cooper|2026-10-17T01:33:37.950Z",
+      "kind": "injury",
+      "observed_at": "2026-10-17T01:33:37.950Z",
+      "sport": "nfl",
+      "title": "Player availability changed",
+      "event": "Denver Broncos",
+      "pick": "Jonathon Cooper",
+      "before": "Active",
+      "after": "Active · Cooper (personal) was reinstated from the Commissioner Exempt List on Friday, Tom Pelissero of Netflix reports.",
+      "source_quote_at": "2026-10-17T01:11Z",
+      "source": "ESPN injuries",
+      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
+    },
+    {
+      "id": "injury|nfl:11:Will Mallory|2026-10-17T01:33:37.950Z",
+      "kind": "injury",
+      "observed_at": "2026-10-17T01:33:37.950Z",
+      "sport": "nfl",
+      "title": "New availability report",
+      "event": "Indianapolis Colts",
+      "pick": "Will Mallory",
+      "before": "Not in the previous dated report",
+      "after": "Injured Reserve · Thumb",
+      "source_quote_at": "2026-10-17T01:17Z",
+      "source": "ESPN injuries",
+      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
+    },
+    {
+      "id": "injury|nfl:27:David Sills V|2026-10-17T01:33:37.950Z",
+      "kind": "injury",
+      "observed_at": "2026-10-17T01:33:37.950Z",
+      "sport": "nfl",
+      "title": "New availability report",
+      "event": "Tampa Bay Buccaneers",
+      "pick": "David Sills V",
+      "before": "Not in the previous dated report",
+      "after": "Injured Reserve · Hamstring",
+      "source_quote_at": "2026-10-17T01:18Z",
+      "source": "ESPN injuries",
+      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
+    },
     {
       "id": "odds|props|401873003|2026-10-18T17:00Z|Receiving yards|Josh Downs|over|bet365|2026-10-17T01:13:36.918Z",
       "kind": "odds",
@@ -2844,48 +2886,6 @@
       "source_quote_at": "2026-10-16T18:51Z",
       "source": "ESPN injuries",
       "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:18:Anfernee Jennings|2026-10-16T19:05:36.825Z",
-      "kind": "injury",
-      "observed_at": "2026-10-16T19:05:36.825Z",
-      "sport": "nfl",
-      "title": "New availability report",
-      "event": "New Orleans Saints",
-      "pick": "Anfernee Jennings",
-      "before": "Not in the previous dated report",
-      "after": "Out · Knee",
-      "source_quote_at": "2026-10-16T18:50Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:18:Kaden Elliss|2026-10-16T19:05:36.825Z",
-      "kind": "injury",
-      "observed_at": "2026-10-16T19:05:36.825Z",
-      "sport": "nfl",
-      "title": "Player availability changed",
-      "event": "New Orleans Saints",
-      "pick": "Kaden Elliss",
-      "before": "Questionable · Calf",
-      "after": "Out · Calf",
-      "source_quote_at": "2026-10-16T18:50Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "starter|nhl:nhl:2026020119:away|2026-10-16T18:34:35.622Z",
-      "kind": "starter",
-      "observed_at": "2026-10-16T18:34:35.622Z",
-      "sport": "nhl",
-      "event": "PIT @ COL",
-      "start": "2026-10-17T01:00:00+00:00",
-      "title": "NHL starting goalie updated",
-      "before": "Arturs Silovs",
-      "after": "Arturs Silovs · confirmed",
-      "source_quote_at": "2026-10-16T18:33:19.976521+00:00",
-      "source": "NHL board",
-      "note": "Review the matchup after a starter change; the baseline does not price individual goalie talent."
     }
   ]
 }
