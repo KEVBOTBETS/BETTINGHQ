@@ -1,29 +1,85 @@
 {
   "schema": 1,
-  "checked_at": "2026-10-17T18:08:12.523Z",
+  "checked_at": "2026-10-17T18:31:17.180Z",
   "coverage": {
-    "ncaaf": {
-      "status": "empty",
-      "reports": 0,
-      "checked_at": "2026-10-17T18:08:12.523Z"
+    "mlb": {
+      "status": "available",
+      "reports": 3,
+      "checked_at": "2026-10-17T18:31:17.180Z"
     },
     "nhl": {
       "status": "available",
       "reports": 43,
-      "checked_at": "2026-10-17T18:08:12.523Z"
+      "checked_at": "2026-10-17T18:31:17.180Z"
     },
-    "mlb": {
-      "status": "available",
-      "reports": 3,
-      "checked_at": "2026-10-17T18:08:12.523Z"
+    "ncaaf": {
+      "status": "empty",
+      "reports": 0,
+      "checked_at": "2026-10-17T18:31:17.180Z"
     },
     "nfl": {
       "status": "available",
       "reports": 349,
-      "checked_at": "2026-10-17T18:08:12.523Z"
+      "checked_at": "2026-10-17T18:31:17.180Z"
     }
   },
   "events": [
+    {
+      "id": "starter|nhl:nhl:2026020134:home|2026-10-17T18:31:17.180Z",
+      "kind": "starter",
+      "observed_at": "2026-10-17T18:31:17.180Z",
+      "sport": "nhl",
+      "event": "PIT @ VGK",
+      "start": "2026-10-18T02:00:00+00:00",
+      "title": "NHL starting goalie updated",
+      "before": "Adin Hill",
+      "after": "Adin Hill · confirmed",
+      "source_quote_at": "2026-10-17T18:29:27.382577+00:00",
+      "source": "NHL board",
+      "note": "Review the matchup after a starter change; the baseline does not price individual goalie talent."
+    },
+    {
+      "id": "injury|nhl:25:Mikael Granlund|2026-10-17T18:31:17.180Z",
+      "kind": "injury",
+      "observed_at": "2026-10-17T18:31:17.180Z",
+      "sport": "nhl",
+      "title": "Player availability changed",
+      "event": "Anaheim Ducks",
+      "pick": "Mikael Granlund",
+      "before": "Out · Upper Body",
+      "after": "Day-To-Day · Upper Body",
+      "source_quote_at": "2026-10-17T18:28Z",
+      "source": "ESPN injuries",
+      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
+    },
+    {
+      "id": "injury|nfl:34:Ja'Marcus Ingram|2026-10-17T18:31:17.180Z",
+      "kind": "injury",
+      "observed_at": "2026-10-17T18:31:17.180Z",
+      "sport": "nfl",
+      "title": "Player availability changed",
+      "event": "Houston Texans",
+      "pick": "Ja'Marcus Ingram",
+      "before": "Injured Reserve · Elbow",
+      "after": "Questionable · Elbow",
+      "source_quote_at": "2026-10-17T18:26Z",
+      "source": "ESPN injuries",
+      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
+    },
+    {
+      "id": "injury|nfl:34:Henry To'oTo'o|2026-10-17T18:31:17.180Z",
+      "kind": "injury",
+      "observed_at": "2026-10-17T18:31:17.180Z",
+      "sport": "nfl",
+      "title": "Player availability changed",
+      "event": "Houston Texans",
+      "pick": "Henry To'oTo'o",
+      "before": "Injured Reserve · Shoulder",
+      "after": "Questionable · Shoulder",
+      "source_quote_at": "2026-10-17T18:13Z",
+      "source": "ESPN injuries",
+      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
+    },
     {
       "id": "odds|props|401873004|2026-10-18T20:05Z|Rushing yards|Jacoby Brissett|over|Fanatics Sportsbook|2026-10-17T18:08:12.523Z",
       "kind": "odds",
@@ -2875,67 +2931,6 @@
       "source_quote_at": "2026-10-16T21:54:14.334189+00:00",
       "source": "Existing MLB board",
       "note": "Your ticket keeps its original odds. Recheck the live book before placing a new wager."
-    },
-    {
-      "id": "odds|mlb|849817|2026-10-17T00:00:00Z|TOTAL||over|DraftKings|2026-10-16T21:58:36.940Z",
-      "kind": "odds",
-      "observed_at": "2026-10-16T21:58:36.940Z",
-      "sport": "mlb",
-      "event": "TB @ CLE",
-      "start": "2026-10-17T00:00:00Z",
-      "pick": "Over 6.5",
-      "title": "Published odds changed",
-      "before": "-118 · line 6.5",
-      "after": "-109 · line 6.5",
-      "book": "DraftKings",
-      "source_quote_at": "2026-10-16T21:54:14.334189+00:00",
-      "source": "Existing MLB board",
-      "note": "Your ticket keeps its original odds. Recheck the live book before placing a new wager."
-    },
-    {
-      "id": "odds|props|401873000|2026-10-18T17:00Z|Rushing yards|Cam Skattebo|over|Hard Rock Bet|2026-10-16T21:58:36.940Z",
-      "kind": "odds",
-      "observed_at": "2026-10-16T21:58:36.940Z",
-      "sport": "props",
-      "event": "New Orleans Saints @ New York Giants",
-      "start": "2026-10-18T17:00Z",
-      "pick": "Cam Skattebo — Over 51.5 Rushing yards",
-      "title": "Published odds changed",
-      "before": "-115 · line 51.5",
-      "after": "-115 · line 52.5",
-      "book": "Hard Rock Bet",
-      "source_quote_at": "2026-10-16T21:55:52.010805+00:00",
-      "source": "Existing Props board",
-      "note": "Your ticket keeps its original odds. Recheck the live book before placing a new wager."
-    },
-    {
-      "id": "odds|props|401873003|2026-10-18T17:00Z|Receiving yards|Josh Downs|over|bet365|2026-10-16T21:58:36.940Z",
-      "kind": "odds",
-      "observed_at": "2026-10-16T21:58:36.940Z",
-      "sport": "props",
-      "event": "Tennessee Titans @ Indianapolis Colts",
-      "start": "2026-10-18T17:00Z",
-      "pick": "Josh Downs — Over 46.5 Receiving yards",
-      "title": "Published odds changed",
-      "before": "-115 · line 46.5",
-      "after": "+115 · line 59.5",
-      "book": "bet365",
-      "source_quote_at": "2026-10-16T21:55:52.010805+00:00",
-      "source": "Existing Props board",
-      "note": "Your ticket keeps its original odds. Recheck the live book before placing a new wager."
-    },
-    {
-      "id": "lineup|849817|2026-10-16T21:58:36.940Z",
-      "kind": "lineup",
-      "observed_at": "2026-10-16T21:58:36.940Z",
-      "sport": "mlb",
-      "event": "TB @ CLE",
-      "start": "2026-10-17T00:00:00Z",
-      "title": "Batting orders confirmed",
-      "before": "Projected batting orders",
-      "after": "Confirmed batting orders",
-      "source_quote_at": "2026-10-16T21:55:37+00:00",
-      "source": "MLB board"
     }
   ]
 }
