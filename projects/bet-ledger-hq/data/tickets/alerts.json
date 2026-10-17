@@ -1,29 +1,107 @@
 {
   "schema": 1,
-  "checked_at": "2026-10-17T17:02:10.304Z",
+  "checked_at": "2026-10-17T17:12:07.461Z",
   "coverage": {
     "ncaaf": {
       "status": "empty",
       "reports": 0,
-      "checked_at": "2026-10-17T17:02:10.304Z"
-    },
-    "mlb": {
-      "status": "available",
-      "reports": 3,
-      "checked_at": "2026-10-17T17:02:10.304Z"
+      "checked_at": "2026-10-17T17:12:07.461Z"
     },
     "nhl": {
       "status": "available",
       "reports": 46,
-      "checked_at": "2026-10-17T17:02:10.304Z"
+      "checked_at": "2026-10-17T17:12:07.461Z"
     },
     "nfl": {
       "status": "available",
       "reports": 347,
-      "checked_at": "2026-10-17T17:02:10.304Z"
+      "checked_at": "2026-10-17T17:12:07.461Z"
+    },
+    "mlb": {
+      "status": "available",
+      "reports": 3,
+      "checked_at": "2026-10-17T17:12:07.461Z"
     }
   },
   "events": [
+    {
+      "id": "odds|props|401873007|2026-10-19T00:20Z|Rushing yards|Dak Prescott|over|FanDuel|2026-10-17T17:12:07.461Z",
+      "kind": "odds",
+      "observed_at": "2026-10-17T17:12:07.461Z",
+      "sport": "props",
+      "event": "Dallas Cowboys @ Green Bay Packers",
+      "start": "2026-10-19T00:20Z",
+      "pick": "Dak Prescott — Over 9.5 Rushing yards",
+      "title": "Published odds changed",
+      "before": "-114 · line 9.5",
+      "after": "-114 · line 8.5",
+      "book": "FanDuel",
+      "source_quote_at": "2026-10-17T17:09:37.129497+00:00",
+      "source": "Existing Props board",
+      "note": "Your ticket keeps its original odds. Recheck the live book before placing a new wager."
+    },
+    {
+      "id": "odds|props|401873003|2026-10-18T17:00Z|Receiving yards|Josh Downs|over|bet365|2026-10-17T17:12:07.461Z",
+      "kind": "odds",
+      "observed_at": "2026-10-17T17:12:07.461Z",
+      "sport": "props",
+      "event": "Tennessee Titans @ Indianapolis Colts",
+      "start": "2026-10-18T17:00Z",
+      "pick": "Josh Downs — Over 46.5 Receiving yards",
+      "title": "Published odds changed",
+      "before": "-115 · line 52.5",
+      "after": "-115 · line 55.5",
+      "book": "bet365",
+      "source_quote_at": "2026-10-17T17:09:37.129497+00:00",
+      "source": "Existing Props board",
+      "note": "Your ticket keeps its original odds. Recheck the live book before placing a new wager."
+    },
+    {
+      "id": "odds|props|401872996|2026-10-18T13:30Z|Receiving yards|Bhayshul Tuten|over|Fanatics Sportsbook|2026-10-17T17:12:07.461Z",
+      "kind": "odds",
+      "observed_at": "2026-10-17T17:12:07.461Z",
+      "sport": "props",
+      "event": "Houston Texans @ Jacksonville Jaguars",
+      "start": "2026-10-18T13:30Z",
+      "pick": "Bhayshul Tuten — Over 10.5 Receiving yards",
+      "title": "Published odds changed",
+      "before": "-105 · line 10.5",
+      "after": "-120 · line 10.5",
+      "book": "Fanatics Sportsbook",
+      "source_quote_at": "2026-10-17T17:09:37.129497+00:00",
+      "source": "Existing Props board",
+      "note": "Your ticket keeps its original odds. Recheck the live book before placing a new wager."
+    },
+    {
+      "id": "price-limit|props|401872996|2026-10-18T13:30Z|Receiving yards|Bhayshul Tuten|over|Fanatics Sportsbook|2026-10-17T17:12:07.461Z",
+      "kind": "price-limit",
+      "observed_at": "2026-10-17T17:12:07.461Z",
+      "sport": "props",
+      "event": "Houston Texans @ Jacksonville Jaguars",
+      "start": "2026-10-18T13:30Z",
+      "pick": "Bhayshul Tuten — Over 10.5 Receiving yards",
+      "title": "Price below published minimum",
+      "before": "-105",
+      "after": "-120",
+      "book": "Fanatics Sportsbook",
+      "source_quote_at": "2026-10-17T17:09:37.129497+00:00",
+      "source": "Published price policy",
+      "note": "Minimum -112 at unchanged line 10.5. Uses the saved forecast, not a new model approval. Confirm current odds and qualification; scheduled observations can miss intervening moves."
+    },
+    {
+      "id": "injury|nhl:19:Pavel Buchnevich|2026-10-17T17:12:07.461Z",
+      "kind": "injury",
+      "observed_at": "2026-10-17T17:12:07.461Z",
+      "sport": "nhl",
+      "title": "Player availability changed",
+      "event": "St. Louis Blues",
+      "pick": "Pavel Buchnevich",
+      "before": "Day-To-Day · Personal",
+      "after": "Day-To-Day · day-to-day",
+      "source_quote_at": "2026-10-16T13:30Z",
+      "source": "ESPN injuries",
+      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
+    },
     {
       "id": "starter|nhl:nhl:2026020131:away|2026-10-17T17:02:10.304Z",
       "kind": "starter",
@@ -2850,76 +2928,6 @@
       "before": "Questionable · Hamstring",
       "after": "Out · Hamstring",
       "source_quote_at": "2026-10-16T21:22Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:19:Tyler Nubin|2026-10-16T21:30:28.048Z",
-      "kind": "injury",
-      "observed_at": "2026-10-16T21:30:28.048Z",
-      "sport": "nfl",
-      "title": "Player availability changed",
-      "event": "New York Giants",
-      "pick": "Tyler Nubin",
-      "before": "Questionable · Neck",
-      "after": "Out · Neck",
-      "source_quote_at": "2026-10-16T21:16Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:19:Colton Hood|2026-10-16T21:30:28.048Z",
-      "kind": "injury",
-      "observed_at": "2026-10-16T21:30:28.048Z",
-      "sport": "nfl",
-      "title": "New availability report",
-      "event": "New York Giants",
-      "pick": "Colton Hood",
-      "before": "Not in the previous dated report",
-      "after": "Out · Concussion",
-      "source_quote_at": "2026-10-16T21:16Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:19:Malik Harrison|2026-10-16T21:30:28.048Z",
-      "kind": "injury",
-      "observed_at": "2026-10-16T21:30:28.048Z",
-      "sport": "nfl",
-      "title": "Player availability changed",
-      "event": "New York Giants",
-      "pick": "Malik Harrison",
-      "before": "Questionable · Groin",
-      "after": "Active",
-      "source_quote_at": "2026-10-16T21:16Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:19:Greg Newsome II|2026-10-16T21:30:28.048Z",
-      "kind": "injury",
-      "observed_at": "2026-10-16T21:30:28.048Z",
-      "sport": "nfl",
-      "title": "Player availability changed",
-      "event": "New York Giants",
-      "pick": "Greg Newsome II",
-      "before": "Questionable · Groin",
-      "after": "Active",
-      "source_quote_at": "2026-10-16T21:15Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:19:Jason Pinnock|2026-10-16T21:30:28.048Z",
-      "kind": "injury",
-      "observed_at": "2026-10-16T21:30:28.048Z",
-      "sport": "nfl",
-      "title": "New availability report",
-      "event": "New York Giants",
-      "pick": "Jason Pinnock",
-      "before": "Not in the previous dated report",
-      "after": "Active",
-      "source_quote_at": "2026-10-16T21:15Z",
       "source": "ESPN injuries",
       "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
     }
