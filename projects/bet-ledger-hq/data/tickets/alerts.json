@@ -1,29 +1,71 @@
 {
   "schema": 1,
-  "checked_at": "2026-10-17T17:12:07.461Z",
+  "checked_at": "2026-10-17T17:28:17.314Z",
   "coverage": {
     "ncaaf": {
       "status": "empty",
       "reports": 0,
-      "checked_at": "2026-10-17T17:12:07.461Z"
+      "checked_at": "2026-10-17T17:28:17.314Z"
     },
     "nhl": {
       "status": "available",
-      "reports": 46,
-      "checked_at": "2026-10-17T17:12:07.461Z"
-    },
-    "nfl": {
-      "status": "available",
-      "reports": 347,
-      "checked_at": "2026-10-17T17:12:07.461Z"
+      "reports": 44,
+      "checked_at": "2026-10-17T17:28:17.314Z"
     },
     "mlb": {
       "status": "available",
       "reports": 3,
-      "checked_at": "2026-10-17T17:12:07.461Z"
+      "checked_at": "2026-10-17T17:28:17.314Z"
+    },
+    "nfl": {
+      "status": "available",
+      "reports": 347,
+      "checked_at": "2026-10-17T17:28:17.314Z"
     }
   },
   "events": [
+    {
+      "id": "starter|nhl:nhl:2026020127:away|2026-10-17T17:28:17.314Z",
+      "kind": "starter",
+      "observed_at": "2026-10-17T17:28:17.314Z",
+      "sport": "nhl",
+      "event": "SJ @ DET",
+      "start": "2026-10-17T23:00:00+00:00",
+      "title": "NHL starting goalie updated",
+      "before": "Alex Nedeljkovic",
+      "after": "Alex Nedeljkovic · confirmed",
+      "source_quote_at": "2026-10-17T17:26:01.640900+00:00",
+      "source": "NHL board",
+      "note": "Review the matchup after a starter change; the baseline does not price individual goalie talent."
+    },
+    {
+      "id": "injury|nhl:10:Florian Xhekaj|2026-10-17T17:28:17.314Z",
+      "kind": "injury",
+      "observed_at": "2026-10-17T17:28:17.314Z",
+      "sport": "nhl",
+      "title": "Player availability changed",
+      "event": "Montreal Canadiens",
+      "pick": "Florian Xhekaj",
+      "before": "Out · Lower Body",
+      "after": "Injured Reserve · Lower Body",
+      "source_quote_at": "2026-10-17T17:08Z",
+      "source": "ESPN injuries",
+      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
+    },
+    {
+      "id": "injury|nhl:16:Egor Chinakhov|2026-10-17T17:28:17.314Z",
+      "kind": "injury",
+      "observed_at": "2026-10-17T17:28:17.314Z",
+      "sport": "nhl",
+      "title": "Player availability changed",
+      "event": "Pittsburgh Penguins",
+      "pick": "Egor Chinakhov",
+      "before": "Day-To-Day · Lower Body",
+      "after": "Out · Lower Body",
+      "source_quote_at": "2026-10-17T17:06Z",
+      "source": "ESPN injuries",
+      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
+    },
     {
       "id": "odds|props|401873007|2026-10-19T00:20Z|Rushing yards|Dak Prescott|over|FanDuel|2026-10-17T17:12:07.461Z",
       "kind": "odds",
@@ -2886,48 +2928,6 @@
       "before": "Not in the previous dated report",
       "after": "Questionable · Foot",
       "source_quote_at": "2026-10-16T21:23Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:6:Joey Porter Jr.|2026-10-16T21:30:28.048Z",
-      "kind": "injury",
-      "observed_at": "2026-10-16T21:30:28.048Z",
-      "sport": "nfl",
-      "title": "Player availability changed",
-      "event": "Dallas Cowboys",
-      "pick": "Joey Porter Jr.",
-      "before": "Active · Porter (illness) was a full participant in Thursday's practice, Calvin Watkins of The Dallas Morning News reports.",
-      "after": "Questionable · Ankle",
-      "source_quote_at": "2026-10-16T21:23Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:6:Drew Shelton|2026-10-16T21:30:28.048Z",
-      "kind": "injury",
-      "observed_at": "2026-10-16T21:30:28.048Z",
-      "sport": "nfl",
-      "title": "New availability report",
-      "event": "Dallas Cowboys",
-      "pick": "Drew Shelton",
-      "before": "Not in the previous dated report",
-      "after": "Out · Hamstring",
-      "source_quote_at": "2026-10-16T21:22Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:6:Cobie Durant|2026-10-16T21:30:28.048Z",
-      "kind": "injury",
-      "observed_at": "2026-10-16T21:30:28.048Z",
-      "sport": "nfl",
-      "title": "Player availability changed",
-      "event": "Dallas Cowboys",
-      "pick": "Cobie Durant",
-      "before": "Questionable · Hamstring",
-      "after": "Out · Hamstring",
-      "source_quote_at": "2026-10-16T21:22Z",
       "source": "ESPN injuries",
       "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
     }
