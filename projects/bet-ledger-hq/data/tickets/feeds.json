@@ -160,13 +160,13 @@
     "accuracy": {
       "generated_at": "2026-10-17T01:11:20.854786+00:00"
     },
-    "lastGoodAt": "2026-10-17T02:04:19.995Z"
+    "lastGoodAt": "2026-10-17T02:31:48.689Z"
   },
   "ladder": {
     "accuracy": {
       "generated_at": "2026-10-17T01:11:36.633538+00:00"
     },
-    "lastGoodAt": "2026-10-17T02:04:19.995Z"
+    "lastGoodAt": "2026-10-17T02:31:48.689Z"
   },
   "props": {
     "meta": {
@@ -11061,7 +11061,7 @@
         "roster_verified": true
       }
     ],
-    "lastGoodAt": "2026-10-17T02:04:19.995Z"
+    "lastGoodAt": "2026-10-17T02:31:48.689Z"
   },
   "nfl": {
     "meta": {
@@ -27211,7 +27211,7 @@
         "odds_observed_at": "2026-10-17T01:06:09.550086+00:00"
       }
     ],
-    "lastGoodAt": "2026-10-17T02:04:19.995Z"
+    "lastGoodAt": "2026-10-17T02:31:48.689Z"
   },
   "ncaaf": {
     "meta": {
@@ -36602,24 +36602,9 @@
         "odds_observed_at": "2026-10-16T23:18:53.572851+00:00"
       }
     ],
-    "lastGoodAt": "2026-10-17T02:04:19.995Z"
+    "lastGoodAt": "2026-10-17T02:31:48.689Z"
   },
   "mlb": {
-    "slate": {
-      "generated_at": "2026-10-17T01:10:10+00:00",
-      "games": [
-        {
-          "gamePk": 849817,
-          "home": "CLE",
-          "away": "TB",
-          "start": "2026-10-17T00:00:00Z",
-          "status": "Delayed Start",
-          "lineups_confirmed": true,
-          "odds": {},
-          "bets": []
-        }
-      ]
-    },
     "meta": {
       "generated_at": "2026-10-17T01:10:22+00:00",
       "day_summary": {
@@ -36808,14 +36793,29 @@
         "probability_reason": "candidate did not improve the chronological holdout"
       }
     },
+    "slate": {
+      "generated_at": "2026-10-17T01:10:10+00:00",
+      "games": [
+        {
+          "gamePk": 849817,
+          "home": "CLE",
+          "away": "TB",
+          "start": "2026-10-17T00:00:00Z",
+          "status": "Delayed Start",
+          "lineups_confirmed": true,
+          "odds": {},
+          "bets": []
+        }
+      ]
+    },
     "accuracy": {
       "generated_at": "2026-10-17T01:10:22+00:00"
     },
-    "lastGoodAt": "2026-10-17T02:04:19.995Z"
+    "lastGoodAt": "2026-10-17T02:31:48.689Z"
   },
   "nhl": {
     "meta": {
-      "generated_at": "2026-10-17T02:02:43.427706+00:00",
+      "generated_at": "2026-10-17T02:29:59.478571+00:00",
       "model_version": "nhl-poisson-1.0",
       "season": 2027,
       "timezone": "America/Toronto",
@@ -36842,22 +36842,22 @@
         },
         "nhl-schedule-2026-10-16": {
           "status": "ok",
-          "observed_at": "2026-10-17T02:02:43.427706+00:00",
+          "observed_at": "2026-10-17T02:29:59.478571+00:00",
           "url": "https://api-web.nhle.com/v1/schedule/2026-10-16"
         },
         "nhl-schedule-2026-10-02": {
           "status": "ok",
-          "observed_at": "2026-10-17T02:02:43.427706+00:00",
+          "observed_at": "2026-10-17T02:29:59.478571+00:00",
           "url": "https://api-web.nhle.com/v1/schedule/2026-10-02"
         },
         "nhl-schedule-2026-10-09": {
           "status": "ok",
-          "observed_at": "2026-10-17T02:02:43.427706+00:00",
+          "observed_at": "2026-10-17T02:29:59.478571+00:00",
           "url": "https://api-web.nhle.com/v1/schedule/2026-10-09"
         },
         "nhl-schedule-2026-10-23": {
           "status": "ok",
-          "observed_at": "2026-10-17T02:02:43.427706+00:00",
+          "observed_at": "2026-10-17T02:29:59.478571+00:00",
           "url": "https://api-web.nhle.com/v1/schedule/2026-10-23"
         },
         "standings-2027": {
@@ -36873,7 +36873,7 @@
           "error": "HTTPError"
         },
         "nhl-official": {
-          "status": "ok",
+          "status": "cached",
           "observed_at": "2026-10-17T02:02:43.427706+00:00",
           "url": "https://api-web.nhle.com/v1/standings/now"
         },
@@ -36899,7 +36899,7 @@
         },
         "public-book-odds": {
           "status": "no matched prices",
-          "observed_at": "2026-10-17T02:02:43.427706+00:00",
+          "observed_at": "2026-10-17T02:29:59.478571+00:00",
           "url": "https://www.covers.com/sport/hockey/nhl/odds",
           "quotes": 0
         },
@@ -36958,99 +36958,10 @@
         "teams": 32
       }
     },
-    "board": [
-      {
-        "season_type": 2,
-        "tier": "PASS",
-        "stake": 0,
-        "held": true,
-        "odds_verified": true,
-        "start_time": "2026-10-17T02:00:00+00:00",
-        "game_id": "nhl:2026020120",
-        "matchup": "BOS @ ANA",
-        "market": "ML",
-        "side": "home",
-        "home": "ANA",
-        "away": "BOS",
-        "pick": "ANA ML",
-        "line": null,
-        "price": -110,
-        "book": "FanDuel (CA)",
-        "edge": -0.035365,
-        "model_prob": 0.505285,
-        "odds_observed_at": "2026-10-17T02:02:43.427706+00:00",
-        "model_version": "nhl-poisson-1.0"
-      },
-      {
-        "season_type": 2,
-        "tier": "PASS",
-        "stake": 0,
-        "held": true,
-        "odds_verified": true,
-        "start_time": "2026-10-17T02:00:00+00:00",
-        "game_id": "nhl:2026020120",
-        "matchup": "BOS @ ANA",
-        "market": "ML",
-        "side": "away",
-        "home": "ANA",
-        "away": "BOS",
-        "pick": "BOS ML",
-        "line": null,
-        "price": -110,
-        "book": "FanDuel (CA)",
-        "edge": -0.055544,
-        "model_prob": 0.494715,
-        "odds_observed_at": "2026-10-17T02:02:43.427706+00:00",
-        "model_version": "nhl-poisson-1.0"
-      },
-      {
-        "season_type": 2,
-        "tier": "PASS",
-        "stake": 0,
-        "held": true,
-        "odds_verified": true,
-        "start_time": "2026-10-17T02:00:00+00:00",
-        "game_id": "nhl:2026020120",
-        "matchup": "BOS @ ANA",
-        "market": "ML",
-        "side": "home",
-        "home": "ANA",
-        "away": "BOS",
-        "pick": "ANA ML",
-        "line": null,
-        "price": -108,
-        "book": "DraftKings (US)",
-        "edge": -0.033113,
-        "model_prob": 0.502037,
-        "odds_observed_at": "2026-10-17T02:02:43.427706+00:00",
-        "model_version": "nhl-poisson-1.0"
-      },
-      {
-        "season_type": 2,
-        "tier": "PASS",
-        "stake": 0,
-        "held": true,
-        "odds_verified": true,
-        "start_time": "2026-10-17T02:00:00+00:00",
-        "game_id": "nhl:2026020120",
-        "matchup": "BOS @ ANA",
-        "market": "ML",
-        "side": "away",
-        "home": "ANA",
-        "away": "BOS",
-        "pick": "BOS ML",
-        "line": null,
-        "price": -112,
-        "book": "DraftKings (US)",
-        "edge": -0.057428,
-        "model_prob": 0.497963,
-        "odds_observed_at": "2026-10-17T02:02:43.427706+00:00",
-        "model_version": "nhl-poisson-1.0"
-      }
-    ],
+    "board": [],
     "accuracy": {
-      "generated_at": "2026-10-17T02:02:43.427706+00:00"
+      "generated_at": "2026-10-17T02:29:59.478571+00:00"
     },
-    "lastGoodAt": "2026-10-17T02:04:19.995Z"
+    "lastGoodAt": "2026-10-17T02:31:48.689Z"
   }
 }
