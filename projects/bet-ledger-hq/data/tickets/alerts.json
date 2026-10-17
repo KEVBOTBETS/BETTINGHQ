@@ -1,29 +1,113 @@
 {
   "schema": 1,
-  "checked_at": "2026-10-17T06:00:43.165Z",
+  "checked_at": "2026-10-17T06:36:41.815Z",
   "coverage": {
-    "nhl": {
-      "status": "available",
-      "reports": 49,
-      "checked_at": "2026-10-17T06:00:43.165Z"
-    },
     "ncaaf": {
       "status": "empty",
       "reports": 0,
-      "checked_at": "2026-10-17T06:00:43.165Z"
+      "checked_at": "2026-10-17T06:36:41.815Z"
     },
-    "nfl": {
+    "nhl": {
       "status": "available",
-      "reports": 346,
-      "checked_at": "2026-10-17T06:00:43.165Z"
+      "reports": 50,
+      "checked_at": "2026-10-17T06:36:41.815Z"
     },
     "mlb": {
       "status": "available",
       "reports": 3,
-      "checked_at": "2026-10-17T06:00:43.165Z"
+      "checked_at": "2026-10-17T06:36:41.815Z"
+    },
+    "nfl": {
+      "status": "available",
+      "reports": 346,
+      "checked_at": "2026-10-17T06:36:41.815Z"
     }
   },
   "events": [
+    {
+      "id": "starter|nhl:nhl:2026020133:away|2026-10-17T06:36:41.815Z",
+      "kind": "starter",
+      "observed_at": "2026-10-17T06:36:41.815Z",
+      "sport": "nhl",
+      "event": "EDM @ UTA",
+      "start": "2026-10-18T02:00:00+00:00",
+      "title": "NHL starting goalie updated",
+      "before": "Not announced",
+      "after": "Tristan Jarry · confirmed",
+      "source_quote_at": "2026-10-17T06:34:42.000998+00:00",
+      "source": "NHL board",
+      "note": "Review the matchup after a starter change; the baseline does not price individual goalie talent."
+    },
+    {
+      "id": "injury|nhl:1:Pavel Zacha|2026-10-17T06:36:41.815Z",
+      "kind": "injury",
+      "observed_at": "2026-10-17T06:36:41.815Z",
+      "sport": "nhl",
+      "title": "New availability report",
+      "event": "Boston Bruins",
+      "pick": "Pavel Zacha",
+      "before": "Not in the previous dated report",
+      "after": "Day-To-Day · Undisclosed",
+      "source_quote_at": "2026-10-17T06:05Z",
+      "source": "ESPN injuries",
+      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
+    },
+    {
+      "id": "injury|nfl:33:Zay Flowers|2026-10-17T06:36:41.815Z",
+      "kind": "injury",
+      "observed_at": "2026-10-17T06:36:41.815Z",
+      "sport": "nfl",
+      "title": "Player availability changed",
+      "event": "Baltimore Ravens",
+      "pick": "Zay Flowers",
+      "before": "Active · Flowers (toe) is has been cleared to play for Sunday's game at Cleveland.",
+      "after": "Active · Flowers (toe) has been cleared to play in Sunday's game at Cleveland.",
+      "source_quote_at": "2026-10-16T20:05Z",
+      "source": "ESPN injuries",
+      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
+    },
+    {
+      "id": "injury|nfl:7:Ja'Quan McMillian|2026-10-17T06:36:41.815Z",
+      "kind": "injury",
+      "observed_at": "2026-10-17T06:36:41.815Z",
+      "sport": "nfl",
+      "title": "Player availability changed",
+      "event": "Denver Broncos",
+      "pick": "Ja'Quan McMillian",
+      "before": "Active · McMillian recorded five tackles (five solo), including 1.0 sack, and a pair of pass breakups, including an interception, in Thursday night's 17-14 overtime win over the Seahawks.",
+      "after": "Active · McMillian recorded five tackles (five solo), including 1.0 sacks, and a pair of pass breakups, including an interception, in Thursday night's 17-14 overtime win over the Seahawks.",
+      "source_quote_at": "2026-10-17T05:04Z",
+      "source": "ESPN injuries",
+      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
+    },
+    {
+      "id": "injury|nfl:26:Nick Emmanwori|2026-10-17T06:36:41.815Z",
+      "kind": "injury",
+      "observed_at": "2026-10-17T06:36:41.815Z",
+      "sport": "nfl",
+      "title": "Player availability changed",
+      "event": "Seattle Seahawks",
+      "pick": "Nick Emmanwori",
+      "before": "Active · Emmanwori recorded seven tackles (four solo), including 1.0 sack, in Thursday night's 17-14 overtime loss to the Broncos.",
+      "after": "Active · Emmanwori recorded seven tackles (four solo), including 1.0 sacks, in Thursday night's 17-14 overtime loss to the Broncos.",
+      "source_quote_at": "2026-10-17T04:59Z",
+      "source": "ESPN injuries",
+      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
+    },
+    {
+      "id": "injury|nfl:26:Ernest Jones IV|2026-10-17T06:36:41.815Z",
+      "kind": "injury",
+      "observed_at": "2026-10-17T06:36:41.815Z",
+      "sport": "nfl",
+      "title": "Player availability changed",
+      "event": "Seattle Seahawks",
+      "pick": "Ernest Jones IV",
+      "before": "Active · Jones recorded nine tackles (five solo), including 1.0 sack, in Thursday night's 17-14 overtime loss to the Broncos.",
+      "after": "Active · Jones recorded nine tackles (five solo), including 1.0 sacks, in Thursday night's 17-14 overtime loss to the Broncos.",
+      "source_quote_at": "2026-10-17T04:56Z",
+      "source": "ESPN injuries",
+      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
+    },
     {
       "id": "injury|nfl:17:Dre'Mont Jones|2026-10-17T06:00:43.165Z",
       "kind": "injury",
@@ -2798,90 +2882,6 @@
       "before": "Not in the previous dated report",
       "after": "Out · Neck",
       "source_quote_at": "2026-10-16T20:15Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:24:Kayode Awosika|2026-10-16T20:30:46.821Z",
-      "kind": "injury",
-      "observed_at": "2026-10-16T20:30:46.821Z",
-      "sport": "nfl",
-      "title": "New availability report",
-      "event": "Los Angeles Chargers",
-      "pick": "Kayode Awosika",
-      "before": "Not in the previous dated report",
-      "after": "Out · Lower Leg",
-      "source_quote_at": "2026-10-16T20:15Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:24:Kendall Williamson|2026-10-16T20:30:46.821Z",
-      "kind": "injury",
-      "observed_at": "2026-10-16T20:30:46.821Z",
-      "sport": "nfl",
-      "title": "Player availability changed",
-      "event": "Los Angeles Chargers",
-      "pick": "Kendall Williamson",
-      "before": "Questionable · Ankle",
-      "after": "Active",
-      "source_quote_at": "2026-10-16T20:15Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:24:Elijah Molden|2026-10-16T20:30:46.821Z",
-      "kind": "injury",
-      "observed_at": "2026-10-16T20:30:46.821Z",
-      "sport": "nfl",
-      "title": "Player availability changed",
-      "event": "Los Angeles Chargers",
-      "pick": "Elijah Molden",
-      "before": "Questionable · Hamstring",
-      "after": "Active",
-      "source_quote_at": "2026-10-16T20:15Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:24:Justin Eboigbe|2026-10-16T20:30:46.821Z",
-      "kind": "injury",
-      "observed_at": "2026-10-16T20:30:46.821Z",
-      "sport": "nfl",
-      "title": "Player availability changed",
-      "event": "Los Angeles Chargers",
-      "pick": "Justin Eboigbe",
-      "before": "Questionable · Shoulder",
-      "after": "Active",
-      "source_quote_at": "2026-10-16T20:15Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:21:Will Shipley|2026-10-16T20:30:46.821Z",
-      "kind": "injury",
-      "observed_at": "2026-10-16T20:30:46.821Z",
-      "sport": "nfl",
-      "title": "Player availability changed",
-      "event": "Philadelphia Eagles",
-      "pick": "Will Shipley",
-      "before": "Doubtful · Foot",
-      "after": "Injured Reserve · Foot",
-      "source_quote_at": "2026-10-16T20:07Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:21:DeVonta Smith|2026-10-16T20:30:46.821Z",
-      "kind": "injury",
-      "observed_at": "2026-10-16T20:30:46.821Z",
-      "sport": "nfl",
-      "title": "Player availability changed",
-      "event": "Philadelphia Eagles",
-      "pick": "DeVonta Smith",
-      "before": "Questionable · Hamstring",
-      "after": "Questionable · Smith (hamstring) said Friday that he is \"good\" and that his availability for Week 6 is \"up to the doctors,\" Tim McManus of ESPN.com reports.",
-      "source_quote_at": "2026-10-16T18:47Z",
       "source": "ESPN injuries",
       "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
     }
