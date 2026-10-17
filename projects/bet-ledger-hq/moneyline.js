@@ -92,5 +92,5 @@
   });$('#refresh').addEventListener('click',refresh);$('#print').addEventListener('click',()=>window.print());
   window.addEventListener('message',e=>{if(e.origin===location.origin&&e.data?.type==='kevbotbets:activate')refresh();});
   window.addEventListener('online',refresh);document.addEventListener('visibilitychange',()=>{if(!document.hidden)render();});
-  setInterval(render,15000);refresh();
+  setInterval(render,15000);setInterval(()=>{if(!document.hidden&&!loading)refresh();},300000);refresh();
 })();

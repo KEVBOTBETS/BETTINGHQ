@@ -147,3 +147,22 @@ class ForecastEvidenceTests(unittest.TestCase):
 
 if __name__ == '__main__':
     unittest.main()
+
+"""Exercise the scheduled CLI through its public-odds checkpoint."""
+import sys
+import unittest
+from unittest.mock import patch
+from pipeline import build
+class ReachedPublicOdds(Exception): pass
+class PublicRefreshTests(unittest.TestCase):
+    def test_default_cli_reaches_public_reader(self):
+        cfg={'season':2026,'prior_season':2025,'data':{'espn_group':80,'odds_provider_priority':[], 'lookback_days':2,'lookahead_days':7},'ratings':{}}
+        game={'game_id':'one'}
+        def save(name, data):
+            if name=='public_odds_health.json':
+                self.assertEqual(data['status'],'fixture');raise ReachedPublicOdds()
+        with patch.object(sys,'argv',['build']), patch.object(build,'load_cfg',return_value=cfg), patch.object(build,'load_overrides',return_value={}), patch.object(build.store,'load',return_value=[game]), patch.object(build.store,'save',side_effect=save), patch.object(build.espn,'fetch_range',return_value=[]), patch.object(build,'merge_games',return_value=[game]), patch.object(build.game_context,'enrich',return_value={}), patch.object(build.quotes,'enrich',return_value={}), patch('importlib.util.module_from_spec') as module, patch('importlib.util.spec_from_file_location') as spec:
+            module.return_value.enrich.return_value={'status':'fixture'}
+            spec.return_value.loader.exec_module.return_value=None
+            with self.assertRaises(ReachedPublicOdds):build.main()
+            module.return_value.enrich.assert_called_once_with([game],'ncaaf',publish=False)

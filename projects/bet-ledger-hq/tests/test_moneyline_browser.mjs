@@ -42,6 +42,11 @@ try{
     assert.equal(await frame.locator('.team-option[aria-pressed=true]').count(),3);
     await frame.getByRole('button',{name:'Pick Buffalo Bills',exact:true}).click();
     assert.match(await frame.locator('#saved').textContent(),/BUF ✓/);
+    await frame.locator('#sport').selectOption('ncaaf');
+    await frame.getByRole('button',{name:'Clear open picks',exact:true}).click();
+    await frame.getByRole('button',{name:'Use predicted winners',exact:true}).click();
+    assert.equal(await frame.locator('.team-option[aria-pressed=true]').count(),1,'NCAAF margin-only predicted winner can be selected');
+    assert.match(await frame.locator('#saved').textContent(),/UGA ✓/);
     await frame.locator('#sport').selectOption('mlb');
     assert.equal(await frame.locator('.match-card').count(),1);
     await frame.locator('#sport').selectOption('all');
