@@ -1,29 +1,57 @@
 {
   "schema": 1,
-  "checked_at": "2026-10-17T15:12:46.989Z",
+  "checked_at": "2026-10-17T15:29:12.783Z",
   "coverage": {
-    "nhl": {
-      "status": "available",
-      "reports": 49,
-      "checked_at": "2026-10-17T15:12:46.989Z"
-    },
-    "mlb": {
-      "status": "available",
-      "reports": 3,
-      "checked_at": "2026-10-17T15:12:46.989Z"
-    },
     "ncaaf": {
       "status": "empty",
       "reports": 0,
-      "checked_at": "2026-10-17T15:12:46.989Z"
+      "checked_at": "2026-10-17T15:29:12.783Z"
+    },
+    "nhl": {
+      "status": "available",
+      "reports": 47,
+      "checked_at": "2026-10-17T15:29:12.783Z"
     },
     "nfl": {
       "status": "available",
       "reports": 346,
-      "checked_at": "2026-10-17T15:12:46.989Z"
+      "checked_at": "2026-10-17T15:29:12.783Z"
+    },
+    "mlb": {
+      "status": "available",
+      "reports": 3,
+      "checked_at": "2026-10-17T15:29:12.783Z"
     }
   },
   "events": [
+    {
+      "id": "starter|nhl:nhl:2026020128:home|2026-10-17T15:29:12.783Z",
+      "kind": "starter",
+      "observed_at": "2026-10-17T15:29:12.783Z",
+      "sport": "nhl",
+      "event": "OTT @ PHI",
+      "start": "2026-10-17T23:00:00+00:00",
+      "title": "NHL starting goalie updated",
+      "before": "Dan Vladar",
+      "after": "Dan Vladar · confirmed",
+      "source_quote_at": "2026-10-17T15:27:15.524129+00:00",
+      "source": "NHL board",
+      "note": "Review the matchup after a starter change; the baseline does not price individual goalie talent."
+    },
+    {
+      "id": "injury|nhl:15:Cam York|2026-10-17T15:29:12.783Z",
+      "kind": "injury",
+      "observed_at": "2026-10-17T15:29:12.783Z",
+      "sport": "nhl",
+      "title": "Player availability changed",
+      "event": "Philadelphia Flyers",
+      "pick": "Cam York",
+      "before": "Day-To-Day · Upper Body",
+      "after": "Out · Upper Body",
+      "source_quote_at": "2026-10-17T15:11Z",
+      "source": "ESPN injuries",
+      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
+    },
     {
       "id": "odds|mlb|849816|2026-10-18T00:08:00Z|RL||away|DraftKings|2026-10-17T15:12:46.989Z",
       "kind": "odds",
@@ -2881,34 +2909,6 @@
       "pick": "Devin White",
       "before": "Not in the previous dated report",
       "after": "Injured Reserve · Forearm",
-      "source_quote_at": "2026-10-16T20:41Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:8:Tom Kennedy|2026-10-16T21:04:37.151Z",
-      "kind": "injury",
-      "observed_at": "2026-10-16T21:04:37.151Z",
-      "sport": "nfl",
-      "title": "New availability report",
-      "event": "Detroit Lions",
-      "pick": "Tom Kennedy",
-      "before": "Not in the previous dated report",
-      "after": "Injured Reserve · Knee - MCL",
-      "source_quote_at": "2026-10-16T20:41Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:8:Ben Bartch|2026-10-16T21:04:37.151Z",
-      "kind": "injury",
-      "observed_at": "2026-10-16T21:04:37.151Z",
-      "sport": "nfl",
-      "title": "New availability report",
-      "event": "Detroit Lions",
-      "pick": "Ben Bartch",
-      "before": "Not in the previous dated report",
-      "after": "Injured Reserve · Foot",
       "source_quote_at": "2026-10-16T20:41Z",
       "source": "ESPN injuries",
       "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
