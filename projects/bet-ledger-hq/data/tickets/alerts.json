@@ -1,29 +1,87 @@
 {
   "schema": 1,
-  "checked_at": "2026-10-17T15:41:14.662Z",
+  "checked_at": "2026-10-17T15:54:11.446Z",
   "coverage": {
-    "nhl": {
-      "status": "available",
-      "reports": 48,
-      "checked_at": "2026-10-17T15:41:14.662Z"
-    },
-    "nfl": {
-      "status": "available",
-      "reports": 345,
-      "checked_at": "2026-10-17T15:41:14.662Z"
-    },
     "ncaaf": {
       "status": "empty",
       "reports": 0,
-      "checked_at": "2026-10-17T15:41:14.662Z"
+      "checked_at": "2026-10-17T15:54:11.446Z"
     },
     "mlb": {
       "status": "available",
       "reports": 3,
-      "checked_at": "2026-10-17T15:41:14.662Z"
+      "checked_at": "2026-10-17T15:54:11.446Z"
+    },
+    "nhl": {
+      "status": "available",
+      "reports": 48,
+      "checked_at": "2026-10-17T15:54:11.446Z"
+    },
+    "nfl": {
+      "status": "available",
+      "reports": 343,
+      "checked_at": "2026-10-17T15:54:11.446Z"
     }
   },
   "events": [
+    {
+      "id": "odds|ncaaf|401856832|2026-10-17T23:00Z|TOTAL||under|Draft Kings|2026-10-17T15:54:11.446Z",
+      "kind": "odds",
+      "observed_at": "2026-10-17T15:54:11.446Z",
+      "sport": "ncaaf",
+      "event": "TCU @ BAY",
+      "start": "2026-10-17T23:00Z",
+      "pick": "Under 50.5",
+      "title": "Published odds changed",
+      "before": "-112 · line 50.5",
+      "after": "-115 · line 50.5",
+      "book": "Draft Kings",
+      "source_quote_at": "2026-10-17T15:50:03.208181+00:00",
+      "source": "Existing NCAAF board",
+      "note": "Your ticket keeps its original odds. Recheck the live book before placing a new wager."
+    },
+    {
+      "id": "starter|nhl:nhl:2026020127:home|2026-10-17T15:54:11.446Z",
+      "kind": "starter",
+      "observed_at": "2026-10-17T15:54:11.446Z",
+      "sport": "nhl",
+      "event": "SJ @ DET",
+      "start": "2026-10-17T23:00:00+00:00",
+      "title": "NHL starting goalie updated",
+      "before": "John Gibson",
+      "after": "John Gibson · confirmed",
+      "source_quote_at": "2026-10-17T15:51:40.750812+00:00",
+      "source": "NHL board",
+      "note": "Review the matchup after a starter change; the baseline does not price individual goalie talent."
+    },
+    {
+      "id": "starter|nhl:nhl:2026020131:home|2026-10-17T15:54:11.446Z",
+      "kind": "starter",
+      "observed_at": "2026-10-17T15:54:11.446Z",
+      "sport": "nhl",
+      "event": "STL @ NSH",
+      "start": "2026-10-18T00:00:00+00:00",
+      "title": "NHL starting goalie updated",
+      "before": "Justus Annunen",
+      "after": "Juuse Saros · Likely",
+      "source_quote_at": "2026-10-17T15:51:40.750812+00:00",
+      "source": "NHL board",
+      "note": "Review the matchup after a starter change; the baseline does not price individual goalie talent."
+    },
+    {
+      "id": "injury|nhl:4:Bowen Byram|2026-10-17T15:54:11.446Z",
+      "kind": "injury",
+      "observed_at": "2026-10-17T15:54:11.446Z",
+      "sport": "nhl",
+      "title": "Player availability changed",
+      "event": "Chicago Blackhawks",
+      "pick": "Bowen Byram",
+      "before": "Day-To-Day · Upper Body",
+      "after": "Out · Upper Body",
+      "source_quote_at": "2026-10-17T15:46Z",
+      "source": "ESPN injuries",
+      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
+    },
     {
       "id": "odds|mlb|849816|2026-10-18T00:08:00Z|TOTAL||over|DraftKings|2026-10-17T15:41:14.662Z",
       "kind": "odds",
@@ -2866,62 +2924,6 @@
       "before": "Questionable · Hamstring",
       "after": "Active",
       "source_quote_at": "2026-10-16T20:28Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:33:Matt Hibner|2026-10-16T21:04:37.151Z",
-      "kind": "injury",
-      "observed_at": "2026-10-16T21:04:37.151Z",
-      "sport": "nfl",
-      "title": "Player availability changed",
-      "event": "Baltimore Ravens",
-      "pick": "Matt Hibner",
-      "before": "Questionable · Hand",
-      "after": "Out · Hand",
-      "source_quote_at": "2026-10-15T23:33Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:3:Anthony Johnson Jr.|2026-10-16T21:04:37.151Z",
-      "kind": "injury",
-      "observed_at": "2026-10-16T21:04:37.151Z",
-      "sport": "nfl",
-      "title": "Player availability changed",
-      "event": "Chicago Bears",
-      "pick": "Anthony Johnson Jr.",
-      "before": "Injured Reserve · Undisclosed",
-      "after": "Out · Undisclosed",
-      "source_quote_at": "2026-10-16T21:00Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:5:Teven Jenkins|2026-10-16T21:04:37.151Z",
-      "kind": "injury",
-      "observed_at": "2026-10-16T21:04:37.151Z",
-      "sport": "nfl",
-      "title": "New availability report",
-      "event": "Cleveland Browns",
-      "pick": "Teven Jenkins",
-      "before": "Not in the previous dated report",
-      "after": "Out · Back",
-      "source_quote_at": "2026-10-16T20:22Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:5:Mike Hall Jr.|2026-10-16T21:04:37.151Z",
-      "kind": "injury",
-      "observed_at": "2026-10-16T21:04:37.151Z",
-      "sport": "nfl",
-      "title": "New availability report",
-      "event": "Cleveland Browns",
-      "pick": "Mike Hall Jr.",
-      "before": "Not in the previous dated report",
-      "after": "Out · Ankle",
-      "source_quote_at": "2026-10-16T20:21Z",
       "source": "ESPN injuries",
       "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
     }
