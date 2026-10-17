@@ -1,29 +1,75 @@
 {
   "schema": 1,
-  "checked_at": "2026-10-17T12:33:33.125Z",
+  "checked_at": "2026-10-17T13:05:01.530Z",
   "coverage": {
     "ncaaf": {
       "status": "empty",
       "reports": 0,
-      "checked_at": "2026-10-17T12:33:33.125Z"
+      "checked_at": "2026-10-17T13:05:01.530Z"
     },
     "nhl": {
       "status": "available",
       "reports": 50,
-      "checked_at": "2026-10-17T12:33:33.125Z"
-    },
-    "nfl": {
-      "status": "available",
-      "reports": 346,
-      "checked_at": "2026-10-17T12:33:33.125Z"
+      "checked_at": "2026-10-17T13:05:01.530Z"
     },
     "mlb": {
       "status": "available",
       "reports": 3,
-      "checked_at": "2026-10-17T12:33:33.125Z"
+      "checked_at": "2026-10-17T13:05:01.530Z"
+    },
+    "nfl": {
+      "status": "available",
+      "reports": 346,
+      "checked_at": "2026-10-17T13:05:01.530Z"
     }
   },
   "events": [
+    {
+      "id": "odds|props|401872996|2026-10-18T13:30Z|Receiving yards|Bhayshul Tuten|over|Fanatics Sportsbook|2026-10-17T13:05:01.530Z",
+      "kind": "odds",
+      "observed_at": "2026-10-17T13:05:01.530Z",
+      "sport": "props",
+      "event": "Houston Texans @ Jacksonville Jaguars",
+      "start": "2026-10-18T13:30Z",
+      "pick": "Bhayshul Tuten — Over 10.5 Receiving yards",
+      "title": "Published odds changed",
+      "before": "-120 · line 10.5",
+      "after": "+100 · line 10.5",
+      "book": "Fanatics Sportsbook",
+      "source_quote_at": "2026-10-17T13:02:30.520846+00:00",
+      "source": "Existing Props board",
+      "note": "Your ticket keeps its original odds. Recheck the live book before placing a new wager."
+    },
+    {
+      "id": "price-limit|props|401872996|2026-10-18T13:30Z|Receiving yards|Bhayshul Tuten|over|Fanatics Sportsbook|2026-10-17T13:05:01.530Z",
+      "kind": "price-limit",
+      "observed_at": "2026-10-17T13:05:01.530Z",
+      "sport": "props",
+      "event": "Houston Texans @ Jacksonville Jaguars",
+      "start": "2026-10-18T13:30Z",
+      "pick": "Bhayshul Tuten — Over 10.5 Receiving yards",
+      "title": "Price back above published minimum",
+      "before": "-120",
+      "after": "+100",
+      "book": "Fanatics Sportsbook",
+      "source_quote_at": "2026-10-17T13:02:30.520846+00:00",
+      "source": "Published price policy",
+      "note": "Minimum -112 at unchanged line 10.5. Uses the saved forecast, not a new model approval. Confirm current odds and qualification; scheduled observations can miss intervening moves."
+    },
+    {
+      "id": "starter|nhl:nhl:2026020132:away|2026-10-17T13:05:01.530Z",
+      "kind": "starter",
+      "observed_at": "2026-10-17T13:05:01.530Z",
+      "sport": "nhl",
+      "event": "BOS @ LA",
+      "start": "2026-10-18T01:00:00+00:00",
+      "title": "NHL starting goalie updated",
+      "before": "Michael DiPietro",
+      "after": "Jeremy Swayman · Unknown",
+      "source_quote_at": "2026-10-17T13:03:11.509105+00:00",
+      "source": "NHL board",
+      "note": "Review the matchup after a starter change; the baseline does not price individual goalie talent."
+    },
     {
       "id": "odds|mlb|849816|2026-10-18T00:00:00Z|RL||away|DraftKings|2026-10-17T09:56:26.442Z",
       "kind": "odds",
@@ -2844,48 +2890,6 @@
       "before": "Questionable · Knee",
       "after": "Active · Wallace (knee) was a limited participant at practice Thursday.",
       "source_quote_at": "2026-10-15T23:51Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:5:Tytus Howard|2026-10-16T20:30:46.821Z",
-      "kind": "injury",
-      "observed_at": "2026-10-16T20:30:46.821Z",
-      "sport": "nfl",
-      "title": "Player availability changed",
-      "event": "Cleveland Browns",
-      "pick": "Tytus Howard",
-      "before": "Questionable · Knee",
-      "after": "Questionable · Howard (knee) did not participate at the Browns' practice Wednesday.",
-      "source_quote_at": "2026-10-15T01:20Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:5:Grant Delpit|2026-10-16T20:30:46.821Z",
-      "kind": "injury",
-      "observed_at": "2026-10-16T20:30:46.821Z",
-      "sport": "nfl",
-      "title": "Player availability changed",
-      "event": "Cleveland Browns",
-      "pick": "Grant Delpit",
-      "before": "Questionable · Shoulder",
-      "after": "Questionable · questionable",
-      "source_quote_at": "2026-10-14T21:51Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:11:Jalen Travis|2026-10-16T20:30:46.821Z",
-      "kind": "injury",
-      "observed_at": "2026-10-16T20:30:46.821Z",
-      "sport": "nfl",
-      "title": "Player availability changed",
-      "event": "Indianapolis Colts",
-      "pick": "Jalen Travis",
-      "before": "Questionable · Ankle",
-      "after": "Active",
-      "source_quote_at": "2026-10-16T20:10Z",
       "source": "ESPN injuries",
       "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
     }
