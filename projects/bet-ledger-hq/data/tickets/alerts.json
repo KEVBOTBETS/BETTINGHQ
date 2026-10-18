@@ -1,29 +1,85 @@
 {
   "schema": 1,
-  "checked_at": "2026-10-18T00:08:06.011Z",
+  "checked_at": "2026-10-18T00:41:05.097Z",
   "coverage": {
-    "ncaaf": {
-      "status": "empty",
-      "reports": 0,
-      "checked_at": "2026-10-18T00:08:06.011Z"
+    "nhl": {
+      "status": "available",
+      "reports": 44,
+      "checked_at": "2026-10-18T00:41:05.097Z"
     },
     "mlb": {
       "status": "available",
       "reports": 2,
-      "checked_at": "2026-10-18T00:08:06.011Z"
+      "checked_at": "2026-10-18T00:41:05.097Z"
     },
-    "nhl": {
-      "status": "available",
-      "reports": 42,
-      "checked_at": "2026-10-18T00:08:06.011Z"
+    "ncaaf": {
+      "status": "empty",
+      "reports": 0,
+      "checked_at": "2026-10-18T00:41:05.097Z"
     },
     "nfl": {
       "status": "available",
       "reports": 332,
-      "checked_at": "2026-10-18T00:08:06.011Z"
+      "checked_at": "2026-10-18T00:41:05.097Z"
     }
   },
   "events": [
+    {
+      "id": "starter|nhl:nhl:2026020132:away|2026-10-18T00:41:05.097Z",
+      "kind": "starter",
+      "observed_at": "2026-10-18T00:41:05.097Z",
+      "sport": "nhl",
+      "event": "BOS @ LA",
+      "start": "2026-10-18T01:00:00+00:00",
+      "title": "NHL starting goalie updated",
+      "before": "Jeremy Swayman",
+      "after": "Jeremy Swayman · confirmed",
+      "source_quote_at": "2026-10-18T00:39:32.534862+00:00",
+      "source": "NHL board",
+      "note": "Review the matchup after a starter change; the baseline does not price individual goalie talent."
+    },
+    {
+      "id": "injury|nhl:12:Calum Ritchie|2026-10-18T00:41:05.097Z",
+      "kind": "injury",
+      "observed_at": "2026-10-18T00:41:05.097Z",
+      "sport": "nhl",
+      "title": "New availability report",
+      "event": "New York Islanders",
+      "pick": "Calum Ritchie",
+      "before": "Not in the previous dated report",
+      "after": "Day-To-Day · Lower Body",
+      "source_quote_at": "2026-10-18T00:15Z",
+      "source": "ESPN injuries",
+      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
+    },
+    {
+      "id": "injury|nhl:12:Matias Maccelli|2026-10-18T00:41:05.097Z",
+      "kind": "injury",
+      "observed_at": "2026-10-18T00:41:05.097Z",
+      "sport": "nhl",
+      "title": "New availability report",
+      "event": "New York Islanders",
+      "pick": "Matias Maccelli",
+      "before": "Not in the previous dated report",
+      "after": "Day-To-Day · Lower Body",
+      "source_quote_at": "2026-10-18T00:10Z",
+      "source": "ESPN injuries",
+      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
+    },
+    {
+      "id": "injury|nfl:18:Cedric Tillman|2026-10-18T00:41:05.097Z",
+      "kind": "injury",
+      "observed_at": "2026-10-18T00:41:05.097Z",
+      "sport": "nfl",
+      "title": "New availability report",
+      "event": "New Orleans Saints",
+      "pick": "Cedric Tillman",
+      "before": "Not in the previous dated report",
+      "after": "Active · The Saints elevated Tillman from the practice squad Saturday.",
+      "source_quote_at": "2026-10-17T23:52Z",
+      "source": "ESPN injuries",
+      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
+    },
     {
       "id": "injury|nfl:34:Jawhar Jordan|2026-10-18T00:08:06.011Z",
       "kind": "injury",
@@ -2904,62 +2960,6 @@
       "before": "Active · Jones recorded nine tackles (five solo), including 1.0 sack, in Thursday night's 17-14 overtime loss to the Broncos.",
       "after": "Active · Jones recorded nine tackles (five solo), including 1.0 sacks, in Thursday night's 17-14 overtime loss to the Broncos.",
       "source_quote_at": "2026-10-17T04:56Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:17:Dre'Mont Jones|2026-10-17T06:00:43.165Z",
-      "kind": "injury",
-      "observed_at": "2026-10-17T06:00:43.165Z",
-      "sport": "nfl",
-      "title": "Player availability changed",
-      "event": "New England Patriots",
-      "pick": "Dre'Mont Jones",
-      "before": "Active · Jones (shoulder) does not have any injury designation ahead of Sunday's game against the Jets.",
-      "after": "Active · Jones (shoulder) does not have an injury designation ahead of Sunday's game against the Jets.",
-      "source_quote_at": "2026-10-17T02:17Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:3:Anthony Johnson Jr.|2026-10-17T05:29:42.917Z",
-      "kind": "injury",
-      "observed_at": "2026-10-17T05:29:42.917Z",
-      "sport": "nfl",
-      "title": "Player availability changed",
-      "event": "Chicago Bears",
-      "pick": "Anthony Johnson Jr.",
-      "before": "Out · Undisclosed",
-      "after": "Injured Reserve · Undisclosed",
-      "source_quote_at": "2026-10-17T05:00Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:7:Brandon Jones|2026-10-17T05:29:42.917Z",
-      "kind": "injury",
-      "observed_at": "2026-10-17T05:29:42.917Z",
-      "sport": "nfl",
-      "title": "New availability report",
-      "event": "Denver Broncos",
-      "pick": "Brandon Jones",
-      "before": "Not in the previous dated report",
-      "after": "Active · Jones recorded eight tackles (three solo) in Thursday night's 17-14 overtime win over the Seahawks.",
-      "source_quote_at": "2026-10-17T05:17Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:7:Kris Abrams-Draine|2026-10-17T05:29:42.917Z",
-      "kind": "injury",
-      "observed_at": "2026-10-17T05:29:42.917Z",
-      "sport": "nfl",
-      "title": "New availability report",
-      "event": "Denver Broncos",
-      "pick": "Kris Abrams-Draine",
-      "before": "Not in the previous dated report",
-      "after": "Active · Abrams-Draine recorded six tackles (four solo), three pass breakups, including an interception, and one forced fumble in Thursday night's 17-14 overtime win over the Seahawks.",
-      "source_quote_at": "2026-10-17T05:13Z",
       "source": "ESPN injuries",
       "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
     }
