@@ -165,13 +165,13 @@
     "accuracy": {
       "generated_at": "2026-10-18T15:51:37.789864+00:00"
     },
-    "lastGoodAt": "2026-10-18T17:15:44.800Z"
+    "lastGoodAt": "2026-10-18T17:28:15.051Z"
   },
   "ladder": {
     "accuracy": {
       "generated_at": "2026-10-18T15:51:46.904889+00:00"
     },
-    "lastGoodAt": "2026-10-18T17:15:44.800Z"
+    "lastGoodAt": "2026-10-18T17:28:15.051Z"
   },
   "props": {
     "meta": {
@@ -11644,7 +11644,7 @@
         "roster_verified": true
       }
     ],
-    "lastGoodAt": "2026-10-18T17:15:44.800Z"
+    "lastGoodAt": "2026-10-18T17:28:15.051Z"
   },
   "nfl": {
     "meta": {
@@ -23143,7 +23143,7 @@
         "odds_observed_at": "2026-10-18T17:12:38.248046+00:00"
       }
     ],
-    "lastGoodAt": "2026-10-18T17:15:44.800Z"
+    "lastGoodAt": "2026-10-18T17:28:15.051Z"
   },
   "ncaaf": {
     "meta": {
@@ -34522,9 +34522,105 @@
         "odds_observed_at": "2026-10-18T17:12:50.602353+00:00"
       }
     ],
-    "lastGoodAt": "2026-10-18T17:15:44.800Z"
+    "lastGoodAt": "2026-10-18T17:28:15.051Z"
   },
   "mlb": {
+    "slate": {
+      "generated_at": "2026-10-18T15:50:42+00:00",
+      "games": [
+        {
+          "gamePk": 849817,
+          "home": "CLE",
+          "away": "TB",
+          "start": "2026-10-18T21:08:00Z",
+          "status": "Scheduled",
+          "lineups_confirmed": false,
+          "odds": {
+            "fetched_at": "2026-10-18T15:49:47.863046+00:00"
+          },
+          "bets": [
+            {
+              "tier": "PASS",
+              "stake": 0,
+              "market": "TOTAL",
+              "label": "Under 6.5",
+              "selection": "Under",
+              "line": 6.5,
+              "price": -118,
+              "book": "DraftKings",
+              "edge_real": -0.0281,
+              "edge": 0.0092,
+              "p_final": 0.5234
+            },
+            {
+              "tier": "PASS",
+              "stake": 0,
+              "market": "ML",
+              "label": "TB ML",
+              "selection": "TB",
+              "line": null,
+              "price": -132,
+              "book": "DraftKings",
+              "edge_real": -0.0274,
+              "edge": 0.008,
+              "p_final": 0.5518
+            },
+            {
+              "tier": "PASS",
+              "stake": 0,
+              "market": "RL",
+              "label": "TB -1.5",
+              "selection": "TB",
+              "line": 1.5,
+              "price": 135,
+              "book": "DraftKings",
+              "edge_real": -0.043,
+              "edge": 0.0025,
+              "p_final": 0.4009
+            },
+            {
+              "tier": "PASS",
+              "stake": 0,
+              "market": "RL",
+              "label": "CLE +1.5",
+              "selection": "CLE",
+              "line": 1.5,
+              "price": -164,
+              "book": "DraftKings",
+              "edge_real": -0.0314,
+              "edge": -0.0017,
+              "p_final": 0.5991
+            },
+            {
+              "tier": "PASS",
+              "stake": 0,
+              "market": "ML",
+              "label": "CLE ML",
+              "selection": "CLE",
+              "line": null,
+              "price": 110,
+              "book": "DraftKings",
+              "edge_real": -0.0434,
+              "edge": -0.0097,
+              "p_final": 0.4482
+            },
+            {
+              "tier": "PASS",
+              "stake": 0,
+              "market": "TOTAL",
+              "label": "Over 6.5",
+              "selection": "Over",
+              "line": 6.5,
+              "price": -102,
+              "book": "DraftKings",
+              "edge_real": -0.0382,
+              "edge": -0.0099,
+              "p_final": 0.4766
+            }
+          ]
+        }
+      ]
+    },
     "meta": {
       "generated_at": "2026-10-18T15:50:49+00:00",
       "day_summary": {
@@ -34715,110 +34811,14 @@
         "probability_reason": "candidate did not improve the chronological holdout"
       }
     },
-    "slate": {
-      "generated_at": "2026-10-18T15:50:42+00:00",
-      "games": [
-        {
-          "gamePk": 849817,
-          "home": "CLE",
-          "away": "TB",
-          "start": "2026-10-18T21:08:00Z",
-          "status": "Scheduled",
-          "lineups_confirmed": false,
-          "odds": {
-            "fetched_at": "2026-10-18T15:49:47.863046+00:00"
-          },
-          "bets": [
-            {
-              "tier": "PASS",
-              "stake": 0,
-              "market": "TOTAL",
-              "label": "Under 6.5",
-              "selection": "Under",
-              "line": 6.5,
-              "price": -118,
-              "book": "DraftKings",
-              "edge_real": -0.0281,
-              "edge": 0.0092,
-              "p_final": 0.5234
-            },
-            {
-              "tier": "PASS",
-              "stake": 0,
-              "market": "ML",
-              "label": "TB ML",
-              "selection": "TB",
-              "line": null,
-              "price": -132,
-              "book": "DraftKings",
-              "edge_real": -0.0274,
-              "edge": 0.008,
-              "p_final": 0.5518
-            },
-            {
-              "tier": "PASS",
-              "stake": 0,
-              "market": "RL",
-              "label": "TB -1.5",
-              "selection": "TB",
-              "line": 1.5,
-              "price": 135,
-              "book": "DraftKings",
-              "edge_real": -0.043,
-              "edge": 0.0025,
-              "p_final": 0.4009
-            },
-            {
-              "tier": "PASS",
-              "stake": 0,
-              "market": "RL",
-              "label": "CLE +1.5",
-              "selection": "CLE",
-              "line": 1.5,
-              "price": -164,
-              "book": "DraftKings",
-              "edge_real": -0.0314,
-              "edge": -0.0017,
-              "p_final": 0.5991
-            },
-            {
-              "tier": "PASS",
-              "stake": 0,
-              "market": "ML",
-              "label": "CLE ML",
-              "selection": "CLE",
-              "line": null,
-              "price": 110,
-              "book": "DraftKings",
-              "edge_real": -0.0434,
-              "edge": -0.0097,
-              "p_final": 0.4482
-            },
-            {
-              "tier": "PASS",
-              "stake": 0,
-              "market": "TOTAL",
-              "label": "Over 6.5",
-              "selection": "Over",
-              "line": 6.5,
-              "price": -102,
-              "book": "DraftKings",
-              "edge_real": -0.0382,
-              "edge": -0.0099,
-              "p_final": 0.4766
-            }
-          ]
-        }
-      ]
-    },
     "accuracy": {
       "generated_at": "2026-10-18T15:50:49+00:00"
     },
-    "lastGoodAt": "2026-10-18T17:15:44.800Z"
+    "lastGoodAt": "2026-10-18T17:28:15.051Z"
   },
   "nhl": {
     "meta": {
-      "generated_at": "2026-10-18T17:00:52.739424+00:00",
+      "generated_at": "2026-10-18T17:26:16.407138+00:00",
       "model_version": "nhl-poisson-1.0",
       "season": 2027,
       "timezone": "America/Toronto",
@@ -34845,22 +34845,22 @@
         },
         "nhl-schedule-2026-10-18": {
           "status": "ok",
-          "observed_at": "2026-10-18T17:00:52.739424+00:00",
+          "observed_at": "2026-10-18T17:26:16.407138+00:00",
           "url": "https://api-web.nhle.com/v1/schedule/2026-10-18"
         },
         "nhl-schedule-2026-10-04": {
           "status": "ok",
-          "observed_at": "2026-10-18T17:00:52.739424+00:00",
+          "observed_at": "2026-10-18T17:26:16.407138+00:00",
           "url": "https://api-web.nhle.com/v1/schedule/2026-10-04"
         },
         "nhl-schedule-2026-10-11": {
           "status": "ok",
-          "observed_at": "2026-10-18T17:00:52.739424+00:00",
+          "observed_at": "2026-10-18T17:26:16.407138+00:00",
           "url": "https://api-web.nhle.com/v1/schedule/2026-10-11"
         },
         "nhl-schedule-2026-10-25": {
           "status": "ok",
-          "observed_at": "2026-10-18T17:00:52.739424+00:00",
+          "observed_at": "2026-10-18T17:26:16.407138+00:00",
           "url": "https://api-web.nhle.com/v1/schedule/2026-10-25"
         },
         "standings-2027": {
@@ -34876,7 +34876,7 @@
           "error": "HTTPError"
         },
         "nhl-official": {
-          "status": "ok",
+          "status": "cached",
           "observed_at": "2026-10-18T17:00:52.739424+00:00",
           "url": "https://api-web.nhle.com/v1/standings/now"
         },
@@ -34902,16 +34902,16 @@
         },
         "public-book-odds": {
           "status": "ok",
-          "observed_at": "2026-10-18T17:00:00+00:00",
+          "observed_at": "2026-10-18T17:26:00+00:00",
           "url": "https://www.covers.com/sport/hockey/nhl/odds",
-          "quotes": 276,
+          "quotes": 274,
           "attempts": [
             {
               "url": "https://www.covers.com/sport/hockey/nhl/odds",
-              "checked_at": "2026-10-18T17:00:52.739424+00:00",
-              "observed_at": "2026-10-18T17:00:00+00:00",
+              "checked_at": "2026-10-18T17:26:16.407138+00:00",
+              "observed_at": "2026-10-18T17:26:00+00:00",
               "status": "ok",
-              "quotes": 276,
+              "quotes": 274,
               "matched_games": 6
             }
           ]
@@ -35003,7 +35003,7 @@
         "book": "FanDuel (CA)",
         "edge": -0.050058,
         "model_prob": 0.620101,
-        "odds_observed_at": "2026-10-18T17:00:52.739424+00:00",
+        "odds_observed_at": "2026-10-18T17:26:16.407138+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -35025,7 +35025,7 @@
         "book": "FanDuel (CA)",
         "edge": -0.031258,
         "model_prob": 0.379899,
-        "odds_observed_at": "2026-10-18T17:00:52.739424+00:00",
+        "odds_observed_at": "2026-10-18T17:26:16.407138+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -35047,7 +35047,7 @@
         "book": "DraftKings (US)",
         "edge": -0.049819,
         "model_prob": 0.624776,
-        "odds_observed_at": "2026-10-18T17:00:52.739424+00:00",
+        "odds_observed_at": "2026-10-18T17:26:16.407138+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -35069,7 +35069,7 @@
         "book": "DraftKings (US)",
         "edge": -0.024419,
         "model_prob": 0.375224,
-        "odds_observed_at": "2026-10-18T17:00:52.739424+00:00",
+        "odds_observed_at": "2026-10-18T17:26:16.407138+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -35091,7 +35091,7 @@
         "book": "BetMGM",
         "edge": -0.039045,
         "model_prob": 0.384382,
-        "odds_observed_at": "2026-10-18T17:00:00+00:00",
+        "odds_observed_at": "2026-10-18T17:26:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -35113,7 +35113,7 @@
         "book": "BetMGM",
         "edge": -0.051616,
         "model_prob": 0.615618,
-        "odds_observed_at": "2026-10-18T17:00:00+00:00",
+        "odds_observed_at": "2026-10-18T17:26:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -35131,11 +35131,11 @@
         "away": "CBJ",
         "pick": "CBJ ML",
         "line": null,
-        "price": 161,
+        "price": 162,
         "book": "bet365",
-        "edge": -0.022415,
-        "model_prob": 0.374554,
-        "odds_observed_at": "2026-10-18T17:00:00+00:00",
+        "edge": -0.022031,
+        "model_prob": 0.373271,
+        "odds_observed_at": "2026-10-18T17:26:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -35153,11 +35153,11 @@
         "away": "CBJ",
         "pick": "MIN ML",
         "line": null,
-        "price": -192,
+        "price": -194,
         "book": "bet365",
-        "edge": -0.0488,
-        "model_prob": 0.625446,
-        "odds_observed_at": "2026-10-18T17:00:00+00:00",
+        "edge": -0.050214,
+        "model_prob": 0.626729,
+        "odds_observed_at": "2026-10-18T17:26:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -35179,7 +35179,7 @@
         "book": "DraftKings",
         "edge": -0.024419,
         "model_prob": 0.375224,
-        "odds_observed_at": "2026-10-18T17:00:00+00:00",
+        "odds_observed_at": "2026-10-18T17:26:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -35201,7 +35201,7 @@
         "book": "DraftKings",
         "edge": -0.049819,
         "model_prob": 0.624776,
-        "odds_observed_at": "2026-10-18T17:00:00+00:00",
+        "odds_observed_at": "2026-10-18T17:26:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -35223,7 +35223,7 @@
         "book": "FanDuel",
         "edge": -0.031258,
         "model_prob": 0.379899,
-        "odds_observed_at": "2026-10-18T17:00:00+00:00",
+        "odds_observed_at": "2026-10-18T17:26:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -35245,7 +35245,7 @@
         "book": "FanDuel",
         "edge": -0.050058,
         "model_prob": 0.620101,
-        "odds_observed_at": "2026-10-18T17:00:00+00:00",
+        "odds_observed_at": "2026-10-18T17:26:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -35267,7 +35267,7 @@
         "book": "Fanatics Sportsbook",
         "edge": -0.032899,
         "model_prob": 0.379255,
-        "odds_observed_at": "2026-10-18T17:00:00+00:00",
+        "odds_observed_at": "2026-10-18T17:26:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -35289,7 +35289,7 @@
         "book": "Fanatics Sportsbook",
         "edge": -0.052547,
         "model_prob": 0.620745,
-        "odds_observed_at": "2026-10-18T17:00:00+00:00",
+        "odds_observed_at": "2026-10-18T17:26:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -35311,7 +35311,7 @@
         "book": "BetRivers",
         "edge": -0.032899,
         "model_prob": 0.379255,
-        "odds_observed_at": "2026-10-18T17:00:00+00:00",
+        "odds_observed_at": "2026-10-18T17:26:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -35333,7 +35333,7 @@
         "book": "BetRivers",
         "edge": -0.052547,
         "model_prob": 0.620745,
-        "odds_observed_at": "2026-10-18T17:00:00+00:00",
+        "odds_observed_at": "2026-10-18T17:26:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -35355,7 +35355,7 @@
         "book": "Caesars Odds",
         "edge": -0.025225,
         "model_prob": 0.374913,
-        "odds_observed_at": "2026-10-18T17:00:00+00:00",
+        "odds_observed_at": "2026-10-18T17:26:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -35377,7 +35377,7 @@
         "book": "Caesars Odds",
         "edge": -0.051034,
         "model_prob": 0.625087,
-        "odds_observed_at": "2026-10-18T17:00:00+00:00",
+        "odds_observed_at": "2026-10-18T17:26:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -35399,7 +35399,7 @@
         "book": "theScore Bet",
         "edge": -0.022784,
         "model_prob": 0.375852,
-        "odds_observed_at": "2026-10-18T17:00:00+00:00",
+        "odds_observed_at": "2026-10-18T17:26:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -35421,7 +35421,7 @@
         "book": "theScore Bet",
         "edge": -0.047354,
         "model_prob": 0.624148,
-        "odds_observed_at": "2026-10-18T17:00:00+00:00",
+        "odds_observed_at": "2026-10-18T17:26:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -35443,7 +35443,7 @@
         "book": "Hard Rock Bet",
         "edge": -0.028739,
         "model_prob": 0.380887,
-        "odds_observed_at": "2026-10-18T17:00:00+00:00",
+        "odds_observed_at": "2026-10-18T17:26:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -35465,7 +35465,7 @@
         "book": "Hard Rock Bet",
         "edge": -0.046231,
         "model_prob": 0.619113,
-        "odds_observed_at": "2026-10-18T17:00:00+00:00",
+        "odds_observed_at": "2026-10-18T17:26:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -35487,7 +35487,7 @@
         "book": "BetMGM",
         "edge": -0.024952,
         "model_prob": 0.592676,
-        "odds_observed_at": "2026-10-18T17:00:00+00:00",
+        "odds_observed_at": "2026-10-18T17:26:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -35509,7 +35509,7 @@
         "book": "BetMGM",
         "edge": -0.083522,
         "model_prob": 0.407324,
-        "odds_observed_at": "2026-10-18T17:00:00+00:00",
+        "odds_observed_at": "2026-10-18T17:26:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -35527,11 +35527,11 @@
         "away": "CBJ",
         "pick": "CBJ +1.5",
         "line": 1.5,
-        "price": -160,
+        "price": -157,
         "book": "bet365",
-        "edge": -0.02038,
-        "model_prob": 0.602843,
-        "odds_observed_at": "2026-10-18T17:00:00+00:00",
+        "edge": -0.019177,
+        "model_prob": 0.59918,
+        "odds_observed_at": "2026-10-18T17:26:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -35549,11 +35549,11 @@
         "away": "CBJ",
         "pick": "MIN -1.5",
         "line": -1.5,
-        "price": 135,
+        "price": 132,
         "book": "bet365",
-        "edge": -0.066681,
-        "model_prob": 0.397157,
-        "odds_observed_at": "2026-10-18T17:00:00+00:00",
+        "edge": -0.070098,
+        "model_prob": 0.40082,
+        "odds_observed_at": "2026-10-18T17:26:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -35571,11 +35571,11 @@
         "away": "CBJ",
         "pick": "CBJ +1.5",
         "line": 1.5,
-        "price": -162,
+        "price": -155,
         "book": "DraftKings",
-        "edge": -0.022394,
-        "model_prob": 0.604474,
-        "odds_observed_at": "2026-10-18T17:00:00+00:00",
+        "edge": -0.018347,
+        "model_prob": 0.596691,
+        "odds_observed_at": "2026-10-18T17:26:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -35593,11 +35593,11 @@
         "away": "CBJ",
         "pick": "MIN -1.5",
         "line": -1.5,
-        "price": 136,
+        "price": 130,
         "book": "DraftKings",
-        "edge": -0.066559,
-        "model_prob": 0.395526,
-        "odds_observed_at": "2026-10-18T17:00:00+00:00",
+        "edge": -0.07239,
+        "model_prob": 0.403309,
+        "odds_observed_at": "2026-10-18T17:26:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -35619,7 +35619,7 @@
         "book": "FanDuel",
         "edge": -0.031763,
         "model_prob": 0.606954,
-        "odds_observed_at": "2026-10-18T17:00:00+00:00",
+        "odds_observed_at": "2026-10-18T17:26:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -35641,7 +35641,7 @@
         "book": "FanDuel",
         "edge": -0.072413,
         "model_prob": 0.393046,
-        "odds_observed_at": "2026-10-18T17:00:00+00:00",
+        "odds_observed_at": "2026-10-18T17:26:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -35659,11 +35659,11 @@
         "away": "CBJ",
         "pick": "CBJ +1.5",
         "line": 1.5,
-        "price": -165,
+        "price": -160,
         "book": "Fanatics Sportsbook",
-        "edge": -0.028389,
-        "model_prob": 0.604966,
-        "odds_observed_at": "2026-10-18T17:00:00+00:00",
+        "edge": -0.026727,
+        "model_prob": 0.598937,
+        "odds_observed_at": "2026-10-18T17:26:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -35681,11 +35681,11 @@
         "away": "CBJ",
         "pick": "MIN -1.5",
         "line": -1.5,
-        "price": 135,
+        "price": 130,
         "book": "Fanatics Sportsbook",
-        "edge": -0.071669,
-        "model_prob": 0.395034,
-        "odds_observed_at": "2026-10-18T17:00:00+00:00",
+        "edge": -0.077555,
+        "model_prob": 0.401063,
+        "odds_observed_at": "2026-10-18T17:26:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -35707,7 +35707,7 @@
         "book": "BetRivers",
         "edge": -0.033942,
         "model_prob": 0.604239,
-        "odds_observed_at": "2026-10-18T17:00:00+00:00",
+        "odds_observed_at": "2026-10-18T17:26:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -35729,7 +35729,7 @@
         "book": "BetRivers",
         "edge": -0.077876,
         "model_prob": 0.395761,
-        "odds_observed_at": "2026-10-18T17:00:00+00:00",
+        "odds_observed_at": "2026-10-18T17:26:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -35751,7 +35751,7 @@
         "book": "Caesars Odds",
         "edge": -0.019177,
         "model_prob": 0.59918,
-        "odds_observed_at": "2026-10-18T17:00:00+00:00",
+        "odds_observed_at": "2026-10-18T17:26:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -35773,7 +35773,7 @@
         "book": "Caesars Odds",
         "edge": -0.070098,
         "model_prob": 0.40082,
-        "odds_observed_at": "2026-10-18T17:00:00+00:00",
+        "odds_observed_at": "2026-10-18T17:26:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -35795,7 +35795,7 @@
         "book": "theScore Bet",
         "edge": -0.018347,
         "model_prob": 0.596691,
-        "odds_observed_at": "2026-10-18T17:00:00+00:00",
+        "odds_observed_at": "2026-10-18T17:26:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -35817,7 +35817,7 @@
         "book": "theScore Bet",
         "edge": -0.07239,
         "model_prob": 0.403309,
-        "odds_observed_at": "2026-10-18T17:00:00+00:00",
+        "odds_observed_at": "2026-10-18T17:26:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -35839,7 +35839,7 @@
         "book": "Hard Rock Bet",
         "edge": -0.034648,
         "model_prob": 0.601068,
-        "odds_observed_at": "2026-10-18T17:00:00+00:00",
+        "odds_observed_at": "2026-10-18T17:26:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -35861,51 +35861,7 @@
         "book": "Hard Rock Bet",
         "edge": -0.082457,
         "model_prob": 0.398932,
-        "odds_observed_at": "2026-10-18T17:00:00+00:00",
-        "model_version": "nhl-poisson-1.0"
-      },
-      {
-        "season_type": 2,
-        "tier": "PASS",
-        "stake": 0,
-        "held": true,
-        "odds_verified": true,
-        "start_time": "2026-10-18T22:00:00+00:00",
-        "game_id": "nhl:2026020135",
-        "matchup": "CBJ @ MIN",
-        "market": "TOTAL",
-        "side": "over",
-        "home": "MIN",
-        "away": "CBJ",
-        "pick": "Over 6.5",
-        "line": 6.5,
-        "price": 100,
-        "book": "BetMGM",
-        "edge": -0.058707,
-        "model_prob": 0.470647,
-        "odds_observed_at": "2026-10-18T17:00:00+00:00",
-        "model_version": "nhl-poisson-1.0"
-      },
-      {
-        "season_type": 2,
-        "tier": "PASS",
-        "stake": 0,
-        "held": true,
-        "odds_verified": true,
-        "start_time": "2026-10-18T22:00:00+00:00",
-        "game_id": "nhl:2026020135",
-        "matchup": "CBJ @ MIN",
-        "market": "TOTAL",
-        "side": "under",
-        "home": "MIN",
-        "away": "CBJ",
-        "pick": "Under 6.5",
-        "line": 6.5,
-        "price": -120,
-        "book": "BetMGM",
-        "edge": -0.029519,
-        "model_prob": 0.529353,
-        "odds_observed_at": "2026-10-18T17:00:00+00:00",
+        "odds_observed_at": "2026-10-18T17:26:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -35927,7 +35883,7 @@
         "book": "bet365",
         "edge": -0.057292,
         "model_prob": 0.469009,
-        "odds_observed_at": "2026-10-18T17:00:00+00:00",
+        "odds_observed_at": "2026-10-18T17:26:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -35949,7 +35905,7 @@
         "book": "bet365",
         "edge": -0.030174,
         "model_prob": 0.530991,
-        "odds_observed_at": "2026-10-18T17:00:00+00:00",
+        "odds_observed_at": "2026-10-18T17:26:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -35971,7 +35927,7 @@
         "book": "DraftKings",
         "edge": -0.05588,
         "model_prob": 0.467386,
-        "odds_observed_at": "2026-10-18T17:00:00+00:00",
+        "odds_observed_at": "2026-10-18T17:26:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -35993,7 +35949,7 @@
         "book": "DraftKings",
         "edge": -0.030817,
         "model_prob": 0.532614,
-        "odds_observed_at": "2026-10-18T17:00:00+00:00",
+        "odds_observed_at": "2026-10-18T17:26:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -36015,7 +35971,7 @@
         "book": "FanDuel",
         "edge": -0.058634,
         "model_prob": 0.466023,
-        "odds_observed_at": "2026-10-18T17:00:00+00:00",
+        "odds_observed_at": "2026-10-18T17:26:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -36037,7 +35993,7 @@
         "book": "FanDuel",
         "edge": -0.035396,
         "model_prob": 0.533977,
-        "odds_observed_at": "2026-10-18T17:00:00+00:00",
+        "odds_observed_at": "2026-10-18T17:26:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -36059,7 +36015,7 @@
         "book": "Fanatics Sportsbook",
         "edge": -0.058707,
         "model_prob": 0.470647,
-        "odds_observed_at": "2026-10-18T17:00:00+00:00",
+        "odds_observed_at": "2026-10-18T17:26:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -36081,7 +36037,7 @@
         "book": "Fanatics Sportsbook",
         "edge": -0.029519,
         "model_prob": 0.529353,
-        "odds_observed_at": "2026-10-18T17:00:00+00:00",
+        "odds_observed_at": "2026-10-18T17:26:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -36103,7 +36059,7 @@
         "book": "BetRivers",
         "edge": -0.07106,
         "model_prob": 0.473577,
-        "odds_observed_at": "2026-10-18T17:00:00+00:00",
+        "odds_observed_at": "2026-10-18T17:26:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -36125,7 +36081,7 @@
         "book": "BetRivers",
         "edge": -0.038517,
         "model_prob": 0.526423,
-        "odds_observed_at": "2026-10-18T17:00:00+00:00",
+        "odds_observed_at": "2026-10-18T17:26:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -36147,7 +36103,7 @@
         "book": "Caesars Odds",
         "edge": -0.059985,
         "model_prob": 0.465354,
-        "odds_observed_at": "2026-10-18T17:00:00+00:00",
+        "odds_observed_at": "2026-10-18T17:26:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -36169,7 +36125,7 @@
         "book": "Caesars Odds",
         "edge": -0.037637,
         "model_prob": 0.534646,
-        "odds_observed_at": "2026-10-18T17:00:00+00:00",
+        "odds_observed_at": "2026-10-18T17:26:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -36191,7 +36147,7 @@
         "book": "theScore Bet",
         "edge": -0.058707,
         "model_prob": 0.470647,
-        "odds_observed_at": "2026-10-18T17:00:00+00:00",
+        "odds_observed_at": "2026-10-18T17:26:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -36213,7 +36169,7 @@
         "book": "theScore Bet",
         "edge": -0.029519,
         "model_prob": 0.529353,
-        "odds_observed_at": "2026-10-18T17:00:00+00:00",
+        "odds_observed_at": "2026-10-18T17:26:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -36235,7 +36191,7 @@
         "book": "Hard Rock Bet",
         "edge": -0.058707,
         "model_prob": 0.470647,
-        "odds_observed_at": "2026-10-18T17:00:00+00:00",
+        "odds_observed_at": "2026-10-18T17:26:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -36257,7 +36213,7 @@
         "book": "Hard Rock Bet",
         "edge": -0.029519,
         "model_prob": 0.529353,
-        "odds_observed_at": "2026-10-18T17:00:00+00:00",
+        "odds_observed_at": "2026-10-18T17:26:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -36279,7 +36235,7 @@
         "book": "FanDuel (CA)",
         "edge": 0.017483,
         "model_prob": 0.363387,
-        "odds_observed_at": "2026-10-18T17:00:52.739424+00:00",
+        "odds_observed_at": "2026-10-18T17:26:16.407138+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -36301,7 +36257,7 @@
         "book": "FanDuel (CA)",
         "edge": -0.074017,
         "model_prob": 0.636613,
-        "odds_observed_at": "2026-10-18T17:00:52.739424+00:00",
+        "odds_observed_at": "2026-10-18T17:26:16.407138+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -36323,7 +36279,7 @@
         "book": "DraftKings (US)",
         "edge": 0.018836,
         "model_prob": 0.36387,
-        "odds_observed_at": "2026-10-18T17:00:52.739424+00:00",
+        "odds_observed_at": "2026-10-18T17:26:16.407138+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -36345,7 +36301,7 @@
         "book": "DraftKings (US)",
         "edge": -0.072067,
         "model_prob": 0.63613,
-        "odds_observed_at": "2026-10-18T17:00:52.739424+00:00",
+        "odds_observed_at": "2026-10-18T17:26:16.407138+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -36367,7 +36323,7 @@
         "book": "BetMGM",
         "edge": -0.074017,
         "model_prob": 0.636613,
-        "odds_observed_at": "2026-10-18T17:00:00+00:00",
+        "odds_observed_at": "2026-10-18T17:26:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -36389,7 +36345,7 @@
         "book": "BetMGM",
         "edge": 0.017483,
         "model_prob": 0.363387,
-        "odds_observed_at": "2026-10-18T17:00:00+00:00",
+        "odds_observed_at": "2026-10-18T17:26:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -36411,7 +36367,7 @@
         "book": "bet365",
         "edge": -0.074017,
         "model_prob": 0.636613,
-        "odds_observed_at": "2026-10-18T17:00:00+00:00",
+        "odds_observed_at": "2026-10-18T17:26:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -36433,7 +36389,7 @@
         "book": "bet365",
         "edge": 0.017483,
         "model_prob": 0.363387,
-        "odds_observed_at": "2026-10-18T17:00:00+00:00",
+        "odds_observed_at": "2026-10-18T17:26:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -36455,7 +36411,7 @@
         "book": "DraftKings",
         "edge": -0.072067,
         "model_prob": 0.63613,
-        "odds_observed_at": "2026-10-18T17:00:00+00:00",
+        "odds_observed_at": "2026-10-18T17:26:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -36477,7 +36433,7 @@
         "book": "DraftKings",
         "edge": 0.018836,
         "model_prob": 0.36387,
-        "odds_observed_at": "2026-10-18T17:00:00+00:00",
+        "odds_observed_at": "2026-10-18T17:26:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -36499,7 +36455,7 @@
         "book": "FanDuel",
         "edge": -0.074017,
         "model_prob": 0.636613,
-        "odds_observed_at": "2026-10-18T17:00:00+00:00",
+        "odds_observed_at": "2026-10-18T17:26:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -36521,7 +36477,7 @@
         "book": "FanDuel",
         "edge": 0.017483,
         "model_prob": 0.363387,
-        "odds_observed_at": "2026-10-18T17:00:00+00:00",
+        "odds_observed_at": "2026-10-18T17:26:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -36543,7 +36499,7 @@
         "book": "Fanatics Sportsbook",
         "edge": -0.074017,
         "model_prob": 0.636613,
-        "odds_observed_at": "2026-10-18T17:00:00+00:00",
+        "odds_observed_at": "2026-10-18T17:26:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -36565,7 +36521,7 @@
         "book": "Fanatics Sportsbook",
         "edge": 0.017483,
         "model_prob": 0.363387,
-        "odds_observed_at": "2026-10-18T17:00:00+00:00",
+        "odds_observed_at": "2026-10-18T17:26:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -36587,7 +36543,7 @@
         "book": "BetRivers",
         "edge": -0.079039,
         "model_prob": 0.641882,
-        "odds_observed_at": "2026-10-18T17:00:00+00:00",
+        "odds_observed_at": "2026-10-18T17:26:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -36609,7 +36565,7 @@
         "book": "BetRivers",
         "edge": 0.020636,
         "model_prob": 0.358118,
-        "odds_observed_at": "2026-10-18T17:00:00+00:00",
+        "odds_observed_at": "2026-10-18T17:26:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -36631,7 +36587,7 @@
         "book": "Caesars Odds",
         "edge": -0.070316,
         "model_prob": 0.637331,
-        "odds_observed_at": "2026-10-18T17:00:00+00:00",
+        "odds_observed_at": "2026-10-18T17:26:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -36653,7 +36609,7 @@
         "book": "Caesars Odds",
         "edge": 0.022727,
         "model_prob": 0.362669,
-        "odds_observed_at": "2026-10-18T17:00:00+00:00",
+        "odds_observed_at": "2026-10-18T17:26:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -36675,7 +36631,7 @@
         "book": "theScore Bet",
         "edge": -0.06908,
         "model_prob": 0.63539,
-        "odds_observed_at": "2026-10-18T17:00:00+00:00",
+        "odds_observed_at": "2026-10-18T17:26:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -36697,7 +36653,7 @@
         "book": "theScore Bet",
         "edge": 0.020908,
         "model_prob": 0.36461,
-        "odds_observed_at": "2026-10-18T17:00:00+00:00",
+        "odds_observed_at": "2026-10-18T17:26:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -36719,7 +36675,7 @@
         "book": "Hard Rock Bet",
         "edge": -0.082994,
         "model_prob": 0.630442,
-        "odds_observed_at": "2026-10-18T17:00:00+00:00",
+        "odds_observed_at": "2026-10-18T17:26:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -36741,7 +36697,7 @@
         "book": "Hard Rock Bet",
         "edge": -0.002192,
         "model_prob": 0.369558,
-        "odds_observed_at": "2026-10-18T17:00:00+00:00",
+        "odds_observed_at": "2026-10-18T17:26:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -36763,7 +36719,7 @@
         "book": "BetMGM",
         "edge": -0.112108,
         "model_prob": 0.422806,
-        "odds_observed_at": "2026-10-18T17:00:00+00:00",
+        "odds_observed_at": "2026-10-18T17:26:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -36785,7 +36741,7 @@
         "book": "BetMGM",
         "edge": 0.004746,
         "model_prob": 0.577194,
-        "odds_observed_at": "2026-10-18T17:00:00+00:00",
+        "odds_observed_at": "2026-10-18T17:26:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -36807,7 +36763,7 @@
         "book": "bet365",
         "edge": -0.097153,
         "model_prob": 0.41415,
-        "odds_observed_at": "2026-10-18T17:00:00+00:00",
+        "odds_observed_at": "2026-10-18T17:26:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -36829,7 +36785,7 @@
         "book": "bet365",
         "edge": 0.010379,
         "model_prob": 0.58585,
-        "odds_observed_at": "2026-10-18T17:00:00+00:00",
+        "odds_observed_at": "2026-10-18T17:26:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -36851,7 +36807,7 @@
         "book": "DraftKings",
         "edge": -0.102694,
         "model_prob": 0.419302,
-        "odds_observed_at": "2026-10-18T17:00:00+00:00",
+        "odds_observed_at": "2026-10-18T17:26:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -36873,7 +36829,7 @@
         "book": "DraftKings",
         "edge": 0.010845,
         "model_prob": 0.580698,
-        "odds_observed_at": "2026-10-18T17:00:00+00:00",
+        "odds_observed_at": "2026-10-18T17:26:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -36895,7 +36851,7 @@
         "book": "FanDuel",
         "edge": -0.113409,
         "model_prob": 0.418203,
-        "odds_observed_at": "2026-10-18T17:00:00+00:00",
+        "odds_observed_at": "2026-10-18T17:26:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -36917,7 +36873,7 @@
         "book": "FanDuel",
         "edge": -0.002634,
         "model_prob": 0.581797,
-        "odds_observed_at": "2026-10-18T17:00:00+00:00",
+        "odds_observed_at": "2026-10-18T17:26:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -36939,7 +36895,7 @@
         "book": "Fanatics Sportsbook",
         "edge": -0.10646,
         "model_prob": 0.4156,
-        "odds_observed_at": "2026-10-18T17:00:00+00:00",
+        "odds_observed_at": "2026-10-18T17:26:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -36961,7 +36917,7 @@
         "book": "Fanatics Sportsbook",
         "edge": 0.001828,
         "model_prob": 0.5844,
-        "odds_observed_at": "2026-10-18T17:00:00+00:00",
+        "odds_observed_at": "2026-10-18T17:26:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -36983,7 +36939,7 @@
         "book": "BetRivers",
         "edge": -0.118075,
         "model_prob": 0.424002,
-        "odds_observed_at": "2026-10-18T17:00:00+00:00",
+        "odds_observed_at": "2026-10-18T17:26:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -37005,7 +36961,7 @@
         "book": "BetRivers",
         "edge": -0.000474,
         "model_prob": 0.575998,
-        "odds_observed_at": "2026-10-18T17:00:00+00:00",
+        "odds_observed_at": "2026-10-18T17:26:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -37027,7 +36983,7 @@
         "book": "Caesars Odds",
         "edge": -0.098219,
         "model_prob": 0.415567,
-        "odds_observed_at": "2026-10-18T17:00:00+00:00",
+        "odds_observed_at": "2026-10-18T17:26:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -37049,7 +37005,7 @@
         "book": "Caesars Odds",
         "edge": 0.011026,
         "model_prob": 0.584433,
-        "odds_observed_at": "2026-10-18T17:00:00+00:00",
+        "odds_observed_at": "2026-10-18T17:26:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -37071,7 +37027,7 @@
         "book": "theScore Bet",
         "edge": -0.105767,
         "model_prob": 0.425825,
-        "odds_observed_at": "2026-10-18T17:00:00+00:00",
+        "odds_observed_at": "2026-10-18T17:26:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -37093,7 +37049,7 @@
         "book": "theScore Bet",
         "edge": 0.015848,
         "model_prob": 0.574175,
-        "odds_observed_at": "2026-10-18T17:00:00+00:00",
+        "odds_observed_at": "2026-10-18T17:26:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -37115,7 +37071,7 @@
         "book": "Hard Rock Bet",
         "edge": -0.112215,
         "model_prob": 0.412923,
-        "odds_observed_at": "2026-10-18T17:00:00+00:00",
+        "odds_observed_at": "2026-10-18T17:26:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -37137,7 +37093,7 @@
         "book": "Hard Rock Bet",
         "edge": -0.008043,
         "model_prob": 0.587077,
-        "odds_observed_at": "2026-10-18T17:00:00+00:00",
+        "odds_observed_at": "2026-10-18T17:26:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -37159,7 +37115,7 @@
         "book": "BetMGM",
         "edge": -0.037161,
         "model_prob": 0.522652,
-        "odds_observed_at": "2026-10-18T17:00:00+00:00",
+        "odds_observed_at": "2026-10-18T17:26:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -37181,7 +37137,7 @@
         "book": "BetMGM",
         "edge": -0.040273,
         "model_prob": 0.477348,
-        "odds_observed_at": "2026-10-18T17:00:00+00:00",
+        "odds_observed_at": "2026-10-18T17:26:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -37203,7 +37159,7 @@
         "book": "bet365",
         "edge": -0.036054,
         "model_prob": 0.461218,
-        "odds_observed_at": "2026-10-18T17:00:00+00:00",
+        "odds_observed_at": "2026-10-18T17:26:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -37225,7 +37181,7 @@
         "book": "bet365",
         "edge": -0.043558,
         "model_prob": 0.538782,
-        "odds_observed_at": "2026-10-18T17:00:00+00:00",
+        "odds_observed_at": "2026-10-18T17:26:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -37247,7 +37203,7 @@
         "book": "DraftKings",
         "edge": -0.034624,
         "model_prob": 0.459703,
-        "odds_observed_at": "2026-10-18T17:00:00+00:00",
+        "odds_observed_at": "2026-10-18T17:26:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -37269,7 +37225,7 @@
         "book": "DraftKings",
         "edge": -0.04409,
         "model_prob": 0.540297,
-        "odds_observed_at": "2026-10-18T17:00:00+00:00",
+        "odds_observed_at": "2026-10-18T17:26:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -37291,7 +37247,7 @@
         "book": "FanDuel",
         "edge": -0.041244,
         "model_prob": 0.524052,
-        "odds_observed_at": "2026-10-18T17:00:00+00:00",
+        "odds_observed_at": "2026-10-18T17:26:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -37313,7 +37269,7 @@
         "book": "FanDuel",
         "edge": -0.042762,
         "model_prob": 0.475948,
-        "odds_observed_at": "2026-10-18T17:00:00+00:00",
+        "odds_observed_at": "2026-10-18T17:26:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -37335,7 +37291,7 @@
         "book": "Fanatics Sportsbook",
         "edge": -0.04181,
         "model_prob": 0.46741,
-        "odds_observed_at": "2026-10-18T17:00:00+00:00",
+        "odds_observed_at": "2026-10-18T17:26:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -37357,7 +37313,7 @@
         "book": "Fanatics Sportsbook",
         "edge": -0.041338,
         "model_prob": 0.53259,
-        "odds_observed_at": "2026-10-18T17:00:00+00:00",
+        "odds_observed_at": "2026-10-18T17:26:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -37379,7 +37335,7 @@
         "book": "BetRivers",
         "edge": -0.042188,
         "model_prob": 0.456101,
-        "odds_observed_at": "2026-10-18T17:00:00+00:00",
+        "odds_observed_at": "2026-10-18T17:26:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -37401,7 +37357,7 @@
         "book": "BetRivers",
         "edge": -0.056175,
         "model_prob": 0.543899,
-        "odds_observed_at": "2026-10-18T17:00:00+00:00",
+        "odds_observed_at": "2026-10-18T17:26:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -37423,7 +37379,7 @@
         "book": "Caesars Odds",
         "edge": -0.043675,
         "model_prob": 0.520611,
-        "odds_observed_at": "2026-10-18T17:00:00+00:00",
+        "odds_observed_at": "2026-10-18T17:26:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -37445,7 +37401,7 @@
         "book": "Caesars Odds",
         "edge": -0.049056,
         "model_prob": 0.479389,
-        "odds_observed_at": "2026-10-18T17:00:00+00:00",
+        "odds_observed_at": "2026-10-18T17:26:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -37467,7 +37423,7 @@
         "book": "theScore Bet",
         "edge": -0.04181,
         "model_prob": 0.46741,
-        "odds_observed_at": "2026-10-18T17:00:00+00:00",
+        "odds_observed_at": "2026-10-18T17:26:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -37489,7 +37445,7 @@
         "book": "theScore Bet",
         "edge": -0.041338,
         "model_prob": 0.53259,
-        "odds_observed_at": "2026-10-18T17:00:00+00:00",
+        "odds_observed_at": "2026-10-18T17:26:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -37511,7 +37467,7 @@
         "book": "Hard Rock Bet",
         "edge": -0.048405,
         "model_prob": 0.464192,
-        "odds_observed_at": "2026-10-18T17:00:00+00:00",
+        "odds_observed_at": "2026-10-18T17:26:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -37533,7 +37489,7 @@
         "book": "Hard Rock Bet",
         "edge": -0.052033,
         "model_prob": 0.535808,
-        "odds_observed_at": "2026-10-18T17:00:00+00:00",
+        "odds_observed_at": "2026-10-18T17:26:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -37555,7 +37511,7 @@
         "book": "BetMGM",
         "edge": -0.052572,
         "model_prob": 0.451156,
-        "odds_observed_at": "2026-10-18T17:00:00+00:00",
+        "odds_observed_at": "2026-10-18T17:26:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -37577,7 +37533,7 @@
         "book": "BetMGM",
         "edge": -0.044605,
         "model_prob": 0.548844,
-        "odds_observed_at": "2026-10-18T17:00:00+00:00",
+        "odds_observed_at": "2026-10-18T17:26:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -37599,7 +37555,7 @@
         "book": "bet365",
         "edge": -0.038051,
         "model_prob": 0.445347,
-        "odds_observed_at": "2026-10-18T17:00:00+00:00",
+        "odds_observed_at": "2026-10-18T17:26:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -37621,7 +37577,7 @@
         "book": "bet365",
         "edge": -0.037514,
         "model_prob": 0.554653,
-        "odds_observed_at": "2026-10-18T17:00:00+00:00",
+        "odds_observed_at": "2026-10-18T17:26:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -37643,7 +37599,7 @@
         "book": "DraftKings",
         "edge": -0.042024,
         "model_prob": 0.447652,
-        "odds_observed_at": "2026-10-18T17:00:00+00:00",
+        "odds_observed_at": "2026-10-18T17:26:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -37665,7 +37621,7 @@
         "book": "DraftKings",
         "edge": -0.038506,
         "model_prob": 0.552348,
-        "odds_observed_at": "2026-10-18T17:00:00+00:00",
+        "odds_observed_at": "2026-10-18T17:26:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -37687,7 +37643,7 @@
         "book": "FanDuel",
         "edge": -0.046034,
         "model_prob": 0.449984,
-        "odds_observed_at": "2026-10-18T17:00:00+00:00",
+        "odds_observed_at": "2026-10-18T17:26:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -37709,7 +37665,7 @@
         "book": "FanDuel",
         "edge": -0.039524,
         "model_prob": 0.550016,
-        "odds_observed_at": "2026-10-18T17:00:00+00:00",
+        "odds_observed_at": "2026-10-18T17:26:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -37731,7 +37687,7 @@
         "book": "Fanatics Sportsbook",
         "edge": -0.046231,
         "model_prob": 0.454176,
-        "odds_observed_at": "2026-10-18T17:00:00+00:00",
+        "odds_observed_at": "2026-10-18T17:26:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -37753,7 +37709,7 @@
         "book": "Fanatics Sportsbook",
         "edge": -0.034311,
         "model_prob": 0.545824,
-        "odds_observed_at": "2026-10-18T17:00:00+00:00",
+        "odds_observed_at": "2026-10-18T17:26:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -37775,7 +37731,7 @@
         "book": "Caesars Odds",
         "edge": -0.043491,
         "model_prob": 0.451183,
-        "odds_observed_at": "2026-10-18T17:00:00+00:00",
+        "odds_observed_at": "2026-10-18T17:26:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -37797,7 +37753,7 @@
         "book": "Caesars Odds",
         "edge": -0.035413,
         "model_prob": 0.548817,
-        "odds_observed_at": "2026-10-18T17:00:00+00:00",
+        "odds_observed_at": "2026-10-18T17:26:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -37819,7 +37775,7 @@
         "book": "theScore Bet",
         "edge": -0.046231,
         "model_prob": 0.454176,
-        "odds_observed_at": "2026-10-18T17:00:00+00:00",
+        "odds_observed_at": "2026-10-18T17:26:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -37841,7 +37797,7 @@
         "book": "theScore Bet",
         "edge": -0.034311,
         "model_prob": 0.545824,
-        "odds_observed_at": "2026-10-18T17:00:00+00:00",
+        "odds_observed_at": "2026-10-18T17:26:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -37863,7 +37819,7 @@
         "book": "BetMGM",
         "edge": -0.030751,
         "model_prob": 0.656588,
-        "odds_observed_at": "2026-10-18T17:00:00+00:00",
+        "odds_observed_at": "2026-10-18T17:26:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -37885,7 +37841,7 @@
         "book": "BetMGM",
         "edge": -0.072788,
         "model_prob": 0.343412,
-        "odds_observed_at": "2026-10-18T17:00:00+00:00",
+        "odds_observed_at": "2026-10-18T17:26:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -37907,7 +37863,7 @@
         "book": "bet365",
         "edge": -0.032311,
         "model_prob": 0.665286,
-        "odds_observed_at": "2026-10-18T17:00:00+00:00",
+        "odds_observed_at": "2026-10-18T17:26:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -37929,7 +37885,7 @@
         "book": "bet365",
         "edge": -0.062801,
         "model_prob": 0.334714,
-        "odds_observed_at": "2026-10-18T17:00:00+00:00",
+        "odds_observed_at": "2026-10-18T17:26:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -37951,7 +37907,7 @@
         "book": "DraftKings",
         "edge": -0.030242,
         "model_prob": 0.664803,
-        "odds_observed_at": "2026-10-18T17:00:00+00:00",
+        "odds_observed_at": "2026-10-18T17:26:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -37973,7 +37929,7 @@
         "book": "DraftKings",
         "edge": -0.061448,
         "model_prob": 0.335197,
-        "odds_observed_at": "2026-10-18T17:00:00+00:00",
+        "odds_observed_at": "2026-10-18T17:26:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -37995,7 +37951,7 @@
         "book": "FanDuel",
         "edge": -0.035851,
         "model_prob": 0.662853,
-        "odds_observed_at": "2026-10-18T17:00:00+00:00",
+        "odds_observed_at": "2026-10-18T17:26:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -38017,7 +37973,7 @@
         "book": "FanDuel",
         "edge": -0.069473,
         "model_prob": 0.337147,
-        "odds_observed_at": "2026-10-18T17:00:00+00:00",
+        "odds_observed_at": "2026-10-18T17:26:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -38039,7 +37995,7 @@
         "book": "Fanatics Sportsbook",
         "edge": -0.036746,
         "model_prob": 0.662237,
-        "odds_observed_at": "2026-10-18T17:00:00+00:00",
+        "odds_observed_at": "2026-10-18T17:26:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -38061,7 +38017,7 @@
         "book": "Fanatics Sportsbook",
         "edge": -0.071152,
         "model_prob": 0.337763,
-        "odds_observed_at": "2026-10-18T17:00:00+00:00",
+        "odds_observed_at": "2026-10-18T17:26:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -38083,7 +38039,7 @@
         "book": "Caesars Odds",
         "edge": -0.029194,
         "model_prob": 0.664558,
-        "odds_observed_at": "2026-10-18T17:00:00+00:00",
+        "odds_observed_at": "2026-10-18T17:26:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -38105,7 +38061,7 @@
         "book": "Caesars Odds",
         "edge": -0.060763,
         "model_prob": 0.335442,
-        "odds_observed_at": "2026-10-18T17:00:00+00:00",
+        "odds_observed_at": "2026-10-18T17:26:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -38127,7 +38083,7 @@
         "book": "theScore Bet",
         "edge": -0.041729,
         "model_prob": 0.663418,
-        "odds_observed_at": "2026-10-18T17:00:00+00:00",
+        "odds_observed_at": "2026-10-18T17:26:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -38149,7 +38105,7 @@
         "book": "theScore Bet",
         "edge": -0.0744,
         "model_prob": 0.336582,
-        "odds_observed_at": "2026-10-18T17:00:00+00:00",
+        "odds_observed_at": "2026-10-18T17:26:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -38171,7 +38127,7 @@
         "book": "BetMGM",
         "edge": -0.049225,
         "model_prob": 0.524796,
-        "odds_observed_at": "2026-10-18T17:00:00+00:00",
+        "odds_observed_at": "2026-10-18T17:26:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -38193,7 +38149,7 @@
         "book": "BetMGM",
         "edge": -0.022967,
         "model_prob": 0.475204,
-        "odds_observed_at": "2026-10-18T17:00:00+00:00",
+        "odds_observed_at": "2026-10-18T17:26:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -38215,7 +38171,7 @@
         "book": "bet365",
         "edge": -0.041493,
         "model_prob": 0.450003,
-        "odds_observed_at": "2026-10-18T17:00:00+00:00",
+        "odds_observed_at": "2026-10-18T17:26:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -38237,7 +38193,7 @@
         "book": "bet365",
         "edge": -0.036472,
         "model_prob": 0.549997,
-        "odds_observed_at": "2026-10-18T17:00:00+00:00",
+        "odds_observed_at": "2026-10-18T17:26:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -38259,7 +38215,7 @@
         "book": "DraftKings",
         "edge": -0.041388,
         "model_prob": 0.44795,
-        "odds_observed_at": "2026-10-18T17:00:00+00:00",
+        "odds_observed_at": "2026-10-18T17:26:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -38281,7 +38237,7 @@
         "book": "DraftKings",
         "edge": -0.039024,
         "model_prob": 0.55205,
-        "odds_observed_at": "2026-10-18T17:00:00+00:00",
+        "odds_observed_at": "2026-10-18T17:26:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -38303,7 +38259,7 @@
         "book": "FanDuel",
         "edge": -0.0508,
         "model_prob": 0.518149,
-        "odds_observed_at": "2026-10-18T17:00:00+00:00",
+        "odds_observed_at": "2026-10-18T17:26:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -38325,7 +38281,7 @@
         "book": "FanDuel",
         "edge": -0.032272,
         "model_prob": 0.481851,
-        "odds_observed_at": "2026-10-18T17:00:00+00:00",
+        "odds_observed_at": "2026-10-18T17:26:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -38347,7 +38303,7 @@
         "book": "Fanatics Sportsbook",
         "edge": -0.052531,
         "model_prob": 0.46218,
-        "odds_observed_at": "2026-10-18T17:00:00+00:00",
+        "odds_observed_at": "2026-10-18T17:26:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -38369,7 +38325,7 @@
         "book": "Fanatics Sportsbook",
         "edge": -0.031924,
         "model_prob": 0.53782,
-        "odds_observed_at": "2026-10-18T17:00:00+00:00",
+        "odds_observed_at": "2026-10-18T17:26:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -38391,7 +38347,7 @@
         "book": "Caesars Odds",
         "edge": -0.051802,
         "model_prob": 0.51561,
-        "odds_observed_at": "2026-10-18T17:00:00+00:00",
+        "odds_observed_at": "2026-10-18T17:26:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -38413,7 +38369,7 @@
         "book": "Caesars Odds",
         "edge": -0.036202,
         "model_prob": 0.48439,
-        "odds_observed_at": "2026-10-18T17:00:00+00:00",
+        "odds_observed_at": "2026-10-18T17:26:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -38435,7 +38391,7 @@
         "book": "theScore Bet",
         "edge": -0.045607,
         "model_prob": 0.454473,
-        "odds_observed_at": "2026-10-18T17:00:00+00:00",
+        "odds_observed_at": "2026-10-18T17:26:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -38457,7 +38413,7 @@
         "book": "theScore Bet",
         "edge": -0.034837,
         "model_prob": 0.545527,
-        "odds_observed_at": "2026-10-18T17:00:00+00:00",
+        "odds_observed_at": "2026-10-18T17:26:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -38479,7 +38435,7 @@
         "book": "BetMGM",
         "edge": -0.068813,
         "model_prob": 0.640191,
-        "odds_observed_at": "2026-10-18T17:00:00+00:00",
+        "odds_observed_at": "2026-10-18T17:26:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -38501,7 +38457,7 @@
         "book": "BetMGM",
         "edge": 0.007465,
         "model_prob": 0.359809,
-        "odds_observed_at": "2026-10-18T17:00:00+00:00",
+        "odds_observed_at": "2026-10-18T17:26:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -38523,7 +38479,7 @@
         "book": "bet365",
         "edge": -0.063166,
         "model_prob": 0.634629,
-        "odds_observed_at": "2026-10-18T17:00:00+00:00",
+        "odds_observed_at": "2026-10-18T17:26:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -38545,7 +38501,7 @@
         "book": "bet365",
         "edge": 0.004769,
         "model_prob": 0.365371,
-        "odds_observed_at": "2026-10-18T17:00:00+00:00",
+        "odds_observed_at": "2026-10-18T17:26:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -38567,7 +38523,7 @@
         "book": "DraftKings",
         "edge": -0.062463,
         "model_prob": 0.630148,
-        "odds_observed_at": "2026-10-18T17:00:00+00:00",
+        "odds_observed_at": "2026-10-18T17:26:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -38589,7 +38545,7 @@
         "book": "DraftKings",
         "edge": -0.0014,
         "model_prob": 0.369852,
-        "odds_observed_at": "2026-10-18T17:00:00+00:00",
+        "odds_observed_at": "2026-10-18T17:26:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -38611,7 +38567,7 @@
         "book": "FanDuel",
         "edge": -0.068813,
         "model_prob": 0.640191,
-        "odds_observed_at": "2026-10-18T17:00:00+00:00",
+        "odds_observed_at": "2026-10-18T17:26:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -38633,7 +38589,7 @@
         "book": "FanDuel",
         "edge": 0.007465,
         "model_prob": 0.359809,
-        "odds_observed_at": "2026-10-18T17:00:00+00:00",
+        "odds_observed_at": "2026-10-18T17:26:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -38655,7 +38611,7 @@
         "book": "Fanatics Sportsbook",
         "edge": -0.068316,
         "model_prob": 0.635912,
-        "odds_observed_at": "2026-10-18T17:00:00+00:00",
+        "odds_observed_at": "2026-10-18T17:26:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -38677,7 +38633,7 @@
         "book": "Fanatics Sportsbook",
         "edge": 0.001243,
         "model_prob": 0.364088,
-        "odds_observed_at": "2026-10-18T17:00:00+00:00",
+        "odds_observed_at": "2026-10-18T17:26:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -38699,7 +38655,7 @@
         "book": "Caesars Odds",
         "edge": -0.063573,
         "model_prob": 0.637249,
-        "odds_observed_at": "2026-10-18T17:00:00+00:00",
+        "odds_observed_at": "2026-10-18T17:26:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -38721,7 +38677,7 @@
         "book": "Caesars Odds",
         "edge": 0.008448,
         "model_prob": 0.362751,
-        "odds_observed_at": "2026-10-18T17:00:00+00:00",
+        "odds_observed_at": "2026-10-18T17:26:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -38743,7 +38699,7 @@
         "book": "theScore Bet",
         "edge": -0.056884,
         "model_prob": 0.628744,
-        "odds_observed_at": "2026-10-18T17:00:00+00:00",
+        "odds_observed_at": "2026-10-18T17:26:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -38765,7 +38721,7 @@
         "book": "theScore Bet",
         "edge": 0.002391,
         "model_prob": 0.371256,
-        "odds_observed_at": "2026-10-18T17:00:00+00:00",
+        "odds_observed_at": "2026-10-18T17:26:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -38787,7 +38743,7 @@
         "book": "BetMGM",
         "edge": -0.112164,
         "model_prob": 0.433091,
-        "odds_observed_at": "2026-10-18T17:00:00+00:00",
+        "odds_observed_at": "2026-10-18T17:26:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -38809,7 +38765,7 @@
         "book": "BetMGM",
         "edge": 0.002993,
         "model_prob": 0.566909,
-        "odds_observed_at": "2026-10-18T17:00:00+00:00",
+        "odds_observed_at": "2026-10-18T17:26:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -38831,7 +38787,7 @@
         "book": "bet365",
         "edge": -0.089161,
         "model_prob": 0.408448,
-        "odds_observed_at": "2026-10-18T17:00:00+00:00",
+        "odds_observed_at": "2026-10-18T17:26:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -38853,7 +38809,7 @@
         "book": "bet365",
         "edge": -0.003276,
         "model_prob": 0.591552,
-        "odds_observed_at": "2026-10-18T17:00:00+00:00",
+        "odds_observed_at": "2026-10-18T17:26:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -38875,7 +38831,7 @@
         "book": "DraftKings",
         "edge": -0.089185,
         "model_prob": 0.406614,
-        "odds_observed_at": "2026-10-18T17:00:00+00:00",
+        "odds_observed_at": "2026-10-18T17:26:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -38897,7 +38853,7 @@
         "book": "DraftKings",
         "edge": -0.005678,
         "model_prob": 0.593386,
-        "odds_observed_at": "2026-10-18T17:00:00+00:00",
+        "odds_observed_at": "2026-10-18T17:26:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -38919,7 +38875,7 @@
         "book": "FanDuel",
         "edge": -0.100514,
         "model_prob": 0.416429,
-        "odds_observed_at": "2026-10-18T17:00:00+00:00",
+        "odds_observed_at": "2026-10-18T17:26:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -38941,7 +38897,7 @@
         "book": "FanDuel",
         "edge": -0.005463,
         "model_prob": 0.583571,
-        "odds_observed_at": "2026-10-18T17:00:00+00:00",
+        "odds_observed_at": "2026-10-18T17:26:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -38963,7 +38919,7 @@
         "book": "Fanatics Sportsbook",
         "edge": -0.094795,
         "model_prob": 0.411457,
-        "odds_observed_at": "2026-10-18T17:00:00+00:00",
+        "odds_observed_at": "2026-10-18T17:26:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -38985,7 +38941,7 @@
         "book": "Fanatics Sportsbook",
         "edge": -0.005565,
         "model_prob": 0.588543,
-        "odds_observed_at": "2026-10-18T17:00:00+00:00",
+        "odds_observed_at": "2026-10-18T17:26:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -39007,7 +38963,7 @@
         "book": "Caesars Odds",
         "edge": -0.09021,
         "model_prob": 0.41167,
-        "odds_observed_at": "2026-10-18T17:00:00+00:00",
+        "odds_observed_at": "2026-10-18T17:26:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -39029,7 +38985,7 @@
         "book": "Caesars Odds",
         "edge": -0.00025,
         "model_prob": 0.58833,
-        "odds_observed_at": "2026-10-18T17:00:00+00:00",
+        "odds_observed_at": "2026-10-18T17:26:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -39051,7 +39007,7 @@
         "book": "theScore Bet",
         "edge": -0.089183,
         "model_prob": 0.404808,
-        "odds_observed_at": "2026-10-18T17:00:00+00:00",
+        "odds_observed_at": "2026-10-18T17:26:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -39073,7 +39029,7 @@
         "book": "theScore Bet",
         "edge": -0.008013,
         "model_prob": 0.595192,
-        "odds_observed_at": "2026-10-18T17:00:00+00:00",
+        "odds_observed_at": "2026-10-18T17:26:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -39095,7 +39051,7 @@
         "book": "BetMGM",
         "edge": -0.046476,
         "model_prob": 0.516918,
-        "odds_observed_at": "2026-10-18T17:00:00+00:00",
+        "odds_observed_at": "2026-10-18T17:26:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -39117,7 +39073,7 @@
         "book": "BetMGM",
         "edge": -0.030058,
         "model_prob": 0.483082,
-        "odds_observed_at": "2026-10-18T17:00:00+00:00",
+        "odds_observed_at": "2026-10-18T17:26:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -39139,7 +39095,7 @@
         "book": "bet365",
         "edge": -0.034121,
         "model_prob": 0.549552,
-        "odds_observed_at": "2026-10-18T17:00:00+00:00",
+        "odds_observed_at": "2026-10-18T17:26:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -39161,7 +39117,7 @@
         "book": "bet365",
         "edge": -0.04505,
         "model_prob": 0.450448,
-        "odds_observed_at": "2026-10-18T17:00:00+00:00",
+        "odds_observed_at": "2026-10-18T17:26:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -39183,7 +39139,7 @@
         "book": "DraftKings",
         "edge": -0.03301,
         "model_prob": 0.54656,
-        "odds_observed_at": "2026-10-18T17:00:00+00:00",
+        "odds_observed_at": "2026-10-18T17:26:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -39205,7 +39161,7 @@
         "book": "DraftKings",
         "edge": -0.047775,
         "model_prob": 0.45344,
-        "odds_observed_at": "2026-10-18T17:00:00+00:00",
+        "odds_observed_at": "2026-10-18T17:26:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -39227,7 +39183,7 @@
         "book": "FanDuel",
         "edge": -0.049479,
         "model_prob": 0.515074,
-        "odds_observed_at": "2026-10-18T17:00:00+00:00",
+        "odds_observed_at": "2026-10-18T17:26:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -39249,7 +39205,7 @@
         "book": "FanDuel",
         "edge": -0.035228,
         "model_prob": 0.484926,
-        "odds_observed_at": "2026-10-18T17:00:00+00:00",
+        "odds_observed_at": "2026-10-18T17:26:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -39271,7 +39227,7 @@
         "book": "Fanatics Sportsbook",
         "edge": -0.051827,
         "model_prob": 0.451511,
-        "odds_observed_at": "2026-10-18T17:00:00+00:00",
+        "odds_observed_at": "2026-10-18T17:26:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -39293,7 +39249,7 @@
         "book": "Fanatics Sportsbook",
         "edge": -0.045223,
         "model_prob": 0.548489,
-        "odds_observed_at": "2026-10-18T17:00:00+00:00",
+        "odds_observed_at": "2026-10-18T17:26:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -39315,7 +39271,7 @@
         "book": "Caesars Odds",
         "edge": -0.048982,
         "model_prob": 0.448593,
-        "odds_observed_at": "2026-10-18T17:00:00+00:00",
+        "odds_observed_at": "2026-10-18T17:26:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -39337,7 +39293,7 @@
         "book": "Caesars Odds",
         "edge": -0.046107,
         "model_prob": 0.551407,
-        "odds_observed_at": "2026-10-18T17:00:00+00:00",
+        "odds_observed_at": "2026-10-18T17:26:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -39359,7 +39315,7 @@
         "book": "theScore Bet",
         "edge": -0.047535,
         "model_prob": 0.563704,
-        "odds_observed_at": "2026-10-18T17:00:00+00:00",
+        "odds_observed_at": "2026-10-18T17:26:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -39381,7 +39337,7 @@
         "book": "theScore Bet",
         "edge": -0.040149,
         "model_prob": 0.436296,
-        "odds_observed_at": "2026-10-18T17:00:00+00:00",
+        "odds_observed_at": "2026-10-18T17:26:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -39403,7 +39359,7 @@
         "book": "BetMGM",
         "edge": -0.039718,
         "model_prob": 0.440497,
-        "odds_observed_at": "2026-10-18T17:00:00+00:00",
+        "odds_observed_at": "2026-10-18T17:26:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -39425,7 +39381,7 @@
         "book": "BetMGM",
         "edge": -0.054632,
         "model_prob": 0.559503,
-        "odds_observed_at": "2026-10-18T17:00:00+00:00",
+        "odds_observed_at": "2026-10-18T17:26:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -39447,7 +39403,7 @@
         "book": "bet365",
         "edge": -0.028379,
         "model_prob": 0.437667,
-        "odds_observed_at": "2026-10-18T17:00:00+00:00",
+        "odds_observed_at": "2026-10-18T17:26:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -39469,7 +39425,7 @@
         "book": "bet365",
         "edge": -0.047158,
         "model_prob": 0.562333,
-        "odds_observed_at": "2026-10-18T17:00:00+00:00",
+        "odds_observed_at": "2026-10-18T17:26:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -39491,7 +39447,7 @@
         "book": "DraftKings",
         "edge": -0.031129,
         "model_prob": 0.440396,
-        "odds_observed_at": "2026-10-18T17:00:00+00:00",
+        "odds_observed_at": "2026-10-18T17:26:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -39513,7 +39469,7 @@
         "book": "DraftKings",
         "edge": -0.046308,
         "model_prob": 0.559604,
-        "odds_observed_at": "2026-10-18T17:00:00+00:00",
+        "odds_observed_at": "2026-10-18T17:26:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -39535,7 +39491,7 @@
         "book": "FanDuel",
         "edge": -0.036262,
         "model_prob": 0.442081,
-        "odds_observed_at": "2026-10-18T17:00:00+00:00",
+        "odds_observed_at": "2026-10-18T17:26:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -39557,7 +39513,7 @@
         "book": "FanDuel",
         "edge": -0.049181,
         "model_prob": 0.557919,
-        "odds_observed_at": "2026-10-18T17:00:00+00:00",
+        "odds_observed_at": "2026-10-18T17:26:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -39579,7 +39535,7 @@
         "book": "Fanatics Sportsbook",
         "edge": -0.034612,
         "model_prob": 0.438813,
-        "odds_observed_at": "2026-10-18T17:00:00+00:00",
+        "odds_observed_at": "2026-10-18T17:26:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -39601,7 +39557,7 @@
         "book": "Fanatics Sportsbook",
         "edge": -0.051787,
         "model_prob": 0.561187,
-        "odds_observed_at": "2026-10-18T17:00:00+00:00",
+        "odds_observed_at": "2026-10-18T17:26:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -39623,7 +39579,7 @@
         "book": "Caesars Odds",
         "edge": -0.032509,
         "model_prob": 0.441777,
-        "odds_observed_at": "2026-10-18T17:00:00+00:00",
+        "odds_observed_at": "2026-10-18T17:26:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -39645,7 +39601,7 @@
         "book": "Caesars Odds",
         "edge": -0.045874,
         "model_prob": 0.558223,
-        "odds_observed_at": "2026-10-18T17:00:00+00:00",
+        "odds_observed_at": "2026-10-18T17:26:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -39663,11 +39619,11 @@
         "away": "SJ",
         "pick": "SJ ML",
         "line": null,
-        "price": 125,
+        "price": 120,
         "book": "theScore Bet",
-        "edge": -0.021975,
-        "model_prob": 0.434678,
-        "odds_observed_at": "2026-10-18T17:00:00+00:00",
+        "edge": -0.02874,
+        "model_prob": 0.441482,
+        "odds_observed_at": "2026-10-18T17:26:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -39685,11 +39641,11 @@
         "away": "SJ",
         "pick": "TOR ML",
         "line": null,
-        "price": -145,
+        "price": -140,
         "book": "theScore Bet",
-        "edge": -0.0448,
-        "model_prob": 0.565322,
-        "odds_observed_at": "2026-10-18T17:00:00+00:00",
+        "edge": -0.042541,
+        "model_prob": 0.558518,
+        "odds_observed_at": "2026-10-18T17:26:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -39711,7 +39667,7 @@
         "book": "BetMGM",
         "edge": -0.022338,
         "model_prob": 0.640537,
-        "odds_observed_at": "2026-10-18T17:00:00+00:00",
+        "odds_observed_at": "2026-10-18T17:26:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -39733,7 +39689,7 @@
         "book": "BetMGM",
         "edge": -0.08337,
         "model_prob": 0.359463,
-        "odds_observed_at": "2026-10-18T17:00:00+00:00",
+        "odds_observed_at": "2026-10-18T17:26:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -39755,7 +39711,7 @@
         "book": "bet365",
         "edge": -0.024581,
         "model_prob": 0.650279,
-        "odds_observed_at": "2026-10-18T17:00:00+00:00",
+        "odds_observed_at": "2026-10-18T17:26:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -39777,7 +39733,7 @@
         "book": "bet365",
         "edge": -0.073241,
         "model_prob": 0.349721,
-        "odds_observed_at": "2026-10-18T17:00:00+00:00",
+        "odds_observed_at": "2026-10-18T17:26:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -39799,7 +39755,7 @@
         "book": "DraftKings",
         "edge": -0.023159,
         "model_prob": 0.649042,
-        "odds_observed_at": "2026-10-18T17:00:00+00:00",
+        "odds_observed_at": "2026-10-18T17:26:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -39821,7 +39777,7 @@
         "book": "DraftKings",
         "edge": -0.073471,
         "model_prob": 0.350958,
-        "odds_observed_at": "2026-10-18T17:00:00+00:00",
+        "odds_observed_at": "2026-10-18T17:26:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -39843,7 +39799,7 @@
         "book": "FanDuel",
         "edge": -0.033125,
         "model_prob": 0.65498,
-        "odds_observed_at": "2026-10-18T17:00:00+00:00",
+        "odds_observed_at": "2026-10-18T17:26:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -39865,7 +39821,7 @@
         "book": "FanDuel",
         "edge": -0.075346,
         "model_prob": 0.34502,
-        "odds_observed_at": "2026-10-18T17:00:00+00:00",
+        "odds_observed_at": "2026-10-18T17:26:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -39887,7 +39843,7 @@
         "book": "Fanatics Sportsbook",
         "edge": -0.02954,
         "model_prob": 0.646974,
-        "odds_observed_at": "2026-10-18T17:00:00+00:00",
+        "odds_observed_at": "2026-10-18T17:26:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -39909,7 +39865,7 @@
         "book": "Fanatics Sportsbook",
         "edge": -0.082131,
         "model_prob": 0.353026,
-        "odds_observed_at": "2026-10-18T17:00:00+00:00",
+        "odds_observed_at": "2026-10-18T17:26:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -39931,7 +39887,7 @@
         "book": "Caesars Odds",
         "edge": -0.025417,
         "model_prob": 0.653997,
-        "odds_observed_at": "2026-10-18T17:00:00+00:00",
+        "odds_observed_at": "2026-10-18T17:26:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -39953,7 +39909,7 @@
         "book": "Caesars Odds",
         "edge": -0.069251,
         "model_prob": 0.346003,
-        "odds_observed_at": "2026-10-18T17:00:00+00:00",
+        "odds_observed_at": "2026-10-18T17:26:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -39975,7 +39931,7 @@
         "book": "theScore Bet",
         "edge": -0.017144,
         "model_prob": 0.64394,
-        "odds_observed_at": "2026-10-18T17:00:00+00:00",
+        "odds_observed_at": "2026-10-18T17:26:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -39997,7 +39953,7 @@
         "book": "theScore Bet",
         "edge": -0.074245,
         "model_prob": 0.35606,
-        "odds_observed_at": "2026-10-18T17:00:00+00:00",
+        "odds_observed_at": "2026-10-18T17:26:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -40019,7 +39975,7 @@
         "book": "BetMGM",
         "edge": -0.047018,
         "model_prob": 0.519809,
-        "odds_observed_at": "2026-10-18T17:00:00+00:00",
+        "odds_observed_at": "2026-10-18T17:26:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -40041,7 +39997,7 @@
         "book": "BetMGM",
         "edge": -0.039617,
         "model_prob": 0.480191,
-        "odds_observed_at": "2026-10-18T17:00:00+00:00",
+        "odds_observed_at": "2026-10-18T17:26:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -40063,7 +40019,7 @@
         "book": "bet365",
         "edge": -0.048754,
         "model_prob": 0.524678,
-        "odds_observed_at": "2026-10-18T17:00:00+00:00",
+        "odds_observed_at": "2026-10-18T17:26:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -40085,7 +40041,7 @@
         "book": "bet365",
         "edge": -0.035097,
         "model_prob": 0.475322,
-        "odds_observed_at": "2026-10-18T17:00:00+00:00",
+        "odds_observed_at": "2026-10-18T17:26:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -40107,7 +40063,7 @@
         "book": "DraftKings",
         "edge": -0.047018,
         "model_prob": 0.519809,
-        "odds_observed_at": "2026-10-18T17:00:00+00:00",
+        "odds_observed_at": "2026-10-18T17:26:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -40129,7 +40085,7 @@
         "book": "DraftKings",
         "edge": -0.039617,
         "model_prob": 0.480191,
-        "odds_observed_at": "2026-10-18T17:00:00+00:00",
+        "odds_observed_at": "2026-10-18T17:26:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -40151,7 +40107,7 @@
         "book": "FanDuel",
         "edge": -0.052638,
         "model_prob": 0.524432,
-        "odds_observed_at": "2026-10-18T17:00:00+00:00",
+        "odds_observed_at": "2026-10-18T17:26:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -40173,7 +40129,7 @@
         "book": "FanDuel",
         "edge": -0.039353,
         "model_prob": 0.475568,
-        "odds_observed_at": "2026-10-18T17:00:00+00:00",
+        "odds_observed_at": "2026-10-18T17:26:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -40195,7 +40151,7 @@
         "book": "Fanatics Sportsbook",
         "edge": -0.047018,
         "model_prob": 0.519809,
-        "odds_observed_at": "2026-10-18T17:00:00+00:00",
+        "odds_observed_at": "2026-10-18T17:26:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -40217,7 +40173,7 @@
         "book": "Fanatics Sportsbook",
         "edge": -0.039617,
         "model_prob": 0.480191,
-        "odds_observed_at": "2026-10-18T17:00:00+00:00",
+        "odds_observed_at": "2026-10-18T17:26:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -40239,7 +40195,7 @@
         "book": "Caesars Odds",
         "edge": -0.054818,
         "model_prob": 0.525101,
-        "odds_observed_at": "2026-10-18T17:00:00+00:00",
+        "odds_observed_at": "2026-10-18T17:26:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -40261,7 +40217,7 @@
         "book": "Caesars Odds",
         "edge": -0.040704,
         "model_prob": 0.474899,
-        "odds_observed_at": "2026-10-18T17:00:00+00:00",
+        "odds_observed_at": "2026-10-18T17:26:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -40279,11 +40235,11 @@
         "away": "SJ",
         "pick": "Over 6.5",
         "line": 6.5,
-        "price": -120,
+        "price": -125,
         "book": "theScore Bet",
-        "edge": -0.047018,
-        "model_prob": 0.519809,
-        "odds_observed_at": "2026-10-18T17:00:00+00:00",
+        "edge": -0.049861,
+        "model_prob": 0.527855,
+        "odds_observed_at": "2026-10-18T17:26:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -40301,11 +40257,11 @@
         "away": "SJ",
         "pick": "Under 6.5",
         "line": 6.5,
-        "price": 100,
+        "price": 105,
         "book": "theScore Bet",
-        "edge": -0.039617,
-        "model_prob": 0.480191,
-        "odds_observed_at": "2026-10-18T17:00:00+00:00",
+        "edge": -0.032102,
+        "model_prob": 0.472145,
+        "odds_observed_at": "2026-10-18T17:26:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -40327,7 +40283,7 @@
         "book": "BetMGM",
         "edge": -0.004583,
         "model_prob": 0.39036,
-        "odds_observed_at": "2026-10-18T17:00:00+00:00",
+        "odds_observed_at": "2026-10-18T17:26:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -40349,7 +40305,7 @@
         "book": "BetMGM",
         "edge": -0.069496,
         "model_prob": 0.60964,
-        "odds_observed_at": "2026-10-18T17:00:00+00:00",
+        "odds_observed_at": "2026-10-18T17:26:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -40371,7 +40327,7 @@
         "book": "bet365",
         "edge": 0.000884,
         "model_prob": 0.39097,
-        "odds_observed_at": "2026-10-18T17:00:00+00:00",
+        "odds_observed_at": "2026-10-18T17:26:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -40393,7 +40349,7 @@
         "book": "bet365",
         "edge": -0.063535,
         "model_prob": 0.60903,
-        "odds_observed_at": "2026-10-18T17:00:00+00:00",
+        "odds_observed_at": "2026-10-18T17:26:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -40415,7 +40371,7 @@
         "book": "DraftKings",
         "edge": -0.002584,
         "model_prob": 0.392683,
-        "odds_observed_at": "2026-10-18T17:00:00+00:00",
+        "odds_observed_at": "2026-10-18T17:26:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -40437,7 +40393,7 @@
         "book": "DraftKings",
         "edge": -0.064404,
         "model_prob": 0.607317,
-        "odds_observed_at": "2026-10-18T17:00:00+00:00",
+        "odds_observed_at": "2026-10-18T17:26:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -40459,7 +40415,7 @@
         "book": "FanDuel",
         "edge": -0.006075,
         "model_prob": 0.394414,
-        "odds_observed_at": "2026-10-18T17:00:00+00:00",
+        "odds_observed_at": "2026-10-18T17:26:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -40481,7 +40437,7 @@
         "book": "FanDuel",
         "edge": -0.065292,
         "model_prob": 0.605586,
-        "odds_observed_at": "2026-10-18T17:00:00+00:00",
+        "odds_observed_at": "2026-10-18T17:26:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -40503,7 +40459,7 @@
         "book": "Fanatics Sportsbook",
         "edge": -0.006989,
         "model_prob": 0.397204,
-        "odds_observed_at": "2026-10-18T17:00:00+00:00",
+        "odds_observed_at": "2026-10-18T17:26:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -40525,7 +40481,7 @@
         "book": "Fanatics Sportsbook",
         "edge": -0.062318,
         "model_prob": 0.602796,
-        "odds_observed_at": "2026-10-18T17:00:00+00:00",
+        "odds_observed_at": "2026-10-18T17:26:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -40547,7 +40503,7 @@
         "book": "Caesars Odds",
         "edge": -0.002175,
         "model_prob": 0.394397,
-        "odds_observed_at": "2026-10-18T17:00:00+00:00",
+        "odds_observed_at": "2026-10-18T17:26:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -40569,7 +40525,7 @@
         "book": "Caesars Odds",
         "edge": -0.061648,
         "model_prob": 0.605603,
-        "odds_observed_at": "2026-10-18T17:00:00+00:00",
+        "odds_observed_at": "2026-10-18T17:26:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -40591,7 +40547,7 @@
         "book": "theScore Bet",
         "edge": -0.008956,
         "model_prob": 0.404508,
-        "odds_observed_at": "2026-10-18T17:00:00+00:00",
+        "odds_observed_at": "2026-10-18T17:26:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -40613,7 +40569,7 @@
         "book": "theScore Bet",
         "edge": -0.054218,
         "model_prob": 0.595492,
-        "odds_observed_at": "2026-10-18T17:00:00+00:00",
+        "odds_observed_at": "2026-10-18T17:26:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -40635,7 +40591,7 @@
         "book": "BetMGM",
         "edge": -0.001605,
         "model_prob": 0.599037,
-        "odds_observed_at": "2026-10-18T17:00:00+00:00",
+        "odds_observed_at": "2026-10-18T17:26:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -40657,7 +40613,7 @@
         "book": "BetMGM",
         "edge": -0.097833,
         "model_prob": 0.400963,
-        "odds_observed_at": "2026-10-18T17:00:00+00:00",
+        "odds_observed_at": "2026-10-18T17:26:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -40679,7 +40635,7 @@
         "book": "bet365",
         "edge": -0.006604,
         "model_prob": 0.612785,
-        "odds_observed_at": "2026-10-18T17:00:00+00:00",
+        "odds_observed_at": "2026-10-18T17:26:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -40701,7 +40657,7 @@
         "book": "bet365",
         "edge": -0.086172,
         "model_prob": 0.387215,
-        "odds_observed_at": "2026-10-18T17:00:00+00:00",
+        "odds_observed_at": "2026-10-18T17:26:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -40723,7 +40679,7 @@
         "book": "DraftKings",
         "edge": -0.00826,
         "model_prob": 0.613213,
-        "odds_observed_at": "2026-10-18T17:00:00+00:00",
+        "odds_observed_at": "2026-10-18T17:26:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -40745,7 +40701,7 @@
         "book": "DraftKings",
         "edge": -0.087183,
         "model_prob": 0.386787,
-        "odds_observed_at": "2026-10-18T17:00:00+00:00",
+        "odds_observed_at": "2026-10-18T17:26:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -40767,7 +40723,7 @@
         "book": "FanDuel",
         "edge": -0.017822,
         "model_prob": 0.615694,
-        "odds_observed_at": "2026-10-18T17:00:00+00:00",
+        "odds_observed_at": "2026-10-18T17:26:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -40789,7 +40745,7 @@
         "book": "FanDuel",
         "edge": -0.093037,
         "model_prob": 0.384306,
-        "odds_observed_at": "2026-10-18T17:00:00+00:00",
+        "odds_observed_at": "2026-10-18T17:26:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -40811,7 +40767,7 @@
         "book": "Fanatics Sportsbook",
         "edge": -0.014353,
         "model_prob": 0.613705,
-        "odds_observed_at": "2026-10-18T17:00:00+00:00",
+        "odds_observed_at": "2026-10-18T17:26:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -40833,7 +40789,7 @@
         "book": "Fanatics Sportsbook",
         "edge": -0.092206,
         "model_prob": 0.386295,
-        "odds_observed_at": "2026-10-18T17:00:00+00:00",
+        "odds_observed_at": "2026-10-18T17:26:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -40855,7 +40811,7 @@
         "book": "Caesars Odds",
         "edge": -0.009064,
         "model_prob": 0.615582,
-        "odds_observed_at": "2026-10-18T17:00:00+00:00",
+        "odds_observed_at": "2026-10-18T17:26:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -40877,7 +40833,7 @@
         "book": "Caesars Odds",
         "edge": -0.085084,
         "model_prob": 0.384418,
-        "odds_observed_at": "2026-10-18T17:00:00+00:00",
+        "odds_observed_at": "2026-10-18T17:26:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -40899,7 +40855,7 @@
         "book": "theScore Bet",
         "edge": -0.008249,
         "model_prob": 0.617505,
-        "odds_observed_at": "2026-10-18T17:00:00+00:00",
+        "odds_observed_at": "2026-10-18T17:26:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -40921,7 +40877,7 @@
         "book": "theScore Bet",
         "edge": -0.082012,
         "model_prob": 0.382495,
-        "odds_observed_at": "2026-10-18T17:00:00+00:00",
+        "odds_observed_at": "2026-10-18T17:26:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -40943,7 +40899,7 @@
         "book": "BetMGM",
         "edge": -0.047621,
         "model_prob": 0.51948,
-        "odds_observed_at": "2026-10-18T17:00:00+00:00",
+        "odds_observed_at": "2026-10-18T17:26:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -40965,7 +40921,7 @@
         "book": "BetMGM",
         "edge": -0.038959,
         "model_prob": 0.48052,
-        "odds_observed_at": "2026-10-18T17:00:00+00:00",
+        "odds_observed_at": "2026-10-18T17:26:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -40987,7 +40943,7 @@
         "book": "bet365",
         "edge": -0.046345,
         "model_prob": 0.516198,
-        "odds_observed_at": "2026-10-18T17:00:00+00:00",
+        "odds_observed_at": "2026-10-18T17:26:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -41009,7 +40965,7 @@
         "book": "bet365",
         "edge": -0.041883,
         "model_prob": 0.483802,
-        "odds_observed_at": "2026-10-18T17:00:00+00:00",
+        "odds_observed_at": "2026-10-18T17:26:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -41031,7 +40987,7 @@
         "book": "DraftKings",
         "edge": -0.047621,
         "model_prob": 0.51948,
-        "odds_observed_at": "2026-10-18T17:00:00+00:00",
+        "odds_observed_at": "2026-10-18T17:26:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -41053,7 +41009,7 @@
         "book": "DraftKings",
         "edge": -0.038959,
         "model_prob": 0.48052,
-        "odds_observed_at": "2026-10-18T17:00:00+00:00",
+        "odds_observed_at": "2026-10-18T17:26:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -41075,7 +41031,7 @@
         "book": "FanDuel",
         "edge": -0.049655,
         "model_prob": 0.514407,
-        "odds_observed_at": "2026-10-18T17:00:00+00:00",
+        "odds_observed_at": "2026-10-18T17:26:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -41097,7 +41053,7 @@
         "book": "FanDuel",
         "edge": -0.04749,
         "model_prob": 0.485593,
-        "odds_observed_at": "2026-10-18T17:00:00+00:00",
+        "odds_observed_at": "2026-10-18T17:26:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -41119,7 +41075,7 @@
         "book": "Fanatics Sportsbook",
         "edge": -0.047621,
         "model_prob": 0.51948,
-        "odds_observed_at": "2026-10-18T17:00:00+00:00",
+        "odds_observed_at": "2026-10-18T17:26:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -41141,7 +41097,7 @@
         "book": "Fanatics Sportsbook",
         "edge": -0.038959,
         "model_prob": 0.48052,
-        "odds_observed_at": "2026-10-18T17:00:00+00:00",
+        "odds_observed_at": "2026-10-18T17:26:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -41163,7 +41119,7 @@
         "book": "Caesars Odds",
         "edge": -0.051002,
         "model_prob": 0.517635,
-        "odds_observed_at": "2026-10-18T17:00:00+00:00",
+        "odds_observed_at": "2026-10-18T17:26:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -41185,7 +41141,7 @@
         "book": "Caesars Odds",
         "edge": -0.044729,
         "model_prob": 0.482365,
-        "odds_observed_at": "2026-10-18T17:00:00+00:00",
+        "odds_observed_at": "2026-10-18T17:26:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -41207,7 +41163,7 @@
         "book": "theScore Bet",
         "edge": -0.047621,
         "model_prob": 0.51948,
-        "odds_observed_at": "2026-10-18T17:00:00+00:00",
+        "odds_observed_at": "2026-10-18T17:26:00+00:00",
         "model_version": "nhl-poisson-1.0"
       },
       {
@@ -41229,13 +41185,13 @@
         "book": "theScore Bet",
         "edge": -0.038959,
         "model_prob": 0.48052,
-        "odds_observed_at": "2026-10-18T17:00:00+00:00",
+        "odds_observed_at": "2026-10-18T17:26:00+00:00",
         "model_version": "nhl-poisson-1.0"
       }
     ],
     "accuracy": {
-      "generated_at": "2026-10-18T17:00:52.739424+00:00"
+      "generated_at": "2026-10-18T17:26:16.407138+00:00"
     },
-    "lastGoodAt": "2026-10-18T17:15:44.800Z"
+    "lastGoodAt": "2026-10-18T17:28:15.051Z"
   }
 }
