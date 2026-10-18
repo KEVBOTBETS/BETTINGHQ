@@ -1,29 +1,43 @@
 {
   "schema": 1,
-  "checked_at": "2026-10-18T09:57:28.519Z",
+  "checked_at": "2026-10-18T10:04:22.157Z",
   "coverage": {
-    "nhl": {
+    "nfl": {
       "status": "available",
-      "reports": 46,
-      "checked_at": "2026-10-18T09:57:28.519Z"
+      "reports": 327,
+      "checked_at": "2026-10-18T10:04:22.157Z"
     },
     "ncaaf": {
       "status": "empty",
       "reports": 0,
-      "checked_at": "2026-10-18T09:57:28.519Z"
+      "checked_at": "2026-10-18T10:04:22.157Z"
+    },
+    "nhl": {
+      "status": "available",
+      "reports": 46,
+      "checked_at": "2026-10-18T10:04:22.157Z"
     },
     "mlb": {
       "status": "available",
       "reports": 2,
-      "checked_at": "2026-10-18T09:57:28.519Z"
-    },
-    "nfl": {
-      "status": "available",
-      "reports": 327,
-      "checked_at": "2026-10-18T09:57:28.519Z"
+      "checked_at": "2026-10-18T10:04:22.157Z"
     }
   },
   "events": [
+    {
+      "id": "injury|nfl:3:Anthony Johnson Jr.|2026-10-18T10:04:22.157Z",
+      "kind": "injury",
+      "observed_at": "2026-10-18T10:04:22.157Z",
+      "sport": "nfl",
+      "title": "Player availability changed",
+      "event": "Chicago Bears",
+      "pick": "Anthony Johnson Jr.",
+      "before": "Out · Undisclosed",
+      "after": "Injured Reserve · Undisclosed",
+      "source_quote_at": "2026-10-18T10:01Z",
+      "source": "ESPN injuries",
+      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
+    },
     {
       "id": "odds|props|401873008|2026-10-20T00:15Z|Rushing yards|Brock Purdy|over|Fanatics Sportsbook|2026-10-18T09:57:28.519Z",
       "kind": "odds",
@@ -2948,22 +2962,6 @@
       "after": "-112 · line 46.5",
       "book": "DraftKings",
       "source_quote_at": "2026-10-17T16:09:05.924998+00:00",
-      "source": "Existing NCAAF board",
-      "note": "Your ticket keeps its original odds. Recheck the live book before placing a new wager."
-    },
-    {
-      "id": "odds|ncaaf|401856832|2026-10-17T23:00Z|TOTAL||under|DraftKings|2026-10-17T16:11:57.581Z",
-      "kind": "odds",
-      "observed_at": "2026-10-17T16:11:57.581Z",
-      "sport": "ncaaf",
-      "event": "TCU @ BAY",
-      "start": "2026-10-17T23:00Z",
-      "pick": "Under 51.5",
-      "title": "Published odds changed",
-      "before": "-112 · line 50.5",
-      "after": "-115 · line 50.5",
-      "book": "DraftKings",
-      "source_quote_at": "2026-10-17T16:09:05.925258+00:00",
       "source": "Existing NCAAF board",
       "note": "Your ticket keeps its original odds. Recheck the live book before placing a new wager."
     }
