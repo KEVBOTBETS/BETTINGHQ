@@ -1,29 +1,43 @@
 {
   "schema": 1,
-  "checked_at": "2026-10-18T11:00:39.641Z",
+  "checked_at": "2026-10-18T11:28:38.068Z",
   "coverage": {
     "nhl": {
       "status": "available",
       "reports": 46,
-      "checked_at": "2026-10-18T11:00:39.641Z"
-    },
-    "mlb": {
-      "status": "available",
-      "reports": 2,
-      "checked_at": "2026-10-18T11:00:39.641Z"
+      "checked_at": "2026-10-18T11:28:38.068Z"
     },
     "ncaaf": {
       "status": "empty",
       "reports": 0,
-      "checked_at": "2026-10-18T11:00:39.641Z"
+      "checked_at": "2026-10-18T11:28:38.068Z"
+    },
+    "mlb": {
+      "status": "available",
+      "reports": 2,
+      "checked_at": "2026-10-18T11:28:38.068Z"
     },
     "nfl": {
       "status": "available",
       "reports": 327,
-      "checked_at": "2026-10-18T11:00:39.641Z"
+      "checked_at": "2026-10-18T11:28:38.068Z"
     }
   },
   "events": [
+    {
+      "id": "injury|nfl:3:Anthony Johnson Jr.|2026-10-18T11:28:38.068Z",
+      "kind": "injury",
+      "observed_at": "2026-10-18T11:28:38.068Z",
+      "sport": "nfl",
+      "title": "Player availability changed",
+      "event": "Chicago Bears",
+      "pick": "Anthony Johnson Jr.",
+      "before": "Injured Reserve · Undisclosed",
+      "after": "Out · Undisclosed",
+      "source_quote_at": "2026-10-18T11:24Z",
+      "source": "ESPN injuries",
+      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
+    },
     {
       "id": "injury|nfl:3:Anthony Johnson Jr.|2026-10-18T10:04:22.157Z",
       "kind": "injury",
@@ -2948,22 +2962,6 @@
       "source_quote_at": "2026-10-17T16:10Z",
       "source": "ESPN injuries",
       "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "odds|ncaaf|401866478|2026-10-17T19:30Z|TOTAL||over|DraftKings|2026-10-17T16:11:57.581Z",
-      "kind": "odds",
-      "observed_at": "2026-10-17T16:11:57.581Z",
-      "sport": "ncaaf",
-      "event": "AKR @ M-OH",
-      "start": "2026-10-17T19:30Z",
-      "pick": "Over 47.5",
-      "title": "Published odds changed",
-      "before": "-108 · line 46.5",
-      "after": "-112 · line 46.5",
-      "book": "DraftKings",
-      "source_quote_at": "2026-10-17T16:09:05.924998+00:00",
-      "source": "Existing NCAAF board",
-      "note": "Your ticket keeps its original odds. Recheck the live book before placing a new wager."
     }
   ]
 }
