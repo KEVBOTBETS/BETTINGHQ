@@ -411,7 +411,7 @@
       "rows": {}
     },
     "ncaaf": {
-      "stamp": "2026-10-18T20:08:09+00:00",
+      "stamp": "2026-10-18T21:11:17+00:00",
       "rows": {
         "ncaaf|401862808|2026-10-24T00:30Z|TOTAL||over": {
           "key": "ncaaf",
@@ -428,15 +428,15 @@
           "start": "2026-10-24T00:30Z",
           "when": 1792801800000,
           "day": "2026-10-23",
-          "pick": "Over 52.5",
+          "pick": "Over 53.5",
           "market": "TOTAL",
-          "line": 52.5,
-          "sourceLine": 52.5,
-          "price": -110,
+          "line": 53.5,
+          "sourceLine": 53.5,
+          "price": -105,
           "book": "Draft Kings",
           "tier": "GOOD",
-          "score": 0.05121328668338168,
-          "quote": "2026-10-18T20:08:02.684649+00:00",
+          "score": 0.053108502256721785,
+          "quote": "2026-10-18T21:11:13.390330+00:00",
           "review": [
             "Availability reports not confirmed."
           ],
@@ -444,18 +444,18 @@
             "version": "price-stress-v1",
             "reserve": 0.03,
             "minReturn": 0.02,
-            "conditional": 0.5661690468313776,
+            "conditional": 0.5555282936388998,
             "push": 0,
-            "stressed": 0.5361690468313776,
-            "ev": 0.0808681803144482,
-            "stressEV": 0.023595453041720837,
-            "worst": -110,
+            "stressed": 0.5255282936388997,
+            "ev": 0.08460285900928044,
+            "stressEV": 0.026031430437851943,
+            "worst": -106,
             "passes": true,
             "reasons": []
           },
-          "probability": 0.5661690468313776,
-          "fair": -130,
-          "worst": -110,
+          "probability": 0.5555282936388998,
+          "fair": -124,
+          "worst": -106,
           "minReturn": 0.025,
           "quoteStatus": "observed",
           "referenceOnly": false,
@@ -465,8 +465,8 @@
             "kind": "line",
             "market": "TOTAL",
             "opened": 50.5,
-            "now": 52.5,
-            "toward": 2,
+            "now": 53.5,
+            "toward": 3,
             "since": "2026-10-18T07:04:49+00:00"
           },
           "source": "NCAAF",
@@ -495,7 +495,7 @@
           "book": "Draft Kings",
           "tier": "LEAN",
           "score": 0.05948196823336665,
-          "quote": "2026-10-18T20:08:02.684649+00:00",
+          "quote": "2026-10-18T21:11:13.390330+00:00",
           "review": [
             "Availability reports not confirmed."
           ],
@@ -530,11 +530,70 @@
           },
           "source": "NCAAF",
           "rank": 2
+        },
+        "ncaaf|401871093|2026-10-24T21:00Z|TOTAL||under": {
+          "key": "ncaaf",
+          "app": "ncaaf-lab",
+          "sport": "NCAAF",
+          "event": "ODU @ LT",
+          "eventId": "401871093",
+          "player": "",
+          "playerId": "",
+          "side": "under",
+          "home": "",
+          "away": "",
+          "version": "unversioned",
+          "start": "2026-10-24T21:00Z",
+          "when": 1792875600000,
+          "day": "2026-10-24",
+          "pick": "Under 44.5",
+          "market": "TOTAL",
+          "line": 44.5,
+          "sourceLine": 44.5,
+          "price": -102,
+          "book": "Draft Kings",
+          "tier": "LEAN",
+          "score": 0.05326969420699132,
+          "quote": "2026-10-18T21:11:13.390330+00:00",
+          "review": [
+            "Availability reports not confirmed."
+          ],
+          "value": {
+            "version": "price-stress-v1",
+            "reserve": 0.03,
+            "minReturn": 0.02,
+            "conditional": 0.5478360784149632,
+            "push": 0,
+            "stressed": 0.5178360784149632,
+            "ev": 0.084930272939437,
+            "stressEV": 0.025518508233554504,
+            "worst": -103,
+            "passes": true,
+            "reasons": []
+          },
+          "probability": 0.5478360784149632,
+          "fair": -121,
+          "worst": -103,
+          "minReturn": 0.025,
+          "quoteStatus": "observed",
+          "referenceOnly": false,
+          "sourceUrl": null,
+          "worstReached": false,
+          "move": {
+            "kind": "line",
+            "market": "TOTAL",
+            "opened": 44.5,
+            "now": 44.5,
+            "toward": 0,
+            "since": "2026-10-18T15:49:43+00:00"
+          },
+          "source": "NCAAF",
+          "rank": 3
         }
       }
     },
     "nfl": {
-      "stamp": "2026-10-18T20:07:57+00:00",
+      "stamp": "2026-10-18T21:11:10+00:00",
       "rows": {}
     },
     "mlb": {
@@ -547,6 +606,43 @@
     }
   },
   "events": [
+    {
+      "id": "ncaaf|2026-10-18T21:11:17+00:00|ncaaf|401871093|2026-10-24T21:00Z|TOTAL||under",
+      "sport": "ncaaf",
+      "observed_at": "2026-10-18T21:14:08.121Z",
+      "published_at": "2026-10-18T21:11:17+00:00",
+      "day": "2026-10-24",
+      "event": "ODU @ LT",
+      "pick": "Under 44.5",
+      "changes": [
+        {
+          "field": "qualified list",
+          "from": "Not in previous snapshot",
+          "to": "Listed"
+        }
+      ]
+    },
+    {
+      "id": "ncaaf|2026-10-18T21:11:17+00:00|ncaaf|401862808|2026-10-24T00:30Z|TOTAL||over",
+      "sport": "ncaaf",
+      "observed_at": "2026-10-18T21:14:08.121Z",
+      "published_at": "2026-10-18T21:11:17+00:00",
+      "day": "2026-10-23",
+      "event": "ARMY @ TLSA",
+      "pick": "Over 53.5",
+      "changes": [
+        {
+          "field": "price",
+          "from": -110,
+          "to": -105
+        },
+        {
+          "field": "line",
+          "from": 52.5,
+          "to": 53.5
+        }
+      ]
+    },
     {
       "id": "ncaaf|2026-10-18T20:08:09+00:00|ncaaf|401864527|2026-10-25T02:00Z|TOTAL||under|absent",
       "sport": "ncaaf",
@@ -10079,39 +10175,7 @@
           "to": "FanDuel"
         }
       ]
-    },
-    {
-      "id": "props|2026-10-11T03:44:37.796815+00:00|props|401872984|2026-10-11T17:00Z|Rushing yards|Tony Pollard|over",
-      "sport": "props",
-      "observed_at": "2026-10-11T03:45:30.137Z",
-      "published_at": "2026-10-11T03:44:37.796815+00:00",
-      "day": "2026-10-11",
-      "event": "Houston Texans @ Tennessee Titans",
-      "pick": "Tony Pollard — Over 47.5 Rushing yards",
-      "changes": [
-        {
-          "field": "rank",
-          "from": 6,
-          "to": 7
-        }
-      ]
-    },
-    {
-      "id": "props|2026-10-11T03:44:37.796815+00:00|props|401872985|2026-10-11T17:00Z|Receiving yards|Pat Freiermuth|over",
-      "sport": "props",
-      "observed_at": "2026-10-11T03:45:30.137Z",
-      "published_at": "2026-10-11T03:44:37.796815+00:00",
-      "day": "2026-10-11",
-      "event": "Indianapolis Colts @ Pittsburgh Steelers",
-      "pick": "Pat Freiermuth — Over 29.5 Receiving yards",
-      "changes": [
-        {
-          "field": "qualified list",
-          "from": "Not in previous snapshot",
-          "to": "Listed"
-        }
-      ]
     }
   ],
-  "checked_at": "2026-10-18T21:01:14.739Z"
+  "checked_at": "2026-10-18T21:14:08.121Z"
 }
