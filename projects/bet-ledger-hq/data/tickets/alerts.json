@@ -1,29 +1,75 @@
 {
   "schema": 1,
-  "checked_at": "2026-10-18T17:02:46.779Z",
+  "checked_at": "2026-10-18T17:15:44.800Z",
   "coverage": {
-    "ncaaf": {
-      "status": "empty",
-      "reports": 0,
-      "checked_at": "2026-10-18T17:02:46.779Z"
-    },
     "mlb": {
       "status": "available",
       "reports": 1,
-      "checked_at": "2026-10-18T17:02:46.779Z"
+      "checked_at": "2026-10-18T17:15:44.800Z"
+    },
+    "ncaaf": {
+      "status": "empty",
+      "reports": 0,
+      "checked_at": "2026-10-18T17:15:44.800Z"
     },
     "nhl": {
       "status": "available",
-      "reports": 41,
-      "checked_at": "2026-10-18T17:02:46.779Z"
+      "reports": 40,
+      "checked_at": "2026-10-18T17:15:44.800Z"
     },
     "nfl": {
       "status": "available",
       "reports": 401,
-      "checked_at": "2026-10-18T17:02:46.779Z"
+      "checked_at": "2026-10-18T17:15:44.800Z"
     }
   },
   "events": [
+    {
+      "id": "odds|props|401873004|2026-10-18T20:05Z|Rushing yards|Jacoby Brissett|over|Fanatics Sportsbook|2026-10-18T17:15:44.800Z",
+      "kind": "odds",
+      "observed_at": "2026-10-18T17:15:44.800Z",
+      "sport": "props",
+      "event": "Arizona Cardinals @ Los Angeles Rams",
+      "start": "2026-10-18T20:05Z",
+      "pick": "Jacoby Brissett — Over 5.5 Rushing yards",
+      "title": "Published odds changed",
+      "before": "+105 · line 10.5",
+      "after": "+100 · line 10.5",
+      "book": "Fanatics Sportsbook",
+      "source_quote_at": "2026-10-18T17:13:00.918871+00:00",
+      "source": "Existing Props board",
+      "note": "Your ticket keeps its original odds. Recheck the live book before placing a new wager."
+    },
+    {
+      "id": "odds|props|401873007|2026-10-19T00:20Z|Receiving yards|Christian Watson|over|BetMGM|2026-10-18T17:15:44.800Z",
+      "kind": "odds",
+      "observed_at": "2026-10-18T17:15:44.800Z",
+      "sport": "props",
+      "event": "Dallas Cowboys @ Green Bay Packers",
+      "start": "2026-10-19T00:20Z",
+      "pick": "Christian Watson — Over 74.5 Receiving yards",
+      "title": "Published odds changed",
+      "before": "+100 · line 74.5",
+      "after": "-115 · line 75.5",
+      "book": "BetMGM",
+      "source_quote_at": "2026-10-18T17:13:00.918871+00:00",
+      "source": "Existing Props board",
+      "note": "Your ticket keeps its original odds. Recheck the live book before placing a new wager."
+    },
+    {
+      "id": "injury|nfl:19:Andrew Thomas|2026-10-18T17:15:44.800Z",
+      "kind": "injury",
+      "observed_at": "2026-10-18T17:15:44.800Z",
+      "sport": "nfl",
+      "title": "Player availability changed",
+      "event": "New York Giants",
+      "pick": "Andrew Thomas",
+      "before": "Active · Thomas (groin), who is listed as questionable for Sunday's game against the Saints, is expected to play, Ian Rapoport of NFL Network reports.",
+      "after": "Active · Thomas (groin) is active for Sunday's game against the Saints, Dan Salomone of the team's official site reports.",
+      "source_quote_at": "2026-10-18T16:47Z",
+      "source": "ESPN injuries",
+      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
+    },
     {
       "id": "starter|nhl:nhl:2026020136:home|2026-10-18T17:02:46.779Z",
       "kind": "starter",
@@ -2845,48 +2891,6 @@
       "before": "Out · Undisclosed",
       "after": "Injured Reserve · Undisclosed",
       "source_quote_at": "2026-10-18T12:24Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:34:Ja'Marcus Ingram|2026-10-18T12:34:45.122Z",
-      "kind": "injury",
-      "observed_at": "2026-10-18T12:34:45.122Z",
-      "sport": "nfl",
-      "title": "Player availability changed",
-      "event": "Houston Texans",
-      "pick": "Ja'Marcus Ingram",
-      "before": "Questionable · Elbow",
-      "after": "Active · Ingram (elbow) is active for Sunday's game against the Jaguars in London.",
-      "source_quote_at": "2026-10-18T12:14Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:34:Henry To'oTo'o|2026-10-18T12:34:45.122Z",
-      "kind": "injury",
-      "observed_at": "2026-10-18T12:34:45.122Z",
-      "sport": "nfl",
-      "title": "Player availability changed",
-      "event": "Houston Texans",
-      "pick": "Henry To'oTo'o",
-      "before": "Questionable · Shoulder",
-      "after": "Active · To'oTo'o (shoulder) is active for Sunday's game against the Jaguars in London.",
-      "source_quote_at": "2026-10-18T12:12Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:34:Marvin Harrison Jr.|2026-10-18T12:34:45.122Z",
-      "kind": "injury",
-      "observed_at": "2026-10-18T12:34:45.122Z",
-      "sport": "nfl",
-      "title": "New availability report",
-      "event": "Houston Texans",
-      "pick": "Marvin Harrison Jr.",
-      "before": "Not in the previous dated report",
-      "after": "Active · Harrison is active for Sunday's game against the Jaguars in London.",
-      "source_quote_at": "2026-10-18T12:06Z",
       "source": "ESPN injuries",
       "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
     }
