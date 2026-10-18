@@ -1,29 +1,71 @@
 {
   "schema": 1,
-  "checked_at": "2026-10-18T11:28:38.068Z",
+  "checked_at": "2026-10-18T11:58:10.189Z",
   "coverage": {
-    "nhl": {
-      "status": "available",
-      "reports": 46,
-      "checked_at": "2026-10-18T11:28:38.068Z"
-    },
     "ncaaf": {
       "status": "empty",
       "reports": 0,
-      "checked_at": "2026-10-18T11:28:38.068Z"
+      "checked_at": "2026-10-18T11:58:10.189Z"
     },
     "mlb": {
       "status": "available",
       "reports": 2,
-      "checked_at": "2026-10-18T11:28:38.068Z"
+      "checked_at": "2026-10-18T11:58:10.189Z"
+    },
+    "nhl": {
+      "status": "available",
+      "reports": 46,
+      "checked_at": "2026-10-18T11:58:10.189Z"
     },
     "nfl": {
       "status": "available",
       "reports": 327,
-      "checked_at": "2026-10-18T11:28:38.068Z"
+      "checked_at": "2026-10-18T11:58:10.189Z"
     }
   },
   "events": [
+    {
+      "id": "starter|nhl:nhl:2026020135:away|2026-10-18T11:58:10.189Z",
+      "kind": "starter",
+      "observed_at": "2026-10-18T11:58:10.189Z",
+      "sport": "nhl",
+      "event": "CBJ @ MIN",
+      "start": "2026-10-18T22:00:00+00:00",
+      "title": "NHL starting goalie updated",
+      "before": "Jet Greaves",
+      "after": "Cam Talbot · Unknown",
+      "source_quote_at": "2026-10-18T11:56:38.946760+00:00",
+      "source": "NHL board",
+      "note": "Review the matchup after a starter change; the baseline does not price individual goalie talent."
+    },
+    {
+      "id": "starter|nhl:nhl:2026020136:away|2026-10-18T11:58:10.189Z",
+      "kind": "starter",
+      "observed_at": "2026-10-18T11:58:10.189Z",
+      "sport": "nhl",
+      "event": "CAR @ CGY",
+      "start": "2026-10-19T00:00:00+00:00",
+      "title": "NHL starting goalie updated",
+      "before": "Pyotr Kochetkov",
+      "after": "Brandon Bussi · Unknown",
+      "source_quote_at": "2026-10-18T11:56:38.946760+00:00",
+      "source": "NHL board",
+      "note": "Review the matchup after a starter change; the baseline does not price individual goalie talent."
+    },
+    {
+      "id": "starter|nhl:nhl:2026020136:home|2026-10-18T11:58:10.189Z",
+      "kind": "starter",
+      "observed_at": "2026-10-18T11:58:10.189Z",
+      "sport": "nhl",
+      "event": "CAR @ CGY",
+      "start": "2026-10-19T00:00:00+00:00",
+      "title": "NHL starting goalie updated",
+      "before": "Dustin Wolf",
+      "after": "Devin Cooley · Unknown",
+      "source_quote_at": "2026-10-18T11:56:38.946760+00:00",
+      "source": "NHL board",
+      "note": "Review the matchup after a starter change; the baseline does not price individual goalie talent."
+    },
     {
       "id": "injury|nfl:3:Anthony Johnson Jr.|2026-10-18T11:28:38.068Z",
       "kind": "injury",
@@ -2918,48 +2960,6 @@
       "before": "Injured Reserve · Thumb",
       "after": "Active · Mallory (thumb) is listed as questionable for Sunday's game against the Titans.",
       "source_quote_at": "2026-10-17T01:17Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:23:Pat Freiermuth|2026-10-17T16:29:39.820Z",
-      "kind": "injury",
-      "observed_at": "2026-10-17T16:29:39.820Z",
-      "sport": "nfl",
-      "title": "New availability report",
-      "event": "Pittsburgh Steelers",
-      "pick": "Pat Freiermuth",
-      "before": "Not in the previous dated report",
-      "after": "Questionable · Calf",
-      "source_quote_at": "2026-10-17T16:25Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:26:Velus Jones Jr.|2026-10-17T16:29:39.820Z",
-      "kind": "injury",
-      "observed_at": "2026-10-17T16:29:39.820Z",
-      "sport": "nfl",
-      "title": "Player availability changed",
-      "event": "Seattle Seahawks",
-      "pick": "Velus Jones Jr.",
-      "before": "Active · Jones was signed from the practice squad to the active roster ahead of Thursday's game against the Broncos.",
-      "after": "Active · Jones turned four carries into 20 yards and caught his only target for minus-one yard during Thursday's 17-14 overtime loss to the Broncos.",
-      "source_quote_at": "2026-10-17T16:14Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:26:Tory Horton|2026-10-17T16:29:39.820Z",
-      "kind": "injury",
-      "observed_at": "2026-10-17T16:29:39.820Z",
-      "sport": "nfl",
-      "title": "New availability report",
-      "event": "Seattle Seahawks",
-      "pick": "Tory Horton",
-      "before": "Not in the previous dated report",
-      "after": "Active · Horton caught one of five targets for 13 yards and returned a punt for 13 yards during the Seahawks' 17-14 overtime loss to the Broncos on Thursday. He also logged one tackle.",
-      "source_quote_at": "2026-10-17T16:10Z",
       "source": "ESPN injuries",
       "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
     }
