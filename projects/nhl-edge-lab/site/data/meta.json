@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-18T05:59:46.525989+00:00",
+  "generated_at": "2026-10-18T06:33:27.422254+00:00",
   "model_version": "nhl-poisson-1.0",
   "season": 2027,
   "timezone": "America/Toronto",
@@ -26,22 +26,22 @@
     },
     "nhl-schedule-2026-10-18": {
       "status": "ok",
-      "observed_at": "2026-10-18T05:59:46.525989+00:00",
+      "observed_at": "2026-10-18T06:33:27.422254+00:00",
       "url": "https://api-web.nhle.com/v1/schedule/2026-10-18"
     },
     "nhl-schedule-2026-10-04": {
       "status": "ok",
-      "observed_at": "2026-10-18T05:59:46.525989+00:00",
+      "observed_at": "2026-10-18T06:33:27.422254+00:00",
       "url": "https://api-web.nhle.com/v1/schedule/2026-10-04"
     },
     "nhl-schedule-2026-10-11": {
       "status": "ok",
-      "observed_at": "2026-10-18T05:59:46.525989+00:00",
+      "observed_at": "2026-10-18T06:33:27.422254+00:00",
       "url": "https://api-web.nhle.com/v1/schedule/2026-10-11"
     },
     "nhl-schedule-2026-10-25": {
       "status": "ok",
-      "observed_at": "2026-10-18T05:59:46.525989+00:00",
+      "observed_at": "2026-10-18T06:33:27.422254+00:00",
       "url": "https://api-web.nhle.com/v1/schedule/2026-10-25"
     },
     "standings-2027": {
@@ -58,7 +58,7 @@
     },
     "nhl-official": {
       "status": "ok",
-      "observed_at": "2026-10-18T05:59:46.525989+00:00",
+      "observed_at": "2026-10-18T06:33:27.422254+00:00",
       "url": "https://api-web.nhle.com/v1/standings/now"
     },
     "nhl-team-summary-2026": {
@@ -82,22 +82,22 @@
       "url": "https://api.nhle.com/stats/rest/en/goalie/summary?isAggregate=false&isGame=false&start=0&limit=1000&cayenneExp=seasonId=20262027%20and%20gameTypeId=2"
     },
     "public-book-odds": {
-      "status": "ok",
-      "observed_at": "2026-10-18T05:59:00+00:00",
+      "status": "no matched prices",
+      "observed_at": null,
       "url": "https://www.covers.com/sport/hockey/nhl/odds",
-      "quotes": 108,
+      "quotes": 0,
       "attempts": [
         {
           "url": "https://www.covers.com/sport/hockey/nhl/odds",
-          "checked_at": "2026-10-18T05:59:46.525989+00:00",
-          "observed_at": "2026-10-18T05:59:00+00:00",
-          "status": "ok",
-          "quotes": 108,
-          "matched_games": 2
+          "checked_at": "2026-10-18T06:33:27.422254+00:00",
+          "observed_at": null,
+          "status": "no matched prices",
+          "quotes": 0,
+          "matched_games": 0
         },
         {
           "url": "https://www.vegasinsider.com/nhl/odds/las-vegas/",
-          "checked_at": "2026-10-18T05:59:46.525989+00:00",
+          "checked_at": "2026-10-18T06:33:27.422254+00:00",
           "observed_at": null,
           "status": "no matched prices",
           "quotes": 0,
@@ -105,7 +105,7 @@
         },
         {
           "url": "https://www.scoresandodds.com/nhl/odds",
-          "checked_at": "2026-10-18T05:59:46.525989+00:00",
+          "checked_at": "2026-10-18T06:33:27.422254+00:00",
           "observed_at": null,
           "status": "no matched prices",
           "quotes": 0,
@@ -127,21 +127,42 @@
     }
   },
   "odds_health": {
-    "status": "ok",
+    "status": "partial",
     "upcoming_games": 53,
-    "priced_games": 2,
+    "priced_games": 0,
     "window_hours": 24,
     "window_games": 2,
-    "window_priced_games": 2,
-    "window_complete_games": 2,
+    "window_priced_games": 0,
+    "window_complete_games": 0,
     "window_markets": {
-      "ML": 2,
-      "ATS": 2,
-      "TOTAL": 2
+      "ML": 0,
+      "ATS": 0,
+      "TOTAL": 0
     },
     "later_games": 51,
     "later_unpriced_games": 51,
-    "missing_games": []
+    "missing_games": [
+      {
+        "game_id": "nhl:2026020135",
+        "matchup": "CBJ @ MIN",
+        "start": "2026-10-18T22:00:00+00:00",
+        "missing_markets": [
+          "ATS",
+          "ML",
+          "TOTAL"
+        ]
+      },
+      {
+        "game_id": "nhl:2026020136",
+        "matchup": "CAR @ CGY",
+        "start": "2026-10-19T00:00:00+00:00",
+        "missing_markets": [
+          "ATS",
+          "ML",
+          "TOTAL"
+        ]
+      }
+    ]
   },
   "counts": {
     "games": 53,
