@@ -1,29 +1,43 @@
 {
   "schema": 1,
-  "checked_at": "2026-10-18T14:29:39.775Z",
+  "checked_at": "2026-10-18T15:00:56.215Z",
   "coverage": {
-    "nfl": {
+    "mlb": {
       "status": "available",
-      "reports": 341,
-      "checked_at": "2026-10-18T14:29:39.775Z"
+      "reports": 2,
+      "checked_at": "2026-10-18T15:00:56.215Z"
     },
     "ncaaf": {
       "status": "empty",
       "reports": 0,
-      "checked_at": "2026-10-18T14:29:39.775Z"
+      "checked_at": "2026-10-18T15:00:56.215Z"
+    },
+    "nfl": {
+      "status": "available",
+      "reports": 341,
+      "checked_at": "2026-10-18T15:00:56.215Z"
     },
     "nhl": {
       "status": "available",
-      "reports": 46,
-      "checked_at": "2026-10-18T14:29:39.775Z"
-    },
-    "mlb": {
-      "status": "available",
-      "reports": 2,
-      "checked_at": "2026-10-18T14:29:39.775Z"
+      "reports": 45,
+      "checked_at": "2026-10-18T15:00:56.215Z"
     }
   },
   "events": [
+    {
+      "id": "injury|nfl:34:Azeez Al-Shaair|2026-10-18T15:00:56.215Z",
+      "kind": "injury",
+      "observed_at": "2026-10-18T15:00:56.215Z",
+      "sport": "nfl",
+      "title": "Player availability changed",
+      "event": "Houston Texans",
+      "pick": "Azeez Al-Shaair",
+      "before": "Active",
+      "after": "Active · Concussion",
+      "source_quote_at": "2026-10-16T18:52Z",
+      "source": "ESPN injuries",
+      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
+    },
     {
       "id": "injury|nfl:30:Ameer Abdullah|2026-10-18T14:29:39.775Z",
       "kind": "injury",
@@ -2946,20 +2960,6 @@
       "before": "Questionable · Knee",
       "after": "Active",
       "source_quote_at": "2026-10-17T19:11Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:28:Nick Cross|2026-10-17T19:26:34.693Z",
-      "kind": "injury",
-      "observed_at": "2026-10-17T19:26:34.693Z",
-      "sport": "nfl",
-      "title": "Player availability changed",
-      "event": "Washington Commanders",
-      "pick": "Nick Cross",
-      "before": "Active · Cross (illness) will be a full participant in practices ahead of Monday's game against the 49ers, Tashan Reed of The Washington Post reports.",
-      "after": "Questionable · Illness",
-      "source_quote_at": "2026-10-17T19:10Z",
       "source": "ESPN injuries",
       "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
     }
