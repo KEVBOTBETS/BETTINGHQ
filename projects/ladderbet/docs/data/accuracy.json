@@ -1,85 +1,85 @@
 {
  "schema": 1,
- "generated_at": "2026-10-18T15:51:46.904889+00:00",
+ "generated_at": "2026-10-18T18:56:55.653435+00:00",
  "label": "Ladder screened-option accuracy",
  "method": "Every screened option is saved before the event, whether or not you choose it. Probabilities here are de-vigged market estimates, not an independent sports model. First pre-event snapshot, frozen line and price. All model picks, including PASS/AVOID and unstaked picks. One preferred side per event/market in pick statistics; the complete priced-side audit is separate. One hypothetical unit per pick; no actual wagers are created. Missing results remain pending.",
  "overall": {
-  "logged": 331,
-  "wins": 149,
+  "logged": 333,
+  "wins": 150,
   "losses": 81,
   "pushes": 1,
   "voids": 0,
-  "settled": 231,
-  "pending": 100,
-  "win_rate": 0.6478260869565218,
-  "units": -0.877,
-  "roi": -0.0037979004329004302,
-  "brier": 0.22886
+  "settled": 232,
+  "pending": 101,
+  "win_rate": 0.6493506493506493,
+  "units": -0.252,
+  "roi": -0.0010875646551724114,
+  "brier": 0.2286
  },
  "all_calls": {
-  "logged": 331,
-  "wins": 149,
+  "logged": 333,
+  "wins": 150,
   "losses": 81,
   "pushes": 1,
   "voids": 0,
-  "settled": 231,
-  "pending": 100,
-  "win_rate": 0.6478260869565218,
-  "units": -0.877,
-  "roi": -0.0037979004329004302,
-  "brier": 0.22886
+  "settled": 232,
+  "pending": 101,
+  "win_rate": 0.6493506493506493,
+  "units": -0.252,
+  "roi": -0.0010875646551724114,
+  "brier": 0.2286
  },
  "by_tier": {
   "SCREENED": {
-   "logged": 331,
-   "wins": 149,
+   "logged": 333,
+   "wins": 150,
    "losses": 81,
    "pushes": 1,
    "voids": 0,
-   "settled": 231,
-   "pending": 100,
-   "win_rate": 0.6478260869565218,
-   "units": -0.877,
-   "roi": -0.0037979004329004302,
-   "brier": 0.22886
+   "settled": 232,
+   "pending": 101,
+   "win_rate": 0.6493506493506493,
+   "units": -0.252,
+   "roi": -0.0010875646551724114,
+   "brier": 0.2286
   }
  },
  "by_market": {
   "ML": {
-   "logged": 331,
-   "wins": 149,
+   "logged": 333,
+   "wins": 150,
    "losses": 81,
    "pushes": 1,
    "voids": 0,
-   "settled": 231,
-   "pending": 100,
-   "win_rate": 0.6478260869565218,
-   "units": -0.877,
-   "roi": -0.0037979004329004302,
-   "brier": 0.22886
+   "settled": 232,
+   "pending": 101,
+   "win_rate": 0.6493506493506493,
+   "units": -0.252,
+   "roi": -0.0010875646551724114,
+   "brier": 0.2286
   }
  },
  "by_version": {
   "2026-09-06-ev2": {
-   "logged": 331,
-   "wins": 149,
+   "logged": 333,
+   "wins": 150,
    "losses": 81,
    "pushes": 1,
    "voids": 0,
-   "settled": 231,
-   "pending": 100,
-   "win_rate": 0.6478260869565218,
-   "units": -0.877,
-   "roi": -0.0037979004329004302,
-   "brier": 0.22886
+   "settled": 232,
+   "pending": 101,
+   "win_rate": 0.6493506493506493,
+   "units": -0.252,
+   "roi": -0.0010875646551724114,
+   "brier": 0.2286
   }
  },
  "calibration": [
   {
    "bucket": "50\u201360%",
-   "n": 80,
-   "predicted": 0.5873,
-   "actual": 0.5625
+   "n": 81,
+   "predicted": 0.58729,
+   "actual": 0.5679
   },
   {
    "bucket": "60\u201370%",
@@ -123,6 +123,48 @@
  },
  "props": {},
  "records": [
+  {
+   "kind": "call",
+   "league": "nhl",
+   "event_id": "401892538",
+   "start": "2026-10-20T01:00Z",
+   "matchup": "Pittsburgh Penguins @ Utah Mammoth",
+   "pick": "Utah Mammoth",
+   "market": "ML",
+   "side": "home",
+   "price": -185.0,
+   "probability": 0.6225,
+   "tier": "SCREENED",
+   "edge": 0,
+   "book": "Draft Kings",
+   "three_way": false,
+   "selected": true,
+   "id": "call:nhl:401892538::ML:home",
+   "captured_at": "2026-10-18T18:56:52.145863+00:00",
+   "result": "Pending",
+   "version": "2026-09-06-ev2"
+  },
+  {
+   "kind": "call",
+   "league": "nhl",
+   "event_id": "401892536",
+   "start": "2026-10-19T23:00Z",
+   "matchup": "Colorado Avalanche @ Philadelphia Flyers",
+   "pick": "Colorado Avalanche",
+   "market": "ML",
+   "side": "away",
+   "price": -218.0,
+   "probability": 0.6575,
+   "tier": "SCREENED",
+   "edge": 0,
+   "book": "Draft Kings",
+   "three_way": false,
+   "selected": true,
+   "id": "call:nhl:401892536::ML:away",
+   "captured_at": "2026-10-18T18:56:52.145863+00:00",
+   "result": "Pending",
+   "version": "2026-09-06-ev2"
+  },
   {
    "kind": "call",
    "league": "epl",
@@ -267,8 +309,13 @@
    "selected": true,
    "id": "call:epl:401878769::ML:away",
    "captured_at": "2026-10-16T16:30:52.303702+00:00",
-   "result": "Pending",
-   "version": "2026-09-06-ev2"
+   "result": "Win",
+   "version": "2026-09-06-ev2",
+   "units": 0.625,
+   "actual": null,
+   "final_home": 0.0,
+   "final_away": 1.0,
+   "graded_at": "2026-10-18T18:56:55.646589+00:00"
   },
   {
    "kind": "call",
