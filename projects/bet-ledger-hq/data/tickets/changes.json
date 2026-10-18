@@ -411,7 +411,7 @@
       "rows": {}
     },
     "ncaaf": {
-      "stamp": "2026-10-18T19:12:01+00:00",
+      "stamp": "2026-10-18T20:08:09+00:00",
       "rows": {
         "ncaaf|401862808|2026-10-24T00:30Z|TOTAL||over": {
           "key": "ncaaf",
@@ -433,10 +433,10 @@
           "line": 52.5,
           "sourceLine": 52.5,
           "price": -110,
-          "book": "DraftKings",
+          "book": "Draft Kings",
           "tier": "GOOD",
           "score": 0.05121328668338168,
-          "quote": "2026-10-18T19:11:56.824642+00:00",
+          "quote": "2026-10-18T20:08:02.684649+00:00",
           "review": [
             "Availability reports not confirmed."
           ],
@@ -472,30 +472,30 @@
           "source": "NCAAF",
           "rank": 1
         },
-        "ncaaf|401864527|2026-10-25T02:00Z|TOTAL||under": {
+        "ncaaf|401864525|2026-10-24T01:00Z|TOTAL||over": {
           "key": "ncaaf",
           "app": "ncaaf-lab",
           "sport": "NCAAF",
-          "event": "NDSU @ UNM",
-          "eventId": "401864527",
+          "event": "AFA @ WYO",
+          "eventId": "401864525",
           "player": "",
           "playerId": "",
-          "side": "under",
+          "side": "over",
           "home": "",
           "away": "",
           "version": "unversioned",
-          "start": "2026-10-25T02:00Z",
-          "when": 1792893600000,
-          "day": "2026-10-24",
-          "pick": "Under 45.5",
+          "start": "2026-10-24T01:00Z",
+          "when": 1792803600000,
+          "day": "2026-10-23",
+          "pick": "Over 45.5",
           "market": "TOTAL",
           "line": 45.5,
           "sourceLine": 45.5,
-          "price": -110,
-          "book": "DraftKings",
+          "price": -102,
+          "book": "Draft Kings",
           "tier": "LEAN",
-          "score": 0.05205883566928815,
-          "quote": "2026-10-18T19:11:56.990195+00:00",
+          "score": 0.05948196823336665,
+          "quote": "2026-10-18T20:08:02.684649+00:00",
           "review": [
             "Availability reports not confirmed."
           ],
@@ -503,18 +503,18 @@
             "version": "price-stress-v1",
             "reserve": 0.03,
             "minReturn": 0.02,
-            "conditional": 0.5670285303016052,
+            "conditional": 0.5549454093472559,
             "push": 0,
-            "stressed": 0.5370285303016051,
-            "ev": 0.08250901239397357,
-            "stressEV": 0.025236285121246205,
-            "worst": -111,
+            "stressed": 0.5249454093472559,
+            "ev": 0.09900953615829122,
+            "stressEV": 0.039597771452408725,
+            "worst": -106,
             "passes": true,
             "reasons": []
           },
-          "probability": 0.5670285303016052,
-          "fair": -130,
-          "worst": -111,
+          "probability": 0.5549454093472559,
+          "fair": -124,
+          "worst": -106,
           "minReturn": 0.025,
           "quoteStatus": "observed",
           "referenceOnly": false,
@@ -523,10 +523,10 @@
           "move": {
             "kind": "line",
             "market": "TOTAL",
-            "opened": 46.5,
+            "opened": 42.5,
             "now": 45.5,
-            "toward": 1,
-            "since": "2026-10-16T16:27:40+00:00"
+            "toward": 3,
+            "since": "2026-10-18T07:04:49+00:00"
           },
           "source": "NCAAF",
           "rank": 2
@@ -534,7 +534,7 @@
       }
     },
     "nfl": {
-      "stamp": "2026-10-18T19:11:54+00:00",
+      "stamp": "2026-10-18T20:07:57+00:00",
       "rows": {}
     },
     "mlb": {
@@ -547,6 +547,54 @@
     }
   },
   "events": [
+    {
+      "id": "ncaaf|2026-10-18T20:08:09+00:00|ncaaf|401864527|2026-10-25T02:00Z|TOTAL||under|absent",
+      "sport": "ncaaf",
+      "observed_at": "2026-10-18T20:11:10.988Z",
+      "published_at": "2026-10-18T20:08:09+00:00",
+      "day": "2026-10-24",
+      "event": "NDSU @ UNM",
+      "pick": "Under 45.5",
+      "changes": [
+        {
+          "field": "qualified list",
+          "from": "Listed",
+          "to": "Not in current snapshot; see board for reason"
+        }
+      ]
+    },
+    {
+      "id": "ncaaf|2026-10-18T20:08:09+00:00|ncaaf|401864525|2026-10-24T01:00Z|TOTAL||over",
+      "sport": "ncaaf",
+      "observed_at": "2026-10-18T20:11:10.988Z",
+      "published_at": "2026-10-18T20:08:09+00:00",
+      "day": "2026-10-23",
+      "event": "AFA @ WYO",
+      "pick": "Over 45.5",
+      "changes": [
+        {
+          "field": "qualified list",
+          "from": "Not in previous snapshot",
+          "to": "Listed"
+        }
+      ]
+    },
+    {
+      "id": "ncaaf|2026-10-18T20:08:09+00:00|ncaaf|401862808|2026-10-24T00:30Z|TOTAL||over",
+      "sport": "ncaaf",
+      "observed_at": "2026-10-18T20:11:10.988Z",
+      "published_at": "2026-10-18T20:08:09+00:00",
+      "day": "2026-10-23",
+      "event": "ARMY @ TLSA",
+      "pick": "Over 52.5",
+      "changes": [
+        {
+          "field": "book",
+          "from": "DraftKings",
+          "to": "Draft Kings"
+        }
+      ]
+    },
     {
       "id": "ncaaf|2026-10-18T19:12:01+00:00|ncaaf|401864527|2026-10-25T02:00Z|TOTAL||under",
       "sport": "ncaaf",
@@ -10063,85 +10111,7 @@
           "to": "Listed"
         }
       ]
-    },
-    {
-      "id": "props|2026-10-11T03:44:37.796815+00:00|props|401872989|2026-10-11T20:05Z|Rushing yards|Omarion Hampton|over",
-      "sport": "props",
-      "observed_at": "2026-10-11T03:45:30.137Z",
-      "published_at": "2026-10-11T03:44:37.796815+00:00",
-      "day": "2026-10-11",
-      "event": "Denver Broncos @ Los Angeles Chargers",
-      "pick": "Omarion Hampton — Over 39.5 Rushing yards",
-      "changes": [
-        {
-          "field": "price",
-          "from": -112,
-          "to": -115
-        },
-        {
-          "field": "line",
-          "from": 40.5,
-          "to": 39.5
-        },
-        {
-          "field": "book",
-          "from": "Caesars",
-          "to": "BetMGM"
-        },
-        {
-          "field": "rank",
-          "from": 3,
-          "to": 4
-        }
-      ]
-    },
-    {
-      "id": "props|2026-10-11T03:44:37.796815+00:00|props|401872987|2026-10-11T17:00Z|Passing yards|Tyler Shough|over",
-      "sport": "props",
-      "observed_at": "2026-10-11T03:45:30.137Z",
-      "published_at": "2026-10-11T03:44:37.796815+00:00",
-      "day": "2026-10-11",
-      "event": "Minnesota Vikings @ New Orleans Saints",
-      "pick": "Tyler Shough — Over 238.5 Passing yards",
-      "changes": [
-        {
-          "field": "price",
-          "from": -115,
-          "to": -110
-        },
-        {
-          "field": "line",
-          "from": 235.5,
-          "to": 238.5
-        },
-        {
-          "field": "book",
-          "from": "Fanatics Sportsbook",
-          "to": "theScore Bet"
-        },
-        {
-          "field": "rank",
-          "from": 4,
-          "to": 3
-        }
-      ]
-    },
-    {
-      "id": "props|2026-10-11T00:52:08.183581+00:00|props|401872985|2026-10-11T17:00Z|Receiving yards|Pat Freiermuth|over|absent",
-      "sport": "props",
-      "observed_at": "2026-10-11T00:53:14.510Z",
-      "published_at": "2026-10-11T00:52:08.183581+00:00",
-      "day": "2026-10-11",
-      "event": "Indianapolis Colts @ Pittsburgh Steelers",
-      "pick": "Pat Freiermuth — Over 28.5 Receiving yards",
-      "changes": [
-        {
-          "field": "qualified list",
-          "from": "Listed",
-          "to": "Not in current snapshot; see board for reason"
-        }
-      ]
     }
   ],
-  "checked_at": "2026-10-18T19:57:18.913Z"
+  "checked_at": "2026-10-18T20:11:10.988Z"
 }
