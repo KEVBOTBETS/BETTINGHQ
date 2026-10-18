@@ -1,29 +1,43 @@
 {
   "schema": 1,
-  "checked_at": "2026-10-18T13:35:38.063Z",
+  "checked_at": "2026-10-18T14:00:20.468Z",
   "coverage": {
-    "mlb": {
-      "status": "available",
-      "reports": 2,
-      "checked_at": "2026-10-18T13:35:38.063Z"
-    },
     "nhl": {
       "status": "available",
       "reports": 46,
-      "checked_at": "2026-10-18T13:35:38.063Z"
-    },
-    "nfl": {
-      "status": "available",
-      "reports": 340,
-      "checked_at": "2026-10-18T13:35:38.063Z"
+      "checked_at": "2026-10-18T14:00:20.468Z"
     },
     "ncaaf": {
       "status": "empty",
       "reports": 0,
-      "checked_at": "2026-10-18T13:35:38.063Z"
+      "checked_at": "2026-10-18T14:00:20.468Z"
+    },
+    "nfl": {
+      "status": "available",
+      "reports": 340,
+      "checked_at": "2026-10-18T14:00:20.468Z"
+    },
+    "mlb": {
+      "status": "available",
+      "reports": 2,
+      "checked_at": "2026-10-18T14:00:20.468Z"
     }
   },
   "events": [
+    {
+      "id": "starter|nhl:nhl:2026020136:away|2026-10-18T14:00:20.468Z",
+      "kind": "starter",
+      "observed_at": "2026-10-18T14:00:20.468Z",
+      "sport": "nhl",
+      "event": "CAR @ CGY",
+      "start": "2026-10-19T00:00:00+00:00",
+      "title": "NHL starting goalie updated",
+      "before": "Brandon Bussi",
+      "after": "Brandon Bussi · confirmed",
+      "source_quote_at": "2026-10-18T13:59:04.715588+00:00",
+      "source": "NHL board",
+      "note": "Review the matchup after a starter change; the baseline does not price individual goalie talent."
+    },
     {
       "id": "injury|nhl:14:Jake Sanderson|2026-10-18T13:35:38.063Z",
       "kind": "injury",
@@ -2943,22 +2957,6 @@
       "book": "DraftKings",
       "source_quote_at": "2026-10-17T18:53:30.100227+00:00",
       "source": "Existing MLB board",
-      "note": "Your ticket keeps its original odds. Recheck the live book before placing a new wager."
-    },
-    {
-      "id": "odds|props|401873004|2026-10-18T20:05Z|Rushing yards|Matthew Stafford|over|FanDuel|2026-10-17T18:56:31.936Z",
-      "kind": "odds",
-      "observed_at": "2026-10-17T18:56:31.936Z",
-      "sport": "props",
-      "event": "Arizona Cardinals @ Los Angeles Rams",
-      "start": "2026-10-18T20:05Z",
-      "pick": "Matthew Stafford — Over 1.5 Rushing yards",
-      "title": "Published odds changed",
-      "before": "+112 · line 1.5",
-      "after": "+116 · line 0.5",
-      "book": "FanDuel",
-      "source_quote_at": "2026-10-17T18:53:43.040552+00:00",
-      "source": "Existing Props board",
       "note": "Your ticket keeps its original odds. Recheck the live book before placing a new wager."
     }
   ]
