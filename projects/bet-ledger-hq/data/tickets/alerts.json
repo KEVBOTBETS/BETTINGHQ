@@ -1,29 +1,87 @@
 {
   "schema": 1,
-  "checked_at": "2026-10-18T21:59:19.545Z",
+  "checked_at": "2026-10-18T22:13:19.452Z",
   "coverage": {
-    "nhl": {
-      "status": "available",
-      "reports": 42,
-      "checked_at": "2026-10-18T21:59:19.545Z"
-    },
-    "nfl": {
-      "status": "available",
-      "reports": 446,
-      "checked_at": "2026-10-18T21:59:19.545Z"
-    },
     "ncaaf": {
       "status": "empty",
       "reports": 0,
-      "checked_at": "2026-10-18T21:59:19.545Z"
+      "checked_at": "2026-10-18T22:13:19.452Z"
+    },
+    "nhl": {
+      "status": "available",
+      "reports": 42,
+      "checked_at": "2026-10-18T22:13:19.452Z"
     },
     "mlb": {
       "status": "available",
       "reports": 1,
-      "checked_at": "2026-10-18T21:59:19.545Z"
+      "checked_at": "2026-10-18T22:13:19.452Z"
+    },
+    "nfl": {
+      "status": "available",
+      "reports": 447,
+      "checked_at": "2026-10-18T22:13:19.452Z"
     }
   },
   "events": [
+    {
+      "id": "odds|ncaaf|401871093|2026-10-24T21:00Z|TOTAL||under|Draft Kings|2026-10-18T22:13:19.452Z",
+      "kind": "odds",
+      "observed_at": "2026-10-18T22:13:19.452Z",
+      "sport": "ncaaf",
+      "event": "ODU @ LT",
+      "start": "2026-10-24T21:00Z",
+      "pick": "Under 44.5",
+      "title": "Published odds changed",
+      "before": "-102 · line 44.5",
+      "after": "-118 · line 45.5",
+      "book": "Draft Kings",
+      "source_quote_at": "2026-10-18T22:10:25.738915+00:00",
+      "source": "Existing NCAAF board",
+      "note": "Your ticket keeps its original odds. Recheck the live book before placing a new wager."
+    },
+    {
+      "id": "injury|nfl:3:Anthony Johnson Jr.|2026-10-18T22:13:19.452Z",
+      "kind": "injury",
+      "observed_at": "2026-10-18T22:13:19.452Z",
+      "sport": "nfl",
+      "title": "Player availability changed",
+      "event": "Chicago Bears",
+      "pick": "Anthony Johnson Jr.",
+      "before": "Out · Undisclosed",
+      "after": "Injured Reserve · Undisclosed",
+      "source_quote_at": "2026-10-18T22:00Z",
+      "source": "ESPN injuries",
+      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
+    },
+    {
+      "id": "injury|nfl:12:Jaylon Moore|2026-10-18T22:13:19.452Z",
+      "kind": "injury",
+      "observed_at": "2026-10-18T22:13:19.452Z",
+      "sport": "nfl",
+      "title": "New availability report",
+      "event": "Kansas City Chiefs",
+      "pick": "Jaylon Moore",
+      "before": "Not in the previous dated report",
+      "after": "Questionable · Head",
+      "source_quote_at": "2026-10-18T21:52Z",
+      "source": "ESPN injuries",
+      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
+    },
+    {
+      "id": "injury|nfl:19:Andrew Thomas|2026-10-18T22:13:19.452Z",
+      "kind": "injury",
+      "observed_at": "2026-10-18T22:13:19.452Z",
+      "sport": "nfl",
+      "title": "Player availability changed",
+      "event": "New York Giants",
+      "pick": "Andrew Thomas",
+      "before": "Active",
+      "after": "Active · Thomas did not sustain a concussion in the Giants' 34-27 loss to the Saints on Sunday, Ryan Dunleavy of the New York Post reports.",
+      "source_quote_at": "2026-10-18T21:50Z",
+      "source": "ESPN injuries",
+      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
+    },
     {
       "id": "odds|props|401873007|2026-10-19T00:20Z|Receiving yards|Christian Watson|over|BetRivers|2026-10-18T21:53:06.855Z",
       "kind": "odds",
@@ -2806,62 +2864,6 @@
       "before": "Active",
       "after": "Active · Dean (ankle) is active for Sunday's game against the Buccaneers.",
       "source_quote_at": "2026-10-18T16:02Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:23:Rico Dowdle|2026-10-18T16:14:16.484Z",
-      "kind": "injury",
-      "observed_at": "2026-10-18T16:14:16.484Z",
-      "sport": "nfl",
-      "title": "Player availability changed",
-      "event": "Pittsburgh Steelers",
-      "pick": "Rico Dowdle",
-      "before": "Active · Dowdle (toe), who is listed as questionable for Sunday's game against the Buccaneers, is slated to play, Jeremy Fowler of ESPN.com reports.",
-      "after": "Active · Dowdle (toe) is active for Sunday's Week 6 matchup against the Buccaneers.",
-      "source_quote_at": "2026-10-18T15:58Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:27:Billy Schrauth|2026-10-18T16:14:16.484Z",
-      "kind": "injury",
-      "observed_at": "2026-10-18T16:14:16.484Z",
-      "sport": "nfl",
-      "title": "New availability report",
-      "event": "Tampa Bay Buccaneers",
-      "pick": "Billy Schrauth",
-      "before": "Not in the previous dated report",
-      "after": "Out · Coach's Decision",
-      "source_quote_at": "2026-10-18T15:52Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:27:Benjamin Morrison|2026-10-18T16:14:16.484Z",
-      "kind": "injury",
-      "observed_at": "2026-10-18T16:14:16.484Z",
-      "sport": "nfl",
-      "title": "Player availability changed",
-      "event": "Tampa Bay Buccaneers",
-      "pick": "Benjamin Morrison",
-      "before": "Doubtful · Quadriceps",
-      "after": "Out · Quadriceps",
-      "source_quote_at": "2026-10-18T15:52Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:27:Luke Haggard|2026-10-18T16:14:16.484Z",
-      "kind": "injury",
-      "observed_at": "2026-10-18T16:14:16.484Z",
-      "sport": "nfl",
-      "title": "New availability report",
-      "event": "Tampa Bay Buccaneers",
-      "pick": "Luke Haggard",
-      "before": "Not in the previous dated report",
-      "after": "Out · Coach's Decision",
-      "source_quote_at": "2026-10-18T15:52Z",
       "source": "ESPN injuries",
       "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
     }
