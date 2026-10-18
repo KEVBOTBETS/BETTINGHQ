@@ -1,29 +1,99 @@
 {
   "schema": 1,
-  "checked_at": "2026-10-18T02:31:46.459Z",
+  "checked_at": "2026-10-18T03:03:57.612Z",
   "coverage": {
-    "mlb": {
-      "status": "available",
-      "reports": 2,
-      "checked_at": "2026-10-18T02:31:46.459Z"
-    },
     "ncaaf": {
       "status": "empty",
       "reports": 0,
-      "checked_at": "2026-10-18T02:31:46.459Z"
+      "checked_at": "2026-10-18T03:03:57.612Z"
     },
     "nhl": {
       "status": "available",
       "reports": 45,
-      "checked_at": "2026-10-18T02:31:46.459Z"
+      "checked_at": "2026-10-18T03:03:57.612Z"
+    },
+    "mlb": {
+      "status": "available",
+      "reports": 2,
+      "checked_at": "2026-10-18T03:03:57.612Z"
     },
     "nfl": {
       "status": "available",
-      "reports": 324,
-      "checked_at": "2026-10-18T02:31:46.459Z"
+      "reports": 326,
+      "checked_at": "2026-10-18T03:03:57.612Z"
     }
   },
   "events": [
+    {
+      "id": "injury|nhl:14:Thomas Chabot|2026-10-18T03:03:57.612Z",
+      "kind": "injury",
+      "observed_at": "2026-10-18T03:03:57.612Z",
+      "sport": "nhl",
+      "title": "Player availability changed",
+      "event": "Ottawa Senators",
+      "pick": "Thomas Chabot",
+      "before": "Day-To-Day · Undisclosed",
+      "after": "Day-To-Day · Upper Body",
+      "source_quote_at": "2026-10-18T01:28Z",
+      "source": "ESPN injuries",
+      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
+    },
+    {
+      "id": "injury|nfl:14:Keagen Trost|2026-10-18T03:03:57.612Z",
+      "kind": "injury",
+      "observed_at": "2026-10-18T03:03:57.612Z",
+      "sport": "nfl",
+      "title": "Player availability changed",
+      "event": "Los Angeles Rams",
+      "pick": "Keagen Trost",
+      "before": "Active",
+      "after": "Active · The Rams activated Trost (hamstring) from injured reserve Saturday.",
+      "source_quote_at": "2026-10-18T02:52Z",
+      "source": "ESPN injuries",
+      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
+    },
+    {
+      "id": "injury|nfl:21:Jaydon Blue|2026-10-18T03:03:57.612Z",
+      "kind": "injury",
+      "observed_at": "2026-10-18T03:03:57.612Z",
+      "sport": "nfl",
+      "title": "New availability report",
+      "event": "Philadelphia Eagles",
+      "pick": "Jaydon Blue",
+      "before": "Not in the previous dated report",
+      "after": "Active · The Eagles signed Blue off the practice squad to the active roster Saturday.",
+      "source_quote_at": "2026-10-18T02:31Z",
+      "source": "ESPN injuries",
+      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
+    },
+    {
+      "id": "injury|nfl:23:Brandon Smith|2026-10-18T03:03:57.612Z",
+      "kind": "injury",
+      "observed_at": "2026-10-18T03:03:57.612Z",
+      "sport": "nfl",
+      "title": "New availability report",
+      "event": "Pittsburgh Steelers",
+      "pick": "Brandon Smith",
+      "before": "Not in the previous dated report",
+      "after": "Active · The Steelers elevated Smith from the practice squad ahead of Sunday's game against the Bucs.",
+      "source_quote_at": "2026-10-18T02:41Z",
+      "source": "ESPN injuries",
+      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
+    },
+    {
+      "id": "injury|nfl:10:Joshua Williams|2026-10-18T03:03:57.612Z",
+      "kind": "injury",
+      "observed_at": "2026-10-18T03:03:57.612Z",
+      "sport": "nfl",
+      "title": "Player availability changed",
+      "event": "Tennessee Titans",
+      "pick": "Joshua Williams",
+      "before": "Active",
+      "after": "Active · The Titans activated Williams (pectoral) from reserve/PUP on Saturday.",
+      "source_quote_at": "2026-10-18T02:44Z",
+      "source": "ESPN injuries",
+      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
+    },
     {
       "id": "injury|nhl:9:Roope Hintz|2026-10-18T02:31:46.459Z",
       "kind": "injury",
@@ -2908,76 +2978,6 @@
       "source_quote_at": "2026-10-17T15:01Z",
       "source": "ESPN injuries",
       "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "starter|nhl:nhl:2026020121:away|2026-10-17T14:59:34.808Z",
-      "kind": "starter",
-      "observed_at": "2026-10-17T14:59:34.808Z",
-      "sport": "nhl",
-      "event": "NJ @ WSH",
-      "start": "2026-10-17T17:00:00+00:00",
-      "title": "NHL starting goalie updated",
-      "before": "Jake Allen",
-      "after": "Jake Allen · confirmed",
-      "source_quote_at": "2026-10-17T14:57:47.290988+00:00",
-      "source": "NHL board",
-      "note": "Review the matchup after a starter change; the baseline does not price individual goalie talent."
-    },
-    {
-      "id": "starter|nhl:nhl:2026020121:home|2026-10-17T14:59:34.808Z",
-      "kind": "starter",
-      "observed_at": "2026-10-17T14:59:34.808Z",
-      "sport": "nhl",
-      "event": "NJ @ WSH",
-      "start": "2026-10-17T17:00:00+00:00",
-      "title": "NHL starting goalie updated",
-      "before": "Logan Thompson",
-      "after": "Logan Thompson · confirmed",
-      "source_quote_at": "2026-10-17T14:57:47.290988+00:00",
-      "source": "NHL board",
-      "note": "Review the matchup after a starter change; the baseline does not price individual goalie talent."
-    },
-    {
-      "id": "starter|nhl:nhl:2026020125:home|2026-10-17T14:59:34.808Z",
-      "kind": "starter",
-      "observed_at": "2026-10-17T14:59:34.808Z",
-      "sport": "nhl",
-      "event": "NYI @ TOR",
-      "start": "2026-10-17T23:00:00+00:00",
-      "title": "NHL starting goalie updated",
-      "before": "Anthony Stolarz",
-      "after": "Sergei Bobrovsky · confirmed",
-      "source_quote_at": "2026-10-17T14:57:47.290988+00:00",
-      "source": "NHL board",
-      "note": "Review the matchup after a starter change; the baseline does not price individual goalie talent."
-    },
-    {
-      "id": "starter|nhl:nhl:2026020126:home|2026-10-17T14:59:34.808Z",
-      "kind": "starter",
-      "observed_at": "2026-10-17T14:59:34.808Z",
-      "sport": "nhl",
-      "event": "BUF @ MTL",
-      "start": "2026-10-17T23:00:00+00:00",
-      "title": "NHL starting goalie updated",
-      "before": "Jacob Fowler",
-      "after": "Jacob Fowler · confirmed",
-      "source_quote_at": "2026-10-17T14:57:47.290988+00:00",
-      "source": "NHL board",
-      "note": "Review the matchup after a starter change; the baseline does not price individual goalie talent."
-    },
-    {
-      "id": "starter|nhl:nhl:2026020127:home|2026-10-17T14:59:34.808Z",
-      "kind": "starter",
-      "observed_at": "2026-10-17T14:59:34.808Z",
-      "sport": "nhl",
-      "event": "SJ @ DET",
-      "start": "2026-10-17T23:00:00+00:00",
-      "title": "NHL starting goalie updated",
-      "before": "Daniil Tarasov",
-      "after": "John Gibson · Likely",
-      "source_quote_at": "2026-10-17T14:57:47.290988+00:00",
-      "source": "NHL board",
-      "note": "Review the matchup after a starter change; the baseline does not price individual goalie talent."
     }
   ]
 }
