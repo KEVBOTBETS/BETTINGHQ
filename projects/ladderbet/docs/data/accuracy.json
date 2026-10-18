@@ -1,91 +1,91 @@
 {
  "schema": 1,
- "generated_at": "2026-10-17T21:53:02.505455+00:00",
+ "generated_at": "2026-10-18T01:08:15.673393+00:00",
  "label": "Ladder screened-option accuracy",
  "method": "Every screened option is saved before the event, whether or not you choose it. Probabilities here are de-vigged market estimates, not an independent sports model. First pre-event snapshot, frozen line and price. All model picks, including PASS/AVOID and unstaked picks. One preferred side per event/market in pick statistics; the complete priced-side audit is separate. One hypothetical unit per pick; no actual wagers are created. Missing results remain pending.",
  "overall": {
   "logged": 331,
-  "wins": 137,
-  "losses": 75,
+  "wins": 144,
+  "losses": 76,
   "pushes": 1,
   "voids": 0,
-  "settled": 213,
-  "pending": 118,
-  "win_rate": 0.6462264150943396,
-  "units": -1.065,
-  "roi": -0.0049999953051643176,
-  "brier": 0.22967
+  "settled": 221,
+  "pending": 110,
+  "win_rate": 0.6545454545454545,
+  "units": 1.517,
+  "roi": 0.00686498190045249,
+  "brier": 0.22711
  },
  "all_calls": {
   "logged": 331,
-  "wins": 137,
-  "losses": 75,
+  "wins": 144,
+  "losses": 76,
   "pushes": 1,
   "voids": 0,
-  "settled": 213,
-  "pending": 118,
-  "win_rate": 0.6462264150943396,
-  "units": -1.065,
-  "roi": -0.0049999953051643176,
-  "brier": 0.22967
+  "settled": 221,
+  "pending": 110,
+  "win_rate": 0.6545454545454545,
+  "units": 1.517,
+  "roi": 0.00686498190045249,
+  "brier": 0.22711
  },
  "by_tier": {
   "SCREENED": {
    "logged": 331,
-   "wins": 137,
-   "losses": 75,
+   "wins": 144,
+   "losses": 76,
    "pushes": 1,
    "voids": 0,
-   "settled": 213,
-   "pending": 118,
-   "win_rate": 0.6462264150943396,
-   "units": -1.065,
-   "roi": -0.0049999953051643176,
-   "brier": 0.22967
+   "settled": 221,
+   "pending": 110,
+   "win_rate": 0.6545454545454545,
+   "units": 1.517,
+   "roi": 0.00686498190045249,
+   "brier": 0.22711
   }
  },
  "by_market": {
   "ML": {
    "logged": 331,
-   "wins": 137,
-   "losses": 75,
+   "wins": 144,
+   "losses": 76,
    "pushes": 1,
    "voids": 0,
-   "settled": 213,
-   "pending": 118,
-   "win_rate": 0.6462264150943396,
-   "units": -1.065,
-   "roi": -0.0049999953051643176,
-   "brier": 0.22967
+   "settled": 221,
+   "pending": 110,
+   "win_rate": 0.6545454545454545,
+   "units": 1.517,
+   "roi": 0.00686498190045249,
+   "brier": 0.22711
   }
  },
  "by_version": {
   "2026-09-06-ev2": {
    "logged": 331,
-   "wins": 137,
-   "losses": 75,
+   "wins": 144,
+   "losses": 76,
    "pushes": 1,
    "voids": 0,
-   "settled": 213,
-   "pending": 118,
-   "win_rate": 0.6462264150943396,
-   "units": -1.065,
-   "roi": -0.0049999953051643176,
-   "brier": 0.22967
+   "settled": 221,
+   "pending": 110,
+   "win_rate": 0.6545454545454545,
+   "units": 1.517,
+   "roi": 0.00686498190045249,
+   "brier": 0.22711
   }
  },
  "calibration": [
   {
    "bucket": "50\u201360%",
-   "n": 75,
-   "predicted": 0.58785,
-   "actual": 0.57333
+   "n": 77,
+   "predicted": 0.58773,
+   "actual": 0.57143
   },
   {
    "bucket": "60\u201370%",
-   "n": 137,
-   "predicted": 0.64169,
-   "actual": 0.68613
+   "n": 143,
+   "predicted": 0.64183,
+   "actual": 0.6993
   }
  ],
  "games": {
@@ -540,8 +540,13 @@
    "selected": true,
    "id": "call:nhl:401892522::ML:home",
    "captured_at": "2026-10-16T16:30:52.303702+00:00",
-   "result": "Pending",
-   "version": "2026-09-06-ev2"
+   "result": "Win",
+   "version": "2026-09-06-ev2",
+   "units": 0.540541,
+   "actual": null,
+   "final_home": 8.0,
+   "final_away": 3.0,
+   "graded_at": "2026-10-18T01:08:15.667835+00:00"
   },
   {
    "kind": "call",
@@ -561,8 +566,13 @@
    "selected": true,
    "id": "call:ncaaf:401869966::ML:home",
    "captured_at": "2026-10-16T16:30:52.303702+00:00",
-   "result": "Pending",
-   "version": "2026-09-06-ev2"
+   "result": "Win",
+   "version": "2026-09-06-ev2",
+   "units": 0.645161,
+   "actual": null,
+   "final_home": 33.0,
+   "final_away": 6.0,
+   "graded_at": "2026-10-18T01:08:15.667835+00:00"
   },
   {
    "kind": "call",
@@ -582,8 +592,13 @@
    "selected": true,
    "id": "call:ncaaf:401862805::ML:away",
    "captured_at": "2026-10-16T16:30:52.303702+00:00",
-   "result": "Pending",
-   "version": "2026-09-06-ev2"
+   "result": "Win",
+   "version": "2026-09-06-ev2",
+   "units": 0.520833,
+   "actual": null,
+   "final_home": 17.0,
+   "final_away": 38.0,
+   "graded_at": "2026-10-18T01:08:15.667835+00:00"
   },
   {
    "kind": "call",
@@ -603,8 +618,13 @@
    "selected": true,
    "id": "call:nhl:401892520::ML:away",
    "captured_at": "2026-10-16T16:30:52.303702+00:00",
-   "result": "Pending",
-   "version": "2026-09-06-ev2"
+   "result": "Win",
+   "version": "2026-09-06-ev2",
+   "units": 0.588235,
+   "actual": null,
+   "final_home": 2.0,
+   "final_away": 3.0,
+   "graded_at": "2026-10-18T01:08:15.667835+00:00"
   },
   {
    "kind": "call",
@@ -624,8 +644,13 @@
    "selected": true,
    "id": "call:ncaaf:401866444::ML:away",
    "captured_at": "2026-10-16T16:30:52.303702+00:00",
-   "result": "Pending",
-   "version": "2026-09-06-ev2"
+   "result": "Win",
+   "version": "2026-09-06-ev2",
+   "units": 0.408163,
+   "actual": null,
+   "final_home": 14.0,
+   "final_away": 34.0,
+   "graded_at": "2026-10-18T01:08:15.667835+00:00"
   },
   {
    "kind": "call",
@@ -645,8 +670,13 @@
    "selected": true,
    "id": "call:ncaaf:401858490::ML:home",
    "captured_at": "2026-10-16T16:30:52.303702+00:00",
-   "result": "Pending",
-   "version": "2026-09-06-ev2"
+   "result": "Win",
+   "version": "2026-09-06-ev2",
+   "units": 0.434783,
+   "actual": null,
+   "final_home": 21.0,
+   "final_away": 18.0,
+   "graded_at": "2026-10-18T01:08:15.667835+00:00"
   },
   {
    "kind": "call",
@@ -666,8 +696,13 @@
    "selected": true,
    "id": "call:ncaaf:401858266::ML:home",
    "captured_at": "2026-10-16T16:30:52.303702+00:00",
-   "result": "Pending",
-   "version": "2026-09-06-ev2"
+   "result": "Loss",
+   "version": "2026-09-06-ev2",
+   "units": -1,
+   "actual": null,
+   "final_home": 20.0,
+   "final_away": 24.0,
+   "graded_at": "2026-10-18T01:08:15.667835+00:00"
   },
   {
    "kind": "call",
@@ -687,8 +722,13 @@
    "selected": true,
    "id": "call:ncaaf:401856721::ML:home",
    "captured_at": "2026-10-16T16:30:52.303702+00:00",
-   "result": "Pending",
-   "version": "2026-09-06-ev2"
+   "result": "Win",
+   "version": "2026-09-06-ev2",
+   "units": 0.444444,
+   "actual": null,
+   "final_home": 31.0,
+   "final_away": 3.0,
+   "graded_at": "2026-10-18T01:08:15.667835+00:00"
   },
   {
    "kind": "call",
