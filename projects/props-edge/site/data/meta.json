@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-18T21:12:16.146120+00:00",
+  "generated_at": "2026-10-18T21:50:46.960866+00:00",
   "provider_priority": [
     "Covers public comparison (no key)",
     "DraftKings Network public reference (no key)",
@@ -16,32 +16,30 @@
     "draftkings_network_keyless": true
   },
   "counts": {
-    "priced_quotes": 116,
-    "eligible_priced_quotes": 116,
-    "qualified_options": 0,
-    "held_options": 0,
-    "board": 57,
-    "actionable": 0,
+    "priced_quotes": 308,
+    "eligible_priced_quotes": 308,
+    "qualified_options": 20,
+    "held_options": 13,
+    "board": 88,
+    "actionable": 7,
     "best": 0,
     "good": 0,
-    "leans": 0,
+    "leans": 20,
     "projections": 6676,
     "injury_report": 757,
-    "ruled_out": 223,
-    "book_lines": 314,
-    "legs_on_book_lines": 170,
-    "legs": 4033,
-    "book_priced_legs": 57,
-    "parlays": 27
+    "ruled_out": 224,
+    "book_lines": 316,
+    "legs_on_book_lines": 152,
+    "legs": 4041,
+    "book_priced_legs": 87,
+    "parlays": 28
   },
   "source_by_sport": {
     "NFL": {
-      "source": "DraftKings Network public reference + ESPN regular-season projections",
-      "priced_quotes": 11,
+      "source": "Covers public comparison + ESPN regular-season projections",
+      "priced_quotes": 308,
       "projections": 6676,
-      "errors": [
-        "Covers public prop comparison request failed (no matchable NFL prop prices (98 cards, 82 recognized prop cards, 82 scheduled-player matches))"
-      ]
+      "errors": []
     }
   },
   "workflow_url": "https://github.com/KEVBOTBETS/BETTINGHQ/actions/workflows/release.yml",
@@ -54,7 +52,7 @@
     "window": {
       "NFL": {
         "next_kickoff": "2026-10-19T00:20Z",
-        "hours_to_kickoff": 3.1,
+        "hours_to_kickoff": 2.5,
         "window_hours": 36.0,
         "inside_window": true
       }
@@ -203,9 +201,9 @@
     },
     "calibration_shrink": 1.0,
     "calibration_active": false,
-    "updated_at": "2026-10-18T21:12:04.462190+00:00",
+    "updated_at": "2026-10-18T21:50:34.314725+00:00",
     "calibration_note": "Calibration is diagnostic only; no automatic refit.",
-    "total_logged": 52378,
+    "total_logged": 52391,
     "pending": 3448,
     "independent_events": 73,
     "legacy_excluded": 17,
@@ -214,43 +212,39 @@
   "parlay_record": {
     "Win": 372,
     "Loss": 15085,
-    "Pending": 2749,
+    "Pending": 2776,
     "Void": 0,
     "Review": 0,
-    "total": 18206,
+    "total": 18233,
     "hit_rate": 0.02406676586659766
   },
   "max_odds_age_hours": 12,
-  "price_source_status": "retained",
+  "price_source_status": "available",
   "quote_health": {
-    "observed": 0,
-    "retained": 105,
-    "reference": 11,
+    "observed": 308,
+    "retained": 0,
+    "reference": 0,
     "expired": 0,
-    "rejected": 158,
+    "rejected": 0,
     "max_age_hours": 4,
     "sources": {
       "Covers public prop comparison": {
-        "status": "unavailable",
-        "error": "Covers public prop comparison request failed (no matchable NFL prop prices (98 cards, 82 recognized prop cards, 82 scheduled-player matches))",
-        "shape": "98 cards, 82 recognized prop cards, 82 scheduled-player matches",
-        "quotes": 0,
-        "checked_at": "2026-10-18T21:11:43.906131+00:00",
+        "status": "available",
+        "quotes": 308,
+        "shape": "88 cards, 74 recognized prop cards, 74 scheduled-player matches",
+        "checked_at": "2026-10-18T21:50:16.407264+00:00",
         "source_url": "https://www.covers.com/sport/football/nfl/player-props"
       },
       "DraftKings Network public reference": {
-        "status": "reference",
-        "quotes": 11,
-        "tables": 1,
-        "rows": 50,
-        "unsupported": 23,
-        "unmatched": 16,
-        "source_url": "https://dknetwork.draftkings.com/draftkings-sportsbook-player-props/"
+        "status": "standby",
+        "quotes": 0
       }
     },
     "board_reasons": {
-      "retained / confirmation": 46,
-      "reference / confirmation": 11
+      "qualified": 7,
+      "portfolio hold": 13,
+      "insufficient edge / model filters": 56,
+      "insufficient sample": 12
     },
     "markets": {
       "Extra point attempts": {
@@ -295,11 +289,11 @@
       },
       "Anytime touchdown": {
         "projections": 406,
-        "observed": 0,
+        "observed": 85,
         "retained": 0,
-        "reference": 11,
+        "reference": 0,
         "expired": 0,
-        "qualified": 0
+        "qualified": 1
       },
       "Receiving touchdowns": {
         "projections": 336,
@@ -311,11 +305,11 @@
       },
       "Receiving yards": {
         "projections": 336,
-        "observed": 0,
-        "retained": 51,
+        "observed": 63,
+        "retained": 0,
         "reference": 0,
         "expired": 0,
-        "qualified": 0
+        "qualified": 3
       },
       "Receptions": {
         "projections": 336,
@@ -383,7 +377,7 @@
       },
       "Pass attempts": {
         "projections": 46,
-        "observed": 0,
+        "observed": 17,
         "retained": 0,
         "reference": 0,
         "expired": 0,
@@ -391,7 +385,7 @@
       },
       "Pass completions": {
         "projections": 46,
-        "observed": 0,
+        "observed": 27,
         "retained": 0,
         "reference": 0,
         "expired": 0,
@@ -399,7 +393,7 @@
       },
       "Pass interceptions": {
         "projections": 46,
-        "observed": 0,
+        "observed": 34,
         "retained": 0,
         "reference": 0,
         "expired": 0,
@@ -415,8 +409,8 @@
       },
       "Passing yards": {
         "projections": 46,
-        "observed": 0,
-        "retained": 9,
+        "observed": 18,
+        "retained": 0,
         "reference": 0,
         "expired": 0,
         "qualified": 0
@@ -447,11 +441,11 @@
       },
       "Rush attempts": {
         "projections": 186,
-        "observed": 0,
+        "observed": 13,
         "retained": 0,
         "reference": 0,
         "expired": 0,
-        "qualified": 0
+        "qualified": 1
       },
       "Rushing touchdowns": {
         "projections": 186,
@@ -463,11 +457,11 @@
       },
       "Rushing yards": {
         "projections": 186,
-        "observed": 0,
-        "retained": 45,
+        "observed": 51,
+        "retained": 0,
         "reference": 0,
         "expired": 0,
-        "qualified": 0
+        "qualified": 2
       }
     }
   },
