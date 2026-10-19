@@ -1,29 +1,57 @@
 {
   "schema": 1,
-  "checked_at": "2026-10-19T17:39:29.150Z",
+  "checked_at": "2026-10-19T18:05:05.678Z",
   "coverage": {
     "ncaaf": {
       "status": "empty",
       "reports": 0,
-      "checked_at": "2026-10-19T17:39:29.150Z"
+      "checked_at": "2026-10-19T18:05:05.678Z"
     },
     "nhl": {
       "status": "available",
-      "reports": 45,
-      "checked_at": "2026-10-19T17:39:29.150Z"
-    },
-    "mlb": {
-      "status": "empty",
-      "reports": 0,
-      "checked_at": "2026-10-19T17:39:29.150Z"
+      "reports": 44,
+      "checked_at": "2026-10-19T18:05:05.678Z"
     },
     "nfl": {
       "status": "available",
       "reports": 525,
-      "checked_at": "2026-10-19T17:39:29.150Z"
+      "checked_at": "2026-10-19T18:05:05.678Z"
+    },
+    "mlb": {
+      "status": "empty",
+      "reports": 0,
+      "checked_at": "2026-10-19T18:05:05.678Z"
     }
   },
   "events": [
+    {
+      "id": "starter|nhl:nhl:2026020140:away|2026-10-19T18:05:05.678Z",
+      "kind": "starter",
+      "observed_at": "2026-10-19T18:05:05.678Z",
+      "sport": "nhl",
+      "event": "PIT @ UTA",
+      "start": "2026-10-20T01:00:00+00:00",
+      "title": "NHL starting goalie updated",
+      "before": "Arturs Silovs",
+      "after": "Arturs Silovs · confirmed",
+      "source_quote_at": "2026-10-19T18:03:06.111103+00:00",
+      "source": "NHL board",
+      "note": "Review the matchup after a starter change; the baseline does not price individual goalie talent."
+    },
+    {
+      "id": "injury|nfl:6:Dee Winters|2026-10-19T18:05:05.678Z",
+      "kind": "injury",
+      "observed_at": "2026-10-19T18:05:05.678Z",
+      "sport": "nfl",
+      "title": "Player availability changed",
+      "event": "Dallas Cowboys",
+      "pick": "Dee Winters",
+      "before": "Questionable · Ankle",
+      "after": "Doubtful · Achilles",
+      "source_quote_at": "2026-10-19T01:25Z",
+      "source": "ESPN injuries",
+      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
+    },
     {
       "id": "starter|nhl:nhl:2026020137:home|2026-10-19T17:39:29.150Z",
       "kind": "starter",
@@ -2826,34 +2854,6 @@
       "before": "Not in the previous dated report",
       "after": "Active · Henry rushed 17 times for 58 yards and brought in his only target for two yards in the Ravens' 13-10 loss to the Browns on Sunday. He also lost a fumble.",
       "source_quote_at": "2026-10-19T05:31Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:17:A.J. Brown|2026-10-19T06:08:27.772Z",
-      "kind": "injury",
-      "observed_at": "2026-10-19T06:08:27.772Z",
-      "sport": "nfl",
-      "title": "Player availability changed",
-      "event": "New England Patriots",
-      "pick": "A.J. Brown",
-      "before": "Active · Brown (ankle) is listed as active Sunday against the Jets.",
-      "after": "Active · Brown secured three of 10 targets for 27 yards in the Patriots' 26-19 win over the Jets on Sunday and fumbled once but recovered.",
-      "source_quote_at": "2026-10-19T05:51Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:6:Javonte Williams|2026-10-19T05:12:50.169Z",
-      "kind": "injury",
-      "observed_at": "2026-10-19T05:12:50.169Z",
-      "sport": "nfl",
-      "title": "New availability report",
-      "event": "Dallas Cowboys",
-      "pick": "Javonte Williams",
-      "before": "Not in the previous dated report",
-      "after": "Active · Williams rushed 11 times for 41 yards and a touchdown while catching both of his targets for nine yards in Sunday's 23-13 loss to the Packers.",
-      "source_quote_at": "2026-10-19T04:23Z",
       "source": "ESPN injuries",
       "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
     }
