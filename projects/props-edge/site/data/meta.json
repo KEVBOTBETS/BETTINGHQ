@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-19T07:22:52.925321+00:00",
+  "generated_at": "2026-10-19T10:05:24.061623+00:00",
   "provider_priority": [
     "Covers public comparison (no key)",
     "DraftKings Network public reference (no key)",
@@ -16,28 +16,28 @@
     "draftkings_network_keyless": true
   },
   "counts": {
-    "priced_quotes": 7,
-    "eligible_priced_quotes": 7,
+    "priced_quotes": 17,
+    "eligible_priced_quotes": 17,
     "qualified_options": 0,
     "held_options": 0,
-    "board": 7,
+    "board": 17,
     "actionable": 0,
     "best": 0,
     "good": 0,
     "leans": 0,
     "projections": 6575,
     "injury_report": 757,
-    "ruled_out": 228,
-    "book_lines": 244,
-    "legs_on_book_lines": 162,
-    "legs": 3979,
-    "book_priced_legs": 7,
-    "parlays": 27
+    "ruled_out": 226,
+    "book_lines": 251,
+    "legs_on_book_lines": 163,
+    "legs": 3981,
+    "book_priced_legs": 15,
+    "parlays": 33
   },
   "source_by_sport": {
     "NFL": {
       "source": "DraftKings Network public reference + ESPN regular-season projections",
-      "priced_quotes": 7,
+      "priced_quotes": 17,
       "projections": 6575,
       "errors": [
         "Covers public prop comparison request failed (no matchable NFL prop prices (68 cards, 56 recognized prop cards, 56 scheduled-player matches))"
@@ -54,7 +54,7 @@
     "window": {
       "NFL": {
         "next_kickoff": "2026-10-20T00:15Z",
-        "hours_to_kickoff": 16.9,
+        "hours_to_kickoff": 14.2,
         "window_hours": 36.0,
         "inside_window": true
       }
@@ -71,7 +71,7 @@
     "line_source": "DraftKings lines via ESPN"
   },
   "accuracy": {
-    "legs": 8047,
+    "legs": 8051,
     "settled": 4836,
     "record": "3305-1531-7",
     "hit_rate": 0.6834,
@@ -203,10 +203,10 @@
     },
     "calibration_shrink": 1.0,
     "calibration_active": false,
-    "updated_at": "2026-10-19T07:22:41.478881+00:00",
+    "updated_at": "2026-10-19T10:05:12.430090+00:00",
     "calibration_note": "Calibration is diagnostic only; no automatic refit.",
-    "total_logged": 53647,
-    "pending": 3204,
+    "total_logged": 53660,
+    "pending": 3208,
     "independent_events": 74,
     "legacy_excluded": 17,
     "method": "One first pregame preferred leg per event/player/market. Full side/line audit retained separately. No wager ROI at estimated prices."
@@ -214,10 +214,10 @@
   "parlay_record": {
     "Win": 410,
     "Loss": 16723,
-    "Pending": 1217,
+    "Pending": 1238,
     "Void": 0,
     "Review": 0,
-    "total": 18350,
+    "total": 18371,
     "hit_rate": 0.023930426661997316
   },
   "max_odds_age_hours": 12,
@@ -225,8 +225,8 @@
   "quote_health": {
     "observed": 0,
     "retained": 0,
-    "reference": 7,
-    "expired": 180,
+    "reference": 17,
+    "expired": 179,
     "rejected": 0,
     "max_age_hours": 4,
     "sources": {
@@ -235,21 +235,21 @@
         "error": "Covers public prop comparison request failed (no matchable NFL prop prices (68 cards, 56 recognized prop cards, 56 scheduled-player matches))",
         "shape": "68 cards, 56 recognized prop cards, 56 scheduled-player matches",
         "quotes": 0,
-        "checked_at": "2026-10-19T07:22:23.812787+00:00",
+        "checked_at": "2026-10-19T10:04:55.413545+00:00",
         "source_url": "https://www.covers.com/sport/football/nfl/player-props"
       },
       "DraftKings Network public reference": {
         "status": "reference",
-        "quotes": 7,
+        "quotes": 17,
         "tables": 1,
         "rows": 50,
-        "unsupported": 32,
-        "unmatched": 11,
+        "unsupported": 31,
+        "unmatched": 2,
         "source_url": "https://dknetwork.draftkings.com/draftkings-sportsbook-player-props/"
       }
     },
     "board_reasons": {
-      "reference / confirmation": 7
+      "reference / confirmation": 17
     },
     "markets": {
       "Sacks": {
@@ -280,8 +280,8 @@
         "projections": 402,
         "observed": 0,
         "retained": 0,
-        "reference": 7,
-        "expired": 62,
+        "reference": 17,
+        "expired": 61,
         "qualified": 0
       },
       "Pass + rush + receiving touchdowns": {
