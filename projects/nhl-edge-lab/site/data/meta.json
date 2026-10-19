@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-19T06:06:37.014578+00:00",
+  "generated_at": "2026-10-19T06:46:08.535653+00:00",
   "model_version": "nhl-poisson-1.0",
   "season": 2027,
   "timezone": "America/Toronto",
@@ -26,22 +26,22 @@
     },
     "nhl-schedule-2026-10-19": {
       "status": "ok",
-      "observed_at": "2026-10-19T06:06:37.014578+00:00",
+      "observed_at": "2026-10-19T06:46:08.535653+00:00",
       "url": "https://api-web.nhle.com/v1/schedule/2026-10-19"
     },
     "nhl-schedule-2026-10-05": {
       "status": "ok",
-      "observed_at": "2026-10-19T06:06:37.014578+00:00",
+      "observed_at": "2026-10-19T06:46:08.535653+00:00",
       "url": "https://api-web.nhle.com/v1/schedule/2026-10-05"
     },
     "nhl-schedule-2026-10-12": {
       "status": "ok",
-      "observed_at": "2026-10-19T06:06:37.014578+00:00",
+      "observed_at": "2026-10-19T06:46:08.535653+00:00",
       "url": "https://api-web.nhle.com/v1/schedule/2026-10-12"
     },
     "nhl-schedule-2026-10-26": {
       "status": "ok",
-      "observed_at": "2026-10-19T06:06:37.014578+00:00",
+      "observed_at": "2026-10-19T06:46:08.535653+00:00",
       "url": "https://api-web.nhle.com/v1/schedule/2026-10-26"
     },
     "standings-2027": {
@@ -58,7 +58,7 @@
     },
     "nhl-official": {
       "status": "ok",
-      "observed_at": "2026-10-19T06:06:37.014578+00:00",
+      "observed_at": "2026-10-19T06:46:08.535653+00:00",
       "url": "https://api-web.nhle.com/v1/standings/now"
     },
     "nhl-team-summary-2026": {
@@ -82,22 +82,22 @@
       "url": "https://api.nhle.com/stats/rest/en/goalie/summary?isAggregate=false&isGame=false&start=0&limit=1000&cayenneExp=seasonId=20262027%20and%20gameTypeId=2"
     },
     "public-book-odds": {
-      "status": "no matched prices",
-      "observed_at": null,
+      "status": "ok",
+      "observed_at": "2026-10-19T06:46:00+00:00",
       "url": "https://www.covers.com/sport/hockey/nhl/odds",
-      "quotes": 0,
+      "quotes": 216,
       "attempts": [
         {
           "url": "https://www.covers.com/sport/hockey/nhl/odds",
-          "checked_at": "2026-10-19T06:06:37.014578+00:00",
-          "observed_at": null,
-          "status": "no matched prices",
-          "quotes": 0,
-          "matched_games": 0
+          "checked_at": "2026-10-19T06:46:08.535653+00:00",
+          "observed_at": "2026-10-19T06:46:00+00:00",
+          "status": "ok",
+          "quotes": 216,
+          "matched_games": 4
         },
         {
           "url": "https://www.vegasinsider.com/nhl/odds/las-vegas/",
-          "checked_at": "2026-10-19T06:06:37.014578+00:00",
+          "checked_at": "2026-10-19T06:46:08.535653+00:00",
           "observed_at": null,
           "status": "no matched prices",
           "quotes": 0,
@@ -105,7 +105,7 @@
         },
         {
           "url": "https://www.scoresandodds.com/nhl/odds",
-          "checked_at": "2026-10-19T06:06:37.014578+00:00",
+          "checked_at": "2026-10-19T06:46:08.535653+00:00",
           "observed_at": null,
           "status": "no matched prices",
           "quotes": 0,
@@ -127,62 +127,21 @@
     }
   },
   "odds_health": {
-    "status": "partial",
+    "status": "ok",
     "upcoming_games": 62,
-    "priced_games": 0,
+    "priced_games": 4,
     "window_hours": 24,
     "window_games": 4,
-    "window_priced_games": 0,
-    "window_complete_games": 0,
+    "window_priced_games": 4,
+    "window_complete_games": 4,
     "window_markets": {
-      "ML": 0,
-      "ATS": 0,
-      "TOTAL": 0
+      "ML": 4,
+      "ATS": 4,
+      "TOTAL": 4
     },
     "later_games": 58,
     "later_unpriced_games": 58,
-    "missing_games": [
-      {
-        "game_id": "nhl:2026020137",
-        "matchup": "ANA @ NYR",
-        "start": "2026-10-19T23:00:00+00:00",
-        "missing_markets": [
-          "ATS",
-          "ML",
-          "TOTAL"
-        ]
-      },
-      {
-        "game_id": "nhl:2026020138",
-        "matchup": "COL @ PHI",
-        "start": "2026-10-19T23:00:00+00:00",
-        "missing_markets": [
-          "ATS",
-          "ML",
-          "TOTAL"
-        ]
-      },
-      {
-        "game_id": "nhl:2026020139",
-        "matchup": "SJ @ TOR",
-        "start": "2026-10-19T23:30:00+00:00",
-        "missing_markets": [
-          "ATS",
-          "ML",
-          "TOTAL"
-        ]
-      },
-      {
-        "game_id": "nhl:2026020140",
-        "matchup": "PIT @ UTA",
-        "start": "2026-10-20T01:00:00+00:00",
-        "missing_markets": [
-          "ATS",
-          "ML",
-          "TOTAL"
-        ]
-      }
-    ]
+    "missing_games": []
   },
   "counts": {
     "games": 62,
