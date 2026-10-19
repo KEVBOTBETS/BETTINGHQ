@@ -1,29 +1,43 @@
 {
   "schema": 1,
-  "checked_at": "2026-10-19T11:08:12.728Z",
+  "checked_at": "2026-10-19T11:38:15.485Z",
   "coverage": {
-    "mlb": {
+    "nfl": {
       "status": "available",
-      "reports": 1,
-      "checked_at": "2026-10-19T11:08:12.728Z"
+      "reports": 507,
+      "checked_at": "2026-10-19T11:38:15.485Z"
     },
     "ncaaf": {
       "status": "empty",
       "reports": 0,
-      "checked_at": "2026-10-19T11:08:12.728Z"
+      "checked_at": "2026-10-19T11:38:15.485Z"
+    },
+    "mlb": {
+      "status": "available",
+      "reports": 1,
+      "checked_at": "2026-10-19T11:38:15.485Z"
     },
     "nhl": {
       "status": "available",
       "reports": 43,
-      "checked_at": "2026-10-19T11:08:12.728Z"
-    },
-    "nfl": {
-      "status": "available",
-      "reports": 507,
-      "checked_at": "2026-10-19T11:08:12.728Z"
+      "checked_at": "2026-10-19T11:38:15.485Z"
     }
   },
   "events": [
+    {
+      "id": "starter|nhl:nhl:2026020139:away|2026-10-19T11:38:15.485Z",
+      "kind": "starter",
+      "observed_at": "2026-10-19T11:38:15.485Z",
+      "sport": "nhl",
+      "event": "SJ @ TOR",
+      "start": "2026-10-19T23:30:00+00:00",
+      "title": "NHL starting goalie updated",
+      "before": "Alex Nedeljkovic",
+      "after": "Yaroslav Askarov · Unknown",
+      "source_quote_at": "2026-10-19T11:36:34.137445+00:00",
+      "source": "NHL board",
+      "note": "Review the matchup after a starter change; the baseline does not price individual goalie talent."
+    },
     {
       "id": "injury|nfl:33:Ja'Kobi Lane|2026-10-19T11:08:12.728Z",
       "kind": "injury",
@@ -2837,20 +2851,6 @@
       "before": "Active",
       "after": "Active · Wicks (undisclosed) returned to Sunday's contest versus the Panthers, Brooks Kubena of The Athletic reports.",
       "source_quote_at": "2026-10-18T20:02Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:21:Dontayvion Wicks|2026-10-18T20:11:10.988Z",
-      "kind": "injury",
-      "observed_at": "2026-10-18T20:11:10.988Z",
-      "sport": "nfl",
-      "title": "Player availability changed",
-      "event": "Philadelphia Eagles",
-      "pick": "Dontayvion Wicks",
-      "before": "Active · Wicks (hamstring) doesn't have a designation for Sunday's contest versus the Panthers.",
-      "after": "Active",
-      "source_quote_at": "2026-10-18T20:01Z",
       "source": "ESPN injuries",
       "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
     }
