@@ -1,29 +1,61 @@
 {
   "schema": 1,
-  "checked_at": "2026-10-19T06:47:46.104Z",
+  "checked_at": "2026-10-19T07:25:03.599Z",
   "coverage": {
-    "nhl": {
-      "status": "available",
-      "reports": 43,
-      "checked_at": "2026-10-19T06:47:46.104Z"
-    },
     "ncaaf": {
       "status": "empty",
       "reports": 0,
-      "checked_at": "2026-10-19T06:47:46.104Z"
+      "checked_at": "2026-10-19T07:25:03.599Z"
+    },
+    "nhl": {
+      "status": "available",
+      "reports": 43,
+      "checked_at": "2026-10-19T07:25:03.599Z"
     },
     "mlb": {
       "status": "available",
       "reports": 1,
-      "checked_at": "2026-10-19T06:47:46.104Z"
+      "checked_at": "2026-10-19T07:25:03.599Z"
     },
     "nfl": {
       "status": "available",
       "reports": 487,
-      "checked_at": "2026-10-19T06:47:46.104Z"
+      "checked_at": "2026-10-19T07:25:03.599Z"
     }
   },
   "events": [
+    {
+      "id": "odds|ncaaf|401864525|2026-10-24T01:00Z|TOTAL||over|Draft Kings|2026-10-19T07:25:03.599Z",
+      "kind": "odds",
+      "observed_at": "2026-10-19T07:25:03.599Z",
+      "sport": "ncaaf",
+      "event": "AFA @ WYO",
+      "start": "2026-10-24T01:00Z",
+      "pick": "Over 45.5",
+      "title": "Published odds changed",
+      "before": "-102 · line 45.5",
+      "after": "-112 · line 45.5",
+      "book": "Draft Kings",
+      "source_quote_at": "2026-10-19T07:19:55.772121+00:00",
+      "source": "Existing NCAAF board",
+      "note": "Your ticket keeps its original odds. Recheck the live book before placing a new wager."
+    },
+    {
+      "id": "price-limit|ncaaf|401864525|2026-10-24T01:00Z|TOTAL||over|Draft Kings|2026-10-19T07:25:03.599Z",
+      "kind": "price-limit",
+      "observed_at": "2026-10-19T07:25:03.599Z",
+      "sport": "ncaaf",
+      "event": "AFA @ WYO",
+      "start": "2026-10-24T01:00Z",
+      "pick": "Over 45.5",
+      "title": "Price below published minimum",
+      "before": "-102",
+      "after": "-112",
+      "book": "Draft Kings",
+      "source_quote_at": "2026-10-19T07:19:55.772121+00:00",
+      "source": "Published price policy",
+      "note": "Minimum -106 at unchanged line 45.5. Uses the saved forecast, not a new model approval. Confirm current odds and qualification; scheduled observations can miss intervening moves."
+    },
     {
       "id": "injury|nfl:1:Bijan Robinson|2026-10-19T06:47:46.104Z",
       "kind": "injury",
@@ -2823,36 +2855,6 @@
       "source_quote_at": "2026-10-18T19:12:15.351389+00:00",
       "source": "Existing Props board",
       "note": "Your ticket keeps its original odds. Recheck the live book before placing a new wager."
-    },
-    {
-      "id": "odds|props|401873006|2026-10-18T20:25Z|Rushing yards|Justin Herbert|over|BetMGM|2026-10-18T19:14:49.895Z",
-      "kind": "odds",
-      "observed_at": "2026-10-18T19:14:49.895Z",
-      "sport": "props",
-      "event": "Los Angeles Chargers @ Kansas City Chiefs",
-      "start": "2026-10-18T20:25Z",
-      "pick": "Justin Herbert — Over 22.5 Rushing yards",
-      "title": "Published odds changed",
-      "before": "-111 · line 22.5",
-      "after": "-115 · line 22.5",
-      "book": "BetMGM",
-      "source_quote_at": "2026-10-18T19:12:15.351389+00:00",
-      "source": "Existing Props board",
-      "note": "Your ticket keeps its original odds. Recheck the live book before placing a new wager."
-    },
-    {
-      "id": "injury|nfl:1:Kendal Daniels|2026-10-18T19:14:49.895Z",
-      "kind": "injury",
-      "observed_at": "2026-10-18T19:14:49.895Z",
-      "sport": "nfl",
-      "title": "Player availability changed",
-      "event": "Atlanta Falcons",
-      "pick": "Kendal Daniels",
-      "before": "Active",
-      "after": "Active · Neck",
-      "source_quote_at": "2026-10-16T17:36Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
     }
   ]
 }
