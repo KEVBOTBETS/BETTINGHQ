@@ -107,11 +107,11 @@
       }
     },
     "wnba": {
-      "stamp": "2026-10-19T01:10:42+00:00",
+      "stamp": "2026-10-19T04:04:21+00:00",
       "rows": {}
     },
     "ncaaf": {
-      "stamp": "2026-10-19T01:08:58+00:00",
+      "stamp": "2026-10-19T04:01:51+00:00",
       "rows": {
         "ncaaf|401862808|2026-10-24T00:30Z|TOTAL||over": {
           "key": "ncaaf",
@@ -136,7 +136,7 @@
           "book": "DraftKings",
           "tier": "GOOD",
           "score": 0.053108502256721785,
-          "quote": "2026-10-19T01:08:49.425771+00:00",
+          "quote": "2026-10-19T04:01:45.739531+00:00",
           "review": [
             "Availability reports not confirmed."
           ],
@@ -171,82 +171,39 @@
           },
           "source": "NCAAF",
           "rank": 1
-        },
-        "ncaaf|401864525|2026-10-24T01:00Z|TOTAL||over": {
-          "key": "ncaaf",
-          "app": "ncaaf-lab",
-          "sport": "NCAAF",
-          "event": "AFA @ WYO",
-          "eventId": "401864525",
-          "player": "",
-          "playerId": "",
-          "side": "over",
-          "home": "",
-          "away": "",
-          "version": "unversioned",
-          "start": "2026-10-24T01:00Z",
-          "when": 1792803600000,
-          "day": "2026-10-23",
-          "pick": "Over 45.5",
-          "market": "TOTAL",
-          "line": 45.5,
-          "sourceLine": 45.5,
-          "price": -102,
-          "book": "DraftKings",
-          "tier": "LEAN",
-          "score": 0.05948196823336665,
-          "quote": "2026-10-19T01:08:49.425771+00:00",
-          "review": [
-            "Availability reports not confirmed."
-          ],
-          "value": {
-            "version": "price-stress-v1",
-            "reserve": 0.03,
-            "minReturn": 0.02,
-            "conditional": 0.5549454093472559,
-            "push": 0,
-            "stressed": 0.5249454093472559,
-            "ev": 0.09900953615829122,
-            "stressEV": 0.039597771452408725,
-            "worst": -106,
-            "passes": true,
-            "reasons": []
-          },
-          "probability": 0.5549454093472559,
-          "fair": -124,
-          "worst": -106,
-          "minReturn": 0.025,
-          "quoteStatus": "observed",
-          "referenceOnly": false,
-          "sourceUrl": null,
-          "worstReached": false,
-          "move": {
-            "kind": "line",
-            "market": "TOTAL",
-            "opened": 42.5,
-            "now": 45.5,
-            "toward": 3,
-            "since": "2026-10-18T07:04:49+00:00"
-          },
-          "source": "NCAAF",
-          "rank": 2
         }
       }
     },
     "nfl": {
-      "stamp": "2026-10-19T01:08:46+00:00",
+      "stamp": "2026-10-19T04:01:41+00:00",
       "rows": {}
     },
     "mlb": {
-      "stamp": "2026-10-19T01:10:02+00:00",
+      "stamp": "2026-10-19T04:03:23+00:00",
       "rows": {}
     },
     "nhl": {
-      "stamp": "2026-10-19T03:34:35.997321+00:00",
+      "stamp": "2026-10-19T04:04:22.729447+00:00",
       "rows": {}
     }
   },
   "events": [
+    {
+      "id": "ncaaf|2026-10-19T04:01:51+00:00|ncaaf|401864525|2026-10-24T01:00Z|TOTAL||over|absent",
+      "sport": "ncaaf",
+      "observed_at": "2026-10-19T04:06:12.801Z",
+      "published_at": "2026-10-19T04:01:51+00:00",
+      "day": "2026-10-23",
+      "event": "AFA @ WYO",
+      "pick": "Over 45.5",
+      "changes": [
+        {
+          "field": "qualified list",
+          "from": "Listed",
+          "to": "Not in current snapshot; see board for reason"
+        }
+      ]
+    },
     {
       "id": "ncaaf|2026-10-19T01:08:58+00:00|ncaaf|401864525|2026-10-24T01:00Z|TOTAL||over",
       "sport": "ncaaf",
@@ -9780,23 +9737,7 @@
           "to": 2
         }
       ]
-    },
-    {
-      "id": "props|2026-10-11T14:17:15.689386+00:00|props|401872994|2026-10-13T00:15Z|Rushing yards|Matthew Stafford|over",
-      "sport": "props",
-      "observed_at": "2026-10-11T14:21:25.476Z",
-      "published_at": "2026-10-11T14:17:15.689386+00:00",
-      "day": "2026-10-12",
-      "event": "Buffalo Bills @ Los Angeles Rams",
-      "pick": "Matthew Stafford — Over 1.5 Rushing yards",
-      "changes": [
-        {
-          "field": "rank",
-          "from": 2,
-          "to": 1
-        }
-      ]
     }
   ],
-  "checked_at": "2026-10-19T03:36:29.658Z"
+  "checked_at": "2026-10-19T04:06:12.801Z"
 }
