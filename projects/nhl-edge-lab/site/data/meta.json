@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-19T17:09:36.617944+00:00",
+  "generated_at": "2026-10-19T17:37:30.781119+00:00",
   "model_version": "nhl-poisson-1.0",
   "season": 2027,
   "timezone": "America/Toronto",
@@ -26,22 +26,22 @@
     },
     "nhl-schedule-2026-10-19": {
       "status": "ok",
-      "observed_at": "2026-10-19T17:09:36.617944+00:00",
+      "observed_at": "2026-10-19T17:37:30.781119+00:00",
       "url": "https://api-web.nhle.com/v1/schedule/2026-10-19"
     },
     "nhl-schedule-2026-10-05": {
       "status": "ok",
-      "observed_at": "2026-10-19T17:09:36.617944+00:00",
+      "observed_at": "2026-10-19T17:37:30.781119+00:00",
       "url": "https://api-web.nhle.com/v1/schedule/2026-10-05"
     },
     "nhl-schedule-2026-10-12": {
       "status": "ok",
-      "observed_at": "2026-10-19T17:09:36.617944+00:00",
+      "observed_at": "2026-10-19T17:37:30.781119+00:00",
       "url": "https://api-web.nhle.com/v1/schedule/2026-10-12"
     },
     "nhl-schedule-2026-10-26": {
       "status": "ok",
-      "observed_at": "2026-10-19T17:09:36.617944+00:00",
+      "observed_at": "2026-10-19T17:37:30.781119+00:00",
       "url": "https://api-web.nhle.com/v1/schedule/2026-10-26"
     },
     "standings-2027": {
@@ -57,7 +57,7 @@
       "error": "HTTPError"
     },
     "nhl-official": {
-      "status": "ok",
+      "status": "cached",
       "observed_at": "2026-10-19T17:09:36.617944+00:00",
       "url": "https://api-web.nhle.com/v1/standings/now"
     },
@@ -83,29 +83,29 @@
     },
     "public-book-odds": {
       "status": "ok",
-      "observed_at": "2026-10-19T17:09:36.617944+00:00",
+      "observed_at": "2026-10-19T17:37:00+00:00",
       "url": "https://www.covers.com/sport/hockey/nhl/odds",
-      "quotes": 184,
+      "quotes": 512,
       "attempts": [
         {
           "url": "https://www.covers.com/sport/hockey/nhl/odds",
-          "checked_at": "2026-10-19T17:09:36.617944+00:00",
+          "checked_at": "2026-10-19T17:37:30.781119+00:00",
+          "observed_at": "2026-10-19T17:37:00+00:00",
+          "status": "ok",
+          "quotes": 512,
+          "matched_games": 14
+        },
+        {
+          "url": "https://www.vegasinsider.com/nhl/odds/las-vegas/",
+          "checked_at": "2026-10-19T17:37:30.781119+00:00",
           "observed_at": null,
           "status": "no matched prices",
           "quotes": 0,
           "matched_games": 0
         },
         {
-          "url": "https://www.vegasinsider.com/nhl/odds/las-vegas/",
-          "checked_at": "2026-10-19T17:09:36.617944+00:00",
-          "observed_at": "2026-10-19T17:09:36.617944+00:00",
-          "status": "ok",
-          "quotes": 184,
-          "matched_games": 4
-        },
-        {
           "url": "https://www.scoresandodds.com/nhl/odds",
-          "checked_at": "2026-10-19T17:09:36.617944+00:00",
+          "checked_at": "2026-10-19T17:37:30.781119+00:00",
           "observed_at": null,
           "status": "no matched prices",
           "quotes": 0,
@@ -129,7 +129,7 @@
   "odds_health": {
     "status": "ok",
     "upcoming_games": 62,
-    "priced_games": 4,
+    "priced_games": 14,
     "window_hours": 24,
     "window_games": 4,
     "window_priced_games": 4,
@@ -140,12 +140,12 @@
       "TOTAL": 4
     },
     "later_games": 58,
-    "later_unpriced_games": 58,
+    "later_unpriced_games": 48,
     "missing_games": []
   },
   "counts": {
     "games": 62,
-    "qualified": 1,
+    "qualified": 0,
     "teams": 32
   },
   "settings": {
