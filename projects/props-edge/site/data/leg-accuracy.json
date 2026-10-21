@@ -1,17 +1,17 @@
 {
- "legs": 8056,
- "settled": 4836,
- "record": "3305-1531-7",
- "hit_rate": 0.6834,
- "average_predicted": 0.6607,
+ "legs": 8250,
+ "settled": 4918,
+ "record": "3357-1561-7",
+ "hit_rate": 0.6826,
+ "average_predicted": 0.6602,
  "brier": 0.1853,
  "buckets": [
   {
    "from": 0.0,
    "to": 0.35,
-   "legs": 428,
-   "predicted": 0.2343,
-   "actual": 0.2336
+   "legs": 441,
+   "predicted": 0.2337,
+   "actual": 0.2313
   },
   {
    "from": 0.35,
@@ -23,119 +23,119 @@
   {
    "from": 0.45,
    "to": 0.55,
-   "legs": 383,
+   "legs": 391,
    "predicted": 0.5183,
-   "actual": 0.4778
+   "actual": 0.4808
   },
   {
    "from": 0.55,
    "to": 0.65,
-   "legs": 844,
+   "legs": 857,
    "predicted": 0.6041,
-   "actual": 0.6457
+   "actual": 0.6453
   },
   {
    "from": 0.65,
    "to": 0.75,
-   "legs": 1462,
-   "predicted": 0.7014,
-   "actual": 0.7319
+   "legs": 1480,
+   "predicted": 0.7016,
+   "actual": 0.7318
   },
   {
    "from": 0.75,
    "to": 1.01,
-   "legs": 1655,
-   "predicted": 0.8074,
-   "actual": 0.8387
+   "legs": 1685,
+   "predicted": 0.8075,
+   "actual": 0.838
   }
  ],
  "by_market": {
   "Tackles + assists": {
-   "legs": 942,
-   "wins": 778,
+   "legs": 956,
+   "wins": 789,
    "predicted": 0.7521,
-   "hit_rate": 0.8259
+   "hit_rate": 0.8253
   },
   "Pass completions": {
-   "legs": 115,
-   "wins": 95,
-   "predicted": 0.7977,
-   "hit_rate": 0.8261
+   "legs": 117,
+   "wins": 96,
+   "predicted": 0.7956,
+   "hit_rate": 0.8205
   },
   "Pass attempts": {
-   "legs": 114,
-   "wins": 89,
-   "predicted": 0.7941,
-   "hit_rate": 0.7807
+   "legs": 116,
+   "wins": 90,
+   "predicted": 0.7916,
+   "hit_rate": 0.7759
   },
   "Rush attempts": {
-   "legs": 250,
-   "wins": 194,
-   "predicted": 0.7302,
-   "hit_rate": 0.776
+   "legs": 255,
+   "wins": 199,
+   "predicted": 0.7301,
+   "hit_rate": 0.7804
   },
   "Passing yards": {
-   "legs": 114,
-   "wins": 98,
-   "predicted": 0.7614,
-   "hit_rate": 0.8596
+   "legs": 116,
+   "wins": 99,
+   "predicted": 0.7594,
+   "hit_rate": 0.8534
   },
   "Targets": {
-   "legs": 502,
-   "wins": 394,
-   "predicted": 0.7517,
-   "hit_rate": 0.7849
+   "legs": 509,
+   "wins": 400,
+   "predicted": 0.7527,
+   "hit_rate": 0.7859
   },
   "Receptions": {
-   "legs": 675,
-   "wins": 479,
-   "predicted": 0.7042,
-   "hit_rate": 0.7096
+   "legs": 684,
+   "wins": 486,
+   "predicted": 0.7053,
+   "hit_rate": 0.7105
   },
   "Rushing yards": {
-   "legs": 337,
-   "wins": 232,
-   "predicted": 0.6619,
-   "hit_rate": 0.6884
+   "legs": 343,
+   "wins": 238,
+   "predicted": 0.6624,
+   "hit_rate": 0.6939
   },
   "Receiving yards": {
-   "legs": 738,
-   "wins": 510,
-   "predicted": 0.673,
-   "hit_rate": 0.6911
+   "legs": 751,
+   "wins": 518,
+   "predicted": 0.6733,
+   "hit_rate": 0.6897
   },
   "Sacks": {
-   "legs": 239,
-   "wins": 154,
-   "predicted": 0.6179,
-   "hit_rate": 0.6444
+   "legs": 241,
+   "wins": 155,
+   "predicted": 0.6173,
+   "hit_rate": 0.6432
   },
   "Passing touchdowns": {
-   "legs": 111,
+   "legs": 113,
    "wins": 62,
-   "predicted": 0.6307,
-   "hit_rate": 0.5586
+   "predicted": 0.6299,
+   "hit_rate": 0.5487
   },
   "Pass interceptions": {
-   "legs": 111,
-   "wins": 59,
-   "predicted": 0.6164,
-   "hit_rate": 0.5315
+   "legs": 113,
+   "wins": 60,
+   "predicted": 0.617,
+   "hit_rate": 0.531
   },
   "Anytime touchdown": {
-   "legs": 588,
-   "wins": 161,
-   "predicted": 0.2999,
-   "hit_rate": 0.2738
+   "legs": 604,
+   "wins": 165,
+   "predicted": 0.2992,
+   "hit_rate": 0.2732
   }
  },
  "calibration_shrink": 1.0,
  "calibration_active": false,
- "updated_at": "2026-10-19T16:00:16.427986+00:00",
+ "updated_at": "2026-10-21T01:20:12.326824+00:00",
  "calibration_note": "Calibration is diagnostic only; no automatic refit.",
- "total_logged": 53720,
- "pending": 3213,
- "independent_events": 74,
+ "total_logged": 54783,
+ "pending": 3325,
+ "independent_events": 75,
  "legacy_excluded": 17,
  "method": "One first pregame preferred leg per event/player/market. Full side/line audit retained separately. No wager ROI at estimated prices."
 }
