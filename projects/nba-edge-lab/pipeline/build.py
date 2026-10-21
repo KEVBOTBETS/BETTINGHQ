@@ -1,5 +1,6 @@
 """Public NBA collection. Preserve original observations and first pregame calls."""
-import argparse,json,re,urllib.request
+import argparse,json,re,time
+import requests
 from pathlib import Path
 from concurrent.futures import ThreadPoolExecutor
 from datetime import datetime,timedelta,timezone
@@ -14,10 +15,28 @@ def read(path,default):
 def write(path,data):
     path.parent.mkdir(parents=True,exist_ok=True);tmp=path.with_suffix('.tmp');tmp.write_text(json.dumps(data,separators=(',',':'),allow_nan=False)+'\n');tmp.replace(path)
 def fetch(url):
-    req=urllib.request.Request(url,headers={'User-Agent':'Mozilla/5.0 (compatible; KEVBOTBETS/1.0; public NBA research)','Accept':'application/json'})
-    with urllib.request.urlopen(req,timeout=18) as r:raw=r.read(8_000_001)
-    if len(raw)>8_000_000:raise ValueError('NBA source exceeds bounded response size')
-    return json.loads(raw)
+    # Use the same transport as the established football collector: automatic
+    # content decoding, bounded responses and polite retries for transient errors.
+    error=None
+    for attempt in range(3):
+        try:
+            with requests.get(url,headers={'User-Agent':'NBA-Edge-Lab/1.0 (+https://github.com/KEVBOTBETS/BETTINGHQ)','Accept':'application/json'},timeout=18,stream=True) as response:
+                if response.status_code!=200:
+                    error=OSError('ESPN HTTP '+str(response.status_code))
+                    if response.status_code not in (408,429,500,502,503,504):raise error
+                else:
+                    chunks=[];size=0
+                    for chunk in response.iter_content(65536):
+                        size+=len(chunk)
+                        if size>8_000_000:raise ValueError('NBA source exceeds bounded response size')
+                        chunks.append(chunk)
+                    value=json.loads(b''.join(chunks))
+                    if not isinstance(value,dict):raise ValueError('NBA source is not an object')
+                    return value
+        except requests.RequestException as exc:error=OSError('ESPN transport '+type(exc).__name__)
+        except (ValueError,UnicodeError) as exc:error=OSError('ESPN response '+type(exc).__name__)
+        if attempt<2:time.sleep(.5*(attempt+1))
+    raise error or OSError('NBA source unavailable')
 def standings(raw,season,observed):
     year=raw.get('season');year=year.get('year') if isinstance(year,dict) else year
     if str(year)!=str(season):return {}
@@ -86,7 +105,7 @@ def main():
         if not args.offline:
             try:
                 data=fetch(url);cache[key]={'data':data,'observed_at':stamp};health[key]={'status':'ok','observed_at':stamp,'url':url};return data
-            except (OSError,ValueError) as exc:error=type(exc).__name__
+            except (OSError,ValueError) as exc:error=type(exc).__name__+': '+str(exc)[:160]
         else:error='Offline'
         health[key]={'status':'retained' if old else 'unavailable','observed_at':old.get('observed_at'),'url':url,'error':error};return old.get('data',{})
     dates={today+timedelta(days=i) for i in range(-3,9)}
@@ -99,7 +118,7 @@ def main():
         key='scoreboard-'+d.isoformat();raw=source(key,BASE+'scoreboard?dates='+d.strftime('%Y%m%d')+'&limit=1000');return key,raw
     with ThreadPoolExecutor(max_workers=4) as pool:boards=list(pool.map(get_day,dates))
     today_key='scoreboard-'+today.isoformat()
-    if health[today_key]['status'] not in ('ok','cached') and not args.offline:raise RuntimeError('NBA schedule refresh failed; retain original publication')
+    if health[today_key]['status'] not in ('ok','cached') and not args.offline:raise RuntimeError('NBA schedule refresh failed; retain original publication: '+str(health[today_key]))
     current=standings(source('standings-'+str(season),'https://site.api.espn.com/apis/v2/sports/basketball/nba/standings?season='+str(season),ttl=1800),season,health['standings-'+str(season)]['observed_at'])
     prior=standings(source('standings-'+str(season-1),'https://site.api.espn.com/apis/v2/sports/basketball/nba/standings?season='+str(season-1),ttl=7*86400),season-1,health['standings-'+str(season-1)]['observed_at'])
     if len(current)<20:raise RuntimeError('Current NBA standings season/coverage unavailable')

@@ -1,0 +1,25 @@
+name: NBA public source check
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'projects/nba-edge-lab/pipeline/**'
+      - 'projects/nba-edge-lab/requirements.txt'
+      - '.github/workflows/nba-source-check.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  public-source:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v7
+        with:
+          python-version: '3.12'
+      - run: pip install -r requirements.txt
+        working-directory: projects/nba-edge-lab
+      - name: Validate real keyless NBA collection
+        run: python -m pipeline.build
+        working-directory: projects/nba-edge-lab
