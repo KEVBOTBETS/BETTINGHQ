@@ -276,6 +276,34 @@ class ProviderParsingTests(unittest.TestCase):
 
 
 class SecurityTests(unittest.TestCase):
+    @staticmethod
+    def scan_text(path):
+        text = path.read_text(errors="ignore")
+        if path.name in {"parlay_history.json", "parlay-history.json"}:
+            value = json.loads(text)
+            if isinstance(value, dict) and value.get("encoding") == "gzip-base64":
+                from pipeline.parlay_history import decode_archive
+                # Validate the checksum and scan the entire decoded history.
+                # The verified content hash is not an API credential. Other
+                # envelope fields still undergo the same secret check.
+                text = json.dumps(decode_archive(value)) + json.dumps({
+                    k: v for k, v in value.items() if k not in {"data", "sha256"}
+                })
+        return text
+
+    def test_compressed_history_does_not_hide_embedded_tokens(self):
+        import tempfile
+        from pipeline.parlay_history import encode_archive
+        pattern = re.compile(r"(?<![A-Za-z0-9])[a-f0-9]{32,}(?![A-Za-z0-9])", re.I)
+        with tempfile.TemporaryDirectory() as folder:
+            path = Path(folder) / "parlay_history.json"
+            path.write_text(encode_archive({"token": "a" * 40}, threshold=1))
+            self.assertIsNotNone(pattern.search(self.scan_text(path)))
+            value = json.loads(encode_archive({"records": {}}, threshold=1))
+            value["extra"] = "b" * 40
+            path.write_text(json.dumps(value))
+            self.assertIsNotNone(pattern.search(self.scan_text(path)))
+
     def test_repository_has_no_embedded_secret_shaped_hex_tokens(self) -> None:
         suspicious = re.compile(r"(?<![A-Za-z0-9])[a-f0-9]{32,}(?![A-Za-z0-9])", re.I)
         allowed_suffixes = {".json", ".py", ".js", ".html", ".css", ".md", ".yml", ".yaml", ".example", ".txt"}
@@ -283,7 +311,7 @@ class SecurityTests(unittest.TestCase):
         for path in ROOT.rglob("*"):
             if not path.is_file() or path.suffix not in allowed_suffixes:
                 continue
-            if suspicious.search(path.read_text(errors="ignore")):
+            if suspicious.search(self.scan_text(path)):
                 hits.append(str(path.relative_to(ROOT)))
         self.assertEqual(hits, [], f"secret-looking token found in: {hits}")
 
