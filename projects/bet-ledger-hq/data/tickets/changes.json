@@ -407,11 +407,11 @@
       }
     },
     "wnba": {
-      "stamp": "2026-10-21T12:09:41+00:00",
+      "stamp": "2026-10-21T17:30:15+00:00",
       "rows": {}
     },
     "ncaaf": {
-      "stamp": "2026-10-21T12:08:21+00:00",
+      "stamp": "2026-10-21T17:27:35+00:00",
       "rows": {
         "ncaaf|401864525|2026-10-24T01:00Z|TOTAL||over": {
           "key": "ncaaf",
@@ -436,7 +436,7 @@
           "book": "Draft Kings",
           "tier": "GOOD",
           "score": 0.05948196823336665,
-          "quote": "2026-10-21T12:08:15.583057+00:00",
+          "quote": "2026-10-21T17:27:21.600115+00:00",
           "review": [
             "Availability reports not confirmed."
           ],
@@ -495,7 +495,7 @@
           "book": "Draft Kings",
           "tier": "GOOD",
           "score": 0.05665864569991372,
-          "quote": "2026-10-21T12:08:15.583057+00:00",
+          "quote": "2026-10-21T17:26:59.198325+00:00",
           "review": [
             "Availability reports not confirmed."
           ],
@@ -546,15 +546,15 @@
           "start": "2026-10-24T17:00Z",
           "when": 1792861200000,
           "day": "2026-10-24",
-          "pick": "Over 40.5",
+          "pick": "Over 39.5",
           "market": "TOTAL",
-          "line": 40.5,
-          "sourceLine": 40.5,
-          "price": -105,
+          "line": 39.5,
+          "sourceLine": 39.5,
+          "price": -112,
           "book": "Draft Kings",
           "tier": "LEAN",
-          "score": 0.05575289243493921,
-          "quote": "2026-10-21T12:08:15.583057+00:00",
+          "score": 0.05011116837641022,
+          "quote": "2026-10-21T17:26:59.197175+00:00",
           "review": [
             "Availability reports not confirmed."
           ],
@@ -562,18 +562,18 @@
             "version": "price-stress-v1",
             "reserve": 0.03,
             "minReturn": 0.02,
-            "conditional": 0.5583907669493968,
+            "conditional": 0.5699250021636599,
             "push": 0,
-            "stressed": 0.5283907669493968,
-            "ev": 0.09019149737739385,
-            "stressEV": 0.03162006880596513,
-            "worst": -107,
+            "stressed": 0.5399250021636599,
+            "ev": 0.07878661123835617,
+            "stressEV": 0.022000896952641957,
+            "worst": -112,
             "passes": true,
             "reasons": []
           },
-          "probability": 0.5583907669493968,
-          "fair": -126,
-          "worst": -107,
+          "probability": 0.5699250021636599,
+          "fair": -132,
+          "worst": -112,
           "minReturn": 0.025,
           "quoteStatus": "observed",
           "referenceOnly": false,
@@ -583,8 +583,8 @@
             "kind": "line",
             "market": "TOTAL",
             "opened": 42.5,
-            "now": 40.5,
-            "toward": -2,
+            "now": 39.5,
+            "toward": -3,
             "since": "2026-10-18T15:49:43+00:00"
           },
           "source": "NCAAF",
@@ -593,23 +593,44 @@
       }
     },
     "nfl": {
-      "stamp": "2026-10-21T12:07:32+00:00",
+      "stamp": "2026-10-21T17:26:58+00:00",
       "rows": {}
     },
     "mlb": {
-      "stamp": "2026-10-21T12:08:33+00:00",
+      "stamp": "2026-10-21T17:29:09+00:00",
       "rows": {}
     },
     "nhl": {
-      "stamp": "2026-10-21T13:11:20.795702+00:00",
+      "stamp": "2026-10-21T17:30:18.641093+00:00",
       "rows": {}
     },
     "nba": {
-      "stamp": "2026-10-21T13:11:23.386211+00:00",
+      "stamp": "2026-10-21T17:26:40.712680+00:00",
       "rows": {}
     }
   },
   "events": [
+    {
+      "id": "ncaaf|2026-10-21T17:27:35+00:00|ncaaf|401866476|2026-10-24T17:00Z|TOTAL||over",
+      "sport": "ncaaf",
+      "observed_at": "2026-10-21T17:32:35.257Z",
+      "published_at": "2026-10-21T17:27:35+00:00",
+      "day": "2026-10-24",
+      "event": "M-OH @ CMU",
+      "pick": "Over 39.5",
+      "changes": [
+        {
+          "field": "price",
+          "from": -105,
+          "to": -112
+        },
+        {
+          "field": "line",
+          "from": 40.5,
+          "to": 39.5
+        }
+      ]
+    },
     {
       "id": "ncaaf|2026-10-21T12:08:21+00:00|ncaaf|401856734|2026-10-31T19:30Z|TOTAL||over|absent",
       "sport": "ncaaf",
@@ -10078,23 +10099,7 @@
           "to": "Listed"
         }
       ]
-    },
-    {
-      "id": "props|2026-10-11T18:44:41.362503+00:00|props|401872993|2026-10-12T00:20Z|Receiving yards|Zay Flowers|over",
-      "sport": "props",
-      "observed_at": "2026-10-11T18:45:45.099Z",
-      "published_at": "2026-10-11T18:44:41.362503+00:00",
-      "day": "2026-10-11",
-      "event": "Baltimore Ravens @ Atlanta Falcons",
-      "pick": "Zay Flowers — Over 64.5 Receiving yards",
-      "changes": [
-        {
-          "field": "qualified list",
-          "from": "Not in previous snapshot",
-          "to": "Listed"
-        }
-      ]
     }
   ],
-  "checked_at": "2026-10-21T13:13:21.260Z"
+  "checked_at": "2026-10-21T17:32:35.257Z"
 }
