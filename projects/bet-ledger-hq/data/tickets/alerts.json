@@ -1,29 +1,57 @@
 {
   "schema": 1,
-  "checked_at": "2026-10-21T05:07:50.104Z",
+  "checked_at": "2026-10-21T07:30:48.059Z",
   "coverage": {
+    "mlb": {
+      "status": "available",
+      "reports": 1,
+      "checked_at": "2026-10-21T07:30:48.059Z"
+    },
     "ncaaf": {
       "status": "empty",
       "reports": 0,
-      "checked_at": "2026-10-21T05:07:50.104Z"
+      "checked_at": "2026-10-21T07:30:48.059Z"
+    },
+    "nhl": {
+      "status": "available",
+      "reports": 39,
+      "checked_at": "2026-10-21T07:30:48.059Z"
     },
     "nfl": {
       "status": "available",
       "reports": 562,
-      "checked_at": "2026-10-21T05:07:50.104Z"
-    },
-    "nhl": {
-      "status": "available",
-      "reports": 38,
-      "checked_at": "2026-10-21T05:07:50.104Z"
-    },
-    "mlb": {
-      "status": "available",
-      "reports": 1,
-      "checked_at": "2026-10-21T05:07:50.104Z"
+      "checked_at": "2026-10-21T07:30:48.059Z"
     }
   },
   "events": [
+    {
+      "id": "injury|nhl:20:Anthony Cirelli|2026-10-21T07:30:48.059Z",
+      "kind": "injury",
+      "observed_at": "2026-10-21T07:30:48.059Z",
+      "sport": "nhl",
+      "title": "New availability report",
+      "event": "Tampa Bay Lightning",
+      "pick": "Anthony Cirelli",
+      "before": "Not in the previous dated report",
+      "after": "Day-To-Day · Undisclosed",
+      "source_quote_at": "2026-10-21T06:52Z",
+      "source": "ESPN injuries",
+      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
+    },
+    {
+      "id": "injury|nfl:23:Payton Wilson|2026-10-21T07:30:48.059Z",
+      "kind": "injury",
+      "observed_at": "2026-10-21T07:30:48.059Z",
+      "sport": "nfl",
+      "title": "Player availability changed",
+      "event": "Pittsburgh Steelers",
+      "pick": "Payton Wilson",
+      "before": "Active · Wilson recorded 11 tackles (seven solo) during Sundays' 26-19 overtime win over the Buccaneers on Sunday.",
+      "after": "Active · Wilson recorded 11 tackles (seven solo) during Sunday's 26-19 overtime win over the Buccaneers.",
+      "source_quote_at": "2026-10-21T02:32Z",
+      "source": "ESPN injuries",
+      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
+    },
     {
       "id": "odds|props|401873017|2026-10-25T17:00Z|Rushing yards|Brock Purdy|over|FanDuel|2026-10-21T05:07:50.104Z",
       "kind": "odds",
@@ -2811,34 +2839,6 @@
       "before": "Out · Coach's Decision",
       "after": "Active",
       "source_quote_at": "2026-10-20T16:04Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:25:Mike Evans|2026-10-20T16:52:02.069Z",
-      "kind": "injury",
-      "observed_at": "2026-10-20T16:52:02.069Z",
-      "sport": "nfl",
-      "title": "Player availability changed",
-      "event": "San Francisco 49ers",
-      "pick": "Mike Evans",
-      "before": "Doubtful · Achilles",
-      "after": "Questionable · Achilles",
-      "source_quote_at": "2026-10-20T14:09Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:26:Chazz Surratt|2026-10-20T16:52:02.069Z",
-      "kind": "injury",
-      "observed_at": "2026-10-20T16:52:02.069Z",
-      "sport": "nfl",
-      "title": "Player availability changed",
-      "event": "Seattle Seahawks",
-      "pick": "Chazz Surratt",
-      "before": "Out · Calf",
-      "after": "Questionable · Calf",
-      "source_quote_at": "2026-10-20T16:10Z",
       "source": "ESPN injuries",
       "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
     }
