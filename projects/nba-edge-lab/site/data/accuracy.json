@@ -1,114 +1,121 @@
 {
  "schema": 1,
- "generated_at": "2026-10-21T01:58:20.831568+00:00",
+ "generated_at": "2026-10-21T05:04:02.308595+00:00",
  "label": "NBA prediction accuracy",
  "method": "First pre-event snapshot, frozen line and price. All model picks, including PASS/AVOID and unstaked picks. One preferred side per event/market in pick statistics; the complete priced-side audit is separate. One hypothetical unit per pick; no actual wagers are created. Missing results remain pending.",
  "overall": {
   "logged": 48,
-  "wins": 0,
-  "losses": 0,
+  "wins": 1,
+  "losses": 2,
   "pushes": 0,
   "voids": 0,
-  "settled": 0,
-  "pending": 48,
-  "win_rate": null,
-  "units": 0,
-  "roi": null,
-  "brier": null
+  "settled": 3,
+  "pending": 45,
+  "win_rate": 0.3333333333333333,
+  "units": -1.048,
+  "roi": -0.34920633333333334,
+  "brier": 0.27832
  },
  "all_calls": {
   "logged": 80,
-  "wins": 0,
-  "losses": 0,
+  "wins": 2,
+  "losses": 3,
   "pushes": 0,
   "voids": 0,
-  "settled": 0,
-  "pending": 80,
-  "win_rate": null,
-  "units": 0,
-  "roi": null,
-  "brier": null
+  "settled": 5,
+  "pending": 75,
+  "win_rate": 0.4,
+  "units": -1.122,
+  "roi": -0.2243386,
+  "brier": 0.28005
  },
  "by_tier": {
   "RESEARCH": {
    "logged": 48,
-   "wins": 0,
-   "losses": 0,
+   "wins": 1,
+   "losses": 2,
    "pushes": 0,
    "voids": 0,
-   "settled": 0,
-   "pending": 48,
-   "win_rate": null,
-   "units": 0,
-   "roi": null,
-   "brier": null
+   "settled": 3,
+   "pending": 45,
+   "win_rate": 0.3333333333333333,
+   "units": -1.048,
+   "roi": -0.34920633333333334,
+   "brier": 0.27832
   }
  },
  "by_market": {
   "ATS": {
    "logged": 16,
    "wins": 0,
-   "losses": 0,
+   "losses": 1,
    "pushes": 0,
    "voids": 0,
-   "settled": 0,
-   "pending": 16,
-   "win_rate": null,
-   "units": 0,
-   "roi": null,
-   "brier": null
+   "settled": 1,
+   "pending": 15,
+   "win_rate": 0.0,
+   "units": -1,
+   "roi": -1.0,
+   "brier": 0.3235
   },
   "ML": {
    "logged": 16,
    "wins": 0,
-   "losses": 0,
+   "losses": 1,
    "pushes": 0,
    "voids": 0,
-   "settled": 0,
-   "pending": 16,
-   "win_rate": null,
-   "units": 0,
-   "roi": null,
-   "brier": null
+   "settled": 1,
+   "pending": 15,
+   "win_rate": 0.0,
+   "units": -1,
+   "roi": -1.0,
+   "brier": 0.26962
   },
   "TOTAL": {
    "logged": 16,
-   "wins": 0,
+   "wins": 1,
    "losses": 0,
    "pushes": 0,
    "voids": 0,
-   "settled": 0,
-   "pending": 16,
-   "win_rate": null,
-   "units": 0,
-   "roi": null,
-   "brier": null
+   "settled": 1,
+   "pending": 15,
+   "win_rate": 1.0,
+   "units": 0.952,
+   "roi": 0.952381,
+   "brier": 0.24182
   }
  },
  "by_version": {
   "nba-scoring-research-1.0": {
    "logged": 48,
-   "wins": 0,
-   "losses": 0,
+   "wins": 1,
+   "losses": 2,
    "pushes": 0,
    "voids": 0,
-   "settled": 0,
-   "pending": 48,
-   "win_rate": null,
-   "units": 0,
-   "roi": null,
-   "brier": null
+   "settled": 3,
+   "pending": 45,
+   "win_rate": 0.3333333333333333,
+   "units": -1.048,
+   "roi": -0.34920633333333334,
+   "brier": 0.27832
   }
  },
- "calibration": [],
+ "calibration": [
+  {
+   "bucket": "50\u201360%",
+   "n": 3,
+   "predicted": 0.53209,
+   "actual": 0.33333
+  }
+ ],
  "games": {
-  "logged": 66,
-  "graded": 0,
-  "pending": 66,
+  "logged": 69,
+  "graded": 1,
+  "pending": 68,
   "winner": {
-   "n": 0,
+   "n": 1,
    "correct": 0,
-   "accuracy": null
+   "accuracy": 0.0
   },
   "ats": {
    "n": 0,
@@ -130,13 +137,67 @@
    "model_mae": null,
    "market_mae": null
   },
-  "margin_mae": null,
-  "total_mae": null,
-  "brier": null
+  "margin_mae": 12.579,
+  "total_mae": 9.128,
+  "brier": 0.26962
  },
  "props": {},
  "excluded_unresolved_teams": 0,
  "records": [
+  {
+   "kind": "game",
+   "league": "NBA",
+   "season": 2027,
+   "event_id": "401909895",
+   "start": "2026-10-30T02:00:00+00:00",
+   "matchup": "MEM @ POR",
+   "margin": 4.86,
+   "total": 233.299,
+   "probability": 0.657254,
+   "market_snapshot": null,
+   "market_spread": null,
+   "market_total": null,
+   "id": "game:NBA:401909895:::",
+   "captured_at": "2026-10-21T05:04:02.306663+00:00",
+   "result": "Pending",
+   "version": "nba-scoring-research-1.0"
+  },
+  {
+   "kind": "game",
+   "league": "NBA",
+   "season": 2027,
+   "event_id": "401909894",
+   "start": "2026-10-30T00:00:00+00:00",
+   "matchup": "SAC @ NO",
+   "margin": 4.75,
+   "total": 233.774,
+   "probability": 0.653886,
+   "market_snapshot": null,
+   "market_spread": null,
+   "market_total": null,
+   "id": "game:NBA:401909894:::",
+   "captured_at": "2026-10-21T05:04:02.306663+00:00",
+   "result": "Pending",
+   "version": "nba-scoring-research-1.0"
+  },
+  {
+   "kind": "game",
+   "league": "NBA",
+   "season": 2027,
+   "event_id": "401909893",
+   "start": "2026-10-29T23:00:00+00:00",
+   "matchup": "CLE @ ATL",
+   "margin": 1.159,
+   "total": 234.72,
+   "probability": 0.538456,
+   "market_snapshot": null,
+   "market_spread": null,
+   "market_total": null,
+   "id": "game:NBA:401909893:::",
+   "captured_at": "2026-10-21T05:04:02.306663+00:00",
+   "result": "Pending",
+   "version": "nba-scoring-research-1.0"
+  },
   {
    "kind": "game",
    "league": "NBA",
@@ -3084,8 +3145,13 @@
    "market_total": null,
    "id": "game:NBA:401909090:::",
    "captured_at": "2026-10-21T00:08:29.515034+00:00",
-   "result": "Pending",
-   "version": "nba-scoring-research-1.0"
+   "result": "Graded",
+   "version": "nba-scoring-research-1.0",
+   "actual_margin": -12.0,
+   "actual_total": 220.0,
+   "final_home": 104.0,
+   "final_away": 116.0,
+   "graded_at": "2026-10-21T05:04:02.306881+00:00"
   },
   {
    "kind": "call",
@@ -3106,8 +3172,13 @@
    "selected": true,
    "id": "call:NBA:401909090::TOTAL:under",
    "captured_at": "2026-10-21T00:08:29.513785+00:00",
-   "result": "Pending",
-   "version": "nba-scoring-research-1.0"
+   "result": "Win",
+   "version": "nba-scoring-research-1.0",
+   "units": 0.952381,
+   "actual": null,
+   "final_home": 104.0,
+   "final_away": 116.0,
+   "graded_at": "2026-10-21T05:04:02.306881+00:00"
   },
   {
    "kind": "call",
@@ -3128,8 +3199,13 @@
    "selected": false,
    "id": "call:NBA:401909090::TOTAL:over",
    "captured_at": "2026-10-21T00:08:29.513785+00:00",
-   "result": "Pending",
-   "version": "nba-scoring-research-1.0"
+   "result": "Loss",
+   "version": "nba-scoring-research-1.0",
+   "units": -1,
+   "actual": null,
+   "final_home": 104.0,
+   "final_away": 116.0,
+   "graded_at": "2026-10-21T05:04:02.306881+00:00"
   },
   {
    "kind": "call",
@@ -3150,8 +3226,13 @@
    "selected": true,
    "id": "call:NBA:401909090::ML:home",
    "captured_at": "2026-10-21T00:08:29.513785+00:00",
-   "result": "Pending",
-   "version": "nba-scoring-research-1.0"
+   "result": "Loss",
+   "version": "nba-scoring-research-1.0",
+   "units": -1,
+   "actual": null,
+   "final_home": 104.0,
+   "final_away": 116.0,
+   "graded_at": "2026-10-21T05:04:02.306881+00:00"
   },
   {
    "kind": "call",
@@ -3172,8 +3253,13 @@
    "selected": true,
    "id": "call:NBA:401909090::ATS:home",
    "captured_at": "2026-10-21T00:08:29.513785+00:00",
-   "result": "Pending",
-   "version": "nba-scoring-research-1.0"
+   "result": "Loss",
+   "version": "nba-scoring-research-1.0",
+   "units": -1,
+   "actual": null,
+   "final_home": 104.0,
+   "final_away": 116.0,
+   "graded_at": "2026-10-21T05:04:02.306881+00:00"
   },
   {
    "kind": "call",
@@ -3194,8 +3280,13 @@
    "selected": false,
    "id": "call:NBA:401909090::ATS:away",
    "captured_at": "2026-10-21T00:08:29.513785+00:00",
-   "result": "Pending",
-   "version": "nba-scoring-research-1.0"
+   "result": "Win",
+   "version": "nba-scoring-research-1.0",
+   "units": 0.925926,
+   "actual": null,
+   "final_home": 104.0,
+   "final_away": 116.0,
+   "graded_at": "2026-10-21T05:04:02.306881+00:00"
   }
  ]
 }
