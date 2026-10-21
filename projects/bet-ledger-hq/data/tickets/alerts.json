@@ -1,29 +1,61 @@
 {
   "schema": 1,
-  "checked_at": "2026-10-21T07:30:48.059Z",
+  "checked_at": "2026-10-21T12:11:54.610Z",
   "coverage": {
-    "mlb": {
+    "nhl": {
       "status": "available",
-      "reports": 1,
-      "checked_at": "2026-10-21T07:30:48.059Z"
+      "reports": 39,
+      "checked_at": "2026-10-21T12:11:54.610Z"
     },
     "ncaaf": {
       "status": "empty",
       "reports": 0,
-      "checked_at": "2026-10-21T07:30:48.059Z"
-    },
-    "nhl": {
-      "status": "available",
-      "reports": 39,
-      "checked_at": "2026-10-21T07:30:48.059Z"
+      "checked_at": "2026-10-21T12:11:54.610Z"
     },
     "nfl": {
       "status": "available",
       "reports": 562,
-      "checked_at": "2026-10-21T07:30:48.059Z"
+      "checked_at": "2026-10-21T12:11:54.610Z"
+    },
+    "mlb": {
+      "status": "available",
+      "reports": 1,
+      "checked_at": "2026-10-21T12:11:54.610Z"
     }
   },
   "events": [
+    {
+      "id": "odds|wnba|401918307|2026-10-22T00:00Z|TOTAL||over|DraftKings|2026-10-21T12:11:54.610Z",
+      "kind": "odds",
+      "observed_at": "2026-10-21T12:11:54.610Z",
+      "sport": "wnba",
+      "event": "GS @ ATL",
+      "start": "2026-10-22T00:00Z",
+      "pick": "Over 151.5",
+      "title": "Published odds changed",
+      "before": "-108 · line 151.5",
+      "after": "-112 · line 151.5",
+      "book": "DraftKings",
+      "source_quote_at": "2026-10-21T12:09:40+00:00",
+      "source": "Existing WNBA board",
+      "note": "Your ticket keeps its original odds. Recheck the live book before placing a new wager."
+    },
+    {
+      "id": "price-limit|wnba|401918307|2026-10-22T00:00Z|TOTAL||over|DraftKings|2026-10-21T12:11:54.610Z",
+      "kind": "price-limit",
+      "observed_at": "2026-10-21T12:11:54.610Z",
+      "sport": "wnba",
+      "event": "GS @ ATL",
+      "start": "2026-10-22T00:00Z",
+      "pick": "Over 151.5",
+      "title": "Price below published minimum",
+      "before": "-108",
+      "after": "-112",
+      "book": "DraftKings",
+      "source_quote_at": "2026-10-21T12:09:40+00:00",
+      "source": "Published price policy",
+      "note": "Minimum -108 at unchanged line 151.5. Uses the saved forecast, not a new model approval. Confirm current odds and qualification; scheduled observations can miss intervening moves."
+    },
     {
       "id": "injury|nhl:20:Anthony Cirelli|2026-10-21T07:30:48.059Z",
       "kind": "injury",
@@ -2808,34 +2840,6 @@
       "title": "Player availability changed",
       "event": "San Francisco 49ers",
       "pick": "Naquan Jones",
-      "before": "Out · Coach's Decision",
-      "after": "Active",
-      "source_quote_at": "2026-10-20T16:04Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:25:Enrique Cruz Jr.|2026-10-20T16:52:02.069Z",
-      "kind": "injury",
-      "observed_at": "2026-10-20T16:52:02.069Z",
-      "sport": "nfl",
-      "title": "Player availability changed",
-      "event": "San Francisco 49ers",
-      "pick": "Enrique Cruz Jr.",
-      "before": "Out · Coach's Decision",
-      "after": "Active",
-      "source_quote_at": "2026-10-20T16:04Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:25:Kurtis Rourke|2026-10-20T16:52:02.069Z",
-      "kind": "injury",
-      "observed_at": "2026-10-20T16:52:02.069Z",
-      "sport": "nfl",
-      "title": "Player availability changed",
-      "event": "San Francisco 49ers",
-      "pick": "Kurtis Rourke",
       "before": "Out · Coach's Decision",
       "after": "Active",
       "source_quote_at": "2026-10-20T16:04Z",
