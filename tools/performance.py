@@ -10,7 +10,7 @@ from collections import Counter
 from datetime import datetime, timezone
 from pathlib import Path
 
-LEAGUES = {'nfl':'NFL', 'ncaaf':'NCAAF', 'mlb':'MLB', 'nhl':'NHL', 'wnba':'WNBA'}
+LEAGUES = {'nba':'NBA', 'nfl':'NFL', 'ncaaf':'NCAAF', 'mlb':'MLB', 'nhl':'NHL', 'wnba':'WNBA'}
 
 def number(value):
     if value is None or isinstance(value, bool): return None

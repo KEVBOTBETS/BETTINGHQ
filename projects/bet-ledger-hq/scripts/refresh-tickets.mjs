@@ -71,7 +71,7 @@ for(const e of Object.values(state.entries)){
   const candidates=quotes.filter(q=>T.selectionKey(q)===T.selectionKey(e.pick)&&q.book===e.pick.book).sort((a,b)=>Date.parse(b.quote)-Date.parse(a.quote));
   const close=T.closing(e.pick,candidates[0]);if(close&&(!e.closing||Date.parse(close.observed_at)>Date.parse(e.closing.observed_at)))e.closing=close;
 }
-const paths={nhl:'hockey/nhl',nfl:'football/nfl',props:'football/nfl',ncaaf:'football/college-football',wnba:'basketball/wnba'};
+const paths={nba:'basketball/nba',nhl:'hockey/nhl',nfl:'football/nfl',props:'football/nfl',ncaaf:'football/college-football',wnba:'basketball/wnba'};
 const tasks=new Map();
 for(const entry of Object.values(state.entries)){
   if(!registry.some(s=>s.active&&s.key===entry.pick.key))continue;
@@ -83,7 +83,7 @@ for(const entry of Object.values(state.entries)){
 // minute earlier, so grading from it costs no extra call -- and ESPN's per-game summary endpoint
 // answers GitHub's runners with HTTP 403, which left every football/WNBA pick Pending for good.
 // The summary is still used for props (player stats) and for any game a board did not publish.
-const scoreboards={nhl:'nhl',nfl:'nfl',ncaaf:'college-football',wnba:'wnba'},boardGames={};
+const scoreboards={nba:'nba',nhl:'nhl',nfl:'nfl',ncaaf:'college-football',wnba:'wnba'},boardGames={};
 await Promise.all(registry.filter(s=>s.active&&scoreboards[s.key]).map(async sport=>{try{
   const rows=await get(new URL(sport.path+'data/games.json',base)),map=new Map();
   for(const g of Array.isArray(rows)?rows:[]){const id=String(g.game_id??'');if(!id)continue;

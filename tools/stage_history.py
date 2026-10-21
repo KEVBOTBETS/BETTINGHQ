@@ -17,6 +17,8 @@ patterns=[
     'projects/props-edge/state/*.json',
     'projects/nhl-edge-lab/state/*.json',
     'projects/nhl-edge-lab/site/data/*.json',
+    'projects/nba-edge-lab/state/*.json',
+    'projects/nba-edge-lab/site/data/*.json',
     'projects/wnba-edge-lab/state/*.json',
     'projects/wnba-edge-lab/site/data/*.json',
     'projects/ladderbet/state/model_accuracy.json',
@@ -30,7 +32,7 @@ for repo in ['nfl-edge-lab','ncaaf-edge-lab']:
         'lines.json','context_cache.json','quote_cache.json','rank_history.json',
         'shadow.json','predictions.json','forecasts.json','early_plays.json','qb_quality.json','public_odds_health.json']]
 files=sorted({str(p.relative_to(ROOT)) for pat in patterns for p in ROOT.glob(pat)
-              if p.is_file() and p.name not in {'ledger.json','summary.json','ladder.json','multisport_cache.json','public_research_cache.json'}})
+              if p.is_file() and not (p.parent==ROOT/'projects/nba-edge-lab/state' and p.name=='sources.json') and p.name not in {'ledger.json','summary.json','ladder.json','multisport_cache.json','public_research_cache.json'}})
 if files: subprocess.run(['git','add','--',*files],cwd=ROOT,check=True)
 
 # Include the losslessly migrated legacy archive deletion in the data commit.

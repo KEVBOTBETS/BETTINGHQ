@@ -3,7 +3,7 @@
  'use strict';
  const contract=r=>JSON.stringify([r.key,String(r.eventId),r.start,r.market,r.playerId||r.player||'',r.side||r.pick,V.number(r.line)]);
  const identity=r=>contract(r)+'|'+String(r.book).trim().toLowerCase();
- function valid(r,now){return !!r.eventId&&!!r.book&&!/unspecified|unknown|model/i.test(r.book)&&!r.referenceOnly&&!r.reference_only&&r.price_source!=='model'&&(!r.quoteStatus||r.quoteStatus==='observed')&&(!r.quote_status||r.quote_status==='observed')&&V.decimal(r.price)!==null&&V.fresh(r.quote,now,r.key==='nhl'?1.5:4)&&V.instant(r.quote)<V.instant(r.start)&&V.instant(r.start)>now;}
+ function valid(r,now){return !!r.eventId&&!!r.book&&!/unspecified|unknown|model/i.test(r.book)&&!r.referenceOnly&&!r.reference_only&&r.price_source!=='model'&&(!r.quoteStatus||r.quoteStatus==='observed')&&(!r.quote_status||r.quote_status==='observed')&&V.decimal(r.price)!==null&&V.fresh(r.quote,now,['nhl','nba'].includes(r.key)?1.5:4)&&V.instant(r.quote)<V.instant(r.start)&&V.instant(r.start)>now;}
  function compare(pick,quotes,now=Date.now()){
   const byBook=new Map();for(const q of quotes||[]){if(contract(q)!==contract(pick)||!valid(q,now))continue;const k=String(q.book).trim().toLowerCase(),old=byBook.get(k);if(!old||Date.parse(q.quote)>Date.parse(old.quote))byBook.set(k,q);}
   const rows=[...byBook.values()].sort((a,b)=>V.decimal(b.price)-V.decimal(a.price));return {rows,best:rows[0]||null,coverage:rows.length};

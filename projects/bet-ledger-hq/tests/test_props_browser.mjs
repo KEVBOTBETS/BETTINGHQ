@@ -1,3 +1,5 @@
+import {gzipSync} from 'node:zlib';
+import {createHash} from 'node:crypto';
 /* Props Edge: parlay lab, cheat sheet, board, ledger and the card studio.
    The model files are stubbed so the page is checked, not today's real slate. */
 import {chromium} from 'playwright';
@@ -103,7 +105,7 @@ try {
     await page.route('**/nfl-edge-lab/data/meta.json*',route=>route.fulfill({contentType:'application/json',body:JSON.stringify({season:2026,current_week:{season_type:2,week:4},generated_at:new Date().toISOString()})}));
     const archive={schema:1,generated_at:'2026-12-21T12:00:00Z',records:parlays.tickets.map(t=>({...t,captured_at:'2026-12-19T12:00:00Z',result:'Pending'}))};
     let finalResults=[];
-    await page.route('**/data/parlay-history.json*',route=>route.fulfill({contentType:'application/json',body:JSON.stringify(archive)}));
+    await page.route('**/data/parlay-history.json*',route=>route.fulfill({contentType:'application/json',body:JSON.stringify((()=>{const raw=Buffer.from(JSON.stringify(archive));return {encoding:'gzip-base64',sha256:createHash('sha256').update(raw).digest('hex'),uncompressed_bytes:raw.length,data:gzipSync(raw).toString('base64')};})())}));
     await page.route('**/data/parlay-results.json*',route=>route.fulfill({contentType:'application/json',body:JSON.stringify({schema:1,records:finalResults})}));
     await page.goto(origin + '/props-edge/');
 

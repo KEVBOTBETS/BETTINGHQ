@@ -7,7 +7,7 @@ import os
 import re
 
 SPORTS = {'bet-ledger-hq': 'hq', 'nfl-edge-lab': 'nfl', 'ncaaf-edge-lab': 'ncaaf',
-          'mlb-edge': 'mlb', 'wnba-edge-lab': 'wnba', 'nhl-edge-lab': 'nhl',
+          'nba-edge-lab': 'nba', 'mlb-edge': 'mlb', 'wnba-edge-lab': 'wnba', 'nhl-edge-lab': 'nhl',
           'props-edge': 'props', 'ladderbet': 'ladder'}
 
 def apply(root):
@@ -42,7 +42,7 @@ def apply(root):
             if sport != 'hq':
                 home = os.path.relpath(root/'bet-ledger-hq/index.html', page.parent).replace(os.sep, '/')
                 desk = os.path.relpath(root/'bet-ledger-hq/sports-desk.html', page.parent).replace(os.sep, '/')
-                league = sport if sport in ('nfl','ncaaf','mlb','nhl','wnba') else 'nfl'
+                league = sport if sport in ('nfl','ncaaf','mlb','nhl','wnba','nba') else 'nfl'
                 parlay_link=f'<a href="{home}#ncaaf-parlays" target="_top">GAME PARLAYS ↗</a>' if sport=='ncaaf' else ''
                 nav = f'<nav class="kb-network" aria-label="Matchday network"><a href="{home}#today" target="_top">KB / {sport.upper()} LAB</a><a href="{desk}?sport={league}">SPORTS DESK ↗</a><a href="{home}#accuracy" target="_top">PERFORMANCE ↗</a>{parlay_link}</nav>'
                 source = re.sub(r'(<body\b[^>]*>)', lambda m:m[0]+nav, source, count=1, flags=re.I)

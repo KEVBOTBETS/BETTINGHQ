@@ -1,7 +1,7 @@
 (() => {
   'use strict';
   const C=window.Moneyline,$=s=>document.querySelector(s),KEY='kevbot-moneyline-v1';
-  const LABEL={nhl:'NHL',nfl:'NFL',ncaaf:'College football',mlb:'MLB'};
+  const LABEL={nba:'NBA',nhl:'NHL',nfl:'NFL',ncaaf:'College football',mlb:'MLB'};
   const esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
   const time=v=>new Intl.DateTimeFormat('en-CA',{timeZone:'America/Toronto',month:'short',day:'numeric',hour:'numeric',minute:'2-digit'}).format(new Date(v));
   let saved={},bundles={},loading=false,request=0,pendingSport=null;
@@ -43,7 +43,7 @@
   async function refresh(){
     const token=++request,date=$('#date').value;if(!date)return;
     loading=true;bundles={};$('#refresh').disabled=true;$('#status').textContent='Checking published forecasts…';render();
-    const paths={nhl:{meta:'../nhl-edge-lab/data/meta.json',games:'../nhl-edge-lab/data/games.json'},mlb:{slate:'../mlb-edge/data/slate-'+date+'.json'},nfl:{meta:'../nfl-edge-lab/data/meta.json',games:'../nfl-edge-lab/data/games.json',details:'../nfl-edge-lab/data/games_detail.json'},ncaaf:{meta:'../ncaaf-edge-lab/data/meta.json',games:'../ncaaf-edge-lab/data/games.json'}};
+    const paths={nba:{meta:'../nba-edge-lab/data/meta.json',games:'../nba-edge-lab/data/games.json'},nhl:{meta:'../nhl-edge-lab/data/meta.json',games:'../nhl-edge-lab/data/games.json'},mlb:{slate:'../mlb-edge/data/slate-'+date+'.json'},nfl:{meta:'../nfl-edge-lab/data/meta.json',games:'../nfl-edge-lab/data/games.json',details:'../nfl-edge-lab/data/games_detail.json'},ncaaf:{meta:'../ncaaf-edge-lab/data/meta.json',games:'../ncaaf-edge-lab/data/games.json'}};
     await Promise.all(Object.entries(paths).map(async([sport,files])=>{try{const entries=await Promise.all(Object.entries(files).map(async([key,url])=>[key,await get(url)]));if(token===request)bundles[sport]=Object.fromEntries(entries);}catch(_){if(token===request)bundles[sport]={error:true};}}));
     if(token!==request)return;
     loading=false;$('#refresh').disabled=false;$('#status').textContent='Forecasts checked '+time(new Date().toISOString())+'. Only fresh pregame picks can be selected.';render();
@@ -86,8 +86,8 @@
   $('#next-nfl').addEventListener('click',()=>openNextDay('nfl'));
   $('#date').value=C.day(Date.now());$('#date').addEventListener('change',()=>{pendingSport=null;refresh();});$('#sport').addEventListener('change',()=>{
     const sport=$('#sport').value;
-    pendingSport=loading&&['nfl','ncaaf','nhl'].includes(sport)?sport:null;
-    if(!loading&&['nfl','ncaaf','nhl'].includes(sport)&&!visible().length&&nextDay(sport))openNextDay(sport);
+    pendingSport=loading&&['nfl','ncaaf','nhl','nba'].includes(sport)?sport:null;
+    if(!loading&&['nfl','ncaaf','nhl','nba'].includes(sport)&&!visible().length&&nextDay(sport))openNextDay(sport);
     else render();
   });$('#refresh').addEventListener('click',refresh);$('#print').addEventListener('click',()=>window.print());
   window.addEventListener('message',e=>{if(e.origin===location.origin&&e.data?.type==='kevbotbets:activate')refresh();});

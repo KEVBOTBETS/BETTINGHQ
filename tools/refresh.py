@@ -9,9 +9,9 @@ from model_refresh import refresh_project
 
 ROOT=Path(__file__).resolve().parents[1]
 parser=argparse.ArgumentParser()
-parser.add_argument('--sport',choices=['all','football','mlb','wnba','nhl','props','ladder','archive'],default='all')
+parser.add_argument('--sport',choices=['all','nba','evening','football','mlb','wnba','nhl','props','ladder','archive'],default='all')
 args=parser.parse_args()
-selected={'all':['nfl-edge-lab','ncaaf-edge-lab','mlb-edge','props-edge','wnba-edge-lab','nhl-edge-lab','ladderbet'],'football':['nfl-edge-lab','ncaaf-edge-lab','props-edge'],'mlb':['mlb-edge'],'nhl':['nhl-edge-lab'],'wnba':['wnba-edge-lab'],'props':['props-edge'],'ladder':['ladderbet'],'archive':[]}[args.sport]
+selected={'nba':['nba-edge-lab'],'evening':['nhl-edge-lab','nba-edge-lab'],'all':['nba-edge-lab','nfl-edge-lab','ncaaf-edge-lab','mlb-edge','props-edge','wnba-edge-lab','nhl-edge-lab','ladderbet'],'football':['nfl-edge-lab','ncaaf-edge-lab','props-edge'],'mlb':['mlb-edge'],'nhl':['nhl-edge-lab'],'wnba':['wnba-edge-lab'],'props':['props-edge'],'ladder':['ladderbet'],'archive':[]}[args.sport]
 for repo in selected:
     if repo=='nhl-edge-lab':
         try:refresh_project(ROOT/'projects'/repo,[sys.executable,'-m','pipeline.public_research'],timeout=600)
@@ -22,12 +22,12 @@ for repo in selected:
     except (subprocess.CalledProcessError,subprocess.TimeoutExpired) as exc:
         # Stale feeds retain their original timestamps and cannot qualify as new picks.
         print(f'::warning::{repo} refresh failed ({type(exc).__name__}); inspect freshness before using its board.')
-if args.sport in ['all','football','nhl','props']:
+if args.sport in ['all','football','nhl','evening','props']:
     try:
         subprocess.run([sys.executable,'-m','pipeline.multisport'],cwd=ROOT/'projects/props-edge',check=True,timeout=600)
     except (subprocess.CalledProcessError,subprocess.TimeoutExpired):
         print('::warning::Multisport props refresh failed; prior quote timestamps retained.')
-if args.sport in ['all','football','nhl','props']:
+if args.sport in ['all','football','nhl','evening','props']:
     subprocess.run([sys.executable,'tools/nhl_tracking.py','--capture'],cwd=ROOT,check=True,timeout=90)
 subprocess.run([sys.executable,'tools/spread_tracking.py'],cwd=ROOT,check=True,timeout=90)
 subprocess.run([sys.executable,'tools/newsletters.py'],cwd=ROOT,check=True,timeout=90)

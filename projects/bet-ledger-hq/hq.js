@@ -33,6 +33,7 @@
     { app: "ncaaf-lab", label: "NCAAF Lab", hue: "var(--b2)" },
     { app: "nfl-lab", label: "NFL Lab", hue: "var(--b3)" },
     { app: "nhl-lab", label: "NHL Ice Lab", hue: "#55d9ee" },
+    { app: "nba-lab", label: "NBA Lab", hue: "#ebad59" },
     { app: "wnba-lab", label: "WNBA Lab", hue: "#b58aff" },
     { app: "props", label: "Props", hue: "var(--b4)" },
     { app: "ladder", label: "Ladder", hue: "var(--b5)" }

@@ -23,6 +23,7 @@ run('ncaaf-edge-lab',[sys.executable,'-m','unittest','tests.test_accuracy','test
 run('props-edge',[sys.executable,'-m','unittest','discover','-s','tests'])
 run('nhl-edge-lab',[sys.executable,'-m','unittest','discover','-s','tests'])
 run('wnba-edge-lab',[sys.executable,'-m','unittest','discover','-s','tests'])
+run('nba-edge-lab',[sys.executable,'-m','unittest','discover','-s','tests'])
 run('ladderbet',[sys.executable,'-m','pytest','-q','tests'])
 for repo in ['props-edge','wnba-edge-lab','nhl-edge-lab','ladderbet']:
     for test in sorted((ROOT/'projects'/repo/'tests').glob('test_*.mjs')):
@@ -40,6 +41,7 @@ for file in ['test_parlay_removals.mjs','test_game_parlays.mjs','test_elite_desk
 run('',[sys.executable,'tools/build_site.py'])
 run('',[sys.executable,'-m','unittest','discover','-s','tests'])
 if args.browser:
+    run('bet-ledger-hq',['node','tests/test_nba_browser.mjs'])
     run('bet-ledger-hq',['node','tests/test_ten_upgrades_browser.mjs'])
     run('bet-ledger-hq',['node','tests/test_readable_browser.mjs'])
     run('bet-ledger-hq',['node','tests/test_game_parlays_browser.mjs'])

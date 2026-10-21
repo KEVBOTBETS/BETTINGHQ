@@ -15,7 +15,7 @@
     "ncaaf-newsletter":{title:"NCAAF newsletter",description:"Weekly college football stories, matchups and playoff context.",url:"newsletter.html?sport=ncaaf"},
     "nfl-newsletter":{title:"NFL newsletter",description:"Weekly NFL stories, matchups and playoff context.",url:"newsletter.html?sport=nfl"},
     desk:{title:"Sports Desk",description:"Seven leagues. Scores, standings, headlines and matchup research.",url:"sports-desk.html"},
-    nba:{title:"NBA Courtside",description:"NBA scores and team research. Model qualification awaits validation.",url:"sports-desk.html?sport=nba"},
+    nba:{title:"NBA Courtside",description:"NBA schedules, standings, statistics and observed odds. Research forecasts.",url:"../nba-edge-lab/"},
     ncaab:{title:"NCAAB Courtside",description:"College hoops scores and team research. Model qualification awaits validation.",url:"sports-desk.html?sport=ncaab"},
     "spread-accuracy":{title:"Spread accuracy",description:"Whole-sheet spread forecasts, cover records and quoted-price returns.",url:"spread-accuracy.html"},
     "nhl-props":{title:"NHL Props",description:"NHL player statistics and observed prop prices.",url:"../props-edge/multisport.html?sport=NHL"},

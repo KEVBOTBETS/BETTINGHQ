@@ -33,13 +33,13 @@
  }
  function preferences(raw){
   const r=raw&&typeof raw==='object'?raw:{};
-  return {sport:['all','nfl','ncaaf','nhl'].includes(r.sport)?r.sport:'all',period:['week','today'].includes(r.period)?r.period:'week',query:typeof r.query==='string'?r.query.slice(0,80):'',view:['all','priced','confirm'].includes(r.view)?r.view:'all',order:r.order==='coverage'?'coverage':'time',compared:Array.isArray(r.compared)?[...new Set(r.compared.filter(x=>typeof x==='string'&&x.length<120))].slice(0,3):[]};
+  return {sport:['all','nfl','ncaaf','nhl','nba'].includes(r.sport)?r.sport:'all',period:['week','today'].includes(r.period)?r.period:'week',query:typeof r.query==='string'?r.query.slice(0,80):'',view:['all','priced','confirm'].includes(r.view)?r.view:'all',order:r.order==='coverage'?'coverage':'time',compared:Array.isArray(r.compared)?[...new Set(r.compared.filter(x=>typeof x==='string'&&x.length<120))].slice(0,3):[]};
  }
  function review(rows,data,{now=Date.now(),failed=false}={}){
   return rows.map(r=>{const g=data?.games?.find(g=>g.id===r.game),base={id:r.id,pick:r.pick};
    if(failed)return {...base,state:'unavailable',message:'Publication reload failed; reconfirm this selection.'};
    if(!(at(r.start)>now))return {...base,state:'started',message:'Game has started; remove this pregame selection.'};
-   if(!Number.isFinite(at(r.observed_at))||at(r.observed_at)>now||now-at(r.observed_at)>(r.sport==='nhl'?90:180)*60000)return {...base,state:'expired',message:'Saved quote expired; remove and reconfirm.'};
+   if(!Number.isFinite(at(r.observed_at))||at(r.observed_at)>now||now-at(r.observed_at)>(['nhl','nba'].includes(r.sport)?90:180)*60000)return {...base,state:'expired',message:'Saved quote expired; remove and reconfirm.'};
    if(r.origin==='User-confirmed sportsbook offer')return {...base,state:'manual',message:'User-confirmed price retained; not independently verified by the publication.'};
    if(!g)return {...base,state:'unavailable',message:'Game missing from the current publication; reconfirm.'};
    const offers=prices(g,r,now).filter(q=>book(q.book)===book(r.book)),q=offers[0];

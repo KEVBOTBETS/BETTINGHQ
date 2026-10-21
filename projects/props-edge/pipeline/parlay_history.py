@@ -3,10 +3,28 @@ from copy import deepcopy
 from datetime import datetime, timezone
 import hashlib
 import json
+import base64
+import gzip
 from .grade import identity, instant
 from .parlay_audit import audit
 
 FINALS = {'Win', 'Loss', 'Push', 'Void'}
+
+
+def decode_archive(value):
+    """Read legacy JSON and the lossless, checksummed compressed envelope."""
+    if isinstance(value,dict) and value.get('encoding')=='gzip-base64':
+        raw=gzip.decompress(base64.b64decode(value['data'],validate=True))
+        if hashlib.sha256(raw).hexdigest()!=value.get('sha256'):raise ValueError('Parlay archive checksum mismatch')
+        return json.loads(raw)
+    return value
+
+def encode_archive(value,threshold=8_000_000):
+    raw=json.dumps(value,separators=(',',':'),allow_nan=False).encode()
+    if len(raw)>threshold:
+        value={'schema':2,'encoding':'gzip-base64','sha256':hashlib.sha256(raw).hexdigest(),'uncompressed_bytes':len(raw),'data':base64.b64encode(gzip.compress(raw,compresslevel=6,mtime=0)).decode('ascii')}
+        return json.dumps(value,separators=(',',':'))+'\n'
+    return raw.decode()+'\n'
 
 def outcome(legs):
     results=[leg.get('result','Pending') for leg in legs]
@@ -22,7 +40,7 @@ def update(root, tickets, now=None):
     now=now or datetime.now(timezone.utc);stamp=now.isoformat()
     path=root/'state/parlay_history.json'
     # Corruption must fail the isolated refresh instead of erasing history.
-    state=json.loads(path.read_text()) if path.exists() else {'schema':1,'records':{}}
+    state=decode_archive(json.loads(path.read_text())) if path.exists() else {'schema':1,'records':{}}
     if state.get('schema')!=1 or not isinstance(state.get('records'),dict):
         raise ValueError('Invalid parlay history; original archive retained')
     for ticket in tickets:
@@ -64,5 +82,5 @@ def update(root, tickets, now=None):
       'note':'Unique published leg combinations frozen before their first game. Overlapping tickets are not independent trials. Research outcomes are not wager ROI. Push/void legs require book-rule review. Tracking starts with this release; old tickets are not reconstructed.'}
     for target,data in [(path,state),(root/'site/data/parlay-audit.json',{'schema':1,'generated_at':stamp,**public['audit']}),(root/'site/data/parlay-history.json',public),(root/'site/data/parlay-results.json',{'schema':1,'generated_at':stamp,'records':compact})]:
         target.parent.mkdir(parents=True,exist_ok=True);temp=target.with_suffix('.tmp')
-        temp.write_text(json.dumps(data,separators=(',',':'),allow_nan=False)+'\n');temp.replace(target)
+        temp.write_text(encode_archive(data) if target in (path,root/'site/data/parlay-history.json') else json.dumps(data,separators=(',',':'),allow_nan=False)+'\n');temp.replace(target)
     return public['summary']

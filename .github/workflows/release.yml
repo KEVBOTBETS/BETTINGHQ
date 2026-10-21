@@ -16,7 +16,7 @@ on:
       sport:
         description: Models to refresh
         type: choice
-        options: [all, football, mlb, wnba, nhl, props, ladder, archive]
+        options: [all, nba, evening, football, mlb, wnba, nhl, props, ladder, archive]
         default: all
   schedule:
     - cron: '23 */3 * * *'
@@ -101,6 +101,13 @@ jobs:
           path: projects/nhl-edge-lab/state/public_research_cache.json
           key: nhl-public-downloads-${{ runner.os }}-${{ github.run_id }}
           restore-keys: nhl-public-downloads-${{ runner.os }}-
+      - name: Restore bounded public NBA source cache
+        if: github.event_name != 'pull_request'
+        uses: actions/cache/restore@v6
+        with:
+          path: projects/nba-edge-lab/state/sources.json
+          key: nba-public-downloads-${{ runner.os }}-${{ github.run_id }}
+          restore-keys: nba-public-downloads-${{ runner.os }}-
       - name: Refresh real data
         if: github.event_name != 'pull_request'
         env:
@@ -114,7 +121,7 @@ jobs:
         run: |
           sport="$REQUESTED_SPORT"
           if [ "$EVENT_SCHEDULE" = '53 12-23 * * 0' ] || [ "$EVENT_SCHEDULE" = '53 15-23 * * 1,4,5,6' ]; then sport=football; fi
-          if [ "$EVENT_SCHEDULE" = '7,37 * * * *' ]; then sport=nhl; fi
+          if [ "$EVENT_SCHEDULE" = '7,37 * * * *' ]; then sport=evening; fi
           python tools/refresh.py --sport "$sport"
           node projects/mlb-edge/tests/test_sim.mjs projects/mlb-edge/docs/data
           python -m unittest discover -s tests
@@ -124,6 +131,12 @@ jobs:
         with:
           path: projects/nhl-edge-lab/state/public_research_cache.json
           key: nhl-public-downloads-${{ runner.os }}-${{ github.run_id }}
+      - name: Save bounded public NBA source cache
+        if: github.event_name != 'pull_request'
+        uses: actions/cache/save@v6
+        with:
+          path: projects/nba-edge-lab/state/sources.json
+          key: nba-public-downloads-${{ runner.os }}-${{ github.run_id }}
       - name: Save public model history
         id: save
         if: github.event_name != 'pull_request'

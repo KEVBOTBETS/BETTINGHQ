@@ -8,7 +8,7 @@ ROOT=Path(__file__).resolve().parents[1]
 class PortableRelease(unittest.TestCase):
     def test_only_recovered_sports_are_active(self):
         registry=json.loads((ROOT/'projects/bet-ledger-hq/sports.json').read_text())
-        self.assertEqual({r['key'] for r in registry if r['active']},{'nfl','ncaaf','mlb','wnba','nhl','props','ladder'})
+        self.assertEqual({r['key'] for r in registry if r['active']},{'nfl','ncaaf','mlb','wnba','nhl','nba','props','ladder'})
 
     def test_public_site_has_no_old_account_dependency(self):
         for p in (ROOT/'_site').rglob('*'):

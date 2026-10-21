@@ -98,13 +98,17 @@
     "key": "nba",
     "label": "NBA",
     "app": "nba-lab",
-    "path": null,
-    "active": false,
-    "feeds": {},
+    "path": "../nba-edge-lab/",
+    "active": true,
+    "feeds": {
+      "meta": "meta",
+      "board": "board",
+      "accuracy": "accuracy"
+    },
     "research_path": "sports-desk.html?sport=nba",
     "capabilities": {
       "research": true,
-      "model": false,
+      "model": true,
       "ticket_qualification": false
     }
   },

@@ -7,7 +7,7 @@ try:
 except ImportError:
  from research.common import read,instant,number,decimal
 ROOT=Path(__file__).resolve().parents[1]
-SOURCES={'nfl':('nfl-edge-lab','site/data'),'ncaaf':('ncaaf-edge-lab','site/data'),'nhl':('nhl-edge-lab','site/data'),'wnba':('wnba-edge-lab','site/data'),'mlb':('mlb-edge','docs/data')}
+SOURCES={'nba':('nba-edge-lab','site/data'),'nfl':('nfl-edge-lab','site/data'),'ncaaf':('ncaaf-edge-lab','site/data'),'nhl':('nhl-edge-lab','site/data'),'wnba':('wnba-edge-lab','site/data'),'mlb':('mlb-edge','docs/data')}
 
 def label(g,side):
  r=g.get(side)
@@ -43,7 +43,7 @@ def build(root=ROOT,now=None,staged=None):
      r['pick']=r.get('label') or r.get('selection')
      r['odds_observed_at']=r.get('odds_observed_at') or (g.get('odds') or {}).get('fetched_at')
     price=number(r.get('price_american',r.get('price')));book=str(r.get('book') or '').strip();stamp=r.get('odds_observed_at') or r.get('observed_at') or r.get('odds_fetched_at') or r.get('updated_at')
-    quote_fresh=age(stamp,now,1.5 if sport=='nhl' else 4)
+    quote_fresh=age(stamp,now,1.5 if sport in ('nhl','nba') else 4)
     valid=decimal(price) is not None and book and r.get('odds_verified') is not False and r.get('price_source')!='model' and not r.get('reference_only') and r.get('quote_status') in (None,'observed')
     passed=r.get('value_policy',{}).get('passes',True) and fresh and quote_fresh and valid and not r.get('held') and not r.get('filtered') and not r.get('validation_policy',{}).get('paused') and (number(r.get('stake')) or 0)>0
     selection_line=number(r.get('line'))
@@ -67,7 +67,7 @@ def build(root=ROOT,now=None,staged=None):
     if ml:p=ml['probability'] if ml['side']=='home' else 1-ml['probability']
    margin=number(projection.get('mu',projection.get('margin')))
    score_projection=None
-   if sport in ('nfl','ncaaf') and fresh and not g.get('source_stale') and projection.get('ratings_known') is True:
+   if sport in ('nfl','ncaaf','nba') and fresh and not g.get('source_stale') and projection.get('ratings_known') is True:
     ph,pa,pt=[number(projection.get(k)) for k in ('proj_home_pts','proj_away_pts','proj_total')]
     if ph is not None and pa is not None and pt is not None and min(ph,pa,pt)>=0:score_projection={'home':ph,'away':pa,'total':pt,'basis':'Published source model scores; not bookmaker totals','observed_at':publication}
    ready=p is not None and fresh and not g.get('source_stale')

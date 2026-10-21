@@ -35,7 +35,17 @@
  }
  async function refresh(){
    if(loading)return;loading=true;render();
-   const get=file=>fetch('data/'+file+'?v='+Date.now(),{cache:'no-store'}).then(r=>{if(!r.ok)throw Error('Unavailable');return r.json();});
+   const get=async file=>{
+     const r=await fetch('data/'+file+'?v='+Date.now(),{cache:'no-store'});if(!r.ok)throw Error('Unavailable');let value=await r.json();
+     if(value.encoding==='gzip-base64'){
+       const bytes=Uint8Array.from(atob(value.data),c=>c.charCodeAt(0));
+       const raw=await new Response(new Blob([bytes]).stream().pipeThrough(new DecompressionStream('gzip'))).arrayBuffer();
+       const hash=Array.from(new Uint8Array(await crypto.subtle.digest('SHA-256',raw)),b=>b.toString(16).padStart(2,'0')).join('');
+       if(hash!==value.sha256||raw.byteLength!==value.uncompressed_bytes)throw Error('History integrity check failed');
+       value=JSON.parse(new TextDecoder().decode(raw));
+     }
+     return value;
+   };
    const fetched=await Promise.allSettled([get('parlay-history.json'),get('parlay-results.json'),get('parlay-audit.json')]);
    failed=fetched.slice(0,2).some(r=>r.status==='rejected');
    if(fetched[2].status==='fulfilled')audit=fetched[2].value;

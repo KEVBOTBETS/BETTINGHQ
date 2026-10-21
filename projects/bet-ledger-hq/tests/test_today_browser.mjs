@@ -4,11 +4,11 @@ import {readFile,mkdir} from "node:fs/promises";
 import path from "node:path";
 import assert from "node:assert/strict";
 // Test the same staged pages users receive, including the shared theme.
-const root=path.resolve(process.cwd(),"../../_site/bet-ledger-hq");
+const root=path.resolve(process.cwd(),"../../_site");
 await mkdir("test-results",{recursive:true});
 const server=createServer(async(req,res)=>{
-  const pathname=decodeURIComponent(new URL(req.url,"http://localhost").pathname),rel=pathname.replace(/^\/bet-ledger-hq\//,"");
-  const file=path.resolve(root,rel===""?"index.html":rel);
+  const pathname=decodeURIComponent(new URL(req.url,"http://localhost").pathname),rel=pathname.slice(1);
+  const file=path.resolve(root,rel+(pathname.endsWith("/")?"index.html":""));
   if(!file.startsWith(root+path.sep)){res.writeHead(403);res.end();return;}
   try{const data=await readFile(file);res.setHeader("Content-Type",file.endsWith(".woff")?"font/woff":file.endsWith(".svg")?"image/svg+xml":file.endsWith(".css")?"text/css":file.endsWith(".js")?"text/javascript":file.endsWith('.webmanifest')?'application/manifest+json':file.endsWith(".json")?"application/json":file.endsWith(".jpg")?"image/jpeg":file.endsWith(".png")?"image/png":file.endsWith('.webp')?'image/webp':"text/html");res.end(data);}
   catch(_){res.writeHead(404);res.end("Not found");}
@@ -93,7 +93,7 @@ try{
     if(!await page.getByRole("link",{name:"Sports Desk",exact:true}).isVisible())await page.getByText("League boards",{exact:true}).click();
     for(const [name,key] of [["Sports Desk","desk"],["NBA","nba"],["NCAAB","ncaab"]]){
       await page.getByRole("link",{name,exact:true}).click();
-      await page.frameLocator("#frame-"+key).locator("#desk-title").waitFor();
+      await page.frameLocator("#frame-"+key).locator(key==="nba"?"h1":"#desk-title").waitFor();
       assert.equal(await page.getByRole("link",{name,exact:true}).getAttribute("aria-current"),"page");
     }
     if(!await page.getByRole('link',{name:'Tickets & results',exact:true}).isVisible())await page.getByText('Results & model',{exact:true}).click();await page.getByRole('link',{name:'Tickets & results',exact:true}).click();

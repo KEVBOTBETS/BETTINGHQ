@@ -6,8 +6,8 @@
 })(typeof self!=="undefined"?self:this,function(){
   "use strict";
   const HOUR=3600000;
-  const LABELS={nhl:"NHL",wnba:"WNBA",mlb:"MLB",nfl:"NFL",ncaaf:"NCAAF",props:"Props",ladder:"Ladder"};
-  const APP={nhl:"nhl-lab",wnba:"wnba-lab",mlb:"mlb-edge",nfl:"nfl-lab",ncaaf:"ncaaf-lab",props:"props",ladder:"ladder"};
+  const LABELS={nba:"NBA",nhl:"NHL",wnba:"WNBA",mlb:"MLB",nfl:"NFL",ncaaf:"NCAAF",props:"Props",ladder:"Ladder"};
+  const APP={nba:"nba-lab",nhl:"nhl-lab",wnba:"wnba-lab",mlb:"mlb-edge",nfl:"nfl-lab",ncaaf:"ncaaf-lab",props:"props",ladder:"ladder"};
   function number(v){return v==null||v===""||!Number.isFinite(Number(v))?null:Number(v);}
   function instant(v){if(!v)return null;const n=Date.parse(v);return Number.isFinite(n)?n:null;}
   function day(v){if(typeof v==="string"&&/^\d{4}-\d{2}-\d{2}$/.test(v))return v;const n=typeof v==="number"?v:instant(v);if(n==null)return "";return new Intl.DateTimeFormat("en-CA",{timeZone:"America/Toronto",year:"numeric",month:"2-digit",day:"2-digit"}).format(new Date(n));}
@@ -69,6 +69,7 @@
     }
     if(meta.odds_health?.healthy===false||["failed","unavailable","error"].includes(meta.odds_health?.status))warnings.push("Odds coverage needs attention.");
     const notes=[];
+    if(key==="nba")notes.push("NBA scoring baseline is research only; automatic best-bet qualification is disabled while prospective results accumulate.");
     if(number(odds.later_unpriced_games)>0)notes.push(odds.later_unpriced_games+" later games have no posted prices yet; these are outside the next 24 hours.");
     return {key,label:LABELS[key],stamp:stamp||null,notes,age,freshness:age.status,coverage:warnings.length?"review":"complete",status:bundle.error?"unavailable":age.status==="stale"?"stale":warnings.length?"review":"recent",warnings};
   }
@@ -78,13 +79,13 @@
       const t=tier(r.tier),start=r.start_time||r.tipoff||r.game_date||game?.start;
       if((!options.quotes&&(!["BEST BET","GOOD","LEAN"].includes(t)||r.held))||r.odds_verified===false)return;
       if(!options.quotes&&key==="mlb"&&!(number(r.stake)>0))return;
-      if(!options.quotes&&["nfl","wnba","nhl"].includes(key)&&!(number(r.stake)>0))return;
+      if(!options.quotes&&["nfl","wnba","nhl","nba"].includes(key)&&!(number(r.stake)>0))return;
       if(!options.quotes&&key==="props"&&!(number(r.recommended_stake)>0))return;
       if(["Final","Postponed","Cancelled","Canceled","Suspended","In Progress"].includes(game?.status))return;
       const when=instant(start),price=american(r.price_american??r.price);
       if(when==null||when<=now||price==null)return;
       const quote=r.odds_observed_at||r.odds_fetched_at||game?.odds?.fetched_at||r.updated_at;
-      const age=freshness(quote,key==="nhl"?1.5:key==="props"?Math.min(6,number(meta.max_odds_age_hours)||6):key==="ncaaf"?3:6,now);
+      const age=freshness(quote,["nhl","nba"].includes(key)?1.5:key==="props"?Math.min(6,number(meta.max_odds_age_hours)||6):key==="ncaaf"?3:6,now);
       const publishedAge=freshness(published,key==="ncaaf"?4:6,now);
       if((quote&&age.status==="unknown")||age.status==="stale"||publishedAge.status!=="recent"||bundle.error)return;
       if(key==="nhl"&&(age.status!=="recent"||![2,3].includes(Number(r.season_type))))return;
@@ -161,7 +162,7 @@
       notes:["Only the current-season accuracy feed is used; legacy mixed-season exports are excluded.","Small samples do not establish a betting edge."]};
   }
   const NFL_TEAMS={"arizona cardinals":"ari","atlanta falcons":"atl","baltimore ravens":"bal","buffalo bills":"buf","carolina panthers":"car","chicago bears":"chi","cincinnati bengals":"cin","cleveland browns":"cle","dallas cowboys":"dal","denver broncos":"den","detroit lions":"det","green bay packers":"gb","houston texans":"hou","indianapolis colts":"ind","jacksonville jaguars":"jax","kansas city chiefs":"kc","las vegas raiders":"lv","los angeles chargers":"lac","los angeles rams":"lar","miami dolphins":"mia","minnesota vikings":"min","new england patriots":"ne","new orleans saints":"no","new york giants":"nyg","new york jets":"nyj","philadelphia eagles":"phi","pittsburgh steelers":"pit","san francisco 49ers":"sf","seattle seahawks":"sea","tampa bay buccaneers":"tb","tennessee titans":"ten","washington commanders":"wsh","was":"wsh","jac":"jax"};
-  function league(row){return String(row.sport||({props:"NFL","nfl-lab":"NFL","ncaaf-lab":"NCAAF","mlb-edge":"MLB","wnba-lab":"WNBA","nhl-lab":"NHL"}[row.app])||"").toUpperCase();}
+  function league(row){return String(row.sport||({props:"NFL","nfl-lab":"NFL","ncaaf-lab":"NCAAF","mlb-edge":"MLB","nba-lab":"NBA","wnba-lab":"WNBA","nhl-lab":"NHL"}[row.app])||"").toUpperCase();}
   function team(s,sport){const n=String(s||"").toLowerCase().replace(/[.]/g,"").replace(/\s+/g," ").trim();return sport==="NFL"?(NFL_TEAMS[n]||n):n;}
   function eventKey(row){
     const sport=league(row),event=String(row.event||row.matchup||"");
