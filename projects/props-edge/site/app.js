@@ -85,15 +85,18 @@
     const list = (state.parlays.profiles?.[state.profile]?.targets || state.parlays.targets || [500, 1000, 5000, 10000, 30000, 50000]);
     if (!list.includes(state.target)) state.target = list[0];
     $('#targets').innerHTML = list.map((target) => {
-      const count = (state.parlays.tickets || []).filter((ticket) => ticket.target === target && ticket.scope === state.scope && (ticket.profile || 'longshot') === state.profile).length;
+      const count = (state.parlays.tickets || []).filter((ticket) => ticket.target === target && ticket.scope === state.scope && (ticket.profile || 'longshot') === state.profile
+        && ($('#parlay-game').value === 'all' || ticket.games.includes($('#parlay-game').value))
+        && ($('#parlay-day').value === 'all' || Q.day(ticket.start_time) === $('#parlay-day').value)).length;
       return `<button class="target" role="radio" data-target="${target}" aria-checked="${state.target === target}"><b>+${target.toLocaleString('en-CA')}</b><small>${count} TICKET${count === 1 ? '' : 'S'}</small></button>`;
     }).join('');
   }
 
   function parlayFilters() {
-    const tickets = (state.parlays.tickets || []).filter((ticket) => ticket.scope === state.scope);
-    const games = [...new Set(tickets.flatMap((ticket) => ticket.games))].sort();
-    const days = [...new Set(tickets.map((ticket) => Q.day(ticket.start_time)).filter(Boolean))].sort();
+    // A shortlist for Full slate must never define which games exist.
+    const tickets = state.parlays.tickets || [];
+    const games = [...new Set([...state.legs.map(leg => leg.matchup), ...tickets.flatMap(ticket => ticket.games || [])].filter(Boolean))].sort();
+    const days = [...new Set([...state.legs, ...tickets].map(row => Q.day(row.start_time)).filter(Boolean))].sort();
     const keep = (select, options, all) => {
       const previous = select.value;
       select.innerHTML = `<option value="all">${all}</option>` + options.map(([value, label]) => `<option value="${esc(value)}">${esc(label)}</option>`).join('');
@@ -156,7 +159,7 @@
 
   window.addEventListener("kevbot:parlay-tools-ready",()=>{if(state.meta)renderParlays();});
   function renderParlays() {
-    targets(); parlayFilters();
+    parlayFilters(); targets();
     const game = $('#parlay-game').value, day = $('#parlay-day').value;
     const tickets = (state.parlays.tickets || []).filter((ticket) =>
       ticket.scope === state.scope && ticket.target === state.target && (ticket.profile || 'longshot') === state.profile
@@ -166,7 +169,7 @@
       + (state.parlays.book_lines_only ? ' · every leg is a line the book posts' : '');
     $('#parlays').innerHTML = tickets.length
       ? tickets.map(ticketCard).join('')
-      : state.profile === 'core' ? '<div class="empty">No Core tickets qualify for this filter. Core requires 2–3 fresh book-priced, positive-edge legs with adequate samples, at one book across distinct games and players. Use Full slate or inspect the single-pick board. No extra legs are added just to reach a payout.</div>' : `<div class="empty">No parlay reached +${Number(state.target).toLocaleString('en-CA')} for this filter.<br>Try another target or scope. Parlays need enough legs with a recent player sample, so an empty board usually means the slate has not been built yet.</div>`;
+      : state.profile === 'core' ? '<div class="empty">No Core tickets qualify for this filter. Core requires 2–3 fresh book-priced, positive-edge legs with adequate samples, at one book across distinct games and players. Use Full slate or inspect the single-pick board. No extra legs are added just to reach a payout.</div>' : `<div class="empty">No parlay reached +${Number(state.target).toLocaleString('en-CA')} for this filter.<br>No supported combination is available at this target with these filters. Check the selected game’s props board or paste current book prices. Missing prices or insufficient supported legs can prevent a ticket; this does not mean the game is missing.</div>`;
   }
 
   /* ---------- cheat sheets ---------- */
@@ -226,7 +229,17 @@
       && (group === 'all' || leg.group === group)
       && (game === 'all' || leg.matchup === game)
       && (!search || norm(leg.player + leg.market).includes(search)))
-      .sort((a, b) => b.model_prob - a.model_prob).slice(0, 300);
+      .sort((a, b) => b.model_prob - a.model_prob);
+    const available = state.legs.filter(leg => game === 'all' || leg.matchup === game);
+    const gamesShown = new Set(rows.map(leg => leg.event_id)).size;
+    const gamesAvailable = new Set(available.map(leg => leg.event_id)).size;
+    let coverage = $('#board-coverage');
+    if (!coverage) {
+      coverage = document.createElement('p'); coverage.id = 'board-coverage';
+      coverage.className = 'muted'; coverage.setAttribute('role', 'status');
+      $('#board').before(coverage);
+    }
+    coverage.textContent = `${rows.length} props shown · ${gamesShown} of ${gamesAvailable} games${realOnly() ? ' · posted lines only; uncheck to include clearly labelled model scenarios' : ' · includes model scenarios; EST is not a sportsbook quote'}. Select a game to inspect all its supported props.`;
     $('#board').innerHTML = rows.length ? rows.map((leg) => `<article class="board-row">
       <div><b>${esc(leg.pick)}</b>${legTags(leg)}<div class="meta">${esc(leg.matchup)} · ${esc(clock(leg.start_time))} · ${esc(leg.line_source || leg.book)} · ${leg.samples || 0} game sample</div><div class="why">${esc(leg.reason)}</div></div>
       <div class="num">${odds(leg.price_american)}<small>${leg.price_source === 'model' ? 'EST' : 'PRICE'}</small></div>
@@ -524,7 +537,15 @@
       state.target = Number(button.dataset.target); renderParlays();
     });
     $('#parlay-profile').addEventListener('change',()=>{state.profile=$('#parlay-profile').value;state.target=null;renderParlays();});
-    $('#parlay-game').addEventListener('change', renderParlays);
+    $('#parlay-game').addEventListener('change', () => {
+      if ($('#parlay-game').value !== 'all') {
+        state.scope = 'game';
+        $$('[data-scope]').forEach(chip => chip.setAttribute('aria-checked', String(chip.dataset.scope === state.scope)));
+        // A previously chosen Sunday date must not hide Thursday's matchup.
+        $('#parlay-day').value = 'all';
+      }
+      renderParlays();
+    });
     $('#parlay-day').addEventListener('change', renderParlays);
     $('#sheet-markets').addEventListener('click', (event) => {
       const button = event.target.closest('[data-market]'); if (!button) return;

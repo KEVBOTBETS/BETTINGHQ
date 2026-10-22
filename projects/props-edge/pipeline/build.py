@@ -47,6 +47,12 @@ def _write_json(name: str, value: Any) -> None:
     temporary.replace(destination)
 
 
+def unpriced_game_projections(projections, quotes):
+    """A partial primary feed must not suppress fallback coverage for other games."""
+    priced_events = {str(quote.event_id) for quote in quotes if quote.event_id}
+    return [row for row in projections if str(row.event_id) not in priced_events]
+
+
 def build() -> dict[str, Any]:
     settings = load_settings()
     qualification = load_qualification_settings()
@@ -103,11 +109,14 @@ def build() -> dict[str, Any]:
                 failed_sources.add(covers.name)
                 price_sources[covers.name] = {"status": "unavailable", "error": str(exc), **covers.diagnostics}
             fallback = DraftKingsNetworkProvider(qualification)
-            if not sport_quotes:
+            missing_projections = unpriced_game_projections(sport_projections, sport_quotes)
+            if missing_projections:
                 try:
-                    sport_quotes = fallback.fetch(sport, sport_projections)
-                    if sport_quotes: source = fallback.name + " + ESPN regular-season projections"
-                    price_sources[fallback.name] = {"status": "reference" if sport_quotes else "empty", "quotes": len(sport_quotes), **fallback.diagnostics}
+                    fallback_quotes = fallback.fetch(sport, missing_projections)
+                    if fallback_quotes:
+                        source = ("Covers public comparison + " if sport_quotes else "") + fallback.name + " + ESPN regular-season projections"
+                    sport_quotes.extend(fallback_quotes)
+                    price_sources[fallback.name] = {"status": "reference" if fallback_quotes else "empty", "quotes": len(fallback_quotes), **fallback.diagnostics}
                 except ProviderError as exc:
                     errors.append(str(exc))
                     failed_sources.add(fallback.name)
