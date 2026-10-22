@@ -1,29 +1,127 @@
 {
   "schema": 1,
-  "checked_at": "2026-10-22T21:54:34.701Z",
+  "checked_at": "2026-10-22T22:44:06.397Z",
   "coverage": {
     "nhl": {
       "status": "available",
       "reports": 29,
-      "checked_at": "2026-10-22T21:54:34.701Z"
+      "checked_at": "2026-10-22T22:44:06.397Z"
     },
     "ncaaf": {
       "status": "empty",
       "reports": 0,
-      "checked_at": "2026-10-22T21:54:34.701Z"
+      "checked_at": "2026-10-22T22:44:06.397Z"
+    },
+    "nfl": {
+      "status": "available",
+      "reports": 409,
+      "checked_at": "2026-10-22T22:44:06.397Z"
     },
     "mlb": {
       "status": "available",
       "reports": 4,
-      "checked_at": "2026-10-22T21:54:34.701Z"
-    },
-    "nfl": {
-      "status": "available",
-      "reports": 408,
-      "checked_at": "2026-10-22T21:54:34.701Z"
+      "checked_at": "2026-10-22T22:44:06.397Z"
     }
   },
   "events": [
+    {
+      "id": "starter|nhl:nhl:2026020154:away|2026-10-22T22:44:06.397Z",
+      "kind": "starter",
+      "observed_at": "2026-10-22T22:44:06.397Z",
+      "sport": "nhl",
+      "event": "NSH @ BOS",
+      "start": "2026-10-22T23:00:00+00:00",
+      "title": "NHL starting goalie updated",
+      "before": "Juuse Saros",
+      "after": "Justus Annunen · confirmed",
+      "source_quote_at": "2026-10-22T22:42:06.701455+00:00",
+      "source": "NHL board",
+      "note": "Review the matchup after a starter change; the baseline does not price individual goalie talent."
+    },
+    {
+      "id": "injury|nfl:22:Jeremiyah Love|2026-10-22T22:44:06.397Z",
+      "kind": "injury",
+      "observed_at": "2026-10-22T22:44:06.397Z",
+      "sport": "nfl",
+      "title": "Player availability changed",
+      "event": "Arizona Cardinals",
+      "pick": "Jeremiyah Love",
+      "before": "Doubtful · Ankle",
+      "after": "Questionable · Ankle",
+      "source_quote_at": "2026-10-22T20:39Z",
+      "source": "ESPN injuries",
+      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
+    },
+    {
+      "id": "injury|nfl:14:Puka Nacua|2026-10-22T22:44:06.397Z",
+      "kind": "injury",
+      "observed_at": "2026-10-22T22:44:06.397Z",
+      "sport": "nfl",
+      "title": "New availability report",
+      "event": "Los Angeles Rams",
+      "pick": "Puka Nacua",
+      "before": "Not in the previous dated report",
+      "after": "Questionable · Calf",
+      "source_quote_at": "2026-10-22T22:21Z",
+      "source": "ESPN injuries",
+      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
+    },
+    {
+      "id": "injury|nfl:16:Justin Jefferson|2026-10-22T22:44:06.397Z",
+      "kind": "injury",
+      "observed_at": "2026-10-22T22:44:06.397Z",
+      "sport": "nfl",
+      "title": "Player availability changed",
+      "event": "Minnesota Vikings",
+      "pick": "Justin Jefferson",
+      "before": "Questionable · Jefferson (ankle) was limited at Wednesday's practice.",
+      "after": "Active · Jefferson (ankle) practiced in full Thursday, Adam Caplan of SiriusXM NFL Radio reports.",
+      "source_quote_at": "2026-10-22T21:54Z",
+      "source": "ESPN injuries",
+      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
+    },
+    {
+      "id": "injury|nfl:16:James Pierre|2026-10-22T22:44:06.397Z",
+      "kind": "injury",
+      "observed_at": "2026-10-22T22:44:06.397Z",
+      "sport": "nfl",
+      "title": "Player availability changed",
+      "event": "Minnesota Vikings",
+      "pick": "James Pierre",
+      "before": "Questionable · Foot",
+      "after": "Active",
+      "source_quote_at": "2026-10-22T21:51Z",
+      "source": "ESPN injuries",
+      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
+    },
+    {
+      "id": "injury|nfl:16:Brian O'Neill|2026-10-22T22:44:06.397Z",
+      "kind": "injury",
+      "observed_at": "2026-10-22T22:44:06.397Z",
+      "sport": "nfl",
+      "title": "Player availability changed",
+      "event": "Minnesota Vikings",
+      "pick": "Brian O'Neill",
+      "before": "Questionable · Knee",
+      "after": "Active",
+      "source_quote_at": "2026-10-22T21:51Z",
+      "source": "ESPN injuries",
+      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
+    },
+    {
+      "id": "injury|nfl:17:Christian Gonzalez|2026-10-22T22:44:06.397Z",
+      "kind": "injury",
+      "observed_at": "2026-10-22T22:44:06.397Z",
+      "sport": "nfl",
+      "title": "New availability report",
+      "event": "New England Patriots",
+      "pick": "Christian Gonzalez",
+      "before": "Not in the previous dated report",
+      "after": "Questionable · Illness",
+      "source_quote_at": "2026-10-22T22:23Z",
+      "source": "ESPN injuries",
+      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
+    },
     {
       "id": "starter|nhl:nhl:2026020156:home|2026-10-22T21:54:34.701Z",
       "kind": "starter",
@@ -2748,104 +2846,6 @@
       "pick": "Siran Neal",
       "before": "Active",
       "after": "Questionable · Knee",
-      "source_quote_at": "2026-10-21T23:52Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:25:Jaden Dugger|2026-10-22T00:39:27.701Z",
-      "kind": "injury",
-      "observed_at": "2026-10-22T00:39:27.701Z",
-      "sport": "nfl",
-      "title": "Player availability changed",
-      "event": "San Francisco 49ers",
-      "pick": "Jaden Dugger",
-      "before": "Active · Dugger tallied 11 tackles (eight solo) during the 49ers' 23-17 win over the Commanders on Monday.",
-      "after": "Questionable · Knee",
-      "source_quote_at": "2026-10-21T01:37Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:26:Rashid Shaheed|2026-10-22T00:39:27.701Z",
-      "kind": "injury",
-      "observed_at": "2026-10-22T00:39:27.701Z",
-      "sport": "nfl",
-      "title": "New availability report",
-      "event": "Seattle Seahawks",
-      "pick": "Rashid Shaheed",
-      "before": "Not in the previous dated report",
-      "after": "Questionable · Hip",
-      "source_quote_at": "2026-10-21T23:37Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:26:Beau Stephens|2026-10-22T00:39:27.701Z",
-      "kind": "injury",
-      "observed_at": "2026-10-22T00:39:27.701Z",
-      "sport": "nfl",
-      "title": "New availability report",
-      "event": "Seattle Seahawks",
-      "pick": "Beau Stephens",
-      "before": "Not in the previous dated report",
-      "after": "Questionable · Knee",
-      "source_quote_at": "2026-10-21T23:08Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:26:Connor O'Toole|2026-10-22T00:39:27.701Z",
-      "kind": "injury",
-      "observed_at": "2026-10-22T00:39:27.701Z",
-      "sport": "nfl",
-      "title": "New availability report",
-      "event": "Seattle Seahawks",
-      "pick": "Connor O'Toole",
-      "before": "Not in the previous dated report",
-      "after": "Questionable · Hamstring",
-      "source_quote_at": "2026-10-21T23:07Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:26:Tyrice Knight|2026-10-22T00:39:27.701Z",
-      "kind": "injury",
-      "observed_at": "2026-10-22T00:39:27.701Z",
-      "sport": "nfl",
-      "title": "New availability report",
-      "event": "Seattle Seahawks",
-      "pick": "Tyrice Knight",
-      "before": "Not in the previous dated report",
-      "after": "Questionable · Oblique",
-      "source_quote_at": "2026-10-21T23:06Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:26:Drew Lock|2026-10-22T00:39:27.701Z",
-      "kind": "injury",
-      "observed_at": "2026-10-22T00:39:27.701Z",
-      "sport": "nfl",
-      "title": "New availability report",
-      "event": "Seattle Seahawks",
-      "pick": "Drew Lock",
-      "before": "Not in the previous dated report",
-      "after": "Questionable · Elbow",
-      "source_quote_at": "2026-10-21T23:06Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:27:Sean Tucker|2026-10-22T00:39:27.701Z",
-      "kind": "injury",
-      "observed_at": "2026-10-22T00:39:27.701Z",
-      "sport": "nfl",
-      "title": "Player availability changed",
-      "event": "Tampa Bay Buccaneers",
-      "pick": "Sean Tucker",
-      "before": "Active",
-      "after": "Active · Tucker (quadriceps) was a full participant at practice Wednesday.",
       "source_quote_at": "2026-10-21T23:52Z",
       "source": "ESPN injuries",
       "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
