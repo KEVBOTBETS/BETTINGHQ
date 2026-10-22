@@ -256,6 +256,74 @@ def _pool(legs: Iterable[dict[str, Any]], settings: dict[str, Any]) -> list[dict
     return sorted(pool, key=lambda leg: (-(leg["price_source"] == "book"), -leg["_rank"]))
 
 
+def single_game_extras(legs, settings, now):
+    """Add date/event-scoped research drafts without changing the regular builder."""
+    common = {"Passing yards", "Pass attempts", "Pass completions", "Rushing yards",
+              "Rush attempts", "Receiving yards", "Receptions"}
+    tickets = []
+    for spec in settings["parlays"].get("single_game_extras", []):
+        if now.astimezone(ZoneInfo("America/Toronto")).date().isoformat() != spec["local_day"]:
+            continue
+        pool = []
+        for original in legs:
+            if str(original.get("event_id")) != str(spec["event_id"]):
+                continue
+            try:
+                start = dt.datetime.fromisoformat(str(original["start_time"]).replace("Z", "+00:00"))
+                probability = float(original["model_prob"])
+                price = float(original["price_american"])
+                if (start.tzinfo is None or start <= now
+                    or start.astimezone(ZoneInfo("America/Toronto")).date().isoformat() != spec["local_day"]
+                    or original.get("sport") != "NFL" or original.get("market") not in common
+                    or int(original.get("samples", 0)) < int(spec["min_samples"])
+                    or not float(original.get("confidence", 0)) >= float(spec["min_confidence"])
+                    or original.get("roster_verified") is False
+                    or str(original.get("status") or "").casefold() in {"out", "inactive", "doubtful", "questionable", "injured reserve", "suspended"}
+                    or not math.isfinite(probability) or not float(spec["min_leg_probability"]) <= probability < 1
+                    or not math.isfinite(price) or abs(price) < 100):
+                    continue
+                if original.get("price_source") == "book":
+                    at = dt.datetime.fromisoformat(str(original.get("updated_at", "")).replace("Z", "+00:00"))
+                    if (original.get("book") != "DraftKings" or original.get("reference_only")
+                        or original.get("quote_status", "observed") != "observed" or at.tzinfo is None
+                        or not 0 <= (now-at).total_seconds() <= 90*60):
+                        continue
+                elif original.get("price_source") != "model" or original.get("line_source") != "DraftKings line via ESPN":
+                    continue
+                leg = dict(original)
+                leg["price_decimal"] = american_to_decimal(price)
+                pool.append(leg)
+            except (KeyError, TypeError, ValueError, OverflowError):
+                continue
+        # Bounded exhaustive comparison, with one contract per distinct player.
+        pool = sorted(pool, key=lambda leg: (-leg["model_prob"], -int(leg["samples"]), leg["id"]))[:128]
+        candidates = {int(target): [] for target in spec["targets"]}
+        for count in range(2, int(spec["max_legs"])+1):
+            for chosen in combinations(pool, count):
+                if len({_norm(leg["player"]) for leg in chosen}) != count:
+                    continue
+                price = 100 * (math.prod(leg["price_decimal"] for leg in chosen)-1)
+                for target in candidates:
+                    if abs(price-target) <= target*float(spec["american_tolerance"]):
+                        baseline = math.prod(leg["model_prob"] for leg in chosen)
+                        candidates[target].append((baseline, abs(price-target), chosen))
+        for target, options in candidates.items():
+            used = []
+            for baseline, gap, chosen in sorted(options, key=lambda item: (-item[0], len(item[2]), item[1])):
+                signature = {leg["id"] for leg in chosen}
+                if any(len(signature & other) >= len(signature)-1 for other in used):
+                    continue
+                used.append(signature)
+                ticket = _ticket(list(chosen), "game", chosen[0]["matchup"], target, settings)
+                ticket.update(id="tonight-"+ticket["id"], profile="longshot", tonight_extra=True,
+                              builder_version="single-game-extras-2026-10-22",
+                              selection_method="2–3 distinct players; strongest independence benchmark within the configured price tolerance. Same-game chance is unvalidated.")
+                tickets.append(ticket)
+                if len(used) >= int(spec["per_target"]):
+                    break
+    return tickets
+
+
 def build_parlays(legs: list[dict[str, Any]], settings: dict[str, Any], now: dt.datetime | None = None) -> dict[str, Any]:
     cfg = settings["parlays"]
     now = now or dt.datetime.now(dt.timezone.utc)
@@ -332,10 +400,13 @@ def build_parlays(legs: list[dict[str, Any]], settings: dict[str, Any], now: dt.
         ticket['builder_version']='2026-10-02'
     if cfg.get('core_enabled',False):
         tickets.extend(core_tickets(upcoming,settings,now))
+    extras = single_game_extras(upcoming, settings, now)
+    tickets.extend(extras)
     tickets.sort(key=lambda ticket: (ticket["scope"], ticket["target"], -ticket["independent_prob"]))
     return {
         "generated_at": now.isoformat(),
         "targets": list(cfg["targets"]),
+        "game_target_extras": {ticket["label"]: sorted({other["target"] for other in extras if other["label"] == ticket["label"]}) for ticket in extras},
         "profiles": {"core":{"label":"Core · 2–3 legs","targets":cfg.get("core_targets",[200,500,1000])},"longshot":{"label":"Moonshots · +500 to +50,000","targets":list(cfg["targets"])}},
         "counts": {
             scope: sum(ticket["scope"] == scope for ticket in tickets) for scope in ("slate", "day", "game")

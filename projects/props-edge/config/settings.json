@@ -113,7 +113,24 @@
       500,
       1000
     ],
-    "core_max_quote_age_hours": 12
+    "core_max_quote_age_hours": 12,
+    "single_game_extras": [
+      {
+        "event_id": "401873010",
+        "local_day": "2026-10-22",
+        "targets": [
+          300,
+          400,
+          500
+        ],
+        "min_samples": 6,
+        "min_leg_probability": 0.5,
+        "max_legs": 3,
+        "per_target": 2,
+        "american_tolerance": 0.02,
+        "min_confidence": 0.6
+      }
+    ]
   },
   "odds_feed": {
     "markets": [

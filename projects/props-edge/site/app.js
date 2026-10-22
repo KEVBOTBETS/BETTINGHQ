@@ -82,10 +82,15 @@
   function targets() {
     if (state.profile == null) state.profile = 'longshot';
     $('#parlay-profile').value = state.profile;
-    const list = (state.parlays.profiles?.[state.profile]?.targets || state.parlays.targets || [500, 1000, 5000, 10000, 30000, 50000]);
+    const base = (state.parlays.profiles?.[state.profile]?.targets || state.parlays.targets || [500, 1000, 5000, 10000, 30000, 50000]);
+    const game = $('#parlay-game').value;
+    const extra = state.scope === 'game' && state.profile === 'longshot'
+      && state.parlays.tickets.some(ticket => ticket.tonight_extra && ticket.games.includes(game) && Date.parse(ticket.start_time) > Date.now())
+      ? state.parlays.game_target_extras?.[game] || [] : [];
+    const list = extra.length ? [...new Set([...base, ...extra])].sort((a, b) => a - b) : base;
     if (!list.includes(state.target)) state.target = list[0];
     $('#targets').innerHTML = list.map((target) => {
-      const count = (state.parlays.tickets || []).filter((ticket) => ticket.target === target && ticket.scope === state.scope && (ticket.profile || 'longshot') === state.profile
+      const count = (state.parlays.tickets || []).filter((ticket) => (!ticket.tonight_extra || Date.parse(ticket.start_time) > Date.now()) && ticket.target === target && ticket.scope === state.scope && (ticket.profile || 'longshot') === state.profile
         && ($('#parlay-game').value === 'all' || ticket.games.includes($('#parlay-game').value))
         && ($('#parlay-day').value === 'all' || Q.day(ticket.start_time) === $('#parlay-day').value)).length;
       return `<button class="target" role="radio" data-target="${target}" aria-checked="${state.target === target}"><b>+${target.toLocaleString('en-CA')}</b><small>${count} TICKET${count === 1 ? '' : 'S'}</small></button>`;
@@ -136,7 +141,7 @@
     const placeable = `<p class="placeable warn">RESEARCH · ${legs.some(l=>l.price_source!=='book')?'ESTIMATED PRICES':'INDIVIDUAL LEG PRICES'} · Combined price needs confirmation.${ticketPrice(ticket).sameGame?' Same-game probability is unavailable.':''}${offBoard?' Some lines may not be offered.':''}</p>`;
     return `<article class="ticket" data-id="${esc(ticket.id)}">
       <div class="ticket-top">
-        <div><h3>${ticket.leg_count} leg parlay</h3><span class="scope">${esc(ticket.scope === 'game' ? ticket.label : ticket.scope === 'day' ? dayLabel(ticket.label) : 'Full slate')} · target +${ticket.target.toLocaleString('en-CA')}</span></div>
+        <div><h3>${ticket.tonight_extra ? 'Tonight extra · ' : ''}${ticket.leg_count} leg parlay</h3><span class="scope">${esc(ticket.scope === 'game' ? ticket.label : ticket.scope === 'day' ? dayLabel(ticket.label) : 'Full slate')} · target +${ticket.target.toLocaleString('en-CA')}</span></div>
         <div><span class="price">${odds(american)}</span><small>${changed ? 'WITH YOUR LINES' : 'MODEL BOARD'}</small></div>
       </div>
       ${placeable}
@@ -162,7 +167,7 @@
     parlayFilters(); targets();
     const game = $('#parlay-game').value, day = $('#parlay-day').value;
     const tickets = (state.parlays.tickets || []).filter((ticket) =>
-      ticket.scope === state.scope && ticket.target === state.target && (ticket.profile || 'longshot') === state.profile
+      (!ticket.tonight_extra || Date.parse(ticket.start_time) > Date.now()) && ticket.scope === state.scope && ticket.target === state.target && (ticket.profile || 'longshot') === state.profile
       && (game === 'all' || ticket.games.includes(game))
       && (day === 'all' || Q.day(ticket.start_time) === day));
     $('#parlay-count').textContent = `${tickets.length} ticket${tickets.length === 1 ? '' : 's'} at this target`
@@ -690,4 +695,5 @@
   state.imported = readStore(IMPORT_KEY, {});
   loadLedger(); wire(); $('#refresh-props').addEventListener('click', refresh); refresh();
   setInterval(() => { if (!document.hidden) refresh(); }, 600000);
+  setInterval(() => { if (!document.hidden && state.meta && !$('#tab-parlays').hidden && state.parlays.tickets.some(ticket => ticket.tonight_extra)) renderParlays(); }, 60000);
 })();
