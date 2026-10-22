@@ -28,6 +28,14 @@
   const latest=new Map();for(const q of rows){if(!valid(q,now))continue;const k=key(q),old=latest.get(k);if(!old||Date.parse(q.observed_at)>Date.parse(old.observed_at))latest.set(k,{...q,id:k,price:Number(q.price),price_decimal:decimal(Number(q.price)),model_prob:num(q.model_prob)});}
   return [...latest.values()];
  }
+ const MILESTONES={Points:[10,15,20,25,30,35,40],Rebounds:[4,6,8,10,12,15],Assists:[4,6,8,10,12],Threes:[1,2,3,4,5,6]};
+ function milestones(watch,now=Date.now()){
+  const seen=new Set();return (watch||[]).filter(q=>q.sport==='NBA'&&q.athlete_id&&MILESTONES[q.market]&&Date.parse(q.start_time)>now&&q.roster_verified===true&&!['out','inactive','doubtful','suspended'].includes(String(q.status||'').toLowerCase())).flatMap(q=>{
+   const id=[q.event_id,q.athlete_id,q.market].join('|');if(seen.has(id))return [];seen.add(id);
+   const recent=(q.recent||[]).filter(v=>typeof v==='number'&&Number.isFinite(v)&&v>=0);
+   return MILESTONES[q.market].map(n=>({...q,milestone_id:id+'|'+n,threshold:n,line:n-.5,side:'over',kind:'player',player_id:String(q.athlete_id),pick:q.player+' '+n+'+ '+q.market.toLowerCase(),history_hits:recent.filter(v=>v>=n).length,history_n:recent.length,model_prob:null,price:null,price_kind:'unpriced',qualified:false}));
+  });
+ }
  function compatible(q,chosen,profile){
   return !chosen.some(l=>l.id===q.id||profile==='core'&&l.event_id===q.event_id
    ||q.event_id===l.event_id&&(q.player_id&&q.player_id===l.player_id
@@ -59,5 +67,5 @@
  }
  function capture(t,now=Date.now()){if(!t?.legs?.length||t.legs.length<2||t.legs.length>8||!t.legs.every(q=>valid(q,now))||new Set(t.legs.map(q=>norm(q.book))).size!==1)throw Error('Draft has expired or mixes books. Refresh and rebuild.');return JSON.parse(JSON.stringify({...t,captured_at:new Date(now).toISOString()}));}
  const profit=b=>b.result==='Win'?Number(b.stake)*(decimal(Number(b.actual_price))-1):b.result==='Loss'?-Number(b.stake):0;
- const api={TARGETS,num,decimal,american,norm,day,fresh,key,valid,contracts,compatible,metrics,build,capture,profit};root.LeagueParlays=api;if(typeof module!=='undefined')module.exports=api;
+ const api={MILESTONES,milestones,TARGETS,num,decimal,american,norm,day,fresh,key,valid,contracts,compatible,metrics,build,capture,profit};root.LeagueParlays=api;if(typeof module!=='undefined')module.exports=api;
 })(typeof window!=='undefined'?window:globalThis);

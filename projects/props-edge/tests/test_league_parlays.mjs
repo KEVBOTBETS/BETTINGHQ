@@ -17,3 +17,11 @@ const fair=C.contracts(nhl,props,'NHL',[],now,true);assert.equal(fair.length,1);
 console.log('NBA/NHL targets, one-book contracts, conflict guards, expiry, fair scenarios, capture and actual P&L passed.');
 
 const crowded=Array.from({length:300},(_,i)=>q('a'+i,{event_id:'a',player_id:String(i),kind:'player',market:'Points',side:'over',line:20.5,price:5000}));crowded.push(q('z1',{event_id:'z',player_id:'z1',kind:'player',market:'Points',side:'over',line:20.5}),q('z2',{event_id:'z',player_id:'z2',kind:'player',market:'Points',side:'over',line:20.5}));assert.ok(C.build(crowded,{target:500,scope:'slate',now}).length,'A crowded earlier game must not hide later-game contracts');
+
+const watch=[{sport:'NBA',event_id:'1',athlete_id:'p1',player:'Example Player',market:'Points',start_time:start,roster_verified:true,recent:[19,20,24,30],average:23.25}];
+const milestones=C.milestones(watch,now),twenty=milestones.find(q=>q.threshold===20);
+assert.equal(twenty.pick,'Example Player 20+ points');assert.equal(twenty.line,19.5);assert.equal(twenty.history_hits,3);assert.equal(twenty.history_n,4);
+assert.equal(twenty.model_prob,null);assert.equal(twenty.price,null);assert.equal(C.valid(twenty,now),false);assert.equal(C.build(milestones,{target:500,now}).length,0);
+assert.equal(C.milestones([...watch,...watch],now).length,milestones.length);assert.equal(C.milestones([{...watch[0],roster_verified:false}],now).length,0);assert.equal(C.milestones([{...watch[0],start_time:at}],now).length,0);
+assert.equal(C.milestones([{...watch[0],recent:[]}],now)[0].history_n,0);assert.equal(C.milestones([{...watch[0],market:'Threes'}],now).find(q=>q.threshold===3).line,2.5);
+console.log('NBA player milestones: exact thresholds, history counts, deduplication and unpriced exclusion passed.');
