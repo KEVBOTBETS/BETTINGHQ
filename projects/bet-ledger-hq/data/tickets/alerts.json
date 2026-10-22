@@ -1,29 +1,113 @@
 {
   "schema": 1,
-  "checked_at": "2026-10-22T17:31:05.085Z",
+  "checked_at": "2026-10-22T18:43:22.370Z",
   "coverage": {
-    "ncaaf": {
-      "status": "empty",
-      "reports": 0,
-      "checked_at": "2026-10-22T17:31:05.085Z"
-    },
-    "nhl": {
-      "status": "available",
-      "reports": 29,
-      "checked_at": "2026-10-22T17:31:05.085Z"
-    },
     "mlb": {
       "status": "available",
       "reports": 4,
-      "checked_at": "2026-10-22T17:31:05.085Z"
+      "checked_at": "2026-10-22T18:43:22.370Z"
+    },
+    "ncaaf": {
+      "status": "empty",
+      "reports": 0,
+      "checked_at": "2026-10-22T18:43:22.370Z"
     },
     "nfl": {
       "status": "available",
-      "reports": 393,
-      "checked_at": "2026-10-22T17:31:05.085Z"
+      "reports": 391,
+      "checked_at": "2026-10-22T18:43:22.370Z"
+    },
+    "nhl": {
+      "status": "available",
+      "reports": 30,
+      "checked_at": "2026-10-22T18:43:22.370Z"
     }
   },
   "events": [
+    {
+      "id": "starter|nhl:nhl:2026020161:away|2026-10-22T18:43:22.370Z",
+      "kind": "starter",
+      "observed_at": "2026-10-22T18:43:22.370Z",
+      "sport": "nhl",
+      "event": "WPG @ DAL",
+      "start": "2026-10-23T00:00:00+00:00",
+      "title": "NHL starting goalie updated",
+      "before": "Stuart Skinner",
+      "after": "Stuart Skinner · confirmed",
+      "source_quote_at": "2026-10-22T18:40:17.876809+00:00",
+      "source": "NHL board",
+      "note": "Review the matchup after a starter change; the baseline does not price individual goalie talent."
+    },
+    {
+      "id": "injury|nfl:12:Josh Simmons|2026-10-22T18:43:22.370Z",
+      "kind": "injury",
+      "observed_at": "2026-10-22T18:43:22.370Z",
+      "sport": "nfl",
+      "title": "Player availability changed",
+      "event": "Kansas City Chiefs",
+      "pick": "Josh Simmons",
+      "before": "Out · Back",
+      "after": "Injured Reserve · Back",
+      "source_quote_at": "2026-10-22T18:25Z",
+      "source": "ESPN injuries",
+      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
+    },
+    {
+      "id": "injury|nfl:26:Elijah Arroyo|2026-10-22T18:43:22.370Z",
+      "kind": "injury",
+      "observed_at": "2026-10-22T18:43:22.370Z",
+      "sport": "nfl",
+      "title": "Player availability changed",
+      "event": "Seattle Seahawks",
+      "pick": "Elijah Arroyo",
+      "before": "Out · Shoulder",
+      "after": "Injured Reserve · Shoulder",
+      "source_quote_at": "2026-10-22T18:10Z",
+      "source": "ESPN injuries",
+      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
+    },
+    {
+      "id": "injury|nfl:26:Zach Charbonnet|2026-10-22T18:43:22.370Z",
+      "kind": "injury",
+      "observed_at": "2026-10-22T18:43:22.370Z",
+      "sport": "nfl",
+      "title": "Player availability changed",
+      "event": "Seattle Seahawks",
+      "pick": "Zach Charbonnet",
+      "before": "Out · Knee - ACL",
+      "after": "Questionable · Knee - ACL",
+      "source_quote_at": "2026-10-22T18:09Z",
+      "source": "ESPN injuries",
+      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
+    },
+    {
+      "id": "injury|nhl:7:Seth Jarvis|2026-10-22T18:43:22.370Z",
+      "kind": "injury",
+      "observed_at": "2026-10-22T18:43:22.370Z",
+      "sport": "nhl",
+      "title": "New availability report",
+      "event": "Carolina Hurricanes",
+      "pick": "Seth Jarvis",
+      "before": "Not in the previous dated report",
+      "after": "Day-To-Day · Shoulder",
+      "source_quote_at": "2026-10-22T18:17Z",
+      "source": "ESPN injuries",
+      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
+    },
+    {
+      "id": "injury|nhl:4:Andrew Mangiapane|2026-10-22T18:43:22.370Z",
+      "kind": "injury",
+      "observed_at": "2026-10-22T18:43:22.370Z",
+      "sport": "nhl",
+      "title": "New availability report",
+      "event": "Chicago Blackhawks",
+      "pick": "Andrew Mangiapane",
+      "before": "Not in the previous dated report",
+      "after": "Injured Reserve · Lower Body",
+      "source_quote_at": "2026-10-22T18:05Z",
+      "source": "ESPN injuries",
+      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
+    },
     {
       "id": "odds|props|401873011|2026-10-25T13:30Z|Receiving yards|Juwan Johnson|over|theScore Bet|2026-10-22T17:31:05.085Z",
       "kind": "odds",
@@ -2763,90 +2847,6 @@
       "before": "Not in the previous dated report",
       "after": "Active · Addison (hamstring) was a full practice participant Wednesday.",
       "source_quote_at": "2026-10-21T21:27Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:17:A.J. Brown|2026-10-21T22:02:15.190Z",
-      "kind": "injury",
-      "observed_at": "2026-10-21T22:02:15.190Z",
-      "sport": "nfl",
-      "title": "Player availability changed",
-      "event": "New England Patriots",
-      "pick": "A.J. Brown",
-      "before": "Questionable · Ankle",
-      "after": "Active · Brown (ankle) does not carry an injury designation going into Thursday's game against the Bears.",
-      "source_quote_at": "2026-10-21T19:22Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:17:Craig Woodson|2026-10-21T22:02:15.190Z",
-      "kind": "injury",
-      "observed_at": "2026-10-21T22:02:15.190Z",
-      "sport": "nfl",
-      "title": "New availability report",
-      "event": "New England Patriots",
-      "pick": "Craig Woodson",
-      "before": "Not in the previous dated report",
-      "after": "Questionable · Shoulder",
-      "source_quote_at": "2026-10-21T19:19Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:17:Christian Elliss|2026-10-21T22:02:15.190Z",
-      "kind": "injury",
-      "observed_at": "2026-10-21T22:02:15.190Z",
-      "sport": "nfl",
-      "title": "New availability report",
-      "event": "New England Patriots",
-      "pick": "Christian Elliss",
-      "before": "Not in the previous dated report",
-      "after": "Questionable · Chest",
-      "source_quote_at": "2026-10-21T19:19Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:17:Kevin Byard|2026-10-21T22:02:15.190Z",
-      "kind": "injury",
-      "observed_at": "2026-10-21T22:02:15.190Z",
-      "sport": "nfl",
-      "title": "New availability report",
-      "event": "New England Patriots",
-      "pick": "Kevin Byard",
-      "before": "Not in the previous dated report",
-      "after": "Questionable · Chest",
-      "source_quote_at": "2026-10-21T19:18Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:17:Channing Canada|2026-10-21T22:02:15.190Z",
-      "kind": "injury",
-      "observed_at": "2026-10-21T22:02:15.190Z",
-      "sport": "nfl",
-      "title": "Player availability changed",
-      "event": "New England Patriots",
-      "pick": "Channing Canada",
-      "before": "Questionable · Hamstring",
-      "after": "Out · Hamstring",
-      "source_quote_at": "2026-10-21T18:32Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:17:Ben Brown|2026-10-21T22:02:15.190Z",
-      "kind": "injury",
-      "observed_at": "2026-10-21T22:02:15.190Z",
-      "sport": "nfl",
-      "title": "Player availability changed",
-      "event": "New England Patriots",
-      "pick": "Ben Brown",
-      "before": "Doubtful · Knee",
-      "after": "Out · Knee",
-      "source_quote_at": "2026-10-21T18:31Z",
       "source": "ESPN injuries",
       "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
     }
