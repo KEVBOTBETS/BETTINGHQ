@@ -1,29 +1,127 @@
 {
   "schema": 1,
-  "checked_at": "2026-10-22T18:43:22.370Z",
+  "checked_at": "2026-10-22T19:28:53.070Z",
   "coverage": {
+    "nhl": {
+      "status": "available",
+      "reports": 30,
+      "checked_at": "2026-10-22T19:28:53.070Z"
+    },
     "mlb": {
       "status": "available",
       "reports": 4,
-      "checked_at": "2026-10-22T18:43:22.370Z"
+      "checked_at": "2026-10-22T19:28:53.070Z"
+    },
+    "nfl": {
+      "status": "available",
+      "reports": 392,
+      "checked_at": "2026-10-22T19:28:53.070Z"
     },
     "ncaaf": {
       "status": "empty",
       "reports": 0,
-      "checked_at": "2026-10-22T18:43:22.370Z"
-    },
-    "nfl": {
-      "status": "available",
-      "reports": 391,
-      "checked_at": "2026-10-22T18:43:22.370Z"
-    },
-    "nhl": {
-      "status": "available",
-      "reports": 30,
-      "checked_at": "2026-10-22T18:43:22.370Z"
+      "checked_at": "2026-10-22T19:28:53.070Z"
     }
   },
   "events": [
+    {
+      "id": "injury|nhl:17:Nicolas Roy|2026-10-22T19:28:53.070Z",
+      "kind": "injury",
+      "observed_at": "2026-10-22T19:28:53.070Z",
+      "sport": "nhl",
+      "title": "Player availability changed",
+      "event": "Colorado Avalanche",
+      "pick": "Nicolas Roy",
+      "before": "Day-To-Day · Lower Body",
+      "after": "Out · Lower Body",
+      "source_quote_at": "2026-10-22T18:44Z",
+      "source": "ESPN injuries",
+      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
+    },
+    {
+      "id": "injury|nhl:5:Daniil Tarasov|2026-10-22T19:28:53.070Z",
+      "kind": "injury",
+      "observed_at": "2026-10-22T19:28:53.070Z",
+      "sport": "nhl",
+      "title": "New availability report",
+      "event": "Detroit Red Wings",
+      "pick": "Daniil Tarasov",
+      "before": "Not in the previous dated report",
+      "after": "Out · Undisclosed",
+      "source_quote_at": "2026-10-22T18:46Z",
+      "source": "ESPN injuries",
+      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
+    },
+    {
+      "id": "injury|nfl:34:David Montgomery|2026-10-22T19:28:53.070Z",
+      "kind": "injury",
+      "observed_at": "2026-10-22T19:28:53.070Z",
+      "sport": "nfl",
+      "title": "Player availability changed",
+      "event": "Houston Texans",
+      "pick": "David Montgomery",
+      "before": "Questionable · Groin",
+      "after": "Doubtful · Groin",
+      "source_quote_at": "2026-10-22T17:45Z",
+      "source": "ESPN injuries",
+      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
+    },
+    {
+      "id": "injury|nfl:18:CJ Donaldson|2026-10-22T19:28:53.070Z",
+      "kind": "injury",
+      "observed_at": "2026-10-22T19:28:53.070Z",
+      "sport": "nfl",
+      "title": "Player availability changed",
+      "event": "New Orleans Saints",
+      "pick": "CJ Donaldson",
+      "before": "Questionable · Shoulder",
+      "after": "Active",
+      "source_quote_at": "2026-10-22T19:23Z",
+      "source": "ESPN injuries",
+      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
+    },
+    {
+      "id": "injury|nfl:23:T.J. Watt|2026-10-22T19:28:53.070Z",
+      "kind": "injury",
+      "observed_at": "2026-10-22T19:28:53.070Z",
+      "sport": "nfl",
+      "title": "New availability report",
+      "event": "Pittsburgh Steelers",
+      "pick": "T.J. Watt",
+      "before": "Not in the previous dated report",
+      "after": "Questionable · Calf",
+      "source_quote_at": "2026-10-22T19:12Z",
+      "source": "ESPN injuries",
+      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
+    },
+    {
+      "id": "injury|nfl:23:Brandin Echols|2026-10-22T19:28:53.070Z",
+      "kind": "injury",
+      "observed_at": "2026-10-22T19:28:53.070Z",
+      "sport": "nfl",
+      "title": "New availability report",
+      "event": "Pittsburgh Steelers",
+      "pick": "Brandin Echols",
+      "before": "Not in the previous dated report",
+      "after": "Out · Hamstring",
+      "source_quote_at": "2026-10-22T19:11Z",
+      "source": "ESPN injuries",
+      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
+    },
+    {
+      "id": "injury|nfl:23:Ben Skowronek|2026-10-22T19:28:53.070Z",
+      "kind": "injury",
+      "observed_at": "2026-10-22T19:28:53.070Z",
+      "sport": "nfl",
+      "title": "Player availability changed",
+      "event": "Pittsburgh Steelers",
+      "pick": "Ben Skowronek",
+      "before": "Questionable · Calf",
+      "after": "Out · Calf",
+      "source_quote_at": "2026-10-22T00:37Z",
+      "source": "ESPN injuries",
+      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
+    },
     {
       "id": "starter|nhl:nhl:2026020161:away|2026-10-22T18:43:22.370Z",
       "kind": "starter",
@@ -2749,104 +2847,6 @@
       "before": "Not in the previous dated report",
       "after": "Questionable · Shoulder",
       "source_quote_at": "2026-10-21T20:36Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:15:Jonah Savaiinaea|2026-10-21T22:02:15.190Z",
-      "kind": "injury",
-      "observed_at": "2026-10-21T22:02:15.190Z",
-      "sport": "nfl",
-      "title": "Player availability changed",
-      "event": "Miami Dolphins",
-      "pick": "Jonah Savaiinaea",
-      "before": "Questionable · Ankle",
-      "after": "Active",
-      "source_quote_at": "2026-10-21T20:33Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:16:T.J. Hockenson|2026-10-21T22:02:15.190Z",
-      "kind": "injury",
-      "observed_at": "2026-10-21T22:02:15.190Z",
-      "sport": "nfl",
-      "title": "New availability report",
-      "event": "Minnesota Vikings",
-      "pick": "T.J. Hockenson",
-      "before": "Not in the previous dated report",
-      "after": "Questionable · Concussion",
-      "source_quote_at": "2026-10-21T21:42Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:16:Justin Jefferson|2026-10-21T22:02:15.190Z",
-      "kind": "injury",
-      "observed_at": "2026-10-21T22:02:15.190Z",
-      "sport": "nfl",
-      "title": "New availability report",
-      "event": "Minnesota Vikings",
-      "pick": "Justin Jefferson",
-      "before": "Not in the previous dated report",
-      "after": "Questionable · Ankle",
-      "source_quote_at": "2026-10-21T21:31Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:16:James Pierre|2026-10-21T22:02:15.190Z",
-      "kind": "injury",
-      "observed_at": "2026-10-21T22:02:15.190Z",
-      "sport": "nfl",
-      "title": "New availability report",
-      "event": "Minnesota Vikings",
-      "pick": "James Pierre",
-      "before": "Not in the previous dated report",
-      "after": "Questionable · Foot",
-      "source_quote_at": "2026-10-21T21:30Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:16:Brian O'Neill|2026-10-21T22:02:15.190Z",
-      "kind": "injury",
-      "observed_at": "2026-10-21T22:02:15.190Z",
-      "sport": "nfl",
-      "title": "New availability report",
-      "event": "Minnesota Vikings",
-      "pick": "Brian O'Neill",
-      "before": "Not in the previous dated report",
-      "after": "Questionable · Knee",
-      "source_quote_at": "2026-10-21T21:29Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:16:Charles Demmings|2026-10-21T22:02:15.190Z",
-      "kind": "injury",
-      "observed_at": "2026-10-21T22:02:15.190Z",
-      "sport": "nfl",
-      "title": "New availability report",
-      "event": "Minnesota Vikings",
-      "pick": "Charles Demmings",
-      "before": "Not in the previous dated report",
-      "after": "Active",
-      "source_quote_at": "2026-10-21T21:29Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:16:Jordan Addison|2026-10-21T22:02:15.190Z",
-      "kind": "injury",
-      "observed_at": "2026-10-21T22:02:15.190Z",
-      "sport": "nfl",
-      "title": "New availability report",
-      "event": "Minnesota Vikings",
-      "pick": "Jordan Addison",
-      "before": "Not in the previous dated report",
-      "after": "Active · Addison (hamstring) was a full practice participant Wednesday.",
-      "source_quote_at": "2026-10-21T21:27Z",
       "source": "ESPN injuries",
       "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
     }
