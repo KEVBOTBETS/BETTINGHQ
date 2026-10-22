@@ -22,7 +22,7 @@ from .nhl_goals import forecasts as goal_forecasts, VERSION as GOAL_VERSION
 ROOT=Path(__file__).resolve().parents[1]
 MARKETS_NHL={'SHOTS ON GOAL':'Shots on goal','GOALS':'Goals','ASSISTS':'Assists','POINTS':'Points','ANYTIME GOALSCORER':'Anytime goal','ANYTIME GOAL SCORER':'Anytime goal','SAVES':'Saves'}
 NHL_CODES={'TB':'TBL','SJ':'SJS','LA':'LAK','NJ':'NJD','MON':'MTL','MTL':'MTL','WIN':'WPG','VEG':'VGK','NAS':'NSH','UTAH':'UTA'}
-PATHS={'NHL':'hockey/nhl','NCAAF':'football/ncaaf'}
+PATHS={'NHL':'hockey/nhl','NCAAF':'football/ncaaf','NBA':'basketball/nba'}
 
 def instant(x):
     try:return dt.datetime.fromisoformat(x.replace('Z','+00:00')).astimezone(dt.timezone.utc)
@@ -50,7 +50,11 @@ def roster_players(data):
             if a.get('id') and a.get('displayName'):rows.append({'id':str(a['id']),'player':a['displayName'],'image':(a.get('headshot') or {}).get('href'),'position':(a.get('position') or {}).get('abbreviation')})
     return rows
 
-def card_market(token,sport):return MARKETS_NHL.get(token.strip().upper()) if sport=='NHL' else _heading(token)
+def card_market(token,sport):
+    if sport=='NBA':
+        from .nba_research import MARKETS
+        return MARKETS.get(token.strip().upper())
+    return MARKETS_NHL.get(token.strip().upper()) if sport=='NHL' else _heading(token)
 
 def parse_offers(cards,games,rosters,sport,stamp):
     quotes={}
@@ -218,6 +222,10 @@ def publish():
     for sport in ['NHL','NCAAF']:
         try:build(sport,cache,now)
         except (OSError,ValueError,ProviderError) as exc:print(sport,'props refresh failed; prior timestamps retained:',type(exc).__name__)
+    try:
+        from .nba_research import build as build_nba
+        build_nba(ROOT,cache,now)
+    except (OSError,ValueError,ProviderError) as exc:print('NBA props refresh failed; prior timestamps retained:',type(exc).__name__)
     cache.save()
 
 if __name__=='__main__':publish()

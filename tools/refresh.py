@@ -22,7 +22,7 @@ for repo in selected:
     except (subprocess.CalledProcessError,subprocess.TimeoutExpired) as exc:
         # Stale feeds retain their original timestamps and cannot qualify as new picks.
         print(f'::warning::{repo} refresh failed ({type(exc).__name__}); inspect freshness before using its board.')
-if args.sport in ['all','football','nhl','evening','props']:
+if args.sport in ['all','football','nhl','nba','evening','props']:
     try:
         subprocess.run([sys.executable,'-m','pipeline.multisport'],cwd=ROOT/'projects/props-edge',check=True,timeout=600)
     except (subprocess.CalledProcessError,subprocess.TimeoutExpired):
