@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-23T12:05:47.603117+00:00",
+  "generated_at": "2026-10-23T16:59:41.932003+00:00",
   "model_version": "nhl-poisson-1.0",
   "season": 2027,
   "timezone": "America/Toronto",
@@ -26,22 +26,22 @@
     },
     "nhl-schedule-2026-10-23": {
       "status": "ok",
-      "observed_at": "2026-10-23T12:05:47.603117+00:00",
+      "observed_at": "2026-10-23T16:59:41.932003+00:00",
       "url": "https://api-web.nhle.com/v1/schedule/2026-10-23"
     },
     "nhl-schedule-2026-10-09": {
       "status": "ok",
-      "observed_at": "2026-10-23T12:05:47.603117+00:00",
+      "observed_at": "2026-10-23T16:59:41.932003+00:00",
       "url": "https://api-web.nhle.com/v1/schedule/2026-10-09"
     },
     "nhl-schedule-2026-10-16": {
       "status": "ok",
-      "observed_at": "2026-10-23T12:05:47.603117+00:00",
+      "observed_at": "2026-10-23T16:59:41.932003+00:00",
       "url": "https://api-web.nhle.com/v1/schedule/2026-10-16"
     },
     "nhl-schedule-2026-10-30": {
       "status": "ok",
-      "observed_at": "2026-10-23T12:05:47.603117+00:00",
+      "observed_at": "2026-10-23T16:59:41.932003+00:00",
       "url": "https://api-web.nhle.com/v1/schedule/2026-10-30"
     },
     "standings-2027": {
@@ -57,8 +57,8 @@
       "error": "HTTPError"
     },
     "nhl-official": {
-      "status": "cached",
-      "observed_at": "2026-10-23T11:58:07.680805+00:00",
+      "status": "ok",
+      "observed_at": "2026-10-23T16:59:41.932003+00:00",
       "url": "https://api-web.nhle.com/v1/standings/now"
     },
     "nhl-team-summary-2026": {
@@ -72,32 +72,32 @@
       "url": "https://api.nhle.com/stats/rest/en/goalie/summary?isAggregate=false&isGame=false&start=0&limit=1000&cayenneExp=seasonId=20252026%20and%20gameTypeId=2"
     },
     "nhl-team-summary-2027": {
-      "status": "cached",
-      "observed_at": "2026-10-23T06:29:12.341269+00:00",
+      "status": "ok",
+      "observed_at": "2026-10-23T16:59:41.932003+00:00",
       "url": "https://api.nhle.com/stats/rest/en/team/summary?isAggregate=false&isGame=false&start=0&limit=100&cayenneExp=seasonId=20262027%20and%20gameTypeId=2"
     },
     "nhl-goalies-2027": {
-      "status": "cached",
-      "observed_at": "2026-10-23T06:29:12.341269+00:00",
+      "status": "ok",
+      "observed_at": "2026-10-23T16:59:41.932003+00:00",
       "url": "https://api.nhle.com/stats/rest/en/goalie/summary?isAggregate=false&isGame=false&start=0&limit=1000&cayenneExp=seasonId=20262027%20and%20gameTypeId=2"
     },
     "public-book-odds": {
       "status": "ok",
-      "observed_at": "2026-10-23T12:05:00+00:00",
+      "observed_at": "2026-10-23T16:59:00+00:00",
       "url": "https://www.covers.com/sport/hockey/nhl/odds",
-      "quotes": 108,
+      "quotes": 458,
       "attempts": [
         {
           "url": "https://www.covers.com/sport/hockey/nhl/odds",
-          "checked_at": "2026-10-23T12:05:47.603117+00:00",
-          "observed_at": "2026-10-23T12:05:00+00:00",
+          "checked_at": "2026-10-23T16:59:41.932003+00:00",
+          "observed_at": "2026-10-23T16:59:00+00:00",
           "status": "ok",
-          "quotes": 108,
-          "matched_games": 2
+          "quotes": 458,
+          "matched_games": 13
         },
         {
           "url": "https://www.vegasinsider.com/nhl/odds/las-vegas/",
-          "checked_at": "2026-10-23T12:05:47.603117+00:00",
+          "checked_at": "2026-10-23T16:59:41.932003+00:00",
           "observed_at": null,
           "status": "no matched prices",
           "quotes": 0,
@@ -105,7 +105,7 @@
         },
         {
           "url": "https://www.scoresandodds.com/nhl/odds",
-          "checked_at": "2026-10-23T12:05:47.603117+00:00",
+          "checked_at": "2026-10-23T16:59:41.932003+00:00",
           "observed_at": null,
           "status": "no matched prices",
           "quotes": 0,
@@ -129,7 +129,7 @@
   "odds_health": {
     "status": "ok",
     "upcoming_games": 61,
-    "priced_games": 2,
+    "priced_games": 13,
     "window_hours": 24,
     "window_games": 2,
     "window_priced_games": 2,
@@ -140,7 +140,7 @@
       "TOTAL": 2
     },
     "later_games": 59,
-    "later_unpriced_games": 59,
+    "later_unpriced_games": 48,
     "missing_games": []
   },
   "counts": {
