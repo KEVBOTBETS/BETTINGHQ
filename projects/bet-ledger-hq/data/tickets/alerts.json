@@ -1,29 +1,71 @@
 {
   "schema": 1,
-  "checked_at": "2026-10-23T01:07:01.045Z",
+  "checked_at": "2026-10-23T01:29:35.397Z",
   "coverage": {
-    "ncaaf": {
-      "status": "empty",
-      "reports": 0,
-      "checked_at": "2026-10-23T01:07:01.045Z"
-    },
     "nhl": {
       "status": "available",
       "reports": 34,
-      "checked_at": "2026-10-23T01:07:01.045Z"
+      "checked_at": "2026-10-23T01:29:35.397Z"
+    },
+    "ncaaf": {
+      "status": "empty",
+      "reports": 0,
+      "checked_at": "2026-10-23T01:29:35.397Z"
+    },
+    "nfl": {
+      "status": "available",
+      "reports": 391,
+      "checked_at": "2026-10-23T01:29:35.397Z"
     },
     "mlb": {
       "status": "available",
       "reports": 4,
-      "checked_at": "2026-10-23T01:07:01.045Z"
-    },
-    "nfl": {
-      "status": "available",
-      "reports": 399,
-      "checked_at": "2026-10-23T01:07:01.045Z"
+      "checked_at": "2026-10-23T01:29:35.397Z"
     }
   },
   "events": [
+    {
+      "id": "injury|nfl:3:Anthony Johnson Jr.|2026-10-23T01:29:35.397Z",
+      "kind": "injury",
+      "observed_at": "2026-10-23T01:29:35.397Z",
+      "sport": "nfl",
+      "title": "Player availability changed",
+      "event": "Chicago Bears",
+      "pick": "Anthony Johnson Jr.",
+      "before": "Out · Undisclosed",
+      "after": "Injured Reserve · Undisclosed",
+      "source_quote_at": "2026-10-23T01:00Z",
+      "source": "ESPN injuries",
+      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
+    },
+    {
+      "id": "injury|nfl:21:Eli Stowers|2026-10-23T01:29:35.397Z",
+      "kind": "injury",
+      "observed_at": "2026-10-23T01:29:35.397Z",
+      "sport": "nfl",
+      "title": "New availability report",
+      "event": "Philadelphia Eagles",
+      "pick": "Eli Stowers",
+      "before": "Not in the previous dated report",
+      "after": "Injured Reserve · Quadriceps",
+      "source_quote_at": "2026-10-23T01:15Z",
+      "source": "ESPN injuries",
+      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
+    },
+    {
+      "id": "injury|nfl:21:Grant Calcaterra|2026-10-23T01:29:35.397Z",
+      "kind": "injury",
+      "observed_at": "2026-10-23T01:29:35.397Z",
+      "sport": "nfl",
+      "title": "New availability report",
+      "event": "Philadelphia Eagles",
+      "pick": "Grant Calcaterra",
+      "before": "Not in the previous dated report",
+      "after": "Injured Reserve · Back",
+      "source_quote_at": "2026-10-23T01:06Z",
+      "source": "ESPN injuries",
+      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
+    },
     {
       "id": "odds|props|401873019|2026-10-25T20:05Z|Receiving yards|Michael Wilson|over|Fanatics Sportsbook|2026-10-23T01:07:01.045Z",
       "kind": "odds",
@@ -2815,54 +2857,6 @@
       "source_quote_at": "2026-10-22T00:01Z",
       "source": "ESPN injuries",
       "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "odds|props|401873011|2026-10-25T13:30Z|Receiving yards|Pat Freiermuth|over|bet365|2026-10-22T12:15:19.805Z",
-      "kind": "odds",
-      "observed_at": "2026-10-22T12:15:19.805Z",
-      "sport": "props",
-      "event": "Pittsburgh Steelers @ New Orleans Saints",
-      "start": "2026-10-25T13:30Z",
-      "pick": "Pat Freiermuth — Over 26.5 Receiving yards",
-      "title": "Published odds changed",
-      "before": "-115 · line 26.5",
-      "after": "-115 · line 30.5",
-      "book": "bet365",
-      "source_quote_at": "2026-10-22T12:11:51.028751+00:00",
-      "source": "Existing Props board",
-      "note": "Your ticket keeps its original odds. Recheck the live book before placing a new wager."
-    },
-    {
-      "id": "odds|props|401873011|2026-10-25T13:30Z|Passing yards|Aaron Rodgers|over|FanDuel|2026-10-22T12:15:19.805Z",
-      "kind": "odds",
-      "observed_at": "2026-10-22T12:15:19.805Z",
-      "sport": "props",
-      "event": "Pittsburgh Steelers @ New Orleans Saints",
-      "start": "2026-10-25T13:30Z",
-      "pick": "Aaron Rodgers — Over 233.5 Passing yards",
-      "title": "Published odds changed",
-      "before": "-114 · line 230.5",
-      "after": "-114 · line 233.5",
-      "book": "FanDuel",
-      "source_quote_at": "2026-10-22T12:11:51.028751+00:00",
-      "source": "Existing Props board",
-      "note": "Your ticket keeps its original odds. Recheck the live book before placing a new wager."
-    },
-    {
-      "id": "odds|ncaaf|401860906|2026-10-24T23:30Z|TOTAL||under|DraftKings|2026-10-22T12:15:19.805Z",
-      "kind": "odds",
-      "observed_at": "2026-10-22T12:15:19.805Z",
-      "sport": "ncaaf",
-      "event": "USU @ TXST",
-      "start": "2026-10-24T23:30Z",
-      "pick": "Under 60.5",
-      "title": "Published odds changed",
-      "before": "-115 · line 61.5",
-      "after": "-105 · line 60.5",
-      "book": "DraftKings",
-      "source_quote_at": "2026-10-22T12:09:54.735820+00:00",
-      "source": "Existing NCAAF board",
-      "note": "Your ticket keeps its original odds. Recheck the live book before placing a new wager."
     }
   ]
 }
