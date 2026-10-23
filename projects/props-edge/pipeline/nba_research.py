@@ -74,16 +74,25 @@ def build(root, cache, now):
     with ThreadPoolExecutor(max_workers=4) as pool:rosters=dict(pool.map(roster,ids.items()))
     raw=json.loads((folder/'players.json').read_text())
     watch=watchlist(games,raw.get('players',[]),rosters,now)
+    from .nba_milestones import histories, forecasts
+    history=histories(root,rosters,now)
+    try:injuries=json.loads((folder/'injuries.json').read_text())
+    except (OSError,ValueError):injuries=None
+    injury_source=(meta.get('sources') or {}).get('injuries') or {}
+    injury_at=instant(injury_source.get('observed_at'))
+    injury_ok=isinstance(injuries,list) and injury_source.get('status')=='ok' and injury_at and 0<=(now-injury_at).total_seconds()<=6*3600
+    estimates=forecasts(watch,history,raw.get('players',[]),injuries,now) if injury_ok else []
     url='https://www.covers.com/sport/basketball/nba/player-props';html='';errors=[]
     try:
         req=urllib.request.Request(url,headers={'User-Agent':'Mozilla/5.0 (compatible; KEVBOTBETS/1.0; public-market-reader)','Accept':'text/html'})
         with urllib.request.urlopen(req,timeout=20) as response:html=response_text(response,4_000_000)
     except (OSError,ProviderError):errors.append('NBA public prop prices unavailable; no lines or prices inferred.')
     parser=_TokenParser();parser.feed(html);quotes=parse_offers(parser.cards,games,rosters,'NBA',now.isoformat())
-    if not quotes:errors.append('No exact roster-matched NBA prop offers extracted. Use current sportsbook prices in the manual entry form.')
+    if not injury_ok:errors.append('Automatic NBA player estimates paused: current injury coverage is unavailable.')
+    if not quotes:errors.append('No exact roster-matched NBA prop offers extracted. Automatic model fair scenarios are separate from observed sportsbook offers.')
     if ids and not all(rosters.values()):errors.append('Some current NBA rosters are unavailable; those players are excluded from offers and history matching.')
     result=dict(sport='NBA',generated_at=now.isoformat(),source_model_at=meta['generated_at'],games=games,quotes=quotes,watchlist=watch,
-                errors=errors,goal_scorers=[],source_url=url,notes=['NBA player averages are history, not calibrated prop probabilities.','No line is inferred from an average. Confirm availability and the combined sportsbook quote.'])
+                errors=errors,milestone_model={'version':'nba-milestones-v1','calibrated':False,'history_players':sum(bool(rows) for rows in history.values()),'forecast_players':len({q['athlete_id'] for q in estimates}),'minimum_games':10,'prior_game_weight':.35,'current_game_weight':1.,'pricing':'model fair estimates; not observed sportsbook offers'},milestone_forecasts=estimates,goal_scorers=[],source_url=url,notes=['NBA player averages are history, not calibrated prop probabilities.','Automatic milestones use a separate uncalibrated history model. Fair prices are estimates, not sportsbook offers. Confirm availability and the combined sportsbook quote.'])
     destination=root/'site/data/nba-props.json';temp=destination.with_suffix('.json.tmp');temp.write_text(json.dumps(result,separators=(',',':'),allow_nan=False)+'\n');temp.replace(destination)
     print('NBA',len(games),'games',len(quotes),'observed offers',len(watch),'player history rows')
     return result

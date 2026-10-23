@@ -1,6 +1,6 @@
 /* Research contracts shared by the NBA and NHL labs. No wagering or inferred book prices. */
 (function(root){'use strict';
- const TARGETS=[300,400,500,1000,2000,5000,10000,30000,50000];
+ const TARGETS=[300,400,500,1000,2000,5000,10000,20000,30000,50000];
  const num=x=>x!==null&&x!==''&&Number.isFinite(Number(x))?Number(x):null;
  const decimal=p=>p>0?1+p/100:1+100/Math.abs(p),american=d=>d>=2?Math.round((d-1)*100):-Math.round(100/(d-1));
  const norm=x=>String(x||'').toLowerCase().replace(/[^a-z0-9]/g,''),day=x=>Number.isFinite(Date.parse(x))?new Intl.DateTimeFormat('en-CA',{timeZone:'America/Toronto',year:'numeric',month:'2-digit',day:'2-digit'}).format(new Date(x)):'';
@@ -10,7 +10,7 @@
   return ['NBA','NHL'].includes(q.sport)&&Boolean(q.event_id)&&Date.parse(q.start_time)>now&&Boolean(q.pick)&&Boolean(norm(q.book))
    &&num(q.price)!==null&&Math.abs(Number(q.price))>=100
    &&(q.kind==='game'?(['ML','ATS'].includes(q.market)?['home','away'].includes(q.side):q.market==='TOTAL'&&['over','under'].includes(q.side)):Boolean(q.player_id)&&(['Anytime goal'].includes(q.market)?['yes','no'].includes(q.side):['over','under'].includes(q.side)))
-   &&(q.price_kind!=='model-fair'||q.sport==='NHL'&&q.market==='Anytime goal'&&num(q.model_prob)>0&&num(q.model_prob)<1)
+   &&(q.price_kind!=='model-fair'||(q.sport==='NHL'&&q.market==='Anytime goal'||q.sport==='NBA'&&q.model_version==='nba-milestones-v1'&&q.samples>=10)&&num(q.model_prob)>0&&num(q.model_prob)<1)
    &&(['ML','Anytime goal'].includes(q.market)||num(q.line)!==null)
    &&fresh(q.observed_at,now,q.price_kind==='model-fair'?6:1.5)&&!q.reference_only
    &&!['out','inactive','doubtful','injured reserve','suspended'].includes(String(q.status||'').toLowerCase())&&!q.shadow?.questionable
@@ -25,6 +25,12 @@
   }else if(sport==='NHL'&&props?.sport==='NHL'&&fresh(props.generated_at,now,6)&&fresh(props.source_model_at,now,6)){
    for(const q of props.goal_scorers||[]){const p=num(q.model_prob);if(p===null||p<=0||p>=1||!ids.has(String(q.event_id)))continue;rows.push({...q,sport,event_id:String(q.event_id),player_id:String(q.athlete_id),pick:q.player+' anytime goal',price:american(1/p),book:'MODEL FAIR · NOT OFFERED',price_kind:'model-fair',observed_at:props.generated_at,kind:'player'});}
   }
+  if(fair&&sport==='NBA'&&props?.sport==='NBA'&&fresh(props.generated_at,now,6)&&fresh(props.source_model_at,now,6)){
+   for(const q of props.milestone_forecasts||[]){const p=num(q.model_prob);if(p===null||p<=0||p>=1||!ids.has(String(q.event_id)))continue;rows.push({...q,sport,event_id:String(q.event_id),start_time:games.find(g=>String(g.event_id)===String(q.event_id))?.start,player_id:String(q.athlete_id),price:american(1/p),book:'MODEL FAIR · NOT OFFERED',price_kind:'model-fair',observed_at:props.generated_at,kind:'player'});}
+  }
+  if(sport==='NBA'&&!fair){const estimates=new Map((props?.milestone_forecasts||[]).map(q=>[[String(q.event_id),String(q.athlete_id),q.market,q.side,q.line].join('|'),q]));
+   for(const q of rows)if(q.kind==='player'){const estimate=estimates.get([q.event_id,q.player_id,q.market,q.side,q.line].join('|'));if(estimate&&fresh(props.generated_at,now,6)&&fresh(props.source_model_at,now,6)){q.model_prob=estimate.model_prob;q.ranking_prob=estimate.ranking_prob;q.samples=estimate.samples;q.reason=estimate.reason;}}
+  }
   const latest=new Map();for(const q of rows){if(!valid(q,now))continue;const k=key(q),old=latest.get(k);if(!old||Date.parse(q.observed_at)>Date.parse(old.observed_at))latest.set(k,{...q,id:k,price:Number(q.price),price_decimal:decimal(Number(q.price)),model_prob:num(q.model_prob)});}
   return [...latest.values()];
  }
@@ -37,7 +43,7 @@
   });
  }
  function compatible(q,chosen,profile){
-  return !chosen.some(l=>l.id===q.id||profile==='core'&&l.event_id===q.event_id
+  return !chosen.some(l=>l.id===q.id||q.sport==='NBA'&&q.player_id&&q.player_id===l.player_id||profile==='core'&&l.event_id===q.event_id
    ||q.event_id===l.event_id&&(q.player_id&&q.player_id===l.player_id
     ||!q.player_id&&!l.player_id&&(q.market==='TOTAL'&&l.market==='TOTAL'||['ML','ATS'].includes(q.market)&&['ML','ATS'].includes(l.market))));
  }
@@ -47,20 +53,22 @@
  }
  function build(pool,{target=500,profile='moonshot',scope='day',game='all',date='all',book='all',kind='all',now=Date.now()}={}){
   if(!TARGETS.includes(Number(target))||scope==='game'&&game==='all')return [];
-  const eligible=pool.filter(q=>valid(q,now)&&(profile!=='core'||q.qualified===true&&num(q.model_prob)>=.6&&q.price_kind==='book')&&(kind==='all'||q.kind===kind||q.market===kind)&&(game==='all'||q.event_id===game)&&(scope==='slate'||date==='all'||day(q.start_time)===date)&&(book==='all'||norm(q.book)===norm(book)));
+  const minPlayerChance=target<=500?.60:target<=1000?.50:target<=2000?.45:target<=5000?.35:target<=20000?.25:.18;
+  const eligible=pool.filter(q=>valid(q,now)&&(q.sport!=='NBA'||q.price_kind!=='model-fair'||num(q.model_prob)>=minPlayerChance)&&(profile!=='core'||q.qualified===true&&num(q.model_prob)>=.6&&q.price_kind==='book')&&(kind==='all'||q.kind===kind||q.market===kind)&&(game==='all'||q.event_id===game)&&(scope==='slate'||date==='all'||day(q.start_time)===date)&&(book==='all'||norm(q.book)===norm(book)));
   const groups=[...new Set(eligible.map(q=>norm(q.book)))],finished=[];
   for(const group of groups){const perGame=new Map(),aim=Math.pow(1+target/100,profile==='core'?0.5:1/3);
    for(const q of eligible.filter(q=>norm(q.book)===group)){if(!perGame.has(q.event_id))perGame.set(q.event_id,[]);perGame.get(q.event_id).push(q);}
    const lists=[...perGame.values()].map(rows=>rows.sort((a,b)=>Math.abs(Math.log(decimal(a.price)/aim))-Math.abs(Math.log(decimal(b.price)/aim))));
    const short=[];for(let depth=0;short.length<240;depth++){let added=false;for(const list of lists)if(list[depth]&&short.length<240){short.push(list[depth]);added=true;}if(!added)break;}
-   const rows=short.sort((a,b)=>String(a.id).localeCompare(String(b.id))),maxLegs=profile==='core'?3:8,min=1+Number(target)*.9/100,max=1+Number(target)*1.1/100;let beam=[{legs:[],dec:1,last:-1}];
+   const rows=short.sort((a,b)=>String(a.id).localeCompare(String(b.id))),maxLegs=profile==='core'?3:eligible.some(q=>q.sport==='NBA'&&q.price_kind==='model-fair')?6:8,tolerance=eligible.some(q=>q.sport==='NBA'&&q.price_kind==='model-fair')?.05:.10,min=1+Number(target)*(1-tolerance)/100,max=1+Number(target)*(1+tolerance)/100;let beam=[{legs:[],dec:1,last:-1}];
    for(let count=1;count<=maxLegs;count++){const next=[];
-    for(const state of beam)for(let i=state.last+1;i<rows.length;i++){const q=rows[i];if(!compatible(q,state.legs,profile))continue;const d=state.dec*decimal(Number(q.price));if(d>max)continue;const entry={legs:[...state.legs,q],dec:d,last:i};if(count>=2&&d>=min)finished.push(entry);else next.push(entry);}
+    for(const state of beam)for(let i=state.last+1;i<rows.length;i++){const q=rows[i];if(!compatible(q,state.legs,profile)||q.sport==='NBA'&&q.price_kind==='model-fair'&&scope!=='game'&&state.legs.some(l=>l.event_id===q.event_id))continue;const d=state.dec*decimal(Number(q.price));if(d>max)continue;const entry={legs:[...state.legs,q],dec:d,last:i};if(count>=2&&d>=min)finished.push(entry);else next.push(entry);}
     // Keep price-diverse partial combinations so small-price legs remain reachable.
     const buckets=new Map();for(const s of next){const k=Math.round(Math.log(s.dec)*70),old=buckets.get(k);if(!old||s.last<old.last)buckets.set(k,s);}beam=[...buckets.values()].sort((a,b)=>Math.abs(Math.log(a.dec/(1+target/100)))-Math.abs(Math.log(b.dec/(1+target/100)))).slice(0,160);if(!beam.length)break;
    }
   }
-  finished.sort((a,b)=>Math.abs(a.dec-(1+target/100))-Math.abs(b.dec-(1+target/100))||a.legs.length-b.legs.length);
+  const ranked=eligible.some(q=>q.sport==='NBA'&&q.price_kind==='model-fair');const rank=s=>s.legs.reduce((v,q)=>v+Math.log(Math.max(.001,num(q.ranking_prob)??num(q.model_prob)??.01)),0);
+  finished.sort((a,b)=>(ranked?rank(b)-rank(a):0)||Math.abs(a.dec-(1+target/100))-Math.abs(b.dec-(1+target/100))||a.legs.length-b.legs.length);
   const picked=[];for(const s of finished){if(picked.some(t=>s.legs.filter(q=>t.legs.some(l=>l.id===q.id)).length>=Math.max(1,s.legs.length-1)))continue;
    picked.push({id:s.legs.map(q=>q.id).join('~'),sport:s.legs[0].sport,target:Number(target),profile,scope,created_at:new Date(now).toISOString(),legs:s.legs.map(q=>({...q})),...metrics(s.legs)});if(picked.length===2)break;}
   return picked;

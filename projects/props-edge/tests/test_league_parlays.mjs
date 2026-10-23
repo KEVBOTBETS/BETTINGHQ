@@ -25,3 +25,9 @@ assert.equal(twenty.model_prob,null);assert.equal(twenty.price,null);assert.equa
 assert.equal(C.milestones([...watch,...watch],now).length,milestones.length);assert.equal(C.milestones([{...watch[0],roster_verified:false}],now).length,0);assert.equal(C.milestones([{...watch[0],start_time:at}],now).length,0);
 assert.equal(C.milestones([{...watch[0],recent:[]}],now)[0].history_n,0);assert.equal(C.milestones([{...watch[0],market:'Threes'}],now).find(q=>q.threshold===3).line,2.5);
 console.log('NBA player milestones: exact thresholds, history counts, deduplication and unpriced exclusion passed.');
+
+const nbaEst={sport:'NBA',generated_at:at,source_model_at:at,milestone_forecasts:[{sport:'NBA',event_id:'1',start_time:start,athlete_id:'p1',player:'Player One',pick:'Player One 20+ points',market:'Points',side:'over',line:19.5,model_prob:.4,ranking_prob:.3,model_version:'nba-milestones-v1',samples:30}]};
+const estimated=C.contracts(system,nbaEst,'NBA',[],now,true);assert.equal(estimated.length,1);assert.equal(estimated[0].price_kind,'model-fair');assert.equal(estimated[0].price,150);assert.equal(C.contracts(system,{...nbaEst,source_model_at:'2026-10-21T00:00Z'},'NBA',[],now,true).length,0);
+assert.equal(C.contracts({...system,games:system.games.map(g=>({...g,start:at}))},nbaEst,'NBA',[],now,true).length,0);
+assert.ok(C.TARGETS.includes(20000));assert.equal(C.compatible(q(1,{player_id:'p1'}),[q(2,{player_id:'p1'})],'moonshot'),false);
+console.log('NBA automatic fair estimates: model provenance, sample floor, current kickoff, freshness and player dedup passed.');
