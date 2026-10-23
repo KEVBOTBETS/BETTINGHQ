@@ -1,29 +1,43 @@
 {
   "schema": 1,
-  "checked_at": "2026-10-23T06:31:58.811Z",
+  "checked_at": "2026-10-23T12:00:30.801Z",
   "coverage": {
     "nhl": {
       "status": "available",
       "reports": 38,
-      "checked_at": "2026-10-23T06:31:58.811Z"
-    },
-    "mlb": {
-      "status": "available",
-      "reports": 4,
-      "checked_at": "2026-10-23T06:31:58.811Z"
+      "checked_at": "2026-10-23T12:00:30.801Z"
     },
     "ncaaf": {
       "status": "empty",
       "reports": 0,
-      "checked_at": "2026-10-23T06:31:58.811Z"
+      "checked_at": "2026-10-23T12:00:30.801Z"
+    },
+    "mlb": {
+      "status": "available",
+      "reports": 4,
+      "checked_at": "2026-10-23T12:00:30.801Z"
     },
     "nfl": {
       "status": "available",
       "reports": 366,
-      "checked_at": "2026-10-23T06:31:58.811Z"
+      "checked_at": "2026-10-23T12:00:30.801Z"
     }
   },
   "events": [
+    {
+      "id": "injury|nfl:3:Anthony Johnson Jr.|2026-10-23T12:00:30.801Z",
+      "kind": "injury",
+      "observed_at": "2026-10-23T12:00:30.801Z",
+      "sport": "nfl",
+      "title": "Player availability changed",
+      "event": "Chicago Bears",
+      "pick": "Anthony Johnson Jr.",
+      "before": "Injured Reserve · Undisclosed",
+      "after": "Out · Undisclosed",
+      "source_quote_at": "2026-10-23T11:00Z",
+      "source": "ESPN injuries",
+      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
+    },
     {
       "id": "odds|props|401873019|2026-10-25T20:05Z|Rushing yards|Jacoby Brissett|over|theScore Bet|2026-10-23T05:13:51.515Z",
       "kind": "odds",
@@ -2854,20 +2868,6 @@
       "title": "NHL starting goalie updated",
       "before": "Anton Forsberg",
       "after": "Darcy Kuemper · Likely",
-      "source_quote_at": "2026-10-22T17:27:38.467857+00:00",
-      "source": "NHL board",
-      "note": "Review the matchup after a starter change; the baseline does not price individual goalie talent."
-    },
-    {
-      "id": "starter|nhl:nhl:2026020160:home|2026-10-22T17:31:05.085Z",
-      "kind": "starter",
-      "observed_at": "2026-10-22T17:31:05.085Z",
-      "sport": "nhl",
-      "event": "VGK @ STL",
-      "start": "2026-10-23T00:00:00+00:00",
-      "title": "NHL starting goalie updated",
-      "before": "Joel Hofer",
-      "after": "Joel Hofer · confirmed",
       "source_quote_at": "2026-10-22T17:27:38.467857+00:00",
       "source": "NHL board",
       "note": "Review the matchup after a starter change; the baseline does not price individual goalie talent."
