@@ -1,29 +1,57 @@
 {
   "schema": 1,
-  "checked_at": "2026-10-24T04:57:48.234Z",
+  "checked_at": "2026-10-24T07:16:15.822Z",
   "coverage": {
+    "ncaaf": {
+      "status": "empty",
+      "reports": 0,
+      "checked_at": "2026-10-24T07:16:15.822Z"
+    },
     "nhl": {
       "status": "available",
-      "reports": 45,
-      "checked_at": "2026-10-24T04:57:48.234Z"
+      "reports": 46,
+      "checked_at": "2026-10-24T07:16:15.822Z"
     },
     "mlb": {
       "status": "available",
       "reports": 14,
-      "checked_at": "2026-10-24T04:57:48.234Z"
+      "checked_at": "2026-10-24T07:16:15.822Z"
     },
     "nfl": {
       "status": "available",
       "reports": 335,
-      "checked_at": "2026-10-24T04:57:48.234Z"
-    },
-    "ncaaf": {
-      "status": "empty",
-      "reports": 0,
-      "checked_at": "2026-10-24T04:57:48.234Z"
+      "checked_at": "2026-10-24T07:16:15.822Z"
     }
   },
   "events": [
+    {
+      "id": "starter|nhl:nhl:2026020176:home|2026-10-24T07:16:15.822Z",
+      "kind": "starter",
+      "observed_at": "2026-10-24T07:16:15.822Z",
+      "sport": "nhl",
+      "event": "TOR @ EDM",
+      "start": "2026-10-24T23:00:00+00:00",
+      "title": "NHL starting goalie updated",
+      "before": "Not announced",
+      "after": "Tristan Jarry · confirmed",
+      "source_quote_at": "2026-10-24T07:13:02.903592+00:00",
+      "source": "NHL board",
+      "note": "Review the matchup after a starter change; the baseline does not price individual goalie talent."
+    },
+    {
+      "id": "injury|nhl:20:Victor Hedman|2026-10-24T07:16:15.822Z",
+      "kind": "injury",
+      "observed_at": "2026-10-24T07:16:15.822Z",
+      "sport": "nhl",
+      "title": "New availability report",
+      "event": "Tampa Bay Lightning",
+      "pick": "Victor Hedman",
+      "before": "Not in the previous dated report",
+      "after": "Day-To-Day · Undisclosed",
+      "source_quote_at": "2026-10-24T04:55Z",
+      "source": "ESPN injuries",
+      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
+    },
     {
       "id": "odds|props|401873011|2026-10-25T13:30Z|Rushing yards|Alvin Kamara|over|DraftKings|2026-10-24T04:57:48.234Z",
       "kind": "odds",
@@ -2860,34 +2888,6 @@
       "before": "Questionable · Ankle",
       "after": "Active",
       "source_quote_at": "2026-10-23T17:22Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:1:Billy Bowman Jr.|2026-10-23T19:42:42.861Z",
-      "kind": "injury",
-      "observed_at": "2026-10-23T19:42:42.861Z",
-      "sport": "nfl",
-      "title": "New availability report",
-      "event": "Atlanta Falcons",
-      "pick": "Billy Bowman Jr.",
-      "before": "Not in the previous dated report",
-      "after": "Out · Hamstring",
-      "source_quote_at": "2026-10-23T17:21Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:1:Divine Deablo|2026-10-23T19:42:42.861Z",
-      "kind": "injury",
-      "observed_at": "2026-10-23T19:42:42.861Z",
-      "sport": "nfl",
-      "title": "Player availability changed",
-      "event": "Atlanta Falcons",
-      "pick": "Divine Deablo",
-      "before": "Questionable · Forearm",
-      "after": "Out · Forearm",
-      "source_quote_at": "2026-10-23T17:21Z",
       "source": "ESPN injuries",
       "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
     }
