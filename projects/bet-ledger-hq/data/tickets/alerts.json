@@ -1,29 +1,141 @@
 {
   "schema": 1,
-  "checked_at": "2026-10-24T18:30:27.455Z",
+  "checked_at": "2026-10-24T19:02:51.048Z",
   "coverage": {
+    "nfl": {
+      "status": "available",
+      "reports": 341,
+      "checked_at": "2026-10-24T19:02:51.048Z"
+    },
     "ncaaf": {
       "status": "empty",
       "reports": 0,
-      "checked_at": "2026-10-24T18:30:27.455Z"
-    },
-    "nfl": {
-      "status": "available",
-      "reports": 342,
-      "checked_at": "2026-10-24T18:30:27.455Z"
+      "checked_at": "2026-10-24T19:02:51.048Z"
     },
     "nhl": {
       "status": "available",
-      "reports": 43,
-      "checked_at": "2026-10-24T18:30:27.455Z"
+      "reports": 44,
+      "checked_at": "2026-10-24T19:02:51.048Z"
     },
     "mlb": {
       "status": "available",
       "reports": 14,
-      "checked_at": "2026-10-24T18:30:27.455Z"
+      "checked_at": "2026-10-24T19:02:51.048Z"
     }
   },
   "events": [
+    {
+      "id": "starter|nhl:nhl:2026020169:home|2026-10-24T19:02:51.048Z",
+      "kind": "starter",
+      "observed_at": "2026-10-24T19:02:51.048Z",
+      "sport": "nhl",
+      "event": "LA @ NJ",
+      "start": "2026-10-24T19:30:00+00:00",
+      "title": "NHL starting goalie updated",
+      "before": "Jake Allen",
+      "after": "Jake Allen · confirmed",
+      "source_quote_at": "2026-10-24T18:59:53.728674+00:00",
+      "source": "NHL board",
+      "note": "Review the matchup after a starter change; the baseline does not price individual goalie talent."
+    },
+    {
+      "id": "starter|nhl:nhl:2026020178:away|2026-10-24T19:02:51.048Z",
+      "kind": "starter",
+      "observed_at": "2026-10-24T19:02:51.048Z",
+      "sport": "nhl",
+      "event": "DET @ CGY",
+      "start": "2026-10-25T02:00:00+00:00",
+      "title": "NHL starting goalie updated",
+      "before": "Michal Postava",
+      "after": "John Gibson · confirmed",
+      "source_quote_at": "2026-10-24T18:59:53.728674+00:00",
+      "source": "NHL board",
+      "note": "Review the matchup after a starter change; the baseline does not price individual goalie talent."
+    },
+    {
+      "id": "starter|nhl:nhl:2026020178:home|2026-10-24T19:02:51.048Z",
+      "kind": "starter",
+      "observed_at": "2026-10-24T19:02:51.048Z",
+      "sport": "nhl",
+      "event": "DET @ CGY",
+      "start": "2026-10-25T02:00:00+00:00",
+      "title": "NHL starting goalie updated",
+      "before": "Devin Cooley",
+      "after": "Devin Cooley · confirmed",
+      "source_quote_at": "2026-10-24T18:59:53.728674+00:00",
+      "source": "NHL board",
+      "note": "Review the matchup after a starter change; the baseline does not price individual goalie talent."
+    },
+    {
+      "id": "starter|nhl:nhl:2026020179:away|2026-10-24T19:02:51.048Z",
+      "kind": "starter",
+      "observed_at": "2026-10-24T19:02:51.048Z",
+      "sport": "nhl",
+      "event": "MIN @ SEA",
+      "start": "2026-10-25T02:00:00+00:00",
+      "title": "NHL starting goalie updated",
+      "before": "Jesper Wallstedt",
+      "after": "Jesper Wallstedt · confirmed",
+      "source_quote_at": "2026-10-24T18:59:53.728674+00:00",
+      "source": "NHL board",
+      "note": "Review the matchup after a starter change; the baseline does not price individual goalie talent."
+    },
+    {
+      "id": "injury|nfl:11:Rigoberto Sanchez|2026-10-24T19:02:51.048Z",
+      "kind": "injury",
+      "observed_at": "2026-10-24T19:02:51.048Z",
+      "sport": "nfl",
+      "title": "Player availability changed",
+      "event": "Indianapolis Colts",
+      "pick": "Rigoberto Sanchez",
+      "before": "Active",
+      "after": "Active · Sanchez (foot) no longer holds any injury designation ahead of Sunday's game against the Vikings.",
+      "source_quote_at": "2026-10-24T18:36Z",
+      "source": "ESPN injuries",
+      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
+    },
+    {
+      "id": "injury|nfl:12:Cooper McDonald|2026-10-24T19:02:51.048Z",
+      "kind": "injury",
+      "observed_at": "2026-10-24T19:02:51.048Z",
+      "sport": "nfl",
+      "title": "Player availability changed",
+      "event": "Kansas City Chiefs",
+      "pick": "Cooper McDonald",
+      "before": "Active",
+      "after": "Active · The Chiefs activated McDonald (knee) from injured reserve Saturday.",
+      "source_quote_at": "2026-10-24T18:54Z",
+      "source": "ESPN injuries",
+      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
+    },
+    {
+      "id": "injury|nhl:9:Oskar Back|2026-10-24T19:02:51.048Z",
+      "kind": "injury",
+      "observed_at": "2026-10-24T19:02:51.048Z",
+      "sport": "nhl",
+      "title": "New availability report",
+      "event": "Dallas Stars",
+      "pick": "Oskar Back",
+      "before": "Not in the previous dated report",
+      "after": "Injured Reserve · Finger",
+      "source_quote_at": "2026-10-24T18:32Z",
+      "source": "ESPN injuries",
+      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
+    },
+    {
+      "id": "injury|nhl:9:Esa Lindell|2026-10-24T19:02:51.048Z",
+      "kind": "injury",
+      "observed_at": "2026-10-24T19:02:51.048Z",
+      "sport": "nhl",
+      "title": "New availability report",
+      "event": "Dallas Stars",
+      "pick": "Esa Lindell",
+      "before": "Not in the previous dated report",
+      "after": "Injured Reserve · Lower Body",
+      "source_quote_at": "2026-10-24T18:25Z",
+      "source": "ESPN injuries",
+      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
+    },
     {
       "id": "odds|ncaaf|401860906|2026-10-24T23:30Z|TOTAL||under|DraftKings|2026-10-24T18:30:27.455Z",
       "kind": "odds",
@@ -2804,118 +2916,6 @@
       "before": "Not in the previous dated report",
       "after": "Out · Elbow",
       "source_quote_at": "2026-10-23T20:49Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|mlb:28:Tyler Zuber|2026-10-23T21:25:04.626Z",
-      "kind": "injury",
-      "observed_at": "2026-10-23T21:25:04.626Z",
-      "sport": "mlb",
-      "title": "New availability report",
-      "event": "Miami Marlins",
-      "pick": "Tyler Zuber",
-      "before": "Not in the previous dated report",
-      "after": "Out · Elbow",
-      "source_quote_at": "2026-10-23T20:54Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|mlb:28:Anthony Bender|2026-10-23T21:25:04.626Z",
-      "kind": "injury",
-      "observed_at": "2026-10-23T21:25:04.626Z",
-      "sport": "mlb",
-      "title": "New availability report",
-      "event": "Miami Marlins",
-      "pick": "Anthony Bender",
-      "before": "Not in the previous dated report",
-      "after": "Out · Lower Leg",
-      "source_quote_at": "2026-10-23T20:54Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|mlb:28:Pete Fairbanks|2026-10-23T21:25:04.626Z",
-      "kind": "injury",
-      "observed_at": "2026-10-23T21:25:04.626Z",
-      "sport": "mlb",
-      "title": "New availability report",
-      "event": "Miami Marlins",
-      "pick": "Pete Fairbanks",
-      "before": "Not in the previous dated report",
-      "after": "Out · Shoulder",
-      "source_quote_at": "2026-10-23T20:53Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|mlb:9:Byron Buxton|2026-10-23T21:25:04.626Z",
-      "kind": "injury",
-      "observed_at": "2026-10-23T21:25:04.626Z",
-      "sport": "mlb",
-      "title": "New availability report",
-      "event": "Minnesota Twins",
-      "pick": "Byron Buxton",
-      "before": "Not in the previous dated report",
-      "after": "Out · Hip",
-      "source_quote_at": "2026-10-23T20:55Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|mlb:9:Anthony Banda|2026-10-23T21:25:04.626Z",
-      "kind": "injury",
-      "observed_at": "2026-10-23T21:25:04.626Z",
-      "sport": "mlb",
-      "title": "New availability report",
-      "event": "Minnesota Twins",
-      "pick": "Anthony Banda",
-      "before": "Not in the previous dated report",
-      "after": "Out · Lat",
-      "source_quote_at": "2026-10-23T20:55Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|mlb:21:Jared Young|2026-10-23T21:25:04.626Z",
-      "kind": "injury",
-      "observed_at": "2026-10-23T21:25:04.626Z",
-      "sport": "mlb",
-      "title": "New availability report",
-      "event": "New York Mets",
-      "pick": "Jared Young",
-      "before": "Not in the previous dated report",
-      "after": "Out · Concussion",
-      "source_quote_at": "2026-10-23T20:56Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|mlb:14:Jameson Taillon|2026-10-23T21:25:04.626Z",
-      "kind": "injury",
-      "observed_at": "2026-10-23T21:25:04.626Z",
-      "sport": "mlb",
-      "title": "New availability report",
-      "event": "Toronto Blue Jays",
-      "pick": "Jameson Taillon",
-      "before": "Not in the previous dated report",
-      "after": "Out · Elbow",
-      "source_quote_at": "2026-10-23T20:37Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:22:Bam Knight|2026-10-23T21:25:04.626Z",
-      "kind": "injury",
-      "observed_at": "2026-10-23T21:25:04.626Z",
-      "sport": "nfl",
-      "title": "New availability report",
-      "event": "Arizona Cardinals",
-      "pick": "Bam Knight",
-      "before": "Not in the previous dated report",
-      "after": "Active · Jeremiyah Love (ankle) will be sidelined for Sunday's game against the Broncos, so Knight and Tyler Allgeier will be used in tandem in Love's absence, Darren Urban of the Cardinals",
-      "source_quote_at": "2026-10-23T21:10Z",
       "source": "ESPN injuries",
       "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
     }
