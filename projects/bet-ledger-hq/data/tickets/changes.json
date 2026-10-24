@@ -407,11 +407,11 @@
       }
     },
     "wnba": {
-      "stamp": "2026-10-23T21:37:18+00:00",
+      "stamp": "2026-10-24T04:54:28+00:00",
       "rows": {}
     },
     "ncaaf": {
-      "stamp": "2026-10-24T01:14:22+00:00",
+      "stamp": "2026-10-24T04:51:58+00:00",
       "rows": {
         "ncaaf|401858509|2026-10-31T23:30Z|TOTAL||over": {
           "key": "ncaaf",
@@ -436,7 +436,7 @@
           "book": "DraftKings",
           "tier": "GOOD",
           "score": 0.05708089737122811,
-          "quote": "2026-10-24T01:13:53.886814+00:00",
+          "quote": "2026-10-24T04:51:48.245912+00:00",
           "review": [
             "Availability reports not confirmed."
           ],
@@ -495,7 +495,7 @@
           "book": "DraftKings",
           "tier": "GOOD",
           "score": 0.05707741783674711,
-          "quote": "2026-10-24T01:13:53.886384+00:00",
+          "quote": "2026-10-24T04:51:48.245710+00:00",
           "review": [
             "Availability reports not confirmed."
           ],
@@ -554,7 +554,7 @@
           "book": "DraftKings",
           "tier": "GOOD",
           "score": 0.05665864569991372,
-          "quote": "2026-10-24T01:13:53.221801+00:00",
+          "quote": "2026-10-24T04:51:47.274299+00:00",
           "review": [
             "Availability reports not confirmed."
           ],
@@ -613,7 +613,7 @@
           "book": "DraftKings",
           "tier": "GOOD",
           "score": 0.05575289243493921,
-          "quote": "2026-10-24T01:13:53.220619+00:00",
+          "quote": "2026-10-24T04:51:47.273706+00:00",
           "review": [
             "Availability reports not confirmed."
           ],
@@ -652,41 +652,43 @@
       }
     },
     "nfl": {
-      "stamp": "2026-10-24T01:13:52+00:00",
+      "stamp": "2026-10-24T04:51:46+00:00",
       "rows": {}
     },
     "mlb": {
-      "stamp": "2026-10-23T21:36:11+00:00",
+      "stamp": "2026-10-24T04:53:32+00:00",
       "rows": {
-        "mlb|849805|2026-10-24T00:00:00Z|ML||away": {
+        "mlb|849802|2026-10-25T00:00:00Z|ML||away": {
           "key": "mlb",
           "app": "mlb-edge",
           "sport": "MLB",
           "event": "TB @ MIL",
-          "eventId": "849805",
+          "eventId": "849802",
           "player": "",
           "playerId": "",
           "side": "away",
           "home": "MIL",
           "away": "TB",
           "version": "unversioned",
-          "start": "2026-10-24T00:00:00Z",
-          "when": 1792800000000,
-          "day": "2026-10-23",
+          "start": "2026-10-25T00:00:00Z",
+          "when": 1792886400000,
+          "day": "2026-10-24",
           "pick": "TB ML",
           "market": "ML",
           "line": null,
           "sourceLine": null,
-          "price": 159,
+          "price": 106,
           "book": "DraftKings",
-          "tier": "BEST BET",
-          "score": 0.0369,
-          "quote": "2026-10-23T21:36:02.894692+00:00",
-          "review": [],
+          "tier": "GOOD",
+          "score": 0.0258,
+          "quote": "2026-10-24T04:52:04.297713+00:00",
+          "review": [
+            "Projected batting orders; lineups not confirmed."
+          ],
           "value": null,
-          "probability": 0.4034,
-          "fair": 148,
-          "worst": 153,
+          "probability": 0.499,
+          "fair": 101,
+          "worst": 105,
           "minReturn": 0.02,
           "quoteStatus": "observed",
           "referenceOnly": false,
@@ -699,15 +701,31 @@
       }
     },
     "nhl": {
-      "stamp": "2026-10-24T01:56:47.394010+00:00",
+      "stamp": "2026-10-24T04:54:30.105863+00:00",
       "rows": {}
     },
     "nba": {
-      "stamp": "2026-10-24T01:56:51.845651+00:00",
+      "stamp": "2026-10-24T04:51:21.305799+00:00",
       "rows": {}
     }
   },
   "events": [
+    {
+      "id": "mlb|2026-10-24T04:53:32+00:00|mlb|849802|2026-10-25T00:00:00Z|ML||away",
+      "sport": "mlb",
+      "observed_at": "2026-10-24T04:57:48.234Z",
+      "published_at": "2026-10-24T04:53:32+00:00",
+      "day": "2026-10-24",
+      "event": "TB @ MIL",
+      "pick": "TB ML",
+      "changes": [
+        {
+          "field": "qualified list",
+          "from": "Not in previous snapshot",
+          "to": "Listed"
+        }
+      ]
+    },
     {
       "id": "ncaaf|2026-10-24T01:14:22+00:00|ncaaf|401866476|2026-10-24T17:00Z|TOTAL||over",
       "sport": "ncaaf",
@@ -10171,33 +10189,7 @@
           "to": 2
         }
       ]
-    },
-    {
-      "id": "ncaaf|2026-10-13T00:02:48+00:00|ncaaf|401866478|2026-10-17T19:30Z|TOTAL||over",
-      "sport": "ncaaf",
-      "observed_at": "2026-10-13T00:04:12.928Z",
-      "published_at": "2026-10-13T00:02:48+00:00",
-      "day": "2026-10-17",
-      "event": "AKR @ M-OH",
-      "pick": "Over 47.5",
-      "changes": [
-        {
-          "field": "price",
-          "from": -118,
-          "to": -105
-        },
-        {
-          "field": "line",
-          "from": 46.5,
-          "to": 47.5
-        },
-        {
-          "field": "rank",
-          "from": 2,
-          "to": 1
-        }
-      ]
     }
   ],
-  "checked_at": "2026-10-24T01:59:21.508Z"
+  "checked_at": "2026-10-24T04:57:48.234Z"
 }
