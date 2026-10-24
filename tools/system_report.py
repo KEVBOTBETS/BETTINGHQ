@@ -25,7 +25,7 @@ def build(root=ROOT,now=None,staged=None):
    meta=read(path/'latest.json',{});source=meta.get('games',[]);board=[]
   if not isinstance(source,list):source=[]
   if not isinstance(board,list):board=[]
-  publication=meta.get('generated_at');fresh=age(publication,now,6);upcoming=[];priced=qualified=forecasts=0;book_set=set();reasons=Counter()
+  publication=meta.get('generated_at');fresh=age(publication,now,4 if sport=='ncaaf' else 6);upcoming=[];priced=qualified=forecasts=0;book_set=set();reasons=Counter()
   for g in source:
    start=g.get('tipoff') or g.get('start') or g.get('date');at=instant(start)
    if not at or not now<at<now+timedelta(days=14) or g.get('completed') or g.get('canceled') or g.get('postponed') or g.get('state') in ('post','in','unknown'):continue
@@ -43,9 +43,11 @@ def build(root=ROOT,now=None,staged=None):
      r['pick']=r.get('label') or r.get('selection')
      r['odds_observed_at']=r.get('odds_observed_at') or (g.get('odds') or {}).get('fetched_at')
     price=number(r.get('price_american',r.get('price')));book=str(r.get('book') or '').strip();stamp=r.get('odds_observed_at') or r.get('observed_at') or r.get('odds_fetched_at') or r.get('updated_at')
-    quote_fresh=age(stamp,now,1.5 if sport in ('nhl','nba') else 4)
+    quote_fresh=age(stamp,now,1.5 if sport in ('nhl','nba') else 3 if sport=='ncaaf' else 4)
     valid=decimal(price) is not None and book and r.get('odds_verified') is not False and r.get('price_source')!='model' and not r.get('reference_only') and r.get('quote_status') in (None,'observed')
-    passed=r.get('value_policy',{}).get('passes',True) and fresh and quote_fresh and valid and not r.get('held') and not r.get('filtered') and not r.get('validation_policy',{}).get('paused') and (number(r.get('stake')) or 0)>0
+    # College publishes model tiers without server-side financial allocations.
+    source_qualified=r.get('tier') in ('BEST BET','GOOD','LEAN') if sport=='ncaaf' else (number(r.get('stake')) or 0)>0
+    passed=r.get('value_policy',{}).get('passes',True) and fresh and quote_fresh and valid and not r.get('held') and not r.get('filtered') and not r.get('validation_policy',{}).get('paused') and source_qualified
     selection_line=number(r.get('line'))
     if sport in ('nfl','ncaaf','mlb') and r.get('market')=='ATS' and r.get('side')=='away' and selection_line is not None:selection_line=-selection_line
     record={'market':r.get('market'),'side':r.get('side'),'line':selection_line,'pick':r.get('pick') or r.get('selection'),'price':price,'book':book,'observed_at':stamp,

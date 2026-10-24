@@ -21,3 +21,12 @@ class SystemReport(unittest.TestCase):
    root=Path(tmp);self.make(root,'ncaaf','meta',{'generated_at':NOW.isoformat()});g={'game_id':'g','date':'2026-10-12T23:00Z','state':'pre','home':'A','away':'B','p_home':.6,'projection':{'ratings_known':True,'mu':3,'proj_home_pts':28.2,'proj_away_pts':25.2,'proj_total':53.4,'market_total':57}}
    self.make(root,'ncaaf','games',[g]);r=build(root,NOW)['games'][0];self.assertEqual(r['score_projection']['total'],53.4);self.assertEqual(r['score_projection']['home'],28.2)
    g['projection']['ratings_known']=False;self.make(root,'ncaaf','games',[g]);self.assertIsNone(build(root,NOW)['games'][0]['score_projection'])
+
+ def test_college_public_tiers_qualify_without_private_stakes(self):
+  with tempfile.TemporaryDirectory() as tmp:
+   root=Path(tmp);self.make(root,'ncaaf','meta',{'generated_at':NOW.isoformat()});self.make(root,'ncaaf','games',[{'game_id':'g','date':'2026-10-12T23:00Z','state':'pre','home':'A','away':'B','p_home':.6}])
+   q={'game_id':'g','market':'TOTAL','side':'over','line':50.5,'pick':'Over 50.5','price':-110,'book':'Book','model_prob':.6,'tier':'GOOD','odds_verified':True,'odds_observed_at':NOW.isoformat(),'value_policy':{'passes':True}}
+   self.make(root,'ncaaf','board',[q]);report=build(root,NOW);self.assertTrue(report['games'][0]['qualified']);self.assertEqual(next(f for f in report['feeds'] if f['sport']=='ncaaf')['qualified_games'],1)
+   for change in [{'tier':'PASS'},{'held':True},{'filtered':'risk hold'},{'value_policy':{'passes':False}},{'validation_policy':{'paused':True}},{'odds_observed_at':'2026-10-12T12:30Z'}]:
+    self.make(root,'ncaaf','board',[{**q,**change}]);self.assertFalse(build(root,NOW)['games'][0]['qualified'],str(change))
+   self.make(root,'ncaaf','board',[q]);self.make(root,'ncaaf','meta',{'generated_at':'2026-10-12T11:30Z'});self.assertFalse(build(root,NOW)['games'][0]['qualified'])
