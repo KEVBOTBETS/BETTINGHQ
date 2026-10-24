@@ -1,29 +1,43 @@
 {
   "schema": 1,
-  "checked_at": "2026-10-24T23:34:42.695Z",
+  "checked_at": "2026-10-24T23:41:40.428Z",
   "coverage": {
-    "nfl": {
-      "status": "available",
-      "reports": 340,
-      "checked_at": "2026-10-24T23:34:42.695Z"
-    },
-    "mlb": {
-      "status": "available",
-      "reports": 13,
-      "checked_at": "2026-10-24T23:34:42.695Z"
-    },
     "nhl": {
       "status": "available",
       "reports": 42,
-      "checked_at": "2026-10-24T23:34:42.695Z"
+      "checked_at": "2026-10-24T23:41:40.428Z"
     },
     "ncaaf": {
       "status": "empty",
       "reports": 0,
-      "checked_at": "2026-10-24T23:34:42.695Z"
+      "checked_at": "2026-10-24T23:41:40.428Z"
+    },
+    "mlb": {
+      "status": "available",
+      "reports": 13,
+      "checked_at": "2026-10-24T23:41:40.428Z"
+    },
+    "nfl": {
+      "status": "available",
+      "reports": 341,
+      "checked_at": "2026-10-24T23:41:40.428Z"
     }
   },
   "events": [
+    {
+      "id": "injury|nfl:19:Jalin Hyatt|2026-10-24T23:41:40.428Z",
+      "kind": "injury",
+      "observed_at": "2026-10-24T23:41:40.428Z",
+      "sport": "nfl",
+      "title": "New availability report",
+      "event": "New York Giants",
+      "pick": "Jalin Hyatt",
+      "before": "Not in the previous dated report",
+      "after": "Active · The Giants elevated Hyatt from the practice squad to the active roster Saturday, Dan Duggan of The Athletic reports.",
+      "source_quote_at": "2026-10-24T23:33Z",
+      "source": "ESPN injuries",
+      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
+    },
     {
       "id": "odds|mlb|849802|2026-10-25T00:00:00Z|RL||away|DraftKings|2026-10-24T23:34:42.695Z",
       "kind": "odds",
@@ -2892,20 +2906,6 @@
       "before": "Injured Reserve · Toe",
       "after": "Injured Reserve · Knee",
       "source_quote_at": "2026-10-22T01:17Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:3:Montez Sweat|2026-10-24T01:18:31.145Z",
-      "kind": "injury",
-      "observed_at": "2026-10-24T01:18:31.145Z",
-      "sport": "nfl",
-      "title": "Player availability changed",
-      "event": "Chicago Bears",
-      "pick": "Montez Sweat",
-      "before": "Active",
-      "after": "Active · The NFL reinstated Sweat after he served a two-game suspension for violating the league's performance-enhancing substances policy.",
-      "source_quote_at": "2026-10-24T00:37Z",
       "source": "ESPN injuries",
       "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
     }
