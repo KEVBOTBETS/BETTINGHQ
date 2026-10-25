@@ -1,29 +1,85 @@
 {
   "schema": 1,
-  "checked_at": "2026-10-25T05:06:06.240Z",
+  "checked_at": "2026-10-25T06:47:15.846Z",
   "coverage": {
+    "nhl": {
+      "status": "available",
+      "reports": 42,
+      "checked_at": "2026-10-25T06:47:15.846Z"
+    },
     "ncaaf": {
       "status": "empty",
       "reports": 0,
-      "checked_at": "2026-10-25T05:06:06.240Z"
-    },
-    "nhl": {
-      "status": "available",
-      "reports": 41,
-      "checked_at": "2026-10-25T05:06:06.240Z"
-    },
-    "nfl": {
-      "status": "available",
-      "reports": 320,
-      "checked_at": "2026-10-25T05:06:06.240Z"
+      "checked_at": "2026-10-25T06:47:15.846Z"
     },
     "mlb": {
       "status": "available",
       "reports": 12,
-      "checked_at": "2026-10-25T05:06:06.240Z"
+      "checked_at": "2026-10-25T06:47:15.846Z"
+    },
+    "nfl": {
+      "status": "available",
+      "reports": 320,
+      "checked_at": "2026-10-25T06:47:15.846Z"
     }
   },
   "events": [
+    {
+      "id": "starter|nhl:nhl:2026020180:away|2026-10-25T06:47:15.846Z",
+      "kind": "starter",
+      "observed_at": "2026-10-25T06:47:15.846Z",
+      "sport": "nhl",
+      "event": "FLA @ CHI",
+      "start": "2026-10-25T19:00:00+00:00",
+      "title": "NHL starting goalie updated",
+      "before": "Not announced",
+      "after": "Akira Schmid · confirmed",
+      "source_quote_at": "2026-10-25T06:44:41.419620+00:00",
+      "source": "NHL board",
+      "note": "Review the matchup after a starter change; the baseline does not price individual goalie talent."
+    },
+    {
+      "id": "starter|nhl:nhl:2026020184:away|2026-10-25T06:47:15.846Z",
+      "kind": "starter",
+      "observed_at": "2026-10-25T06:47:15.846Z",
+      "sport": "nhl",
+      "event": "MIN @ VAN",
+      "start": "2026-10-26T02:00:00+00:00",
+      "title": "NHL starting goalie updated",
+      "before": "Not announced",
+      "after": "Calvin Pickard · confirmed",
+      "source_quote_at": "2026-10-25T06:44:41.419620+00:00",
+      "source": "NHL board",
+      "note": "Review the matchup after a starter change; the baseline does not price individual goalie talent."
+    },
+    {
+      "id": "injury|nhl:20:Zemgus Girgensons|2026-10-25T06:47:15.846Z",
+      "kind": "injury",
+      "observed_at": "2026-10-25T06:47:15.846Z",
+      "sport": "nhl",
+      "title": "New availability report",
+      "event": "Tampa Bay Lightning",
+      "pick": "Zemgus Girgensons",
+      "before": "Not in the previous dated report",
+      "after": "Day-To-Day · Undisclosed",
+      "source_quote_at": "2026-10-25T05:10Z",
+      "source": "ESPN injuries",
+      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
+    },
+    {
+      "id": "injury|nfl:3:Anthony Johnson Jr.|2026-10-25T06:47:15.846Z",
+      "kind": "injury",
+      "observed_at": "2026-10-25T06:47:15.846Z",
+      "sport": "nfl",
+      "title": "Player availability changed",
+      "event": "Chicago Bears",
+      "pick": "Anthony Johnson Jr.",
+      "before": "Out · Undisclosed",
+      "after": "Injured Reserve · Undisclosed",
+      "source_quote_at": "2026-10-25T06:00Z",
+      "source": "ESPN injuries",
+      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
+    },
     {
       "id": "odds|props|401873011|2026-10-25T13:30Z|Rushing yards|Alvin Kamara|over|DraftKings|2026-10-25T05:06:06.240Z",
       "kind": "odds",
@@ -2882,66 +2938,6 @@
       "source_quote_at": "2026-10-24T04:53:40.591010+00:00",
       "source": "Existing Props board",
       "note": "Your ticket keeps its original odds. Recheck the live book before placing a new wager."
-    },
-    {
-      "id": "odds|props|401873011|2026-10-25T13:30Z|Receiving yards|Juwan Johnson|over|DraftKings|2026-10-24T04:57:48.234Z",
-      "kind": "odds",
-      "observed_at": "2026-10-24T04:57:48.234Z",
-      "sport": "props",
-      "event": "Pittsburgh Steelers @ New Orleans Saints",
-      "start": "2026-10-25T13:30Z",
-      "pick": "Juwan Johnson — Over 30.5 Receiving yards",
-      "title": "Published odds changed",
-      "before": "-113 · line 32.5",
-      "after": "-110 · line 33.5",
-      "book": "DraftKings",
-      "source_quote_at": "2026-10-24T04:53:40.591010+00:00",
-      "source": "Existing Props board",
-      "note": "Your ticket keeps its original odds. Recheck the live book before placing a new wager."
-    },
-    {
-      "id": "odds|props|401873019|2026-10-25T20:05Z|Receiving yards|Michael Wilson|over|Fanatics Sportsbook|2026-10-24T04:57:48.234Z",
-      "kind": "odds",
-      "observed_at": "2026-10-24T04:57:48.234Z",
-      "sport": "props",
-      "event": "Denver Broncos @ Arizona Cardinals",
-      "start": "2026-10-25T20:05Z",
-      "pick": "Michael Wilson — Over 45.5 Receiving yards",
-      "title": "Published odds changed",
-      "before": "-125 · line 45.5",
-      "after": "-110 · line 50.5",
-      "book": "Fanatics Sportsbook",
-      "source_quote_at": "2026-10-24T04:53:40.591010+00:00",
-      "source": "Existing Props board",
-      "note": "Your ticket keeps its original odds. Recheck the live book before placing a new wager."
-    },
-    {
-      "id": "injury|nfl:22:Wydett Williams Jr.|2026-10-24T04:57:48.234Z",
-      "kind": "injury",
-      "observed_at": "2026-10-24T04:57:48.234Z",
-      "sport": "nfl",
-      "title": "Player availability changed",
-      "event": "Arizona Cardinals",
-      "pick": "Wydett Williams Jr.",
-      "before": "Active",
-      "after": "Active · Williams (concussion) does not have an injury designation against the Broncos on Sunday, Zach Gershman of the Cardinals' official site reports.",
-      "source_quote_at": "2026-10-24T02:14Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:3:Sam Roush|2026-10-24T04:57:48.234Z",
-      "kind": "injury",
-      "observed_at": "2026-10-24T04:57:48.234Z",
-      "sport": "nfl",
-      "title": "New availability report",
-      "event": "Chicago Bears",
-      "pick": "Sam Roush",
-      "before": "Not in the previous dated report",
-      "after": "Active · Roush is expected to get more work on offense after Cole Kmet (knee) landed on injured reserve Friday.",
-      "source_quote_at": "2026-10-24T04:13Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
     }
   ]
 }
