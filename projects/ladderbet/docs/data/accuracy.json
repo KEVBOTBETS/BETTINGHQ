@@ -1,91 +1,91 @@
 {
  "schema": 1,
- "generated_at": "2026-10-24T23:32:35.453250+00:00",
+ "generated_at": "2026-10-25T05:03:00.844277+00:00",
  "label": "Ladder screened-option accuracy",
  "method": "Every screened option is saved before the event, whether or not you choose it. Probabilities here are de-vigged market estimates, not an independent sports model. First pre-event snapshot, frozen line and price. All model picks, including PASS/AVOID and unstaked picks. One preferred side per event/market in pick statistics; the complete priced-side audit is separate. One hypothetical unit per pick; no actual wagers are created. Missing results remain pending.",
  "overall": {
-  "logged": 402,
-  "wins": 172,
-  "losses": 92,
+  "logged": 405,
+  "wins": 176,
+  "losses": 96,
   "pushes": 1,
   "voids": 0,
-  "settled": 265,
-  "pending": 137,
-  "win_rate": 0.6515151515151515,
-  "units": 1.294,
-  "roi": 0.004883003773584909,
-  "brier": 0.229
+  "settled": 273,
+  "pending": 132,
+  "win_rate": 0.6470588235294118,
+  "units": -0.503,
+  "roi": -0.0018425567765567733,
+  "brier": 0.22968
  },
  "all_calls": {
-  "logged": 402,
-  "wins": 172,
-  "losses": 92,
+  "logged": 405,
+  "wins": 176,
+  "losses": 96,
   "pushes": 1,
   "voids": 0,
-  "settled": 265,
-  "pending": 137,
-  "win_rate": 0.6515151515151515,
-  "units": 1.294,
-  "roi": 0.004883003773584909,
-  "brier": 0.229
+  "settled": 273,
+  "pending": 132,
+  "win_rate": 0.6470588235294118,
+  "units": -0.503,
+  "roi": -0.0018425567765567733,
+  "brier": 0.22968
  },
  "by_tier": {
   "SCREENED": {
-   "logged": 402,
-   "wins": 172,
-   "losses": 92,
+   "logged": 405,
+   "wins": 176,
+   "losses": 96,
    "pushes": 1,
    "voids": 0,
-   "settled": 265,
-   "pending": 137,
-   "win_rate": 0.6515151515151515,
-   "units": 1.294,
-   "roi": 0.004883003773584909,
-   "brier": 0.229
+   "settled": 273,
+   "pending": 132,
+   "win_rate": 0.6470588235294118,
+   "units": -0.503,
+   "roi": -0.0018425567765567733,
+   "brier": 0.22968
   }
  },
  "by_market": {
   "ML": {
-   "logged": 402,
-   "wins": 172,
-   "losses": 92,
+   "logged": 405,
+   "wins": 176,
+   "losses": 96,
    "pushes": 1,
    "voids": 0,
-   "settled": 265,
-   "pending": 137,
-   "win_rate": 0.6515151515151515,
-   "units": 1.294,
-   "roi": 0.004883003773584909,
-   "brier": 0.229
+   "settled": 273,
+   "pending": 132,
+   "win_rate": 0.6470588235294118,
+   "units": -0.503,
+   "roi": -0.0018425567765567733,
+   "brier": 0.22968
   }
  },
  "by_version": {
   "2026-09-06-ev2": {
-   "logged": 402,
-   "wins": 172,
-   "losses": 92,
+   "logged": 405,
+   "wins": 176,
+   "losses": 96,
    "pushes": 1,
    "voids": 0,
-   "settled": 265,
-   "pending": 137,
-   "win_rate": 0.6515151515151515,
-   "units": 1.294,
-   "roi": 0.004883003773584909,
-   "brier": 0.229
+   "settled": 273,
+   "pending": 132,
+   "win_rate": 0.6470588235294118,
+   "units": -0.503,
+   "roi": -0.0018425567765567733,
+   "brier": 0.22968
   }
  },
  "calibration": [
   {
    "bucket": "50\u201360%",
-   "n": 97,
-   "predicted": 0.58707,
-   "actual": 0.59794
+   "n": 101,
+   "predicted": 0.58702,
+   "actual": 0.59406
   },
   {
    "bucket": "60\u201370%",
-   "n": 167,
-   "predicted": 0.64201,
-   "actual": 0.68263
+   "n": 171,
+   "predicted": 0.64183,
+   "actual": 0.67836
   }
  ],
  "games": {
@@ -125,6 +125,27 @@
  "records": [
   {
    "kind": "call",
+   "league": "nfl",
+   "event_id": "401873009",
+   "start": "2026-10-27T00:15Z",
+   "matchup": "Dallas Cowboys @ Philadelphia Eagles",
+   "pick": "Dallas Cowboys",
+   "market": "ML",
+   "side": "away",
+   "price": -218.0,
+   "probability": 0.6575,
+   "tier": "SCREENED",
+   "edge": 0,
+   "book": "DraftKings",
+   "three_way": false,
+   "selected": true,
+   "id": "call:nfl:401873009::ML:away",
+   "captured_at": "2026-10-25T05:02:48.865649+00:00",
+   "result": "Pending",
+   "version": "2026-09-06-ev2"
+  },
+  {
+   "kind": "call",
    "league": "nhl",
    "event_id": "401892581",
    "start": "2026-10-26T02:00Z",
@@ -141,6 +162,27 @@
    "selected": true,
    "id": "call:nhl:401892581::ML:away",
    "captured_at": "2026-10-24T14:59:51.777233+00:00",
+   "result": "Pending",
+   "version": "2026-09-06-ev2"
+  },
+  {
+   "kind": "call",
+   "league": "nba",
+   "event_id": "401909867",
+   "start": "2026-10-26T01:00Z",
+   "matchup": "Memphis Grizzlies @ Sacramento Kings",
+   "pick": "Memphis Grizzlies",
+   "market": "ML",
+   "side": "away",
+   "price": -170.0,
+   "probability": 0.6038,
+   "tier": "SCREENED",
+   "edge": 0,
+   "book": "DraftKings",
+   "three_way": false,
+   "selected": true,
+   "id": "call:nba:401909867::ML:away",
+   "captured_at": "2026-10-25T05:02:48.865649+00:00",
    "result": "Pending",
    "version": "2026-09-06-ev2"
   },
@@ -204,6 +246,27 @@
    "selected": true,
    "id": "call:nhl:401892579::ML:home",
    "captured_at": "2026-10-24T14:59:51.777233+00:00",
+   "result": "Pending",
+   "version": "2026-09-06-ev2"
+  },
+  {
+   "kind": "call",
+   "league": "nba",
+   "event_id": "401909861",
+   "start": "2026-10-25T21:00Z",
+   "matchup": "Los Angeles Lakers @ Utah Jazz",
+   "pick": "Los Angeles Lakers",
+   "market": "ML",
+   "side": "away",
+   "price": -238.0,
+   "probability": 0.675,
+   "tier": "SCREENED",
+   "edge": 0,
+   "book": "DraftKings",
+   "three_way": false,
+   "selected": true,
+   "id": "call:nba:401909861::ML:away",
+   "captured_at": "2026-10-25T05:02:48.865649+00:00",
    "result": "Pending",
    "version": "2026-09-06-ev2"
   },
@@ -477,8 +540,13 @@
    "selected": true,
    "id": "call:ncaaf:401856732::ML:home",
    "captured_at": "2026-10-22T23:47:41.725732+00:00",
-   "result": "Pending",
-   "version": "2026-09-06-ev2"
+   "result": "Win",
+   "version": "2026-09-06-ev2",
+   "units": 0.617284,
+   "actual": null,
+   "final_home": 34.0,
+   "final_away": 27.0,
+   "graded_at": "2026-10-25T05:03:00.837370+00:00"
   },
   {
    "kind": "call",
@@ -498,8 +566,13 @@
    "selected": true,
    "id": "call:mls:761894::ML:home",
    "captured_at": "2026-10-22T23:47:41.725732+00:00",
-   "result": "Pending",
-   "version": "2026-09-06-ev2"
+   "result": "Loss",
+   "version": "2026-09-06-ev2",
+   "units": -1,
+   "actual": null,
+   "final_home": 1.0,
+   "final_away": 2.0,
+   "graded_at": "2026-10-25T05:03:00.837370+00:00"
   },
   {
    "kind": "call",
@@ -519,8 +592,13 @@
    "selected": true,
    "id": "call:nhl:401892574::ML:home",
    "captured_at": "2026-10-23T17:24:02.475361+00:00",
-   "result": "Pending",
-   "version": "2026-09-06-ev2"
+   "result": "Loss",
+   "version": "2026-09-06-ev2",
+   "units": -1,
+   "actual": null,
+   "final_home": 2.0,
+   "final_away": 7.0,
+   "graded_at": "2026-10-25T05:03:00.837370+00:00"
   },
   {
    "kind": "call",
@@ -540,8 +618,13 @@
    "selected": true,
    "id": "call:nhl:401892573::ML:away",
    "captured_at": "2026-10-23T17:24:02.475361+00:00",
-   "result": "Pending",
-   "version": "2026-09-06-ev2"
+   "result": "Win",
+   "version": "2026-09-06-ev2",
+   "units": 0.645161,
+   "actual": null,
+   "final_home": 0.0,
+   "final_away": 4.0,
+   "graded_at": "2026-10-25T05:03:00.837370+00:00"
   },
   {
    "kind": "call",
@@ -561,8 +644,13 @@
    "selected": true,
    "id": "call:nhl:401892568::ML:home",
    "captured_at": "2026-10-23T17:24:02.475361+00:00",
-   "result": "Pending",
-   "version": "2026-09-06-ev2"
+   "result": "Win",
+   "version": "2026-09-06-ev2",
+   "units": 0.540541,
+   "actual": null,
+   "final_home": 6.0,
+   "final_away": 4.0,
+   "graded_at": "2026-10-25T05:03:00.837370+00:00"
   },
   {
    "kind": "call",
@@ -582,8 +670,13 @@
    "selected": true,
    "id": "call:ncaaf:401858276::ML:home",
    "captured_at": "2026-10-24T14:59:51.777233+00:00",
-   "result": "Pending",
-   "version": "2026-09-06-ev2"
+   "result": "Loss",
+   "version": "2026-09-06-ev2",
+   "units": -1,
+   "actual": null,
+   "final_home": 16.0,
+   "final_away": 20.0,
+   "graded_at": "2026-10-25T05:03:00.837370+00:00"
   },
   {
    "kind": "call",
@@ -603,8 +696,13 @@
    "selected": true,
    "id": "call:nba:401909853::ML:away",
    "captured_at": "2026-10-24T04:54:36.312759+00:00",
-   "result": "Pending",
-   "version": "2026-09-06-ev2"
+   "result": "Loss",
+   "version": "2026-09-06-ev2",
+   "units": -1,
+   "actual": null,
+   "final_home": 115.0,
+   "final_away": 110.0,
+   "graded_at": "2026-10-25T05:03:00.837370+00:00"
   },
   {
    "kind": "call",
@@ -624,8 +722,13 @@
    "selected": true,
    "id": "call:ncaaf:401864528::ML:home",
    "captured_at": "2026-10-22T21:52:29.692495+00:00",
-   "result": "Pending",
-   "version": "2026-09-06-ev2"
+   "result": "Win",
+   "version": "2026-09-06-ev2",
+   "units": 0.4,
+   "actual": null,
+   "final_home": 28.0,
+   "final_away": 13.0,
+   "graded_at": "2026-10-25T05:03:00.837370+00:00"
   },
   {
    "kind": "call",

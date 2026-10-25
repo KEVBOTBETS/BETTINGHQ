@@ -407,11 +407,69 @@
       }
     },
     "wnba": {
-      "stamp": "2026-10-24T23:32:15+00:00",
-      "rows": {}
+      "stamp": "2026-10-25T05:02:39+00:00",
+      "rows": {
+        "wnba|401918309|2026-10-27T00:00Z|TOTAL||over": {
+          "key": "wnba",
+          "app": "wnba-lab",
+          "sport": "WNBA",
+          "event": "ATL @ GS",
+          "eventId": "401918309",
+          "player": "",
+          "playerId": "",
+          "side": "over",
+          "home": "GS",
+          "away": "ATL",
+          "version": "unversioned",
+          "start": "2026-10-27T00:00Z",
+          "when": 1793059200000,
+          "day": "2026-10-26",
+          "pick": "Over 149.5",
+          "market": "TOTAL",
+          "line": 149.5,
+          "sourceLine": 149.5,
+          "price": -110,
+          "book": "DraftKings",
+          "tier": "GOOD",
+          "score": 0.0354,
+          "quote": "2026-10-25T05:02:38+00:00",
+          "review": [],
+          "value": {
+            "version": "price-stress-v1",
+            "reserve": 0.03,
+            "minReturn": 0.02,
+            "conditional": 0.5651,
+            "push": 0,
+            "stressed": 0.5351,
+            "ev": 0.07882727272727297,
+            "stressEV": 0.021554545454545604,
+            "worst": -110,
+            "passes": true,
+            "reasons": []
+          },
+          "probability": 0.5651,
+          "fair": -129,
+          "worst": -110,
+          "minReturn": 0.02,
+          "quoteStatus": "observed",
+          "referenceOnly": false,
+          "sourceUrl": null,
+          "worstReached": false,
+          "move": {
+            "kind": "price",
+            "market": "TOTAL",
+            "opened": -110,
+            "now": -110,
+            "toward": 0,
+            "since": null
+          },
+          "source": "WNBA",
+          "rank": 1
+        }
+      }
     },
     "ncaaf": {
-      "stamp": "2026-10-25T01:46:13+00:00",
+      "stamp": "2026-10-25T05:01:16+00:00",
       "rows": {
         "ncaaf|401856734|2026-10-31T19:30Z|TOTAL||over": {
           "key": "ncaaf",
@@ -436,7 +494,7 @@
           "book": "DraftKings",
           "tier": "GOOD",
           "score": 0.05707741783674711,
-          "quote": "2026-10-25T01:46:03.768245+00:00",
+          "quote": "2026-10-25T05:01:11.664271+00:00",
           "review": [
             "Availability reports not confirmed."
           ],
@@ -471,66 +529,193 @@
           },
           "source": "NCAAF",
           "rank": 1
-        }
-      }
-    },
-    "nfl": {
-      "stamp": "2026-10-25T01:46:02+00:00",
-      "rows": {}
-    },
-    "mlb": {
-      "stamp": "2026-10-24T23:30:51+00:00",
-      "rows": {
-        "mlb|849802|2026-10-25T00:00:00Z|RL||away": {
-          "key": "mlb",
-          "app": "mlb-edge",
-          "sport": "MLB",
-          "event": "TB @ MIL",
-          "eventId": "849802",
+        },
+        "ncaaf|401858509|2026-10-31T23:30Z|TOTAL||over": {
+          "key": "ncaaf",
+          "app": "ncaaf-lab",
+          "sport": "NCAAF",
+          "event": "OSU @ USC",
+          "eventId": "401858509",
           "player": "",
           "playerId": "",
-          "side": "away",
-          "home": "MIL",
-          "away": "TB",
+          "side": "over",
+          "home": "",
+          "away": "",
           "version": "unversioned",
-          "start": "2026-10-25T00:00:00Z",
-          "when": 1792886400000,
-          "day": "2026-10-24",
-          "pick": "TB -1.5",
-          "market": "RL",
-          "line": -1.5,
-          "sourceLine": 1.5,
-          "price": 178,
+          "start": "2026-10-31T23:30Z",
+          "when": 1793489400000,
+          "day": "2026-10-31",
+          "pick": "Over 52.5",
+          "market": "TOTAL",
+          "line": 52.5,
+          "sourceLine": 52.5,
+          "price": -110,
           "book": "DraftKings",
           "tier": "GOOD",
-          "score": 0.036,
-          "quote": "2026-10-24T23:29:18.217442+00:00",
-          "review": [],
-          "value": null,
-          "probability": 0.3752,
-          "fair": 167,
-          "worst": 172,
-          "minReturn": 0.02,
+          "score": 0.056001587499172764,
+          "quote": "2026-10-25T05:01:08.483976+00:00",
+          "review": [
+            "Availability reports not confirmed."
+          ],
+          "value": {
+            "version": "price-stress-v1",
+            "reserve": 0.03,
+            "minReturn": 0.02,
+            "conditional": 0.5713414101994022,
+            "push": 0,
+            "stressed": 0.5413414101994022,
+            "ev": 0.09074269219885878,
+            "stressEV": 0.03346996492613141,
+            "worst": -113,
+            "passes": true,
+            "reasons": []
+          },
+          "probability": 0.5713414101994022,
+          "fair": -133,
+          "worst": -113,
+          "minReturn": 0.025,
           "quoteStatus": "observed",
           "referenceOnly": false,
           "sourceUrl": null,
           "worstReached": false,
-          "move": null,
-          "source": "MLB",
-          "rank": 1
+          "move": {
+            "kind": "line",
+            "market": "TOTAL",
+            "opened": 55.5,
+            "now": 52.5,
+            "toward": -3,
+            "since": "2026-08-25T21:30:33+00:00"
+          },
+          "source": "NCAAF",
+          "rank": 2
+        },
+        "ncaaf|401858278|2026-10-31T16:00Z|ATS||home": {
+          "key": "ncaaf",
+          "app": "ncaaf-lab",
+          "sport": "NCAAF",
+          "event": "SMU @ SYR",
+          "eventId": "401858278",
+          "player": "",
+          "playerId": "",
+          "side": "home",
+          "home": "",
+          "away": "",
+          "version": "unversioned",
+          "start": "2026-10-31T16:00Z",
+          "when": 1793462400000,
+          "day": "2026-10-31",
+          "pick": "SYR +10.5",
+          "market": "ATS",
+          "line": 10.5,
+          "sourceLine": 10.5,
+          "price": -105,
+          "book": "DraftKings",
+          "tier": "GOOD",
+          "score": 0.05266363403715721,
+          "quote": "2026-10-25T05:01:08.483056+00:00",
+          "review": [
+            "Availability reports not confirmed."
+          ],
+          "value": {
+            "version": "price-stress-v1",
+            "reserve": 0.03,
+            "minReturn": 0.02,
+            "conditional": 0.5550696819887767,
+            "push": 0,
+            "stressed": 0.5250696819887767,
+            "ev": 0.08370747435904025,
+            "stressEV": 0.025136045787611527,
+            "worst": -106,
+            "passes": true,
+            "reasons": []
+          },
+          "probability": 0.5550696819887767,
+          "fair": -124,
+          "worst": -106,
+          "minReturn": 0.025,
+          "quoteStatus": "observed",
+          "referenceOnly": false,
+          "sourceUrl": null,
+          "worstReached": false,
+          "move": {
+            "kind": "line",
+            "market": "ATS",
+            "opened": 10.5,
+            "now": 10.5,
+            "toward": 0,
+            "since": "2026-10-25T05:01:15+00:00"
+          },
+          "source": "NCAAF",
+          "rank": 3
         }
       }
     },
+    "nfl": {
+      "stamp": "2026-10-25T05:01:06+00:00",
+      "rows": {}
+    },
+    "mlb": {
+      "stamp": "2026-10-25T05:01:28+00:00",
+      "rows": {}
+    },
     "nhl": {
-      "stamp": "2026-10-25T01:35:15.949438+00:00",
+      "stamp": "2026-10-25T05:02:42.454489+00:00",
       "rows": {}
     },
     "nba": {
-      "stamp": "2026-10-25T01:35:21.146703+00:00",
+      "stamp": "2026-10-25T05:00:37.556586+00:00",
       "rows": {}
     }
   },
   "events": [
+    {
+      "id": "ncaaf|2026-10-25T05:01:16+00:00|ncaaf|401858278|2026-10-31T16:00Z|ATS||home",
+      "sport": "ncaaf",
+      "observed_at": "2026-10-25T05:06:06.240Z",
+      "published_at": "2026-10-25T05:01:16+00:00",
+      "day": "2026-10-31",
+      "event": "SMU @ SYR",
+      "pick": "SYR +10.5",
+      "changes": [
+        {
+          "field": "qualified list",
+          "from": "Not in previous snapshot",
+          "to": "Listed"
+        }
+      ]
+    },
+    {
+      "id": "ncaaf|2026-10-25T05:01:16+00:00|ncaaf|401858509|2026-10-31T23:30Z|TOTAL||over",
+      "sport": "ncaaf",
+      "observed_at": "2026-10-25T05:06:06.240Z",
+      "published_at": "2026-10-25T05:01:16+00:00",
+      "day": "2026-10-31",
+      "event": "OSU @ USC",
+      "pick": "Over 52.5",
+      "changes": [
+        {
+          "field": "qualified list",
+          "from": "Not in previous snapshot",
+          "to": "Listed"
+        }
+      ]
+    },
+    {
+      "id": "wnba|2026-10-25T05:02:39+00:00|wnba|401918309|2026-10-27T00:00Z|TOTAL||over",
+      "sport": "wnba",
+      "observed_at": "2026-10-25T05:06:06.240Z",
+      "published_at": "2026-10-25T05:02:39+00:00",
+      "day": "2026-10-26",
+      "event": "ATL @ GS",
+      "pick": "Over 149.5",
+      "changes": [
+        {
+          "field": "qualified list",
+          "from": "Not in previous snapshot",
+          "to": "Listed"
+        }
+      ]
+    },
     {
       "id": "ncaaf|2026-10-24T23:49:21+00:00|ncaaf|401856734|2026-10-31T19:30Z|TOTAL||over",
       "sport": "ncaaf",
@@ -9977,55 +10162,7 @@
           "to": "Listed"
         }
       ]
-    },
-    {
-      "id": "props|2026-10-13T18:54:36.923849+00:00|props|401872996|2026-10-18T13:30Z|Receiving yards|Parker Washington|over",
-      "sport": "props",
-      "observed_at": "2026-10-13T18:56:01.098Z",
-      "published_at": "2026-10-13T18:54:36.923849+00:00",
-      "day": "2026-10-18",
-      "event": "Houston Texans @ Jacksonville Jaguars",
-      "pick": "Parker Washington — Over 61.5 Receiving yards",
-      "changes": [
-        {
-          "field": "qualified list",
-          "from": "Not in previous snapshot",
-          "to": "Listed"
-        }
-      ]
-    },
-    {
-      "id": "props|2026-10-13T18:54:36.923849+00:00|props|401872997|2026-10-18T17:00Z|Rushing yards|Derrick Henry|over",
-      "sport": "props",
-      "observed_at": "2026-10-13T18:56:01.098Z",
-      "published_at": "2026-10-13T18:54:36.923849+00:00",
-      "day": "2026-10-18",
-      "event": "Baltimore Ravens @ Cleveland Browns",
-      "pick": "Derrick Henry — Over 79.5 Rushing yards",
-      "changes": [
-        {
-          "field": "qualified list",
-          "from": "Not in previous snapshot",
-          "to": "Listed"
-        }
-      ]
-    },
-    {
-      "id": "props|2026-10-13T18:54:36.923849+00:00|props|401873008|2026-10-20T00:15Z|Rushing yards|Brock Purdy|over",
-      "sport": "props",
-      "observed_at": "2026-10-13T18:56:01.098Z",
-      "published_at": "2026-10-13T18:54:36.923849+00:00",
-      "day": "2026-10-19",
-      "event": "Washington Commanders @ San Francisco 49ers",
-      "pick": "Brock Purdy — Over 16.5 Rushing yards",
-      "changes": [
-        {
-          "field": "qualified list",
-          "from": "Not in previous snapshot",
-          "to": "Listed"
-        }
-      ]
     }
   ],
-  "checked_at": "2026-10-25T01:50:06.910Z"
+  "checked_at": "2026-10-25T05:06:06.240Z"
 }
