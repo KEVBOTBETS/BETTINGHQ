@@ -1,91 +1,91 @@
 {
  "schema": 1,
- "generated_at": "2026-10-25T11:53:28.250691+00:00",
+ "generated_at": "2026-10-25T16:40:40.490813+00:00",
  "label": "Ladder screened-option accuracy",
  "method": "Every screened option is saved before the event, whether or not you choose it. Probabilities here are de-vigged market estimates, not an independent sports model. First pre-event snapshot, frozen line and price. All model picks, including PASS/AVOID and unstaked picks. One preferred side per event/market in pick statistics; the complete priced-side audit is separate. One hypothetical unit per pick; no actual wagers are created. Missing results remain pending.",
  "overall": {
-  "logged": 406,
-  "wins": 176,
-  "losses": 96,
+  "logged": 408,
+  "wins": 177,
+  "losses": 97,
   "pushes": 1,
   "voids": 0,
-  "settled": 273,
+  "settled": 275,
   "pending": 133,
-  "win_rate": 0.6470588235294118,
-  "units": -0.503,
-  "roi": -0.0018425567765567733,
-  "brier": 0.22968
+  "win_rate": 0.6459854014598541,
+  "units": -0.932,
+  "roi": -0.0033875963636363603,
+  "brier": 0.22978
  },
  "all_calls": {
-  "logged": 406,
-  "wins": 176,
-  "losses": 96,
+  "logged": 408,
+  "wins": 177,
+  "losses": 97,
   "pushes": 1,
   "voids": 0,
-  "settled": 273,
+  "settled": 275,
   "pending": 133,
-  "win_rate": 0.6470588235294118,
-  "units": -0.503,
-  "roi": -0.0018425567765567733,
-  "brier": 0.22968
+  "win_rate": 0.6459854014598541,
+  "units": -0.932,
+  "roi": -0.0033875963636363603,
+  "brier": 0.22978
  },
  "by_tier": {
   "SCREENED": {
-   "logged": 406,
-   "wins": 176,
-   "losses": 96,
+   "logged": 408,
+   "wins": 177,
+   "losses": 97,
    "pushes": 1,
    "voids": 0,
-   "settled": 273,
+   "settled": 275,
    "pending": 133,
-   "win_rate": 0.6470588235294118,
-   "units": -0.503,
-   "roi": -0.0018425567765567733,
-   "brier": 0.22968
+   "win_rate": 0.6459854014598541,
+   "units": -0.932,
+   "roi": -0.0033875963636363603,
+   "brier": 0.22978
   }
  },
  "by_market": {
   "ML": {
-   "logged": 406,
-   "wins": 176,
-   "losses": 96,
+   "logged": 408,
+   "wins": 177,
+   "losses": 97,
    "pushes": 1,
    "voids": 0,
-   "settled": 273,
+   "settled": 275,
    "pending": 133,
-   "win_rate": 0.6470588235294118,
-   "units": -0.503,
-   "roi": -0.0018425567765567733,
-   "brier": 0.22968
+   "win_rate": 0.6459854014598541,
+   "units": -0.932,
+   "roi": -0.0033875963636363603,
+   "brier": 0.22978
   }
  },
  "by_version": {
   "2026-09-06-ev2": {
-   "logged": 406,
-   "wins": 176,
-   "losses": 96,
+   "logged": 408,
+   "wins": 177,
+   "losses": 97,
    "pushes": 1,
    "voids": 0,
-   "settled": 273,
+   "settled": 275,
    "pending": 133,
-   "win_rate": 0.6470588235294118,
-   "units": -0.503,
-   "roi": -0.0018425567765567733,
-   "brier": 0.22968
+   "win_rate": 0.6459854014598541,
+   "units": -0.932,
+   "roi": -0.0033875963636363603,
+   "brier": 0.22978
   }
  },
  "calibration": [
   {
    "bucket": "50\u201360%",
-   "n": 101,
-   "predicted": 0.58702,
-   "actual": 0.59406
+   "n": 102,
+   "predicted": 0.58693,
+   "actual": 0.58824
   },
   {
    "bucket": "60\u201370%",
-   "n": 171,
-   "predicted": 0.64183,
-   "actual": 0.67836
+   "n": 172,
+   "predicted": 0.64164,
+   "actual": 0.68023
   }
  ],
  "games": {
@@ -123,6 +123,27 @@
  },
  "props": {},
  "records": [
+  {
+   "kind": "call",
+   "league": "nhl",
+   "event_id": "401892584",
+   "start": "2026-10-27T01:30Z",
+   "matchup": "Detroit Red Wings @ Edmonton Oilers",
+   "pick": "Edmonton Oilers",
+   "market": "ML",
+   "side": "home",
+   "price": -185.0,
+   "probability": 0.6225,
+   "tier": "SCREENED",
+   "edge": 0,
+   "book": "DraftKings",
+   "three_way": false,
+   "selected": true,
+   "id": "call:nhl:401892584::ML:home",
+   "captured_at": "2026-10-25T16:40:29.640988+00:00",
+   "result": "Pending",
+   "version": "2026-09-06-ev2"
+  },
   {
    "kind": "call",
    "league": "nfl",
@@ -378,6 +399,27 @@
   {
    "kind": "call",
    "league": "nfl",
+   "event_id": "401873017",
+   "start": "2026-10-25T17:00Z",
+   "matchup": "San Francisco 49ers @ Atlanta Falcons",
+   "pick": "San Francisco 49ers",
+   "market": "ML",
+   "side": "away",
+   "price": -155.0,
+   "probability": 0.583,
+   "tier": "SCREENED",
+   "edge": 0,
+   "book": "DraftKings",
+   "three_way": false,
+   "selected": true,
+   "id": "call:nfl:401873017::ML:away",
+   "captured_at": "2026-10-25T16:40:29.640988+00:00",
+   "result": "Pending",
+   "version": "2026-09-06-ev2"
+  },
+  {
+   "kind": "call",
+   "league": "nfl",
    "event_id": "401873015",
    "start": "2026-10-25T17:00Z",
    "matchup": "Miami Dolphins @ New York Jets",
@@ -435,8 +477,13 @@
    "selected": true,
    "id": "call:epl:401878766::ML:away",
    "captured_at": "2026-10-25T11:53:23.130498+00:00",
-   "result": "Pending",
-   "version": "2026-09-06-ev2"
+   "result": "Loss",
+   "version": "2026-09-06-ev2",
+   "units": -1,
+   "actual": null,
+   "final_home": 1.0,
+   "final_away": 1.0,
+   "graded_at": "2026-10-25T16:40:40.485568+00:00"
   },
   {
    "kind": "call",
@@ -456,8 +503,13 @@
    "selected": true,
    "id": "call:nfl:401873011::ML:away",
    "captured_at": "2026-10-23T17:24:02.475361+00:00",
-   "result": "Pending",
-   "version": "2026-09-06-ev2"
+   "result": "Win",
+   "version": "2026-09-06-ev2",
+   "units": 0.571429,
+   "actual": null,
+   "final_home": 10.0,
+   "final_away": 16.0,
+   "graded_at": "2026-10-25T16:40:40.485568+00:00"
   },
   {
    "kind": "call",
