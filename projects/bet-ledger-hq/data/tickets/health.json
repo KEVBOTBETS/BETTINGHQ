@@ -1,5 +1,5 @@
 {
-  "checked_at": "2026-10-25T11:55:43.393Z",
+  "checked_at": "2026-10-25T12:35:03.708Z",
   "feeds": {
     "mlb": {
       "status": "recent",
@@ -7,8 +7,20 @@
       "coverage": "complete",
       "failed_fields": [],
       "published_at": "2026-10-25T11:52:27+00:00",
-      "last_good_at": "2026-10-25T11:55:43.393Z",
+      "last_good_at": "2026-10-25T12:35:03.708Z",
       "warnings": [],
+      "notes": []
+    },
+    "ncaaf": {
+      "status": "review",
+      "freshness": "recent",
+      "coverage": "review",
+      "failed_fields": [],
+      "published_at": "2026-10-25T11:50:57+00:00",
+      "last_good_at": "2026-10-25T12:35:03.708Z",
+      "warnings": [
+        "Availability reports are partial: 0 of 121 teams have recent reports. Verify team news; silence does not confirm availability."
+      ],
       "notes": []
     },
     "wnba": {
@@ -17,7 +29,7 @@
       "coverage": "complete",
       "failed_fields": [],
       "published_at": "2026-10-25T11:53:17+00:00",
-      "last_good_at": "2026-10-25T11:55:43.393Z",
+      "last_good_at": "2026-10-25T12:35:03.708Z",
       "warnings": [],
       "notes": [
         "2 later games have no posted prices yet; these are outside the next 24 hours."
@@ -29,7 +41,7 @@
       "coverage": "complete",
       "failed_fields": [],
       "published_at": "2026-10-25T11:53:28.250691+00:00",
-      "last_good_at": "2026-10-25T11:55:43.393Z",
+      "last_good_at": "2026-10-25T12:35:03.708Z",
       "warnings": [],
       "notes": []
     },
@@ -39,7 +51,7 @@
       "coverage": "review",
       "failed_fields": [],
       "published_at": "2026-10-25T11:53:14.806131+00:00",
-      "last_good_at": "2026-10-25T11:55:43.393Z",
+      "last_good_at": "2026-10-25T12:35:03.708Z",
       "warnings": [
         "One or more source requests failed."
       ],
@@ -50,25 +62,27 @@
       "freshness": "recent",
       "coverage": "complete",
       "failed_fields": [],
-      "published_at": "2026-10-25T11:50:31.932703+00:00",
-      "last_good_at": "2026-10-25T11:55:43.393Z",
+      "published_at": "2026-10-25T12:32:26.846884+00:00",
+      "last_good_at": "2026-10-25T12:35:03.708Z",
       "warnings": [],
       "notes": [
         "NBA scoring baseline is research only; automatic best-bet qualification is disabled while prospective results accumulate.",
         "64 later games have no posted prices yet; these are outside the next 24 hours."
       ]
     },
-    "ncaaf": {
+    "nhl": {
       "status": "review",
       "freshness": "recent",
       "coverage": "review",
       "failed_fields": [],
-      "published_at": "2026-10-25T11:50:57+00:00",
-      "last_good_at": "2026-10-25T11:55:43.393Z",
+      "published_at": "2026-10-25T12:32:20.536252+00:00",
+      "last_good_at": "2026-10-25T12:35:03.708Z",
       "warnings": [
-        "Availability reports are partial: 0 of 121 teams have recent reports. Verify team news; silence does not confirm availability."
+        "Some source feeds are unavailable. The official NHL schedule fallback is active; optional news and injury coverage may be incomplete."
       ],
-      "notes": []
+      "notes": [
+        "51 later games have no posted prices yet; these are outside the next 24 hours."
+      ]
     },
     "nfl": {
       "status": "recent",
@@ -76,23 +90,9 @@
       "coverage": "complete",
       "failed_fields": [],
       "published_at": "2026-10-25T11:50:49+00:00",
-      "last_good_at": "2026-10-25T11:55:43.393Z",
+      "last_good_at": "2026-10-25T12:35:03.708Z",
       "warnings": [],
       "notes": []
-    },
-    "nhl": {
-      "status": "review",
-      "freshness": "recent",
-      "coverage": "review",
-      "failed_fields": [],
-      "published_at": "2026-10-25T11:53:19.636994+00:00",
-      "last_good_at": "2026-10-25T11:55:43.393Z",
-      "warnings": [
-        "Some source feeds are unavailable. The official NHL schedule fallback is active; optional news and injury coverage may be incomplete."
-      ],
-      "notes": [
-        "51 later games have no posted prices yet; these are outside the next 24 hours."
-      ]
     }
   },
   "result_failures": []
