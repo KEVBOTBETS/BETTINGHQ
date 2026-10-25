@@ -469,7 +469,7 @@
       }
     },
     "ncaaf": {
-      "stamp": "2026-10-25T16:38:46+00:00",
+      "stamp": "2026-10-25T17:19:20+00:00",
       "rows": {
         "ncaaf|401858509|2026-10-31T23:30Z|TOTAL||over": {
           "key": "ncaaf",
@@ -494,7 +494,7 @@
           "book": "DraftKings",
           "tier": "GOOD",
           "score": 0.060073265470023195,
-          "quote": "2026-10-25T16:38:40.623092+00:00",
+          "quote": "2026-10-25T17:19:14.261005+00:00",
           "review": [
             "Availability reports not confirmed."
           ],
@@ -553,7 +553,7 @@
           "book": "DraftKings",
           "tier": "GOOD",
           "score": 0.06006390806963099,
-          "quote": "2026-10-25T16:38:38.078708+00:00",
+          "quote": "2026-10-25T17:19:15.275031+00:00",
           "review": [
             "Availability reports not confirmed."
           ],
@@ -612,7 +612,7 @@
           "book": "DraftKings",
           "tier": "GOOD",
           "score": 0.05599582605698743,
-          "quote": "2026-10-25T16:38:40.623092+00:00",
+          "quote": "2026-10-25T17:19:15.275031+00:00",
           "review": [
             "Availability reports not confirmed."
           ],
@@ -671,7 +671,7 @@
           "book": "DraftKings",
           "tier": "GOOD",
           "score": 0.05568314744885239,
-          "quote": "2026-10-25T16:38:40.623092+00:00",
+          "quote": "2026-10-25T17:19:15.275031+00:00",
           "review": [
             "Availability reports not confirmed."
           ],
@@ -706,11 +706,70 @@
           },
           "source": "NCAAF",
           "rank": 4
+        },
+        "ncaaf|401864531|2026-10-31T19:30Z|TOTAL||under": {
+          "key": "ncaaf",
+          "app": "ncaaf-lab",
+          "sport": "NCAAF",
+          "event": "UTEP @ NDSU",
+          "eventId": "401864531",
+          "player": "",
+          "playerId": "",
+          "side": "under",
+          "home": "",
+          "away": "",
+          "version": "unversioned",
+          "start": "2026-10-31T19:30Z",
+          "when": 1793475000000,
+          "day": "2026-10-31",
+          "pick": "Under 49.5",
+          "market": "TOTAL",
+          "line": 49.5,
+          "sourceLine": 49.5,
+          "price": -110,
+          "book": "DraftKings",
+          "tier": "GOOD",
+          "score": 0.052304773012583516,
+          "quote": "2026-10-25T17:19:14.260614+00:00",
+          "review": [
+            "Availability reports not confirmed."
+          ],
+          "value": {
+            "version": "price-stress-v1",
+            "reserve": 0.03,
+            "minReturn": 0.02,
+            "conditional": 0.5672824642049167,
+            "push": 0,
+            "stressed": 0.5372824642049167,
+            "ev": 0.08299379530029549,
+            "stressEV": 0.025721068027568128,
+            "worst": -111,
+            "passes": true,
+            "reasons": []
+          },
+          "probability": 0.5672824642049167,
+          "fair": -131,
+          "worst": -111,
+          "minReturn": 0.025,
+          "quoteStatus": "observed",
+          "referenceOnly": false,
+          "sourceUrl": null,
+          "worstReached": false,
+          "move": {
+            "kind": "line",
+            "market": "TOTAL",
+            "opened": 49.5,
+            "now": 49.5,
+            "toward": 0,
+            "since": "2026-10-25T17:19:19+00:00"
+          },
+          "source": "NCAAF",
+          "rank": 5
         }
       }
     },
     "nfl": {
-      "stamp": "2026-10-25T16:38:36+00:00",
+      "stamp": "2026-10-25T17:19:12+00:00",
       "rows": {}
     },
     "mlb": {
@@ -727,6 +786,22 @@
     }
   },
   "events": [
+    {
+      "id": "ncaaf|2026-10-25T17:19:20+00:00|ncaaf|401864531|2026-10-31T19:30Z|TOTAL||under",
+      "sport": "ncaaf",
+      "observed_at": "2026-10-25T17:22:55.386Z",
+      "published_at": "2026-10-25T17:19:20+00:00",
+      "day": "2026-10-31",
+      "event": "UTEP @ NDSU",
+      "pick": "Under 49.5",
+      "changes": [
+        {
+          "field": "qualified list",
+          "from": "Not in previous snapshot",
+          "to": "Listed"
+        }
+      ]
+    },
     {
       "id": "ncaaf|2026-10-25T16:38:46+00:00|ncaaf|401871096|2026-10-31T17:00Z|TOTAL||under",
       "sport": "ncaaf",
@@ -10220,23 +10295,7 @@
           "to": 3
         }
       ]
-    },
-    {
-      "id": "ncaaf|2026-10-14T01:08:16+00:00|ncaaf|401862802|2026-10-17T16:00Z|TOTAL||over",
-      "sport": "ncaaf",
-      "observed_at": "2026-10-14T01:11:18.626Z",
-      "published_at": "2026-10-14T01:08:16+00:00",
-      "day": "2026-10-17",
-      "event": "FAU @ ARMY",
-      "pick": "Over 55.5",
-      "changes": [
-        {
-          "field": "qualified list",
-          "from": "Not in previous snapshot",
-          "to": "Listed"
-        }
-      ]
     }
   ],
-  "checked_at": "2026-10-25T16:49:51.154Z"
+  "checked_at": "2026-10-25T17:22:55.386Z"
 }
