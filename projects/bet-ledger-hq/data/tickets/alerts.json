@@ -1,29 +1,43 @@
 {
   "schema": 1,
-  "checked_at": "2026-10-26T05:07:47.629Z",
+  "checked_at": "2026-10-26T10:30:52.878Z",
   "coverage": {
     "nhl": {
       "status": "available",
       "reports": 33,
-      "checked_at": "2026-10-26T05:07:47.629Z"
+      "checked_at": "2026-10-26T10:30:52.878Z"
     },
     "ncaaf": {
       "status": "empty",
       "reports": 0,
-      "checked_at": "2026-10-26T05:07:47.629Z"
-    },
-    "nfl": {
-      "status": "available",
-      "reports": 495,
-      "checked_at": "2026-10-26T05:07:47.629Z"
+      "checked_at": "2026-10-26T10:30:52.878Z"
     },
     "mlb": {
       "status": "available",
       "reports": 11,
-      "checked_at": "2026-10-26T05:07:47.629Z"
+      "checked_at": "2026-10-26T10:30:52.878Z"
+    },
+    "nfl": {
+      "status": "available",
+      "reports": 495,
+      "checked_at": "2026-10-26T10:30:52.878Z"
     }
   },
   "events": [
+    {
+      "id": "injury|nfl:3:Anthony Johnson Jr.|2026-10-26T10:30:52.878Z",
+      "kind": "injury",
+      "observed_at": "2026-10-26T10:30:52.878Z",
+      "sport": "nfl",
+      "title": "Player availability changed",
+      "event": "Chicago Bears",
+      "pick": "Anthony Johnson Jr.",
+      "before": "Injured Reserve · Undisclosed",
+      "after": "Out · Undisclosed",
+      "source_quote_at": "2026-10-26T10:00Z",
+      "source": "ESPN injuries",
+      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
+    },
     {
       "id": "odds|ncaaf|401871096|2026-10-31T17:00Z|TOTAL||under|DraftKings|2026-10-26T05:07:47.629Z",
       "kind": "odds",
@@ -2841,20 +2855,6 @@
       "before": "Questionable · Concussion",
       "after": "Questionable · Head",
       "source_quote_at": "2026-10-25T19:36Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:34:Jaylin Noel|2026-10-25T20:08:43.017Z",
-      "kind": "injury",
-      "observed_at": "2026-10-25T20:08:43.017Z",
-      "sport": "nfl",
-      "title": "New availability report",
-      "event": "Houston Texans",
-      "pick": "Jaylin Noel",
-      "before": "Not in the previous dated report",
-      "after": "Questionable · Toe",
-      "source_quote_at": "2026-10-25T19:58Z",
       "source": "ESPN injuries",
       "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
     }
