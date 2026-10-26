@@ -1,29 +1,73 @@
 {
   "schema": 1,
-  "checked_at": "2026-10-26T04:38:02.829Z",
+  "checked_at": "2026-10-26T05:07:47.629Z",
   "coverage": {
-    "ncaaf": {
-      "status": "empty",
-      "reports": 0,
-      "checked_at": "2026-10-26T04:38:02.829Z"
-    },
     "nhl": {
       "status": "available",
       "reports": 33,
-      "checked_at": "2026-10-26T04:38:02.829Z"
+      "checked_at": "2026-10-26T05:07:47.629Z"
+    },
+    "ncaaf": {
+      "status": "empty",
+      "reports": 0,
+      "checked_at": "2026-10-26T05:07:47.629Z"
     },
     "nfl": {
       "status": "available",
-      "reports": 497,
-      "checked_at": "2026-10-26T04:38:02.829Z"
+      "reports": 495,
+      "checked_at": "2026-10-26T05:07:47.629Z"
     },
     "mlb": {
       "status": "available",
       "reports": 11,
-      "checked_at": "2026-10-26T04:38:02.829Z"
+      "checked_at": "2026-10-26T05:07:47.629Z"
     }
   },
   "events": [
+    {
+      "id": "odds|ncaaf|401871096|2026-10-31T17:00Z|TOTAL||under|DraftKings|2026-10-26T05:07:47.629Z",
+      "kind": "odds",
+      "observed_at": "2026-10-26T05:07:47.629Z",
+      "sport": "ncaaf",
+      "event": "MRSH @ ODU",
+      "start": "2026-10-31T17:00Z",
+      "pick": "Under 44.5",
+      "title": "Published odds changed",
+      "before": "-105 · line 44.5",
+      "after": "-115 · line 45.5",
+      "book": "DraftKings",
+      "source_quote_at": "2026-10-26T05:04:08.400248+00:00",
+      "source": "Existing NCAAF board",
+      "note": "Your ticket keeps its original odds. Recheck the live book before placing a new wager."
+    },
+    {
+      "id": "injury|nfl:5:Denzel Boston|2026-10-26T05:07:47.629Z",
+      "kind": "injury",
+      "observed_at": "2026-10-26T05:07:47.629Z",
+      "sport": "nfl",
+      "title": "Player availability changed",
+      "event": "Cleveland Browns",
+      "pick": "Denzel Boston",
+      "before": "Active · Boston caught just three of eight targets for 27 yards in Sunday's 27-24 win over the Titans.",
+      "after": "Active · Boston caught three of eight targets for 27 yards in Sunday's 27-24 win over the Titans.",
+      "source_quote_at": "2026-10-26T02:23Z",
+      "source": "ESPN injuries",
+      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
+    },
+    {
+      "id": "injury|nfl:26:AJ Barner|2026-10-26T05:07:47.629Z",
+      "kind": "injury",
+      "observed_at": "2026-10-26T05:07:47.629Z",
+      "sport": "nfl",
+      "title": "Player availability changed",
+      "event": "Seattle Seahawks",
+      "pick": "AJ Barner",
+      "before": "Active · Barner caught four of five targets for 42 yards while also adding three rushes for four yards during Sunday night's 20-3 win over the Chiefs.",
+      "after": "Active · Barner caught four of five targets for 42 yards while adding three rushes for four yards during Sunday night's 20-3 win over the Chiefs.",
+      "source_quote_at": "2026-10-26T03:47Z",
+      "source": "ESPN injuries",
+      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
+    },
     {
       "id": "injury|nfl:22:Bam Knight|2026-10-26T04:38:02.829Z",
       "kind": "injury",
@@ -2811,48 +2855,6 @@
       "before": "Not in the previous dated report",
       "after": "Questionable · Toe",
       "source_quote_at": "2026-10-25T19:58Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:34:Woody Marks|2026-10-25T20:08:43.017Z",
-      "kind": "injury",
-      "observed_at": "2026-10-25T20:08:43.017Z",
-      "sport": "nfl",
-      "title": "Player availability changed",
-      "event": "Houston Texans",
-      "pick": "Woody Marks",
-      "before": "Questionable · Leg",
-      "after": "Active · Marks (leg) returned to Sunday's contest against the Giants, Aaron Wilson of KPRC 2 Houston reports.",
-      "source_quote_at": "2026-10-25T19:49Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:15:Jaylen Wright|2026-10-25T20:08:43.017Z",
-      "kind": "injury",
-      "observed_at": "2026-10-25T20:08:43.017Z",
-      "sport": "nfl",
-      "title": "Player availability changed",
-      "event": "Miami Dolphins",
-      "pick": "Jaylen Wright",
-      "before": "Active · Wright (foot) doesn't have an injury designation for Sunday's game at the Jets, David Furones of the South Florida Sun Sentinel reports.",
-      "after": "Questionable · Quadriceps",
-      "source_quote_at": "2026-10-25T19:59Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:15:Dante Trader Jr.|2026-10-25T20:08:43.017Z",
-      "kind": "injury",
-      "observed_at": "2026-10-25T20:08:43.017Z",
-      "sport": "nfl",
-      "title": "Player availability changed",
-      "event": "Miami Dolphins",
-      "pick": "Dante Trader Jr.",
-      "before": "Questionable · Shoulder",
-      "after": "Active · Trader (shoulder) has returned to Sunday's game against the Jets, David Furones of the South Florida Sun Sentinel reports.",
-      "source_quote_at": "2026-10-25T19:50Z",
       "source": "ESPN injuries",
       "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
     }
