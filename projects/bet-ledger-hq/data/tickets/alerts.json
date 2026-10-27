@@ -1,29 +1,71 @@
 {
   "schema": 1,
-  "checked_at": "2026-10-27T09:17:58.502Z",
+  "checked_at": "2026-10-27T12:42:35.914Z",
   "coverage": {
     "nhl": {
       "status": "available",
       "reports": 31,
-      "checked_at": "2026-10-27T09:17:58.502Z"
-    },
-    "mlb": {
-      "status": "available",
-      "reports": 2,
-      "checked_at": "2026-10-27T09:17:58.502Z"
-    },
-    "nfl": {
-      "status": "available",
-      "reports": 542,
-      "checked_at": "2026-10-27T09:17:58.502Z"
+      "checked_at": "2026-10-27T12:42:35.914Z"
     },
     "ncaaf": {
       "status": "empty",
       "reports": 0,
-      "checked_at": "2026-10-27T09:17:58.502Z"
+      "checked_at": "2026-10-27T12:42:35.914Z"
+    },
+    "mlb": {
+      "status": "available",
+      "reports": 2,
+      "checked_at": "2026-10-27T12:42:35.914Z"
+    },
+    "nfl": {
+      "status": "available",
+      "reports": 542,
+      "checked_at": "2026-10-27T12:42:35.914Z"
     }
   },
   "events": [
+    {
+      "id": "starter|nhl:nhl:2026020190:away|2026-10-27T12:42:35.914Z",
+      "kind": "starter",
+      "observed_at": "2026-10-27T12:42:35.914Z",
+      "sport": "nhl",
+      "event": "LA @ CHI",
+      "start": "2026-10-28T00:00:00+00:00",
+      "title": "NHL starting goalie updated",
+      "before": "Darcy Kuemper",
+      "after": "Anton Forsberg · Unknown",
+      "source_quote_at": "2026-10-27T12:39:51.469693+00:00",
+      "source": "NHL board",
+      "note": "Review the matchup after a starter change; the baseline does not price individual goalie talent."
+    },
+    {
+      "id": "starter|nhl:nhl:2026020196:home|2026-10-27T12:42:35.914Z",
+      "kind": "starter",
+      "observed_at": "2026-10-27T12:42:35.914Z",
+      "sport": "nhl",
+      "event": "OTT @ VGK",
+      "start": "2026-10-28T02:00:00+00:00",
+      "title": "NHL starting goalie updated",
+      "before": "Carter Hart",
+      "after": "Adin Hill · Unknown",
+      "source_quote_at": "2026-10-27T12:39:51.469693+00:00",
+      "source": "NHL board",
+      "note": "Review the matchup after a starter change; the baseline does not price individual goalie talent."
+    },
+    {
+      "id": "injury|nfl:2:C.J. Gardner-Johnson|2026-10-27T12:42:35.914Z",
+      "kind": "injury",
+      "observed_at": "2026-10-27T12:42:35.914Z",
+      "sport": "nfl",
+      "title": "Player availability changed",
+      "event": "Buffalo Bills",
+      "pick": "C.J. Gardner-Johnson",
+      "before": "Suspension · Suspension",
+      "after": "Active · Suspension",
+      "source_quote_at": "2026-10-27T12:00Z",
+      "source": "ESPN injuries",
+      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
+    },
     {
       "id": "odds|ncaaf|401858278|2026-10-31T16:00Z|ATS||home|DraftKings|2026-10-27T09:17:58.502Z",
       "kind": "odds",
@@ -2806,48 +2848,6 @@
       "before": "Doubtful · Quadriceps",
       "after": "Injured Reserve · Quadriceps",
       "source_quote_at": "2026-10-25T20:50Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:9:Kaleb Johnson|2026-10-26T20:47:01.411Z",
-      "kind": "injury",
-      "observed_at": "2026-10-26T20:47:01.411Z",
-      "sport": "nfl",
-      "title": "Player availability changed",
-      "event": "Green Bay Packers",
-      "pick": "Kaleb Johnson",
-      "before": "Out · Coach's Decision",
-      "after": "Active · Johnson (coach's decision) is inactive for Sunday's game against the Lions.",
-      "source_quote_at": "2026-10-25T19:10Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:34:Marlin Klein|2026-10-26T20:47:01.411Z",
-      "kind": "injury",
-      "observed_at": "2026-10-26T20:47:01.411Z",
-      "sport": "nfl",
-      "title": "Player availability changed",
-      "event": "Houston Texans",
-      "pick": "Marlin Klein",
-      "before": "Out · Coach's Decision",
-      "after": "Active",
-      "source_quote_at": "2026-10-26T18:31Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:34:Febechi Nwaiwu|2026-10-26T20:47:01.411Z",
-      "kind": "injury",
-      "observed_at": "2026-10-26T20:47:01.411Z",
-      "sport": "nfl",
-      "title": "Player availability changed",
-      "event": "Houston Texans",
-      "pick": "Febechi Nwaiwu",
-      "before": "Out · Coach's Decision",
-      "after": "Active",
-      "source_quote_at": "2026-10-26T18:31Z",
       "source": "ESPN injuries",
       "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
     }
