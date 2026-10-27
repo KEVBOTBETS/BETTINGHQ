@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-27T00:41:36.343395+00:00",
+  "generated_at": "2026-10-27T00:49:32.554086+00:00",
   "model_version": "nhl-poisson-1.0",
   "season": 2027,
   "timezone": "America/Toronto",
@@ -26,22 +26,22 @@
     },
     "nhl-schedule-2026-10-26": {
       "status": "ok",
-      "observed_at": "2026-10-27T00:41:36.343395+00:00",
+      "observed_at": "2026-10-27T00:49:32.554086+00:00",
       "url": "https://api-web.nhle.com/v1/schedule/2026-10-26"
     },
     "nhl-schedule-2026-10-12": {
       "status": "ok",
-      "observed_at": "2026-10-27T00:41:36.343395+00:00",
+      "observed_at": "2026-10-27T00:49:32.554086+00:00",
       "url": "https://api-web.nhle.com/v1/schedule/2026-10-12"
     },
     "nhl-schedule-2026-10-19": {
       "status": "ok",
-      "observed_at": "2026-10-27T00:41:36.343395+00:00",
+      "observed_at": "2026-10-27T00:49:32.554086+00:00",
       "url": "https://api-web.nhle.com/v1/schedule/2026-10-19"
     },
     "nhl-schedule-2026-11-02": {
       "status": "ok",
-      "observed_at": "2026-10-27T00:41:36.343395+00:00",
+      "observed_at": "2026-10-27T00:49:32.554086+00:00",
       "url": "https://api-web.nhle.com/v1/schedule/2026-11-02"
     },
     "standings-2027": {
@@ -57,7 +57,7 @@
       "error": "HTTPError"
     },
     "nhl-official": {
-      "status": "ok",
+      "status": "cached",
       "observed_at": "2026-10-27T00:41:36.343395+00:00",
       "url": "https://api-web.nhle.com/v1/standings/now"
     },
@@ -83,29 +83,29 @@
     },
     "public-book-odds": {
       "status": "ok",
-      "observed_at": "2026-10-27T00:41:00+00:00",
+      "observed_at": "2026-10-27T00:49:32.554086+00:00",
       "url": "https://www.covers.com/sport/hockey/nhl/odds",
-      "quotes": 642,
+      "quotes": 40,
       "attempts": [
         {
           "url": "https://www.covers.com/sport/hockey/nhl/odds",
-          "checked_at": "2026-10-27T00:41:36.343395+00:00",
-          "observed_at": "2026-10-27T00:41:00+00:00",
-          "status": "ok",
-          "quotes": 642,
-          "matched_games": 12
-        },
-        {
-          "url": "https://www.vegasinsider.com/nhl/odds/las-vegas/",
-          "checked_at": "2026-10-27T00:41:36.343395+00:00",
+          "checked_at": "2026-10-27T00:49:32.554086+00:00",
           "observed_at": null,
           "status": "no matched prices",
           "quotes": 0,
           "matched_games": 0
         },
         {
+          "url": "https://www.vegasinsider.com/nhl/odds/las-vegas/",
+          "checked_at": "2026-10-27T00:49:32.554086+00:00",
+          "observed_at": "2026-10-27T00:49:32.554086+00:00",
+          "status": "ok",
+          "quotes": 40,
+          "matched_games": 1
+        },
+        {
           "url": "https://www.scoresandodds.com/nhl/odds",
-          "checked_at": "2026-10-27T00:41:36.343395+00:00",
+          "checked_at": "2026-10-27T00:49:32.554086+00:00",
           "observed_at": null,
           "status": "no matched prices",
           "quotes": 0,
@@ -127,21 +127,92 @@
     }
   },
   "odds_health": {
-    "status": "ok",
+    "status": "partial",
     "upcoming_games": 60,
-    "priced_games": 12,
+    "priced_games": 1,
     "window_hours": 24,
     "window_games": 8,
-    "window_priced_games": 8,
-    "window_complete_games": 8,
+    "window_priced_games": 1,
+    "window_complete_games": 1,
     "window_markets": {
-      "ML": 8,
-      "ATS": 8,
-      "TOTAL": 8
+      "ML": 1,
+      "ATS": 1,
+      "TOTAL": 1
     },
     "later_games": 52,
-    "later_unpriced_games": 48,
-    "missing_games": []
+    "later_unpriced_games": 52,
+    "missing_games": [
+      {
+        "game_id": "nhl:2026020188",
+        "matchup": "CBJ @ PHI",
+        "start": "2026-10-27T23:00:00+00:00",
+        "missing_markets": [
+          "ATS",
+          "ML",
+          "TOTAL"
+        ]
+      },
+      {
+        "game_id": "nhl:2026020189",
+        "matchup": "BOS @ CAR",
+        "start": "2026-10-28T00:00:00+00:00",
+        "missing_markets": [
+          "ATS",
+          "ML",
+          "TOTAL"
+        ]
+      },
+      {
+        "game_id": "nhl:2026020190",
+        "matchup": "LA @ CHI",
+        "start": "2026-10-28T00:00:00+00:00",
+        "missing_markets": [
+          "ATS",
+          "ML",
+          "TOTAL"
+        ]
+      },
+      {
+        "game_id": "nhl:2026020191",
+        "matchup": "MTL @ STL",
+        "start": "2026-10-28T00:00:00+00:00",
+        "missing_markets": [
+          "ATS",
+          "ML",
+          "TOTAL"
+        ]
+      },
+      {
+        "game_id": "nhl:2026020192",
+        "matchup": "NYI @ NSH",
+        "start": "2026-10-28T00:00:00+00:00",
+        "missing_markets": [
+          "ATS",
+          "ML",
+          "TOTAL"
+        ]
+      },
+      {
+        "game_id": "nhl:2026020193",
+        "matchup": "NJ @ DAL",
+        "start": "2026-10-28T00:00:00+00:00",
+        "missing_markets": [
+          "ATS",
+          "ML",
+          "TOTAL"
+        ]
+      },
+      {
+        "game_id": "nhl:2026020194",
+        "matchup": "FLA @ WPG",
+        "start": "2026-10-28T00:00:00+00:00",
+        "missing_markets": [
+          "ATS",
+          "ML",
+          "TOTAL"
+        ]
+      }
+    ]
   },
   "counts": {
     "games": 60,
