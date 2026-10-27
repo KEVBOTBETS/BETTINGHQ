@@ -1,77 +1,77 @@
 {
  "schema": 1,
- "generated_at": "2026-10-27T00:41:48.049352+00:00",
+ "generated_at": "2026-10-27T09:15:29.863991+00:00",
  "label": "Ladder screened-option accuracy",
  "method": "Every screened option is saved before the event, whether or not you choose it. Probabilities here are de-vigged market estimates, not an independent sports model. First pre-event snapshot, frozen line and price. All model picks, including PASS/AVOID and unstaked picks. One preferred side per event/market in pick statistics; the complete priced-side audit is separate. One hypothetical unit per pick; no actual wagers are created. Missing results remain pending.",
  "overall": {
-  "logged": 422,
-  "wins": 185,
+  "logged": 423,
+  "wins": 186,
   "losses": 100,
   "pushes": 1,
   "voids": 0,
-  "settled": 286,
+  "settled": 287,
   "pending": 136,
-  "win_rate": 0.6491228070175439,
-  "units": 0.16,
-  "roi": 0.0005604720279720305,
-  "brier": 0.22866
+  "win_rate": 0.6503496503496503,
+  "units": 0.716,
+  "roi": 0.0024942543554006998,
+  "brier": 0.22838
  },
  "all_calls": {
-  "logged": 422,
-  "wins": 185,
+  "logged": 423,
+  "wins": 186,
   "losses": 100,
   "pushes": 1,
   "voids": 0,
-  "settled": 286,
+  "settled": 287,
   "pending": 136,
-  "win_rate": 0.6491228070175439,
-  "units": 0.16,
-  "roi": 0.0005604720279720305,
-  "brier": 0.22866
+  "win_rate": 0.6503496503496503,
+  "units": 0.716,
+  "roi": 0.0024942543554006998,
+  "brier": 0.22838
  },
  "by_tier": {
   "SCREENED": {
-   "logged": 422,
-   "wins": 185,
+   "logged": 423,
+   "wins": 186,
    "losses": 100,
    "pushes": 1,
    "voids": 0,
-   "settled": 286,
+   "settled": 287,
    "pending": 136,
-   "win_rate": 0.6491228070175439,
-   "units": 0.16,
-   "roi": 0.0005604720279720305,
-   "brier": 0.22866
+   "win_rate": 0.6503496503496503,
+   "units": 0.716,
+   "roi": 0.0024942543554006998,
+   "brier": 0.22838
   }
  },
  "by_market": {
   "ML": {
-   "logged": 422,
-   "wins": 185,
+   "logged": 423,
+   "wins": 186,
    "losses": 100,
    "pushes": 1,
    "voids": 0,
-   "settled": 286,
+   "settled": 287,
    "pending": 136,
-   "win_rate": 0.6491228070175439,
-   "units": 0.16,
-   "roi": 0.0005604720279720305,
-   "brier": 0.22866
+   "win_rate": 0.6503496503496503,
+   "units": 0.716,
+   "roi": 0.0024942543554006998,
+   "brier": 0.22838
   }
  },
  "by_version": {
   "2026-09-06-ev2": {
-   "logged": 422,
-   "wins": 185,
+   "logged": 423,
+   "wins": 186,
    "losses": 100,
    "pushes": 1,
    "voids": 0,
-   "settled": 286,
+   "settled": 287,
    "pending": 136,
-   "win_rate": 0.6491228070175439,
-   "units": 0.16,
-   "roi": 0.0005604720279720305,
-   "brier": 0.22866
+   "win_rate": 0.6503496503496503,
+   "units": 0.716,
+   "roi": 0.0024942543554006998,
+   "brier": 0.22838
   }
  },
  "calibration": [
@@ -83,9 +83,9 @@
   },
   {
    "bucket": "60\u201370%",
-   "n": 180,
-   "predicted": 0.64184,
-   "actual": 0.68889
+   "n": 181,
+   "predicted": 0.6417,
+   "actual": 0.69061
   }
  ],
  "games": {
@@ -293,6 +293,27 @@
   },
   {
    "kind": "call",
+   "league": "nba",
+   "event_id": "401909878",
+   "start": "2026-10-28T00:00Z",
+   "matchup": "Detroit Pistons @ New York Knicks",
+   "pick": "New York Knicks",
+   "market": "ML",
+   "side": "home",
+   "price": -155.0,
+   "probability": 0.583,
+   "tier": "SCREENED",
+   "edge": 0,
+   "book": "DraftKings",
+   "three_way": false,
+   "selected": true,
+   "id": "call:nba:401909878::ML:home",
+   "captured_at": "2026-10-27T09:15:25.730994+00:00",
+   "result": "Pending",
+   "version": "2026-09-06-ev2"
+  },
+  {
+   "kind": "call",
    "league": "nhl",
    "event_id": "401892584",
    "start": "2026-10-27T01:30Z",
@@ -414,8 +435,13 @@
    "selected": true,
    "id": "call:nba:401909869::ML:home",
    "captured_at": "2026-10-26T13:25:28.094130+00:00",
-   "result": "Pending",
-   "version": "2026-09-06-ev2"
+   "result": "Win",
+   "version": "2026-09-06-ev2",
+   "units": 0.555556,
+   "actual": null,
+   "final_home": 127.0,
+   "final_away": 125.0,
+   "graded_at": "2026-10-27T09:15:29.855605+00:00"
   },
   {
    "kind": "call",
