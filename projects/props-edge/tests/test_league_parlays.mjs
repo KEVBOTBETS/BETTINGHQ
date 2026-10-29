@@ -31,3 +31,5 @@ const estimated=C.contracts(system,nbaEst,'NBA',[],now,true);assert.equal(estima
 assert.equal(C.contracts({...system,games:system.games.map(g=>({...g,start:at}))},nbaEst,'NBA',[],now,true).length,0);
 assert.ok(C.TARGETS.includes(20000));assert.equal(C.compatible(q(1,{player_id:'p1'}),[q(2,{player_id:'p1'})],'moonshot'),false);
 console.log('NBA automatic fair estimates: model provenance, sample floor, current kickoff, freshness and player dedup passed.');
+
+const diagGames=[{event_id:'1',start},{event_id:'2',start:'2026-10-23T23:00Z'},{event_id:'3',start:'2026-10-23T23:30Z'}];const diagnosis=C.diagnose([],{scope:'day',date:'2026-10-22',game:'all',fair:true},diagGames,now);assert.match(diagnosis.reason,/Only 1 upcoming game/);assert.equal(diagnosis.next_day,'2026-10-23');assert.match(C.diagnose([],{scope:'game',game:'all'},diagGames,now).reason,/Choose one game/);console.log('Precise empty-state reasons and next multi-game day passed');

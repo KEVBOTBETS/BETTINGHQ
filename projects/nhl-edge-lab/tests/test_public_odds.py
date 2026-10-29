@@ -73,3 +73,19 @@ class CoverageFallbackTests(unittest.TestCase):
   report=odds_coverage([g,future],NOW)
   self.assertEqual(report['window_games'],1);self.assertEqual(report['window_priced_games'],1);self.assertEqual(report['later_unpriced_games'],1)
   self.assertEqual(report['window_markets'],{'ML':1,'ATS':0,'TOTAL':0})
+
+class MatchupPages(unittest.TestCase):
+ def fixture(self):
+  head='<title>Flyers vs Bruins Odds For October 10, 2026 - NHL</title>'
+  table=lambda heading,columns,left,right:'<article><header>'+heading+' Collapse Card</header><table class="compareOddsTable"><thead><tr><th>ALL BOOKS</th>'+''.join('<th>'+c+'</th>' for c in columns)+'</tr></thead><tbody><tr><th class="sportsbookLogoContainer"><img alt="DraftKings logo"></th><td class="compareOddsSide">'+left+'</td><td class="compareOddsSide">'+right+'</td></tr></tbody></table></article>'
+  return head+table('Moneyline',['PHI','BOS'],'+115','-135')+table('Total',['OVER','UNDER'],'o5.5 -110','u5.5 -110')+table('Spread',['PHI','BOS'],'+1.5 -150','-1.5 +130')
+ def test_complete_same_book_markets_and_exact_page_identity(self):
+  from pipeline.public_odds import parse_matchup,covered_markets
+  rows=parse_matchup(self.fixture(),GAME,NOW,'https://www.covers.com/sport/hockey/nhl/matchup/1/odds');self.assertEqual(len(rows),6);self.assertEqual(covered_markets({**GAME,'quotes':[q for _,q in rows]},NOW),{'ML','ATS','TOTAL'})
+  self.assertEqual(parse_matchup(self.fixture().replace('October 10','October 11'),GAME,NOW,'url'),[])
+  self.assertEqual(len(parse_matchup(self.fixture().replace('u5.5','u6.5'),GAME,NOW,'url')),4)
+ def test_advertised_fallback_uses_scheduled_game_not_an_arbitrary_link(self):
+  from pipeline.public_odds import advertised_pages
+  h=page('moneyline',cell('DraftKings',quote('+115'),quote('-135'))).replace('</strong>PHI','</strong>PHI')
+  h=h.replace('</tr>','<a href="https://www.covers.com/sport/hockey/nhl/matchup/1/odds">Odds</a></tr>')
+  self.assertEqual(len(advertised_pages(h,[GAME],NOW)),1);self.assertEqual(advertised_pages(h,[GAME,GAME],NOW),[]);self.assertEqual(advertised_pages(h.replace('www.covers.com','example.com'),[GAME],NOW),[])

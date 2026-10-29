@@ -142,9 +142,18 @@ def enrich(games, cfg, cache, now=None):
                 if tid not in injuries:injuries[tid]=rows
         except (requests.RequestException,ValueError) as exc:
             public_health={'status':'unavailable','error':type(exc).__name__,'checked_at':now.isoformat(),'source_url':public_availability.URL}
+    from . import conference_availability
+    conference_health={'status':'not needed'}
+    if teams and any(tid not in injuries for tid in teams):
+        try:
+            extra,conference_health=conference_availability.fetch(current,now)
+            for tid,rows in extra.items():
+                existing=injuries.setdefault(tid,[]);seen={public_availability.key(r['name']) for r in existing}
+                existing.extend(r for r in rows if public_availability.key(r['name']) not in seen)
+        except (requests.RequestException,ValueError) as exc:conference_health={'status':'unavailable','error':type(exc).__name__,'checked_at':now.isoformat(),'source_url':conference_availability.URL}
     injury_health.update(status='partial' if injuries else 'unavailable',current_reports=sum(map(len,injuries.values())),
         teams_checked=len(teams),teams_with_reports=sum(tid in injuries for tid in teams),
-        sources={'ESPN':primary_health,'Covers':public_health},checked_at=now.isoformat())
+        sources={'ESPN':primary_health,'Covers':public_health,'Conference reports':conference_health},checked_at=now.isoformat())
     if str(cache.get('season')) != str(season):
         cache.clear()
         cache['season'] = season
@@ -198,7 +207,7 @@ def enrich(games, cfg, cache, now=None):
         except (requests.RequestException, ValueError):
             pass
     for g in current:
-        reports = {side: injuries.get(str(g[side].get('id')), []) for side in ('home', 'away')}
+        reports = {side: [r for r in injuries.get(str(g[side].get('id')), []) if not r.get('game_id') or r['game_id']==str(g['game_id'])] for side in ('home', 'away')}
         availability = {'status': 'partial' if any(reports.values()) else 'unavailable',
                         'checked_at': injury_health.get('checked_at'), 'reports': reports,
                         'note': 'Only dated reports from the last 72 hours. No report does not confirm availability.'}

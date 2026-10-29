@@ -9,7 +9,7 @@ import urllib.request
 from .http import ProviderError, response_text
 from .providers.covers import _TokenParser
 
-MARKETS = {'POINTS':'Points','REBOUNDS':'Rebounds','ASSISTS':'Assists','THREE POINTERS MADE':'Threes',
+MARKETS = {'POINTS SCORED':'Points','3-POINTERS MADE':'Threes','THREE POINTERS':'Threes','POINTS':'Points','REBOUNDS':'Rebounds','ASSISTS':'Assists','THREE POINTERS MADE':'Threes',
            'THREES MADE':'Threes','STEALS':'Steals','BLOCKS':'Blocks','POINTS + REBOUNDS + ASSISTS':'Points + rebounds + assists'}
 STAT_KEYS = {'Points':'PTS','Rebounds':'REB','Assists':'AST','Steals':'STL','Blocks':'BLK','Turnovers':'TO','Threes':'3PT'}
 
@@ -88,11 +88,18 @@ def build(root, cache, now):
         with urllib.request.urlopen(req,timeout=20) as response:html=response_text(response,4_000_000)
     except (OSError,ProviderError):errors.append('NBA public prop prices unavailable; no lines or prices inferred.')
     parser=_TokenParser();parser.feed(html);quotes=parse_offers(parser.cards,games,rosters,'NBA',now.isoformat())
+    from .public_markets import collect
+    extra,price_health=collect(html,games,rosters,'NBA',now) if not quotes else ([],[])
+    quotes.extend(extra)
     if not injury_ok:errors.append('Automatic NBA player estimates paused: current injury coverage is unavailable.')
     if not quotes:errors.append('No exact roster-matched NBA prop offers extracted. Automatic model fair scenarios are separate from observed sportsbook offers.')
     if ids and not all(rosters.values()):errors.append('Some current NBA rosters are unavailable; those players are excluded from offers and history matching.')
     result=dict(sport='NBA',generated_at=now.isoformat(),source_model_at=meta['generated_at'],games=games,quotes=quotes,watchlist=watch,
-                errors=errors,milestone_model={'version':'nba-milestones-v1','calibrated':False,'history_players':sum(bool(rows) for rows in history.values()),'forecast_players':len({q['athlete_id'] for q in estimates}),'minimum_games':10,'prior_game_weight':.35,'current_game_weight':1.,'pricing':'model fair estimates; not observed sportsbook offers'},milestone_forecasts=estimates,goal_scorers=[],source_url=url,notes=['NBA player averages are history, not calibrated prop probabilities.','Automatic milestones use a separate uncalibrated history model. Fair prices are estimates, not sportsbook offers. Confirm availability and the combined sportsbook quote.'])
+                errors=errors,price_sources=price_health,milestone_model={'version':'nba-milestones-v1','calibrated':False,'history_players':sum(bool(rows) for rows in history.values()),'forecast_players':len({q['athlete_id'] for q in estimates}),'minimum_games':10,'prior_game_weight':.35,'current_game_weight':1.,'pricing':'model fair estimates; not observed sportsbook offers'},milestone_forecasts=estimates,goal_scorers=[],source_url=url,notes=['NBA player averages are history, not calibrated prop probabilities.','Automatic milestones use a separate uncalibrated history model. Fair prices are estimates, not sportsbook offers. Confirm availability and the combined sportsbook quote.'])
+    from .nba_validation import publish as publish_validation
+    result['validation']=publish_validation(root,result,raw.get('players',[]),now)
     destination=root/'site/data/nba-props.json';temp=destination.with_suffix('.json.tmp');temp.write_text(json.dumps(result,separators=(',',':'),allow_nan=False)+'\n');temp.replace(destination)
+    from .lab_feeds import publish as publish_lab_feeds
+    publish_lab_feeds(root,result)
     print('NBA',len(games),'games',len(quotes),'observed offers',len(watch),'player history rows')
     return result

@@ -33,3 +33,8 @@ class PublicResearch(unittest.TestCase):
   self.assertIsNone(P.goalie_effect(data,'BUF',{'name':'Same Name','confirmed':True}))
   data['statistics']['2025']['goalies']['rows'][0]['playerId']='1'
   self.assertGreater(P.goalie_effect(data,'BUF',{'name':'Same Name','confirmed':True})['gsax_per60'],0)
+
+class CalendarGoalies(unittest.TestCase):
+ def test_only_advertised_date_pages_are_retained(self):
+  h='<a href="/starting-goalies/2026-10-13">Next</a><a href="https://evil.com/starting-goalies/2026-10-13">Bad</a><script id="__NEXT_DATA__">{"props":{"pageProps":{"data":[]}}}</script>'
+  r=P.embedded(h);self.assertEqual(r['_advertised_goalie_pages'],['https://www.dailyfaceoff.com/starting-goalies/2026-10-13']);self.assertEqual(r['data'],[])

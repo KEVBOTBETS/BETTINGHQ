@@ -353,6 +353,7 @@ def parse_event(ev: dict, odds_priority: list[str]) -> dict | None:
         return {
             "id": str(t.get("id") or ""),
             "abbr": (t.get("abbreviation") or t.get("shortDisplayName") or "").strip(),
+            "short_name": (t.get("location") or t.get("shortDisplayName") or "").strip(),
             "name": (t.get("displayName") or t.get("name") or "").strip(),
             "logo": t.get("logo"),
             "color": t.get("color"),

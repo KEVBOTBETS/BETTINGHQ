@@ -13,14 +13,14 @@
    &&(q.price_kind!=='model-fair'||(q.sport==='NHL'&&q.market==='Anytime goal'||q.sport==='NBA'&&q.model_version==='nba-milestones-v1'&&q.samples>=10)&&num(q.model_prob)>0&&num(q.model_prob)<1)
    &&(['ML','Anytime goal'].includes(q.market)||num(q.line)!==null)
    &&fresh(q.observed_at,now,q.price_kind==='model-fair'?6:1.5)&&!q.reference_only
-   &&!['out','inactive','doubtful','injured reserve','suspended'].includes(String(q.status||'').toLowerCase())&&!q.shadow?.questionable
+   &&!['out','inactive','questionable','doubtful','injured reserve','suspended'].includes(String(q.status||'').toLowerCase())&&!q.shadow?.questionable
    &&(!q.quote_status||q.quote_status==='observed')
    &&(q.price_kind==='model-fair'||!q.price_source||q.price_source!=='model');
  }
  function contracts(system,props,sport,manual=[],now=Date.now(),fair=false){
   const games=(system.games||[]).filter(g=>g.sport===sport.toLowerCase()),ids=new Set(games.map(g=>String(g.event_id))),rows=[];
   if(!fair){for(const g of games){if(!fresh(g.publication_at,now,6))continue;for(const q of g.selections||[])rows.push({...q,sport,event_id:String(g.event_id),matchup:g.matchup,start_time:g.start,price:q.price,model_prob:num(q.probability),price_kind:'book',observed_at:q.observed_at,kind:'game'});}
-   if(props?.sport===sport&&fresh(props.generated_at,now,6))for(const q of props.quotes||[])if(ids.has(String(q.event_id)))rows.push({...q,sport,event_id:String(q.event_id),player_id:String(q.athlete_id),price:q.price_american,price_kind:'book',kind:'player',pick:`${q.player} ${q.side} ${q.line??''} ${q.market}`});
+   if(props?.sport===sport&&fresh(props.generated_at,now,6))for(const q of props.quotes||[])if(ids.has(String(q.event_id)))rows.push({...q,sport,event_id:String(q.event_id),player_id:String(q.athlete_id),price:q.price_american,price_kind:'book',kind:'player',pick:q.market==='Anytime goal'?q.player+' anytime goal':`${q.player} ${q.side} ${q.line??''} ${q.market}`});
    for(const q of manual)if(q.sport===sport&&ids.has(String(q.event_id)))rows.push({...q,price_kind:'manual',kind:'player'});
   }else if(sport==='NHL'&&props?.sport==='NHL'&&fresh(props.generated_at,now,6)&&fresh(props.source_model_at,now,6)){
    for(const q of props.goal_scorers||[]){const p=num(q.model_prob);if(p===null||p<=0||p>=1||!ids.has(String(q.event_id)))continue;rows.push({...q,sport,event_id:String(q.event_id),player_id:String(q.athlete_id),pick:q.player+' anytime goal',price:american(1/p),book:'MODEL FAIR · NOT OFFERED',price_kind:'model-fair',observed_at:props.generated_at,kind:'player'});}
@@ -36,7 +36,7 @@
  }
  const MILESTONES={Points:[10,15,20,25,30,35,40],Rebounds:[4,6,8,10,12,15],Assists:[4,6,8,10,12],Threes:[1,2,3,4,5,6]};
  function milestones(watch,now=Date.now()){
-  const seen=new Set();return (watch||[]).filter(q=>q.sport==='NBA'&&q.athlete_id&&MILESTONES[q.market]&&Date.parse(q.start_time)>now&&q.roster_verified===true&&!['out','inactive','doubtful','suspended'].includes(String(q.status||'').toLowerCase())).flatMap(q=>{
+  const seen=new Set();return (watch||[]).filter(q=>q.sport==='NBA'&&q.athlete_id&&MILESTONES[q.market]&&Date.parse(q.start_time)>now&&q.roster_verified===true&&!['out','inactive','questionable','doubtful','suspended'].includes(String(q.status||'').toLowerCase())).flatMap(q=>{
    const id=[q.event_id,q.athlete_id,q.market].join('|');if(seen.has(id))return [];seen.add(id);
    const recent=(q.recent||[]).filter(v=>typeof v==='number'&&Number.isFinite(v)&&v>=0);
    return MILESTONES[q.market].map(n=>({...q,milestone_id:id+'|'+n,threshold:n,line:n-.5,side:'over',kind:'player',player_id:String(q.athlete_id),pick:q.player+' '+n+'+ '+q.market.toLowerCase(),history_hits:recent.filter(v=>v>=n).length,history_n:recent.length,model_prob:null,price:null,price_kind:'unpriced',qualified:false}));
@@ -73,7 +73,18 @@
    picked.push({id:s.legs.map(q=>q.id).join('~'),sport:s.legs[0].sport,target:Number(target),profile,scope,created_at:new Date(now).toISOString(),legs:s.legs.map(q=>({...q})),...metrics(s.legs)});if(picked.length===2)break;}
   return picked;
  }
+ function diagnose(pool,options,games,now=Date.now()){
+  const date=options.date||'all',scope=options.scope||'day',game=options.game||'all';const upcoming=(games||[]).filter(g=>Date.parse(g.start)>now),matching=upcoming.filter(g=>(game==='all'||String(g.event_id)===game)&&(scope==='slate'||date==='all'||day(g.start)===date));
+  const counts=new Map();for(const g of upcoming){const d=day(g.start);counts.set(d,(counts.get(d)||0)+1);}const next=[...counts.keys()].sort().find(d=>(date==='all'||d>date)&&counts.get(d)>=2);
+  if(scope==='game'&&game==='all')return {reason:'Choose one game for same-game drafts.',next_day:null};
+  if(!matching.length)return {reason:'No upcoming games remain for this date and game filter.',next_day:next};
+  if(scope!=='game'&&matching.length<2)return {reason:'Only '+matching.length+' upcoming game remains on '+date+'. Multi-game parlays need at least two different games. Same-game research is available through Scope.',next_day:next};
+  const eligible=pool.filter(q=>valid(q,now)&&(game==='all'||q.event_id===game)&&(scope==='slate'||date==='all'||day(q.start_time)===date)&&(options.kind==='all'||!options.kind||q.kind===options.kind||q.market===options.kind)&&(options.book==='all'||!options.book||norm(q.book)===norm(options.book)));
+  if(!eligible.length)return {reason:options.fair?'No usable player estimates match these filters. Check player history, availability coverage and the selected stat.':'No current sportsbook contracts match these filters. Observed offers and model fair scenarios use separate pricing pools.',next_day:next};
+  if(options.profile==='core')return {reason:'No Core combination qualifies. Research drafts remain available without becoming qualified bets.',next_day:next};
+  return {reason:'Current contracts cannot reach this target after the leg-chance, player, game and single-book rules. Try another target or date; a price is never invented to fill a ticket.',next_day:next};
+ }
  function capture(t,now=Date.now()){if(!t?.legs?.length||t.legs.length<2||t.legs.length>8||!t.legs.every(q=>valid(q,now))||new Set(t.legs.map(q=>norm(q.book))).size!==1)throw Error('Draft has expired or mixes books. Refresh and rebuild.');return JSON.parse(JSON.stringify({...t,captured_at:new Date(now).toISOString()}));}
  const profit=b=>b.result==='Win'?Number(b.stake)*(decimal(Number(b.actual_price))-1):b.result==='Loss'?-Number(b.stake):0;
- const api={MILESTONES,milestones,TARGETS,num,decimal,american,norm,day,fresh,key,valid,contracts,compatible,metrics,build,capture,profit};root.LeagueParlays=api;if(typeof module!=='undefined')module.exports=api;
+ const api={diagnose,MILESTONES,milestones,TARGETS,num,decimal,american,norm,day,fresh,key,valid,contracts,compatible,metrics,build,capture,profit};root.LeagueParlays=api;if(typeof module!=='undefined')module.exports=api;
 })(typeof window!=='undefined'?window:globalThis);

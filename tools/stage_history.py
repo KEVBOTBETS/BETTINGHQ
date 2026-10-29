@@ -15,6 +15,8 @@ patterns=[
     'projects/props-edge/site/data/*.json',
     'projects/props-edge/site/data/history/*.json',
     'projects/props-edge/state/*.json',
+    'projects/props-edge/state/nba-validation.json.gz',
+    'projects/props-edge/site/data/labs/**/*.json',
     'projects/nhl-edge-lab/state/*.json',
     'projects/nhl-edge-lab/site/data/*.json',
     'projects/nba-edge-lab/state/*.json',

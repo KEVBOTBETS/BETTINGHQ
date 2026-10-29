@@ -66,14 +66,14 @@ def parse_offers(cards,games,rosters,sport,stamp):
         matches=[g for g in games if any(_compact(t)==_compact(g['away']+'@'+g['home']) for t in matchups)]
         if len(matches)!=1:continue
         game=matches[0]
+        if not instant(stamp) or not instant(game.get('date')) or instant(game['date'])<=instant(stamp) or game.get('completed') or game.get('state')=='in':continue
         sides=[s for s in ('away','home') if game[s] in tokens[:5]]
-        if len(sides)!=1:continue
-        team=game[sides[0]]
-        # Match the exact displayed player token against a current team roster.
-        names={_compact(t) for t in tokens[:8]}
-        athletes=[a for a in rosters.get(team,[]) if names & _player_aliases(a['player'])]
+        names={_compact(re.sub(r'\b(?:logo|image thumbnail)\b','',t,flags=re.I)) for t in tokens[:8]}
+        possible=[game[sides[0]]] if len(sides)==1 else [game['away'],game['home']]
+        exact=[(team,a) for team in possible for a in rosters.get(team,[]) if _compact(a['player']) in names]
+        athletes=exact or [(team,a) for team in possible for a in rosters.get(team,[]) if names & _player_aliases(a['player'])]
         if len(athletes)!=1:continue
-        athlete=athletes[0]
+        team,athlete=athletes[0]
         for i,t in enumerate(tokens):
             book=_book(t)
             if not book:continue
@@ -120,6 +120,16 @@ class Cache:
     def save(self):
         self.path.parent.mkdir(exist_ok=True);self.path.write_text(json.dumps(self.data,separators=(',',':'))+'\n')
 
+def nhl_availability(rows,inputs):
+    from .public_markets import person
+    for row in rows:
+        lineup=(inputs.get('lineups') or {}).get(NHL_CODES.get(row['team'],row['team']),{})
+        matches=[r for r in lineup.get('players',[]) if person(r.get('name',''))==person(row['player'])]
+        if len(matches)!=1:continue
+        role=matches[0];status='inactive' if role.get('available') is False else 'questionable' if role.get('questionable') else 'participation unconfirmed'
+        row['status']=status;row['availability']={'status':status,'source_url':lineup.get('source_url'),'reported_at':lineup.get('updated_at'),'observed_at':lineup.get('observed_at'),'note':'Projected lineup; roster membership alone does not confirm participation.'}
+    return rows
+
 def build(sport,cache,now):
     folder=ROOT.parent/(sport.lower()+'-edge-lab')
     all_games=json.loads((folder/'site/data/games.json').read_text())
@@ -160,11 +170,11 @@ def build(sport,cache,now):
             shadows=opportunity_forecasts(g,scorers,research_inputs)
             for row in scorers:
                 row['shadow']=shadows.get((str(g['game_id']),row['athlete_id']))
-            watch.extend(scorers)
+            watch.extend(nhl_availability(scorers,research_inputs))
             history_rows=nhl_watchlist(g,rosters,stats,season)
             for row in history_rows:
                 if row['market']=='Shots on goal':row['shadow']=shadows.get((str(g['game_id']),row['athlete_id']))
-            watch.extend(history_rows)
+            watch.extend(nhl_availability(history_rows,research_inputs))
     else:
         # Restrict roster/history calls to teams whose cards have current offered markets.
         offered={t for c in parser.cards for t in c[1:4] if t in teams}
@@ -193,13 +203,17 @@ def build(sport,cache,now):
                 if not team or g['date']!=p.start_time:continue
                 watch.append({'sport':sport,'event_id':str(g['game_id']),'start_time':g['date'],'matchup':g['away']+' @ '+g['home'],'team':team,**who,'athlete_id':who['id'],'market':p.market,'average':round(sum(p.recent)/len(p.recent),2),'samples':p.samples,'recent':p.recent,'history_season':str(g.get('season',now.year)),'history_note':'Recent completed regular-season box scores, matched to the current team roster. Historical hit rates are not forecasts.','model_prob':None})
     quotes=parse_offers(parser.cards,games,rosters,sport,stamp)
+    from .public_markets import collect
+    extra,price_health=collect(html,games,rosters,sport,now) if sport=='NHL' else ([],[])
+    quotes.extend(extra)
     history={(w['event_id'],w['athlete_id'],w['market']):w for w in watch}
     for q in quotes:
         w=history.get((q['event_id'],q['athlete_id'],q['market']))
-        if w:q.update({k:w[k] for k in ['average','samples','recent','history_season','history_note','model_prob','model_version','probability_basis','shadow'] if k in w})
+        if w:q.update({k:w[k] for k in ['average','samples','recent','history_season','history_note','model_prob','model_version','probability_basis','shadow','status','availability'] if k in w})
     result={'sport':sport,'generated_at':stamp,'source_model_at':json.loads((folder/'site/data/meta.json').read_text()).get('generated_at'),'games':[{k:g.get(k) for k in ['game_id','date','away','home','away_name','home_name','away_logo','home_logo','season_type','venue']} for g in games],'quotes':quotes,'watchlist':watch,'errors':errors,'notes':['Public book offers are matched to one upcoming game and one current roster player.','Player participation, starting goalie and final combined parlay price must be confirmed at the book.','NHL/college history is descriptive research; no calibrated prop win probability is claimed.'],'source_url':url}
     result['diagnostics']={'advertised_game_pages':len(links.links),'index_cards':len(parser.cards),'upcoming_games':len(games),'roster_teams':sum(bool(v) for v in rosters.values()),'statistics_teams':sum(bool(v.get('skaters')) for v in stats.values()),'matched_offers':len(quotes)}
     result['public_game_pages']=links.links
+    result['price_sources']=price_health
     if sport=='NHL':
         result['goal_model']={'version':GOAL_VERSION,'validated':False,'method':'Gamma-Poisson goal-rate shrinkage with bounded matchup adjustment','basis':'Conditional on player participation; regulation and OT goals only; shootout excluded','prior_max_games':30,'baseline_games':12}
         result['goal_scorers']=[w for w in watch if w['market']=='Anytime goal']
@@ -214,6 +228,8 @@ def build(sport,cache,now):
         errors.append('Official NHL player history unavailable for the scheduled teams.')
 
     dest=ROOT/'site/data'/f'{sport.lower()}-props.json';dest.write_text(json.dumps(result,separators=(',',':'),allow_nan=False)+'\n')
+    from .lab_feeds import publish as publish_lab_feeds
+    if sport=='NHL':publish_lab_feeds(ROOT,result)
     print(sport,len(games),'games',len(quotes),'observed offers',len(watch),'history rows')
     return result
 

@@ -6,6 +6,7 @@ failed-source timestamp renewal, or guessed prices. Fail closed on changed marku
 import re
 import urllib.request
 import unicodedata
+from concurrent.futures import ThreadPoolExecutor
 from datetime import datetime, timedelta, timezone
 from html.parser import HTMLParser
 from zoneinfo import ZoneInfo
@@ -235,7 +236,16 @@ def fetch(games,now,health=None):
         if not targets:break
         check={'url':url,'checked_at':now.isoformat(),'observed_at':None}
         try:
-            rows=parser(download(url),targets,now)
+            html=download(url);rows=parser(html,targets,now)
+            if url==URL:
+                pages=[(u,g) for u,g in advertised_pages(html,targets,now) if gid_missing(g,rows,now)]
+                def read_page(item):
+                    u,g=item
+                    try:return parse_matchup(download(u),g,now,u)
+                    except (OSError,ValueError):return []
+                with ThreadPoolExecutor(max_workers=4) as pool:
+                    for extra in pool.map(read_page,pages[:12]):rows.extend(extra)
+                check['game_pages_checked']=min(12,len(pages))
             check.update(status='ok' if rows else 'no matched prices',quotes=len(rows),matched_games=len({gid for gid,_ in rows}))
             if rows:check['observed_at']=max(q['observed_at'] for _,q in rows)
             for gid,q in rows:
@@ -247,3 +257,61 @@ def fetch(games,now,health=None):
         except (OSError,ValueError) as exc:check.update(status='unavailable',error=type(exc).__name__)
         health.append(check)
     return list(result.values())
+
+def advertised_pages(html,games,now):
+    """Bind advertised matchup URLs to a unique scheduled date/time/team pair."""
+    tree=Tree();tree.feed(html);out={}
+    for table in tree.root.find('table'):
+        if table.attrs.get('id')!='moneyline-table':continue
+        for row in table.find('tr','oddsGameRow'):
+            if re.search(r'display\s*:\s*none',row.attrs.get('style',''),re.I):continue
+            times=row.find(cls='game-time');teams=row.find(cls='teams-div')
+            if len(times)!=1 or len(teams)!=1:continue
+            at=start_time(times[0].text(),now);names={}
+            for side in ('away','home'):
+                cells=teams[0].find(cls=side+'-cell');strong=cells[0].find('strong') if len(cells)==1 else []
+                if len(strong)==1:names[side]=code(strong[0].text())
+            matches=[g for g in games if at and instant(g.get('date')) and g.get('state')=='pre' and 0<(instant(g['date'])-now).total_seconds()<48*3600 and abs((instant(g['date'])-at).total_seconds())<=60 and len(names)==2 and all(code(g[s])==names[s] for s in names)]
+            if len(matches)!=1:continue
+            links={n.attrs.get('href','') for n in row.find('a') if re.fullmatch(r'https://www\.covers\.com/sport/hockey/nhl/matchup/\d+/odds',n.attrs.get('href',''))}
+            if len(links)==1:out[next(iter(links))]=matches[0]
+    return list(out.items())
+
+def parse_matchup(html,game,now,url):
+    tree=Tree();tree.feed(html);title=' '.join(n.text() for n in tree.root.find('title'));m=re.search(r'For ([A-Za-z]+ \d{1,2}, \d{4})',title)
+    try:day=datetime.strptime(m[1],'%B %d, %Y').date() if m else None
+    except ValueError:return []
+    at=instant(game.get('date'))
+    if not at or at<=now or day!=at.astimezone(TORONTO).date():return []
+    output=[]
+    for article in tree.root.find('article'):
+        headers=article.find('header');heading=headers[0].text().replace('Collapse Card','').strip() if headers else ''
+        market={'Moneyline':'ML','Total':'TOTAL','Spread':'ATS'}.get(heading);tables=article.find('table','compareOddsTable')
+        if not market or len(tables)!=1:continue
+        columns=[n.text() for n in tables[0].find('thead')[0].find('th')] if tables[0].find('thead') else []
+        if market!='TOTAL' and [code(x) for x in columns[1:]]!=[code(game['away']),code(game['home'])]:continue
+        if market=='TOTAL' and columns[1:]!=['OVER','UNDER']:continue
+        for row in tables[0].find('tr'):
+            logos=row.find('th','sportsbookLogoContainer');cells=row.find('td','compareOddsSide')
+            if len(logos)!=1 or len(cells)!=2:continue
+            labels=[n.attrs.get('alt','').removesuffix(' logo') for n in logos[0].find('img')]
+            if len(labels)!=1 or labels[0].lower() in ('consensus','open','opening'):continue
+            book=labels[0];pair=[]
+            for i,cell in enumerate(cells):
+                text=cell.text().replace('−','-');side=['away','home'][i];line=None
+                if market=='ML':price=signed(text)
+                else:
+                    m=re.fullmatch(r'([ou]?)([+-]?\d+(?:\.\d+)?)\s+([+-]\d{3,6})',text,re.I)
+                    if not m:break
+                    price=signed(m[3]);line=float(m[2])
+                    if market=='TOTAL':
+                        if m[1].lower() not in ('o','u'):break
+                        side='over' if m[1].lower()=='o' else 'under'
+                if price is None:break
+                pair.append(dict(market=market,side=side,line=line,price=price,book=book,observed_at=now.isoformat(),captured_at=now.isoformat(),source='Covers public game comparison',source_url=url,open_price=None))
+            if len(pair)!=2 or market=='ATS' and pair[0]['line']!=-pair[1]['line'] or market=='TOTAL' and (pair[0]['line']!=pair[1]['line'] or {q['side'] for q in pair}!={'over','under'}):continue
+            for i,q in enumerate(pair):q['opposite_price']=pair[1-i]['price'];output.append((game['game_id'],q))
+    return output
+
+def gid_missing(game,rows,now):
+    return covered_markets({**game,'quotes':list(game.get('quotes',[]))+[q for gid,q in rows if gid==game['game_id']]},now)!={'ML','ATS','TOTAL'}

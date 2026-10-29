@@ -45,7 +45,9 @@ def embedded(html):
     tree=Tree();tree.feed(html)
     # Tree intentionally omits script contents; read only the public page's data script.
     m=re.search(r'<script\b[^>]*id=["\']__NEXT_DATA__["\'][^>]*>(.*?)</script>',html,re.S)
-    return json.loads(m[1]).get('props',{}).get('pageProps',{}) if m else {}
+    result=json.loads(m[1]).get('props',{}).get('pageProps',{}) if m else {}
+    result['_advertised_goalie_pages']=sorted({urljoin(DF,a.attrs['href']) for a in tree.root.find('a') if re.fullmatch(r'/starting-goalies/\d{4}-\d{2}-\d{2}',a.attrs.get('href',''))})
+    return result
 
 def links(html):
     tree=Tree();tree.feed(html)
@@ -126,6 +128,14 @@ def refresh(games,now=None):
     now=now or datetime.now(timezone.utc);cache=Cache(now);year=now.year if now.month>=7 else now.year-1
     raw=cache.get(DF,lambda x:embedded(x.decode()),.25) or {}
     reports=goalie_reports(raw,games,now,cache.health.get(DF,{}).get('observed_at'))
+    from zoneinfo import ZoneInfo
+    wanted_days={instant(g['date']).astimezone(ZoneInfo('America/Toronto')).date().isoformat() for g in games if instant(g.get('date')) and 0<(instant(g['date'])-now).total_seconds()<48*3600 and g.get('state')=='pre'}
+    extra_data=[]
+    for url in raw.get('_advertised_goalie_pages',[]):
+        if url.rsplit('/',1)[-1] not in wanted_days:continue
+        data=cache.get(url,lambda x:embedded(x.decode()),.25) or {};extra_data.append(data)
+        reports.update(goalie_reports(data,games,now,cache.health.get(url,{}).get('observed_at')))
+    raw={**raw,'data':list(raw.get('data',[]))+[r for payload in extra_data for r in payload.get('data',[])]}
     wanted={norm(g.get(s+'_name')) for g in games if instant(g.get('date')) and now<instant(g['date'])<now+timedelta(days=2) and g.get('state')=='pre' for s in ('home','away')}
     slugs={norm(r.get(s+'TeamName')):r.get(s+'TeamSlug') for r in raw.get('data',[]) for s in ('home','away') if r.get(s+'TeamSlug')}
     # Current goalie page advertises today's teams. Directory pages advertise all others.

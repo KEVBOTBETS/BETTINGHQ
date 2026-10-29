@@ -187,7 +187,7 @@ class PublicAvailabilityFallbackTests(unittest.TestCase):
         now=datetime(2026,10,17,15,tzinfo=timezone.utc)
         g={'date_utc':'2026-10-17T19:00:00Z','indoor':True,'home':{'id':'333','name':'Alabama Crimson Tide'},'away':{'id':'2','name':'Opponent'}}
         rows,health=P.parse(self.page(),[g['home'],g['away']],now)
-        with patch.object(C,'get_json',return_value={'season':{'year':2026}}),patch.object(P,'fetch',return_value=(rows,health)):
+        with patch.object(C,'get_json',return_value={'season':{'year':2026}}),patch.object(P,'fetch',return_value=(rows,health)),patch('pipeline.conference_availability.fetch',return_value=({},{})):
             result=C.enrich([g],{'season':2026},{'season':2026,'conferences_checked_at':now.isoformat()},now)
         self.assertEqual(g['context']['availability']['status'],'partial');self.assertEqual(g['context']['availability']['reports']['away'],[])
         self.assertEqual(result['availability']['teams_with_reports'],1);self.assertEqual(result['availability']['teams_checked'],2)
