@@ -411,7 +411,7 @@
       "rows": {}
     },
     "ncaaf": {
-      "stamp": "2026-10-29T19:59:53+00:00",
+      "stamp": "2026-10-29T20:49:29+00:00",
       "rows": {
         "ncaaf|401862823|2026-11-08T00:30Z|TOTAL||over": {
           "key": "ncaaf",
@@ -436,7 +436,7 @@
           "book": "Draft Kings",
           "tier": "GOOD",
           "score": 0.06569601438869538,
-          "quote": "2026-10-29T19:59:41.744383+00:00",
+          "quote": "2026-10-29T20:49:01.952908+00:00",
           "review": [
             "Availability reports not confirmed."
           ],
@@ -487,15 +487,15 @@
           "start": "2026-10-31T19:30Z",
           "when": 1793475000000,
           "day": "2026-10-31",
-          "pick": "Over 55.5",
+          "pick": "Over 56.5",
           "market": "TOTAL",
-          "line": 55.5,
-          "sourceLine": 55.5,
-          "price": -105,
+          "line": 56.5,
+          "sourceLine": 56.5,
+          "price": -108,
           "book": "Draft Kings",
           "tier": "GOOD",
-          "score": 0.06340108809016042,
-          "quote": "2026-10-29T19:59:40.706483+00:00",
+          "score": 0.05729860962930576,
+          "quote": "2026-10-29T20:49:01.380738+00:00",
           "review": [
             "Availability reports not confirmed."
           ],
@@ -503,16 +503,16 @@
             "version": "price-stress-v1",
             "reserve": 0.03,
             "minReturn": 0.02,
-            "conditional": 0.5684858681274796,
+            "conditional": 0.5678812955847639,
             "push": 0,
-            "stressed": 0.5384858681274796,
-            "ev": 0.109900980629841,
-            "stressEV": 0.0513295520584125,
+            "stressed": 0.5378812955847638,
+            "ev": 0.09369731001510084,
+            "stressEV": 0.035919532237322915,
             "worst": -111,
             "passes": true,
             "reasons": []
           },
-          "probability": 0.5684858681274796,
+          "probability": 0.5678812955847639,
           "fair": -131,
           "worst": -111,
           "minReturn": 0.025,
@@ -524,8 +524,8 @@
             "kind": "line",
             "market": "TOTAL",
             "opened": 53.5,
-            "now": 55.5,
-            "toward": 2,
+            "now": 56.5,
+            "toward": 3,
             "since": "2026-08-25T21:30:33+00:00"
           },
           "source": "NCAAF",
@@ -554,7 +554,7 @@
           "book": "Draft Kings",
           "tier": "GOOD",
           "score": 0.05248545655219257,
-          "quote": "2026-10-29T19:59:40.706325+00:00",
+          "quote": "2026-10-29T20:49:01.380548+00:00",
           "review": [
             "Availability reports not confirmed."
           ],
@@ -613,7 +613,7 @@
           "book": "Draft Kings",
           "tier": "LEAN",
           "score": 0.05586078855331002,
-          "quote": "2026-10-29T19:59:40.707431+00:00",
+          "quote": "2026-10-29T20:49:01.381748+00:00",
           "review": [
             "Availability reports not confirmed."
           ],
@@ -652,7 +652,7 @@
       }
     },
     "nfl": {
-      "stamp": "2026-10-29T19:59:39+00:00",
+      "stamp": "2026-10-29T20:49:00+00:00",
       "rows": {}
     },
     "mlb": {
@@ -669,6 +669,27 @@
     }
   },
   "events": [
+    {
+      "id": "ncaaf|2026-10-29T20:49:29+00:00|ncaaf|401856734|2026-10-31T19:30Z|TOTAL||over",
+      "sport": "ncaaf",
+      "observed_at": "2026-10-29T20:54:04.796Z",
+      "published_at": "2026-10-29T20:49:29+00:00",
+      "day": "2026-10-31",
+      "event": "FLA @ UGA",
+      "pick": "Over 56.5",
+      "changes": [
+        {
+          "field": "price",
+          "from": -105,
+          "to": -108
+        },
+        {
+          "field": "line",
+          "from": 55.5,
+          "to": 56.5
+        }
+      ]
+    },
     {
       "id": "ncaaf|2026-10-29T19:59:53+00:00|ncaaf|401858509|2026-10-31T23:30Z|TOTAL||over",
       "sport": "ncaaf",
@@ -10157,28 +10178,7 @@
           "to": "Fanatics Sportsbook"
         }
       ]
-    },
-    {
-      "id": "mlb|2026-10-16T21:55:43+00:00|mlb|849817|2026-10-17T00:00:00Z|RL||away",
-      "sport": "mlb",
-      "observed_at": "2026-10-16T21:58:36.940Z",
-      "published_at": "2026-10-16T21:55:43+00:00",
-      "day": "2026-10-16",
-      "event": "TB @ CLE",
-      "pick": "TB -1.5",
-      "changes": [
-        {
-          "field": "price",
-          "from": 162,
-          "to": 161
-        },
-        {
-          "field": "rank",
-          "from": 1,
-          "to": 2
-        }
-      ]
     }
   ],
-  "checked_at": "2026-10-29T20:04:57.496Z"
+  "checked_at": "2026-10-29T20:54:04.796Z"
 }
