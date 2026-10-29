@@ -1,47 +1,47 @@
 {
  "schema": 1,
- "generated_at": "2026-10-29T10:21:13.895912+00:00",
+ "generated_at": "2026-10-29T18:52:27.050973+00:00",
  "label": "WNBA prediction accuracy",
  "method": "First pre-event snapshot, frozen line and price. All model picks, including PASS/AVOID and unstaked picks. One preferred side per event/market in pick statistics; the complete priced-side audit is separate. One hypothetical unit per pick; no actual wagers are created. Missing results remain pending.",
  "overall": {
   "logged": 153,
-  "wins": 85,
-  "losses": 65,
+  "wins": 86,
+  "losses": 67,
   "pushes": 0,
   "voids": 0,
-  "settled": 150,
-  "pending": 3,
-  "win_rate": 0.5666666666666667,
-  "units": 18.212,
-  "roi": 0.12141221999999999,
-  "brier": 0.22709
+  "settled": 153,
+  "pending": 0,
+  "win_rate": 0.5620915032679739,
+  "units": 17.121,
+  "roi": 0.11190146405228757,
+  "brier": 0.22667
  },
  "all_calls": {
   "logged": 306,
-  "wins": 150,
-  "losses": 150,
+  "wins": 153,
+  "losses": 153,
   "pushes": 0,
   "voids": 0,
-  "settled": 300,
-  "pending": 6,
+  "settled": 306,
+  "pending": 0,
   "win_rate": 0.5,
-  "units": -17.392,
-  "roi": -0.05797457999999999,
-  "brier": 0.22709
+  "units": -17.973,
+  "roi": -0.05873575816993463,
+  "brier": 0.22667
  },
  "by_tier": {
   "AVOID": {
    "logged": 137,
-   "wins": 76,
-   "losses": 58,
+   "wins": 77,
+   "losses": 60,
    "pushes": 0,
    "voids": 0,
-   "settled": 134,
-   "pending": 3,
-   "win_rate": 0.5671641791044776,
-   "units": 17.582,
-   "roi": 0.13120776119402985,
-   "brier": 0.23065
+   "settled": 137,
+   "pending": 0,
+   "win_rate": 0.5620437956204379,
+   "units": 16.491,
+   "roi": 0.1203717591240876,
+   "brier": 0.2301
   },
   "BEST BET": {
    "logged": 6,
@@ -87,56 +87,56 @@
   "ATS": {
    "logged": 51,
    "wins": 30,
-   "losses": 20,
+   "losses": 21,
    "pushes": 0,
    "voids": 0,
-   "settled": 50,
-   "pending": 1,
-   "win_rate": 0.6,
-   "units": 7.628,
-   "roi": 0.15255502,
-   "brier": 0.24351
+   "settled": 51,
+   "pending": 0,
+   "win_rate": 0.5882352941176471,
+   "units": 6.628,
+   "roi": 0.12995590196078433,
+   "brier": 0.24394
   },
   "ML": {
    "logged": 51,
    "wins": 28,
-   "losses": 22,
-   "pushes": 0,
-   "voids": 0,
-   "settled": 50,
-   "pending": 1,
-   "win_rate": 0.56,
-   "units": 9.014,
-   "roi": 0.18027322,
-   "brier": 0.18752
-  },
-  "TOTAL": {
-   "logged": 51,
-   "wins": 27,
    "losses": 23,
    "pushes": 0,
    "voids": 0,
-   "settled": 50,
-   "pending": 1,
-   "win_rate": 0.54,
-   "units": 1.57,
-   "roi": 0.03140842,
-   "brier": 0.25024
+   "settled": 51,
+   "pending": 0,
+   "win_rate": 0.5490196078431373,
+   "units": 8.014,
+   "roi": 0.15713060784313726,
+   "brier": 0.18708
+  },
+  "TOTAL": {
+   "logged": 51,
+   "wins": 28,
+   "losses": 23,
+   "pushes": 0,
+   "voids": 0,
+   "settled": 51,
+   "pending": 0,
+   "win_rate": 0.5490196078431373,
+   "units": 2.48,
+   "roi": 0.04861788235294118,
+   "brier": 0.24899
   }
  },
  "by_version": {
   "2026-09-06-ev2": {
    "logged": 102,
-   "wins": 55,
-   "losses": 44,
+   "wins": 56,
+   "losses": 46,
    "pushes": 0,
    "voids": 0,
-   "settled": 99,
-   "pending": 3,
-   "win_rate": 0.5555555555555556,
-   "units": 8.975,
-   "roi": 0.09065947474747474,
-   "brier": 0.22677
+   "settled": 102,
+   "pending": 0,
+   "win_rate": 0.5490196078431373,
+   "units": 7.884,
+   "roi": 0.07729783333333333,
+   "brier": 0.22615
   },
   "legacy": {
    "logged": 51,
@@ -179,15 +179,15 @@
   },
   {
    "bucket": "40\u201350%",
-   "n": 16,
-   "predicted": 0.46934,
-   "actual": 0.5
+   "n": 17,
+   "predicted": 0.46565,
+   "actual": 0.47059
   },
   {
    "bucket": "50\u201360%",
-   "n": 97,
-   "predicted": 0.53114,
-   "actual": 0.60825
+   "n": 99,
+   "predicted": 0.53135,
+   "actual": 0.60606
   },
   {
    "bucket": "60\u201370%",
@@ -210,12 +210,12 @@
  ],
  "games": {
   "logged": 45,
-  "graded": 39,
-  "pending": 6,
+  "graded": 40,
+  "pending": 5,
   "winner": {
-   "n": 39,
-   "correct": 29,
-   "accuracy": 0.74359
+   "n": 40,
+   "correct": 30,
+   "accuracy": 0.75
   },
   "ats": {
    "n": 4,
@@ -237,9 +237,9 @@
    "model_mae": 11.17444,
    "market_mae": 11.05556
   },
-  "margin_mae": 11.20308,
-  "total_mae": 13.02462,
-  "brier": 0.17082
+  "margin_mae": 11.14725,
+  "total_mae": 13.057,
+  "brier": 0.17132
  },
  "props": {},
  "excluded_unresolved_teams": 14,
@@ -275,8 +275,13 @@
    "market_total": null,
    "id": "game:WNBA:401918310:::",
    "captured_at": "2026-10-22T05:09:12.470932+00:00",
-   "result": "Pending",
-   "version": "2026-09-06-ev2"
+   "result": "Graded",
+   "version": "2026-09-06-ev2",
+   "actual_margin": 11.0,
+   "actual_total": 149.0,
+   "final_home": 80.0,
+   "final_away": 69.0,
+   "graded_at": "2026-10-29T18:52:27.043880+00:00"
   },
   {
    "kind": "call",
@@ -297,8 +302,13 @@
    "selected": false,
    "id": "call:WNBA:401918310::TOTAL:under",
    "captured_at": "2026-10-27T09:15:20.287355+00:00",
-   "result": "Pending",
-   "version": "2026-09-06-ev2"
+   "result": "Loss",
+   "version": "2026-09-06-ev2",
+   "units": -1,
+   "actual": null,
+   "final_home": 80.0,
+   "final_away": 69.0,
+   "graded_at": "2026-10-29T18:52:27.043880+00:00"
   },
   {
    "kind": "call",
@@ -319,8 +329,13 @@
    "selected": true,
    "id": "call:WNBA:401918310::TOTAL:over",
    "captured_at": "2026-10-27T09:15:20.287355+00:00",
-   "result": "Pending",
-   "version": "2026-09-06-ev2"
+   "result": "Win",
+   "version": "2026-09-06-ev2",
+   "units": 0.909091,
+   "actual": null,
+   "final_home": 80.0,
+   "final_away": 69.0,
+   "graded_at": "2026-10-29T18:52:27.043880+00:00"
   },
   {
    "kind": "call",
@@ -341,8 +356,13 @@
    "selected": false,
    "id": "call:WNBA:401918310::ML:home",
    "captured_at": "2026-10-27T09:15:20.287355+00:00",
-   "result": "Pending",
-   "version": "2026-09-06-ev2"
+   "result": "Win",
+   "version": "2026-09-06-ev2",
+   "units": 0.617284,
+   "actual": null,
+   "final_home": 80.0,
+   "final_away": 69.0,
+   "graded_at": "2026-10-29T18:52:27.043880+00:00"
   },
   {
    "kind": "call",
@@ -363,8 +383,13 @@
    "selected": true,
    "id": "call:WNBA:401918310::ML:away",
    "captured_at": "2026-10-27T09:15:20.287355+00:00",
-   "result": "Pending",
-   "version": "2026-09-06-ev2"
+   "result": "Loss",
+   "version": "2026-09-06-ev2",
+   "units": -1,
+   "actual": null,
+   "final_home": 80.0,
+   "final_away": 69.0,
+   "graded_at": "2026-10-29T18:52:27.043880+00:00"
   },
   {
    "kind": "call",
@@ -385,8 +410,13 @@
    "selected": false,
    "id": "call:WNBA:401918310::ATS:home",
    "captured_at": "2026-10-27T09:15:20.287355+00:00",
-   "result": "Pending",
-   "version": "2026-09-06-ev2"
+   "result": "Win",
+   "version": "2026-09-06-ev2",
+   "units": 0.892857,
+   "actual": null,
+   "final_home": 80.0,
+   "final_away": 69.0,
+   "graded_at": "2026-10-29T18:52:27.043880+00:00"
   },
   {
    "kind": "call",
@@ -407,8 +437,13 @@
    "selected": true,
    "id": "call:WNBA:401918310::ATS:away",
    "captured_at": "2026-10-27T09:15:20.287355+00:00",
-   "result": "Pending",
-   "version": "2026-09-06-ev2"
+   "result": "Loss",
+   "version": "2026-09-06-ev2",
+   "units": -1,
+   "actual": null,
+   "final_home": 80.0,
+   "final_away": 69.0,
+   "graded_at": "2026-10-29T18:52:27.043880+00:00"
   },
   {
    "kind": "game",
