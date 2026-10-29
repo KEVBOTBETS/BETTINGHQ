@@ -19,6 +19,9 @@ on:
         options: [all, nba, evening, football, mlb, wnba, nhl, props, ladder, archive]
         default: all
   schedule:
+    # Full keyless reviews at Toronto noon and 6 pm, including DST.
+    - cron: '0 12,18 * * *'
+      timezone: America/Toronto
     - cron: '23 */3 * * *'
     - cron: '7,37 * * * *'
     # Game-day football refreshes. Inactives post ~90 min before kickoff, so
@@ -34,7 +37,7 @@ jobs:
   build:
     # Deployment environment waits must never stop odds/history collection.
     concurrency:
-      group: ${{ github.event_name == 'pull_request' && format('kevbot-pr-{0}', github.event.pull_request.number) || 'kevbot-refresh' }}
+      group: ${{ github.event_name == 'pull_request' && format('kevbot-pr-{0}', github.event.pull_request.number) || (github.event.schedule == '0 12,18 * * *' && 'kevbot-daily-review' || 'kevbot-refresh') }}
       cancel-in-progress: false
     runs-on: ubuntu-24.04
     timeout-minutes: 55
@@ -73,11 +76,11 @@ jobs:
           path: .validation/browser-certificate
           key: browser-${{ runner.os }}-py312-node22-${{ steps.code.outputs.fingerprint }}
       - run: npx playwright install --with-deps chromium
-        if: github.event_name != 'schedule' || steps.visual.outputs.cache-hit != 'true'
+        if: github.event_name != 'schedule' || github.event.schedule == '0 12,18 * * *' || steps.visual.outputs.cache-hit != 'true'
         working-directory: projects/bet-ledger-hq
       - name: Offline release checks
         env:
-          REUSE_BROWSER: ${{ github.event_name == 'schedule' && steps.visual.outputs.cache-hit == 'true' }}
+          REUSE_BROWSER: ${{ github.event_name == 'schedule' && github.event.schedule != '0 12,18 * * *' && steps.visual.outputs.cache-hit == 'true' }}
           CODE_FINGERPRINT: ${{ steps.code.outputs.fingerprint }}
         run: |
           if [ "$REUSE_BROWSER" = true ]; then
@@ -109,6 +112,7 @@ jobs:
           key: nba-public-downloads-${{ runner.os }}-${{ github.run_id }}
           restore-keys: nba-public-downloads-${{ runner.os }}-
       - name: Refresh real data
+        id: refresh
         if: github.event_name != 'pull_request'
         env:
           REQUESTED_SPORT: ${{ inputs.sport || 'all' }}
@@ -125,6 +129,11 @@ jobs:
           python tools/refresh.py --sport "$sport"
           node projects/mlb-edge/tests/test_sim.mjs projects/mlb-edge/docs/data
           python -m unittest discover -s tests
+      - name: Review coverage after automatic recovery
+        if: always() && github.event_name != 'pull_request'
+        env:
+          REFRESH_OUTCOME: ${{ steps.refresh.outcome }}
+        run: python tools/daily_review.py
       - name: Save bounded public NHL download cache
         if: github.event_name != 'pull_request'
         uses: actions/cache/save@v6
@@ -188,6 +197,8 @@ jobs:
           name: validation
           path: |
             validation.json
+            review-report.json
+            review-report.md
             projects/bet-ledger-hq/test-results/
   publish:
     concurrency:
