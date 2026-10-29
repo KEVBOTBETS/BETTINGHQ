@@ -1,29 +1,43 @@
 {
   "schema": 1,
-  "checked_at": "2026-10-29T10:26:48.696Z",
+  "checked_at": "2026-10-29T11:54:37.710Z",
   "coverage": {
-    "ncaaf": {
-      "status": "empty",
-      "reports": 0,
-      "checked_at": "2026-10-29T10:26:48.696Z"
-    },
     "mlb": {
       "status": "available",
       "reports": 5,
-      "checked_at": "2026-10-29T10:26:48.696Z"
-    },
-    "nfl": {
-      "status": "available",
-      "reports": 498,
-      "checked_at": "2026-10-29T10:26:48.696Z"
+      "checked_at": "2026-10-29T11:54:37.710Z"
     },
     "nhl": {
       "status": "available",
       "reports": 36,
-      "checked_at": "2026-10-29T10:26:48.696Z"
+      "checked_at": "2026-10-29T11:54:37.710Z"
+    },
+    "ncaaf": {
+      "status": "empty",
+      "reports": 0,
+      "checked_at": "2026-10-29T11:54:37.710Z"
+    },
+    "nfl": {
+      "status": "available",
+      "reports": 498,
+      "checked_at": "2026-10-29T11:54:37.710Z"
     }
   },
   "events": [
+    {
+      "id": "injury|nfl:3:Anthony Johnson Jr.|2026-10-29T11:54:37.710Z",
+      "kind": "injury",
+      "observed_at": "2026-10-29T11:54:37.710Z",
+      "sport": "nfl",
+      "title": "Player availability changed",
+      "event": "Chicago Bears",
+      "pick": "Anthony Johnson Jr.",
+      "before": "Injured Reserve · Undisclosed",
+      "after": "Out · Undisclosed",
+      "source_quote_at": "2026-10-29T11:00Z",
+      "source": "ESPN injuries",
+      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
+    },
     {
       "id": "odds|wnba|401918310|2026-10-29T16:30Z|TOTAL||over|DraftKings|2026-10-29T10:26:48.696Z",
       "kind": "odds",
@@ -2872,20 +2886,6 @@
       "before": "Day-To-Day · Undisclosed",
       "after": "Out · Undisclosed",
       "source_quote_at": "2026-10-28T16:10Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nhl:6:Zach Hyman|2026-10-28T19:54:40.062Z",
-      "kind": "injury",
-      "observed_at": "2026-10-28T19:54:40.062Z",
-      "sport": "nhl",
-      "title": "Player availability changed",
-      "event": "Edmonton Oilers",
-      "pick": "Zach Hyman",
-      "before": "Day-To-Day · Upper Body",
-      "after": "Injured Reserve · Neck",
-      "source_quote_at": "2026-10-28T16:04Z",
       "source": "ESPN injuries",
       "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
     }
