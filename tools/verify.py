@@ -24,6 +24,7 @@ run('props-edge',[sys.executable,'-m','unittest','discover','-s','tests'])
 run('nhl-edge-lab',[sys.executable,'-m','unittest','discover','-s','tests'])
 run('wnba-edge-lab',[sys.executable,'-m','unittest','discover','-s','tests'])
 run('nba-edge-lab',[sys.executable,'-m','unittest','discover','-s','tests'])
+run('nba-edge-lab',['node','tests/test_bands.mjs'])
 run('ladderbet',[sys.executable,'-m','pytest','-q','tests'])
 for repo in ['props-edge','wnba-edge-lab','nhl-edge-lab','ladderbet']:
     for test in sorted((ROOT/'projects'/repo/'tests').glob('test_*.mjs')):
@@ -52,6 +53,7 @@ if args.browser:
     run('bet-ledger-hq',['node','tests/test_validation_options_browser.mjs'])
     run('bet-ledger-hq',['node','tests/test_tonight_extras_browser.mjs'])
     run('bet-ledger-hq',['node','tests/test_league_parlays_browser.mjs'])
+    run('bet-ledger-hq',['node','tests/test_nba_bands_browser.mjs'])
     run('bet-ledger-hq',['node','tests/test_prop_recovery_browser.mjs'])
     run('bet-ledger-hq',['node','tests/test_professional_browser.mjs'])
     run('bet-ledger-hq',['node','tests/test_value_execution_browser.mjs'])

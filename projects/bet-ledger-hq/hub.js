@@ -19,6 +19,7 @@
     ncaab:{title:"NCAAB Courtside",description:"College hoops scores and team research. Model qualification awaits validation.",url:"sports-desk.html?sport=ncaab"},
     "spread-accuracy":{title:"Spread accuracy",description:"Whole-sheet spread forecasts, cover records and quoted-price returns.",url:"spread-accuracy.html"},
     "nhl-props":{title:"NHL Props & Parlay Lab",description:"Hockey player research, goal scorers, payout targets and your parlay ledger.",url:"../props-edge/league-parlays.html?sport=NHL"},
+    "nba-bands":{title:"NBA Bands Parlay Lab",description:"Predicted winners, winning-margin bands and three-to-four-game nightly research tickets.",url:"../nba-edge-lab/bands.html"},
     "nba-props":{title:"NBA Props & Parlay Lab",description:"Basketball player history, observed lines, payout targets and your parlay ledger.",url:"../props-edge/league-parlays.html?sport=NBA"},
     "ncaaf-props":{title:"NCAAF Props",description:"College football player statistics and observed prop prices.",url:"../props-edge/multisport.html?sport=NCAAF"},
     accuracy:{title:"Performance Center",description:"Frozen forecasts, calibration and like-for-like market benchmarks.",url:"accuracy.html"},
