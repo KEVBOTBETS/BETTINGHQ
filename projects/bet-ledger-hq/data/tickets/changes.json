@@ -407,7 +407,7 @@
       }
     },
     "wnba": {
-      "stamp": "2026-10-30T18:15:34+00:00",
+      "stamp": "2026-10-30T20:39:31+00:00",
       "rows": {
         "wnba|401918311|2026-11-01T00:00Z|TOTAL||over": {
           "key": "wnba",
@@ -432,7 +432,7 @@
           "book": "DraftKings",
           "tier": "GOOD",
           "score": 0.0365,
-          "quote": "2026-10-30T18:15:34+00:00",
+          "quote": "2026-10-30T20:39:30+00:00",
           "review": [],
           "value": {
             "version": "price-stress-v1",
@@ -469,7 +469,7 @@
       }
     },
     "ncaaf": {
-      "stamp": "2026-10-30T20:18:05+00:00",
+      "stamp": "2026-10-30T20:38:06+00:00",
       "rows": {
         "ncaaf|401862823|2026-11-08T00:30Z|TOTAL||over": {
           "key": "ncaaf",
@@ -494,7 +494,7 @@
           "book": "DraftKings",
           "tier": "GOOD",
           "score": 0.06569601438869538,
-          "quote": "2026-10-30T20:17:56.529965+00:00",
+          "quote": "2026-10-30T20:37:59.725073+00:00",
           "review": [
             "Availability reports not confirmed."
           ],
@@ -553,7 +553,7 @@
           "book": "DraftKings",
           "tier": "GOOD",
           "score": 0.06030639130439829,
-          "quote": "2026-10-30T20:17:56.021545+00:00",
+          "quote": "2026-10-30T20:37:59.725073+00:00",
           "review": [
             "Availability reports not confirmed."
           ],
@@ -612,7 +612,7 @@
           "book": "DraftKings",
           "tier": "GOOD",
           "score": 0.05729860962930576,
-          "quote": "2026-10-30T20:17:56.021007+00:00",
+          "quote": "2026-10-30T20:37:59.725073+00:00",
           "review": [
             "Availability reports not confirmed."
           ],
@@ -647,86 +647,43 @@
           },
           "source": "NCAAF",
           "rank": 3
-        },
-        "ncaaf|401861966|2026-10-31T19:00Z|TOTAL||over": {
-          "key": "ncaaf",
-          "app": "ncaaf-lab",
-          "sport": "NCAAF",
-          "event": "CONN @ AFA",
-          "eventId": "401861966",
-          "player": "",
-          "playerId": "",
-          "side": "over",
-          "home": "",
-          "away": "",
-          "version": "unversioned",
-          "start": "2026-10-31T19:00Z",
-          "when": 1793473200000,
-          "day": "2026-10-31",
-          "pick": "Over 51.5",
-          "market": "TOTAL",
-          "line": 51.5,
-          "sourceLine": 51.5,
-          "price": -110,
-          "book": "DraftKings",
-          "tier": "GOOD",
-          "score": 0.05248545655219257,
-          "quote": "2026-10-30T20:17:56.020899+00:00",
-          "review": [
-            "Availability reports not confirmed."
-          ],
-          "value": {
-            "version": "price-stress-v1",
-            "reserve": 0.03,
-            "minReturn": 0.02,
-            "conditional": 0.56747019041484,
-            "push": 0,
-            "stressed": 0.53747019041484,
-            "ev": 0.08335218170105829,
-            "stressEV": 0.026079454428330928,
-            "worst": -111,
-            "passes": true,
-            "reasons": []
-          },
-          "probability": 0.56747019041484,
-          "fair": -131,
-          "worst": -111,
-          "minReturn": 0.025,
-          "quoteStatus": "observed",
-          "referenceOnly": false,
-          "sourceUrl": null,
-          "worstReached": false,
-          "move": {
-            "kind": "line",
-            "market": "TOTAL",
-            "opened": 55.5,
-            "now": 51.5,
-            "toward": -4,
-            "since": "2026-10-25T17:19:19+00:00"
-          },
-          "source": "NCAAF",
-          "rank": 4
         }
       }
     },
     "nfl": {
-      "stamp": "2026-10-30T20:17:55+00:00",
+      "stamp": "2026-10-30T20:37:53+00:00",
       "rows": {}
     },
     "mlb": {
-      "stamp": "2026-10-30T18:14:28+00:00",
+      "stamp": "2026-10-30T20:38:11+00:00",
       "rows": {}
     },
     "nhl": {
-      "stamp": "2026-10-30T18:15:37.342730+00:00",
+      "stamp": "2026-10-30T20:39:33.801780+00:00",
       "rows": {}
     },
     "nba": {
-      "stamp": "2026-10-30T18:13:08.426745+00:00",
+      "stamp": "2026-10-30T20:37:27.334918+00:00",
       "rows": {}
     }
   },
   "events": [
+    {
+      "id": "ncaaf|2026-10-30T20:38:06+00:00|ncaaf|401861966|2026-10-31T19:00Z|TOTAL||over|absent",
+      "sport": "ncaaf",
+      "observed_at": "2026-10-30T20:44:53.042Z",
+      "published_at": "2026-10-30T20:38:06+00:00",
+      "day": "2026-10-31",
+      "event": "CONN @ AFA",
+      "pick": "Over 51.5",
+      "changes": [
+        {
+          "field": "qualified list",
+          "from": "Listed",
+          "to": "Not in current snapshot; see board for reason"
+        }
+      ]
+    },
     {
       "id": "ncaaf|2026-10-30T20:18:05+00:00|ncaaf|401858507|2026-10-31T16:30Z|ATS||home|absent",
       "sport": "ncaaf",
@@ -10200,23 +10157,7 @@
           "to": "DraftKings"
         }
       ]
-    },
-    {
-      "id": "ncaaf|2026-10-16T23:10:38+00:00|ncaaf|401858265|2026-10-17T23:30Z|ATS||home",
-      "sport": "ncaaf",
-      "observed_at": "2026-10-16T23:14:03.477Z",
-      "published_at": "2026-10-16T23:10:38+00:00",
-      "day": "2026-10-17",
-      "event": "LOU @ SYR",
-      "pick": "SYR +14.5",
-      "changes": [
-        {
-          "field": "book",
-          "from": "Draft Kings",
-          "to": "DraftKings"
-        }
-      ]
     }
   ],
-  "checked_at": "2026-10-30T20:23:20.631Z"
+  "checked_at": "2026-10-30T20:44:53.042Z"
 }
