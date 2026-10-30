@@ -1,29 +1,133 @@
 {
   "schema": 1,
-  "checked_at": "2026-10-30T22:20:58.083Z",
+  "checked_at": "2026-10-30T22:45:29.103Z",
   "coverage": {
     "ncaaf": {
       "status": "empty",
       "reports": 0,
-      "checked_at": "2026-10-30T22:20:58.083Z"
+      "checked_at": "2026-10-30T22:45:29.103Z"
     },
-    "mlb": {
+    "nfl": {
       "status": "available",
-      "reports": 22,
-      "checked_at": "2026-10-30T22:20:58.083Z"
+      "reports": 349,
+      "checked_at": "2026-10-30T22:45:29.103Z"
     },
     "nhl": {
       "status": "available",
       "reports": 38,
-      "checked_at": "2026-10-30T22:20:58.083Z"
+      "checked_at": "2026-10-30T22:45:29.103Z"
     },
-    "nfl": {
+    "mlb": {
       "status": "available",
-      "reports": 346,
-      "checked_at": "2026-10-30T22:20:58.083Z"
+      "reports": 22,
+      "checked_at": "2026-10-30T22:45:29.103Z"
     }
   },
   "events": [
+    {
+      "id": "odds|props|401873031|2026-11-01T18:00Z|Rushing yards|Joe Burrow|over|theScore Bet|2026-10-30T22:45:29.103Z",
+      "kind": "odds",
+      "observed_at": "2026-10-30T22:45:29.103Z",
+      "sport": "props",
+      "event": "Tennessee Titans @ Cincinnati Bengals",
+      "start": "2026-11-01T18:00Z",
+      "pick": "Joe Burrow — Over 5.5 Rushing yards",
+      "title": "Published odds changed",
+      "before": "-110 · line 5.5",
+      "after": "-115 · line 5.5",
+      "book": "theScore Bet",
+      "source_quote_at": "2026-10-30T22:39:32.112822+00:00",
+      "source": "Existing Props board",
+      "note": "Your ticket keeps its original odds. Recheck the live book before placing a new wager."
+    },
+    {
+      "id": "odds|props|401873024|2026-11-01T18:00Z|Rushing yards|Jacoby Brissett|over|Fanatics Sportsbook|2026-10-30T22:45:29.103Z",
+      "kind": "odds",
+      "observed_at": "2026-10-30T22:45:29.103Z",
+      "sport": "props",
+      "event": "Arizona Cardinals @ Dallas Cowboys",
+      "start": "2026-11-01T18:00Z",
+      "pick": "Jacoby Brissett — Over 10.5 Rushing yards",
+      "title": "Published odds changed",
+      "before": "-110 · line 10.5",
+      "after": "-105 · line 10.5",
+      "book": "Fanatics Sportsbook",
+      "source_quote_at": "2026-10-30T22:39:32.112822+00:00",
+      "source": "Existing Props board",
+      "note": "Your ticket keeps its original odds. Recheck the live book before placing a new wager."
+    },
+    {
+      "id": "odds|props|401873036|2026-11-03T01:15Z|Rushing yards|Sam Darnold|over|bet365|2026-10-30T22:45:29.103Z",
+      "kind": "odds",
+      "observed_at": "2026-10-30T22:45:29.103Z",
+      "sport": "props",
+      "event": "Chicago Bears @ Seattle Seahawks",
+      "start": "2026-11-03T01:15Z",
+      "pick": "Sam Darnold — Over 5.5 Rushing yards",
+      "title": "Published odds changed",
+      "before": "-115 · line 5.5",
+      "after": "-110 · line 5.5",
+      "book": "bet365",
+      "source_quote_at": "2026-10-30T22:39:32.112822+00:00",
+      "source": "Existing Props board",
+      "note": "Your ticket keeps its original odds. Recheck the live book before placing a new wager."
+    },
+    {
+      "id": "starter|nhl:nhl:2026020215:away|2026-10-30T22:45:29.103Z",
+      "kind": "starter",
+      "observed_at": "2026-10-30T22:45:29.103Z",
+      "sport": "nhl",
+      "event": "WPG @ FLA",
+      "start": "2026-10-30T23:00:00+00:00",
+      "title": "NHL starting goalie updated",
+      "before": "Nico Daws",
+      "after": "Nico Daws · confirmed",
+      "source_quote_at": "2026-10-30T22:40:31.061262+00:00",
+      "source": "NHL board",
+      "note": "Review the matchup after a starter change; the baseline does not price individual goalie talent."
+    },
+    {
+      "id": "injury|nfl:33:Tyler Huntley|2026-10-30T22:45:29.103Z",
+      "kind": "injury",
+      "observed_at": "2026-10-30T22:45:29.103Z",
+      "sport": "nfl",
+      "title": "New availability report",
+      "event": "Baltimore Ravens",
+      "pick": "Tyler Huntley",
+      "before": "Not in the previous dated report",
+      "after": "Active · Huntley will be the backup quarterback against the Bills on Sunday after Lamar Jackson (ankle) was cleared to return from a three-game absence, Ryan Mink of the Ravens' official si",
+      "source_quote_at": "2026-10-30T22:20Z",
+      "source": "ESPN injuries",
+      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
+    },
+    {
+      "id": "injury|nfl:7:Jonah Coleman|2026-10-30T22:45:29.103Z",
+      "kind": "injury",
+      "observed_at": "2026-10-30T22:45:29.103Z",
+      "sport": "nfl",
+      "title": "New availability report",
+      "event": "Denver Broncos",
+      "pick": "Jonah Coleman",
+      "before": "Not in the previous dated report",
+      "after": "Active · Coleman said Friday that he'll be ready for a larger role if that's what the team needs in the absence of RJ Harvey, who has been ruled out for Sunday's game against Kansas City du",
+      "source_quote_at": "2026-10-30T22:16Z",
+      "source": "ESPN injuries",
+      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
+    },
+    {
+      "id": "injury|nfl:21:Makai Lemon|2026-10-30T22:45:29.103Z",
+      "kind": "injury",
+      "observed_at": "2026-10-30T22:45:29.103Z",
+      "sport": "nfl",
+      "title": "New availability report",
+      "event": "Philadelphia Eagles",
+      "pick": "Makai Lemon",
+      "before": "Not in the previous dated report",
+      "after": "Active · Lemon will be the Eagles' top wide receiver for a second consecutive game due to the absences of both DeVonta Smith (hamstring) and Dontayvion Wicks (ankle).",
+      "source_quote_at": "2026-10-30T22:33Z",
+      "source": "ESPN injuries",
+      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
+    },
     {
       "id": "odds|props|401873027|2026-11-01T18:00Z|Rushing yards|Aaron Rodgers|over|bet365|2026-10-30T22:20:58.083Z",
       "kind": "odds",
@@ -2791,104 +2895,6 @@
       "before": "Not in the previous dated report",
       "after": "Active · Fitzgerald made both field-goal attempts and converted his only extra-point try in Thursday's 27-19 loss to Green Bay.",
       "source_quote_at": "2026-10-30T04:39Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:29:Jalen Coker|2026-10-30T09:06:21.264Z",
-      "kind": "injury",
-      "observed_at": "2026-10-30T09:06:21.264Z",
-      "sport": "nfl",
-      "title": "Player availability changed",
-      "event": "Carolina Panthers",
-      "pick": "Jalen Coker",
-      "before": "Active · Coker (shoulder) was listed as a full participant in Tuesday's practice, Mike Kaye of ESPN.com reports.",
-      "after": "Active · Coker secured two of five targets for 37 yards and a touchdown in the Panthers' 27-19 loss to the Packers on Thursday. He also lost a fumble.",
-      "source_quote_at": "2026-10-30T04:23Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:29:Corey Bullock|2026-10-30T09:06:21.264Z",
-      "kind": "injury",
-      "observed_at": "2026-10-30T09:06:21.264Z",
-      "sport": "nfl",
-      "title": "New availability report",
-      "event": "Carolina Panthers",
-      "pick": "Corey Bullock",
-      "before": "Not in the previous dated report",
-      "after": "Questionable · Quadriceps",
-      "source_quote_at": "2026-10-30T04:15Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:29:Bryce Young|2026-10-30T09:06:21.264Z",
-      "kind": "injury",
-      "observed_at": "2026-10-30T09:06:21.264Z",
-      "sport": "nfl",
-      "title": "New availability report",
-      "event": "Carolina Panthers",
-      "pick": "Bryce Young",
-      "before": "Not in the previous dated report",
-      "after": "Active · Young completed 23 of 41 passes for 209 yards with one touchdown and one interception in the Panthers' 27-19 loss to the Packers on Thursday.",
-      "source_quote_at": "2026-10-30T04:10Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:29:Chuba Hubbard|2026-10-30T09:06:21.264Z",
-      "kind": "injury",
-      "observed_at": "2026-10-30T09:06:21.264Z",
-      "sport": "nfl",
-      "title": "New availability report",
-      "event": "Carolina Panthers",
-      "pick": "Chuba Hubbard",
-      "before": "Not in the previous dated report",
-      "after": "Active · Hubbard rushed 22 times for 81 yards and a touchdown and brought in seven of eight targets for 38 yards in the Panthers' 27-19 loss to the Packers on Thursday.",
-      "source_quote_at": "2026-10-30T03:59Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:29:Tetairoa McMillan|2026-10-30T09:06:21.264Z",
-      "kind": "injury",
-      "observed_at": "2026-10-30T09:06:21.264Z",
-      "sport": "nfl",
-      "title": "New availability report",
-      "event": "Carolina Panthers",
-      "pick": "Tetairoa McMillan",
-      "before": "Not in the previous dated report",
-      "after": "Active · McMillan brought in six of 11 targets for 57 yards in the Panthers' 27-19 loss to the Packers on Thursday.",
-      "source_quote_at": "2026-10-30T03:45Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:3:Anthony Johnson Jr.|2026-10-30T09:06:21.264Z",
-      "kind": "injury",
-      "observed_at": "2026-10-30T09:06:21.264Z",
-      "sport": "nfl",
-      "title": "Player availability changed",
-      "event": "Chicago Bears",
-      "pick": "Anthony Johnson Jr.",
-      "before": "Injured Reserve · Undisclosed",
-      "after": "Out · Undisclosed",
-      "source_quote_at": "2026-10-30T08:00Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:9:MarShawn Lloyd|2026-10-30T09:06:21.264Z",
-      "kind": "injury",
-      "observed_at": "2026-10-30T09:06:21.264Z",
-      "sport": "nfl",
-      "title": "New availability report",
-      "event": "Green Bay Packers",
-      "pick": "MarShawn Lloyd",
-      "before": "Not in the previous dated report",
-      "after": "Active · Lloyd rushed three times for seven yards and brought in his only target for nine yards in the Packers' 27-19 win over the Panthers on Thursday.",
-      "source_quote_at": "2026-10-30T04:43Z",
       "source": "ESPN injuries",
       "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
     }
