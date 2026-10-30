@@ -78,7 +78,7 @@ try{
     await frame.getByRole("button",{name:"Exposure",exact:true}).click();
     await frame.getByText("Connect and sync in Ledger").waitFor();
     assert.deepEqual(await page.locator(".board-link").evaluateAll(links=>links.map(a=>a.hash).sort()),
-      ["#moneyline-records","#ncaaf-parlays","#thursday-night","#sunday-night","#monday-night","#model-lab","#opportunities","#desk","#today","#ledger","#accuracy","#football","#moneyline","#mlb","#nfl","#ncaaf","#nhl","#wnba","#nba","#nba-props","#ncaab","#props","#ladder","#archive","#nfl-newsletter","#ncaaf-newsletter","#ncaaf-props","#nhl-props","#all-spreads","#spread-accuracy"].sort());
+      ["#moneyline-records","#ncaaf-parlays","#thursday-night","#sunday-night","#monday-night","#model-lab","#opportunities","#desk","#today","#ledger","#accuracy","#football","#moneyline","#mlb","#nfl","#ncaaf","#nhl","#wnba","#nba","#nba-bands","#nba-props","#ncaab","#props","#ladder","#archive","#nfl-newsletter","#ncaaf-newsletter","#ncaaf-props","#nhl-props","#all-spreads","#spread-accuracy"].sort());
     assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth));
     const child=page.frames().find(f=>f.url().endsWith("today.html"));
     assert.ok(await child.evaluate(()=>document.documentElement.scrollWidth<=innerWidth));
@@ -96,6 +96,11 @@ try{
       await page.frameLocator("#frame-"+key).locator(key==="nba"?"h1":"#desk-title").waitFor();
       assert.equal(await page.getByRole("link",{name,exact:true}).getAttribute("aria-current"),"page");
     }
+    const bandsLink=page.getByRole('link',{name:'NBA Winning Bands',exact:true});
+    if(!await bandsLink.isVisible())await page.getByText('Props & more',{exact:true}).click();
+    await bandsLink.click();
+    await page.frameLocator('#frame-nba-bands').getByRole('heading',{name:'Bands Parlay Lab',exact:true}).waitFor();
+    assert.equal(await bandsLink.getAttribute('aria-current'),'page');
     if(!await page.getByRole('link',{name:'Tickets & results',exact:true}).isVisible())await page.getByText('Results & model',{exact:true}).click();await page.getByRole('link',{name:'Tickets & results',exact:true}).click();
     const archive=page.frameLocator('#frame-archive');
     await archive.locator('#archive-select option').first().waitFor({state:'attached'});
