@@ -469,7 +469,7 @@
       }
     },
     "ncaaf": {
-      "stamp": "2026-10-30T18:14:22+00:00",
+      "stamp": "2026-10-30T20:18:05+00:00",
       "rows": {
         "ncaaf|401862823|2026-11-08T00:30Z|TOTAL||over": {
           "key": "ncaaf",
@@ -494,7 +494,7 @@
           "book": "DraftKings",
           "tier": "GOOD",
           "score": 0.06569601438869538,
-          "quote": "2026-10-30T18:13:35.688198+00:00",
+          "quote": "2026-10-30T20:17:56.529965+00:00",
           "review": [
             "Availability reports not confirmed."
           ],
@@ -553,7 +553,7 @@
           "book": "DraftKings",
           "tier": "GOOD",
           "score": 0.06030639130439829,
-          "quote": "2026-10-30T18:13:34.471543+00:00",
+          "quote": "2026-10-30T20:17:56.021545+00:00",
           "review": [
             "Availability reports not confirmed."
           ],
@@ -612,7 +612,7 @@
           "book": "DraftKings",
           "tier": "GOOD",
           "score": 0.05729860962930576,
-          "quote": "2026-10-30T18:13:34.471143+00:00",
+          "quote": "2026-10-30T20:17:56.021007+00:00",
           "review": [
             "Availability reports not confirmed."
           ],
@@ -671,7 +671,7 @@
           "book": "DraftKings",
           "tier": "GOOD",
           "score": 0.05248545655219257,
-          "quote": "2026-10-30T18:13:34.471064+00:00",
+          "quote": "2026-10-30T20:17:56.020899+00:00",
           "review": [
             "Availability reports not confirmed."
           ],
@@ -706,70 +706,11 @@
           },
           "source": "NCAAF",
           "rank": 4
-        },
-        "ncaaf|401858507|2026-10-31T16:30Z|ATS||home": {
-          "key": "ncaaf",
-          "app": "ncaaf-lab",
-          "sport": "NCAAF",
-          "event": "MICH @ RUTG",
-          "eventId": "401858507",
-          "player": "",
-          "playerId": "",
-          "side": "home",
-          "home": "",
-          "away": "",
-          "version": "unversioned",
-          "start": "2026-10-31T16:30Z",
-          "when": 1793464200000,
-          "day": "2026-10-31",
-          "pick": "RUTG +15.5",
-          "market": "ATS",
-          "line": 15.5,
-          "sourceLine": 15.5,
-          "price": -108,
-          "book": "DraftKings",
-          "tier": "GOOD",
-          "score": 0.050125466179512315,
-          "quote": "2026-10-30T18:13:34.470849+00:00",
-          "review": [
-            "Availability reports not confirmed."
-          ],
-          "value": {
-            "version": "price-stress-v1",
-            "reserve": 0.03,
-            "minReturn": 0.02,
-            "conditional": 0.5601530179914747,
-            "push": 0,
-            "stressed": 0.5301530179914746,
-            "ev": 0.07881321983543277,
-            "stressEV": 0.02103544205765484,
-            "worst": -108,
-            "passes": true,
-            "reasons": []
-          },
-          "probability": 0.5601530179914747,
-          "fair": -127,
-          "worst": -108,
-          "minReturn": 0.025,
-          "quoteStatus": "observed",
-          "referenceOnly": false,
-          "sourceUrl": null,
-          "worstReached": false,
-          "move": {
-            "kind": "line",
-            "market": "ATS",
-            "opened": 14,
-            "now": 15.5,
-            "toward": -1.5,
-            "since": "2026-10-25T11:50:56+00:00"
-          },
-          "source": "NCAAF",
-          "rank": 5
         }
       }
     },
     "nfl": {
-      "stamp": "2026-10-30T18:13:32+00:00",
+      "stamp": "2026-10-30T20:17:55+00:00",
       "rows": {}
     },
     "mlb": {
@@ -786,6 +727,22 @@
     }
   },
   "events": [
+    {
+      "id": "ncaaf|2026-10-30T20:18:05+00:00|ncaaf|401858507|2026-10-31T16:30Z|ATS||home|absent",
+      "sport": "ncaaf",
+      "observed_at": "2026-10-30T20:23:20.631Z",
+      "published_at": "2026-10-30T20:18:05+00:00",
+      "day": "2026-10-31",
+      "event": "MICH @ RUTG",
+      "pick": "RUTG +15.5",
+      "changes": [
+        {
+          "field": "qualified list",
+          "from": "Listed",
+          "to": "Not in current snapshot; see board for reason"
+        }
+      ]
+    },
     {
       "id": "ncaaf|2026-10-30T18:14:22+00:00|ncaaf|401858507|2026-10-31T16:30Z|ATS||home",
       "sport": "ncaaf",
@@ -10259,23 +10216,7 @@
           "to": "DraftKings"
         }
       ]
-    },
-    {
-      "id": "ncaaf|2026-10-16T23:10:38+00:00|ncaaf|401866478|2026-10-17T19:30Z|TOTAL||over",
-      "sport": "ncaaf",
-      "observed_at": "2026-10-16T23:14:03.477Z",
-      "published_at": "2026-10-16T23:10:38+00:00",
-      "day": "2026-10-17",
-      "event": "AKR @ M-OH",
-      "pick": "Over 46.5",
-      "changes": [
-        {
-          "field": "book",
-          "from": "Draft Kings",
-          "to": "DraftKings"
-        }
-      ]
     }
   ],
-  "checked_at": "2026-10-30T18:20:39.144Z"
+  "checked_at": "2026-10-30T20:23:20.631Z"
 }
