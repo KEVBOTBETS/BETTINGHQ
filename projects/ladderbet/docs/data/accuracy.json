@@ -1,77 +1,77 @@
 {
  "schema": 1,
- "generated_at": "2026-10-30T01:47:06.673705+00:00",
+ "generated_at": "2026-10-30T10:24:11.170348+00:00",
  "label": "Ladder screened-option accuracy",
  "method": "Every screened option is saved before the event, whether or not you choose it. Probabilities here are de-vigged market estimates, not an independent sports model. First pre-event snapshot, frozen line and price. All model picks, including PASS/AVOID and unstaked picks. One preferred side per event/market in pick statistics; the complete priced-side audit is separate. One hypothetical unit per pick; no actual wagers are created. Missing results remain pending.",
  "overall": {
-  "logged": 468,
-  "wins": 192,
+  "logged": 469,
+  "wins": 194,
   "losses": 102,
   "pushes": 1,
   "voids": 0,
-  "settled": 295,
-  "pending": 173,
-  "win_rate": 0.6530612244897959,
-  "units": 1.807,
-  "roi": 0.006125877966101697,
-  "brier": 0.22753
+  "settled": 297,
+  "pending": 172,
+  "win_rate": 0.6554054054054054,
+  "units": 2.783,
+  "roi": 0.009369892255892258,
+  "brier": 0.22685
  },
  "all_calls": {
-  "logged": 468,
-  "wins": 192,
+  "logged": 469,
+  "wins": 194,
   "losses": 102,
   "pushes": 1,
   "voids": 0,
-  "settled": 295,
-  "pending": 173,
-  "win_rate": 0.6530612244897959,
-  "units": 1.807,
-  "roi": 0.006125877966101697,
-  "brier": 0.22753
+  "settled": 297,
+  "pending": 172,
+  "win_rate": 0.6554054054054054,
+  "units": 2.783,
+  "roi": 0.009369892255892258,
+  "brier": 0.22685
  },
  "by_tier": {
   "SCREENED": {
-   "logged": 468,
-   "wins": 192,
+   "logged": 469,
+   "wins": 194,
    "losses": 102,
    "pushes": 1,
    "voids": 0,
-   "settled": 295,
-   "pending": 173,
-   "win_rate": 0.6530612244897959,
-   "units": 1.807,
-   "roi": 0.006125877966101697,
-   "brier": 0.22753
+   "settled": 297,
+   "pending": 172,
+   "win_rate": 0.6554054054054054,
+   "units": 2.783,
+   "roi": 0.009369892255892258,
+   "brier": 0.22685
   }
  },
  "by_market": {
   "ML": {
-   "logged": 468,
-   "wins": 192,
+   "logged": 469,
+   "wins": 194,
    "losses": 102,
    "pushes": 1,
    "voids": 0,
-   "settled": 295,
-   "pending": 173,
-   "win_rate": 0.6530612244897959,
-   "units": 1.807,
-   "roi": 0.006125877966101697,
-   "brier": 0.22753
+   "settled": 297,
+   "pending": 172,
+   "win_rate": 0.6554054054054054,
+   "units": 2.783,
+   "roi": 0.009369892255892258,
+   "brier": 0.22685
   }
  },
  "by_version": {
   "2026-09-06-ev2": {
-   "logged": 468,
-   "wins": 192,
+   "logged": 469,
+   "wins": 194,
    "losses": 102,
    "pushes": 1,
    "voids": 0,
-   "settled": 295,
-   "pending": 173,
-   "win_rate": 0.6530612244897959,
-   "units": 1.807,
-   "roi": 0.006125877966101697,
-   "brier": 0.22753
+   "settled": 297,
+   "pending": 172,
+   "win_rate": 0.6554054054054054,
+   "units": 2.783,
+   "roi": 0.009369892255892258,
+   "brier": 0.22685
   }
  },
  "calibration": [
@@ -83,9 +83,9 @@
   },
   {
    "bucket": "60\u201370%",
-   "n": 187,
-   "predicted": 0.64157,
-   "actual": 0.69519
+   "n": 189,
+   "predicted": 0.64161,
+   "actual": 0.69841
   }
  ],
  "games": {
@@ -123,6 +123,27 @@
  },
  "props": {},
  "records": [
+  {
+   "kind": "call",
+   "league": "ncaaf",
+   "event_id": "401860924",
+   "start": "2026-11-01T03:00Z",
+   "matchup": "Oregon State Beavers @ Fresno State Bulldogs",
+   "pick": "Oregon State Beavers",
+   "market": "ML",
+   "side": "away",
+   "price": -225.0,
+   "probability": 0.6636,
+   "tier": "SCREENED",
+   "edge": 0,
+   "book": "DraftKings",
+   "three_way": false,
+   "selected": true,
+   "id": "call:ncaaf:401860924::ML:away",
+   "captured_at": "2026-10-30T10:24:06.761282+00:00",
+   "result": "Pending",
+   "version": "2026-09-06-ev2"
+  },
   {
    "kind": "call",
    "league": "ncaaf",
@@ -729,8 +750,13 @@
    "selected": true,
    "id": "call:nhl:401892600::ML:home",
    "captured_at": "2026-10-28T20:29:40.903251+00:00",
-   "result": "Pending",
-   "version": "2026-09-06-ev2"
+   "result": "Win",
+   "version": "2026-09-06-ev2",
+   "units": 0.555556,
+   "actual": null,
+   "final_home": 4.0,
+   "final_away": 1.0,
+   "graded_at": "2026-10-30T10:24:11.161112+00:00"
   },
   {
    "kind": "call",
@@ -776,8 +802,13 @@
    "selected": true,
    "id": "call:nhl:401892601::ML:home",
    "captured_at": "2026-10-28T20:29:40.903251+00:00",
-   "result": "Pending",
-   "version": "2026-09-06-ev2"
+   "result": "Win",
+   "version": "2026-09-06-ev2",
+   "units": 0.420168,
+   "actual": null,
+   "final_home": 6.0,
+   "final_away": 4.0,
+   "graded_at": "2026-10-30T10:24:11.161112+00:00"
   },
   {
    "kind": "call",
