@@ -1,29 +1,57 @@
 {
   "schema": 1,
-  "checked_at": "2026-10-31T13:06:03.130Z",
+  "checked_at": "2026-10-31T13:47:08.602Z",
   "coverage": {
+    "nhl": {
+      "status": "available",
+      "reports": 40,
+      "checked_at": "2026-10-31T13:47:08.602Z"
+    },
     "ncaaf": {
       "status": "empty",
       "reports": 0,
-      "checked_at": "2026-10-31T13:06:03.130Z"
+      "checked_at": "2026-10-31T13:47:08.602Z"
     },
     "mlb": {
       "status": "available",
       "reports": 22,
-      "checked_at": "2026-10-31T13:06:03.130Z"
-    },
-    "nhl": {
-      "status": "available",
-      "reports": 40,
-      "checked_at": "2026-10-31T13:06:03.130Z"
+      "checked_at": "2026-10-31T13:47:08.602Z"
     },
     "nfl": {
       "status": "available",
       "reports": 300,
-      "checked_at": "2026-10-31T13:06:03.130Z"
+      "checked_at": "2026-10-31T13:47:08.602Z"
     }
   },
   "events": [
+    {
+      "id": "injury|nhl:3:Brennan Othmann|2026-10-31T13:47:08.602Z",
+      "kind": "injury",
+      "observed_at": "2026-10-31T13:47:08.602Z",
+      "sport": "nhl",
+      "title": "Player availability changed",
+      "event": "Calgary Flames",
+      "pick": "Brennan Othmann",
+      "before": "Out · Upper Body",
+      "after": "Day-To-Day · Upper Body",
+      "source_quote_at": "2026-10-31T13:04Z",
+      "source": "ESPN injuries",
+      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
+    },
+    {
+      "id": "injury|nfl:3:Anthony Johnson Jr.|2026-10-31T13:47:08.602Z",
+      "kind": "injury",
+      "observed_at": "2026-10-31T13:47:08.602Z",
+      "sport": "nfl",
+      "title": "Player availability changed",
+      "event": "Chicago Bears",
+      "pick": "Anthony Johnson Jr.",
+      "before": "Injured Reserve · Undisclosed",
+      "after": "Out · Undisclosed",
+      "source_quote_at": "2026-10-31T13:01Z",
+      "source": "ESPN injuries",
+      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
+    },
     {
       "id": "odds|wnba|401918311|2026-11-01T00:00Z|TOTAL||over|DraftKings|2026-10-31T13:06:03.130Z",
       "kind": "odds",
@@ -2899,34 +2927,6 @@
       "before": "Questionable · Knee",
       "after": "Active · Wayne (knee) was a limited practice participant Thursday, David Furones of the South Florida Sun Sentinel reports.",
       "source_quote_at": "2026-10-30T00:26Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:15:Will Kacmarek|2026-10-30T20:23:20.631Z",
-      "kind": "injury",
-      "observed_at": "2026-10-30T20:23:20.631Z",
-      "sport": "nfl",
-      "title": "Player availability changed",
-      "event": "Miami Dolphins",
-      "pick": "Will Kacmarek",
-      "before": "Questionable · Hamstring",
-      "after": "Active · Kacmarek (hamstring) practiced in a limited capacity Thursday, David Furones of the South Florida Sun Sentinel reports.",
-      "source_quote_at": "2026-10-30T00:18Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:16:Jay Ward|2026-10-30T20:23:20.631Z",
-      "kind": "injury",
-      "observed_at": "2026-10-30T20:23:20.631Z",
-      "sport": "nfl",
-      "title": "New availability report",
-      "event": "Minnesota Vikings",
-      "pick": "Jay Ward",
-      "before": "Not in the previous dated report",
-      "after": "Questionable · Knee",
-      "source_quote_at": "2026-10-30T18:18Z",
       "source": "ESPN injuries",
       "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
     }
