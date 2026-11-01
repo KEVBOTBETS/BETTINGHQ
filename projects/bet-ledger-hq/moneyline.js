@@ -25,8 +25,9 @@
     $('#slate-note').textContent=nflDay&&['all','nfl'].includes($('#sport').value)&&!allCards().some(c=>c.sport==='nfl')
       ?'No NFL games on '+(selectedDay?dateLabel(selectedDay):'the selected date')+'. Next NFL game day: '+dateLabel(nflDay)+'. Use “Next NFL picks” to see the model’s winners.'
       :$('#sport').value==='nfl'&&rows.length?'NFL winner predictions for '+dateLabel(selectedDay)+'. These picks do not require a qualifying bet or sportsbook price.':'';
-    const open=rows.filter(c=>!isLocked(c)).length;
-    $('#slate-count').innerHTML=rows.length?'<b>'+open+'</b> open · '+(rows.length-open)+' started or locked':'';
+    if(!loading&&$('#sport').value==='nfl'&&rows.some(c=>!isLocked(c))&&!rows.some(c=>c.selectable&&!isLocked(c))&&rows.some(c=>c.fresh!=='recent'))$('#slate-note').textContent='NFL forecasts are stale. Refresh forecasts rechecks published files; selections resume after a successful model refresh. Old prices and predictions are not treated as current.';
+    const open=rows.filter(c=>!isLocked(c)).length,selectable=rows.filter(c=>c.selectable&&!isLocked(c)).length;
+    $('#slate-count').innerHTML=rows.length?'<b>'+open+'</b> upcoming · '+selectable+' selectable · '+(rows.length-open)+' started or locked':'';
     $('#cards').innerHTML=rows.length?rows.map((c,i)=>{
       const locked=isLocked(c),chosen=saved[c.key];
       const rank=side=>c[side+'Rank']&&c[side+'Rank']<26?'<em>#'+c[side+'Rank']+'</em> ':'';
@@ -44,7 +45,7 @@
     const token=++request,date=$('#date').value;if(!date)return;
     loading=true;bundles={};$('#refresh').disabled=true;$('#status').textContent='Checking published forecasts…';render();
     const paths={nba:{meta:'../nba-edge-lab/data/meta.json',games:'../nba-edge-lab/data/games.json'},nhl:{meta:'../nhl-edge-lab/data/meta.json',games:'../nhl-edge-lab/data/games.json'},mlb:{slate:'../mlb-edge/data/slate-'+date+'.json'},nfl:{meta:'../nfl-edge-lab/data/meta.json',games:'../nfl-edge-lab/data/games.json',details:'../nfl-edge-lab/data/games_detail.json'},ncaaf:{meta:'../ncaaf-edge-lab/data/meta.json',games:'../ncaaf-edge-lab/data/games.json'}};
-    await Promise.all(Object.entries(paths).map(async([sport,files])=>{try{const entries=await Promise.all(Object.entries(files).map(async([key,url])=>[key,await get(url)]));if(token===request)bundles[sport]=Object.fromEntries(entries);}catch(_){if(token===request)bundles[sport]={error:true};}}));
+    await Promise.all(Object.entries(paths).map(async([sport,files])=>{try{const entries=await Promise.all(Object.entries(files).map(async([key,url])=>[key,key==='details'?await get(url).catch(()=>[]):await get(url)]));if(token===request)bundles[sport]=Object.fromEntries(entries);}catch(_){if(token===request)bundles[sport]={error:true};}}));
     if(token!==request)return;
     loading=false;$('#refresh').disabled=false;$('#status').textContent='Forecasts checked '+time(new Date().toISOString())+'. Only fresh pregame picks can be selected.';render();
     const jump=pendingSport;pendingSport=null;

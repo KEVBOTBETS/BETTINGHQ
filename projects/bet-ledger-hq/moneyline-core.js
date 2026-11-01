@@ -10,14 +10,17 @@
     const stamp=(sport==='mlb'?bundle.slate:bundle.meta)?.generated_at;
     const fresh=freshness(stamp,sport,now);
     const games=sport==='mlb'?bundle.slate?.games:bundle.games;
-    const details=new Map((bundle.details||[]).map(g=>[String(g.game_id),g]));
+    const details=new Map((Array.isArray(bundle.details)?bundle.details:[]).map(g=>[String(g.game_id),g]));
     const seen=new Set(),out=[];
     for(const g of Array.isArray(games)?games:[]){
       const id=String(g.gamePk??g.game_id??''),key=sport+':'+id;
       if(!id||seen.has(key))continue;
       if(sport==='mlb'&&g.gameType&&!['R','F','D','L','W'].includes(g.gameType))continue;
       if(sport!=='mlb'&&![2,3].includes(Number(g.season_type)))continue;
-      const detail=sport==='nfl'?details.get(id):g;
+      // The NFL detail feed covers the model's focused week. Its full schedule
+      // also carries real model projections for later games; use those when a
+      // focused card is absent. Never require a wager or a price to pick a winner.
+      const detail=sport==='nfl'?(details.get(id)||g):g;
       const start=g.start||g.date,when=instant(start);
       if(when===null)continue;
       const home=typeof g.home==='object'?g.home.abbr:g.home,away=typeof g.away==='object'?g.away.abbr:g.away;

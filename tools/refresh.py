@@ -6,12 +6,19 @@ from pathlib import Path
 import subprocess
 import sys
 from model_refresh import refresh_project
+from refresh_policy import recovery_projects
 
 ROOT=Path(__file__).resolve().parents[1]
 parser=argparse.ArgumentParser()
 parser.add_argument('--sport',choices=['all','nba','evening','football','mlb','wnba','nhl','props','ladder','archive'],default='all')
 args=parser.parse_args()
 selected={'nba':['nba-edge-lab'],'evening':['nhl-edge-lab','nba-edge-lab'],'all':['nba-edge-lab','nfl-edge-lab','ncaaf-edge-lab','mlb-edge','props-edge','wnba-edge-lab','nhl-edge-lab','ladderbet'],'football':['nfl-edge-lab','ncaaf-edge-lab','props-edge'],'mlb':['mlb-edge'],'nhl':['nhl-edge-lab'],'wnba':['wnba-edge-lab'],'props':['props-edge'],'ladder':['ladderbet'],'archive':[]}[args.sport]
+if args.sport != 'archive':
+    recovery = recovery_projects(ROOT, selected)
+    if recovery:print('Recovering stale or missing publications: '+', '.join(recovery), flush=True)
+    # Schedule delivery can be late or a waiting run can be replaced. Every run
+    # checks all publication ages instead of depending on a particular cron firing.
+    selected = recovery + selected
 for repo in selected:
     if repo=='nhl-edge-lab':
         try:refresh_project(ROOT/'projects'/repo,[sys.executable,'-m','pipeline.public_research'],timeout=600)
@@ -22,16 +29,16 @@ for repo in selected:
     except (subprocess.CalledProcessError,subprocess.TimeoutExpired) as exc:
         # Stale feeds retain their original timestamps and cannot qualify as new picks.
         print(f'::warning::{repo} refresh failed ({type(exc).__name__}); inspect freshness before using its board.')
-if args.sport in ['all','football','nhl','nba','evening','props']:
+if any(repo in selected for repo in ['props-edge','nhl-edge-lab','nba-edge-lab']):
     try:
         subprocess.run([sys.executable,'-m','pipeline.multisport'],cwd=ROOT/'projects/props-edge',check=True,timeout=600)
     except (subprocess.CalledProcessError,subprocess.TimeoutExpired):
         print('::warning::Multisport props refresh failed; prior quote timestamps retained.')
-if args.sport in ['all','football','nhl','evening','props']:
+if 'nhl-edge-lab' in selected:
     subprocess.run([sys.executable,'tools/nhl_tracking.py','--capture'],cwd=ROOT,check=True,timeout=90)
 subprocess.run([sys.executable,'tools/spread_tracking.py'],cwd=ROOT,check=True,timeout=90)
 subprocess.run([sys.executable,'tools/newsletters.py'],cwd=ROOT,check=True,timeout=90)
-if args.sport in ['all','football','props']:
+if any(repo in selected for repo in ['nfl-edge-lab','ncaaf-edge-lab','props-edge']):
     subprocess.run([sys.executable,'tools/night_news.py'],cwd=ROOT,timeout=60,check=False)
     subprocess.run([sys.executable,'-m','tools.research.ingest'],cwd=ROOT,timeout=180,check=False)
     try:subprocess.run([sys.executable,'-m','tools.research.cfb_ingest'],cwd=ROOT,timeout=240,check=False)

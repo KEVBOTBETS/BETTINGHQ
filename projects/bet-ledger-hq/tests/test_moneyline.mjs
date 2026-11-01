@@ -29,3 +29,9 @@ assert.equal(C.cards('mlb',{slate:{...mlb.slate,games:[...mlb.slate.games,...mlb
 assert.equal(C.day('2026-09-20T01:00:00Z'),'2026-09-19');
 for(const p of [null,'',NaN,2,-.1,true])assert.equal(C.cards('mlb',{slate:{...mlb.slate,games:[{...mlb.slate.games[0],sim:{p_home_final:p}}]}},now)[0].predicted,null);
 console.log('Moneyline: winner selection, timing, stale feeds, missing inputs, ties, duplicate games and immutable picks passed');
+
+const scheduleOnly={...nfl,details:[],games:[{...nfl.games[0],projection:{mu:-3,ratings_known:true}}]};
+assert.equal(C.cards('nfl',scheduleOnly,now)[0].predicted,'away','Future-week schedule projections work without focused detail cards');
+assert.equal(C.cards('nfl',scheduleOnly,now)[0].probability,null);
+assert.equal(C.cards('nfl',{...scheduleOnly,details:{}},now)[0].predicted,'away');
+assert.equal(C.cards('nfl',{...scheduleOnly,meta:{generated_at:'2026-09-18T15:00:00Z'}},now)[0].selectable,false,'Schedule fallback never bypasses freshness');
