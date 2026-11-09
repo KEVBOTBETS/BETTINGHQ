@@ -145,7 +145,7 @@ def main(argv=None, root=None):
             g['quotes']=parse_espn((event.get('competitions') or [{}])[0].get('odds') or [],g['observed_at'])
     ordered=sorted(games.values(),key=lambda g:g['tipoff']);players=[]
     wanted=[g for g in ordered if (g['state']=='pre' and now<model.instant(g['tipoff'])<now+timedelta(hours=36)) or (not college and (now-timedelta(days=10)<model.instant(g['tipoff'])<now or g['game_id'] in recovery_ids))]
-    wanted=sorted(wanted,key=lambda g:g['tipoff'],reverse=True)[:(96 if college else 160)]
+    wanted=sorted(wanted,key=lambda g:g['tipoff'],reverse=not college)[:(96 if college else 160)]
     def context(g):
         key='summary-'+g['game_id'];raw=source(key,BASE+'summary?event='+g['game_id'],ttl=0 if g['state']!='post' else 1800)
         if health[key]['status'] not in ('ok','cached'):return
