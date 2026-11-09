@@ -5,7 +5,7 @@
   const instant=v=>typeof v==='string'&&/(Z|[+-]\d\d:\d\d)$/i.test(v)&&Number.isFinite(Date.parse(v))?Date.parse(v):null;
   const probability=v=>{const n=number(v);return n!==null&&n>=0&&n<=1?n:null;};
   const day=v=>{const t=typeof v==='number'?v:instant(v);return t===null?'':new Intl.DateTimeFormat('en-CA',{timeZone:'America/Toronto',year:'numeric',month:'2-digit',day:'2-digit'}).format(new Date(t));};
-  function freshness(stamp,sport,now){const t=instant(stamp);return t===null||t>now+300000?'unknown':now-t>(sport==='ncaaf'?4:6)*3600000?'stale':'recent';}
+  function freshness(stamp,sport,now){const t=instant(stamp);return t===null||t>now+300000?'unknown':now-t>(['ncaaf','ncaab'].includes(sport)?4:6)*3600000?'stale':'recent';}
   function cards(sport,bundle,now=Date.now()){
     const stamp=(sport==='mlb'?bundle.slate:bundle.meta)?.generated_at;
     const fresh=freshness(stamp,sport,now);

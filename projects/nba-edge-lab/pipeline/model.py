@@ -2,7 +2,7 @@
 from datetime import datetime
 from statistics import NormalDist
 import math
-VERSION='nba-scoring-research-1.0'
+VERSION='nba-scoring-research-1.1'
 def number(v):
     try:return float(v) if v is not None and not isinstance(v,bool) and math.isfinite(float(v)) else None
     except (TypeError,ValueError):return None
@@ -12,7 +12,8 @@ def instant(v):
     except ValueError:return None
 def decimal(v):
     p=number(v);return 1+(p/100 if p>0 else 100/-p) if p is not None and abs(p)>=100 else None
-def project(home,away,now,neutral=False):
+def project(home,away,now,neutral=False,fit=None,college=False):
+    prior_games=12 if college else 20
     def rate(team,field):
         current=team.get('current') or {};prior=team.get('prior') or {}
         n=number(current.get('games')) or 0;pn=number(prior.get('games')) or 0
@@ -26,18 +27,18 @@ def project(home,away,now,neutral=False):
         if n and c is not None:
             at=instant(current.get('observed_at'))
             if not at or not 0<=(now-at).total_seconds()<=24*3600:return None
-            return (n*c+20*p)/(n+20)
+            return (n*c+prior_games*p)/(n+prior_games)
         return p
     hf,ha,af,aa=rate(home,'points_for'),rate(home,'points_against'),rate(away,'points_for'),rate(away,'points_against')
     if None in (hf,ha,af,aa):return {'ratings_known':False,'reason':'Verified current/prior NBA scoring samples unavailable'}
     h,a=(hf+aa)/2,(af+ha)/2
     # A disclosed baseline assumption, not a fitted or validated NBA parameter.
     if not neutral:h+=1.0;a-=1.0
-    mu=h-a;total=h+a;p=NormalDist(0,12).cdf(mu)
-    return {'ratings_known':True,'mu':round(mu,3),'total':round(total,3),'proj_total':round(total,3),
-        'proj_home_pts':round(h,2),'proj_away_pts':round(a,2),'p_home':round(p,6),'margin_sd':12,'total_sd':18,
-        'prior_weight':round(20/(20+min(home.get('current',{}).get('games') or 0,away.get('current',{}).get('games') or 0)),3),
-        'basis':'Previous regular-season scoring rates blended with current-season rates over 20 games. No player injury adjustment.',
+    raw_mu=h-a;bias=(fit or {}).get('bias',0);sigma=(fit or {}).get('margin_sd',12);mu=raw_mu+bias;total=h+a;h+=bias/2;a-=bias/2;p=NormalDist(0,sigma).cdf(mu)
+    return {'ratings_known':True,'raw_mu':round(raw_mu,3),'mu':round(mu,3),'model_version':'ncaab-scoring-research-1.0' if college else VERSION,'total':round(total,3),'proj_total':round(total,3),
+        'proj_home_pts':round(h,2),'proj_away_pts':round(a,2),'p_home':round(p,6),'margin_sd':sigma,'total_sd':18,
+        'prior_weight':round(prior_games/(prior_games+min(home.get('current',{}).get('games') or 0,away.get('current',{}).get('games') or 0)),3),
+        'residual_fit':fit,'basis':'Previous regular-season scoring rates blended with current-season rates using a disclosed prior-game weight. No player injury adjustment.',
         'mode':'research','calibrated':False}
 def candidates(game,now):
     p=game.get('projection') or {};rows=[]
@@ -62,6 +63,6 @@ def candidates(game,now):
             'home':game['home']['abbr'],'away':game['away']['abbr'],'matchup':game['away']['abbr']+' @ '+game['home']['abbr'],
             'season':game['season'],'season_type':game['season_type'],'pick':label,'model_prob':conditional,'push_prob':push,
             'edge':(1-push)*(conditional*price-1) if conditional is not None else None,'odds_observed_at':q['observed_at'],
-            'odds_verified':True,'model_version':VERSION,'tier':'RESEARCH','held':True,'stake':0,
+            'odds_verified':True,'model_version':p.get('model_version',VERSION),'tier':'RESEARCH','held':True,'stake':0,
             'reasons':['New NBA baseline is uncalibrated; research only. Confirm injuries and the current sportsbook price.']})
     return rows

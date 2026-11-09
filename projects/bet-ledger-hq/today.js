@@ -3,6 +3,7 @@
   "use strict";
   const C=window.KevToday, BS=window.BetSync, $=s=>document.querySelector(s);
   const sources={
+    ncaab:{meta:"../ncaab-edge-lab/data/meta.json",board:"../ncaab-edge-lab/data/board.json",accuracy:"../ncaab-edge-lab/data/accuracy.json"},
     nba:{meta:"../nba-edge-lab/data/meta.json",board:"../nba-edge-lab/data/board.json",accuracy:"../nba-edge-lab/data/accuracy.json"},
     nhl:{meta:"../nhl-edge-lab/data/meta.json",board:"../nhl-edge-lab/data/board.json",accuracy:"../nhl-edge-lab/data/accuracy.json"},
     wnba:{meta:"../wnba-edge-lab/data/meta.json",board:"../wnba-edge-lab/data/board.json",accuracy:"../wnba-edge-lab/data/accuracy.json"},

@@ -93,7 +93,7 @@ try{
     if(!await page.getByRole("link",{name:"Sports Desk",exact:true}).isVisible())await page.getByText("League boards",{exact:true}).click();
     for(const [name,key] of [["Sports Desk","desk"],["NBA","nba"],["NCAAB","ncaab"]]){
       await page.getByRole("link",{name,exact:true}).click();
-      await page.frameLocator("#frame-"+key).locator(key==="nba"?"h1":"#desk-title").waitFor();
+      await page.frameLocator("#frame-"+key).locator(["nba","ncaab"].includes(key)?"h1":"#desk-title").waitFor();
       assert.equal(await page.getByRole("link",{name,exact:true}).getAttribute("aria-current"),"page");
     }
     const bandsLink=page.getByRole('link',{name:'NBA Winning Bands',exact:true});

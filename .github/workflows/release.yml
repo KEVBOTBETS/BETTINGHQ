@@ -111,6 +111,13 @@ jobs:
           path: projects/nba-edge-lab/state/sources.json
           key: nba-public-downloads-${{ runner.os }}-${{ github.run_id }}
           restore-keys: nba-public-downloads-${{ runner.os }}-
+      - name: Restore bounded public college basketball source cache
+        if: github.event_name != 'pull_request'
+        uses: actions/cache/restore@v6
+        with:
+          path: projects/ncaab-edge-lab/state/sources.json
+          key: ncaab-public-downloads-${{ runner.os }}-${{ github.run_id }}
+          restore-keys: ncaab-public-downloads-${{ runner.os }}-
       - name: Refresh real data
         id: refresh
         if: github.event_name != 'pull_request'
@@ -146,6 +153,12 @@ jobs:
         with:
           path: projects/nba-edge-lab/state/sources.json
           key: nba-public-downloads-${{ runner.os }}-${{ github.run_id }}
+      - name: Save bounded public college basketball source cache
+        if: github.event_name != 'pull_request'
+        uses: actions/cache/save@v6
+        with:
+          path: projects/ncaab-edge-lab/state/sources.json
+          key: ncaab-public-downloads-${{ runner.os }}-${{ github.run_id }}
       - name: Save public model history
         id: save
         if: github.event_name != 'pull_request'

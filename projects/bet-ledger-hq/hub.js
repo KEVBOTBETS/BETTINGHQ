@@ -16,7 +16,7 @@
     "nfl-newsletter":{title:"NFL newsletter",description:"Weekly NFL stories, matchups and playoff context.",url:"newsletter.html?sport=nfl"},
     desk:{title:"Sports Desk",description:"Seven leagues. Scores, standings, headlines and matchup research.",url:"sports-desk.html"},
     nba:{title:"NBA Courtside",description:"NBA schedules, standings, statistics and observed odds. Research forecasts.",url:"../nba-edge-lab/"},
-    ncaab:{title:"NCAAB Courtside",description:"College hoops scores and team research. Model qualification awaits validation.",url:"sports-desk.html?sport=ncaab"},
+    ncaab:{title:"NCAAB Courtside",description:"College hoops schedules, standings, model winners, spread and total research.",url:"../ncaab-edge-lab/"},
     "spread-accuracy":{title:"Spread accuracy",description:"Whole-sheet spread forecasts, cover records and quoted-price returns.",url:"spread-accuracy.html"},
     "nhl-props":{title:"NHL Props & Parlay Lab",description:"Hockey player research, goal scorers, payout targets and your parlay ledger.",url:"../props-edge/league-parlays.html?sport=NHL"},
     "nba-bands":{title:"NBA Bands Parlay Lab",description:"Predicted winners, winning-margin bands and three-to-four-game nightly research tickets.",url:"../nba-edge-lab/bands.html"},

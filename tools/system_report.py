@@ -7,7 +7,7 @@ try:
 except ImportError:
  from research.common import read,instant,number,decimal
 ROOT=Path(__file__).resolve().parents[1]
-SOURCES={'nba':('nba-edge-lab','site/data'),'nfl':('nfl-edge-lab','site/data'),'ncaaf':('ncaaf-edge-lab','site/data'),'nhl':('nhl-edge-lab','site/data'),'wnba':('wnba-edge-lab','site/data'),'mlb':('mlb-edge','docs/data')}
+SOURCES={'ncaab':('ncaab-edge-lab','site/data'),'nba':('nba-edge-lab','site/data'),'nfl':('nfl-edge-lab','site/data'),'ncaaf':('ncaaf-edge-lab','site/data'),'nhl':('nhl-edge-lab','site/data'),'wnba':('wnba-edge-lab','site/data'),'mlb':('mlb-edge','docs/data')}
 
 def label(g,side):
  r=g.get(side)
@@ -25,7 +25,7 @@ def build(root=ROOT,now=None,staged=None):
    meta=read(path/'latest.json',{});source=meta.get('games',[]);board=[]
   if not isinstance(source,list):source=[]
   if not isinstance(board,list):board=[]
-  publication=meta.get('generated_at');fresh=age(publication,now,4 if sport=='ncaaf' else 6);upcoming=[];priced=qualified=forecasts=0;book_set=set();reasons=Counter()
+  publication=meta.get('generated_at');fresh=age(publication,now,4 if sport in ('ncaaf','ncaab') else 6);upcoming=[];priced=qualified=forecasts=0;book_set=set();reasons=Counter()
   for g in source:
    start=g.get('tipoff') or g.get('start') or g.get('date');at=instant(start)
    if not at or not now<at<now+timedelta(days=14) or g.get('completed') or g.get('canceled') or g.get('postponed') or g.get('state') in ('post','in','unknown'):continue
@@ -43,7 +43,7 @@ def build(root=ROOT,now=None,staged=None):
      r['pick']=r.get('label') or r.get('selection')
      r['odds_observed_at']=r.get('odds_observed_at') or (g.get('odds') or {}).get('fetched_at')
     price=number(r.get('price_american',r.get('price')));book=str(r.get('book') or '').strip();stamp=r.get('odds_observed_at') or r.get('observed_at') or r.get('odds_fetched_at') or r.get('updated_at')
-    quote_fresh=age(stamp,now,1.5 if sport in ('nhl','nba') else 3 if sport=='ncaaf' else 4)
+    quote_fresh=age(stamp,now,1.5 if sport in ('nhl','nba','ncaab') else 3 if sport=='ncaaf' else 4)
     valid=decimal(price) is not None and book and r.get('odds_verified') is not False and r.get('price_source')!='model' and not r.get('reference_only') and r.get('quote_status') in (None,'observed')
     # College publishes model tiers without server-side financial allocations.
     source_qualified=r.get('tier') in ('BEST BET','GOOD','LEAN') if sport=='ncaaf' else (number(r.get('stake')) or 0)>0
@@ -69,7 +69,7 @@ def build(root=ROOT,now=None,staged=None):
     if ml:p=ml['probability'] if ml['side']=='home' else 1-ml['probability']
    margin=number(projection.get('mu',projection.get('margin')))
    score_projection=None
-   if sport in ('nfl','ncaaf','nba') and fresh and not g.get('source_stale') and projection.get('ratings_known') is True:
+   if sport in ('nfl','ncaaf','nba','ncaab') and fresh and not g.get('source_stale') and projection.get('ratings_known') is True:
     ph,pa,pt=[number(projection.get(k)) for k in ('proj_home_pts','proj_away_pts','proj_total')]
     if ph is not None and pa is not None and pt is not None and min(ph,pa,pt)>=0:score_projection={'home':ph,'away':pa,'total':pt,'basis':'Published source model scores; not bookmaker totals','observed_at':publication}
    ready=p is not None and fresh and not g.get('source_stale')

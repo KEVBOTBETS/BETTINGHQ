@@ -4,7 +4,7 @@ import json
 
 PUBLICATIONS = {
     **{name: f'projects/{name}/site/data/meta.json' for name in
-       ['nfl-edge-lab', 'ncaaf-edge-lab', 'nba-edge-lab', 'nhl-edge-lab', 'props-edge', 'wnba-edge-lab']},
+       ['ncaab-edge-lab', 'nfl-edge-lab', 'ncaaf-edge-lab', 'nba-edge-lab', 'nhl-edge-lab', 'props-edge', 'wnba-edge-lab']},
     'mlb-edge': 'projects/mlb-edge/docs/data/latest.json',
     'ladderbet': 'projects/ladderbet/docs/data/accuracy.json',
 }

@@ -6,8 +6,8 @@
 })(typeof self!=="undefined"?self:this,function(){
   "use strict";
   const HOUR=3600000;
-  const LABELS={nba:"NBA",nhl:"NHL",wnba:"WNBA",mlb:"MLB",nfl:"NFL",ncaaf:"NCAAF",props:"Props",ladder:"Ladder"};
-  const APP={nba:"nba-lab",nhl:"nhl-lab",wnba:"wnba-lab",mlb:"mlb-edge",nfl:"nfl-lab",ncaaf:"ncaaf-lab",props:"props",ladder:"ladder"};
+  const LABELS={ncaab:"NCAAB",nba:"NBA",nhl:"NHL",wnba:"WNBA",mlb:"MLB",nfl:"NFL",ncaaf:"NCAAF",props:"Props",ladder:"Ladder"};
+  const APP={ncaab:"ncaab-lab",nba:"nba-lab",nhl:"nhl-lab",wnba:"wnba-lab",mlb:"mlb-edge",nfl:"nfl-lab",ncaaf:"ncaaf-lab",props:"props",ladder:"ladder"};
   function number(v){return v==null||v===""||!Number.isFinite(Number(v))?null:Number(v);}
   function instant(v){if(!v)return null;const n=Date.parse(v);return Number.isFinite(n)?n:null;}
   function day(v){if(typeof v==="string"&&/^\d{4}-\d{2}-\d{2}$/.test(v))return v;const n=typeof v==="number"?v:instant(v);if(n==null)return "";return new Intl.DateTimeFormat("en-CA",{timeZone:"America/Toronto",year:"numeric",month:"2-digit",day:"2-digit"}).format(new Date(n));}
@@ -44,7 +44,7 @@
   function health(key,bundle,now=Date.now()){
     const meta=bundle.meta||bundle.slate||{};
     const stamp=meta.generated_at||meta.generated||bundle.accuracy?.generated_at;
-    const limit=key==="props"?6:key==="ncaaf"?4:6;
+    const limit=key==="props"?6:["ncaaf","ncaab"].includes(key)?4:6;
     const age=freshness(stamp,limit,now),warnings=[];
     if(bundle.error)warnings.push("Latest fetch failed; retained data is for reference only. No current recommendations from this board.");
     if(age.status!=="recent")warnings.push(age.status==="stale"?"Published data is stale.":"Published data time is unavailable.");
@@ -69,7 +69,7 @@
     }
     if(meta.odds_health?.healthy===false||["failed","unavailable","error"].includes(meta.odds_health?.status))warnings.push("Odds coverage needs attention.");
     const notes=[];
-    if(key==="nba")notes.push("NBA scoring baseline is research only; automatic best-bet qualification is disabled while prospective results accumulate.");
+    if(["nba","ncaab"].includes(key))notes.push("Basketball scoring baseline is research only; automatic best-bet qualification is disabled while prospective results accumulate.");
     if(number(odds.later_unpriced_games)>0)notes.push(odds.later_unpriced_games+" later games have no posted prices yet; these are outside the next 24 hours.");
     return {key,label:LABELS[key],stamp:stamp||null,notes,age,freshness:age.status,coverage:warnings.length?"review":"complete",status:bundle.error?"unavailable":age.status==="stale"?"stale":warnings.length?"review":"recent",warnings};
   }
@@ -79,14 +79,14 @@
       const t=tier(r.tier),start=r.start_time||r.tipoff||r.game_date||game?.start;
       if((!options.quotes&&(!["BEST BET","GOOD","LEAN"].includes(t)||r.held))||r.odds_verified===false)return;
       if(!options.quotes&&key==="mlb"&&!(number(r.stake)>0))return;
-      if(!options.quotes&&["nfl","wnba","nhl","nba"].includes(key)&&!(number(r.stake)>0))return;
+      if(!options.quotes&&["nfl","wnba","nhl","nba","ncaab"].includes(key)&&!(number(r.stake)>0))return;
       if(!options.quotes&&key==="props"&&!(number(r.recommended_stake)>0))return;
       if(["Final","Postponed","Cancelled","Canceled","Suspended","In Progress"].includes(game?.status))return;
       const when=instant(start),price=american(r.price_american??r.price);
       if(when==null||when<=now||price==null)return;
       const quote=r.odds_observed_at||r.odds_fetched_at||game?.odds?.fetched_at||r.updated_at;
-      const age=freshness(quote,["nhl","nba"].includes(key)?1.5:key==="props"?Math.min(6,number(meta.max_odds_age_hours)||6):key==="ncaaf"?3:6,now);
-      const publishedAge=freshness(published,key==="ncaaf"?4:6,now);
+      const age=freshness(quote,["nhl","nba","ncaab"].includes(key)?1.5:key==="props"?Math.min(6,number(meta.max_odds_age_hours)||6):key==="ncaaf"?3:6,now);
+      const publishedAge=freshness(published,["ncaaf","ncaab"].includes(key)?4:6,now);
       if((quote&&age.status==="unknown")||age.status==="stale"||publishedAge.status!=="recent"||bundle.error)return;
       if(key==="nhl"&&(age.status!=="recent"||![2,3].includes(Number(r.season_type))))return;
       const review=[];

@@ -12,7 +12,7 @@ ROOT=Path(__file__).resolve().parents[1]
 parser=argparse.ArgumentParser()
 parser.add_argument('--sport',choices=['all','nba','evening','football','mlb','wnba','nhl','props','ladder','archive'],default='all')
 args=parser.parse_args()
-selected={'nba':['nba-edge-lab'],'evening':['nhl-edge-lab','nba-edge-lab'],'all':['nba-edge-lab','nfl-edge-lab','ncaaf-edge-lab','mlb-edge','props-edge','wnba-edge-lab','nhl-edge-lab','ladderbet'],'football':['nfl-edge-lab','ncaaf-edge-lab','props-edge'],'mlb':['mlb-edge'],'nhl':['nhl-edge-lab'],'wnba':['wnba-edge-lab'],'props':['props-edge'],'ladder':['ladderbet'],'archive':[]}[args.sport]
+selected={'nba':['nba-edge-lab'],'evening':['nhl-edge-lab','nba-edge-lab','ncaab-edge-lab'],'all':['ncaab-edge-lab','nba-edge-lab','nfl-edge-lab','ncaaf-edge-lab','mlb-edge','props-edge','wnba-edge-lab','nhl-edge-lab','ladderbet'],'football':['nfl-edge-lab','ncaaf-edge-lab','props-edge'],'mlb':['mlb-edge'],'nhl':['nhl-edge-lab'],'wnba':['wnba-edge-lab'],'props':['props-edge'],'ladder':['ladderbet'],'archive':[]}[args.sport]
 if args.sport != 'archive':
     recovery = recovery_projects(ROOT, selected)
     if recovery:print('Recovering stale or missing publications: '+', '.join(recovery), flush=True)

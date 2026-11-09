@@ -5,6 +5,7 @@ import subprocess
 import tempfile
 
 OUTPUTS={
+    'ncaab-edge-lab':['state','site/data'],
     'nfl-edge-lab':['state','site/data'],
     'ncaaf-edge-lab':['state','site/data'],
     'props-edge':['state','site/data'],
@@ -20,6 +21,8 @@ def refresh_project(project, command, timeout=1800):
     with tempfile.TemporaryDirectory(prefix='kevbot-refresh-') as folder:
         work=Path(folder)/project.name
         shutil.copytree(project,work,ignore=shutil.ignore_patterns('.git','node_modules','__pycache__','.venv','*.log','*.tmp','_public_site'))
+        if project.name=='ncaab-edge-lab':
+            shutil.copytree(project.parent/'nba-edge-lab/pipeline',work/'_basketball_shared',ignore=shutil.ignore_patterns('__pycache__'))
         # Football refreshes run outside the repository. Bundle the stdlib-only
         # reader so quotes and health are written inside the same isolation.
         if project.name in ('nfl-edge-lab','ncaaf-edge-lab'):

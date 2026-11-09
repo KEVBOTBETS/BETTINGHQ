@@ -12,7 +12,7 @@ def call(row, league, historical=False):
             "market": row.get("market"), "side": row.get("side"), "pick": row.get("pick"),
             "line": line, "price": row.get("price"), "book": row.get("book"),
             "probability": row.get("model_prob"), "tier": row.get("tier"),
-            "edge": row.get("action_edge", row.get("edge")), "reason": row.get("filtered"),
+            "edge": row.get("action_edge", row.get("edge")), "reason": row.get("filtered"), "version":row.get("model_version") or A.VERSION,
             **({"captured_at": captured, "version": "legacy", "prior_result": row.get("result"),
                 "graded_at": row.get("graded_at")} if historical else {})}
 
@@ -42,10 +42,11 @@ def game(row, league):
             "start": row.get("date_utc") or row.get("tipoff") or row.get("date"),
             "completed": row.get("completed"),
             "matchup": row.get("matchup") or f'{away.get("abbr")} @ {home.get("abbr")}',
-            "margin": p.get("mu", p.get("margin")), "total": p.get("proj_total", p.get("total")),
+            "version":p.get("model_version") or A.VERSION, "raw_margin":p.get("raw_mu"), "margin": p.get("mu", p.get("margin")), "total": p.get("proj_total", p.get("total")),
             "probability": row.get("p_home"), "market_snapshot": market_snapshot(row),
             "market_spread": o.get("spread_home", -p["market_margin"] if p.get("market_margin") is not None else None),
-            "market_total": o.get("total", p.get("market_total"))}
+            "market_total": o.get("total", p.get("market_total")),
+            "market_spread_source":o.get("spread_home_source"), "market_total_source":o.get("total_source")}
 
 
 def results(games):

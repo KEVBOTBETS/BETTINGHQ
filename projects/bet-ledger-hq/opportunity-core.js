@@ -6,7 +6,7 @@
  function toggle(storage,id){const old=read(storage),games=old.games.includes(id)?old.games.filter(x=>x!==id):[...old.games,id];storage.setItem(KEY,JSON.stringify({schema:1,games,updated_at:new Date().toISOString()}));return games;}
  function changes(before,after){if(!before)return[];const out=[];for(const [key,label]of [['p_home','Home win estimate'],['margin','Projected margin']]){const a=number(before[key]),b=number(after[key]);if(a!==null&&b!==null&&Math.abs(a-b)>.00001)out.push({label,from:a,to:b});}const a=before.best,b=after.best;if(a&&b&&a.market===b.market&&a.side===b.side&&a.line===b.line&&a.book===b.book&&a.price!=null&&b.price!=null&&a.price!==b.price)out.push({label:'Same-book price',from:a.price,to:b.price});return out;}
  function events(row){
-  const normalize=s=>({'nfl-lab':'nfl','ncaaf-lab':'ncaaf','nhl-lab':'nhl','mlb-edge':'mlb','wnba-lab':'wnba'})[String(s).toLowerCase()]||String(s).toLowerCase();
+  const normalize=s=>({'nfl-lab':'nfl','ncaaf-lab':'ncaaf','nba-lab':'nba','ncaab-lab':'ncaab','nhl-lab':'nhl','mlb-edge':'mlb','wnba-lab':'wnba'})[String(s).toLowerCase()]||String(s).toLowerCase();
   const n=row.native||{},sport=normalize(row.sport||row.app),legs=Array.isArray(n.legs)?n.legs:[];
   const refs=legs.length?legs:[{sport,event_id:n.game_id||n.event_id,event:row.event,start_time:n.start_time||n.tipoff||row.event_date}];
   return [...new Map(refs.map(l=>{const key=normalize(l.sport||sport)+'|'+(l.event_id||l.game_id||(l.matchup||l.event||row.event)+'|'+String(l.start_time||l.date||row.event_date||'').slice(0,10));return [key,{key,event:l.matchup||l.event||row.event}];})).values()];

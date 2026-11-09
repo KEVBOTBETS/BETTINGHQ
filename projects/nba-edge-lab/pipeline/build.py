@@ -44,7 +44,10 @@ def standings(raw,season,observed):
     def walk(node,conference=''):
         if node.get('isConference'):conference=node.get('name','')
         for row in node.get('standings',{}).get('entries',[]):
-            t=row.get('team') or {};stats={v['name']:v for v in row.get('stats',[])}
+            t=row.get('team') or {};stats={};
+            for v in row.get('stats',[]):
+                # ESPN college standings repeat names for home/road/conference splits.
+                if '_' not in str(v.get('type','')):stats.setdefault(v['name'],v)
             get=lambda k:model.number(stats.get(k,{}).get('value'))
             if not t.get('id') or not t.get('abbreviation'):continue
             wins,losses=get('wins'),get('losses');games=get('gamesPlayed')
@@ -94,8 +97,13 @@ def parse_summary(raw,game,observed):
                     players.append({'player_id':str(athlete['id']),'name':athlete['displayName'],'team':team['team'].get('abbreviation'),
                         'game_id':game['game_id'],'start':game['tipoff'],'state':game['state'],'observed_at':observed,'stats':dict(zip(labels,values))})
     return quotes,players
-def main():
-    ap=argparse.ArgumentParser();ap.add_argument('--offline',action='store_true');args=ap.parse_args()
+def main(argv=None, root=None):
+    global ROOT, STATE, OUT, BASE
+    ap=argparse.ArgumentParser();ap.add_argument('--offline',action='store_true');ap.add_argument('--league',choices=['NBA','NCAAB'],default='NBA');args=ap.parse_args(argv)
+    league=args.league;college=league=='NCAAB';route='mens-college-basketball' if college else 'nba'
+    if root is not None:ROOT=Path(root);STATE=ROOT/'state';OUT=ROOT/'site/data'
+    STATE.mkdir(parents=True,exist_ok=True);OUT.mkdir(parents=True,exist_ok=True)
+    BASE='https://site.api.espn.com/apis/site/v2/sports/basketball/'+route+'/'
     now=datetime.now(timezone.utc);stamp=now.isoformat();today=now.astimezone(ET).date();season=today.year+(today.month>=8)
     cache=read(STATE/'sources.json',{});health={}
     def source(key,url,ttl=0):
@@ -108,20 +116,25 @@ def main():
             except (OSError,ValueError) as exc:error=type(exc).__name__+': '+str(exc)[:160]
         else:error='Offline'
         health[key]={'status':'retained' if old else 'unavailable','observed_at':old.get('observed_at'),'url':url,'error':error};return old.get('data',{})
-    dates={today+timedelta(days=i) for i in range(-3,9)}
+    dates={today+timedelta(days=i) for i in range(-10,9)}
     pending=read(STATE/'model_accuracy.json',{'records':{}})
     for r in pending.get('records',{}).values():
         at=model.instant(r.get('start'))
-        if r.get('result')=='Pending' and at and now-timedelta(days=14)<=at<now:dates.add(at.astimezone(ET).date())
+        if r.get('result')=='Pending' and at and now-timedelta(days=45)<=at<now:dates.add(at.astimezone(ET).date())
+    recovery_ids=set()
+    if not college:
+        from .database import pending_player_games
+        recovery_ids,extra_dates=pending_player_games(ROOT,now)
+        dates.update(extra_dates)
     dates=sorted(dates)
     def get_day(d):
-        key='scoreboard-'+d.isoformat();raw=source(key,BASE+'scoreboard?dates='+d.strftime('%Y%m%d')+'&limit=1000');return key,raw
+        key='scoreboard-'+d.isoformat();raw=source(key,BASE+'scoreboard?dates='+d.strftime('%Y%m%d')+'&limit=1000'+('&groups=50' if college else ''));return key,raw
     with ThreadPoolExecutor(max_workers=4) as pool:boards=list(pool.map(get_day,dates))
     today_key='scoreboard-'+today.isoformat()
-    if health[today_key]['status'] not in ('ok','cached') and not args.offline:raise RuntimeError('NBA schedule refresh failed; retain original publication: '+str(health[today_key]))
-    current=standings(source('standings-'+str(season),'https://site.api.espn.com/apis/v2/sports/basketball/nba/standings?season='+str(season),ttl=1800),season,health['standings-'+str(season)]['observed_at'])
-    prior=standings(source('standings-'+str(season-1),'https://site.api.espn.com/apis/v2/sports/basketball/nba/standings?season='+str(season-1),ttl=7*86400),season-1,health['standings-'+str(season-1)]['observed_at'])
-    if len(current)<20:raise RuntimeError('Current NBA standings season/coverage unavailable')
+    if health[today_key]['status'] not in ('ok','cached') and not args.offline:raise RuntimeError(league+' schedule refresh failed; retain original publication: '+str(health[today_key]))
+    current=standings(source('standings-'+str(season),'https://site.api.espn.com/apis/v2/sports/basketball/'+route+'/standings?season='+str(season),ttl=1800),season,health['standings-'+str(season)]['observed_at'])
+    prior=standings(source('standings-'+str(season-1),'https://site.api.espn.com/apis/v2/sports/basketball/'+route+'/standings?season='+str(season-1),ttl=7*86400),season-1,health['standings-'+str(season-1)]['observed_at'])
+    if len(current)<(100 if college else 20):raise RuntimeError('Current '+league+' standings season/coverage unavailable')
     games={}
     for key,raw in boards:
         for event in raw.get('events',[]):
@@ -131,7 +144,8 @@ def main():
             from .quotes import parse_espn
             g['quotes']=parse_espn((event.get('competitions') or [{}])[0].get('odds') or [],g['observed_at'])
     ordered=sorted(games.values(),key=lambda g:g['tipoff']);players=[]
-    wanted=[g for g in ordered if now-timedelta(days=2)<model.instant(g['tipoff'])<now+timedelta(hours=36)]
+    wanted=[g for g in ordered if (g['state']=='pre' and now<model.instant(g['tipoff'])<now+timedelta(hours=36)) or (not college and (now-timedelta(days=10)<model.instant(g['tipoff'])<now or g['game_id'] in recovery_ids))]
+    wanted=sorted(wanted,key=lambda g:g['tipoff'],reverse=True)[:(96 if college else 160)]
     def context(g):
         key='summary-'+g['game_id'];raw=source(key,BASE+'summary?event='+g['game_id'],ttl=0 if g['state']!='post' else 1800)
         if health[key]['status'] not in ('ok','cached'):return
@@ -139,7 +153,7 @@ def main():
     with ThreadPoolExecutor(max_workers=4) as pool:list(pool.map(context,wanted))
     attempts=[]
     upcoming=[g for g in ordered if g['state']=='pre' and not g['canceled'] and not g['postponed'] and model.instant(g['tipoff'])>now]
-    if not args.offline:
+    if not args.offline and not college:
         # A bounded public comparison page supplements missing markets.
         offers=public_odds.collect([g for g in upcoming if model.instant(g['tipoff'])<=now+timedelta(hours=48)],now,attempts)
         for gid,q in offers:
@@ -150,6 +164,8 @@ def main():
             existing[:]=[x for x in existing if identity(x)!=identity(q)];existing.append(q)
     teams={}
     for tid,t in current.items():teams[tid]={**t,'current':t,'prior':prior.get(tid,{})}
+    if college:
+        for t in teams.values():t.update(stats={'gamesPlayed':t['games'],'avgPoints':t['points_for']},stats_season=season,stats_observed_at=t['observed_at'])
     def team_details(item):
         tid,t=item
         for stat_season in ([season,season-1] if (t.get('games') or 0)>0 else [season-1]):
@@ -160,11 +176,16 @@ def main():
                 values={v['name']:v.get('value') for c in raw.get('results',{}).get('stats',{}).get('categories',[]) for v in c.get('stats',[]) if model.number(v.get('value')) is not None}
                 if not values:continue
                 t['stats']=values;t['stats_season']=stat_season;t['stats_observed_at']=health[key]['observed_at'];break
-    with ThreadPoolExecutor(max_workers=4) as pool:list(pool.map(team_details,teams.items()))
+    if not college:
+        with ThreadPoolExecutor(max_workers=4) as pool:list(pool.map(team_details,teams.items()))
+    from .database import merge_players, residual_fit, market_lines
+    players=merge_players(ROOT,players,season,now) if not college else players
+    game_history.A.settle(pending,game_history.results(ordered))
+    fit=residual_fit(pending,now) if not college else None
     board=[]
     for g in ordered:
         if g in upcoming and not g['source_stale']:
-            g['projection']=model.project(teams.get(g['home']['id'],{}),teams.get(g['away']['id'],{}),now,g['neutral'])
+            g['projection']=model.project(teams.get(g['home']['id'],{}),teams.get(g['away']['id'],{}),now,g['neutral'],fit=fit,college=college)
         else:g['projection']={'ratings_known':False,'reason':'No new forecast after tipoff'}
         g['p_home']=g['projection'].get('p_home')
         board.extend(model.candidates(g,now))
@@ -173,14 +194,15 @@ def main():
         if ml:
             q=ml[0];paired=[r for r in ml if r['book']==q['book'] and r['observed_at']==q['observed_at']]
             g['odds']={'book':q['book'],'fetched_at':q['observed_at'],'quotes':{r['side']+'_ml':r for r in paired}}
+        g.setdefault('odds',{}).update(market_lines(g,now))
     records=read(STATE/'model_accuracy.json',{'records':{}})
     # Frozen forecasts are displayed for started games; never recomputed from results.
     frozen={r['event_id']:r for r in records.get('records',{}).values() if r.get('kind')=='game'}
     for g in ordered:
         old=frozen.get(g['game_id'])
         if old and g['state']!='pre':g['frozen_forecast']={'p_home':old.get('probability'),'margin':old.get('margin'),'total':old.get('total'),'captured_at':old.get('captured_at')}
-    accuracy=game_history.update(STATE/'model_accuracy.json',OUT/'accuracy.json',board,upcoming,ordered,'NBA')
-    leader_raw=source('leaders','https://site.api.espn.com/apis/site/v3/sports/basketball/nba/leaders?season='+str(season)+'&seasontype=2&limit=10',ttl=3600)
+    accuracy=game_history.update(STATE/'model_accuracy.json',OUT/'accuracy.json',board,upcoming,ordered,league)
+    leader_raw=source('leaders','https://site.api.espn.com/apis/site/v3/sports/basketball/'+route+'/leaders?season='+str(season)+'&seasontype=2&limit=10',ttl=3600)
     leader_season=leader_raw.get('requestedSeason') or {};leaders=[]
     if leader_season.get('year') in (season,season-1) and (leader_season.get('type') or {}).get('type')==2:
         for category in (leader_raw.get('leaders') or {}).get('categories',[]):
@@ -201,16 +223,16 @@ def main():
     near=[g for g in upcoming if model.instant(g['tipoff'])<=now+timedelta(hours=24)]
     coverage={g['game_id']:public_odds.covered_markets(g,now) for g in upcoming}
     priced=sum(bool(coverage[g['game_id']]) for g in near)
-    meta={'generated_at':stamp,'season':season,'season_label':f'{season-1}-{str(season)[-2:]}','league':'NBA','model_version':model.VERSION,
-        'model_mode':'research','automatic_qualification':False,'timezone':'America/Toronto','max_odds_age_hours':1.5,
+    meta={'generated_at':stamp,'season':season,'season_label':f'{season-1}-{str(season)[-2:]}','league':league,'model_version':('ncaab-scoring-research-1.0' if college else model.VERSION),
+        'model_mode':'research','automatic_qualification':False,'residual_fit':fit,'database':{'player_game_rows':len(players),'completed_games':sum(g['completed'] for g in ordered),'current_team_games':{t['abbr']:t.get('games') for t in current.values()}},'college':college,'timezone':'America/Toronto','max_odds_age_hours':1.5,
         'source_status':'partial' if any(s['status'] in ('retained','unavailable') for s in health.values()) else 'live-data','sources':health,
         'public_odds_attempts':attempts,'counts':{'games':len(upcoming),'teams':len(teams),'qualified':0,'players':len(players),'forecast_games':sum(g['projection'].get('ratings_known',False) for g in upcoming)},
         'odds_health':{'status':'ok' if all(coverage[g['game_id']]=={'ML','ATS','TOTAL'} for g in near) else 'partial','window_hours':24,'window_games':len(near),'window_priced_games':priced,'upcoming_games':len(upcoming),'priced_games':sum(bool(v) for v in coverage.values()),'later_unpriced_games':sum(not coverage[g['game_id']] for g in upcoming if g not in near)},
-        'limitations':['New scoring-rate baseline; probabilities are uncalibrated research estimates.','Prior-year scoring has limited roster continuity. No player injury adjustment.','All observed markets remain research selections; no automatic BEST BET labels.','Prices are snapshots. Stats and standings are season-labeled. Missing source fields remain missing.']}
+        'limitations':['Scoring-rate research baseline; probabilities are not calibrated or promoted to automatic bets.','Prior-year scoring has limited roster continuity. No player injury adjustment.','All observed markets remain research selections; no automatic BEST BET labels.','Prices are snapshots. Stats and standings are season-labeled. Missing source fields remain missing.']}
     outputs={'meta':meta,'games':ordered,'board':board,'standings':{'season':season,'generated_at':stamp,'teams':list(current.values())},'teams':{'season':season,'generated_at':stamp,'teams':list(teams.values())},'players':{'season':season,'generated_at':stamp,'players':players},'leaders':leader_data,'news':news,'injuries':injuries,'results':[g for g in ordered if g['completed']]}
     for name,data in outputs.items():write(OUT/(name+'.json'),data)
     # Only public statistics/observations are stored; never browser wager state.
     cache={k:v for k,v in cache.items() if not k.startswith(('scoreboard-','summary-')) or model.instant(v.get('observed_at')) and (now-model.instant(v['observed_at'])).total_seconds()<14*86400}
     write(STATE/'sources.json',cache)
-    print(json.dumps({'league':'NBA','season':season,**meta['counts'],'priced_next_24h':priced}))
+    print(json.dumps({'league':league,'season':season,**meta['counts'],'priced_next_24h':priced}))
 if __name__=='__main__':main()

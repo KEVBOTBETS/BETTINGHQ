@@ -15,7 +15,7 @@ def publication(path):
         return True
     if len(parts) < 4 or parts[0] != 'projects':
         return False
-    return (parts[2] == 'state' and path.endswith('.json') or
+    return (parts[2] == 'state' and path.endswith(('.json', '.json.gz')) or
             parts[2:4] in [('site', 'data'), ('docs', 'data')] and path.endswith('.json') or
             parts[1] in ('mlb-edge', 'bet-ledger-hq') and parts[2] == 'data' and path.endswith(('.json', '.json.gz')) or
             path == 'projects/ladderbet/docs/index.html' or
