@@ -4,13 +4,13 @@ from . import model_accuracy as A
 
 def call(row, league, historical=False):
     line = row.get("line")
-    if row.get("market") == "ATS" and row.get("side") == "away" and league not in ("WNBA", "NBA") and line is not None:
+    if row.get("market") == "ATS" and row.get("side") == "away" and league not in ("WNBA", "NBA", "NCAAB") and line is not None:
         line = -float(line)
     captured = next((row.get(k) for k in ("first_seen", "logged_at", "tracked_at") if row.get(k)), None)
     return {"kind": "call", "league": league, "event_id": str(row.get("game_id") or ""),
             "start": row.get("game_date") or row.get("tipoff"), "matchup": row.get("matchup"),
             "market": row.get("market"), "side": row.get("side"), "pick": row.get("pick"),
-            "line": line, "price": row.get("price"), "book": row.get("book"),
+            "line": line, "line_schema":"selection-signed", "price": row.get("price"), "book": row.get("book"),
             "probability": row.get("model_prob"), "tier": row.get("tier"),
             "edge": row.get("action_edge", row.get("edge")), "reason": row.get("filtered"), "version":row.get("model_version") or A.VERSION,
             **({"captured_at": captured, "version": "legacy", "prior_result": row.get("result"),
@@ -57,6 +57,11 @@ def results(games):
 
 def update(state_path, output_path, candidates, forecast_games, all_games, league, historical=(), old_forecasts=None):
     log = A.load(state_path)
+    # Repair only the new college adapter's pending, legacy-encoded away lines.
+    # Keep the original field and capture/probability intact; never rewrite a
+    # graded record or relabel a newly observed line as an earlier observation.
+    if league=='NCAAB':
+        repair_college_lines(log)
     # Import only a documented pregame timestamp, never reconstruct past picks.
     A.record(log, [call(r, league, True) for r in (historical if not log.get("legacy_imported") else ())
                    if any(r.get(k) for k in ("first_seen", "logged_at", "tracked_at"))])
@@ -77,3 +82,10 @@ def update(state_path, output_path, candidates, forecast_games, all_games, leagu
     output = A.report(log, f"{league} prediction accuracy")
     A.save(output_path, output)
     return output
+
+
+def repair_college_lines(log):
+    for r in log.get('records',{}).values():
+        if r.get('league')=='NCAAB' and r.get('kind')=='call' and r.get('market')=='ATS' and r.get('side')=='away' and r.get('result')=='Pending' and r.get('version')=='ncaab-scoring-research-1.0' and not r.get('line_schema') and A.number(r.get('line')) is not None:
+            r['line_encoding_repair']={'original_line':r['line'],'reason':'College quotes already use selection-signed spreads; removed the legacy home-line inversion.'}
+            r['line']=-float(r['line']);r['line_schema']='selection-signed'
