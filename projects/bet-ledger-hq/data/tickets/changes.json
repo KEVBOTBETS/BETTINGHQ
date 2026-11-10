@@ -407,11 +407,11 @@
       }
     },
     "wnba": {
-      "stamp": "2026-11-10T11:04:04+00:00",
+      "stamp": "2026-11-10T17:17:21+00:00",
       "rows": {}
     },
     "ncaaf": {
-      "stamp": "2026-11-10T11:03:06+00:00",
+      "stamp": "2026-11-10T17:15:54+00:00",
       "rows": {
         "ncaaf|401858522|2026-11-14T17:00Z|TOTAL||over": {
           "key": "ncaaf",
@@ -428,15 +428,15 @@
           "start": "2026-11-14T17:00Z",
           "when": 1794675600000,
           "day": "2026-11-14",
-          "pick": "Over 46.5",
+          "pick": "Over 45.5",
           "market": "TOTAL",
-          "line": 46.5,
-          "sourceLine": 46.5,
+          "line": 45.5,
+          "sourceLine": 45.5,
           "price": -110,
           "book": "Draft Kings",
           "tier": "GOOD",
-          "score": 0.051257166787351635,
-          "quote": "2026-11-10T11:02:54.792193+00:00",
+          "score": 0.0560490670369832,
+          "quote": "2026-11-10T17:15:47.426570+00:00",
           "review": [
             "Availability reports not confirmed."
           ],
@@ -444,18 +444,18 @@
             "version": "price-stress-v1",
             "reserve": 0.03,
             "minReturn": 0.02,
-            "conditional": 0.5662131461711291,
+            "conditional": 0.5713968148032864,
             "push": 0,
-            "stressed": 0.536213146171129,
-            "ev": 0.08095236996306454,
-            "stressEV": 0.023679642690337177,
-            "worst": -110,
+            "stressed": 0.5413968148032864,
+            "ev": 0.09084846462445584,
+            "stressEV": 0.033575737351728696,
+            "worst": -113,
             "passes": true,
             "reasons": []
           },
-          "probability": 0.5662131461711291,
-          "fair": -130,
-          "worst": -110,
+          "probability": 0.5713968148032864,
+          "fair": -133,
+          "worst": -113,
           "minReturn": 0.025,
           "quoteStatus": "observed",
           "referenceOnly": false,
@@ -465,8 +465,8 @@
             "kind": "line",
             "market": "TOTAL",
             "opened": 47.5,
-            "now": 46.5,
-            "toward": -1,
+            "now": 45.5,
+            "toward": -2,
             "since": "2026-11-09T05:40:11+00:00"
           },
           "source": "NCAAF",
@@ -475,27 +475,43 @@
       }
     },
     "nfl": {
-      "stamp": "2026-11-10T11:02:53+00:00",
+      "stamp": "2026-11-10T17:15:23+00:00",
       "rows": {}
     },
     "mlb": {
-      "stamp": "2026-11-10T11:04:10+00:00",
+      "stamp": "2026-11-10T17:16:01+00:00",
       "rows": {}
     },
     "nhl": {
-      "stamp": "2026-11-10T11:04:27.568019+00:00",
+      "stamp": "2026-11-10T17:17:26.523783+00:00",
       "rows": {}
     },
     "nba": {
-      "stamp": "2026-11-10T11:04:35.576141+00:00",
+      "stamp": "2026-11-10T17:14:53.049107+00:00",
       "rows": {}
     },
     "ncaab": {
-      "stamp": "2026-11-10T11:04:44.167789+00:00",
+      "stamp": "2026-11-10T17:14:44.248825+00:00",
       "rows": {}
     }
   },
   "events": [
+    {
+      "id": "ncaaf|2026-11-10T17:15:54+00:00|ncaaf|401858522|2026-11-14T17:00Z|TOTAL||over",
+      "sport": "ncaaf",
+      "observed_at": "2026-11-10T17:23:49.973Z",
+      "published_at": "2026-11-10T17:15:54+00:00",
+      "day": "2026-11-14",
+      "event": "NU @ OSU",
+      "pick": "Over 45.5",
+      "changes": [
+        {
+          "field": "line",
+          "from": 46.5,
+          "to": 45.5
+        }
+      ]
+    },
     {
       "id": "ncaaf|2026-11-10T11:03:06+00:00|ncaaf|401858522|2026-11-14T17:00Z|TOTAL||over",
       "sport": "ncaaf",
@@ -9829,23 +9845,7 @@
           "to": 3
         }
       ]
-    },
-    {
-      "id": "ncaaf|2026-10-17T15:07:38+00:00|ncaaf|401856720|2026-10-17T16:00Z|ATS||away",
-      "sport": "ncaaf",
-      "observed_at": "2026-10-17T15:12:46.989Z",
-      "published_at": "2026-10-17T15:07:38+00:00",
-      "day": "2026-10-17",
-      "event": "MSST @ LSU",
-      "pick": "MSST +18.5",
-      "changes": [
-        {
-          "field": "qualified list",
-          "from": "Not in previous snapshot",
-          "to": "Listed"
-        }
-      ]
     }
   ],
-  "checked_at": "2026-11-10T11:09:10.248Z"
+  "checked_at": "2026-11-10T17:23:49.973Z"
 }
