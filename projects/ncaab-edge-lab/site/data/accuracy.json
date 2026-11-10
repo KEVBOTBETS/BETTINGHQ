@@ -1,138 +1,175 @@
 {
  "schema": 1,
- "generated_at": "2026-11-10T00:43:45.228333+00:00",
+ "generated_at": "2026-11-10T02:42:57.882650+00:00",
  "label": "NCAAB prediction accuracy",
  "method": "First pre-event snapshot, frozen line and price. All model picks, including PASS/AVOID and unstaked picks. One preferred side per event/market in pick statistics; the complete priced-side audit is separate. One hypothetical unit per pick; no actual wagers are created. Missing results remain pending.",
  "overall": {
   "logged": 201,
-  "wins": 0,
-  "losses": 0,
+  "wins": 40,
+  "losses": 20,
   "pushes": 0,
   "voids": 0,
-  "settled": 0,
-  "pending": 201,
-  "win_rate": null,
-  "units": 0,
-  "roi": null,
-  "brier": null
+  "settled": 60,
+  "pending": 141,
+  "win_rate": 0.6666666666666666,
+  "units": 3.892,
+  "roi": 0.06487496666666667,
+  "brier": 0.2361
  },
  "all_calls": {
   "logged": 342,
-  "wins": 0,
-  "losses": 0,
+  "wins": 58,
+  "losses": 44,
   "pushes": 0,
   "voids": 0,
-  "settled": 0,
-  "pending": 342,
-  "win_rate": null,
-  "units": 0,
-  "roi": null,
-  "brier": null
+  "settled": 102,
+  "pending": 240,
+  "win_rate": 0.5686274509803921,
+  "units": -3.761,
+  "roi": -0.0368737156862745,
+  "brier": 0.25327
  },
  "by_tier": {
   "RESEARCH": {
    "logged": 201,
-   "wins": 0,
-   "losses": 0,
+   "wins": 40,
+   "losses": 20,
    "pushes": 0,
    "voids": 0,
-   "settled": 0,
-   "pending": 201,
-   "win_rate": null,
-   "units": 0,
-   "roi": null,
-   "brier": null
+   "settled": 60,
+   "pending": 141,
+   "win_rate": 0.6666666666666666,
+   "units": 3.892,
+   "roi": 0.06487496666666667,
+   "brier": 0.2361
   }
  },
  "by_market": {
   "ATS": {
    "logged": 70,
-   "wins": 0,
-   "losses": 0,
+   "wins": 12,
+   "losses": 9,
    "pushes": 0,
    "voids": 0,
-   "settled": 0,
-   "pending": 70,
-   "win_rate": null,
-   "units": 0,
-   "roi": null,
-   "brier": null
+   "settled": 21,
+   "pending": 49,
+   "win_rate": 0.5714285714285714,
+   "units": 1.753,
+   "roi": 0.08348780952380952,
+   "brier": 0.30978
   },
   "ML": {
    "logged": 60,
-   "wins": 0,
-   "losses": 0,
+   "wins": 16,
+   "losses": 2,
    "pushes": 0,
    "voids": 0,
-   "settled": 0,
-   "pending": 60,
-   "win_rate": null,
-   "units": 0,
-   "roi": null,
-   "brier": null
+   "settled": 18,
+   "pending": 42,
+   "win_rate": 0.8888888888888888,
+   "units": 0.281,
+   "roi": 0.015608666666666668,
+   "brier": 0.13882
   },
   "TOTAL": {
    "logged": 71,
-   "wins": 0,
-   "losses": 0,
+   "wins": 12,
+   "losses": 9,
    "pushes": 0,
    "voids": 0,
-   "settled": 0,
-   "pending": 71,
-   "win_rate": null,
-   "units": 0,
-   "roi": null,
-   "brier": null
+   "settled": 21,
+   "pending": 50,
+   "win_rate": 0.5714285714285714,
+   "units": 1.858,
+   "roi": 0.08849038095238096,
+   "brier": 0.2458
   }
  },
  "by_version": {
   "ncaab-scoring-research-1.0": {
    "logged": 201,
-   "wins": 0,
-   "losses": 0,
+   "wins": 40,
+   "losses": 20,
    "pushes": 0,
    "voids": 0,
-   "settled": 0,
-   "pending": 201,
-   "win_rate": null,
-   "units": 0,
-   "roi": null,
-   "brier": null
+   "settled": 60,
+   "pending": 141,
+   "win_rate": 0.6666666666666666,
+   "units": 3.892,
+   "roi": 0.06487496666666667,
+   "brier": 0.2361
   }
  },
- "calibration": [],
+ "calibration": [
+  {
+   "bucket": "40\u201350%",
+   "n": 2,
+   "predicted": 0.44947,
+   "actual": 0.5
+  },
+  {
+   "bucket": "50\u201360%",
+   "n": 22,
+   "predicted": 0.54992,
+   "actual": 0.54545
+  },
+  {
+   "bucket": "60\u201370%",
+   "n": 13,
+   "predicted": 0.63793,
+   "actual": 0.76923
+  },
+  {
+   "bucket": "70\u201380%",
+   "n": 11,
+   "predicted": 0.74919,
+   "actual": 0.81818
+  },
+  {
+   "bucket": "80\u201390%",
+   "n": 4,
+   "predicted": 0.8665,
+   "actual": 0.75
+  },
+  {
+   "bucket": "90\u2013100%",
+   "n": 8,
+   "predicted": 0.96786,
+   "actual": 0.625
+  }
+ ],
  "games": {
   "logged": 386,
-  "graded": 0,
-  "pending": 386,
+  "graded": 21,
+  "pending": 365,
   "winner": {
-   "n": 0,
-   "correct": 0,
-   "accuracy": null
+   "n": 21,
+   "correct": 19,
+   "accuracy": 0.90476
   },
   "ats": {
-   "n": 0,
-   "correct": 0,
-   "accuracy": null
+   "n": 21,
+   "correct": 12,
+   "accuracy": 0.57143
   },
   "totals": {
-   "n": 0,
-   "correct": 0,
-   "accuracy": null
+   "n": 21,
+   "correct": 12,
+   "accuracy": 0.57143
   },
   "margin_comparison": {
-   "n": 0,
-   "model_mae": null,
-   "market_mae": null
+   "n": 21,
+   "model_mae": 14.74367,
+   "market_mae": 9.02381
   },
   "total_comparison": {
-   "n": 0,
-   "model_mae": null,
-   "market_mae": null
+   "n": 21,
+   "model_mae": 13.49371,
+   "market_mae": 13.78571
   },
-  "margin_mae": null,
-  "total_mae": null,
-  "brier": null
+  "margin_mae": 14.74367,
+  "total_mae": 13.49371,
+  "brier": 0.12475
  },
  "props": {},
  "excluded_unresolved_teams": 0,
@@ -13618,7 +13655,12 @@
    },
    "id": "game:NCAAB:401919016:::",
    "captured_at": "2026-11-09T05:38:51.334340+00:00",
-   "result": "Pending"
+   "result": "Graded",
+   "actual_margin": 28.0,
+   "actual_total": 156.0,
+   "final_home": 92.0,
+   "final_away": 64.0,
+   "graded_at": "2026-11-10T02:42:57.870904+00:00"
   },
   {
    "kind": "game",
@@ -13656,7 +13698,12 @@
    },
    "id": "game:NCAAB:401906793:::",
    "captured_at": "2026-11-09T05:38:51.334340+00:00",
-   "result": "Pending"
+   "result": "Graded",
+   "actual_margin": 41.0,
+   "actual_total": 155.0,
+   "final_home": 98.0,
+   "final_away": 57.0,
+   "graded_at": "2026-11-10T02:42:57.870904+00:00"
   },
   {
    "kind": "game",
@@ -13694,7 +13741,12 @@
    },
    "id": "game:NCAAB:401906759:::",
    "captured_at": "2026-11-09T05:38:51.334340+00:00",
-   "result": "Pending"
+   "result": "Graded",
+   "actual_margin": 41.0,
+   "actual_total": 177.0,
+   "final_home": 109.0,
+   "final_away": 68.0,
+   "graded_at": "2026-11-10T02:42:57.870904+00:00"
   },
   {
    "kind": "call",
@@ -13716,7 +13768,12 @@
    "selected": true,
    "id": "call:NCAAB:401919016::TOTAL:under",
    "captured_at": "2026-11-09T05:38:51.329871+00:00",
-   "result": "Pending"
+   "result": "Loss",
+   "units": -1,
+   "actual": null,
+   "final_home": 92.0,
+   "final_away": 64.0,
+   "graded_at": "2026-11-10T02:42:57.870904+00:00"
   },
   {
    "kind": "call",
@@ -13738,7 +13795,12 @@
    "selected": false,
    "id": "call:NCAAB:401919016::TOTAL:over",
    "captured_at": "2026-11-09T05:38:51.329871+00:00",
-   "result": "Pending"
+   "result": "Win",
+   "units": 0.909091,
+   "actual": null,
+   "final_home": 92.0,
+   "final_away": 64.0,
+   "graded_at": "2026-11-10T02:42:57.870904+00:00"
   },
   {
    "kind": "call",
@@ -13760,7 +13822,12 @@
    "selected": true,
    "id": "call:NCAAB:401919016::ML:home",
    "captured_at": "2026-11-09T05:38:51.329871+00:00",
-   "result": "Pending"
+   "result": "Win",
+   "units": 0.055556,
+   "actual": null,
+   "final_home": 92.0,
+   "final_away": 64.0,
+   "graded_at": "2026-11-10T02:42:57.870904+00:00"
   },
   {
    "kind": "call",
@@ -13782,7 +13849,12 @@
    "selected": false,
    "id": "call:NCAAB:401919016::ATS:home",
    "captured_at": "2026-11-09T05:38:51.329871+00:00",
-   "result": "Pending"
+   "result": "Win",
+   "units": 0.909091,
+   "actual": null,
+   "final_home": 92.0,
+   "final_away": 64.0,
+   "graded_at": "2026-11-10T02:42:57.870904+00:00"
   },
   {
    "kind": "call",
@@ -13804,12 +13876,17 @@
    "selected": true,
    "id": "call:NCAAB:401919016::ATS:away",
    "captured_at": "2026-11-09T05:38:51.329871+00:00",
-   "result": "Pending",
+   "result": "Loss",
    "line_encoding_repair": {
     "original_line": -16.5,
     "reason": "College quotes already use selection-signed spreads; removed the legacy home-line inversion."
    },
-   "line_schema": "selection-signed"
+   "line_schema": "selection-signed",
+   "units": -1,
+   "actual": null,
+   "final_home": 92.0,
+   "final_away": 64.0,
+   "graded_at": "2026-11-10T02:42:57.870904+00:00"
   },
   {
    "kind": "call",
@@ -13831,7 +13908,12 @@
    "selected": true,
    "id": "call:NCAAB:401906793::TOTAL:under",
    "captured_at": "2026-11-09T05:38:51.329871+00:00",
-   "result": "Pending"
+   "result": "Win",
+   "units": 0.952381,
+   "actual": null,
+   "final_home": 98.0,
+   "final_away": 57.0,
+   "graded_at": "2026-11-10T02:42:57.870904+00:00"
   },
   {
    "kind": "call",
@@ -13853,7 +13935,12 @@
    "selected": false,
    "id": "call:NCAAB:401906793::TOTAL:over",
    "captured_at": "2026-11-09T05:38:51.329871+00:00",
-   "result": "Pending"
+   "result": "Loss",
+   "units": -1,
+   "actual": null,
+   "final_home": 98.0,
+   "final_away": 57.0,
+   "graded_at": "2026-11-10T02:42:57.870904+00:00"
   },
   {
    "kind": "call",
@@ -13875,7 +13962,12 @@
    "selected": true,
    "id": "call:NCAAB:401906793::ML:home",
    "captured_at": "2026-11-09T05:38:51.329871+00:00",
-   "result": "Pending"
+   "result": "Win",
+   "units": 0.0125,
+   "actual": null,
+   "final_home": 98.0,
+   "final_away": 57.0,
+   "graded_at": "2026-11-10T02:42:57.870904+00:00"
   },
   {
    "kind": "call",
@@ -13897,7 +13989,12 @@
    "selected": false,
    "id": "call:NCAAB:401906793::ATS:home",
    "captured_at": "2026-11-09T05:38:51.329871+00:00",
-   "result": "Pending"
+   "result": "Win",
+   "units": 0.909091,
+   "actual": null,
+   "final_home": 98.0,
+   "final_away": 57.0,
+   "graded_at": "2026-11-10T02:42:57.870904+00:00"
   },
   {
    "kind": "call",
@@ -13919,12 +14016,17 @@
    "selected": true,
    "id": "call:NCAAB:401906793::ATS:away",
    "captured_at": "2026-11-09T05:38:51.329871+00:00",
-   "result": "Pending",
+   "result": "Loss",
    "line_encoding_repair": {
     "original_line": -23.5,
     "reason": "College quotes already use selection-signed spreads; removed the legacy home-line inversion."
    },
-   "line_schema": "selection-signed"
+   "line_schema": "selection-signed",
+   "units": -1,
+   "actual": null,
+   "final_home": 98.0,
+   "final_away": 57.0,
+   "graded_at": "2026-11-10T02:42:57.870904+00:00"
   },
   {
    "kind": "call",
@@ -13946,7 +14048,12 @@
    "selected": true,
    "id": "call:NCAAB:401906759::TOTAL:under",
    "captured_at": "2026-11-09T05:38:51.329871+00:00",
-   "result": "Pending"
+   "result": "Loss",
+   "units": -1,
+   "actual": null,
+   "final_home": 109.0,
+   "final_away": 68.0,
+   "graded_at": "2026-11-10T02:42:57.870904+00:00"
   },
   {
    "kind": "call",
@@ -13968,7 +14075,12 @@
    "selected": false,
    "id": "call:NCAAB:401906759::TOTAL:over",
    "captured_at": "2026-11-09T05:38:51.329871+00:00",
-   "result": "Pending"
+   "result": "Win",
+   "units": 0.909091,
+   "actual": null,
+   "final_home": 109.0,
+   "final_away": 68.0,
+   "graded_at": "2026-11-10T02:42:57.870904+00:00"
   },
   {
    "kind": "call",
@@ -13990,7 +14102,12 @@
    "selected": true,
    "id": "call:NCAAB:401906759::ML:home",
    "captured_at": "2026-11-09T05:38:51.329871+00:00",
-   "result": "Pending"
+   "result": "Win",
+   "units": 0.001,
+   "actual": null,
+   "final_home": 109.0,
+   "final_away": 68.0,
+   "graded_at": "2026-11-10T02:42:57.870904+00:00"
   },
   {
    "kind": "call",
@@ -14012,7 +14129,12 @@
    "selected": false,
    "id": "call:NCAAB:401906759::ATS:home",
    "captured_at": "2026-11-09T05:38:51.329871+00:00",
-   "result": "Pending"
+   "result": "Win",
+   "units": 0.869565,
+   "actual": null,
+   "final_home": 109.0,
+   "final_away": 68.0,
+   "graded_at": "2026-11-10T02:42:57.870904+00:00"
   },
   {
    "kind": "call",
@@ -14034,12 +14156,17 @@
    "selected": true,
    "id": "call:NCAAB:401906759::ATS:away",
    "captured_at": "2026-11-09T05:38:51.329871+00:00",
-   "result": "Pending",
+   "result": "Loss",
    "line_encoding_repair": {
     "original_line": -32.5,
     "reason": "College quotes already use selection-signed spreads; removed the legacy home-line inversion."
    },
-   "line_schema": "selection-signed"
+   "line_schema": "selection-signed",
+   "units": -1,
+   "actual": null,
+   "final_home": 109.0,
+   "final_away": 68.0,
+   "graded_at": "2026-11-10T02:42:57.870904+00:00"
   },
   {
    "kind": "game",
@@ -14077,7 +14204,12 @@
    },
    "id": "game:NCAAB:401926181:::",
    "captured_at": "2026-11-09T05:38:51.334340+00:00",
-   "result": "Pending"
+   "result": "Graded",
+   "actual_margin": 10.0,
+   "actual_total": 154.0,
+   "final_home": 82.0,
+   "final_away": 72.0,
+   "graded_at": "2026-11-10T02:42:57.870904+00:00"
   },
   {
    "kind": "game",
@@ -14115,7 +14247,12 @@
    },
    "id": "game:NCAAB:401925681:::",
    "captured_at": "2026-11-09T05:38:51.334340+00:00",
-   "result": "Pending"
+   "result": "Graded",
+   "actual_margin": 24.0,
+   "actual_total": 164.0,
+   "final_home": 94.0,
+   "final_away": 70.0,
+   "graded_at": "2026-11-10T02:42:57.870904+00:00"
   },
   {
    "kind": "game",
@@ -14153,7 +14290,12 @@
    },
    "id": "game:NCAAB:401922060:::",
    "captured_at": "2026-11-09T05:38:51.334340+00:00",
-   "result": "Pending"
+   "result": "Graded",
+   "actual_margin": 9.0,
+   "actual_total": 121.0,
+   "final_home": 65.0,
+   "final_away": 56.0,
+   "graded_at": "2026-11-10T02:42:57.870904+00:00"
   },
   {
    "kind": "game",
@@ -14184,7 +14326,12 @@
    },
    "id": "game:NCAAB:401921720:::",
    "captured_at": "2026-11-09T05:38:51.334340+00:00",
-   "result": "Pending"
+   "result": "Graded",
+   "actual_margin": 38.0,
+   "actual_total": 140.0,
+   "final_home": 89.0,
+   "final_away": 51.0,
+   "graded_at": "2026-11-10T02:42:57.870904+00:00"
   },
   {
    "kind": "game",
@@ -14222,7 +14369,12 @@
    },
    "id": "game:NCAAB:401920877:::",
    "captured_at": "2026-11-09T05:38:51.334340+00:00",
-   "result": "Pending"
+   "result": "Graded",
+   "actual_margin": 18.0,
+   "actual_total": 140.0,
+   "final_home": 79.0,
+   "final_away": 61.0,
+   "graded_at": "2026-11-10T02:42:57.870904+00:00"
   },
   {
    "kind": "game",
@@ -14253,7 +14405,12 @@
    },
    "id": "game:NCAAB:401920686:::",
    "captured_at": "2026-11-09T05:38:51.334340+00:00",
-   "result": "Pending"
+   "result": "Graded",
+   "actual_margin": 42.0,
+   "actual_total": 124.0,
+   "final_home": 83.0,
+   "final_away": 41.0,
+   "graded_at": "2026-11-10T02:42:57.870904+00:00"
   },
   {
    "kind": "game",
@@ -14291,7 +14448,12 @@
    },
    "id": "game:NCAAB:401919846:::",
    "captured_at": "2026-11-09T05:38:51.334340+00:00",
-   "result": "Pending"
+   "result": "Graded",
+   "actual_margin": 20.0,
+   "actual_total": 130.0,
+   "final_home": 75.0,
+   "final_away": 55.0,
+   "graded_at": "2026-11-10T02:42:57.870904+00:00"
   },
   {
    "kind": "game",
@@ -14329,7 +14491,12 @@
    },
    "id": "game:NCAAB:401919806:::",
    "captured_at": "2026-11-09T05:38:51.334340+00:00",
-   "result": "Pending"
+   "result": "Graded",
+   "actual_margin": 20.0,
+   "actual_total": 112.0,
+   "final_home": 66.0,
+   "final_away": 46.0,
+   "graded_at": "2026-11-10T02:42:57.870904+00:00"
   },
   {
    "kind": "game",
@@ -14367,7 +14534,12 @@
    },
    "id": "game:NCAAB:401919733:::",
    "captured_at": "2026-11-09T05:38:51.334340+00:00",
-   "result": "Pending"
+   "result": "Graded",
+   "actual_margin": -15.0,
+   "actual_total": 149.0,
+   "final_home": 67.0,
+   "final_away": 82.0,
+   "graded_at": "2026-11-10T02:42:57.870904+00:00"
   },
   {
    "kind": "game",
@@ -14405,7 +14577,12 @@
    },
    "id": "game:NCAAB:401918074:::",
    "captured_at": "2026-11-09T05:38:51.334340+00:00",
-   "result": "Pending"
+   "result": "Graded",
+   "actual_margin": 15.0,
+   "actual_total": 169.0,
+   "final_home": 92.0,
+   "final_away": 77.0,
+   "graded_at": "2026-11-10T02:42:57.870904+00:00"
   },
   {
    "kind": "game",
@@ -14443,7 +14620,12 @@
    },
    "id": "game:NCAAB:401916305:::",
    "captured_at": "2026-11-09T05:38:51.334340+00:00",
-   "result": "Pending"
+   "result": "Graded",
+   "actual_margin": -2.0,
+   "actual_total": 124.0,
+   "final_home": 61.0,
+   "final_away": 63.0,
+   "graded_at": "2026-11-10T02:42:57.870904+00:00"
   },
   {
    "kind": "game",
@@ -14481,7 +14663,12 @@
    },
    "id": "game:NCAAB:401911010:::",
    "captured_at": "2026-11-09T05:38:51.334340+00:00",
-   "result": "Pending"
+   "result": "Graded",
+   "actual_margin": 16.0,
+   "actual_total": 174.0,
+   "final_home": 95.0,
+   "final_away": 79.0,
+   "graded_at": "2026-11-10T02:42:57.870904+00:00"
   },
   {
    "kind": "game",
@@ -14512,7 +14699,12 @@
    },
    "id": "game:NCAAB:401906865:::",
    "captured_at": "2026-11-09T05:38:51.334340+00:00",
-   "result": "Pending"
+   "result": "Graded",
+   "actual_margin": 31.0,
+   "actual_total": 155.0,
+   "final_home": 93.0,
+   "final_away": 62.0,
+   "graded_at": "2026-11-10T02:42:57.870904+00:00"
   },
   {
    "kind": "game",
@@ -14550,7 +14742,12 @@
    },
    "id": "game:NCAAB:401906849:::",
    "captured_at": "2026-11-09T05:38:51.334340+00:00",
-   "result": "Pending"
+   "result": "Graded",
+   "actual_margin": 23.0,
+   "actual_total": 117.0,
+   "final_home": 70.0,
+   "final_away": 47.0,
+   "graded_at": "2026-11-10T02:42:57.870904+00:00"
   },
   {
    "kind": "game",
@@ -14588,7 +14785,12 @@
    },
    "id": "game:NCAAB:401906781:::",
    "captured_at": "2026-11-09T05:38:51.334340+00:00",
-   "result": "Pending"
+   "result": "Graded",
+   "actual_margin": 8.0,
+   "actual_total": 152.0,
+   "final_home": 80.0,
+   "final_away": 72.0,
+   "graded_at": "2026-11-10T02:42:57.870904+00:00"
   },
   {
    "kind": "call",
@@ -14610,7 +14812,12 @@
    "selected": false,
    "id": "call:NCAAB:401926181::TOTAL:under",
    "captured_at": "2026-11-09T05:38:51.329871+00:00",
-   "result": "Pending"
+   "result": "Loss",
+   "units": -1,
+   "actual": null,
+   "final_home": 82.0,
+   "final_away": 72.0,
+   "graded_at": "2026-11-10T02:42:57.870904+00:00"
   },
   {
    "kind": "call",
@@ -14632,7 +14839,12 @@
    "selected": true,
    "id": "call:NCAAB:401926181::TOTAL:over",
    "captured_at": "2026-11-09T05:38:51.329871+00:00",
-   "result": "Pending"
+   "result": "Win",
+   "units": 0.869565,
+   "actual": null,
+   "final_home": 82.0,
+   "final_away": 72.0,
+   "graded_at": "2026-11-10T02:42:57.870904+00:00"
   },
   {
    "kind": "call",
@@ -14654,7 +14866,12 @@
    "selected": true,
    "id": "call:NCAAB:401926181::ML:home",
    "captured_at": "2026-11-09T05:38:51.329871+00:00",
-   "result": "Pending"
+   "result": "Win",
+   "units": 0.022222,
+   "actual": null,
+   "final_home": 82.0,
+   "final_away": 72.0,
+   "graded_at": "2026-11-10T02:42:57.870904+00:00"
   },
   {
    "kind": "call",
@@ -14676,7 +14893,12 @@
    "selected": false,
    "id": "call:NCAAB:401926181::ATS:home",
    "captured_at": "2026-11-09T05:38:51.329871+00:00",
-   "result": "Pending"
+   "result": "Loss",
+   "units": -1,
+   "actual": null,
+   "final_home": 82.0,
+   "final_away": 72.0,
+   "graded_at": "2026-11-10T02:42:57.870904+00:00"
   },
   {
    "kind": "call",
@@ -14698,12 +14920,17 @@
    "selected": true,
    "id": "call:NCAAB:401926181::ATS:away",
    "captured_at": "2026-11-09T05:38:51.329871+00:00",
-   "result": "Pending",
+   "result": "Win",
    "line_encoding_repair": {
     "original_line": -20.5,
     "reason": "College quotes already use selection-signed spreads; removed the legacy home-line inversion."
    },
-   "line_schema": "selection-signed"
+   "line_schema": "selection-signed",
+   "units": 0.869565,
+   "actual": null,
+   "final_home": 82.0,
+   "final_away": 72.0,
+   "graded_at": "2026-11-10T02:42:57.870904+00:00"
   },
   {
    "kind": "call",
@@ -14725,7 +14952,12 @@
    "selected": false,
    "id": "call:NCAAB:401925681::TOTAL:under",
    "captured_at": "2026-11-09T05:38:51.329871+00:00",
-   "result": "Pending"
+   "result": "Loss",
+   "units": -1,
+   "actual": null,
+   "final_home": 94.0,
+   "final_away": 70.0,
+   "graded_at": "2026-11-10T02:42:57.870904+00:00"
   },
   {
    "kind": "call",
@@ -14747,7 +14979,12 @@
    "selected": true,
    "id": "call:NCAAB:401925681::TOTAL:over",
    "captured_at": "2026-11-09T05:38:51.329871+00:00",
-   "result": "Pending"
+   "result": "Win",
+   "units": 0.869565,
+   "actual": null,
+   "final_home": 94.0,
+   "final_away": 70.0,
+   "graded_at": "2026-11-10T02:42:57.870904+00:00"
   },
   {
    "kind": "call",
@@ -14769,7 +15006,12 @@
    "selected": true,
    "id": "call:NCAAB:401925681::ML:home",
    "captured_at": "2026-11-09T05:38:51.329871+00:00",
-   "result": "Pending"
+   "result": "Win",
+   "units": 0.002,
+   "actual": null,
+   "final_home": 94.0,
+   "final_away": 70.0,
+   "graded_at": "2026-11-10T02:42:57.870904+00:00"
   },
   {
    "kind": "call",
@@ -14791,7 +15033,12 @@
    "selected": false,
    "id": "call:NCAAB:401925681::ATS:home",
    "captured_at": "2026-11-09T05:38:51.329871+00:00",
-   "result": "Pending"
+   "result": "Loss",
+   "units": -1,
+   "actual": null,
+   "final_home": 94.0,
+   "final_away": 70.0,
+   "graded_at": "2026-11-10T02:42:57.870904+00:00"
   },
   {
    "kind": "call",
@@ -14813,12 +15060,17 @@
    "selected": true,
    "id": "call:NCAAB:401925681::ATS:away",
    "captured_at": "2026-11-09T05:38:51.329871+00:00",
-   "result": "Pending",
+   "result": "Win",
    "line_encoding_repair": {
     "original_line": -28.5,
     "reason": "College quotes already use selection-signed spreads; removed the legacy home-line inversion."
    },
-   "line_schema": "selection-signed"
+   "line_schema": "selection-signed",
+   "units": 0.869565,
+   "actual": null,
+   "final_home": 94.0,
+   "final_away": 70.0,
+   "graded_at": "2026-11-10T02:42:57.870904+00:00"
   },
   {
    "kind": "call",
@@ -14840,7 +15092,12 @@
    "selected": true,
    "id": "call:NCAAB:401922060::TOTAL:under",
    "captured_at": "2026-11-09T05:38:51.329871+00:00",
-   "result": "Pending"
+   "result": "Win",
+   "units": 0.892857,
+   "actual": null,
+   "final_home": 65.0,
+   "final_away": 56.0,
+   "graded_at": "2026-11-10T02:42:57.870904+00:00"
   },
   {
    "kind": "call",
@@ -14862,7 +15119,12 @@
    "selected": false,
    "id": "call:NCAAB:401922060::TOTAL:over",
    "captured_at": "2026-11-09T05:38:51.329871+00:00",
-   "result": "Pending"
+   "result": "Loss",
+   "units": -1,
+   "actual": null,
+   "final_home": 65.0,
+   "final_away": 56.0,
+   "graded_at": "2026-11-10T02:42:57.870904+00:00"
   },
   {
    "kind": "call",
@@ -14884,7 +15146,12 @@
    "selected": true,
    "id": "call:NCAAB:401922060::ML:home",
    "captured_at": "2026-11-09T05:38:51.329871+00:00",
-   "result": "Pending"
+   "result": "Win",
+   "units": 0.212766,
+   "actual": null,
+   "final_home": 65.0,
+   "final_away": 56.0,
+   "graded_at": "2026-11-10T02:42:57.870904+00:00"
   },
   {
    "kind": "call",
@@ -14906,7 +15173,12 @@
    "selected": false,
    "id": "call:NCAAB:401922060::ATS:home",
    "captured_at": "2026-11-09T05:38:51.329871+00:00",
-   "result": "Pending"
+   "result": "Loss",
+   "units": -1,
+   "actual": null,
+   "final_home": 65.0,
+   "final_away": 56.0,
+   "graded_at": "2026-11-10T02:42:57.870904+00:00"
   },
   {
    "kind": "call",
@@ -14928,12 +15200,17 @@
    "selected": true,
    "id": "call:NCAAB:401922060::ATS:away",
    "captured_at": "2026-11-09T05:38:51.329871+00:00",
-   "result": "Pending",
+   "result": "Win",
    "line_encoding_repair": {
     "original_line": -10.5,
     "reason": "College quotes already use selection-signed spreads; removed the legacy home-line inversion."
    },
-   "line_schema": "selection-signed"
+   "line_schema": "selection-signed",
+   "units": 0.847458,
+   "actual": null,
+   "final_home": 65.0,
+   "final_away": 56.0,
+   "graded_at": "2026-11-10T02:42:57.870904+00:00"
   },
   {
    "kind": "call",
@@ -14955,7 +15232,12 @@
    "selected": true,
    "id": "call:NCAAB:401921720::TOTAL:under",
    "captured_at": "2026-11-09T05:38:51.329871+00:00",
-   "result": "Pending"
+   "result": "Win",
+   "units": 0.909091,
+   "actual": null,
+   "final_home": 89.0,
+   "final_away": 51.0,
+   "graded_at": "2026-11-10T02:42:57.870904+00:00"
   },
   {
    "kind": "call",
@@ -14977,7 +15259,12 @@
    "selected": false,
    "id": "call:NCAAB:401921720::TOTAL:over",
    "captured_at": "2026-11-09T05:38:51.329871+00:00",
-   "result": "Pending"
+   "result": "Loss",
+   "units": -1,
+   "actual": null,
+   "final_home": 89.0,
+   "final_away": 51.0,
+   "graded_at": "2026-11-10T02:42:57.870904+00:00"
   },
   {
    "kind": "call",
@@ -14999,7 +15286,12 @@
    "selected": false,
    "id": "call:NCAAB:401921720::ATS:home",
    "captured_at": "2026-11-09T05:38:51.329871+00:00",
-   "result": "Pending"
+   "result": "Win",
+   "units": 0.952381,
+   "actual": null,
+   "final_home": 89.0,
+   "final_away": 51.0,
+   "graded_at": "2026-11-10T02:42:57.870904+00:00"
   },
   {
    "kind": "call",
@@ -15021,12 +15313,17 @@
    "selected": true,
    "id": "call:NCAAB:401921720::ATS:away",
    "captured_at": "2026-11-09T05:38:51.329871+00:00",
-   "result": "Pending",
+   "result": "Loss",
    "line_encoding_repair": {
     "original_line": -34.5,
     "reason": "College quotes already use selection-signed spreads; removed the legacy home-line inversion."
    },
-   "line_schema": "selection-signed"
+   "line_schema": "selection-signed",
+   "units": -1,
+   "actual": null,
+   "final_home": 89.0,
+   "final_away": 51.0,
+   "graded_at": "2026-11-10T02:42:57.870904+00:00"
   },
   {
    "kind": "call",
@@ -15048,7 +15345,12 @@
    "selected": false,
    "id": "call:NCAAB:401920877::TOTAL:under",
    "captured_at": "2026-11-09T05:38:51.329871+00:00",
-   "result": "Pending"
+   "result": "Win",
+   "units": 0.925926,
+   "actual": null,
+   "final_home": 79.0,
+   "final_away": 61.0,
+   "graded_at": "2026-11-10T02:42:57.870904+00:00"
   },
   {
    "kind": "call",
@@ -15070,7 +15372,12 @@
    "selected": true,
    "id": "call:NCAAB:401920877::TOTAL:over",
    "captured_at": "2026-11-09T05:38:51.329871+00:00",
-   "result": "Pending"
+   "result": "Loss",
+   "units": -1,
+   "actual": null,
+   "final_home": 79.0,
+   "final_away": 61.0,
+   "graded_at": "2026-11-10T02:42:57.870904+00:00"
   },
   {
    "kind": "call",
@@ -15092,7 +15399,12 @@
    "selected": true,
    "id": "call:NCAAB:401920877::ML:home",
    "captured_at": "2026-11-09T05:38:51.329871+00:00",
-   "result": "Pending"
+   "result": "Win",
+   "units": 0.408163,
+   "actual": null,
+   "final_home": 79.0,
+   "final_away": 61.0,
+   "graded_at": "2026-11-10T02:42:57.870904+00:00"
   },
   {
    "kind": "call",
@@ -15114,7 +15426,12 @@
    "selected": true,
    "id": "call:NCAAB:401920877::ATS:home",
    "captured_at": "2026-11-09T05:38:51.329871+00:00",
-   "result": "Pending"
+   "result": "Win",
+   "units": 0.869565,
+   "actual": null,
+   "final_home": 79.0,
+   "final_away": 61.0,
+   "graded_at": "2026-11-10T02:42:57.870904+00:00"
   },
   {
    "kind": "call",
@@ -15136,12 +15453,17 @@
    "selected": false,
    "id": "call:NCAAB:401920877::ATS:away",
    "captured_at": "2026-11-09T05:38:51.329871+00:00",
-   "result": "Pending",
+   "result": "Loss",
    "line_encoding_repair": {
     "original_line": -5.5,
     "reason": "College quotes already use selection-signed spreads; removed the legacy home-line inversion."
    },
-   "line_schema": "selection-signed"
+   "line_schema": "selection-signed",
+   "units": -1,
+   "actual": null,
+   "final_home": 79.0,
+   "final_away": 61.0,
+   "graded_at": "2026-11-10T02:42:57.870904+00:00"
   },
   {
    "kind": "call",
@@ -15163,7 +15485,12 @@
    "selected": false,
    "id": "call:NCAAB:401920686::TOTAL:under",
    "captured_at": "2026-11-09T05:38:51.329871+00:00",
-   "result": "Pending"
+   "result": "Win",
+   "units": 0.869565,
+   "actual": null,
+   "final_home": 83.0,
+   "final_away": 41.0,
+   "graded_at": "2026-11-10T02:42:57.870904+00:00"
   },
   {
    "kind": "call",
@@ -15185,7 +15512,12 @@
    "selected": true,
    "id": "call:NCAAB:401920686::TOTAL:over",
    "captured_at": "2026-11-09T05:38:51.329871+00:00",
-   "result": "Pending"
+   "result": "Loss",
+   "units": -1,
+   "actual": null,
+   "final_home": 83.0,
+   "final_away": 41.0,
+   "graded_at": "2026-11-10T02:42:57.870904+00:00"
   },
   {
    "kind": "call",
@@ -15207,7 +15539,12 @@
    "selected": false,
    "id": "call:NCAAB:401920686::ATS:home",
    "captured_at": "2026-11-09T05:38:51.329871+00:00",
-   "result": "Pending"
+   "result": "Win",
+   "units": 0.869565,
+   "actual": null,
+   "final_home": 83.0,
+   "final_away": 41.0,
+   "graded_at": "2026-11-10T02:42:57.870904+00:00"
   },
   {
    "kind": "call",
@@ -15229,12 +15566,17 @@
    "selected": true,
    "id": "call:NCAAB:401920686::ATS:away",
    "captured_at": "2026-11-09T05:38:51.329871+00:00",
-   "result": "Pending",
+   "result": "Loss",
    "line_encoding_repair": {
     "original_line": -37.5,
     "reason": "College quotes already use selection-signed spreads; removed the legacy home-line inversion."
    },
-   "line_schema": "selection-signed"
+   "line_schema": "selection-signed",
+   "units": -1,
+   "actual": null,
+   "final_home": 83.0,
+   "final_away": 41.0,
+   "graded_at": "2026-11-10T02:42:57.870904+00:00"
   },
   {
    "kind": "call",
@@ -15256,7 +15598,12 @@
    "selected": true,
    "id": "call:NCAAB:401919846::TOTAL:under",
    "captured_at": "2026-11-09T05:38:51.329871+00:00",
-   "result": "Pending"
+   "result": "Win",
+   "units": 0.925926,
+   "actual": null,
+   "final_home": 75.0,
+   "final_away": 55.0,
+   "graded_at": "2026-11-10T02:42:57.870904+00:00"
   },
   {
    "kind": "call",
@@ -15278,7 +15625,12 @@
    "selected": false,
    "id": "call:NCAAB:401919846::TOTAL:over",
    "captured_at": "2026-11-09T05:38:51.329871+00:00",
-   "result": "Pending"
+   "result": "Loss",
+   "units": -1,
+   "actual": null,
+   "final_home": 75.0,
+   "final_away": 55.0,
+   "graded_at": "2026-11-10T02:42:57.870904+00:00"
   },
   {
    "kind": "call",
@@ -15300,7 +15652,12 @@
    "selected": true,
    "id": "call:NCAAB:401919846::ML:home",
    "captured_at": "2026-11-09T05:38:51.329871+00:00",
-   "result": "Pending"
+   "result": "Win",
+   "units": 0.16,
+   "actual": null,
+   "final_home": 75.0,
+   "final_away": 55.0,
+   "graded_at": "2026-11-10T02:42:57.870904+00:00"
   },
   {
    "kind": "call",
@@ -15322,7 +15679,12 @@
    "selected": false,
    "id": "call:NCAAB:401919846::ATS:home",
    "captured_at": "2026-11-09T05:38:51.329871+00:00",
-   "result": "Pending"
+   "result": "Win",
+   "units": 0.925926,
+   "actual": null,
+   "final_home": 75.0,
+   "final_away": 55.0,
+   "graded_at": "2026-11-10T02:42:57.870904+00:00"
   },
   {
    "kind": "call",
@@ -15344,12 +15706,17 @@
    "selected": true,
    "id": "call:NCAAB:401919846::ATS:away",
    "captured_at": "2026-11-09T05:38:51.329871+00:00",
-   "result": "Pending",
+   "result": "Loss",
    "line_encoding_repair": {
     "original_line": -10.5,
     "reason": "College quotes already use selection-signed spreads; removed the legacy home-line inversion."
    },
-   "line_schema": "selection-signed"
+   "line_schema": "selection-signed",
+   "units": -1,
+   "actual": null,
+   "final_home": 75.0,
+   "final_away": 55.0,
+   "graded_at": "2026-11-10T02:42:57.870904+00:00"
   },
   {
    "kind": "call",
@@ -15371,7 +15738,12 @@
    "selected": true,
    "id": "call:NCAAB:401919806::TOTAL:under",
    "captured_at": "2026-11-09T05:38:51.329871+00:00",
-   "result": "Pending"
+   "result": "Win",
+   "units": 0.892857,
+   "actual": null,
+   "final_home": 66.0,
+   "final_away": 46.0,
+   "graded_at": "2026-11-10T02:42:57.870904+00:00"
   },
   {
    "kind": "call",
@@ -15393,7 +15765,12 @@
    "selected": false,
    "id": "call:NCAAB:401919806::TOTAL:over",
    "captured_at": "2026-11-09T05:38:51.329871+00:00",
-   "result": "Pending"
+   "result": "Loss",
+   "units": -1,
+   "actual": null,
+   "final_home": 66.0,
+   "final_away": 46.0,
+   "graded_at": "2026-11-10T02:42:57.870904+00:00"
   },
   {
    "kind": "call",
@@ -15415,7 +15792,12 @@
    "selected": true,
    "id": "call:NCAAB:401919806::ML:home",
    "captured_at": "2026-11-09T05:38:51.329871+00:00",
-   "result": "Pending"
+   "result": "Win",
+   "units": 0.4,
+   "actual": null,
+   "final_home": 66.0,
+   "final_away": 46.0,
+   "graded_at": "2026-11-10T02:42:57.870904+00:00"
   },
   {
    "kind": "call",
@@ -15437,7 +15819,12 @@
    "selected": false,
    "id": "call:NCAAB:401919806::ATS:home",
    "captured_at": "2026-11-09T05:38:51.329871+00:00",
-   "result": "Pending"
+   "result": "Win",
+   "units": 0.909091,
+   "actual": null,
+   "final_home": 66.0,
+   "final_away": 46.0,
+   "graded_at": "2026-11-10T02:42:57.870904+00:00"
   },
   {
    "kind": "call",
@@ -15459,12 +15846,17 @@
    "selected": true,
    "id": "call:NCAAB:401919806::ATS:away",
    "captured_at": "2026-11-09T05:38:51.329871+00:00",
-   "result": "Pending",
+   "result": "Loss",
    "line_encoding_repair": {
     "original_line": -5.5,
     "reason": "College quotes already use selection-signed spreads; removed the legacy home-line inversion."
    },
-   "line_schema": "selection-signed"
+   "line_schema": "selection-signed",
+   "units": -1,
+   "actual": null,
+   "final_home": 66.0,
+   "final_away": 46.0,
+   "graded_at": "2026-11-10T02:42:57.870904+00:00"
   },
   {
    "kind": "call",
@@ -15486,7 +15878,12 @@
    "selected": true,
    "id": "call:NCAAB:401919733::TOTAL:under",
    "captured_at": "2026-11-09T05:38:51.329871+00:00",
-   "result": "Pending"
+   "result": "Loss",
+   "units": -1,
+   "actual": null,
+   "final_home": 67.0,
+   "final_away": 82.0,
+   "graded_at": "2026-11-10T02:42:57.870904+00:00"
   },
   {
    "kind": "call",
@@ -15508,7 +15905,12 @@
    "selected": false,
    "id": "call:NCAAB:401919733::TOTAL:over",
    "captured_at": "2026-11-09T05:38:51.329871+00:00",
-   "result": "Pending"
+   "result": "Win",
+   "units": 0.925926,
+   "actual": null,
+   "final_home": 67.0,
+   "final_away": 82.0,
+   "graded_at": "2026-11-10T02:42:57.870904+00:00"
   },
   {
    "kind": "call",
@@ -15530,7 +15932,12 @@
    "selected": true,
    "id": "call:NCAAB:401919733::ML:home",
    "captured_at": "2026-11-09T05:38:51.329871+00:00",
-   "result": "Pending"
+   "result": "Loss",
+   "units": -1,
+   "actual": null,
+   "final_home": 67.0,
+   "final_away": 82.0,
+   "graded_at": "2026-11-10T02:42:57.870904+00:00"
   },
   {
    "kind": "call",
@@ -15552,7 +15959,12 @@
    "selected": false,
    "id": "call:NCAAB:401919733::ATS:home",
    "captured_at": "2026-11-09T05:38:51.329871+00:00",
-   "result": "Pending"
+   "result": "Loss",
+   "units": -1,
+   "actual": null,
+   "final_home": 67.0,
+   "final_away": 82.0,
+   "graded_at": "2026-11-10T02:42:57.870904+00:00"
   },
   {
    "kind": "call",
@@ -15574,12 +15986,17 @@
    "selected": true,
    "id": "call:NCAAB:401919733::ATS:away",
    "captured_at": "2026-11-09T05:38:51.329871+00:00",
-   "result": "Pending",
+   "result": "Win",
    "line_encoding_repair": {
     "original_line": -5.5,
     "reason": "College quotes already use selection-signed spreads; removed the legacy home-line inversion."
    },
-   "line_schema": "selection-signed"
+   "line_schema": "selection-signed",
+   "units": 0.909091,
+   "actual": null,
+   "final_home": 67.0,
+   "final_away": 82.0,
+   "graded_at": "2026-11-10T02:42:57.870904+00:00"
   },
   {
    "kind": "call",
@@ -15601,7 +16018,12 @@
    "selected": true,
    "id": "call:NCAAB:401918074::TOTAL:under",
    "captured_at": "2026-11-09T05:38:51.329871+00:00",
-   "result": "Pending"
+   "result": "Loss",
+   "units": -1,
+   "actual": null,
+   "final_home": 92.0,
+   "final_away": 77.0,
+   "graded_at": "2026-11-10T02:42:57.870904+00:00"
   },
   {
    "kind": "call",
@@ -15623,7 +16045,12 @@
    "selected": false,
    "id": "call:NCAAB:401918074::TOTAL:over",
    "captured_at": "2026-11-09T05:38:51.329871+00:00",
-   "result": "Pending"
+   "result": "Win",
+   "units": 0.909091,
+   "actual": null,
+   "final_home": 92.0,
+   "final_away": 77.0,
+   "graded_at": "2026-11-10T02:42:57.870904+00:00"
   },
   {
    "kind": "call",
@@ -15645,7 +16072,12 @@
    "selected": true,
    "id": "call:NCAAB:401918074::ML:home",
    "captured_at": "2026-11-09T05:38:51.329871+00:00",
-   "result": "Pending"
+   "result": "Win",
+   "units": 0.015385,
+   "actual": null,
+   "final_home": 92.0,
+   "final_away": 77.0,
+   "graded_at": "2026-11-10T02:42:57.870904+00:00"
   },
   {
    "kind": "call",
@@ -15667,7 +16099,12 @@
    "selected": false,
    "id": "call:NCAAB:401918074::ATS:home",
    "captured_at": "2026-11-09T05:38:51.329871+00:00",
-   "result": "Pending"
+   "result": "Loss",
+   "units": -1,
+   "actual": null,
+   "final_home": 92.0,
+   "final_away": 77.0,
+   "graded_at": "2026-11-10T02:42:57.870904+00:00"
   },
   {
    "kind": "call",
@@ -15689,12 +16126,17 @@
    "selected": true,
    "id": "call:NCAAB:401918074::ATS:away",
    "captured_at": "2026-11-09T05:38:51.329871+00:00",
-   "result": "Pending",
+   "result": "Win",
    "line_encoding_repair": {
     "original_line": -21.5,
     "reason": "College quotes already use selection-signed spreads; removed the legacy home-line inversion."
    },
-   "line_schema": "selection-signed"
+   "line_schema": "selection-signed",
+   "units": 0.909091,
+   "actual": null,
+   "final_home": 92.0,
+   "final_away": 77.0,
+   "graded_at": "2026-11-10T02:42:57.870904+00:00"
   },
   {
    "kind": "call",
@@ -15716,7 +16158,12 @@
    "selected": true,
    "id": "call:NCAAB:401916305::TOTAL:under",
    "captured_at": "2026-11-09T05:38:51.329871+00:00",
-   "result": "Pending"
+   "result": "Win",
+   "units": 0.909091,
+   "actual": null,
+   "final_home": 61.0,
+   "final_away": 63.0,
+   "graded_at": "2026-11-10T02:42:57.870904+00:00"
   },
   {
    "kind": "call",
@@ -15738,7 +16185,12 @@
    "selected": false,
    "id": "call:NCAAB:401916305::TOTAL:over",
    "captured_at": "2026-11-09T05:38:51.329871+00:00",
-   "result": "Pending"
+   "result": "Loss",
+   "units": -1,
+   "actual": null,
+   "final_home": 61.0,
+   "final_away": 63.0,
+   "graded_at": "2026-11-10T02:42:57.870904+00:00"
   },
   {
    "kind": "call",
@@ -15760,7 +16212,12 @@
    "selected": true,
    "id": "call:NCAAB:401916305::ML:home",
    "captured_at": "2026-11-09T05:38:51.329871+00:00",
-   "result": "Pending"
+   "result": "Loss",
+   "units": -1,
+   "actual": null,
+   "final_home": 61.0,
+   "final_away": 63.0,
+   "graded_at": "2026-11-10T02:42:57.870904+00:00"
   },
   {
    "kind": "call",
@@ -15782,7 +16239,12 @@
    "selected": false,
    "id": "call:NCAAB:401916305::ATS:home",
    "captured_at": "2026-11-09T05:38:51.329871+00:00",
-   "result": "Pending"
+   "result": "Loss",
+   "units": -1,
+   "actual": null,
+   "final_home": 61.0,
+   "final_away": 63.0,
+   "graded_at": "2026-11-10T02:42:57.870904+00:00"
   },
   {
    "kind": "call",
@@ -15804,12 +16266,17 @@
    "selected": true,
    "id": "call:NCAAB:401916305::ATS:away",
    "captured_at": "2026-11-09T05:38:51.329871+00:00",
-   "result": "Pending",
+   "result": "Win",
    "line_encoding_repair": {
     "original_line": -7.5,
     "reason": "College quotes already use selection-signed spreads; removed the legacy home-line inversion."
    },
-   "line_schema": "selection-signed"
+   "line_schema": "selection-signed",
+   "units": 0.869565,
+   "actual": null,
+   "final_home": 61.0,
+   "final_away": 63.0,
+   "graded_at": "2026-11-10T02:42:57.870904+00:00"
   },
   {
    "kind": "call",
@@ -15831,7 +16298,12 @@
    "selected": false,
    "id": "call:NCAAB:401911010::TOTAL:under",
    "captured_at": "2026-11-09T05:38:51.329871+00:00",
-   "result": "Pending"
+   "result": "Loss",
+   "units": -1,
+   "actual": null,
+   "final_home": 95.0,
+   "final_away": 79.0,
+   "graded_at": "2026-11-10T02:42:57.870904+00:00"
   },
   {
    "kind": "call",
@@ -15853,7 +16325,12 @@
    "selected": true,
    "id": "call:NCAAB:401911010::TOTAL:over",
    "captured_at": "2026-11-09T05:38:51.329871+00:00",
-   "result": "Pending"
+   "result": "Win",
+   "units": 0.909091,
+   "actual": null,
+   "final_home": 95.0,
+   "final_away": 79.0,
+   "graded_at": "2026-11-10T02:42:57.870904+00:00"
   },
   {
    "kind": "call",
@@ -15875,7 +16352,12 @@
    "selected": true,
    "id": "call:NCAAB:401911010::ML:home",
    "captured_at": "2026-11-09T05:38:51.329871+00:00",
-   "result": "Pending"
+   "result": "Win",
+   "units": 0.105263,
+   "actual": null,
+   "final_home": 95.0,
+   "final_away": 79.0,
+   "graded_at": "2026-11-10T02:42:57.870904+00:00"
   },
   {
    "kind": "call",
@@ -15897,7 +16379,12 @@
    "selected": false,
    "id": "call:NCAAB:401911010::ATS:home",
    "captured_at": "2026-11-09T05:38:51.329871+00:00",
-   "result": "Pending"
+   "result": "Win",
+   "units": 0.869565,
+   "actual": null,
+   "final_home": 95.0,
+   "final_away": 79.0,
+   "graded_at": "2026-11-10T02:42:57.870904+00:00"
   },
   {
    "kind": "call",
@@ -15919,12 +16406,17 @@
    "selected": true,
    "id": "call:NCAAB:401911010::ATS:away",
    "captured_at": "2026-11-09T05:38:51.329871+00:00",
-   "result": "Pending",
+   "result": "Loss",
    "line_encoding_repair": {
     "original_line": -12.5,
     "reason": "College quotes already use selection-signed spreads; removed the legacy home-line inversion."
    },
-   "line_schema": "selection-signed"
+   "line_schema": "selection-signed",
+   "units": -1,
+   "actual": null,
+   "final_home": 95.0,
+   "final_away": 79.0,
+   "graded_at": "2026-11-10T02:42:57.870904+00:00"
   },
   {
    "kind": "call",
@@ -15946,7 +16438,12 @@
    "selected": true,
    "id": "call:NCAAB:401906865::TOTAL:under",
    "captured_at": "2026-11-09T05:38:51.329871+00:00",
-   "result": "Pending"
+   "result": "Loss",
+   "units": -1,
+   "actual": null,
+   "final_home": 93.0,
+   "final_away": 62.0,
+   "graded_at": "2026-11-10T02:42:57.870904+00:00"
   },
   {
    "kind": "call",
@@ -15968,7 +16465,12 @@
    "selected": false,
    "id": "call:NCAAB:401906865::TOTAL:over",
    "captured_at": "2026-11-09T05:38:51.329871+00:00",
-   "result": "Pending"
+   "result": "Win",
+   "units": 0.952381,
+   "actual": null,
+   "final_home": 93.0,
+   "final_away": 62.0,
+   "graded_at": "2026-11-10T02:42:57.870904+00:00"
   },
   {
    "kind": "call",
@@ -15990,7 +16492,12 @@
    "selected": false,
    "id": "call:NCAAB:401906865::ATS:home",
    "captured_at": "2026-11-09T05:38:51.329871+00:00",
-   "result": "Pending"
+   "result": "Loss",
+   "units": -1,
+   "actual": null,
+   "final_home": 93.0,
+   "final_away": 62.0,
+   "graded_at": "2026-11-10T02:42:57.870904+00:00"
   },
   {
    "kind": "call",
@@ -16012,12 +16519,17 @@
    "selected": true,
    "id": "call:NCAAB:401906865::ATS:away",
    "captured_at": "2026-11-09T05:38:51.329871+00:00",
-   "result": "Pending",
+   "result": "Win",
    "line_encoding_repair": {
     "original_line": -35.5,
     "reason": "College quotes already use selection-signed spreads; removed the legacy home-line inversion."
    },
-   "line_schema": "selection-signed"
+   "line_schema": "selection-signed",
+   "units": 0.952381,
+   "actual": null,
+   "final_home": 93.0,
+   "final_away": 62.0,
+   "graded_at": "2026-11-10T02:42:57.870904+00:00"
   },
   {
    "kind": "call",
@@ -16039,7 +16551,12 @@
    "selected": false,
    "id": "call:NCAAB:401906849::TOTAL:under",
    "captured_at": "2026-11-09T05:38:51.329871+00:00",
-   "result": "Pending"
+   "result": "Win",
+   "units": 0.952381,
+   "actual": null,
+   "final_home": 70.0,
+   "final_away": 47.0,
+   "graded_at": "2026-11-10T02:42:57.870904+00:00"
   },
   {
    "kind": "call",
@@ -16061,7 +16578,12 @@
    "selected": true,
    "id": "call:NCAAB:401906849::TOTAL:over",
    "captured_at": "2026-11-09T05:38:51.329871+00:00",
-   "result": "Pending"
+   "result": "Loss",
+   "units": -1,
+   "actual": null,
+   "final_home": 70.0,
+   "final_away": 47.0,
+   "graded_at": "2026-11-10T02:42:57.870904+00:00"
   },
   {
    "kind": "call",
@@ -16083,7 +16605,12 @@
    "selected": true,
    "id": "call:NCAAB:401906849::ML:home",
    "captured_at": "2026-11-09T05:38:51.329871+00:00",
-   "result": "Pending"
+   "result": "Win",
+   "units": 0.002,
+   "actual": null,
+   "final_home": 70.0,
+   "final_away": 47.0,
+   "graded_at": "2026-11-10T02:42:57.870904+00:00"
   },
   {
    "kind": "call",
@@ -16105,7 +16632,12 @@
    "selected": false,
    "id": "call:NCAAB:401906849::ATS:home",
    "captured_at": "2026-11-09T05:38:51.329871+00:00",
-   "result": "Pending"
+   "result": "Loss",
+   "units": -1,
+   "actual": null,
+   "final_home": 70.0,
+   "final_away": 47.0,
+   "graded_at": "2026-11-10T02:42:57.870904+00:00"
   },
   {
    "kind": "call",
@@ -16127,12 +16659,17 @@
    "selected": true,
    "id": "call:NCAAB:401906849::ATS:away",
    "captured_at": "2026-11-09T05:38:51.329871+00:00",
-   "result": "Pending",
+   "result": "Win",
    "line_encoding_repair": {
     "original_line": -28.5,
     "reason": "College quotes already use selection-signed spreads; removed the legacy home-line inversion."
    },
-   "line_schema": "selection-signed"
+   "line_schema": "selection-signed",
+   "units": 0.925926,
+   "actual": null,
+   "final_home": 70.0,
+   "final_away": 47.0,
+   "graded_at": "2026-11-10T02:42:57.870904+00:00"
   },
   {
    "kind": "call",
@@ -16154,7 +16691,12 @@
    "selected": false,
    "id": "call:NCAAB:401906781::TOTAL:under",
    "captured_at": "2026-11-09T05:38:51.329871+00:00",
-   "result": "Pending"
+   "result": "Win",
+   "units": 0.909091,
+   "actual": null,
+   "final_home": 80.0,
+   "final_away": 72.0,
+   "graded_at": "2026-11-10T02:42:57.870904+00:00"
   },
   {
    "kind": "call",
@@ -16176,7 +16718,12 @@
    "selected": true,
    "id": "call:NCAAB:401906781::TOTAL:over",
    "captured_at": "2026-11-09T05:38:51.329871+00:00",
-   "result": "Pending"
+   "result": "Loss",
+   "units": -1,
+   "actual": null,
+   "final_home": 80.0,
+   "final_away": 72.0,
+   "graded_at": "2026-11-10T02:42:57.870904+00:00"
   },
   {
    "kind": "call",
@@ -16198,7 +16745,12 @@
    "selected": true,
    "id": "call:NCAAB:401906781::ML:home",
    "captured_at": "2026-11-09T05:38:51.329871+00:00",
-   "result": "Pending"
+   "result": "Win",
+   "units": 0.015385,
+   "actual": null,
+   "final_home": 80.0,
+   "final_away": 72.0,
+   "graded_at": "2026-11-10T02:42:57.870904+00:00"
   },
   {
    "kind": "call",
@@ -16220,7 +16772,12 @@
    "selected": false,
    "id": "call:NCAAB:401906781::ATS:home",
    "captured_at": "2026-11-09T05:38:51.329871+00:00",
-   "result": "Pending"
+   "result": "Loss",
+   "units": -1,
+   "actual": null,
+   "final_home": 80.0,
+   "final_away": 72.0,
+   "graded_at": "2026-11-10T02:42:57.870904+00:00"
   },
   {
    "kind": "call",
@@ -16242,12 +16799,17 @@
    "selected": true,
    "id": "call:NCAAB:401906781::ATS:away",
    "captured_at": "2026-11-09T05:38:51.329871+00:00",
-   "result": "Pending",
+   "result": "Win",
    "line_encoding_repair": {
     "original_line": -23.5,
     "reason": "College quotes already use selection-signed spreads; removed the legacy home-line inversion."
    },
-   "line_schema": "selection-signed"
+   "line_schema": "selection-signed",
+   "units": 0.909091,
+   "actual": null,
+   "final_home": 80.0,
+   "final_away": 72.0,
+   "graded_at": "2026-11-10T02:42:57.870904+00:00"
   },
   {
    "kind": "game",
@@ -16285,7 +16847,12 @@
    },
    "id": "game:NCAAB:401921180:::",
    "captured_at": "2026-11-09T05:38:51.334340+00:00",
-   "result": "Pending"
+   "result": "Graded",
+   "actual_margin": 13.0,
+   "actual_total": 143.0,
+   "final_home": 78.0,
+   "final_away": 65.0,
+   "graded_at": "2026-11-10T02:42:57.870904+00:00"
   },
   {
    "kind": "game",
@@ -16323,7 +16890,12 @@
    },
    "id": "game:NCAAB:401909718:::",
    "captured_at": "2026-11-09T05:38:51.334340+00:00",
-   "result": "Pending"
+   "result": "Graded",
+   "actual_margin": 3.0,
+   "actual_total": 163.0,
+   "final_home": 83.0,
+   "final_away": 80.0,
+   "graded_at": "2026-11-10T02:42:57.870904+00:00"
   },
   {
    "kind": "call",
@@ -16345,7 +16917,12 @@
    "selected": true,
    "id": "call:NCAAB:401921180::TOTAL:under",
    "captured_at": "2026-11-09T05:38:51.329871+00:00",
-   "result": "Pending"
+   "result": "Win",
+   "units": 0.892857,
+   "actual": null,
+   "final_home": 78.0,
+   "final_away": 65.0,
+   "graded_at": "2026-11-10T02:42:57.870904+00:00"
   },
   {
    "kind": "call",
@@ -16367,7 +16944,12 @@
    "selected": false,
    "id": "call:NCAAB:401921180::TOTAL:over",
    "captured_at": "2026-11-09T05:38:51.329871+00:00",
-   "result": "Pending"
+   "result": "Loss",
+   "units": -1,
+   "actual": null,
+   "final_home": 78.0,
+   "final_away": 65.0,
+   "graded_at": "2026-11-10T02:42:57.870904+00:00"
   },
   {
    "kind": "call",
@@ -16389,7 +16971,12 @@
    "selected": true,
    "id": "call:NCAAB:401921180::ML:home",
    "captured_at": "2026-11-09T05:38:51.329871+00:00",
-   "result": "Pending"
+   "result": "Win",
+   "units": 0.4,
+   "actual": null,
+   "final_home": 78.0,
+   "final_away": 65.0,
+   "graded_at": "2026-11-10T02:42:57.870904+00:00"
   },
   {
    "kind": "call",
@@ -16411,7 +16998,12 @@
    "selected": false,
    "id": "call:NCAAB:401921180::ATS:home",
    "captured_at": "2026-11-09T05:38:51.329871+00:00",
-   "result": "Pending"
+   "result": "Win",
+   "units": 0.869565,
+   "actual": null,
+   "final_home": 78.0,
+   "final_away": 65.0,
+   "graded_at": "2026-11-10T02:42:57.870904+00:00"
   },
   {
    "kind": "call",
@@ -16433,12 +17025,17 @@
    "selected": true,
    "id": "call:NCAAB:401921180::ATS:away",
    "captured_at": "2026-11-09T05:38:51.329871+00:00",
-   "result": "Pending",
+   "result": "Loss",
    "line_encoding_repair": {
     "original_line": -5.5,
     "reason": "College quotes already use selection-signed spreads; removed the legacy home-line inversion."
    },
-   "line_schema": "selection-signed"
+   "line_schema": "selection-signed",
+   "units": -1,
+   "actual": null,
+   "final_home": 78.0,
+   "final_away": 65.0,
+   "graded_at": "2026-11-10T02:42:57.870904+00:00"
   },
   {
    "kind": "call",
@@ -16460,7 +17057,12 @@
    "selected": false,
    "id": "call:NCAAB:401909718::TOTAL:under",
    "captured_at": "2026-11-09T05:38:51.329871+00:00",
-   "result": "Pending"
+   "result": "Loss",
+   "units": -1,
+   "actual": null,
+   "final_home": 83.0,
+   "final_away": 80.0,
+   "graded_at": "2026-11-10T02:42:57.870904+00:00"
   },
   {
    "kind": "call",
@@ -16482,7 +17084,12 @@
    "selected": true,
    "id": "call:NCAAB:401909718::TOTAL:over",
    "captured_at": "2026-11-09T05:38:51.329871+00:00",
-   "result": "Pending"
+   "result": "Win",
+   "units": 0.925926,
+   "actual": null,
+   "final_home": 83.0,
+   "final_away": 80.0,
+   "graded_at": "2026-11-10T02:42:57.870904+00:00"
   },
   {
    "kind": "call",
@@ -16504,7 +17111,12 @@
    "selected": true,
    "id": "call:NCAAB:401909718::ML:home",
    "captured_at": "2026-11-09T05:38:51.329871+00:00",
-   "result": "Pending"
+   "result": "Win",
+   "units": 0.458716,
+   "actual": null,
+   "final_home": 83.0,
+   "final_away": 80.0,
+   "graded_at": "2026-11-10T02:42:57.870904+00:00"
   },
   {
    "kind": "call",
@@ -16526,7 +17138,12 @@
    "selected": false,
    "id": "call:NCAAB:401909718::ATS:home",
    "captured_at": "2026-11-09T05:38:51.329871+00:00",
-   "result": "Pending"
+   "result": "Loss",
+   "units": -1,
+   "actual": null,
+   "final_home": 83.0,
+   "final_away": 80.0,
+   "graded_at": "2026-11-10T02:42:57.870904+00:00"
   },
   {
    "kind": "call",
@@ -16548,12 +17165,17 @@
    "selected": true,
    "id": "call:NCAAB:401909718::ATS:away",
    "captured_at": "2026-11-09T05:38:51.329871+00:00",
-   "result": "Pending",
+   "result": "Win",
    "line_encoding_repair": {
     "original_line": -5.5,
     "reason": "College quotes already use selection-signed spreads; removed the legacy home-line inversion."
    },
-   "line_schema": "selection-signed"
+   "line_schema": "selection-signed",
+   "units": 0.869565,
+   "actual": null,
+   "final_home": 83.0,
+   "final_away": 80.0,
+   "graded_at": "2026-11-10T02:42:57.870904+00:00"
   },
   {
    "kind": "game",
@@ -16591,7 +17213,12 @@
    },
    "id": "game:NCAAB:401916315:::",
    "captured_at": "2026-11-09T05:38:51.334340+00:00",
-   "result": "Pending"
+   "result": "Graded",
+   "actual_margin": 10.0,
+   "actual_total": 158.0,
+   "final_home": 84.0,
+   "final_away": 74.0,
+   "graded_at": "2026-11-10T02:42:57.870904+00:00"
   },
   {
    "kind": "call",
@@ -16613,7 +17240,12 @@
    "selected": true,
    "id": "call:NCAAB:401916315::TOTAL:under",
    "captured_at": "2026-11-09T05:38:51.329871+00:00",
-   "result": "Pending"
+   "result": "Win",
+   "units": 0.909091,
+   "actual": null,
+   "final_home": 84.0,
+   "final_away": 74.0,
+   "graded_at": "2026-11-10T02:42:57.870904+00:00"
   },
   {
    "kind": "call",
@@ -16635,7 +17267,12 @@
    "selected": false,
    "id": "call:NCAAB:401916315::TOTAL:over",
    "captured_at": "2026-11-09T05:38:51.329871+00:00",
-   "result": "Pending"
+   "result": "Loss",
+   "units": -1,
+   "actual": null,
+   "final_home": 84.0,
+   "final_away": 74.0,
+   "graded_at": "2026-11-10T02:42:57.870904+00:00"
   },
   {
    "kind": "call",
@@ -16657,7 +17294,12 @@
    "selected": true,
    "id": "call:NCAAB:401916315::ML:home",
    "captured_at": "2026-11-09T05:38:51.329871+00:00",
-   "result": "Pending"
+   "result": "Win",
+   "units": 0.01,
+   "actual": null,
+   "final_home": 84.0,
+   "final_away": 74.0,
+   "graded_at": "2026-11-10T02:42:57.870904+00:00"
   },
   {
    "kind": "call",
@@ -16679,7 +17321,12 @@
    "selected": false,
    "id": "call:NCAAB:401916315::ATS:home",
    "captured_at": "2026-11-09T05:38:51.329871+00:00",
-   "result": "Pending"
+   "result": "Loss",
+   "units": -1,
+   "actual": null,
+   "final_home": 84.0,
+   "final_away": 74.0,
+   "graded_at": "2026-11-10T02:42:57.870904+00:00"
   },
   {
    "kind": "call",
@@ -16701,12 +17348,17 @@
    "selected": true,
    "id": "call:NCAAB:401916315::ATS:away",
    "captured_at": "2026-11-09T05:38:51.329871+00:00",
-   "result": "Pending",
+   "result": "Win",
    "line_encoding_repair": {
     "original_line": -25.5,
     "reason": "College quotes already use selection-signed spreads; removed the legacy home-line inversion."
    },
-   "line_schema": "selection-signed"
+   "line_schema": "selection-signed",
+   "units": 0.952381,
+   "actual": null,
+   "final_home": 84.0,
+   "final_away": 74.0,
+   "graded_at": "2026-11-10T02:42:57.870904+00:00"
   }
  ]
 }
