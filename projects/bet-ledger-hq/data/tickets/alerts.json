@@ -1,29 +1,127 @@
 {
   "schema": 1,
-  "checked_at": "2026-11-10T17:23:49.973Z",
+  "checked_at": "2026-11-10T18:44:31.752Z",
   "coverage": {
     "ncaaf": {
       "status": "empty",
       "reports": 0,
-      "checked_at": "2026-11-10T17:23:49.973Z"
-    },
-    "nhl": {
-      "status": "available",
-      "reports": 29,
-      "checked_at": "2026-11-10T17:23:49.973Z"
+      "checked_at": "2026-11-10T18:44:31.752Z"
     },
     "nfl": {
       "status": "available",
-      "reports": 532,
-      "checked_at": "2026-11-10T17:23:49.973Z"
+      "reports": 529,
+      "checked_at": "2026-11-10T18:44:31.752Z"
+    },
+    "nhl": {
+      "status": "available",
+      "reports": 26,
+      "checked_at": "2026-11-10T18:44:31.752Z"
     },
     "mlb": {
       "status": "available",
-      "reports": 3,
-      "checked_at": "2026-11-10T17:23:49.973Z"
+      "reports": 4,
+      "checked_at": "2026-11-10T18:44:31.752Z"
     }
   },
   "events": [
+    {
+      "id": "starter|nhl:nhl:2026020286:away|2026-11-10T18:44:31.752Z",
+      "kind": "starter",
+      "observed_at": "2026-11-10T18:44:31.752Z",
+      "sport": "nhl",
+      "event": "COL @ TOR",
+      "start": "2026-11-11T00:00:00+00:00",
+      "title": "NHL starting goalie updated",
+      "before": "Mackenzie Blackwood",
+      "after": "Mackenzie Blackwood · confirmed",
+      "source_quote_at": "2026-11-10T18:39:33.643527+00:00",
+      "source": "NHL board",
+      "note": "Review the matchup after a starter change; the baseline does not price individual goalie talent."
+    },
+    {
+      "id": "starter|nhl:nhl:2026020291:home|2026-11-10T18:44:31.752Z",
+      "kind": "starter",
+      "observed_at": "2026-11-10T18:44:31.752Z",
+      "sport": "nhl",
+      "event": "NJ @ WPG",
+      "start": "2026-11-11T00:00:00+00:00",
+      "title": "NHL starting goalie updated",
+      "before": "Nico Daws",
+      "after": "Nico Daws · confirmed",
+      "source_quote_at": "2026-11-10T18:39:33.643527+00:00",
+      "source": "NHL board",
+      "note": "Review the matchup after a starter change; the baseline does not price individual goalie talent."
+    },
+    {
+      "id": "starter|nhl:nhl:2026020290:away|2026-11-10T18:44:31.752Z",
+      "kind": "starter",
+      "observed_at": "2026-11-10T18:44:31.752Z",
+      "sport": "nhl",
+      "event": "DET @ STL",
+      "start": "2026-11-11T01:00:00+00:00",
+      "title": "NHL starting goalie updated",
+      "before": "John Gibson",
+      "after": "John Gibson · confirmed",
+      "source_quote_at": "2026-11-10T18:39:33.643527+00:00",
+      "source": "NHL board",
+      "note": "Review the matchup after a starter change; the baseline does not price individual goalie talent."
+    },
+    {
+      "id": "injury|nfl:16:Kyle Van Noy|2026-11-10T18:44:31.752Z",
+      "kind": "injury",
+      "observed_at": "2026-11-10T18:44:31.752Z",
+      "sport": "nfl",
+      "title": "Player availability changed",
+      "event": "Minnesota Vikings",
+      "pick": "Kyle Van Noy",
+      "before": "Active",
+      "after": "Active · Van Noy (calf) has returned to Monday night's matchup with Buffalo, Kevin Seifert of ESPN.com reports.",
+      "source_quote_at": "2026-11-10T01:48Z",
+      "source": "ESPN injuries",
+      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
+    },
+    {
+      "id": "injury|nfl:21:Arnold Ebiketie|2026-11-10T18:44:31.752Z",
+      "kind": "injury",
+      "observed_at": "2026-11-10T18:44:31.752Z",
+      "sport": "nfl",
+      "title": "New availability report",
+      "event": "Philadelphia Eagles",
+      "pick": "Arnold Ebiketie",
+      "before": "Not in the previous dated report",
+      "after": "Active · Ebiketie will remain with the Eagles after his reported trade to the Bengals on Tuesday fell through and won't be completed, according to NFL reporter Jordan Schultz.",
+      "source_quote_at": "2026-11-10T17:26Z",
+      "source": "ESPN injuries",
+      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
+    },
+    {
+      "id": "injury|nhl:2:Alex Lyon|2026-11-10T18:44:31.752Z",
+      "kind": "injury",
+      "observed_at": "2026-11-10T18:44:31.752Z",
+      "sport": "nhl",
+      "title": "New availability report",
+      "event": "Buffalo Sabres",
+      "pick": "Alex Lyon",
+      "before": "Not in the previous dated report",
+      "after": "Injured Reserve · Shoulder",
+      "source_quote_at": "2026-11-10T17:54Z",
+      "source": "ESPN injuries",
+      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
+    },
+    {
+      "id": "injury|mlb:26:Randy Rodriguez|2026-11-10T18:44:31.752Z",
+      "kind": "injury",
+      "observed_at": "2026-11-10T18:44:31.752Z",
+      "sport": "mlb",
+      "title": "New availability report",
+      "event": "San Francisco Giants",
+      "pick": "Randy Rodriguez",
+      "before": "Not in the previous dated report",
+      "after": "Out · Elbow",
+      "source_quote_at": "2026-11-10T18:29Z",
+      "source": "ESPN injuries",
+      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
+    },
     {
       "id": "odds|ncaaf|401858522|2026-11-14T17:00Z|TOTAL||over|Draft Kings|2026-11-10T17:23:49.973Z",
       "kind": "odds",
@@ -2731,106 +2829,6 @@
       "before": "Not in the previous dated report",
       "after": "Questionable · Knee",
       "source_quote_at": "2026-11-10T00:09Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "odds|props|401873051|2026-11-10T01:15Z|Rushing yards|Aaron Jones Sr.|over|DraftKings|2026-11-10T00:01:31.807Z",
-      "kind": "odds",
-      "observed_at": "2026-11-10T00:01:31.807Z",
-      "sport": "props",
-      "event": "Buffalo Bills @ Minnesota Vikings",
-      "start": "2026-11-10T01:15Z",
-      "pick": "Aaron Jones Sr. — Over 31.5 Rushing yards",
-      "title": "Published odds changed",
-      "before": "-115 · line 30.5",
-      "after": "-109 · line 32.5",
-      "book": "DraftKings",
-      "source_quote_at": "2026-11-09T23:56:07.192605+00:00",
-      "source": "Existing Props board",
-      "note": "Your ticket keeps its original odds. Recheck the live book before placing a new wager."
-    },
-    {
-      "id": "injury|nfl:22:Gardner Minshew II|2026-11-10T00:01:31.807Z",
-      "kind": "injury",
-      "observed_at": "2026-11-10T00:01:31.807Z",
-      "sport": "nfl",
-      "title": "Player availability changed",
-      "event": "Arizona Cardinals",
-      "pick": "Gardner Minshew II",
-      "before": "Questionable · Elbow",
-      "after": "Doubtful · Elbow",
-      "source_quote_at": "2026-11-09T22:51Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:2:Jalon Kilgore|2026-11-10T00:01:31.807Z",
-      "kind": "injury",
-      "observed_at": "2026-11-10T00:01:31.807Z",
-      "sport": "nfl",
-      "title": "New availability report",
-      "event": "Buffalo Bills",
-      "pick": "Jalon Kilgore",
-      "before": "Not in the previous dated report",
-      "after": "Out · Coach's Decision",
-      "source_quote_at": "2026-11-09T23:51Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:2:Mike Danna|2026-11-10T00:01:31.807Z",
-      "kind": "injury",
-      "observed_at": "2026-11-10T00:01:31.807Z",
-      "sport": "nfl",
-      "title": "New availability report",
-      "event": "Buffalo Bills",
-      "pick": "Mike Danna",
-      "before": "Not in the previous dated report",
-      "after": "Out · Coach's Decision",
-      "source_quote_at": "2026-11-09T23:51Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:2:Dion Dawkins|2026-11-10T00:01:31.807Z",
-      "kind": "injury",
-      "observed_at": "2026-11-10T00:01:31.807Z",
-      "sport": "nfl",
-      "title": "Player availability changed",
-      "event": "Buffalo Bills",
-      "pick": "Dion Dawkins",
-      "before": "Questionable · Ribs",
-      "after": "Out · Ribs",
-      "source_quote_at": "2026-11-09T23:51Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:2:Greg Gaines|2026-11-10T00:01:31.807Z",
-      "kind": "injury",
-      "observed_at": "2026-11-10T00:01:31.807Z",
-      "sport": "nfl",
-      "title": "New availability report",
-      "event": "Buffalo Bills",
-      "pick": "Greg Gaines",
-      "before": "Not in the previous dated report",
-      "after": "Out · Calf",
-      "source_quote_at": "2026-11-09T23:51Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:2:Alec Anderson|2026-11-10T00:01:31.807Z",
-      "kind": "injury",
-      "observed_at": "2026-11-10T00:01:31.807Z",
-      "sport": "nfl",
-      "title": "Player availability changed",
-      "event": "Buffalo Bills",
-      "pick": "Alec Anderson",
-      "before": "Questionable · Ankle",
-      "after": "Out · Ankle",
-      "source_quote_at": "2026-11-09T23:51Z",
       "source": "ESPN injuries",
       "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
     }
