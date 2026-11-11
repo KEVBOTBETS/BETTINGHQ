@@ -172,14 +172,13 @@ jobs:
             git commit -m 'Refresh public model data and frozen forecasts'
             saved=false
           fi
-          # Someone may push code while this run is building. The refreshed data
-          # is still worth keeping (line snapshots, frozen forecasts, CLV locks),
-          # so it is replayed on top of the new commit -- but the site is left
-          # to the next run, since this one built the older code.
+          # Preserve concurrent model history. Publish only when release code is
+          # unchanged and this artifact is not older than the competing data.
+          # Code changes and uncertain/newer publications wait for the next run.
           publish=true
           for attempt in 1 2 3; do
             git fetch origin main
-            [ "$(git rev-parse origin/main)" != "$built" ] && publish=false
+            if ! python -m tools.publication_guard "$built" origin/main; then publish=false; fi
             [ "$saved" = true ] && break
             # The model builds also rewrite tracked files that are not model
             # history (caches, scratch state). Those are left unstaged on
@@ -196,7 +195,7 @@ jobs:
             if [ "$attempt" = 3 ]; then echo "::error::Could not save refreshed data after 3 attempts."; exit 1; fi
           done
           if [ "$publish" = false ]; then
-            echo "::notice::main moved during this build, so the refreshed data was saved on top of it and publishing is left to the next run, which builds the newer code."
+            echo "::notice::Main has changed release code or newer/uncertain data; refreshed history was retained where possible and publication is left to the next validated run."
           fi
           echo "publish=$publish" >> "$GITHUB_OUTPUT"
       - uses: actions/upload-pages-artifact@v5
