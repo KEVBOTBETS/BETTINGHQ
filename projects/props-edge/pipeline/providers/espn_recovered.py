@@ -3,6 +3,7 @@ from __future__ import annotations
 import datetime as dt
 import re
 import statistics
+from pathlib import Path
 from collections import defaultdict
 from concurrent.futures import ThreadPoolExecutor
 from typing import Any
@@ -623,7 +624,13 @@ class EspnProjectionProvider:
             recent_events.extend(season.get("events") or [])
         recent_events = list({str(e["id"]): e for e in recent_events if e.get("id")}.values())
         upcoming_events = _upcoming_window(recent_events, now, int(fetch["lookahead_days"]))
-        roster_targets = _upcoming_teams(upcoming_events)
+        # The weekly view lists every position and bye team, not just players
+        # with a prop market inside the seven-day betting window.
+        from .. import weekly_nfl
+        season = _nfl_season_year(today)
+        full_events = weekly_nfl.schedule_events(recent_events, season, now,
+            Path(__file__).resolve().parents[3] / "nfl-edge-lab/site/data")
+        roster_targets = _upcoming_teams(full_events)
 
         def fetch_roster(team_input: tuple[str, str]) -> tuple[str, dict[str, Any]] | None:
             team_id, team_name = team_input
@@ -682,11 +689,15 @@ class EspnProjectionProvider:
             if event.get("id")
         ]
 
+        event_dates = {str(e["id"]): e.get("date") for e in selected if e.get("id")}
+
         def fetch_summary(event_input: tuple[str, int]) -> dict[str, Any] | None:
             event_id, season_year = event_input
             try:
                 summary = self.client.get(f"/{path}/summary", {"event": event_id}, retries=1)
                 summary["_props_edge_season_year"] = season_year
+                summary["_weekly_event_date"] = event_dates.get(event_id)
+                summary["_weekly_completed"] = True
                 return summary
             except Exception:
                 return None
@@ -695,23 +706,25 @@ class EspnProjectionProvider:
             summaries = [summary for summary in pool.map(fetch_summary, event_inputs) if summary]
         if event_inputs and not summaries:
             raise ProviderError("ESPN completed-game statistics could not be read; previous published data was retained")
-        return parse_summaries(
-            summaries,
-            "NFL",
-            _team_and_matchups(upcoming_events),
+        options = dict(
             current_season_year=_nfl_season_year(today),
             defense_weight=float(self.settings["projection_model"].get("defense_weight", 0.40)),
-            defense_max_adjustment=float(
-                self.settings["projection_model"].get("defense_max_adjustment", 0.12)
-            ),
-            defense_prior_season_weight=float(
-                self.settings["projection_model"].get("defense_prior_season_weight", 0.55)
-            ),
-            defense_current_season_full_weight_games=int(
-                self.settings["projection_model"].get(
-                    "defense_current_season_full_weight_games", 4
-                )
-            ),
-            current_roster=current_roster,
-            verified_roster_teams=verified_roster_teams,
+            defense_max_adjustment=float(self.settings["projection_model"].get("defense_max_adjustment", 0.12)),
+            defense_prior_season_weight=float(self.settings["projection_model"].get("defense_prior_season_weight", 0.55)),
+            defense_current_season_full_weight_games=int(self.settings["projection_model"].get("defense_current_season_full_weight_games", 4)),
+            current_roster=current_roster, verified_roster_teams=verified_roster_teams,
         )
+        result = parse_summaries(summaries, "NFL", _team_and_matchups(upcoming_events), **options)
+        try:
+            captured = dt.datetime.now(dt.timezone.utc)
+            season = _nfl_season_year(today)
+            future = [e for e in full_events if weekly_nfl.instant(e.get("date")) and
+                      weekly_nfl.instant(e["date"]) > captured and
+                      ((e.get("status") or {}).get("type") or {}).get("state") in ("pre", None)]
+            weekly_projections = parse_summaries(summaries, "NFL", _team_and_matchups(future), **options)
+            self.weekly_snapshot = weekly_nfl.build_snapshot(weekly_projections, roster_payloads,
+                full_events, summaries, season, captured)
+        except (OSError, ValueError, TypeError) as exc:
+            self.weekly_error = type(exc).__name__
+            print(f"NFL weekly statistics unavailable ({type(exc).__name__}); previous timestamps retained.")
+        return result

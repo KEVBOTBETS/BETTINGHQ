@@ -4,6 +4,8 @@ No private endpoints, login, API keys, consensus/openers passed off as book odds
 failed-source timestamp renewal, or guessed prices. Fail closed on changed markup.
 """
 import re
+import gzip
+import http.client
 import urllib.request
 import unicodedata
 from concurrent.futures import ThreadPoolExecutor
@@ -12,7 +14,9 @@ from html.parser import HTMLParser
 from zoneinfo import ZoneInfo
 from .model import instant, number
 
-URL='https://www.covers.com/sport/hockey/nhl/odds'
+# The public country selector exposes sportsbook prices rather than US
+# prediction-market percentage contracts, which are deliberately rejected.
+URL='https://www.covers.com/sport/hockey/nhl/odds?countrycode=ca'
 TORONTO=ZoneInfo('America/Toronto')
 CODES={'CLB':'CBJ','NAS':'NSH','MON':'MTL','CAL':'CGY','VEG':'VGK','UTAH':'UTA','WIN':'WPG','NJ':'NJD','SJ':'SJS','TB':'TBL','LA':'LAK','LV':'VGK'}
 def code(v):return CODES.get(v,v)
@@ -199,13 +203,22 @@ def parse_grid(html,games,now,scores=False):
     return list(result.values())
 
 def download(url):
-    request=urllib.request.Request(url,headers={'User-Agent':'Mozilla/5.0 (compatible; KEVBOTBETS/1.0; public-market-reader)','Accept':'text/html'})
-    with urllib.request.urlopen(request,timeout=20) as response:
-        raw=response.read(6_000_001)
-    if len(raw)>6_000_000:raise ValueError('Public odds page exceeds limit')
-    html=raw.decode('utf-8',errors='replace')
-    if re.search(r'access denied|verify that you are human|captcha',html[:10000],re.I):raise ValueError('Public odds access unavailable')
-    return html
+    request=urllib.request.Request(url,headers={'User-Agent':'Mozilla/5.0 (compatible; KEVBOTBETS/1.0; public-market-reader)','Accept':'text/html','Accept-Encoding':'gzip'})
+    for attempt in range(2):
+        try:
+            with urllib.request.urlopen(request,timeout=20) as response:
+                raw=response.read(6_000_001)
+                encoding=response.headers.get('Content-Encoding','').lower()
+            if len(raw)>6_000_000:raise ValueError('Public odds page exceeds limit')
+            if encoding=='gzip' or raw[:2]==b'\x1f\x8b':raw=gzip.decompress(raw)
+            if len(raw)>6_000_000:raise ValueError('Decoded odds page exceeds limit')
+            html=raw.decode('utf-8',errors='replace')
+            if re.search(r'access denied|verify that you are human|captcha',html[:10000],re.I):raise ValueError('Public odds access unavailable')
+            return html
+        except (http.client.IncompleteRead,TimeoutError,EOFError) as exc:
+            if attempt:raise OSError('Public odds response was incomplete') from exc
+    raise OSError('Public odds response unavailable')
+
 
 def covered_markets(game,now):
     groups={}
@@ -241,6 +254,7 @@ def fetch(games,now,health=None):
                 pages=[(u,g) for u,g in advertised_pages(html,targets,now) if gid_missing(g,rows,now)]
                 def read_page(item):
                     u,g=item
+                    u+='?countrycode=ca'
                     try:return parse_matchup(download(u),g,now,u)
                     except (OSError,ValueError):return []
                 with ThreadPoolExecutor(max_workers=4) as pool:

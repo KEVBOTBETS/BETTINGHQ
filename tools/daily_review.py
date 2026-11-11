@@ -62,6 +62,15 @@ def review(root=ROOT, now=None, refresh_outcome='unknown'):
             findings.append(f'{sport.upper()}: {warning}')
         if feed.get('freshness') not in ('recent', 'fresh'):
             findings.append(f"{sport.upper()}: feed freshness is {feed.get('freshness', 'unknown')}.")
+    try:
+        weekly = json.loads((root / 'projects/props-edge/site/data/nfl-weekly/manifest.json').read_text())
+        checked = instant(weekly.get('generated_at'))
+        if not checked or not dt.timedelta(0) <= now-checked <= dt.timedelta(hours=4):
+            findings.append('NFL weekly player stats: snapshot is missing a recent refresh.')
+        if weekly.get('missing_roster_teams'):
+            findings.append('NFL weekly player stats: roster unavailable for '+', '.join(weekly['missing_roster_teams']))
+    except (OSError, ValueError, TypeError):
+        findings.append('NFL weekly player stats: published roster/projection feed is unavailable.')
     props = {}
     for sport in ('nba', 'nhl'):
         try:

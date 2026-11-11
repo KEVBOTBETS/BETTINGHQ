@@ -293,6 +293,16 @@ def build() -> dict[str, Any]:
     # selection deliberately chooses one contract; comparison must not invent books.
     _write_json("quotes.json", [quote.to_dict() for quote in quotes])
     _write_json("projections.json", projection_rows)
+    weekly = getattr(projections_provider, "weekly_snapshot", None)
+    if weekly:
+        from .weekly_nfl import publish as publish_weekly
+        weekly_manifest = publish_weekly(weekly, ROOT)
+        meta["weekly_nfl"] = {"status":"published", "generated_at":weekly_manifest["generated_at"],
+            "rostered_players":weekly_manifest["rostered_players"],
+            "verified_roster_teams":len(weekly_manifest["roster_teams"]),
+            "missing_roster_teams":weekly_manifest["missing_roster_teams"]}
+    else:
+        meta["weekly_nfl"] = {"status":"retained / unavailable", "reason":getattr(projections_provider,"weekly_error","NFL source unavailable")}
     _write_json("meta.json", meta)
     _write_json("quote-history.json", quote_state)
     cache_path.parent.mkdir(parents=True, exist_ok=True)

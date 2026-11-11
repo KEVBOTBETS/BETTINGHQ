@@ -3,6 +3,7 @@
 (() => {
   "use strict";
   const configs = {
+    "nfl-stats":{title:"NFL weekly player stats",description:"Weekly passing, rushing, receiving, defensive and specialist projections. All positions, team filters and sortable statistics.",url:"nfl-stats.html"},
     "moneyline-records":{title:"Moneyline results",description:"Every frozen winner prediction, including games with no recommended bet.",url:"moneyline-records.html"},
     "ncaaf-parlays":{title:"NCAAF Game Parlays",description:"Spread, total and moneyline targets: +500, +1000, +2000 and +10000.",url:"game-parlays.html"},
     opportunities:{title:"Opportunity Finder",description:"Every upcoming game, public source health, your watchlist and accepted-receipt exposure.",url:"opportunity-finder.html"},

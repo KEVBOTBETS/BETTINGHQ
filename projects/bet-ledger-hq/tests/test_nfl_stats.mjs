@@ -1,0 +1,12 @@
+import assert from 'node:assert/strict';
+import {selectRows,formatStat,exportCSV} from '../nfl-stats-core.mjs';
+const rows=[{id:'one',player:'A',team_id:'1',team:'Alfa',position:'QB',stats:{pass_yds:100}},{id:'two',player:'B',team_id:'2',team:'Beta',position:'WR',stats:{pass_yds:99,receptions:0}},{id:'three',player:'C',team_id:'1',team:'Alfa',position:'OT',stats:{}}];
+assert.deepEqual(selectRows(rows,{sort:'pass_yds',direction:'desc'}).map(r=>r.id),['one','two','three']);
+assert.deepEqual(selectRows(rows,{sort:'pass_yds',direction:'asc'}).map(r=>r.id),['two','one','three']);
+assert.equal(selectRows(rows,{team:'1',position:'OT'}).length,1);
+assert.equal(selectRows(rows,{search:'beta'}).length,1);
+assert.equal(selectRows(rows,{projected:true}).length,2);
+assert.equal(formatStat(0),'0.0');assert.equal(formatStat(undefined),'—');
+assert.match(exportCSV([{...rows[0],player:'=1+1'}]),/"'=1\+1"/);
+assert.equal(rows[0].id,'one');assert.equal(rows[1].id,'two');
+console.log('NFL stats filtering, numeric sorting, missing values and CSV passed');

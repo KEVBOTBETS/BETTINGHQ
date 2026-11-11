@@ -25,7 +25,7 @@ def main():
     hub = PROJECTS / 'bet-ledger-hq'
     target = OUT / 'bet-ledger-hq'
     target.mkdir()
-    suffixes = {'.html', '.js', '.css', '.webmanifest', '.svg', '.png', '.jpg', '.webp'}
+    suffixes = {'.html', '.js', '.mjs', '.css', '.webmanifest', '.svg', '.png', '.jpg', '.webp'}
     for path in hub.iterdir():
         if path.is_file() and (path.suffix in suffixes or path.name == 'SETUP-SYNC.md'):
             shutil.copy2(path, target / path.name)
