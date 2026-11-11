@@ -230,3 +230,45 @@ jobs:
       - uses: actions/configure-pages@v6
       - uses: actions/deploy-pages@v5
         id: deploy
+
+  repository-backup:
+    name: Verify and package repository backup
+    needs: publish
+    if: github.event_name == 'push' && contains(github.event.head_commit.message, '[backup]')
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          ref: main
+          persist-credentials: false
+      - uses: actions/setup-python@v7
+        with:
+          python-version: '3.12'
+      - name: Capture all history and verify restoration
+        env:
+          REQUIRED_COMMIT: ${{ github.sha }}
+        run: python tools/repository_backup.py --output "$RUNNER_TEMP/BETTINGHQ" --required-commit "$REQUIRED_COMMIT"
+      - name: Upload complete tracked files ZIP
+        uses: actions/upload-artifact@v7
+        with:
+          name: BETTINGHQ-files-backup
+          path: |
+            ${{ runner.temp }}/BETTINGHQ/files/
+            ${{ runner.temp }}/BETTINGHQ/RESTORE-README.md
+            ${{ runner.temp }}/BETTINGHQ/BACKUP-MANIFEST.json
+          include-hidden-files: true
+          compression-level: 6
+          retention-days: 7
+          if-no-files-found: error
+      - name: Upload complete Git history ZIP
+        uses: actions/upload-artifact@v7
+        with:
+          name: BETTINGHQ-full-history-backup
+          path: ${{ runner.temp }}/BETTINGHQ/
+          include-hidden-files: true
+          compression-level: 0
+          retention-days: 7
+          if-no-files-found: error
