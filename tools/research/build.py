@@ -160,9 +160,7 @@ def build(root=ROOT,out=None,capture=False,now=None):
             if len(legs)<2:continue
             ticket=opportunity.joint_ticket(legs)
             if ticket:tickets.append({'sport':'nfl','profile':profile,'book':book,**ticket,'legs':[{'player':q['player'],'event_id':q['event_id'],'market':q['market'],'side':q['side'],'line':q['line'],'win':q['probability']['win'],'price':q['price']} for q in legs]})
-    close_index=defaultdict(list)
-    for q in quote_archive:close_index[tuple(q.get('contract',[])),q.get('book'),q.get('side')].append(q)
-    clv=[{'sport':q['sport'],'matchup':q.get('matchup'),'market':q['market'],'side':q['side'],'book':q['book'],**c} for q in old.get('quotes',[]) if (c:=market.closing_value(q,close_index[tuple(q.get('contract',[])),q.get('book'),q.get('side')],now))]
+    clv=[{'sport':q['sport'],'matchup':q.get('matchup'),'market':q['market'],'side':q['side'],'book':q['book'],**c} for q,c in market.closing_values(old.get('quotes',[]),quote_archive,now)]
     state={'schema':1,'version':VERSION,'updated_at':now.isoformat(),'forecasts':frozen,'quotes':quote_archive}
     prop_archive=prop_tracking.freeze(old.get('prop_forecasts',[]),props,now) if capture else old.get('prop_forecasts',[])
     if capture:prop_archive=prop_tracking.settle(prop_archive,dataset,root/'projects/nfl-edge-lab/state/nflverse_games.csv',now)

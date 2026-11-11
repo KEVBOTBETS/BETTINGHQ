@@ -1,4 +1,5 @@
 """Exact-market quote comparison. Expert consensus is never treated as betting volume."""
+from bisect import bisect_left
 from collections import defaultdict
 from .common import instant, number, decimal, seed
 
@@ -23,8 +24,14 @@ def normalize(raw, now):
 def audit(raw, archive, now):
     valid=[q for r in raw if (q:=normalize(r,now))]; rejected=len(raw)-len(valid)
     # A duplicate scrape does not create additional market evidence.
-    saved={q['id']:q for q in archive if q.get('id') and q.get('contract') and instant(q.get('observed_at')) and instant(q.get('start')) and instant(q['observed_at'])<instant(q['start']) and instant(q['observed_at'])<=now}
+    saved={}
+    for q in archive:
+        if not q.get('id') or not q.get('contract'):continue
+        at,start=instant(q.get('observed_at')),instant(q.get('start'))
+        if at and start and at<start and at<=now:saved[q['id']]=q
     for q in valid:saved.setdefault(q['id'],q)
+    history_by_contract=defaultdict(list)
+    for q in saved.values():history_by_contract[tuple(q['contract'])].append(q)
     groups=defaultdict(list)
     for q in valid:groups[tuple(q['contract'])].append(q)
     reports=[]
@@ -40,7 +47,7 @@ def audit(raw, archive, now):
                 total=sum(1/q['decimal'] for q in bookrows)
                 pairs.append({'book':book,'probabilities':{q['side']:(1/q['decimal'])/total for q in bookrows},'overround':total-1})
         best={side:max(qs,key=lambda q:q['decimal']) for side,qs in sides.items()}
-        history=[q for q in saved.values() if tuple(q['contract'])==contract]
+        history=history_by_contract[contract]
         same=[q for q in sorted(history,key=lambda q:q['observed_at']) if q['book']==rows[0]['book'] and q['side']==rows[0]['side']]
         reports.append({'contract':list(contract),'matchup':rows[0].get('matchup'),'quotes':rows,'best':best,'devig_pairs':pairs,'books':len({q['book'] for q in rows}),'first':same[0] if same else None,'latest':same[-1] if same else None,'coverage':'multiple books' if len({q['book'] for q in rows})>=2 else 'single book','actionable':False})
     series=defaultdict(list)
@@ -63,3 +70,30 @@ def closing_value(selection, archive, now):
     if not rows:return None
     last=max(rows,key=lambda q:q['observed_at'])
     return {'last_observed_at':last['observed_at'],'decimal_ratio':selection['decimal']/last['decimal']-1,'minutes_before_start':(start-instant(last['observed_at'])).total_seconds()/60,'label':'last observed pregame price; not guaranteed final close'}
+
+
+def closing_values(selections, archive, now):
+    """Same closing-price calculation with one indexed pass over the archive.
+
+    Keep each original selection and require its own captured time and start;
+    changed start times never admit an observation after that frozen kickoff.
+    """
+    groups=defaultdict(dict)
+    def key(q):return (tuple(q.get('contract') or []),q.get('book'),q.get('side'))
+    for q in archive:
+        at=instant(q.get('observed_at'))
+        if at:groups[key(q)].setdefault(at,q)
+    indexes={k:(sorted(rows),rows) for k,rows in groups.items()}
+    values=[]
+    for selection in selections:
+        start,captured=instant(selection.get('start')),instant(selection.get('observed_at'))
+        if not start or not captured or captured>=start or now<start:continue
+        times,rows=indexes.get(key(selection),([],{}))
+        position=bisect_left(times,start)-1
+        if position<0 or times[position]<captured:continue
+        at=times[position];last=rows[at]
+        values.append((selection,{'last_observed_at':last['observed_at'],
+            'decimal_ratio':selection['decimal']/last['decimal']-1,
+            'minutes_before_start':(start-at).total_seconds()/60,
+            'label':'last observed pregame price; not guaranteed final close'}))
+    return values
