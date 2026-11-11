@@ -62,6 +62,15 @@ def attach_market_benchmarks(candidates,by_event,now):
             if pair and same:q['market_no_push']=pair['probabilities'].get(q['side'])
     return enriched
 
+def publication_report(result, preview_limit=200):
+    """Bound the browser payload, retaining full research records separately."""
+    closes=result.get('closing_prices',[])
+    return {**result,'closing_price_count':len(closes),
+            'closing_prices':closes[-preview_limit:] if preview_limit else [],
+            'closing_prices_preview_limit':preview_limit,
+            'closing_prices_scope':'Preview only; complete observations remain in the repository research archive.'}
+
+
 def build(root=ROOT,out=None,capture=False,now=None):
     now=now or datetime.now(timezone.utc);old=read_archive(root);dataset=read(root/'research/inputs/nfl-pbp.json',{})
     dataset=ingest.enrich_workload(dataset,read(root/'research/inputs/nfl-workload.json',{}),now)
@@ -177,7 +186,7 @@ def build(root=ROOT,out=None,capture=False,now=None):
     multisport['ncaaf'].update(team_games=len(college_rows),observed_at=college.get('live_observed_at'),efficiency_training_games=college_model['games'] if college_model else 0,residual_games=len(college_model['residuals']) if college_model else 0)
     result={'schema':1,'version':VERSION,'generated_at':now.isoformat(),'mode':'Local research · promotion disabled','games':games,'market':prices,'props':props,'workloads':workloads,'tickets':tickets,'lab':experiments.report(frozen,now),'prop_lab':prop_tracking.report(prop_archive,now),'closing_prices':clv,'coverage':{'nfl':{'team_games':len(rows),'player_games':len(dataset.get('players',[])),'observed_at':dataset.get('observed_at'),'efficiency_training_games':trained['games'] if trained else 0,'residual_games':len(trained['residuals']) if trained else 0},**multisport},'upgrades':readiness.completion(),'diagnostics':diagnostics,'weather':weather,'market_calibration':calibration.report(market_archive,now),'workload_coverage':dataset.get('workload_coverage',{}),'notes':['NFL efficiency replay uses corrected public data and is exploratory. Prospective captures provide the real test.','NCAAF play-efficiency forecasts remain experimental, with no automatic promotion. NHL role/shot-quality research and its prospective record are published in NHL Props when eligible public inputs are available.','Lineup sensitivities have no invented availability probabilities and do not add a second injury haircut to production.','All new outputs are shadow research. No automatic model promotion or bet placement. Reports are published by the normal release workflow.'],'sources':[{'name':'Public NCAAF play data','url':'https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/espn_cfb_pbp'},{'name':'nflverse play data','url':'https://github.com/nflverse/nflverse-data/releases/tag/pbp'},{'name':'nflverse update schedule','url':'https://nflverse.nflverse.com/articles/nflverse_data_schedule.html'},{'name':'Observed public prop offers','url':'https://www.covers.com/sport/football/nfl/player-props'}]}
     if out:
-        write(out,result)
+        write(out,publication_report(result))
         write(out.with_name('diagnostics.json'),{'generated_at':now.isoformat(),'boards':diagnostics})
     return result
 
