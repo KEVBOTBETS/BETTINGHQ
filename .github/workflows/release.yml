@@ -187,6 +187,7 @@ jobs:
             # sets them aside and puts them back. `rebase --abort` exits 128
             # when no rebase started, so it must not be allowed to fail the step.
             if ! git rebase --autostash origin/main; then
+              publish=false
               git rebase --abort 2>/dev/null || true
               echo "::warning::Refreshed data conflicted with a newer commit on main and was not saved; the next run refreshes it again."
               break
