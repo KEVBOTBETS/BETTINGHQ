@@ -1,0 +1,35 @@
+name: Independent published-site watchdog
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ['tools/public_watchdog.py', '.github/workflows/public-watchdog.yml']
+  schedule:
+    # Check after the noon / 6 pm refresh has had time to publish.
+    - cron: '45 12,18 * * *'
+      timezone: America/Toronto
+permissions:
+  contents: read
+  actions: write
+concurrency:
+  group: public-site-watchdog
+  cancel-in-progress: false
+jobs:
+  check:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v7
+        with:
+          python-version: '3.12'
+      - name: Check live publication and request one bounded recovery if needed
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        run: python tools/public_watchdog.py
+      - uses: actions/upload-artifact@v6
+        if: always()
+        with:
+          name: published-site-watchdog
+          path: watchdog-report.*
+          retention-days: 30
