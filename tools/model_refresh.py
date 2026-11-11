@@ -23,6 +23,17 @@ def refresh_project(project, command, timeout=1800):
         shutil.copytree(project,work,ignore=shutil.ignore_patterns('.git','node_modules','__pycache__','.venv','*.log','*.tmp','_public_site'))
         if project.name=='ncaab-edge-lab':
             shutil.copytree(project.parent/'nba-edge-lab/pipeline',work/'_basketball_shared',ignore=shutil.ignore_patterns('__pycache__'))
+        # Weekly player forecasts reuse the full NFL season schedule. The
+        # isolated props copy must carry this read-only dependency too; the
+        # calendar-year scoreboard alone drops January Week 17/18 games.
+        if project.name=='props-edge':
+            schedule=project.parent/'nfl-edge-lab/site/data'
+            for filename in ('meta.json','games.json'):
+                source=schedule/filename
+                if source.is_file():
+                    destination=Path(folder)/'nfl-edge-lab/site/data'/filename
+                    destination.parent.mkdir(parents=True,exist_ok=True)
+                    shutil.copy2(source,destination)
         # Football refreshes run outside the repository. Bundle the stdlib-only
         # reader so quotes and health are written inside the same isolation.
         if project.name in ('nfl-edge-lab','ncaaf-edge-lab'):
