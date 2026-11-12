@@ -71,6 +71,14 @@ def review(root=ROOT, now=None, refresh_outcome='unknown'):
             findings.append('NFL weekly player stats: roster unavailable for '+', '.join(weekly['missing_roster_teams']))
     except (OSError, ValueError, TypeError):
         findings.append('NFL weekly player stats: published roster/projection feed is unavailable.')
+    for sport in ('NBA','NHL'):
+        try:
+            forecast=json.loads((root/f'projects/props-edge/site/data/player-stats/{sport.lower()}/manifest.json').read_text())
+            at=instant(forecast.get('generated_at'))
+            if not at or not dt.timedelta(0)<=now-at<=dt.timedelta(hours=4):findings.append(sport+' player stats: snapshot is stale or unavailable.')
+            coverage=forecast.get('coverage') or {}
+            if coverage.get('roster_teams',0)<coverage.get('expected_teams',0):findings.append(sport+' player stats: some scheduled-team rosters are unavailable.')
+        except (OSError,ValueError,TypeError):findings.append(sport+' player stats: feed unavailable.')
     props = {}
     for sport in ('nba', 'nhl'):
         try:

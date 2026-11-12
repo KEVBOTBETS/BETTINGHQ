@@ -27,8 +27,8 @@
   }
   function build(games,meta,{now=Date.now(),date=day(now),format='five'}={}){
     if(!formats[format])throw Error('Unknown band format');
-    const seen=new Set(),pool=[];
-    for(const g of games){if(!eligible(g,meta,now)||day(g.tipoff)!==date||seen.has(String(g.game_id)))continue;seen.add(String(g.game_id));const c=candidate(g,format);if(c.win_prob>=.6)pool.push(c);}
+    const seen=new Set(),pool=[],all=[];
+    for(const g of games){if(!eligible(g,meta,now)||day(g.tipoff)!==date||seen.has(String(g.game_id)))continue;seen.add(String(g.game_id));const c=candidate(g,format);all.push(c);if(c.win_prob>=.6)pool.push(c);}
     pool.sort((a,b)=>b.bands[0].prob-a.bands[0].prob||a.event_id.localeCompare(b.event_id));
     const tickets=[];
     // Twelve games bound the combination search. At most one team/band per event.
@@ -45,7 +45,7 @@
     search(0,[],1);tickets.sort((a,b)=>b.prob-a.prob||a.signature.localeCompare(b.signature));
     const chosen=tickets.slice(0,3),four=tickets.find(t=>t.legs.length===4&&!chosen.includes(t));
     if(four)chosen.push(four);else if(tickets[3])chosen.push(tickets[3]);
-    return {pool,tickets:chosen,date,format,reason:pool.length<3?`Only ${pool.length} eligible teams meet the 60% win threshold. Three distinct upcoming games are required.`:chosen.length<3?'Fewer distinct combinations meet the band guards; no extra tickets were forced.':null};
+    return {pool,all,tickets:chosen,date,format,reason:pool.length<3?`Only ${pool.length} eligible teams meet the 60% win threshold. Three distinct upcoming games are required.`:chosen.length<3?'Fewer distinct combinations meet the band guards; no extra tickets were forced.':null};
   }
   const api={formats,cdf,day,eligible,candidate,build};if(typeof module!=='undefined'&&module.exports)module.exports=api;else root.NBABands=api;
 })(typeof globalThis!=='undefined'?globalThis:this);

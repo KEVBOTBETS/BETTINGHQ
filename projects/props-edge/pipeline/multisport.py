@@ -227,6 +227,11 @@ def build(sport,cache,now):
     if sport=='NHL' and teams and not watch:
         errors.append('Official NHL player history unavailable for the scheduled teams.')
 
+    if sport=='NHL':
+        from .player_outlooks import nhl_rows, publish as publish_outlooks
+        capture=dt.datetime.now(dt.timezone.utc)
+        outlooks=nhl_rows(games,rosters,stats,research_inputs,result.get('goal_scorers',[]),season,capture)
+        result['player_stat_outlook']=publish_outlooks(ROOT,sport,outlooks,games,capture,dict(roster_teams=sum(bool(v) for v in rosters.values()),statistics_teams=sum(d.get('season')==season for d in stats.values()),lineup_teams=len(research_inputs.get('lineups',{})),expected_teams=len(teams)))
     dest=ROOT/'site/data'/f'{sport.lower()}-props.json';dest.write_text(json.dumps(result,separators=(',',':'),allow_nan=False)+'\n')
     from .lab_feeds import publish as publish_lab_feeds
     if sport=='NHL':publish_lab_feeds(ROOT,result)

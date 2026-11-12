@@ -69,7 +69,7 @@ def build(root, cache, now):
         found=[]
         for group in data.get('athletes') or []:
             for a in group.get('items',[]) if 'items' in group else [group]:
-                if a.get('id') and a.get('displayName'):found.append(dict(id=str(a['id']),player=a['displayName'],position=(a.get('position') or {}).get('abbreviation')))
+                if a.get('id') and a.get('displayName'):found.append(dict(id=str(a['id']),player=a['displayName'],position=(a.get('position') or {}).get('abbreviation'),availability=((a.get('injuries') or [{}])[0].get('status') or (a.get('status') or {}).get('name') or 'Not reported')))
         return team,found
     with ThreadPoolExecutor(max_workers=4) as pool:rosters=dict(pool.map(roster,ids.items()))
     raw=json.loads((folder/'players.json').read_text())
@@ -98,6 +98,8 @@ def build(root, cache, now):
                 errors=errors,price_sources=price_health,milestone_model={'version':'nba-milestones-v1','calibrated':False,'history_players':sum(bool(rows) for rows in history.values()),'forecast_players':len({q['athlete_id'] for q in estimates}),'minimum_games':10,'prior_game_weight':.35,'current_game_weight':1.,'pricing':'model fair estimates; not observed sportsbook offers'},milestone_forecasts=estimates,goal_scorers=[],source_url=url,notes=['NBA player averages are history, not calibrated prop probabilities.','Automatic milestones use a separate uncalibrated history model. Fair prices are estimates, not sportsbook offers. Confirm availability and the combined sportsbook quote.'])
     from .nba_validation import publish as publish_validation
     result['validation']=publish_validation(root,result,raw.get('players',[]),now)
+    from .player_outlooks import publish_nba
+    result['player_stat_outlook']=publish_nba(root,result,raw.get('players',[]),rosters,injuries if injury_ok else None,cache,ids,now)
     destination=root/'site/data/nba-props.json';temp=destination.with_suffix('.json.tmp');temp.write_text(json.dumps(result,separators=(',',':'),allow_nan=False)+'\n');temp.replace(destination)
     from .lab_feeds import publish as publish_lab_feeds
     publish_lab_feeds(root,result)

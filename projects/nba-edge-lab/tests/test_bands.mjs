@@ -16,3 +16,5 @@ assert.equal(C.build([game(1),game(1),game(2)],meta,opts).pool.length,2);
 assert.equal(C.day('2026-10-31T02:00Z'),'2026-10-30');
 assert.throws(()=>C.build([],meta,{now,format:'fake'}));
 console.log('NBA bands: probability mass, 60% filter, 3–4 distinct games, formats, Toronto dates and stale/kickoff guards passed');
+
+const marginal=C.build([weak],meta,opts);assert.equal(marginal.all.length,1);assert.equal(marginal.pool.length,0);assert.equal(marginal.tickets.length,0);

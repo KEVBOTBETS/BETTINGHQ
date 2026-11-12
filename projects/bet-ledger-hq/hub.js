@@ -3,6 +3,8 @@
 (() => {
   "use strict";
   const configs = {
+    "nba-stats":{title:"NBA player stats",description:"Daily starter and rotation stat outlooks, team and position filters, sortable predictions.",url:"nba-stats.html"},
+    "nhl-stats":{title:"NHL player stats",description:"Daily skater and starting-goalie stat outlooks, with availability and saved pregame history.",url:"nhl-stats.html"},
     "nfl-stats":{title:"NFL weekly player stats",description:"Weekly passing, rushing, receiving, defensive and specialist projections. All positions, team filters and sortable statistics.",url:"nfl-stats.html"},
     "moneyline-records":{title:"Moneyline results",description:"Every frozen winner prediction, including games with no recommended bet.",url:"moneyline-records.html"},
     "ncaaf-parlays":{title:"NCAAF Game Parlays",description:"Spread, total and moneyline targets: +500, +1000, +2000 and +10000.",url:"game-parlays.html"},
