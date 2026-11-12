@@ -30,3 +30,19 @@ class RecoveryPolicy(unittest.TestCase):
             self.assertEqual(set(recovery_projects(root, ['nfl-edge-lab'], now)),set(PUBLICATIONS)-{'nfl-edge-lab'})
             p.unlink()
             self.assertEqual(set(recovery_projects(root, [], now)),set(PUBLICATIONS))
+
+    def test_active_parlay_sources_recover_before_price_expiry(self):
+        now=dt.datetime(2026,11,12,22,tzinfo=dt.timezone.utc)
+        with tempfile.TemporaryDirectory() as folder:
+            root=Path(folder)
+            for name,relative in PUBLICATIONS.items():
+                p=root/relative;p.parent.mkdir(parents=True,exist_ok=True)
+                p.write_text(json.dumps({'generated_at':(now-dt.timedelta(minutes=80)).isoformat()}))
+            for sport in ('nba','nhl'):
+                p=root/f'projects/{sport}-edge-lab/site/data/games.json'
+                p.write_text(json.dumps([{'date':(now+dt.timedelta(hours=3)).isoformat(),'completed':False}]))
+            self.assertEqual(recovery_projects(root,[],now),['nba-edge-lab','nhl-edge-lab'])
+            # No current slate retains the existing two-hour policy.
+            for sport in ('nba','nhl'):
+                (root/f'projects/{sport}-edge-lab/site/data/games.json').write_text('[]')
+            self.assertEqual(recovery_projects(root,[],now),[])
