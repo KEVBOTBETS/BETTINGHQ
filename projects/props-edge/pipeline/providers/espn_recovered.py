@@ -651,6 +651,15 @@ class EspnProjectionProvider:
             roster_payloads = [
                 payload for payload in pool.map(fetch_roster, roster_targets) if payload
             ]
+        def fetch_depth(team_input):
+            team_id, _ = team_input
+            try:
+                data = self.client.get(f"/{path}/teams/{team_id}/depthcharts", retries=1)
+                return str(team_id), data
+            except Exception:
+                return str(team_id), {}
+        with ThreadPoolExecutor(max_workers=4) as pool:
+            depth_payloads = dict(pool.map(fetch_depth, roster_targets))
         current_roster = _roster_info(roster_payloads)
         verified_roster_teams = {
             _norm(team_name)
@@ -721,9 +730,15 @@ class EspnProjectionProvider:
             future = [e for e in full_events if weekly_nfl.instant(e.get("date")) and
                       weekly_nfl.instant(e["date"]) > captured and
                       ((e.get("status") or {}).get("type") or {}).get("state") in ("pre", None)]
-            weekly_projections = parse_summaries(summaries, "NFL", _team_and_matchups(future), **options)
+            # Weekly outlook uses current-season form from the last six weeks;
+            # prior-season or obsolete roles cannot dominate a new starter.
+            current_summaries = [s for s in summaries if
+                s.get("_props_edge_season_year") == season and
+                weekly_nfl.instant(s.get("_weekly_event_date")) and
+                dt.timedelta(0) <= captured-weekly_nfl.instant(s["_weekly_event_date"]) <= dt.timedelta(days=42)]
+            weekly_projections = parse_summaries(current_summaries, "NFL", _team_and_matchups(future), **options)
             self.weekly_snapshot = weekly_nfl.build_snapshot(weekly_projections, roster_payloads,
-                full_events, summaries, season, captured)
+                full_events, current_summaries, season, captured, depth_payloads=depth_payloads)
         except (OSError, ValueError, TypeError) as exc:
             self.weekly_error = type(exc).__name__
             print(f"NFL weekly statistics unavailable ({type(exc).__name__}); previous timestamps retained.")

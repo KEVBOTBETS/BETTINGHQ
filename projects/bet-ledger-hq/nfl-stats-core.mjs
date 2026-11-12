@@ -13,7 +13,7 @@ export const views={
 export function value(row,key){return key in fields?row.stats?.[key]:row[key];}
 export function selectRows(rows,{team='all',position='all',search='',projected=false,sort='team',direction='asc'}={}){
  const q=search.toLocaleLowerCase().trim(),sign=direction==='desc'?-1:1;
- const filtered=rows.filter(r=>(team==='all'||r.team_id===team)&&(position==='all'||r.position===position)&&(!projected||Object.keys(r.stats||{}).length)&&(!q||[r.player,r.team,r.team_abbreviation,r.position,r.opponent].some(v=>String(v||'').toLocaleLowerCase().includes(q))));
+ const filtered=rows.filter(r=>r.role_eligible!==false&&(team==='all'||r.team_id===team)&&(position==='all'||r.position===position)&&(!projected||Object.keys(r.stats||{}).length)&&(!q||[r.player,r.team,r.team_abbreviation,r.position,r.opponent].some(v=>String(v||'').toLocaleLowerCase().includes(q))));
  return filtered.sort((a,b)=>{
   const x=value(a,sort),y=value(b,sort),xm=x==null||x==='',ym=y==null||y==='';
   if(xm!==ym)return xm?1:-1;
@@ -24,7 +24,7 @@ export function selectRows(rows,{team='all',position='all',search='',projected=f
 export function formatStat(value){return typeof value==='number'&&Number.isFinite(value)?value.toLocaleString(undefined,{minimumFractionDigits:1,maximumFractionDigits:1}):'—';}
 function csvCell(value){const str=String(value??'');return '"'+(/^[=+\-@\t\r]/.test(str)?"'"+str:str).replaceAll('"','""')+'"';}
 export function exportCSV(rows){
- const keys=['season','week','player','team','position','opponent','status','availability','samples','captured_at',...Object.keys(fields)];
- const labels={season:'Season',week:'Week',player:'Player',team:'Team',position:'Position',opponent:'Opponent',status:'Forecast status',availability:'Availability',samples:'Max sample games',captured_at:'Forecast captured (UTC)'};
+ const keys=['season','week','player','team','position','opponent','role','status','availability','samples','captured_at',...Object.keys(fields)];
+ const labels={season:'Season',week:'Week',player:'Player',team:'Team',position:'Position',opponent:'Opponent',role:'Expected role',status:'Forecast status',availability:'Availability',samples:'Max sample games',captured_at:'Forecast captured (UTC)'};
  return '\uFEFF'+[keys.map(k=>csvCell(fields[k]?.[1]||labels[k]||k)).join(','),...rows.map(r=>keys.map(k=>csvCell(value(r,k))).join(','))].join('\r\n');
 }

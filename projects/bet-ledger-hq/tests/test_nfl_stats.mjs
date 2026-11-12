@@ -10,3 +10,5 @@ assert.equal(formatStat(0),'0.0');assert.equal(formatStat(undefined),'—');
 assert.match(exportCSV([{...rows[0],player:'=1+1'}]),/"'=1\+1"/);
 assert.equal(rows[0].id,'one');assert.equal(rows[1].id,'two');
 console.log('NFL stats filtering, numeric sorting, missing values and CSV passed');
+
+assert.equal(selectRows([{id:'excluded',player:'Backup',team:'A',role_eligible:false}]).length,0,'Exclude unconfirmed bench roles');

@@ -13,7 +13,7 @@ import shutil
 import statistics
 import tempfile
 
-VERSION = 'nfl-weekly-form-v1'
+VERSION = 'nfl-weekly-role-v2'
 MARKETS = {
     'Pass attempts':'pass_att','Pass completions':'pass_cmp','Passing yards':'pass_yds',
     'Passing touchdowns':'pass_td','Pass interceptions':'pass_int','Rush attempts':'rush_att',
@@ -163,9 +163,12 @@ def extra_form(summaries, now):
     return result,{pid:at.isoformat() for pid,at in last_played.items()}
 
 
-def build_snapshot(projections, payloads, events, summaries, season, now):
+def build_snapshot(projections, payloads, events, summaries, season, now, depth_payloads=None):
     teams,players,registry=roster_rows(payloads,events)
     if not players:raise ValueError('No verified NFL roster was available')
+    if depth_payloads is not None:
+        from .weekly_roles import assign_roles
+        players=assign_roles(players,depth_payloads,summaries,now)
     schedule=defaultdict(list);team_games=defaultdict(set);all_teams={}
     for event in events:
         try:week=int((event.get('week') or {}).get('number') or 0)
@@ -219,13 +222,18 @@ def build_snapshot(projections, payloads, events, summaries, season, now):
                 opponent=g['away'] if g['home']==tid else g['home']
                 row.update(opponent=all_teams.get(opponent,{}).get('abbreviation'),venue='Home' if g['home']==tid else 'Away')
                 if instant(g['start'])<=now or g['state']!='pre':row['status']='No saved pregame forecast'
-                elif player['unavailable']:row['status']='Unavailable / role not confirmed'
+                elif player['unavailable'] or player.get('role_eligible') is False:row['status']='Unavailable / role not confirmed'
                 else:
                     stats={**predicted.get((g['event_id'],(norm(player['team']),norm(player['player']))),{}),**extra.get(player['player_id'],{})}
                     row['stats']={k:v['value'] for k,v in stats.items()};row['stat_samples']={k:v['samples'] for k,v in stats.items()}
+                    # Never price a new QB1's full-game passing from relief-only samples.
+                    if player['position']=='QB' and row['stats'].get('pass_att',0)<15:
+                        row['stats']={};row['stat_samples']={}
                     row['samples']=max(row['stat_samples'].values(),default=0)
                     row['status']='Early outlook · conditional role' if week>current and stats else 'Projection · conditional role' if stats else 'No supported individual stat history'
-                    if stats:row['captured_at']=row['first_captured_at']=now.isoformat()
+                    if row['samples'] and row['samples']<4:row['status']+=' · small sample'
+                    if player['position']=='QB' and not row['stats'] and player.get('role_eligible'):row['status']='Starter candidate · insufficient full-game passing history'
+                    if row['stats']:row['captured_at']=row['first_captured_at']=now.isoformat()
                     if row['stats'].get('punts',0)>0 and 'punt_yds' in row['stats']:
                         row['stats']['punt_avg']=round(row['stats']['punt_yds']/row['stats']['punts'],2)
             rows.append(row)
@@ -234,7 +242,8 @@ def build_snapshot(projections, payloads, events, summaries, season, now):
             'roster_teams':sorted(teams),'missing_roster_teams':[t['name'] for tid,t in all_teams.items() if tid not in teams],
             'rostered_players':len(players),'rows':rows,'automatic_qualification':False,
             'method':'Existing ESPN recent-form and opponent-allowance research model; punting/extra defensive counts use recent completed-game form. Conditional on a continuing role, not a playing-time guarantee.',
-            'sources':['https://www.espn.com/nfl/players','https://www.espn.com/nfl/scoreboard']}
+            'depth_teams':sorted(t for t,p in (depth_payloads or {}).items() if p.get('depthchart')),'role_policy':'Expected starters, meaningful regular contributors and injury replacement candidates. No automatic workload transfer.',
+            'sources':['https://www.espn.com/nfl/depth','https://www.espn.com/nfl/scoreboard']}
 
 
 def merge_history(previous, snapshot, now):
