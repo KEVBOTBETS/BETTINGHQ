@@ -48,6 +48,11 @@ def watchlist(games, players, rosters, now):
     return rows
 
 
+def uncovered_games(games,quotes):
+    covered={str(q.get('event_id')) for q in quotes}
+    return [g for g in games if str(g['game_id']) not in covered]
+
+
 def build(root, cache, now):
     from .multisport import instant, parse_offers, MatchupLinks
     root = Path(root); folder = root.parent/'nba-edge-lab/site/data'
@@ -89,7 +94,9 @@ def build(root, cache, now):
     except (OSError,ProviderError):errors.append('NBA public prop prices unavailable; no lines or prices inferred.')
     parser=_TokenParser();parser.feed(html);quotes=parse_offers(parser.cards,games,rosters,'NBA',now.isoformat())
     from .public_markets import collect
-    extra,price_health=collect(html,games,rosters,'NBA',now) if not quotes else ([],[])
+    # Partial index coverage must not suppress fallback pages for other games.
+    missing_games=uncovered_games(games,quotes)
+    extra,price_health=collect(html,missing_games,rosters,'NBA',now) if missing_games else ([],[])
     quotes.extend(extra)
     if not injury_ok:errors.append('Automatic NBA player estimates paused: current injury coverage is unavailable.')
     if not quotes:errors.append('No exact roster-matched NBA prop offers extracted. Automatic model fair scenarios are separate from observed sportsbook offers.')

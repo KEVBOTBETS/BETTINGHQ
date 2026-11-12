@@ -49,6 +49,12 @@ class OutlookTests(unittest.TestCase):
   self.assertEqual(rows[0]['stats']['shots'],2);self.assertEqual(rows[0]['stats']['blocks'],.4)
   inputs['year']=2025
   self.assertFalse(nhl_rows([GAME],rosters,{},inputs,[],20262027,NOW)[0]['stats'])
+ def test_partial_nba_index_does_not_hide_uncovered_games(self):
+  from pipeline.nba_research import uncovered_games
+  games=[{'game_id':str(i)} for i in range(4)]
+  missing=uncovered_games(games,[{'event_id':'0'},{'event_id':'1'}])
+  self.assertEqual([g['game_id'] for g in missing],['2','3'])
+  self.assertEqual(uncovered_games(games,[{'event_id':str(i)} for i in range(4)]),[])
  def test_no_prior_season_relabelling(self):
   self.assertFalse(nhl_rows([GAME],{'A':[{'id':'1','player':'Old','position':'C'}]},{'A':{'season':20252026}}, {},[],20262027,NOW))
  def test_freeze_after_start_remove_cancelled_or_ineligible_pregame_rows(self):
