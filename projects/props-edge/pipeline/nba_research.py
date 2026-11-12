@@ -53,6 +53,12 @@ def uncovered_games(games,quotes):
     return [g for g in games if str(g['game_id']) not in covered]
 
 
+def injury_coverage_usable(injuries,source,now):
+    from .multisport import instant
+    at=instant(source.get('observed_at'))
+    return bool(isinstance(injuries,list) and source.get('status') in ('ok','cached','retained') and at and 0<=(now-at).total_seconds()<=6*3600)
+
+
 def build(root, cache, now):
     from .multisport import instant, parse_offers, MatchupLinks
     root = Path(root); folder = root.parent/'nba-edge-lab/site/data'
@@ -84,8 +90,7 @@ def build(root, cache, now):
     try:injuries=json.loads((folder/'injuries.json').read_text())
     except (OSError,ValueError):injuries=None
     injury_source=(meta.get('sources') or {}).get('injuries') or {}
-    injury_at=instant(injury_source.get('observed_at'))
-    injury_ok=isinstance(injuries,list) and injury_source.get('status')=='ok' and injury_at and 0<=(now-injury_at).total_seconds()<=6*3600
+    injury_ok=injury_coverage_usable(injuries,injury_source,now)
     estimates=forecasts(watch,history,raw.get('players',[]),injuries,now) if injury_ok else []
     url='https://www.covers.com/sport/basketball/nba/player-props';html='';errors=[]
     try:

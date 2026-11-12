@@ -9,6 +9,16 @@ GAME={'game_id':'1','date':(NOW+dt.timedelta(hours=2)).isoformat(),'away':'A','h
 def nba_history(pid='1',values=None):
  return [dict(player_id=pid,team='A',game_id=str(i),start=(NOW-dt.timedelta(days=i*2+1)).isoformat(),state='post',stats=dict(MIN='24:30',PTS='12',REB='5',AST='4',STL='0',BLK='1',TO='2',FG='4-8',**{'3PT':'2-4','FT':'2-2','OREB':'1','DREB':'4'})) for i in range(4)]
 class OutlookTests(unittest.TestCase):
+ def test_cached_injury_reports_preserve_original_freshness(self):
+  from pipeline.nba_research import injury_coverage_usable
+  for status in ['ok','cached','retained']:
+   source={'status':status,'observed_at':(NOW-dt.timedelta(minutes=20)).isoformat()}
+   self.assertTrue(injury_coverage_usable([],source,NOW))
+   self.assertFalse(injury_coverage_usable([],source,NOW+dt.timedelta(hours=6)))
+   self.assertFalse(injury_coverage_usable(None,source,NOW))
+  self.assertFalse(injury_coverage_usable([],{'status':'unavailable','observed_at':NOW.isoformat()},NOW))
+  self.assertFalse(injury_coverage_usable([],{'status':'cached','observed_at':(NOW+dt.timedelta(minutes=1)).isoformat()},NOW))
+
  def test_nba_real_zero_and_component_consistency(self):
   who={'id':'1','player':'Starter','position':'G'}
   rows=nba_rows([GAME],nba_history(),{'A':[who]},[],{},NOW)
