@@ -1,29 +1,43 @@
 {
   "schema": 1,
-  "checked_at": "2026-11-13T06:28:40.690Z",
+  "checked_at": "2026-11-13T11:24:12.967Z",
   "coverage": {
-    "mlb": {
+    "nhl": {
       "status": "available",
-      "reports": 10,
-      "checked_at": "2026-11-13T06:28:40.690Z"
+      "reports": 32,
+      "checked_at": "2026-11-13T11:24:12.967Z"
     },
     "ncaaf": {
       "status": "empty",
       "reports": 0,
-      "checked_at": "2026-11-13T06:28:40.690Z"
+      "checked_at": "2026-11-13T11:24:12.967Z"
     },
-    "nhl": {
+    "mlb": {
       "status": "available",
-      "reports": 32,
-      "checked_at": "2026-11-13T06:28:40.690Z"
+      "reports": 10,
+      "checked_at": "2026-11-13T11:24:12.967Z"
     },
     "nfl": {
       "status": "available",
       "reports": 416,
-      "checked_at": "2026-11-13T06:28:40.690Z"
+      "checked_at": "2026-11-13T11:24:12.967Z"
     }
   },
   "events": [
+    {
+      "id": "injury|nfl:28:Chig Okonkwo|2026-11-13T11:24:12.967Z",
+      "kind": "injury",
+      "observed_at": "2026-11-13T11:24:12.967Z",
+      "sport": "nfl",
+      "title": "Player availability changed",
+      "event": "Washington Commanders",
+      "pick": "Chig Okonkwo",
+      "before": "Active · Okonkwo (back) returned to Thursday's eventual 24-21 win at the Giants, finishing with four catches (on eight targets) for 24 yards.",
+      "after": "Active · Okonkwo (back) is questionable to return to Thursday's game against the Giants, Ralph Vacchiano of FoxSports.com reports.",
+      "source_quote_at": "2026-11-13T02:10Z",
+      "source": "ESPN injuries",
+      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
+    },
     {
       "id": "odds|props|401873061|2026-11-15T21:05Z|Passing yards|Matthew Stafford|over|Caesars|2026-11-13T06:28:40.690Z",
       "kind": "odds",
@@ -2878,20 +2892,6 @@
       "title": "NHL starting goalie updated",
       "before": "Jacob Markstrom",
       "after": "Akira Schmid · confirmed",
-      "source_quote_at": "2026-11-12T18:37:56.355874+00:00",
-      "source": "NHL board",
-      "note": "Review the matchup after a starter change; the baseline does not price individual goalie talent."
-    },
-    {
-      "id": "starter|nhl:nhl:2026020305:away|2026-11-12T18:39:49.657Z",
-      "kind": "starter",
-      "observed_at": "2026-11-12T18:39:49.657Z",
-      "sport": "nhl",
-      "event": "BUF @ CHI",
-      "start": "2026-11-13T01:00:00+00:00",
-      "title": "NHL starting goalie updated",
-      "before": "Ukko-Pekka Luukkonen",
-      "after": "Alex Lyon · Unknown",
       "source_quote_at": "2026-11-12T18:37:56.355874+00:00",
       "source": "NHL board",
       "note": "Review the matchup after a starter change; the baseline does not price individual goalie talent."
