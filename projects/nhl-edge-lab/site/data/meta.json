@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-14T03:05:22.834440+00:00",
+  "generated_at": "2026-11-14T08:57:32.441647+00:00",
   "model_version": "nhl-poisson-1.0",
   "season": 2027,
   "timezone": "America/Toronto",
@@ -21,28 +21,28 @@
     "scoreboard": {
       "status": "unavailable",
       "observed_at": null,
-      "url": "https://site.api.espn.com/apis/site/v2/sports/hockey/nhl/scoreboard?dates=20261113",
+      "url": "https://site.api.espn.com/apis/site/v2/sports/hockey/nhl/scoreboard?dates=20261114",
       "error": "HTTPError"
     },
-    "nhl-schedule-2026-11-13": {
+    "nhl-schedule-2026-11-14": {
       "status": "ok",
-      "observed_at": "2026-11-14T03:05:22.834440+00:00",
-      "url": "https://api-web.nhle.com/v1/schedule/2026-11-13"
+      "observed_at": "2026-11-14T08:57:32.441647+00:00",
+      "url": "https://api-web.nhle.com/v1/schedule/2026-11-14"
     },
-    "nhl-schedule-2026-10-30": {
+    "nhl-schedule-2026-10-31": {
       "status": "ok",
-      "observed_at": "2026-11-14T03:05:22.834440+00:00",
-      "url": "https://api-web.nhle.com/v1/schedule/2026-10-30"
+      "observed_at": "2026-11-14T08:57:32.441647+00:00",
+      "url": "https://api-web.nhle.com/v1/schedule/2026-10-31"
     },
-    "nhl-schedule-2026-11-06": {
+    "nhl-schedule-2026-11-07": {
       "status": "ok",
-      "observed_at": "2026-11-14T03:05:22.834440+00:00",
-      "url": "https://api-web.nhle.com/v1/schedule/2026-11-06"
+      "observed_at": "2026-11-14T08:57:32.441647+00:00",
+      "url": "https://api-web.nhle.com/v1/schedule/2026-11-07"
     },
-    "nhl-schedule-2026-11-20": {
+    "nhl-schedule-2026-11-21": {
       "status": "ok",
-      "observed_at": "2026-11-14T03:05:22.834440+00:00",
-      "url": "https://api-web.nhle.com/v1/schedule/2026-11-20"
+      "observed_at": "2026-11-14T08:57:32.441647+00:00",
+      "url": "https://api-web.nhle.com/v1/schedule/2026-11-21"
     },
     "standings-2027": {
       "status": "unavailable",
@@ -58,7 +58,7 @@
     },
     "nhl-official": {
       "status": "ok",
-      "observed_at": "2026-11-14T03:05:22.834440+00:00",
+      "observed_at": "2026-11-14T08:57:32.441647+00:00",
       "url": "https://api-web.nhle.com/v1/standings/now"
     },
     "nhl-team-summary-2026": {
@@ -72,41 +72,41 @@
       "url": "https://api.nhle.com/stats/rest/en/goalie/summary?isAggregate=false&isGame=false&start=0&limit=1000&cayenneExp=seasonId=20252026%20and%20gameTypeId=2"
     },
     "nhl-team-summary-2027": {
-      "status": "ok",
+      "status": "cached",
       "observed_at": "2026-11-14T03:05:22.834440+00:00",
       "url": "https://api.nhle.com/stats/rest/en/team/summary?isAggregate=false&isGame=false&start=0&limit=100&cayenneExp=seasonId=20262027%20and%20gameTypeId=2"
     },
     "nhl-goalies-2027": {
-      "status": "ok",
+      "status": "cached",
       "observed_at": "2026-11-14T03:05:22.834440+00:00",
       "url": "https://api.nhle.com/stats/rest/en/goalie/summary?isAggregate=false&isGame=false&start=0&limit=1000&cayenneExp=seasonId=20262027%20and%20gameTypeId=2"
     },
     "public-book-odds": {
       "status": "ok",
-      "observed_at": "2026-11-14T03:05:00+00:00",
+      "observed_at": "2026-11-14T08:57:32.441647+00:00",
       "url": "https://www.covers.com/sport/hockey/nhl/odds?countrycode=ca",
-      "quotes": 590,
+      "quotes": 686,
       "attempts": [
         {
           "url": "https://www.covers.com/sport/hockey/nhl/odds?countrycode=ca",
-          "checked_at": "2026-11-14T03:05:22.834440+00:00",
-          "observed_at": "2026-11-14T03:05:00+00:00",
+          "checked_at": "2026-11-14T08:57:32.441647+00:00",
+          "observed_at": "2026-11-14T08:57:00+00:00",
           "game_pages_checked": 5,
           "status": "ok",
-          "quotes": 590,
+          "quotes": 646,
           "matched_games": 13
         },
         {
           "url": "https://www.vegasinsider.com/nhl/odds/las-vegas/",
-          "checked_at": "2026-11-14T03:05:22.834440+00:00",
-          "observed_at": null,
-          "status": "no matched prices",
-          "quotes": 0,
-          "matched_games": 0
+          "checked_at": "2026-11-14T08:57:32.441647+00:00",
+          "observed_at": "2026-11-14T08:57:32.441647+00:00",
+          "status": "ok",
+          "quotes": 40,
+          "matched_games": 1
         },
         {
           "url": "https://www.scoresandodds.com/nhl/odds",
-          "checked_at": "2026-11-14T03:05:22.834440+00:00",
+          "checked_at": "2026-11-14T08:57:32.441647+00:00",
           "observed_at": null,
           "status": "no matched prices",
           "quotes": 0,
@@ -128,35 +128,24 @@
     }
   },
   "odds_health": {
-    "status": "partial",
-    "upcoming_games": 61,
-    "priced_games": 13,
+    "status": "ok",
+    "upcoming_games": 66,
+    "priced_games": 14,
     "window_hours": 24,
     "window_games": 14,
-    "window_priced_games": 13,
-    "window_complete_games": 13,
+    "window_priced_games": 14,
+    "window_complete_games": 14,
     "window_markets": {
-      "ML": 13,
-      "ATS": 13,
-      "TOTAL": 13
+      "ML": 14,
+      "ATS": 14,
+      "TOTAL": 14
     },
-    "later_games": 47,
-    "later_unpriced_games": 47,
-    "missing_games": [
-      {
-        "game_id": "nhl:2026020318",
-        "matchup": "NJ @ WSH",
-        "start": "2026-11-15T00:00:00+00:00",
-        "missing_markets": [
-          "ATS",
-          "ML",
-          "TOTAL"
-        ]
-      }
-    ]
+    "later_games": 52,
+    "later_unpriced_games": 52,
+    "missing_games": []
   },
   "counts": {
-    "games": 61,
+    "games": 66,
     "qualified": 0,
     "teams": 32
   },
