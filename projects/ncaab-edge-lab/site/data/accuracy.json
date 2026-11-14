@@ -1,163 +1,163 @@
 {
  "schema": 1,
- "generated_at": "2026-11-14T01:43:38.367624+00:00",
+ "generated_at": "2026-11-14T03:03:25.224765+00:00",
  "label": "NCAAB prediction accuracy",
  "method": "First pre-event snapshot, frozen line and price. All model picks, including PASS/AVOID and unstaked picks. One preferred side per event/market in pick statistics; the complete priced-side audit is separate. One hypothetical unit per pick; no actual wagers are created. Missing results remain pending.",
  "overall": {
-  "logged": 714,
-  "wins": 277,
-  "losses": 206,
+  "logged": 723,
+  "wins": 320,
+  "losses": 235,
   "pushes": 0,
   "voids": 0,
-  "settled": 483,
-  "pending": 231,
-  "win_rate": 0.5734989648033126,
-  "units": -21.928,
-  "roi": -0.04539951138716355,
-  "brier": 0.26921
+  "settled": 555,
+  "pending": 168,
+  "win_rate": 0.5765765765765766,
+  "units": -23.086,
+  "roi": -0.04159641981981981,
+  "brier": 0.26268
  },
  "all_calls": {
-  "logged": 1210,
-  "wins": 445,
-  "losses": 370,
+  "logged": 1225,
+  "wins": 511,
+  "losses": 426,
   "pushes": 0,
   "voids": 0,
-  "settled": 815,
-  "pending": 395,
-  "win_rate": 0.5460122699386503,
-  "units": -32.878,
-  "roi": -0.04034056564417178,
-  "brier": 0.28413
+  "settled": 937,
+  "pending": 288,
+  "win_rate": 0.5453575240128068,
+  "units": -40.265,
+  "roi": -0.04297175773745998,
+  "brier": 0.27687
  },
  "by_tier": {
   "RESEARCH": {
-   "logged": 714,
-   "wins": 277,
-   "losses": 206,
+   "logged": 723,
+   "wins": 320,
+   "losses": 235,
    "pushes": 0,
    "voids": 0,
-   "settled": 483,
-   "pending": 231,
-   "win_rate": 0.5734989648033126,
-   "units": -21.928,
-   "roi": -0.04539951138716355,
-   "brier": 0.26921
+   "settled": 555,
+   "pending": 168,
+   "win_rate": 0.5765765765765766,
+   "units": -23.086,
+   "roi": -0.04159641981981981,
+   "brier": 0.26268
   }
  },
  "by_market": {
   "ATS": {
-   "logged": 248,
-   "wins": 87,
-   "losses": 79,
+   "logged": 251,
+   "wins": 104,
+   "losses": 87,
    "pushes": 0,
    "voids": 0,
-   "settled": 166,
-   "pending": 82,
-   "win_rate": 0.5240963855421686,
-   "units": 0.062,
-   "roi": 0.00037165662650603444,
-   "brier": 0.34838
+   "settled": 191,
+   "pending": 60,
+   "win_rate": 0.5445026178010471,
+   "units": 7.561,
+   "roi": 0.03958891099476441,
+   "brier": 0.3284
   },
   "ML": {
-   "logged": 218,
-   "wins": 113,
-   "losses": 38,
+   "logged": 221,
+   "wins": 129,
+   "losses": 44,
    "pushes": 0,
    "voids": 0,
-   "settled": 151,
-   "pending": 67,
-   "win_rate": 0.7483443708609272,
-   "units": -3.389,
-   "roi": -0.02244349668874172,
-   "brier": 0.18871
+   "settled": 173,
+   "pending": 48,
+   "win_rate": 0.7456647398843931,
+   "units": -6.053,
+   "roi": -0.03498988439306359,
+   "brier": 0.18582
   },
   "TOTAL": {
-   "logged": 248,
-   "wins": 77,
-   "losses": 89,
+   "logged": 251,
+   "wins": 87,
+   "losses": 104,
    "pushes": 0,
    "voids": 0,
-   "settled": 166,
-   "pending": 82,
-   "win_rate": 0.463855421686747,
-   "units": -18.601,
-   "roi": -0.11205235542168673,
-   "brier": 0.26328
+   "settled": 191,
+   "pending": 60,
+   "win_rate": 0.45549738219895286,
+   "units": -24.594,
+   "roi": -0.12876568062827226,
+   "brier": 0.26658
   }
  },
  "by_version": {
   "ncaab-scoring-research-1.0": {
-   "logged": 714,
-   "wins": 277,
-   "losses": 206,
+   "logged": 723,
+   "wins": 320,
+   "losses": 235,
    "pushes": 0,
    "voids": 0,
-   "settled": 483,
-   "pending": 231,
-   "win_rate": 0.5734989648033126,
-   "units": -21.928,
-   "roi": -0.04539951138716355,
-   "brier": 0.26921
+   "settled": 555,
+   "pending": 168,
+   "win_rate": 0.5765765765765766,
+   "units": -23.086,
+   "roi": -0.04159641981981981,
+   "brier": 0.26268
   }
  },
  "calibration": [
   {
    "bucket": "20\u201330%",
-   "n": 3,
-   "predicted": 0.24412,
+   "n": 4,
+   "predicted": 0.2421,
    "actual": 0.0
   },
   {
    "bucket": "30\u201340%",
-   "n": 5,
-   "predicted": 0.3774,
-   "actual": 0.8
+   "n": 6,
+   "predicted": 0.37333,
+   "actual": 0.83333
   },
   {
    "bucket": "40\u201350%",
-   "n": 26,
-   "predicted": 0.47182,
-   "actual": 0.53846
+   "n": 30,
+   "predicted": 0.4702,
+   "actual": 0.5
   },
   {
    "bucket": "50\u201360%",
-   "n": 190,
-   "predicted": 0.55086,
-   "actual": 0.51579
+   "n": 216,
+   "predicted": 0.5509,
+   "actual": 0.51389
   },
   {
    "bucket": "60\u201370%",
-   "n": 110,
-   "predicted": 0.64447,
-   "actual": 0.61818
+   "n": 127,
+   "predicted": 0.64481,
+   "actual": 0.61417
   },
   {
    "bucket": "70\u201380%",
-   "n": 62,
-   "predicted": 0.74838,
-   "actual": 0.77419
+   "n": 74,
+   "predicted": 0.74747,
+   "actual": 0.75676
   },
   {
    "bucket": "80\u201390%",
-   "n": 34,
-   "predicted": 0.84281,
-   "actual": 0.55882
+   "n": 36,
+   "predicted": 0.84315,
+   "actual": 0.58333
   },
   {
    "bucket": "90\u2013100%",
-   "n": 53,
-   "predicted": 0.95781,
-   "actual": 0.49057
+   "n": 62,
+   "predicted": 0.9604,
+   "actual": 0.54839
   }
  ],
  "games": {
   "logged": 567,
-  "graded": 166,
-  "pending": 401,
+  "graded": 191,
+  "pending": 376,
   "winner": {
-   "n": 166,
-   "correct": 126,
-   "accuracy": 0.75904
+   "n": 191,
+   "correct": 146,
+   "accuracy": 0.7644
   },
   "ats": {
    "n": 37,
@@ -179,9 +179,9 @@
    "model_mae": 12.95959,
    "market_mae": 12.12162
   },
-  "margin_mae": 14.58232,
-  "total_mae": 13.39848,
-  "brier": 0.1763
+  "margin_mae": 14.26196,
+  "total_mae": 13.06076,
+  "brier": 0.17382
  },
  "props": {},
  "excluded_unresolved_teams": 0,
@@ -6907,6 +6907,213 @@
   {
    "kind": "call",
    "league": "NCAAB",
+   "event_id": "401925079",
+   "start": "2026-11-15T01:00:00+00:00",
+   "matchup": "NWST @ LR",
+   "market": "TOTAL",
+   "side": "under",
+   "pick": "Under 143.5",
+   "line": 143.5,
+   "line_schema": "selection-signed",
+   "price": -110.0,
+   "book": "DraftKings",
+   "probability": 0.4814558670439442,
+   "tier": "RESEARCH",
+   "edge": -0.08085698109792461,
+   "reason": null,
+   "version": "ncaab-scoring-research-1.0",
+   "selected": false,
+   "id": "call:NCAAB:401925079::TOTAL:under",
+   "captured_at": "2026-11-14T03:03:25.178691+00:00",
+   "result": "Pending"
+  },
+  {
+   "kind": "call",
+   "league": "NCAAB",
+   "event_id": "401925079",
+   "start": "2026-11-15T01:00:00+00:00",
+   "matchup": "NWST @ LR",
+   "market": "TOTAL",
+   "side": "over",
+   "pick": "Over 143.5",
+   "line": 143.5,
+   "line_schema": "selection-signed",
+   "price": -110.0,
+   "book": "DraftKings",
+   "probability": 0.5185441329560558,
+   "tier": "RESEARCH",
+   "edge": -0.01005210981116611,
+   "reason": null,
+   "version": "ncaab-scoring-research-1.0",
+   "selected": true,
+   "id": "call:NCAAB:401925079::TOTAL:over",
+   "captured_at": "2026-11-14T03:03:25.178691+00:00",
+   "result": "Pending"
+  },
+  {
+   "kind": "call",
+   "league": "NCAAB",
+   "event_id": "401925079",
+   "start": "2026-11-15T01:00:00+00:00",
+   "matchup": "NWST @ LR",
+   "market": "ML",
+   "side": "home",
+   "pick": "LR ML",
+   "line": null,
+   "line_schema": "selection-signed",
+   "price": -410.0,
+   "book": "DraftKings",
+   "probability": 0.582414,
+   "tier": "RESEARCH",
+   "edge": -0.2755338048780488,
+   "reason": null,
+   "version": "ncaab-scoring-research-1.0",
+   "selected": true,
+   "id": "call:NCAAB:401925079::ML:home",
+   "captured_at": "2026-11-14T03:03:25.178691+00:00",
+   "result": "Pending"
+  },
+  {
+   "kind": "call",
+   "league": "NCAAB",
+   "event_id": "401925079",
+   "start": "2026-11-15T01:00:00+00:00",
+   "matchup": "NWST @ LR",
+   "market": "ATS",
+   "side": "home",
+   "pick": "LR -9.5",
+   "line": -9.5,
+   "line_schema": "selection-signed",
+   "price": -110.0,
+   "book": "DraftKings",
+   "probability": 0.27975033802920113,
+   "tier": "RESEARCH",
+   "edge": -0.4659311728533433,
+   "reason": null,
+   "version": "ncaab-scoring-research-1.0",
+   "selected": false,
+   "id": "call:NCAAB:401925079::ATS:home",
+   "captured_at": "2026-11-14T03:03:25.178691+00:00",
+   "result": "Pending"
+  },
+  {
+   "kind": "call",
+   "league": "NCAAB",
+   "event_id": "401925079",
+   "start": "2026-11-15T01:00:00+00:00",
+   "matchup": "NWST @ LR",
+   "market": "ATS",
+   "side": "away",
+   "pick": "NWST +9.5",
+   "line": 9.5,
+   "line_schema": "selection-signed",
+   "price": -110.0,
+   "book": "DraftKings",
+   "probability": 0.7202496619707989,
+   "tier": "RESEARCH",
+   "edge": 0.37502208194425246,
+   "reason": null,
+   "version": "ncaab-scoring-research-1.0",
+   "selected": true,
+   "id": "call:NCAAB:401925079::ATS:away",
+   "captured_at": "2026-11-14T03:03:25.178691+00:00",
+   "result": "Pending"
+  },
+  {
+   "kind": "call",
+   "league": "NCAAB",
+   "event_id": "401925063",
+   "start": "2026-11-15T01:00:00+00:00",
+   "matchup": "LT @ NICH",
+   "market": "TOTAL",
+   "side": "under",
+   "pick": "Under 139.5",
+   "line": 139.5,
+   "line_schema": "selection-signed",
+   "price": -110.0,
+   "book": "DraftKings",
+   "probability": 0.4762769327394106,
+   "tier": "RESEARCH",
+   "edge": -0.09074403749748883,
+   "reason": null,
+   "version": "ncaab-scoring-research-1.0",
+   "selected": false,
+   "id": "call:NCAAB:401925063::TOTAL:under",
+   "captured_at": "2026-11-14T03:03:25.178691+00:00",
+   "result": "Pending"
+  },
+  {
+   "kind": "call",
+   "league": "NCAAB",
+   "event_id": "401925063",
+   "start": "2026-11-15T01:00:00+00:00",
+   "matchup": "LT @ NICH",
+   "market": "TOTAL",
+   "side": "over",
+   "pick": "Over 139.5",
+   "line": 139.5,
+   "line_schema": "selection-signed",
+   "price": -110.0,
+   "book": "DraftKings",
+   "probability": 0.5237230672605895,
+   "tier": "RESEARCH",
+   "edge": -0.0001650534116018898,
+   "reason": null,
+   "version": "ncaab-scoring-research-1.0",
+   "selected": true,
+   "id": "call:NCAAB:401925063::TOTAL:over",
+   "captured_at": "2026-11-14T03:03:25.178691+00:00",
+   "result": "Pending"
+  },
+  {
+   "kind": "call",
+   "league": "NCAAB",
+   "event_id": "401925063",
+   "start": "2026-11-15T01:00:00+00:00",
+   "matchup": "LT @ NICH",
+   "market": "ATS",
+   "side": "home",
+   "pick": "NICH -2.5",
+   "line": -2.5,
+   "line_schema": "selection-signed",
+   "price": -110.0,
+   "book": "DraftKings",
+   "probability": 0.39121002907236757,
+   "tier": "RESEARCH",
+   "edge": -0.25314448995275274,
+   "reason": null,
+   "version": "ncaab-scoring-research-1.0",
+   "selected": false,
+   "id": "call:NCAAB:401925063::ATS:home",
+   "captured_at": "2026-11-14T03:03:25.178691+00:00",
+   "result": "Pending"
+  },
+  {
+   "kind": "call",
+   "league": "NCAAB",
+   "event_id": "401925063",
+   "start": "2026-11-15T01:00:00+00:00",
+   "matchup": "LT @ NICH",
+   "market": "ATS",
+   "side": "away",
+   "pick": "LT +2.5",
+   "line": 2.5,
+   "line_schema": "selection-signed",
+   "price": -110.0,
+   "book": "DraftKings",
+   "probability": 0.6087899709276324,
+   "tier": "RESEARCH",
+   "edge": 0.16223539904366202,
+   "reason": null,
+   "version": "ncaab-scoring-research-1.0",
+   "selected": true,
+   "id": "call:NCAAB:401925063::ATS:away",
+   "captured_at": "2026-11-14T03:03:25.178691+00:00",
+   "result": "Pending"
+  },
+  {
+   "kind": "call",
+   "league": "NCAAB",
    "event_id": "401911520",
    "start": "2026-11-15T01:00:00+00:00",
    "matchup": "UCD @ SAC",
@@ -7377,6 +7584,29 @@
    "selected": false,
    "id": "call:NCAAB:401911188::TOTAL:over",
    "captured_at": "2026-11-14T01:32:29.184997+00:00",
+   "result": "Pending"
+  },
+  {
+   "kind": "call",
+   "league": "NCAAB",
+   "event_id": "401911188",
+   "start": "2026-11-15T00:30:00+00:00",
+   "matchup": "CIN @ DAY",
+   "market": "ML",
+   "side": "home",
+   "pick": "DAY ML",
+   "line": null,
+   "line_schema": "selection-signed",
+   "price": 240.0,
+   "book": "DraftKings",
+   "probability": 0.52935,
+   "tier": "RESEARCH",
+   "edge": 0.79979,
+   "reason": null,
+   "version": "ncaab-scoring-research-1.0",
+   "selected": true,
+   "id": "call:NCAAB:401911188::ML:home",
+   "captured_at": "2026-11-14T03:03:25.178691+00:00",
    "result": "Pending"
   },
   {
@@ -10895,6 +11125,121 @@
    "result": "Pending"
   },
   {
+   "kind": "call",
+   "league": "NCAAB",
+   "event_id": "401912229",
+   "start": "2026-11-14T18:00:00+00:00",
+   "matchup": "STMN @ ARMY",
+   "market": "TOTAL",
+   "side": "under",
+   "pick": "Under 149.5",
+   "line": 149.5,
+   "line_schema": "selection-signed",
+   "price": -105.0,
+   "book": "DraftKings",
+   "probability": 0.4631503956110533,
+   "tier": "RESEARCH",
+   "edge": -0.0957539895212769,
+   "reason": null,
+   "version": "ncaab-scoring-research-1.0",
+   "selected": false,
+   "id": "call:NCAAB:401912229::TOTAL:under",
+   "captured_at": "2026-11-14T03:03:25.178691+00:00",
+   "result": "Pending"
+  },
+  {
+   "kind": "call",
+   "league": "NCAAB",
+   "event_id": "401912229",
+   "start": "2026-11-14T18:00:00+00:00",
+   "matchup": "STMN @ ARMY",
+   "market": "TOTAL",
+   "side": "over",
+   "pick": "Over 149.5",
+   "line": 149.5,
+   "line_schema": "selection-signed",
+   "price": -115.0,
+   "book": "DraftKings",
+   "probability": 0.5368496043889467,
+   "tier": "RESEARCH",
+   "edge": 0.003675347335856838,
+   "reason": null,
+   "version": "ncaab-scoring-research-1.0",
+   "selected": true,
+   "id": "call:NCAAB:401912229::TOTAL:over",
+   "captured_at": "2026-11-14T03:03:25.178691+00:00",
+   "result": "Pending"
+  },
+  {
+   "kind": "call",
+   "league": "NCAAB",
+   "event_id": "401912229",
+   "start": "2026-11-14T18:00:00+00:00",
+   "matchup": "STMN @ ARMY",
+   "market": "ML",
+   "side": "home",
+   "pick": "ARMY ML",
+   "line": null,
+   "line_schema": "selection-signed",
+   "price": 295.0,
+   "book": "DraftKings",
+   "probability": 0.388324,
+   "tier": "RESEARCH",
+   "edge": 0.5338798,
+   "reason": null,
+   "version": "ncaab-scoring-research-1.0",
+   "selected": true,
+   "id": "call:NCAAB:401912229::ML:home",
+   "captured_at": "2026-11-14T03:03:25.178691+00:00",
+   "result": "Pending"
+  },
+  {
+   "kind": "call",
+   "league": "NCAAB",
+   "event_id": "401912229",
+   "start": "2026-11-14T18:00:00+00:00",
+   "matchup": "STMN @ ARMY",
+   "market": "ATS",
+   "side": "home",
+   "pick": "ARMY +9.5",
+   "line": 9.5,
+   "line_schema": "selection-signed",
+   "price": -118.0,
+   "book": "DraftKings",
+   "probability": 0.6942733283934858,
+   "tier": "RESEARCH",
+   "edge": 0.2826405558455922,
+   "reason": null,
+   "version": "ncaab-scoring-research-1.0",
+   "selected": true,
+   "id": "call:NCAAB:401912229::ATS:home",
+   "captured_at": "2026-11-14T03:03:25.178691+00:00",
+   "result": "Pending"
+  },
+  {
+   "kind": "call",
+   "league": "NCAAB",
+   "event_id": "401912229",
+   "start": "2026-11-14T18:00:00+00:00",
+   "matchup": "STMN @ ARMY",
+   "market": "ATS",
+   "side": "away",
+   "pick": "STMN -9.5",
+   "line": -9.5,
+   "line_schema": "selection-signed",
+   "price": -102.0,
+   "book": "DraftKings",
+   "probability": 0.30572667160651423,
+   "tier": "RESEARCH",
+   "edge": -0.39454129740670707,
+   "reason": null,
+   "version": "ncaab-scoring-research-1.0",
+   "selected": false,
+   "id": "call:NCAAB:401912229::ATS:away",
+   "captured_at": "2026-11-14T03:03:25.178691+00:00",
+   "result": "Pending"
+  },
+  {
    "kind": "game",
    "league": "NCAAB",
    "season": 2027,
@@ -13265,7 +13610,12 @@
    "market_total_source": null,
    "id": "game:NCAAB:401926117:::",
    "captured_at": "2026-11-09T05:38:51.334340+00:00",
-   "result": "Pending"
+   "result": "Graded",
+   "actual_margin": -24.0,
+   "actual_total": 156.0,
+   "final_home": 66.0,
+   "final_away": 90.0,
+   "graded_at": "2026-11-14T03:03:25.185387+00:00"
   },
   {
    "kind": "game",
@@ -13349,7 +13699,12 @@
    "market_total_source": null,
    "id": "game:NCAAB:401917916:::",
    "captured_at": "2026-11-09T05:38:51.334340+00:00",
-   "result": "Pending"
+   "result": "Graded",
+   "actual_margin": 13.0,
+   "actual_total": 145.0,
+   "final_home": 79.0,
+   "final_away": 66.0,
+   "graded_at": "2026-11-14T03:03:25.185387+00:00"
   },
   {
    "kind": "game",
@@ -13780,7 +14135,12 @@
    "selected": true,
    "id": "call:NCAAB:401926117::TOTAL:under",
    "captured_at": "2026-11-12T23:52:27.016792+00:00",
-   "result": "Pending"
+   "result": "Win",
+   "units": 0.869565,
+   "actual": null,
+   "final_home": 66.0,
+   "final_away": 90.0,
+   "graded_at": "2026-11-14T03:03:25.185387+00:00"
   },
   {
    "kind": "call",
@@ -13803,7 +14163,12 @@
    "selected": false,
    "id": "call:NCAAB:401926117::TOTAL:over",
    "captured_at": "2026-11-12T23:52:27.016792+00:00",
-   "result": "Pending"
+   "result": "Loss",
+   "units": -1,
+   "actual": null,
+   "final_home": 66.0,
+   "final_away": 90.0,
+   "graded_at": "2026-11-14T03:03:25.185387+00:00"
   },
   {
    "kind": "call",
@@ -13826,7 +14191,12 @@
    "selected": true,
    "id": "call:NCAAB:401926117::ML:home",
    "captured_at": "2026-11-12T23:52:27.016792+00:00",
-   "result": "Pending"
+   "result": "Loss",
+   "units": -1,
+   "actual": null,
+   "final_home": 66.0,
+   "final_away": 90.0,
+   "graded_at": "2026-11-14T03:03:25.185387+00:00"
   },
   {
    "kind": "call",
@@ -13849,7 +14219,12 @@
    "selected": true,
    "id": "call:NCAAB:401926117::ATS:home",
    "captured_at": "2026-11-12T23:52:27.016792+00:00",
-   "result": "Pending"
+   "result": "Loss",
+   "units": -1,
+   "actual": null,
+   "final_home": 66.0,
+   "final_away": 90.0,
+   "graded_at": "2026-11-14T03:03:25.185387+00:00"
   },
   {
    "kind": "call",
@@ -13872,7 +14247,12 @@
    "selected": false,
    "id": "call:NCAAB:401926117::ATS:away",
    "captured_at": "2026-11-12T23:52:27.016792+00:00",
-   "result": "Pending"
+   "result": "Win",
+   "units": 0.847458,
+   "actual": null,
+   "final_home": 66.0,
+   "final_away": 90.0,
+   "graded_at": "2026-11-14T03:03:25.185387+00:00"
   },
   {
    "kind": "call",
@@ -14240,7 +14620,12 @@
    "selected": false,
    "id": "call:NCAAB:401917916::TOTAL:under",
    "captured_at": "2026-11-12T23:52:27.016792+00:00",
-   "result": "Pending"
+   "result": "Win",
+   "units": 0.869565,
+   "actual": null,
+   "final_home": 79.0,
+   "final_away": 66.0,
+   "graded_at": "2026-11-14T03:03:25.185387+00:00"
   },
   {
    "kind": "call",
@@ -14263,7 +14648,12 @@
    "selected": true,
    "id": "call:NCAAB:401917916::TOTAL:over",
    "captured_at": "2026-11-12T23:52:27.016792+00:00",
-   "result": "Pending"
+   "result": "Loss",
+   "units": -1,
+   "actual": null,
+   "final_home": 79.0,
+   "final_away": 66.0,
+   "graded_at": "2026-11-14T03:03:25.185387+00:00"
   },
   {
    "kind": "call",
@@ -14286,7 +14676,12 @@
    "selected": true,
    "id": "call:NCAAB:401917916::ML:home",
    "captured_at": "2026-11-12T23:52:27.016792+00:00",
-   "result": "Pending"
+   "result": "Win",
+   "units": 0.01,
+   "actual": null,
+   "final_home": 79.0,
+   "final_away": 66.0,
+   "graded_at": "2026-11-14T03:03:25.185387+00:00"
   },
   {
    "kind": "call",
@@ -14309,7 +14704,12 @@
    "selected": false,
    "id": "call:NCAAB:401917916::ATS:home",
    "captured_at": "2026-11-12T23:52:27.016792+00:00",
-   "result": "Pending"
+   "result": "Loss",
+   "units": -1,
+   "actual": null,
+   "final_home": 79.0,
+   "final_away": 66.0,
+   "graded_at": "2026-11-14T03:03:25.185387+00:00"
   },
   {
    "kind": "call",
@@ -14332,7 +14732,12 @@
    "selected": true,
    "id": "call:NCAAB:401917916::ATS:away",
    "captured_at": "2026-11-12T23:52:27.016792+00:00",
-   "result": "Pending"
+   "result": "Win",
+   "units": 0.847458,
+   "actual": null,
+   "final_home": 79.0,
+   "final_away": 66.0,
+   "graded_at": "2026-11-14T03:03:25.185387+00:00"
   },
   {
    "kind": "call",
@@ -14652,7 +15057,12 @@
    "market_total_source": null,
    "id": "game:NCAAB:401927363:::",
    "captured_at": "2026-11-09T05:38:51.334340+00:00",
-   "result": "Pending"
+   "result": "Graded",
+   "actual_margin": 9.0,
+   "actual_total": 153.0,
+   "final_home": 81.0,
+   "final_away": 72.0,
+   "graded_at": "2026-11-14T03:03:25.185387+00:00"
   },
   {
    "kind": "game",
@@ -14673,7 +15083,12 @@
    "market_total_source": null,
    "id": "game:NCAAB:401926794:::",
    "captured_at": "2026-11-09T05:38:51.334340+00:00",
-   "result": "Pending"
+   "result": "Graded",
+   "actual_margin": 8.0,
+   "actual_total": 140.0,
+   "final_home": 74.0,
+   "final_away": 66.0,
+   "graded_at": "2026-11-14T03:03:25.185387+00:00"
   },
   {
    "kind": "game",
@@ -14694,7 +15109,12 @@
    "market_total_source": null,
    "id": "game:NCAAB:401926152:::",
    "captured_at": "2026-11-09T05:38:51.334340+00:00",
-   "result": "Pending"
+   "result": "Graded",
+   "actual_margin": 13.0,
+   "actual_total": 163.0,
+   "final_home": 88.0,
+   "final_away": 75.0,
+   "graded_at": "2026-11-14T03:03:25.185387+00:00"
   },
   {
    "kind": "game",
@@ -14715,7 +15135,12 @@
    "market_total_source": null,
    "id": "game:NCAAB:401916316:::",
    "captured_at": "2026-11-09T05:38:51.334340+00:00",
-   "result": "Pending"
+   "result": "Graded",
+   "actual_margin": 16.0,
+   "actual_total": 152.0,
+   "final_home": 84.0,
+   "final_away": 68.0,
+   "graded_at": "2026-11-14T03:03:25.185387+00:00"
   },
   {
    "kind": "call",
@@ -14738,7 +15163,12 @@
    "selected": true,
    "id": "call:NCAAB:401927363::TOTAL:under",
    "captured_at": "2026-11-12T23:52:27.016792+00:00",
-   "result": "Pending"
+   "result": "Win",
+   "units": 0.892857,
+   "actual": null,
+   "final_home": 81.0,
+   "final_away": 72.0,
+   "graded_at": "2026-11-14T03:03:25.185387+00:00"
   },
   {
    "kind": "call",
@@ -14761,7 +15191,12 @@
    "selected": false,
    "id": "call:NCAAB:401927363::TOTAL:over",
    "captured_at": "2026-11-12T23:52:27.016792+00:00",
-   "result": "Pending"
+   "result": "Loss",
+   "units": -1,
+   "actual": null,
+   "final_home": 81.0,
+   "final_away": 72.0,
+   "graded_at": "2026-11-14T03:03:25.185387+00:00"
   },
   {
    "kind": "call",
@@ -14784,7 +15219,12 @@
    "selected": true,
    "id": "call:NCAAB:401927363::ML:home",
    "captured_at": "2026-11-12T23:52:27.016792+00:00",
-   "result": "Pending"
+   "result": "Win",
+   "units": 0.125,
+   "actual": null,
+   "final_home": 81.0,
+   "final_away": 72.0,
+   "graded_at": "2026-11-14T03:03:25.185387+00:00"
   },
   {
    "kind": "call",
@@ -14807,7 +15247,12 @@
    "selected": false,
    "id": "call:NCAAB:401927363::ATS:home",
    "captured_at": "2026-11-12T23:52:27.016792+00:00",
-   "result": "Pending"
+   "result": "Loss",
+   "units": -1,
+   "actual": null,
+   "final_home": 81.0,
+   "final_away": 72.0,
+   "graded_at": "2026-11-14T03:03:25.185387+00:00"
   },
   {
    "kind": "call",
@@ -14830,7 +15275,12 @@
    "selected": true,
    "id": "call:NCAAB:401927363::ATS:away",
    "captured_at": "2026-11-12T23:52:27.016792+00:00",
-   "result": "Pending"
+   "result": "Win",
+   "units": 0.892857,
+   "actual": null,
+   "final_home": 81.0,
+   "final_away": 72.0,
+   "graded_at": "2026-11-14T03:03:25.185387+00:00"
   },
   {
    "kind": "call",
@@ -14853,7 +15303,12 @@
    "selected": false,
    "id": "call:NCAAB:401926794::TOTAL:under",
    "captured_at": "2026-11-13T06:27:12.157766+00:00",
-   "result": "Pending"
+   "result": "Loss",
+   "units": -1,
+   "actual": null,
+   "final_home": 74.0,
+   "final_away": 66.0,
+   "graded_at": "2026-11-14T03:03:25.185387+00:00"
   },
   {
    "kind": "call",
@@ -14876,7 +15331,12 @@
    "selected": true,
    "id": "call:NCAAB:401926794::TOTAL:over",
    "captured_at": "2026-11-13T06:27:12.157766+00:00",
-   "result": "Pending"
+   "result": "Win",
+   "units": 0.869565,
+   "actual": null,
+   "final_home": 74.0,
+   "final_away": 66.0,
+   "graded_at": "2026-11-14T03:03:25.185387+00:00"
   },
   {
    "kind": "call",
@@ -14899,7 +15359,12 @@
    "selected": true,
    "id": "call:NCAAB:401926794::ML:home",
    "captured_at": "2026-11-13T06:27:12.157766+00:00",
-   "result": "Pending"
+   "result": "Win",
+   "units": 0.055556,
+   "actual": null,
+   "final_home": 74.0,
+   "final_away": 66.0,
+   "graded_at": "2026-11-14T03:03:25.185387+00:00"
   },
   {
    "kind": "call",
@@ -14922,7 +15387,12 @@
    "selected": false,
    "id": "call:NCAAB:401926794::ATS:home",
    "captured_at": "2026-11-13T06:27:12.157766+00:00",
-   "result": "Pending"
+   "result": "Loss",
+   "units": -1,
+   "actual": null,
+   "final_home": 74.0,
+   "final_away": 66.0,
+   "graded_at": "2026-11-14T03:03:25.185387+00:00"
   },
   {
    "kind": "call",
@@ -14945,7 +15415,12 @@
    "selected": true,
    "id": "call:NCAAB:401926794::ATS:away",
    "captured_at": "2026-11-13T06:27:12.157766+00:00",
-   "result": "Pending"
+   "result": "Win",
+   "units": 0.952381,
+   "actual": null,
+   "final_home": 74.0,
+   "final_away": 66.0,
+   "graded_at": "2026-11-14T03:03:25.185387+00:00"
   },
   {
    "kind": "call",
@@ -14968,7 +15443,12 @@
    "selected": false,
    "id": "call:NCAAB:401926152::TOTAL:under",
    "captured_at": "2026-11-12T23:52:27.016792+00:00",
-   "result": "Pending"
+   "result": "Loss",
+   "units": -1,
+   "actual": null,
+   "final_home": 88.0,
+   "final_away": 75.0,
+   "graded_at": "2026-11-14T03:03:25.185387+00:00"
   },
   {
    "kind": "call",
@@ -14991,7 +15471,12 @@
    "selected": true,
    "id": "call:NCAAB:401926152::TOTAL:over",
    "captured_at": "2026-11-12T23:52:27.016792+00:00",
-   "result": "Pending"
+   "result": "Win",
+   "units": 0.909091,
+   "actual": null,
+   "final_home": 88.0,
+   "final_away": 75.0,
+   "graded_at": "2026-11-14T03:03:25.185387+00:00"
   },
   {
    "kind": "call",
@@ -15014,7 +15499,12 @@
    "selected": true,
    "id": "call:NCAAB:401926152::ML:home",
    "captured_at": "2026-11-12T23:52:27.016792+00:00",
-   "result": "Pending"
+   "result": "Win",
+   "units": 0.444444,
+   "actual": null,
+   "final_home": 88.0,
+   "final_away": 75.0,
+   "graded_at": "2026-11-14T03:03:25.185387+00:00"
   },
   {
    "kind": "call",
@@ -15037,7 +15527,12 @@
    "selected": false,
    "id": "call:NCAAB:401926152::ATS:home",
    "captured_at": "2026-11-12T23:52:27.016792+00:00",
-   "result": "Pending"
+   "result": "Win",
+   "units": 0.952381,
+   "actual": null,
+   "final_home": 88.0,
+   "final_away": 75.0,
+   "graded_at": "2026-11-14T03:03:25.185387+00:00"
   },
   {
    "kind": "call",
@@ -15060,7 +15555,12 @@
    "selected": true,
    "id": "call:NCAAB:401926152::ATS:away",
    "captured_at": "2026-11-12T23:52:27.016792+00:00",
-   "result": "Pending"
+   "result": "Loss",
+   "units": -1,
+   "actual": null,
+   "final_home": 88.0,
+   "final_away": 75.0,
+   "graded_at": "2026-11-14T03:03:25.185387+00:00"
   },
   {
    "kind": "call",
@@ -15083,7 +15583,12 @@
    "selected": false,
    "id": "call:NCAAB:401916316::TOTAL:under",
    "captured_at": "2026-11-12T22:49:12.230996+00:00",
-   "result": "Pending"
+   "result": "Loss",
+   "units": -1,
+   "actual": null,
+   "final_home": 84.0,
+   "final_away": 68.0,
+   "graded_at": "2026-11-14T03:03:25.185387+00:00"
   },
   {
    "kind": "call",
@@ -15106,7 +15611,12 @@
    "selected": true,
    "id": "call:NCAAB:401916316::TOTAL:over",
    "captured_at": "2026-11-12T22:49:12.230996+00:00",
-   "result": "Pending"
+   "result": "Win",
+   "units": 0.909091,
+   "actual": null,
+   "final_home": 84.0,
+   "final_away": 68.0,
+   "graded_at": "2026-11-14T03:03:25.185387+00:00"
   },
   {
    "kind": "call",
@@ -15129,7 +15639,12 @@
    "selected": true,
    "id": "call:NCAAB:401916316::ML:home",
    "captured_at": "2026-11-12T22:49:12.230996+00:00",
-   "result": "Pending"
+   "result": "Win",
+   "units": 0.21978,
+   "actual": null,
+   "final_home": 84.0,
+   "final_away": 68.0,
+   "graded_at": "2026-11-14T03:03:25.185387+00:00"
   },
   {
    "kind": "call",
@@ -15152,7 +15667,12 @@
    "selected": false,
    "id": "call:NCAAB:401916316::ATS:home",
    "captured_at": "2026-11-12T22:49:12.230996+00:00",
-   "result": "Pending"
+   "result": "Win",
+   "units": 0.980392,
+   "actual": null,
+   "final_home": 84.0,
+   "final_away": 68.0,
+   "graded_at": "2026-11-14T03:03:25.185387+00:00"
   },
   {
    "kind": "call",
@@ -15175,7 +15695,12 @@
    "selected": true,
    "id": "call:NCAAB:401916316::ATS:away",
    "captured_at": "2026-11-12T22:49:12.230996+00:00",
-   "result": "Pending"
+   "result": "Loss",
+   "units": -1,
+   "actual": null,
+   "final_home": 84.0,
+   "final_away": 68.0,
+   "graded_at": "2026-11-14T03:03:25.185387+00:00"
   },
   {
    "kind": "game",
@@ -15196,7 +15721,12 @@
    "market_total_source": null,
    "id": "game:NCAAB:401926133:::",
    "captured_at": "2026-11-09T05:38:51.334340+00:00",
-   "result": "Pending"
+   "result": "Graded",
+   "actual_margin": 18.0,
+   "actual_total": 142.0,
+   "final_home": 80.0,
+   "final_away": 62.0,
+   "graded_at": "2026-11-14T03:03:25.185387+00:00"
   },
   {
    "kind": "game",
@@ -15217,7 +15747,12 @@
    "market_total_source": null,
    "id": "game:NCAAB:401925820:::",
    "captured_at": "2026-11-09T05:38:51.334340+00:00",
-   "result": "Pending"
+   "result": "Graded",
+   "actual_margin": -6.0,
+   "actual_total": 126.0,
+   "final_home": 60.0,
+   "final_away": 66.0,
+   "graded_at": "2026-11-14T03:03:25.185387+00:00"
   },
   {
    "kind": "game",
@@ -15238,7 +15773,12 @@
    "market_total_source": null,
    "id": "game:NCAAB:401925755:::",
    "captured_at": "2026-11-09T05:38:51.334340+00:00",
-   "result": "Pending"
+   "result": "Graded",
+   "actual_margin": 34.0,
+   "actual_total": 178.0,
+   "final_home": 106.0,
+   "final_away": 72.0,
+   "graded_at": "2026-11-14T03:03:25.185387+00:00"
   },
   {
    "kind": "game",
@@ -15259,7 +15799,12 @@
    "market_total_source": null,
    "id": "game:NCAAB:401924796:::",
    "captured_at": "2026-11-09T05:38:51.334340+00:00",
-   "result": "Pending"
+   "result": "Graded",
+   "actual_margin": 5.0,
+   "actual_total": 125.0,
+   "final_home": 65.0,
+   "final_away": 60.0,
+   "graded_at": "2026-11-14T03:03:25.185387+00:00"
   },
   {
    "kind": "game",
@@ -15280,7 +15825,12 @@
    "market_total_source": null,
    "id": "game:NCAAB:401924704:::",
    "captured_at": "2026-11-09T05:38:51.334340+00:00",
-   "result": "Pending"
+   "result": "Graded",
+   "actual_margin": -18.0,
+   "actual_total": 136.0,
+   "final_home": 59.0,
+   "final_away": 77.0,
+   "graded_at": "2026-11-14T03:03:25.185387+00:00"
   },
   {
    "kind": "game",
@@ -15301,7 +15851,12 @@
    "market_total_source": null,
    "id": "game:NCAAB:401922211:::",
    "captured_at": "2026-11-09T05:38:51.334340+00:00",
-   "result": "Pending"
+   "result": "Graded",
+   "actual_margin": -9.0,
+   "actual_total": 169.0,
+   "final_home": 80.0,
+   "final_away": 89.0,
+   "graded_at": "2026-11-14T03:03:25.185387+00:00"
   },
   {
    "kind": "game",
@@ -15322,7 +15877,12 @@
    "market_total_source": null,
    "id": "game:NCAAB:401921825:::",
    "captured_at": "2026-11-09T05:38:51.334340+00:00",
-   "result": "Pending"
+   "result": "Graded",
+   "actual_margin": 27.0,
+   "actual_total": 151.0,
+   "final_home": 89.0,
+   "final_away": 62.0,
+   "graded_at": "2026-11-14T03:03:25.185387+00:00"
   },
   {
    "kind": "game",
@@ -15343,7 +15903,12 @@
    "market_total_source": null,
    "id": "game:NCAAB:401921803:::",
    "captured_at": "2026-11-09T05:38:51.334340+00:00",
-   "result": "Pending"
+   "result": "Graded",
+   "actual_margin": 1.0,
+   "actual_total": 155.0,
+   "final_home": 78.0,
+   "final_away": 77.0,
+   "graded_at": "2026-11-14T03:03:25.185387+00:00"
   },
   {
    "kind": "game",
@@ -15364,7 +15929,12 @@
    "market_total_source": null,
    "id": "game:NCAAB:401921191:::",
    "captured_at": "2026-11-09T05:38:51.334340+00:00",
-   "result": "Pending"
+   "result": "Graded",
+   "actual_margin": 3.0,
+   "actual_total": 121.0,
+   "final_home": 62.0,
+   "final_away": 59.0,
+   "graded_at": "2026-11-14T03:03:25.185387+00:00"
   },
   {
    "kind": "game",
@@ -15385,7 +15955,12 @@
    "market_total_source": null,
    "id": "game:NCAAB:401920973:::",
    "captured_at": "2026-11-09T05:38:51.334340+00:00",
-   "result": "Pending"
+   "result": "Graded",
+   "actual_margin": -7.0,
+   "actual_total": 147.0,
+   "final_home": 70.0,
+   "final_away": 77.0,
+   "graded_at": "2026-11-14T03:03:25.185387+00:00"
   },
   {
    "kind": "game",
@@ -15406,7 +15981,12 @@
    "market_total_source": null,
    "id": "game:NCAAB:401920747:::",
    "captured_at": "2026-11-09T05:38:51.334340+00:00",
-   "result": "Pending"
+   "result": "Graded",
+   "actual_margin": 11.0,
+   "actual_total": 157.0,
+   "final_home": 84.0,
+   "final_away": 73.0,
+   "graded_at": "2026-11-14T03:03:25.185387+00:00"
   },
   {
    "kind": "game",
@@ -15427,7 +16007,12 @@
    "market_total_source": null,
    "id": "game:NCAAB:401920379:::",
    "captured_at": "2026-11-09T05:38:51.334340+00:00",
-   "result": "Pending"
+   "result": "Graded",
+   "actual_margin": 20.0,
+   "actual_total": 144.0,
+   "final_home": 82.0,
+   "final_away": 62.0,
+   "graded_at": "2026-11-14T03:03:25.185387+00:00"
   },
   {
    "kind": "game",
@@ -15448,7 +16033,12 @@
    "market_total_source": null,
    "id": "game:NCAAB:401918958:::",
    "captured_at": "2026-11-09T05:38:51.334340+00:00",
-   "result": "Pending"
+   "result": "Graded",
+   "actual_margin": 19.0,
+   "actual_total": 143.0,
+   "final_home": 81.0,
+   "final_away": 62.0,
+   "graded_at": "2026-11-14T03:03:25.185387+00:00"
   },
   {
    "kind": "game",
@@ -15469,7 +16059,12 @@
    "market_total_source": null,
    "id": "game:NCAAB:401913528:::",
    "captured_at": "2026-11-09T05:38:51.334340+00:00",
-   "result": "Pending"
+   "result": "Graded",
+   "actual_margin": 22.0,
+   "actual_total": 194.0,
+   "final_home": 108.0,
+   "final_away": 86.0,
+   "graded_at": "2026-11-14T03:03:25.185387+00:00"
   },
   {
    "kind": "game",
@@ -15490,7 +16085,12 @@
    "market_total_source": null,
    "id": "game:NCAAB:401911210:::",
    "captured_at": "2026-11-09T05:38:51.334340+00:00",
-   "result": "Pending"
+   "result": "Graded",
+   "actual_margin": 28.0,
+   "actual_total": 142.0,
+   "final_home": 85.0,
+   "final_away": 57.0,
+   "graded_at": "2026-11-14T03:03:25.185387+00:00"
   },
   {
    "kind": "game",
@@ -15511,7 +16111,12 @@
    "market_total_source": null,
    "id": "game:NCAAB:401911197:::",
    "captured_at": "2026-11-09T05:38:51.334340+00:00",
-   "result": "Pending"
+   "result": "Graded",
+   "actual_margin": 22.0,
+   "actual_total": 138.0,
+   "final_home": 80.0,
+   "final_away": 58.0,
+   "graded_at": "2026-11-14T03:03:25.185387+00:00"
   },
   {
    "kind": "game",
@@ -15532,7 +16137,12 @@
    "market_total_source": null,
    "id": "game:NCAAB:401906850:::",
    "captured_at": "2026-11-09T05:38:51.334340+00:00",
-   "result": "Pending"
+   "result": "Graded",
+   "actual_margin": 5.0,
+   "actual_total": 161.0,
+   "final_home": 83.0,
+   "final_away": 78.0,
+   "graded_at": "2026-11-14T03:03:25.185387+00:00"
   },
   {
    "kind": "game",
@@ -15553,7 +16163,12 @@
    "market_total_source": null,
    "id": "game:NCAAB:401906782:::",
    "captured_at": "2026-11-09T05:38:51.334340+00:00",
-   "result": "Pending"
+   "result": "Graded",
+   "actual_margin": -8.0,
+   "actual_total": 148.0,
+   "final_home": 70.0,
+   "final_away": 78.0,
+   "graded_at": "2026-11-14T03:03:25.185387+00:00"
   },
   {
    "kind": "game",
@@ -15574,7 +16189,12 @@
    "market_total_source": null,
    "id": "game:NCAAB:401906772:::",
    "captured_at": "2026-11-09T05:38:51.334340+00:00",
-   "result": "Pending"
+   "result": "Graded",
+   "actual_margin": 29.0,
+   "actual_total": 137.0,
+   "final_home": 83.0,
+   "final_away": 54.0,
+   "graded_at": "2026-11-14T03:03:25.185387+00:00"
   },
   {
    "kind": "call",
@@ -15597,7 +16217,12 @@
    "selected": false,
    "id": "call:NCAAB:401926133::TOTAL:under",
    "captured_at": "2026-11-12T23:52:27.016792+00:00",
-   "result": "Pending"
+   "result": "Win",
+   "units": 0.909091,
+   "actual": null,
+   "final_home": 80.0,
+   "final_away": 62.0,
+   "graded_at": "2026-11-14T03:03:25.185387+00:00"
   },
   {
    "kind": "call",
@@ -15620,7 +16245,12 @@
    "selected": true,
    "id": "call:NCAAB:401926133::TOTAL:over",
    "captured_at": "2026-11-12T23:52:27.016792+00:00",
-   "result": "Pending"
+   "result": "Loss",
+   "units": -1,
+   "actual": null,
+   "final_home": 80.0,
+   "final_away": 62.0,
+   "graded_at": "2026-11-14T03:03:25.185387+00:00"
   },
   {
    "kind": "call",
@@ -15643,7 +16273,12 @@
    "selected": true,
    "id": "call:NCAAB:401926133::ML:home",
    "captured_at": "2026-11-12T23:52:27.016792+00:00",
-   "result": "Pending"
+   "result": "Win",
+   "units": 0.027778,
+   "actual": null,
+   "final_home": 80.0,
+   "final_away": 62.0,
+   "graded_at": "2026-11-14T03:03:25.185387+00:00"
   },
   {
    "kind": "call",
@@ -15666,7 +16301,12 @@
    "selected": false,
    "id": "call:NCAAB:401926133::ATS:home",
    "captured_at": "2026-11-12T23:52:27.016792+00:00",
-   "result": "Pending"
+   "result": "Loss",
+   "units": -1,
+   "actual": null,
+   "final_home": 80.0,
+   "final_away": 62.0,
+   "graded_at": "2026-11-14T03:03:25.185387+00:00"
   },
   {
    "kind": "call",
@@ -15689,7 +16329,12 @@
    "selected": true,
    "id": "call:NCAAB:401926133::ATS:away",
    "captured_at": "2026-11-12T23:52:27.016792+00:00",
-   "result": "Pending"
+   "result": "Win",
+   "units": 0.892857,
+   "actual": null,
+   "final_home": 80.0,
+   "final_away": 62.0,
+   "graded_at": "2026-11-14T03:03:25.185387+00:00"
   },
   {
    "kind": "call",
@@ -15712,7 +16357,12 @@
    "selected": false,
    "id": "call:NCAAB:401925820::TOTAL:under",
    "captured_at": "2026-11-12T23:20:55.262948+00:00",
-   "result": "Pending"
+   "result": "Win",
+   "units": 0.952381,
+   "actual": null,
+   "final_home": 60.0,
+   "final_away": 66.0,
+   "graded_at": "2026-11-14T03:03:25.185387+00:00"
   },
   {
    "kind": "call",
@@ -15735,7 +16385,12 @@
    "selected": true,
    "id": "call:NCAAB:401925820::TOTAL:over",
    "captured_at": "2026-11-12T23:20:55.262948+00:00",
-   "result": "Pending"
+   "result": "Loss",
+   "units": -1,
+   "actual": null,
+   "final_home": 60.0,
+   "final_away": 66.0,
+   "graded_at": "2026-11-14T03:03:25.185387+00:00"
   },
   {
    "kind": "call",
@@ -15758,7 +16413,12 @@
    "selected": true,
    "id": "call:NCAAB:401925820::ML:home",
    "captured_at": "2026-11-12T23:20:55.262948+00:00",
-   "result": "Pending"
+   "result": "Loss",
+   "units": -1,
+   "actual": null,
+   "final_home": 60.0,
+   "final_away": 66.0,
+   "graded_at": "2026-11-14T03:03:25.185387+00:00"
   },
   {
    "kind": "call",
@@ -15781,7 +16441,12 @@
    "selected": false,
    "id": "call:NCAAB:401925820::ATS:home",
    "captured_at": "2026-11-12T23:20:55.262948+00:00",
-   "result": "Pending"
+   "result": "Loss",
+   "units": -1,
+   "actual": null,
+   "final_home": 60.0,
+   "final_away": 66.0,
+   "graded_at": "2026-11-14T03:03:25.185387+00:00"
   },
   {
    "kind": "call",
@@ -15804,7 +16469,12 @@
    "selected": true,
    "id": "call:NCAAB:401925820::ATS:away",
    "captured_at": "2026-11-12T23:20:55.262948+00:00",
-   "result": "Pending"
+   "result": "Win",
+   "units": 0.909091,
+   "actual": null,
+   "final_home": 60.0,
+   "final_away": 66.0,
+   "graded_at": "2026-11-14T03:03:25.185387+00:00"
   },
   {
    "kind": "call",
@@ -15827,7 +16497,12 @@
    "selected": true,
    "id": "call:NCAAB:401925755::TOTAL:under",
    "captured_at": "2026-11-12T23:20:55.262948+00:00",
-   "result": "Pending"
+   "result": "Loss",
+   "units": -1,
+   "actual": null,
+   "final_home": 106.0,
+   "final_away": 72.0,
+   "graded_at": "2026-11-14T03:03:25.185387+00:00"
   },
   {
    "kind": "call",
@@ -15850,7 +16525,12 @@
    "selected": false,
    "id": "call:NCAAB:401925755::TOTAL:over",
    "captured_at": "2026-11-12T23:20:55.262948+00:00",
-   "result": "Pending"
+   "result": "Win",
+   "units": 0.909091,
+   "actual": null,
+   "final_home": 106.0,
+   "final_away": 72.0,
+   "graded_at": "2026-11-14T03:03:25.185387+00:00"
   },
   {
    "kind": "call",
@@ -15873,7 +16553,12 @@
    "selected": true,
    "id": "call:NCAAB:401925755::ML:home",
    "captured_at": "2026-11-12T23:20:55.262948+00:00",
-   "result": "Pending"
+   "result": "Win",
+   "units": 0.001,
+   "actual": null,
+   "final_home": 106.0,
+   "final_away": 72.0,
+   "graded_at": "2026-11-14T03:03:25.185387+00:00"
   },
   {
    "kind": "call",
@@ -15896,7 +16581,12 @@
    "selected": false,
    "id": "call:NCAAB:401925755::ATS:home",
    "captured_at": "2026-11-12T23:20:55.262948+00:00",
-   "result": "Pending"
+   "result": "Win",
+   "units": 0.909091,
+   "actual": null,
+   "final_home": 106.0,
+   "final_away": 72.0,
+   "graded_at": "2026-11-14T03:03:25.185387+00:00"
   },
   {
    "kind": "call",
@@ -15919,7 +16609,12 @@
    "selected": true,
    "id": "call:NCAAB:401925755::ATS:away",
    "captured_at": "2026-11-12T23:20:55.262948+00:00",
-   "result": "Pending"
+   "result": "Loss",
+   "units": -1,
+   "actual": null,
+   "final_home": 106.0,
+   "final_away": 72.0,
+   "graded_at": "2026-11-14T03:03:25.185387+00:00"
   },
   {
    "kind": "call",
@@ -15942,7 +16637,12 @@
    "selected": false,
    "id": "call:NCAAB:401924796::TOTAL:under",
    "captured_at": "2026-11-13T06:27:12.157766+00:00",
-   "result": "Pending"
+   "result": "Win",
+   "units": 0.980392,
+   "actual": null,
+   "final_home": 65.0,
+   "final_away": 60.0,
+   "graded_at": "2026-11-14T03:03:25.185387+00:00"
   },
   {
    "kind": "call",
@@ -15965,7 +16665,12 @@
    "selected": true,
    "id": "call:NCAAB:401924796::TOTAL:over",
    "captured_at": "2026-11-13T06:27:12.157766+00:00",
-   "result": "Pending"
+   "result": "Loss",
+   "units": -1,
+   "actual": null,
+   "final_home": 65.0,
+   "final_away": 60.0,
+   "graded_at": "2026-11-14T03:03:25.185387+00:00"
   },
   {
    "kind": "call",
@@ -15988,7 +16693,12 @@
    "selected": true,
    "id": "call:NCAAB:401924796::ML:home",
    "captured_at": "2026-11-13T06:27:12.157766+00:00",
-   "result": "Pending"
+   "result": "Win",
+   "units": 0.769231,
+   "actual": null,
+   "final_home": 65.0,
+   "final_away": 60.0,
+   "graded_at": "2026-11-14T03:03:25.185387+00:00"
   },
   {
    "kind": "call",
@@ -16011,7 +16721,12 @@
    "selected": false,
    "id": "call:NCAAB:401924796::ATS:home",
    "captured_at": "2026-11-13T06:27:12.157766+00:00",
-   "result": "Pending"
+   "result": "Win",
+   "units": 0.847458,
+   "actual": null,
+   "final_home": 65.0,
+   "final_away": 60.0,
+   "graded_at": "2026-11-14T03:03:25.185387+00:00"
   },
   {
    "kind": "call",
@@ -16034,7 +16749,12 @@
    "selected": true,
    "id": "call:NCAAB:401924796::ATS:away",
    "captured_at": "2026-11-13T06:27:12.157766+00:00",
-   "result": "Pending"
+   "result": "Loss",
+   "units": -1,
+   "actual": null,
+   "final_home": 65.0,
+   "final_away": 60.0,
+   "graded_at": "2026-11-14T03:03:25.185387+00:00"
   },
   {
    "kind": "call",
@@ -16057,7 +16777,12 @@
    "selected": false,
    "id": "call:NCAAB:401924704::TOTAL:under",
    "captured_at": "2026-11-13T06:27:12.157766+00:00",
-   "result": "Pending"
+   "result": "Win",
+   "units": 0.925926,
+   "actual": null,
+   "final_home": 59.0,
+   "final_away": 77.0,
+   "graded_at": "2026-11-14T03:03:25.185387+00:00"
   },
   {
    "kind": "call",
@@ -16080,7 +16805,12 @@
    "selected": true,
    "id": "call:NCAAB:401924704::TOTAL:over",
    "captured_at": "2026-11-13T06:27:12.157766+00:00",
-   "result": "Pending"
+   "result": "Loss",
+   "units": -1,
+   "actual": null,
+   "final_home": 59.0,
+   "final_away": 77.0,
+   "graded_at": "2026-11-14T03:03:25.185387+00:00"
   },
   {
    "kind": "call",
@@ -16103,7 +16833,12 @@
    "selected": true,
    "id": "call:NCAAB:401924704::ML:home",
    "captured_at": "2026-11-13T06:27:12.157766+00:00",
-   "result": "Pending"
+   "result": "Loss",
+   "units": -1,
+   "actual": null,
+   "final_home": 59.0,
+   "final_away": 77.0,
+   "graded_at": "2026-11-14T03:03:25.185387+00:00"
   },
   {
    "kind": "call",
@@ -16126,7 +16861,12 @@
    "selected": false,
    "id": "call:NCAAB:401924704::ATS:home",
    "captured_at": "2026-11-13T06:27:12.157766+00:00",
-   "result": "Pending"
+   "result": "Loss",
+   "units": -1,
+   "actual": null,
+   "final_home": 59.0,
+   "final_away": 77.0,
+   "graded_at": "2026-11-14T03:03:25.185387+00:00"
   },
   {
    "kind": "call",
@@ -16149,7 +16889,12 @@
    "selected": true,
    "id": "call:NCAAB:401924704::ATS:away",
    "captured_at": "2026-11-13T06:27:12.157766+00:00",
-   "result": "Pending"
+   "result": "Win",
+   "units": 0.952381,
+   "actual": null,
+   "final_home": 59.0,
+   "final_away": 77.0,
+   "graded_at": "2026-11-14T03:03:25.185387+00:00"
   },
   {
    "kind": "call",
@@ -16172,7 +16917,12 @@
    "selected": true,
    "id": "call:NCAAB:401922211::TOTAL:under",
    "captured_at": "2026-11-13T06:27:12.157766+00:00",
-   "result": "Pending"
+   "result": "Loss",
+   "units": -1,
+   "actual": null,
+   "final_home": 80.0,
+   "final_away": 89.0,
+   "graded_at": "2026-11-14T03:03:25.185387+00:00"
   },
   {
    "kind": "call",
@@ -16195,7 +16945,12 @@
    "selected": false,
    "id": "call:NCAAB:401922211::TOTAL:over",
    "captured_at": "2026-11-13T06:27:12.157766+00:00",
-   "result": "Pending"
+   "result": "Win",
+   "units": 0.869565,
+   "actual": null,
+   "final_home": 80.0,
+   "final_away": 89.0,
+   "graded_at": "2026-11-14T03:03:25.185387+00:00"
   },
   {
    "kind": "call",
@@ -16218,7 +16973,12 @@
    "selected": true,
    "id": "call:NCAAB:401922211::ML:home",
    "captured_at": "2026-11-13T06:27:12.157766+00:00",
-   "result": "Pending"
+   "result": "Loss",
+   "units": -1,
+   "actual": null,
+   "final_home": 80.0,
+   "final_away": 89.0,
+   "graded_at": "2026-11-14T03:03:25.185387+00:00"
   },
   {
    "kind": "call",
@@ -16241,7 +17001,12 @@
    "selected": false,
    "id": "call:NCAAB:401922211::ATS:home",
    "captured_at": "2026-11-13T06:27:12.157766+00:00",
-   "result": "Pending"
+   "result": "Loss",
+   "units": -1,
+   "actual": null,
+   "final_home": 80.0,
+   "final_away": 89.0,
+   "graded_at": "2026-11-14T03:03:25.185387+00:00"
   },
   {
    "kind": "call",
@@ -16264,7 +17029,12 @@
    "selected": true,
    "id": "call:NCAAB:401922211::ATS:away",
    "captured_at": "2026-11-13T06:27:12.157766+00:00",
-   "result": "Pending"
+   "result": "Win",
+   "units": 0.909091,
+   "actual": null,
+   "final_home": 80.0,
+   "final_away": 89.0,
+   "graded_at": "2026-11-14T03:03:25.185387+00:00"
   },
   {
    "kind": "call",
@@ -16287,7 +17057,12 @@
    "selected": false,
    "id": "call:NCAAB:401921825::TOTAL:under",
    "captured_at": "2026-11-13T06:27:12.157766+00:00",
-   "result": "Pending"
+   "result": "Win",
+   "units": 0.952381,
+   "actual": null,
+   "final_home": 89.0,
+   "final_away": 62.0,
+   "graded_at": "2026-11-14T03:03:25.185387+00:00"
   },
   {
    "kind": "call",
@@ -16310,7 +17085,12 @@
    "selected": true,
    "id": "call:NCAAB:401921825::TOTAL:over",
    "captured_at": "2026-11-13T06:27:12.157766+00:00",
-   "result": "Pending"
+   "result": "Loss",
+   "units": -1,
+   "actual": null,
+   "final_home": 89.0,
+   "final_away": 62.0,
+   "graded_at": "2026-11-14T03:03:25.185387+00:00"
   },
   {
    "kind": "call",
@@ -16333,7 +17113,12 @@
    "selected": false,
    "id": "call:NCAAB:401921825::ATS:home",
    "captured_at": "2026-11-13T06:27:12.157766+00:00",
-   "result": "Pending"
+   "result": "Loss",
+   "units": -1,
+   "actual": null,
+   "final_home": 89.0,
+   "final_away": 62.0,
+   "graded_at": "2026-11-14T03:03:25.185387+00:00"
   },
   {
    "kind": "call",
@@ -16356,7 +17141,12 @@
    "selected": true,
    "id": "call:NCAAB:401921825::ATS:away",
    "captured_at": "2026-11-13T06:27:12.157766+00:00",
-   "result": "Pending"
+   "result": "Win",
+   "units": 0.869565,
+   "actual": null,
+   "final_home": 89.0,
+   "final_away": 62.0,
+   "graded_at": "2026-11-14T03:03:25.185387+00:00"
   },
   {
    "kind": "call",
@@ -16379,7 +17169,12 @@
    "selected": true,
    "id": "call:NCAAB:401921803::TOTAL:under",
    "captured_at": "2026-11-12T23:20:55.262948+00:00",
-   "result": "Pending"
+   "result": "Win",
+   "units": 0.892857,
+   "actual": null,
+   "final_home": 78.0,
+   "final_away": 77.0,
+   "graded_at": "2026-11-14T03:03:25.185387+00:00"
   },
   {
    "kind": "call",
@@ -16402,7 +17197,12 @@
    "selected": false,
    "id": "call:NCAAB:401921803::TOTAL:over",
    "captured_at": "2026-11-12T23:20:55.262948+00:00",
-   "result": "Pending"
+   "result": "Loss",
+   "units": -1,
+   "actual": null,
+   "final_home": 78.0,
+   "final_away": 77.0,
+   "graded_at": "2026-11-14T03:03:25.185387+00:00"
   },
   {
    "kind": "call",
@@ -16425,7 +17225,12 @@
    "selected": true,
    "id": "call:NCAAB:401921803::ML:home",
    "captured_at": "2026-11-13T19:56:00.246960+00:00",
-   "result": "Pending"
+   "result": "Win",
+   "units": 0.001,
+   "actual": null,
+   "final_home": 78.0,
+   "final_away": 77.0,
+   "graded_at": "2026-11-14T03:03:25.185387+00:00"
   },
   {
    "kind": "call",
@@ -16448,7 +17253,12 @@
    "selected": false,
    "id": "call:NCAAB:401921803::ATS:home",
    "captured_at": "2026-11-12T23:20:55.262948+00:00",
-   "result": "Pending"
+   "result": "Loss",
+   "units": -1,
+   "actual": null,
+   "final_home": 78.0,
+   "final_away": 77.0,
+   "graded_at": "2026-11-14T03:03:25.185387+00:00"
   },
   {
    "kind": "call",
@@ -16471,7 +17281,12 @@
    "selected": true,
    "id": "call:NCAAB:401921803::ATS:away",
    "captured_at": "2026-11-12T23:20:55.262948+00:00",
-   "result": "Pending"
+   "result": "Win",
+   "units": 0.909091,
+   "actual": null,
+   "final_home": 78.0,
+   "final_away": 77.0,
+   "graded_at": "2026-11-14T03:03:25.185387+00:00"
   },
   {
    "kind": "call",
@@ -16494,7 +17309,12 @@
    "selected": false,
    "id": "call:NCAAB:401921191::TOTAL:under",
    "captured_at": "2026-11-12T23:20:55.262948+00:00",
-   "result": "Pending"
+   "result": "Win",
+   "units": 0.869565,
+   "actual": null,
+   "final_home": 62.0,
+   "final_away": 59.0,
+   "graded_at": "2026-11-14T03:03:25.185387+00:00"
   },
   {
    "kind": "call",
@@ -16517,7 +17337,12 @@
    "selected": true,
    "id": "call:NCAAB:401921191::TOTAL:over",
    "captured_at": "2026-11-12T23:20:55.262948+00:00",
-   "result": "Pending"
+   "result": "Loss",
+   "units": -1,
+   "actual": null,
+   "final_home": 62.0,
+   "final_away": 59.0,
+   "graded_at": "2026-11-14T03:03:25.185387+00:00"
   },
   {
    "kind": "call",
@@ -16540,7 +17365,12 @@
    "selected": true,
    "id": "call:NCAAB:401921191::ML:home",
    "captured_at": "2026-11-12T23:20:55.262948+00:00",
-   "result": "Pending"
+   "result": "Win",
+   "units": 0.350877,
+   "actual": null,
+   "final_home": 62.0,
+   "final_away": 59.0,
+   "graded_at": "2026-11-14T03:03:25.185387+00:00"
   },
   {
    "kind": "call",
@@ -16563,7 +17393,12 @@
    "selected": false,
    "id": "call:NCAAB:401921191::ATS:home",
    "captured_at": "2026-11-12T23:20:55.262948+00:00",
-   "result": "Pending"
+   "result": "Loss",
+   "units": -1,
+   "actual": null,
+   "final_home": 62.0,
+   "final_away": 59.0,
+   "graded_at": "2026-11-14T03:03:25.185387+00:00"
   },
   {
    "kind": "call",
@@ -16586,7 +17421,12 @@
    "selected": true,
    "id": "call:NCAAB:401921191::ATS:away",
    "captured_at": "2026-11-12T23:20:55.262948+00:00",
-   "result": "Pending"
+   "result": "Win",
+   "units": 0.909091,
+   "actual": null,
+   "final_home": 62.0,
+   "final_away": 59.0,
+   "graded_at": "2026-11-14T03:03:25.185387+00:00"
   },
   {
    "kind": "call",
@@ -16609,7 +17449,12 @@
    "selected": false,
    "id": "call:NCAAB:401920973::TOTAL:under",
    "captured_at": "2026-11-12T23:20:55.262948+00:00",
-   "result": "Pending"
+   "result": "Win",
+   "units": 0.869565,
+   "actual": null,
+   "final_home": 70.0,
+   "final_away": 77.0,
+   "graded_at": "2026-11-14T03:03:25.185387+00:00"
   },
   {
    "kind": "call",
@@ -16632,7 +17477,12 @@
    "selected": true,
    "id": "call:NCAAB:401920973::TOTAL:over",
    "captured_at": "2026-11-12T23:20:55.262948+00:00",
-   "result": "Pending"
+   "result": "Loss",
+   "units": -1,
+   "actual": null,
+   "final_home": 70.0,
+   "final_away": 77.0,
+   "graded_at": "2026-11-14T03:03:25.185387+00:00"
   },
   {
    "kind": "call",
@@ -16655,7 +17505,12 @@
    "selected": true,
    "id": "call:NCAAB:401920973::ML:home",
    "captured_at": "2026-11-12T23:20:55.262948+00:00",
-   "result": "Pending"
+   "result": "Loss",
+   "units": -1,
+   "actual": null,
+   "final_home": 70.0,
+   "final_away": 77.0,
+   "graded_at": "2026-11-14T03:03:25.185387+00:00"
   },
   {
    "kind": "call",
@@ -16678,7 +17533,12 @@
    "selected": false,
    "id": "call:NCAAB:401920973::ATS:home",
    "captured_at": "2026-11-12T23:20:55.262948+00:00",
-   "result": "Pending"
+   "result": "Loss",
+   "units": -1,
+   "actual": null,
+   "final_home": 70.0,
+   "final_away": 77.0,
+   "graded_at": "2026-11-14T03:03:25.185387+00:00"
   },
   {
    "kind": "call",
@@ -16701,7 +17561,12 @@
    "selected": true,
    "id": "call:NCAAB:401920973::ATS:away",
    "captured_at": "2026-11-12T23:20:55.262948+00:00",
-   "result": "Pending"
+   "result": "Win",
+   "units": 0.952381,
+   "actual": null,
+   "final_home": 70.0,
+   "final_away": 77.0,
+   "graded_at": "2026-11-14T03:03:25.185387+00:00"
   },
   {
    "kind": "call",
@@ -16724,7 +17589,12 @@
    "selected": true,
    "id": "call:NCAAB:401920747::TOTAL:under",
    "captured_at": "2026-11-12T23:52:27.016792+00:00",
-   "result": "Pending"
+   "result": "Loss",
+   "units": -1,
+   "actual": null,
+   "final_home": 84.0,
+   "final_away": 73.0,
+   "graded_at": "2026-11-14T03:03:25.185387+00:00"
   },
   {
    "kind": "call",
@@ -16747,7 +17617,12 @@
    "selected": false,
    "id": "call:NCAAB:401920747::TOTAL:over",
    "captured_at": "2026-11-12T23:52:27.016792+00:00",
-   "result": "Pending"
+   "result": "Win",
+   "units": 0.909091,
+   "actual": null,
+   "final_home": 84.0,
+   "final_away": 73.0,
+   "graded_at": "2026-11-14T03:03:25.185387+00:00"
   },
   {
    "kind": "call",
@@ -16770,7 +17645,12 @@
    "selected": true,
    "id": "call:NCAAB:401920747::ML:home",
    "captured_at": "2026-11-12T23:52:27.016792+00:00",
-   "result": "Pending"
+   "result": "Win",
+   "units": 1.02,
+   "actual": null,
+   "final_home": 84.0,
+   "final_away": 73.0,
+   "graded_at": "2026-11-14T03:03:25.185387+00:00"
   },
   {
    "kind": "call",
@@ -16793,7 +17673,12 @@
    "selected": false,
    "id": "call:NCAAB:401920747::ATS:home",
    "captured_at": "2026-11-12T23:52:27.016792+00:00",
-   "result": "Pending"
+   "result": "Win",
+   "units": 0.847458,
+   "actual": null,
+   "final_home": 84.0,
+   "final_away": 73.0,
+   "graded_at": "2026-11-14T03:03:25.185387+00:00"
   },
   {
    "kind": "call",
@@ -16816,7 +17701,12 @@
    "selected": true,
    "id": "call:NCAAB:401920747::ATS:away",
    "captured_at": "2026-11-12T23:52:27.016792+00:00",
-   "result": "Pending"
+   "result": "Loss",
+   "units": -1,
+   "actual": null,
+   "final_home": 84.0,
+   "final_away": 73.0,
+   "graded_at": "2026-11-14T03:03:25.185387+00:00"
   },
   {
    "kind": "call",
@@ -16839,7 +17729,12 @@
    "selected": true,
    "id": "call:NCAAB:401920379::TOTAL:under",
    "captured_at": "2026-11-13T06:27:12.157766+00:00",
-   "result": "Pending"
+   "result": "Win",
+   "units": 0.909091,
+   "actual": null,
+   "final_home": 82.0,
+   "final_away": 62.0,
+   "graded_at": "2026-11-14T03:03:25.185387+00:00"
   },
   {
    "kind": "call",
@@ -16862,7 +17757,12 @@
    "selected": false,
    "id": "call:NCAAB:401920379::TOTAL:over",
    "captured_at": "2026-11-13T06:27:12.157766+00:00",
-   "result": "Pending"
+   "result": "Loss",
+   "units": -1,
+   "actual": null,
+   "final_home": 82.0,
+   "final_away": 62.0,
+   "graded_at": "2026-11-14T03:03:25.185387+00:00"
   },
   {
    "kind": "call",
@@ -16885,7 +17785,12 @@
    "selected": true,
    "id": "call:NCAAB:401920379::ML:home",
    "captured_at": "2026-11-13T06:27:12.157766+00:00",
-   "result": "Pending"
+   "result": "Win",
+   "units": 0.002,
+   "actual": null,
+   "final_home": 82.0,
+   "final_away": 62.0,
+   "graded_at": "2026-11-14T03:03:25.185387+00:00"
   },
   {
    "kind": "call",
@@ -16908,7 +17813,12 @@
    "selected": false,
    "id": "call:NCAAB:401920379::ATS:home",
    "captured_at": "2026-11-13T06:27:12.157766+00:00",
-   "result": "Pending"
+   "result": "Loss",
+   "units": -1,
+   "actual": null,
+   "final_home": 82.0,
+   "final_away": 62.0,
+   "graded_at": "2026-11-14T03:03:25.185387+00:00"
   },
   {
    "kind": "call",
@@ -16931,7 +17841,12 @@
    "selected": true,
    "id": "call:NCAAB:401920379::ATS:away",
    "captured_at": "2026-11-13T06:27:12.157766+00:00",
-   "result": "Pending"
+   "result": "Win",
+   "units": 0.952381,
+   "actual": null,
+   "final_home": 82.0,
+   "final_away": 62.0,
+   "graded_at": "2026-11-14T03:03:25.185387+00:00"
   },
   {
    "kind": "call",
@@ -16954,7 +17869,12 @@
    "selected": false,
    "id": "call:NCAAB:401918958::TOTAL:under",
    "captured_at": "2026-11-12T23:20:55.262948+00:00",
-   "result": "Pending"
+   "result": "Win",
+   "units": 0.909091,
+   "actual": null,
+   "final_home": 81.0,
+   "final_away": 62.0,
+   "graded_at": "2026-11-14T03:03:25.185387+00:00"
   },
   {
    "kind": "call",
@@ -16977,7 +17897,12 @@
    "selected": true,
    "id": "call:NCAAB:401918958::TOTAL:over",
    "captured_at": "2026-11-12T23:20:55.262948+00:00",
-   "result": "Pending"
+   "result": "Loss",
+   "units": -1,
+   "actual": null,
+   "final_home": 81.0,
+   "final_away": 62.0,
+   "graded_at": "2026-11-14T03:03:25.185387+00:00"
   },
   {
    "kind": "call",
@@ -17000,7 +17925,12 @@
    "selected": true,
    "id": "call:NCAAB:401918958::ML:home",
    "captured_at": "2026-11-12T23:20:55.262948+00:00",
-   "result": "Pending"
+   "result": "Win",
+   "units": 0.015385,
+   "actual": null,
+   "final_home": 81.0,
+   "final_away": 62.0,
+   "graded_at": "2026-11-14T03:03:25.185387+00:00"
   },
   {
    "kind": "call",
@@ -17023,7 +17953,12 @@
    "selected": false,
    "id": "call:NCAAB:401918958::ATS:home",
    "captured_at": "2026-11-12T23:20:55.262948+00:00",
-   "result": "Pending"
+   "result": "Loss",
+   "units": -1,
+   "actual": null,
+   "final_home": 81.0,
+   "final_away": 62.0,
+   "graded_at": "2026-11-14T03:03:25.185387+00:00"
   },
   {
    "kind": "call",
@@ -17046,7 +17981,12 @@
    "selected": true,
    "id": "call:NCAAB:401918958::ATS:away",
    "captured_at": "2026-11-12T23:20:55.262948+00:00",
-   "result": "Pending"
+   "result": "Win",
+   "units": 0.925926,
+   "actual": null,
+   "final_home": 81.0,
+   "final_away": 62.0,
+   "graded_at": "2026-11-14T03:03:25.185387+00:00"
   },
   {
    "kind": "call",
@@ -17069,7 +18009,12 @@
    "selected": true,
    "id": "call:NCAAB:401913528::TOTAL:under",
    "captured_at": "2026-11-12T23:20:55.262948+00:00",
-   "result": "Pending"
+   "result": "Loss",
+   "units": -1,
+   "actual": null,
+   "final_home": 108.0,
+   "final_away": 86.0,
+   "graded_at": "2026-11-14T03:03:25.185387+00:00"
   },
   {
    "kind": "call",
@@ -17092,7 +18037,12 @@
    "selected": false,
    "id": "call:NCAAB:401913528::TOTAL:over",
    "captured_at": "2026-11-12T23:20:55.262948+00:00",
-   "result": "Pending"
+   "result": "Win",
+   "units": 0.869565,
+   "actual": null,
+   "final_home": 108.0,
+   "final_away": 86.0,
+   "graded_at": "2026-11-14T03:03:25.185387+00:00"
   },
   {
    "kind": "call",
@@ -17115,7 +18065,12 @@
    "selected": false,
    "id": "call:NCAAB:401913528::ATS:home",
    "captured_at": "2026-11-12T23:20:55.262948+00:00",
-   "result": "Pending"
+   "result": "Loss",
+   "units": -1,
+   "actual": null,
+   "final_home": 108.0,
+   "final_away": 86.0,
+   "graded_at": "2026-11-14T03:03:25.185387+00:00"
   },
   {
    "kind": "call",
@@ -17138,7 +18093,12 @@
    "selected": true,
    "id": "call:NCAAB:401913528::ATS:away",
    "captured_at": "2026-11-12T23:20:55.262948+00:00",
-   "result": "Pending"
+   "result": "Win",
+   "units": 0.925926,
+   "actual": null,
+   "final_home": 108.0,
+   "final_away": 86.0,
+   "graded_at": "2026-11-14T03:03:25.185387+00:00"
   },
   {
    "kind": "call",
@@ -17161,7 +18121,12 @@
    "selected": false,
    "id": "call:NCAAB:401911210::TOTAL:under",
    "captured_at": "2026-11-12T23:20:55.262948+00:00",
-   "result": "Pending"
+   "result": "Loss",
+   "units": -1,
+   "actual": null,
+   "final_home": 85.0,
+   "final_away": 57.0,
+   "graded_at": "2026-11-14T03:03:25.185387+00:00"
   },
   {
    "kind": "call",
@@ -17184,7 +18149,12 @@
    "selected": true,
    "id": "call:NCAAB:401911210::TOTAL:over",
    "captured_at": "2026-11-12T23:20:55.262948+00:00",
-   "result": "Pending"
+   "result": "Win",
+   "units": 0.952381,
+   "actual": null,
+   "final_home": 85.0,
+   "final_away": 57.0,
+   "graded_at": "2026-11-14T03:03:25.185387+00:00"
   },
   {
    "kind": "call",
@@ -17207,7 +18177,12 @@
    "selected": true,
    "id": "call:NCAAB:401911210::ML:home",
    "captured_at": "2026-11-12T23:20:55.262948+00:00",
-   "result": "Pending"
+   "result": "Win",
+   "units": 0.166667,
+   "actual": null,
+   "final_home": 85.0,
+   "final_away": 57.0,
+   "graded_at": "2026-11-14T03:03:25.185387+00:00"
   },
   {
    "kind": "call",
@@ -17230,7 +18205,12 @@
    "selected": false,
    "id": "call:NCAAB:401911210::ATS:home",
    "captured_at": "2026-11-12T23:20:55.262948+00:00",
-   "result": "Pending"
+   "result": "Win",
+   "units": 0.909091,
+   "actual": null,
+   "final_home": 85.0,
+   "final_away": 57.0,
+   "graded_at": "2026-11-14T03:03:25.185387+00:00"
   },
   {
    "kind": "call",
@@ -17253,7 +18233,12 @@
    "selected": true,
    "id": "call:NCAAB:401911210::ATS:away",
    "captured_at": "2026-11-12T23:20:55.262948+00:00",
-   "result": "Pending"
+   "result": "Loss",
+   "units": -1,
+   "actual": null,
+   "final_home": 85.0,
+   "final_away": 57.0,
+   "graded_at": "2026-11-14T03:03:25.185387+00:00"
   },
   {
    "kind": "call",
@@ -17276,7 +18261,12 @@
    "selected": true,
    "id": "call:NCAAB:401911197::TOTAL:under",
    "captured_at": "2026-11-13T06:27:12.157766+00:00",
-   "result": "Pending"
+   "result": "Win",
+   "units": 0.892857,
+   "actual": null,
+   "final_home": 80.0,
+   "final_away": 58.0,
+   "graded_at": "2026-11-14T03:03:25.185387+00:00"
   },
   {
    "kind": "call",
@@ -17299,7 +18289,12 @@
    "selected": false,
    "id": "call:NCAAB:401911197::TOTAL:over",
    "captured_at": "2026-11-13T06:27:12.157766+00:00",
-   "result": "Pending"
+   "result": "Loss",
+   "units": -1,
+   "actual": null,
+   "final_home": 80.0,
+   "final_away": 58.0,
+   "graded_at": "2026-11-14T03:03:25.185387+00:00"
   },
   {
    "kind": "call",
@@ -17322,7 +18317,12 @@
    "selected": true,
    "id": "call:NCAAB:401911197::ML:home",
    "captured_at": "2026-11-13T06:27:12.157766+00:00",
-   "result": "Pending"
+   "result": "Win",
+   "units": 0.125,
+   "actual": null,
+   "final_home": 80.0,
+   "final_away": 58.0,
+   "graded_at": "2026-11-14T03:03:25.185387+00:00"
   },
   {
    "kind": "call",
@@ -17345,7 +18345,12 @@
    "selected": false,
    "id": "call:NCAAB:401911197::ATS:home",
    "captured_at": "2026-11-13T06:27:12.157766+00:00",
-   "result": "Pending"
+   "result": "Win",
+   "units": 0.847458,
+   "actual": null,
+   "final_home": 80.0,
+   "final_away": 58.0,
+   "graded_at": "2026-11-14T03:03:25.185387+00:00"
   },
   {
    "kind": "call",
@@ -17368,7 +18373,12 @@
    "selected": true,
    "id": "call:NCAAB:401911197::ATS:away",
    "captured_at": "2026-11-13T06:27:12.157766+00:00",
-   "result": "Pending"
+   "result": "Loss",
+   "units": -1,
+   "actual": null,
+   "final_home": 80.0,
+   "final_away": 58.0,
+   "graded_at": "2026-11-14T03:03:25.185387+00:00"
   },
   {
    "kind": "call",
@@ -17391,7 +18401,12 @@
    "selected": true,
    "id": "call:NCAAB:401906850::TOTAL:under",
    "captured_at": "2026-11-12T23:20:55.262948+00:00",
-   "result": "Pending"
+   "result": "Loss",
+   "units": -1,
+   "actual": null,
+   "final_home": 83.0,
+   "final_away": 78.0,
+   "graded_at": "2026-11-14T03:03:25.185387+00:00"
   },
   {
    "kind": "call",
@@ -17414,7 +18429,12 @@
    "selected": false,
    "id": "call:NCAAB:401906850::TOTAL:over",
    "captured_at": "2026-11-12T23:20:55.262948+00:00",
-   "result": "Pending"
+   "result": "Win",
+   "units": 0.925926,
+   "actual": null,
+   "final_home": 83.0,
+   "final_away": 78.0,
+   "graded_at": "2026-11-14T03:03:25.185387+00:00"
   },
   {
    "kind": "call",
@@ -17437,7 +18457,12 @@
    "selected": true,
    "id": "call:NCAAB:401906850::ML:home",
    "captured_at": "2026-11-12T23:20:55.262948+00:00",
-   "result": "Pending"
+   "result": "Win",
+   "units": 0.002,
+   "actual": null,
+   "final_home": 83.0,
+   "final_away": 78.0,
+   "graded_at": "2026-11-14T03:03:25.185387+00:00"
   },
   {
    "kind": "call",
@@ -17460,7 +18485,12 @@
    "selected": false,
    "id": "call:NCAAB:401906850::ATS:home",
    "captured_at": "2026-11-12T23:20:55.262948+00:00",
-   "result": "Pending"
+   "result": "Loss",
+   "units": -1,
+   "actual": null,
+   "final_home": 83.0,
+   "final_away": 78.0,
+   "graded_at": "2026-11-14T03:03:25.185387+00:00"
   },
   {
    "kind": "call",
@@ -17483,7 +18513,12 @@
    "selected": true,
    "id": "call:NCAAB:401906850::ATS:away",
    "captured_at": "2026-11-12T23:20:55.262948+00:00",
-   "result": "Pending"
+   "result": "Win",
+   "units": 0.847458,
+   "actual": null,
+   "final_home": 83.0,
+   "final_away": 78.0,
+   "graded_at": "2026-11-14T03:03:25.185387+00:00"
   },
   {
    "kind": "call",
@@ -17506,7 +18541,12 @@
    "selected": true,
    "id": "call:NCAAB:401906782::TOTAL:under",
    "captured_at": "2026-11-12T23:06:33.678131+00:00",
-   "result": "Pending"
+   "result": "Win",
+   "units": 0.909091,
+   "actual": null,
+   "final_home": 70.0,
+   "final_away": 78.0,
+   "graded_at": "2026-11-14T03:03:25.185387+00:00"
   },
   {
    "kind": "call",
@@ -17529,7 +18569,12 @@
    "selected": false,
    "id": "call:NCAAB:401906782::TOTAL:over",
    "captured_at": "2026-11-12T23:06:33.678131+00:00",
-   "result": "Pending"
+   "result": "Loss",
+   "units": -1,
+   "actual": null,
+   "final_home": 70.0,
+   "final_away": 78.0,
+   "graded_at": "2026-11-14T03:03:25.185387+00:00"
   },
   {
    "kind": "call",
@@ -17552,7 +18597,12 @@
    "selected": true,
    "id": "call:NCAAB:401906782::ML:home",
    "captured_at": "2026-11-12T23:06:33.678131+00:00",
-   "result": "Pending"
+   "result": "Loss",
+   "units": -1,
+   "actual": null,
+   "final_home": 70.0,
+   "final_away": 78.0,
+   "graded_at": "2026-11-14T03:03:25.185387+00:00"
   },
   {
    "kind": "call",
@@ -17575,7 +18625,12 @@
    "selected": false,
    "id": "call:NCAAB:401906782::ATS:home",
    "captured_at": "2026-11-12T23:06:33.678131+00:00",
-   "result": "Pending"
+   "result": "Loss",
+   "units": -1,
+   "actual": null,
+   "final_home": 70.0,
+   "final_away": 78.0,
+   "graded_at": "2026-11-14T03:03:25.185387+00:00"
   },
   {
    "kind": "call",
@@ -17598,7 +18653,12 @@
    "selected": true,
    "id": "call:NCAAB:401906782::ATS:away",
    "captured_at": "2026-11-12T23:06:33.678131+00:00",
-   "result": "Pending"
+   "result": "Win",
+   "units": 0.925926,
+   "actual": null,
+   "final_home": 70.0,
+   "final_away": 78.0,
+   "graded_at": "2026-11-14T03:03:25.185387+00:00"
   },
   {
    "kind": "call",
@@ -17621,7 +18681,12 @@
    "selected": false,
    "id": "call:NCAAB:401906772::TOTAL:under",
    "captured_at": "2026-11-12T23:20:55.262948+00:00",
-   "result": "Pending"
+   "result": "Win",
+   "units": 0.909091,
+   "actual": null,
+   "final_home": 83.0,
+   "final_away": 54.0,
+   "graded_at": "2026-11-14T03:03:25.185387+00:00"
   },
   {
    "kind": "call",
@@ -17644,7 +18709,12 @@
    "selected": true,
    "id": "call:NCAAB:401906772::TOTAL:over",
    "captured_at": "2026-11-12T23:20:55.262948+00:00",
-   "result": "Pending"
+   "result": "Loss",
+   "units": -1,
+   "actual": null,
+   "final_home": 83.0,
+   "final_away": 54.0,
+   "graded_at": "2026-11-14T03:03:25.185387+00:00"
   },
   {
    "kind": "call",
@@ -17667,7 +18737,12 @@
    "selected": false,
    "id": "call:NCAAB:401906772::ATS:home",
    "captured_at": "2026-11-12T23:20:55.262948+00:00",
-   "result": "Pending"
+   "result": "Loss",
+   "units": -1,
+   "actual": null,
+   "final_home": 83.0,
+   "final_away": 54.0,
+   "graded_at": "2026-11-14T03:03:25.185387+00:00"
   },
   {
    "kind": "call",
@@ -17690,7 +18765,12 @@
    "selected": true,
    "id": "call:NCAAB:401906772::ATS:away",
    "captured_at": "2026-11-12T23:20:55.262948+00:00",
-   "result": "Pending"
+   "result": "Win",
+   "units": 0.925926,
+   "actual": null,
+   "final_home": 83.0,
+   "final_away": 54.0,
+   "graded_at": "2026-11-14T03:03:25.185387+00:00"
   },
   {
    "kind": "game",
