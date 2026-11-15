@@ -1,29 +1,155 @@
 {
   "schema": 1,
-  "checked_at": "2026-11-15T02:35:57.309Z",
+  "checked_at": "2026-11-15T06:59:44.527Z",
   "coverage": {
     "nhl": {
       "status": "available",
-      "reports": 31,
-      "checked_at": "2026-11-15T02:35:57.309Z"
+      "reports": 35,
+      "checked_at": "2026-11-15T06:59:44.527Z"
     },
-    "mlb": {
+    "nfl": {
       "status": "available",
-      "reports": 3,
-      "checked_at": "2026-11-15T02:35:57.309Z"
+      "reports": 313,
+      "checked_at": "2026-11-15T06:59:44.527Z"
     },
     "ncaaf": {
       "status": "empty",
       "reports": 0,
-      "checked_at": "2026-11-15T02:35:57.309Z"
+      "checked_at": "2026-11-15T06:59:44.527Z"
     },
-    "nfl": {
+    "mlb": {
       "status": "available",
-      "reports": 349,
-      "checked_at": "2026-11-15T02:35:57.309Z"
+      "reports": 3,
+      "checked_at": "2026-11-15T06:59:44.527Z"
     }
   },
   "events": [
+    {
+      "id": "starter|nhl:nhl:2026020328:away|2026-11-15T06:59:44.527Z",
+      "kind": "starter",
+      "observed_at": "2026-11-15T06:59:44.527Z",
+      "sport": "nhl",
+      "event": "CGY @ ANA",
+      "start": "2026-11-16T01:00:00+00:00",
+      "title": "NHL starting goalie updated",
+      "before": "Devin Cooley",
+      "after": "Dustin Wolf · Unknown",
+      "source_quote_at": "2026-11-15T06:57:48.640056+00:00",
+      "source": "NHL board",
+      "note": "Review the matchup after a starter change; the baseline does not price individual goalie talent."
+    },
+    {
+      "id": "injury|nhl:12:Bo Horvat|2026-11-15T06:59:44.527Z",
+      "kind": "injury",
+      "observed_at": "2026-11-15T06:59:44.527Z",
+      "sport": "nhl",
+      "title": "New availability report",
+      "event": "New York Islanders",
+      "pick": "Bo Horvat",
+      "before": "Not in the previous dated report",
+      "after": "Day-To-Day · Undisclosed",
+      "source_quote_at": "2026-11-15T06:01Z",
+      "source": "ESPN injuries",
+      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
+    },
+    {
+      "id": "injury|nhl:12:Logan Stanley|2026-11-15T06:59:44.527Z",
+      "kind": "injury",
+      "observed_at": "2026-11-15T06:59:44.527Z",
+      "sport": "nhl",
+      "title": "New availability report",
+      "event": "New York Islanders",
+      "pick": "Logan Stanley",
+      "before": "Not in the previous dated report",
+      "after": "Day-To-Day · Lower Body",
+      "source_quote_at": "2026-11-15T05:17Z",
+      "source": "ESPN injuries",
+      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
+    },
+    {
+      "id": "injury|nhl:12:Jean-Gabriel Pageau|2026-11-15T06:59:44.527Z",
+      "kind": "injury",
+      "observed_at": "2026-11-15T06:59:44.527Z",
+      "sport": "nhl",
+      "title": "Player availability changed",
+      "event": "New York Islanders",
+      "pick": "Jean-Gabriel Pageau",
+      "before": "Day-To-Day · Lower Body",
+      "after": "Out · Lower Body",
+      "source_quote_at": "2026-11-15T02:35Z",
+      "source": "ESPN injuries",
+      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
+    },
+    {
+      "id": "injury|nhl:14:Hayden Hodgson|2026-11-15T06:59:44.527Z",
+      "kind": "injury",
+      "observed_at": "2026-11-15T06:59:44.527Z",
+      "sport": "nhl",
+      "title": "Player availability changed",
+      "event": "Ottawa Senators",
+      "pick": "Hayden Hodgson",
+      "before": "Day-To-Day · Lower Body",
+      "after": "Day-To-Day · Groin",
+      "source_quote_at": "2026-11-15T03:25Z",
+      "source": "ESPN injuries",
+      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
+    },
+    {
+      "id": "injury|nhl:19:Aleksanteri Kaskimaki|2026-11-15T06:59:44.527Z",
+      "kind": "injury",
+      "observed_at": "2026-11-15T06:59:44.527Z",
+      "sport": "nhl",
+      "title": "New availability report",
+      "event": "St. Louis Blues",
+      "pick": "Aleksanteri Kaskimaki",
+      "before": "Not in the previous dated report",
+      "after": "Day-To-Day · Undisclosed",
+      "source_quote_at": "2026-11-15T03:55Z",
+      "source": "ESPN injuries",
+      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
+    },
+    {
+      "id": "injury|nhl:19:Philip Broberg|2026-11-15T06:59:44.527Z",
+      "kind": "injury",
+      "observed_at": "2026-11-15T06:59:44.527Z",
+      "sport": "nhl",
+      "title": "New availability report",
+      "event": "St. Louis Blues",
+      "pick": "Philip Broberg",
+      "before": "Not in the previous dated report",
+      "after": "Day-To-Day · Lower Body",
+      "source_quote_at": "2026-11-15T02:26Z",
+      "source": "ESPN injuries",
+      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
+    },
+    {
+      "id": "injury|nfl:6:James Mitchell|2026-11-15T06:59:44.527Z",
+      "kind": "injury",
+      "observed_at": "2026-11-15T06:59:44.527Z",
+      "sport": "nfl",
+      "title": "Player availability changed",
+      "event": "Dallas Cowboys",
+      "pick": "James Mitchell",
+      "before": "Active · The Cowboys elevated Mitchell from the practice squad to the active roster Saturday, Tommy Yarrish of the team's official site reports.",
+      "after": "Active · The Cowboys signed Mitchell from the practice squad to the active roster Saturday, Tommy Yarrish of the team's official site reports.",
+      "source_quote_at": "2026-11-14T19:17Z",
+      "source": "ESPN injuries",
+      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
+    },
+    {
+      "id": "injury|nfl:13:Carter Runyon|2026-11-15T06:59:44.527Z",
+      "kind": "injury",
+      "observed_at": "2026-11-15T06:59:44.527Z",
+      "sport": "nfl",
+      "title": "Player availability changed",
+      "event": "Las Vegas Raiders",
+      "pick": "Carter Runyon",
+      "before": "Active · The Raiders elevated Runyon from their practice squad to their active roster Saturday.",
+      "after": "Active · The Raiders elevated Runyon from their practice squad to the active roster Saturday.",
+      "source_quote_at": "2026-11-14T23:02Z",
+      "source": "ESPN injuries",
+      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
+    },
     {
       "id": "odds|props|401873056|2026-11-15T18:00Z|Rushing yards|C.J. Stroud|over|bet365|2026-11-15T02:35:57.309Z",
       "kind": "odds",
@@ -2773,132 +2899,6 @@
       "before": "Active · Virgil will take over a larger role after teammate Michael Wilson suffered a season-ending neck injury last week, Zach Gershman of azcardinals.com reports.",
       "after": "Active · Virgil will take over a larger role after teammate Michael Wilson suffered a season-ending neck injury last week, Zach Gershman of the Cardinals' official site reports.",
       "source_quote_at": "2026-11-13T22:18Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:1:Kendal Daniels|2026-11-14T01:38:48.799Z",
-      "kind": "injury",
-      "observed_at": "2026-11-14T01:38:48.799Z",
-      "sport": "nfl",
-      "title": "Player availability changed",
-      "event": "Atlanta Falcons",
-      "pick": "Kendal Daniels",
-      "before": "Active · Daniels (Achilles) was a limited participant at Thursday's practice, Tori McElhaney of the Falcons' official site reports.",
-      "after": "Active · Daniels (Achilles) does not carry an injury designation into Sunday's game against the Chiefs, Will McFadden of the Falcons' official site reports.",
-      "source_quote_at": "2026-11-13T23:22Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:33:Rashod Bateman|2026-11-14T01:38:48.799Z",
-      "kind": "injury",
-      "observed_at": "2026-11-14T01:38:48.799Z",
-      "sport": "nfl",
-      "title": "Player availability changed",
-      "event": "Baltimore Ravens",
-      "pick": "Rashod Bateman",
-      "before": "Questionable · Calf",
-      "after": "Active · Bateman (calf) was listed as a full participant on Friday's practice estimation.",
-      "source_quote_at": "2026-11-13T23:22Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:33:Olaivavega Ioane|2026-11-14T01:38:48.799Z",
-      "kind": "injury",
-      "observed_at": "2026-11-14T01:38:48.799Z",
-      "sport": "nfl",
-      "title": "Player availability changed",
-      "event": "Baltimore Ravens",
-      "pick": "Olaivavega Ioane",
-      "before": "Questionable · Knee",
-      "after": "Active",
-      "source_quote_at": "2026-11-13T23:13Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:2:Tyrell Shavers|2026-11-14T01:38:48.799Z",
-      "kind": "injury",
-      "observed_at": "2026-11-14T01:38:48.799Z",
-      "sport": "nfl",
-      "title": "New availability report",
-      "event": "Buffalo Bills",
-      "pick": "Tyrell Shavers",
-      "before": "Not in the previous dated report",
-      "after": "Out · Knee - ACL",
-      "source_quote_at": "2026-11-14T00:36Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:2:Amani Hooker|2026-11-14T01:38:48.799Z",
-      "kind": "injury",
-      "observed_at": "2026-11-14T01:38:48.799Z",
-      "sport": "nfl",
-      "title": "New availability report",
-      "event": "Buffalo Bills",
-      "pick": "Amani Hooker",
-      "before": "Not in the previous dated report",
-      "after": "Active · Head coach Joe Brady confirmed Friday that Hooker will play Sunday against the Jets, Sal Capaccio of WGR Sports Radio 550 Buffalo reports.",
-      "source_quote_at": "2026-11-13T23:11Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:2:Connor McGovern|2026-11-14T01:38:48.799Z",
-      "kind": "injury",
-      "observed_at": "2026-11-14T01:38:48.799Z",
-      "sport": "nfl",
-      "title": "Player availability changed",
-      "event": "Buffalo Bills",
-      "pick": "Connor McGovern",
-      "before": "Questionable · Neck",
-      "after": "Active",
-      "source_quote_at": "2026-11-13T22:39Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:2:Dion Dawkins|2026-11-14T01:38:48.799Z",
-      "kind": "injury",
-      "observed_at": "2026-11-14T01:38:48.799Z",
-      "sport": "nfl",
-      "title": "Player availability changed",
-      "event": "Buffalo Bills",
-      "pick": "Dion Dawkins",
-      "before": "Questionable · Ribs",
-      "after": "Active",
-      "source_quote_at": "2026-11-13T22:39Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:2:Alec Anderson|2026-11-14T01:38:48.799Z",
-      "kind": "injury",
-      "observed_at": "2026-11-14T01:38:48.799Z",
-      "sport": "nfl",
-      "title": "New availability report",
-      "event": "Buffalo Bills",
-      "pick": "Alec Anderson",
-      "before": "Not in the previous dated report",
-      "after": "Active",
-      "source_quote_at": "2026-11-13T22:38Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:2:Spencer Brown|2026-11-14T01:38:48.799Z",
-      "kind": "injury",
-      "observed_at": "2026-11-14T01:38:48.799Z",
-      "sport": "nfl",
-      "title": "Player availability changed",
-      "event": "Buffalo Bills",
-      "pick": "Spencer Brown",
-      "before": "Questionable · Ankle",
-      "after": "Doubtful · Ankle",
-      "source_quote_at": "2026-11-13T22:37Z",
       "source": "ESPN injuries",
       "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
     }
