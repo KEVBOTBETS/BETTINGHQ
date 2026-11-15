@@ -1,19 +1,19 @@
 {
  "schema": 2,
  "projection_only": false,
- "generated_at": "2026-11-15T06:57:43.865922+00:00",
+ "generated_at": "2026-11-15T14:45:00.577272+00:00",
  "label": "NFL Props forecast and priced-call accuracy",
  "scope": {
   "season": 2026,
   "season_type": 2,
   "season_type_label": "regular season",
-  "included_records": 79060,
+  "included_records": 79091,
   "excluded_records": 0
  },
  "method": "First pre-event snapshot, frozen line and price. All model picks, including PASS/AVOID and unstaked picks. One preferred side per event/market in pick statistics; the complete priced-side audit is separate. One hypothetical unit per pick; no actual wagers are created. Missing results remain pending.",
  "props": {
   "Anytime touchdown": {
-   "logged": 4461,
+   "logged": 4463,
    "graded": 2493,
    "mae": 0.32702,
    "bias": -0.05265
@@ -115,31 +115,31 @@
    "bias": -0.1224
   },
   "Rush + receiving touchdowns": {
-   "logged": 4461,
+   "logged": 4463,
    "graded": 2301,
    "mae": 0.34759,
    "bias": -0.06237
   },
   "Rush + receiving yards": {
-   "logged": 4461,
+   "logged": 4463,
    "graded": 2301,
    "mae": 22.59673,
    "bias": -1.91251
   },
   "Rush attempts": {
-   "logged": 2026,
+   "logged": 2028,
    "graded": 880,
    "mae": 3.34103,
    "bias": -0.19585
   },
   "Rushing touchdowns": {
-   "logged": 2026,
+   "logged": 2028,
    "graded": 880,
    "mae": 0.33773,
    "bias": -0.07118
   },
   "Rushing yards": {
-   "logged": 2026,
+   "logged": 2028,
    "graded": 880,
    "mae": 19.35209,
    "bias": -1.02964
@@ -169,33 +169,33 @@
    "bias": -0.19762
   },
   "Touchdowns scored": {
-   "logged": 4461,
+   "logged": 4463,
    "graded": 2493,
    "mae": 0.32702,
    "bias": -0.05265
   }
  },
  "overall": {
-  "logged": 1262,
+  "logged": 1264,
   "wins": 511,
   "losses": 553,
   "pushes": 0,
   "voids": 0,
   "settled": 1064,
-  "pending": 198,
+  "pending": 200,
   "win_rate": 0.48026315789473684,
   "units": 30.077,
   "roi": 0.02826798872180452,
   "brier": 0.23977
  },
  "all_calls": {
-  "logged": 5516,
+  "logged": 5533,
   "wins": 2329,
   "losses": 2451,
   "pushes": 0,
   "voids": 0,
   "settled": 4780,
-  "pending": 736,
+  "pending": 753,
   "win_rate": 0.48723849372384936,
   "units": -268.135,
   "roi": -0.05609526966527196,
@@ -203,26 +203,26 @@
  },
  "by_tier": {
   "LEAN": {
-   "logged": 262,
+   "logged": 263,
    "wins": 116,
    "losses": 102,
    "pushes": 0,
    "voids": 0,
    "settled": 218,
-   "pending": 44,
+   "pending": 45,
    "win_rate": 0.5321100917431193,
    "units": 3.004,
    "roi": 0.013780885321100918,
    "brier": 0.24863
   },
   "PASS": {
-   "logged": 1000,
+   "logged": 1001,
    "wins": 395,
    "losses": 451,
    "pushes": 0,
    "voids": 0,
    "settled": 846,
-   "pending": 154,
+   "pending": 155,
    "win_rate": 0.466903073286052,
    "units": 27.073,
    "roi": 0.032001072104018924,
@@ -296,13 +296,13 @@
    "brier": 0.25736
   },
   "Receiving yards": {
-   "logged": 370,
+   "logged": 372,
    "wins": 165,
    "losses": 146,
    "pushes": 0,
    "voids": 0,
    "settled": 311,
-   "pending": 59,
+   "pending": 61,
    "win_rate": 0.5305466237942122,
    "units": 1.773,
    "roi": 0.0057021189710611,
@@ -337,13 +337,13 @@
  },
  "by_version": {
   "2026-09-23-restored-v1": {
-   "logged": 1262,
+   "logged": 1264,
    "wins": 511,
    "losses": 553,
    "pushes": 0,
    "voids": 0,
    "settled": 1064,
-   "pending": 198,
+   "pending": 200,
    "win_rate": 0.48026315789473684,
    "units": 30.077,
    "roi": 0.02826798872180452,
