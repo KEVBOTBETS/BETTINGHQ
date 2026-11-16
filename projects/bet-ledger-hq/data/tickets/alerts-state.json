@@ -351,45 +351,6 @@
       "move": null,
       "source": "Props"
     },
-    "props|401873053|2026-11-15T14:30Z|Rushing yards|Jared Goff|over|bet365": {
-      "key": "props",
-      "app": "props",
-      "sport": "NFL",
-      "event": "New England Patriots @ Detroit Lions",
-      "eventId": "401873053",
-      "player": "Jared Goff",
-      "playerId": "",
-      "side": "over",
-      "home": "",
-      "away": "",
-      "version": "unversioned",
-      "start": "2026-11-15T14:30Z",
-      "when": 1794753000000,
-      "day": "2026-11-15",
-      "pick": "",
-      "market": "Rushing yards",
-      "line": 0.5,
-      "sourceLine": 0.5,
-      "price": 110,
-      "book": "bet365",
-      "tier": "",
-      "score": null,
-      "quote": "2026-11-15T02:33:29.125719+00:00",
-      "review": [
-        "No current-season player sample yet."
-      ],
-      "value": null,
-      "probability": null,
-      "fair": null,
-      "worst": null,
-      "minReturn": 0.02,
-      "quoteStatus": "observed",
-      "referenceOnly": false,
-      "sourceUrl": "https://www.covers.com/sport/football/nfl/player-props",
-      "worstReached": false,
-      "move": null,
-      "source": "Props"
-    },
     "props|401873056|2026-11-15T18:00Z|Rushing yards|C.J. Stroud|over|bet365": {
       "key": "props",
       "app": "props",
@@ -1760,7 +1721,7 @@
       "book": "DraftKings",
       "tier": "PASS",
       "score": 0.048480305812211175,
-      "quote": "2026-11-16T06:52:58.960525+00:00",
+      "quote": "2026-11-16T17:24:21.930739+00:00",
       "review": [
         "Availability reports not confirmed."
       ],
@@ -1860,6 +1821,52 @@
       "worstReached": false,
       "move": null,
       "source": "Props"
+    },
+    "ncaaf|401856753|2026-11-22T00:30Z|TOTAL||over|DraftKings": {
+      "key": "ncaaf",
+      "app": "ncaaf-lab",
+      "sport": "NCAAF",
+      "event": "UGA @ SC",
+      "eventId": "401856753",
+      "player": "",
+      "playerId": "",
+      "side": "over",
+      "home": "",
+      "away": "",
+      "version": "unversioned",
+      "start": "2026-11-22T00:30Z",
+      "when": 1795307400000,
+      "day": "2026-11-21",
+      "pick": "Over 51.5",
+      "market": "TOTAL",
+      "line": 51.5,
+      "sourceLine": 51.5,
+      "price": -105,
+      "book": "DraftKings",
+      "tier": "LEAN",
+      "score": 0.05048546395414581,
+      "quote": "2026-11-16T17:23:59.458687+00:00",
+      "review": [
+        "Availability reports not confirmed."
+      ],
+      "value": null,
+      "probability": 0.5529077477741741,
+      "fair": -123,
+      "worst": -117,
+      "minReturn": 0.025,
+      "quoteStatus": "observed",
+      "referenceOnly": false,
+      "sourceUrl": null,
+      "worstReached": false,
+      "move": {
+        "kind": "line",
+        "market": "TOTAL",
+        "opened": 50.5,
+        "now": 51.5,
+        "toward": 1,
+        "since": "2026-11-12T00:54:28+00:00"
+      },
+      "source": "NCAAF"
     }
   },
   "lineups": {},
@@ -2250,14 +2257,6 @@
         "status": "Active",
         "detail": "",
         "report_at": "2026-11-13T23:13Z"
-      },
-      "nfl:33:Lamar Jackson": {
-        "sport": "nfl",
-        "team": "Baltimore Ravens",
-        "player": "Lamar Jackson",
-        "status": "Injured Reserve",
-        "detail": "Thumb",
-        "report_at": "2026-11-13T14:48Z"
       },
       "nfl:2:Ray Davis": {
         "sport": "nfl",
@@ -2919,7 +2918,7 @@
         "sport": "nfl",
         "team": "Dallas Cowboys",
         "player": "Tyler Booker",
-        "status": "Questionable",
+        "status": "Out",
         "detail": "Ankle",
         "report_at": "2026-11-16T01:27Z"
       },
@@ -2927,7 +2926,7 @@
         "sport": "nfl",
         "team": "Dallas Cowboys",
         "player": "DaRon Bland",
-        "status": "Questionable",
+        "status": "Doubtful",
         "detail": "Ankle",
         "report_at": "2026-11-16T01:24Z"
       },
@@ -3051,6 +3050,14 @@
         "detail": "Turpin (ribs) does not carry an injury designation into Sunday's game against the 49ers, Tommy Yarrish of the Cowboys' official site reports.",
         "report_at": "2026-11-14T00:48Z"
       },
+      "nfl:8:Aidan Hutchinson": {
+        "sport": "nfl",
+        "team": "Detroit Lions",
+        "player": "Aidan Hutchinson",
+        "status": "Out",
+        "detail": "Knee - ACL",
+        "report_at": "2026-11-16T14:42Z"
+      },
       "nfl:8:Sam LaPorta": {
         "sport": "nfl",
         "team": "Detroit Lions",
@@ -3106,14 +3113,6 @@
         "status": "Active",
         "detail": "Gibbs carried the ball 22 times for 153 yards and two touchdowns while catching seven of eight targets for 99 yards in Sunday's 35-10 win over the Patriots.",
         "report_at": "2026-11-15T19:22Z"
-      },
-      "nfl:8:Aidan Hutchinson": {
-        "sport": "nfl",
-        "team": "Detroit Lions",
-        "player": "Aidan Hutchinson",
-        "status": "Doubtful",
-        "detail": "Knee",
-        "report_at": "2026-11-15T19:03Z"
       },
       "nfl:8:Jared Goff": {
         "sport": "nfl",
@@ -3178,6 +3177,14 @@
         "status": "Active",
         "detail": "Wonnum (concussion) does not carry an injury designation into Sunday's game against the Patriots in Munich, Nolan Bianchi of The Detroit News reports.",
         "report_at": "2026-11-13T22:22Z"
+      },
+      "nfl:9:Tyrod Taylor": {
+        "sport": "nfl",
+        "team": "Green Bay Packers",
+        "player": "Tyrod Taylor",
+        "status": "Active",
+        "detail": "Taylor completed one of two pass attempts for three yards in Sunday's 30-10 loss to the Vikings.",
+        "report_at": "2026-11-16T15:54Z"
       },
       "nfl:9:MarShawn Lloyd": {
         "sport": "nfl",
@@ -3370,14 +3377,6 @@
         "status": "Active",
         "detail": "Hopper (illness) does not have any injury designation ahead of Sunday's game against the Vikings, Wes Hodkiewicz of the Packers' official site reports.",
         "report_at": "2026-11-14T00:51Z"
-      },
-      "nfl:9:Savion Williams": {
-        "sport": "nfl",
-        "team": "Green Bay Packers",
-        "player": "Savion Williams",
-        "status": "Active",
-        "detail": "Williams (groin) doesn't have a designation for Sunday's game versus the Vikings, Wes Hodkiewicz of the Packers' official site reports.",
-        "report_at": "2026-11-13T21:54Z"
       },
       "nfl:34:Dalton Schultz": {
         "sport": "nfl",
@@ -3682,6 +3681,14 @@
         "status": "Out",
         "detail": "Hamstring",
         "report_at": "2026-11-14T17:22Z"
+      },
+      "nfl:30:Cam'Ron Silmon-Craig": {
+        "sport": "nfl",
+        "team": "Jacksonville Jaguars",
+        "player": "Cam'Ron Silmon-Craig",
+        "status": "Active",
+        "detail": "",
+        "report_at": "2026-11-16T16:51Z"
       },
       "nfl:30:Chris Rodriguez Jr.": {
         "sport": "nfl",
@@ -3995,6 +4002,30 @@
         "detail": "The Chiefs elevated Carter from the practice squad to the active roster Saturday.",
         "report_at": "2026-11-14T17:28Z"
       },
+      "nfl:13:Jalen Nailor": {
+        "sport": "nfl",
+        "team": "Las Vegas Raiders",
+        "player": "Jalen Nailor",
+        "status": "Active",
+        "detail": "Nailor recorded one reception for minus-1 yard on four targets in Sunday's 21-13 loss to the Seahawks.",
+        "report_at": "2026-11-16T16:44Z"
+      },
+      "nfl:13:Dylan Laube": {
+        "sport": "nfl",
+        "team": "Las Vegas Raiders",
+        "player": "Dylan Laube",
+        "status": "Active",
+        "detail": "Laube played all 22 of his snaps on special teams in Sunday's 21-13 loss to the Seahawks and returned two kickoffs for 46 yards and one punt for zero yards.",
+        "report_at": "2026-11-16T15:51Z"
+      },
+      "nfl:13:Brock Bowers": {
+        "sport": "nfl",
+        "team": "Las Vegas Raiders",
+        "player": "Brock Bowers",
+        "status": "Questionable",
+        "detail": "Ankle",
+        "report_at": "2026-11-16T13:16Z"
+      },
       "nfl:13:Michael Mayer": {
         "sport": "nfl",
         "team": "Las Vegas Raiders",
@@ -4034,14 +4065,6 @@
         "status": "Active",
         "detail": "Jeanty turned his nine carries into just 18 yards and caught all four of his targets for 46 yards during Sunday's 21-13 loss to the Seahawks.",
         "report_at": "2026-11-16T02:10Z"
-      },
-      "nfl:13:Brock Bowers": {
-        "sport": "nfl",
-        "team": "Las Vegas Raiders",
-        "player": "Brock Bowers",
-        "status": "Questionable",
-        "detail": "Ankle",
-        "report_at": "2026-11-16T00:29Z"
       },
       "nfl:13:Kwity Paye": {
         "sport": "nfl",
@@ -4427,6 +4450,30 @@
         "detail": "Higbee (illness) and Colby Parkinson (rib) have both been cleared to play in Sunday's game against the Cardinals, while fellow tight end Davis Allen (oblique) is listed as question",
         "report_at": "2026-11-13T21:54Z"
       },
+      "nfl:15:Jordan Phillips": {
+        "sport": "nfl",
+        "team": "Miami Dolphins",
+        "player": "Jordan Phillips",
+        "status": "Questionable",
+        "detail": "Arm",
+        "report_at": "2026-11-16T16:07Z"
+      },
+      "nfl:15:Seydou Traore": {
+        "sport": "nfl",
+        "team": "Miami Dolphins",
+        "player": "Seydou Traore",
+        "status": "Active",
+        "detail": "Traore went without a target while playing six of the Dolphins' 69 snaps on offense in Sunday's 24-22 loss to the Colts.",
+        "report_at": "2026-11-16T15:39Z"
+      },
+      "nfl:15:Greg Dulcich": {
+        "sport": "nfl",
+        "team": "Miami Dolphins",
+        "player": "Greg Dulcich",
+        "status": "Active",
+        "detail": "Dulcich failed to haul in either of his two targets while logging 42 of 69 offensive snaps in the Dolphins' 24-22 loss to the Colts on Sunday.",
+        "report_at": "2026-11-16T15:36Z"
+      },
       "nfl:15:Jalen Tolbert": {
         "sport": "nfl",
         "team": "Miami Dolphins",
@@ -4554,14 +4601,6 @@
         "status": "Active",
         "detail": "The Dolphins elevated Cook from the practice squad to the active roster Saturday.",
         "report_at": "2026-11-14T18:46Z"
-      },
-      "nfl:15:Zane Gonzalez": {
-        "sport": "nfl",
-        "team": "Miami Dolphins",
-        "player": "Zane Gonzalez",
-        "status": "Active",
-        "detail": "The Dolphins signed Gonzalez off the practice squad to the active roster Saturday.",
-        "report_at": "2026-11-14T18:39Z"
       },
       "nfl:15:Will Kacmarek": {
         "sport": "nfl",
@@ -4759,9 +4798,9 @@
         "sport": "nfl",
         "team": "New England Patriots",
         "player": "Drake Maye",
-        "status": "Questionable",
+        "status": "Doubtful",
         "detail": "Ankle",
-        "report_at": "2026-11-16T01:28Z"
+        "report_at": "2026-11-16T17:16Z"
       },
       "nfl:17:A.J. Brown": {
         "sport": "nfl",
@@ -5179,6 +5218,22 @@
         "detail": "Singletary played just five snaps on offense and took one carry for three yards in Thursday's 24-21 loss to the Commanders.",
         "report_at": "2026-11-13T20:40Z"
       },
+      "nfl:20:Omar Cooper Jr.": {
+        "sport": "nfl",
+        "team": "New York Jets",
+        "player": "Omar Cooper Jr.",
+        "status": "Questionable",
+        "detail": "Ankle",
+        "report_at": "2026-11-16T14:55Z"
+      },
+      "nfl:20:Geno Smith": {
+        "sport": "nfl",
+        "team": "New York Jets",
+        "player": "Geno Smith",
+        "status": "Questionable",
+        "detail": "Ankle",
+        "report_at": "2026-11-16T14:48Z"
+      },
       "nfl:20:Adonai Mitchell": {
         "sport": "nfl",
         "team": "New York Jets",
@@ -5194,14 +5249,6 @@
         "status": "Active",
         "detail": "Allen rushed eight times for 40 yards and caught his only target for six yards in Sunday's 31-12 loss to the Bills.",
         "report_at": "2026-11-16T00:54Z"
-      },
-      "nfl:20:Geno Smith": {
-        "sport": "nfl",
-        "team": "New York Jets",
-        "player": "Geno Smith",
-        "status": "Questionable",
-        "detail": "Ankle",
-        "report_at": "2026-11-16T00:40Z"
       },
       "nfl:20:Cade Klubnik": {
         "sport": "nfl",
@@ -5226,14 +5273,6 @@
         "status": "Active",
         "detail": "Wilson (concussion) caught seven of 14 targets for 106 yards and lost a fumble in Sunday's 31-12 loss to the Bills.",
         "report_at": "2026-11-15T22:05Z"
-      },
-      "nfl:20:Omar Cooper Jr.": {
-        "sport": "nfl",
-        "team": "New York Jets",
-        "player": "Omar Cooper Jr.",
-        "status": "Questionable",
-        "detail": "Ankle",
-        "report_at": "2026-11-15T19:57Z"
       },
       "nfl:20:Dylan Parham": {
         "sport": "nfl",
@@ -5314,6 +5353,14 @@
         "status": "Out",
         "detail": "Coach's Decision",
         "report_at": "2026-11-15T16:36Z"
+      },
+      "nfl:23:Mason Rudolph": {
+        "sport": "nfl",
+        "team": "Pittsburgh Steelers",
+        "player": "Mason Rudolph",
+        "status": "Active",
+        "detail": "Rudolph completed one of three pass attempts for two yards and rushed once for nine yards in Sunday's 38-18 loss to the Bengals.",
+        "report_at": "2026-11-16T15:58Z"
       },
       "nfl:23:DK Metcalf": {
         "sport": "nfl",
@@ -5611,14 +5658,6 @@
         "detail": "Charbonnet churned out 94 yards on 20 carries during Sunday's 21-13 win in Las Vegas.",
         "report_at": "2026-11-16T01:48Z"
       },
-      "nfl:26:Abraham Lucas": {
-        "sport": "nfl",
-        "team": "Seattle Seahawks",
-        "player": "Abraham Lucas",
-        "status": "Questionable",
-        "detail": "Ankle",
-        "report_at": "2026-11-16T01:36Z"
-      },
       "nfl:26:Jaxon Smith-Njigba": {
         "sport": "nfl",
         "team": "Seattle Seahawks",
@@ -5642,6 +5681,14 @@
         "status": "Questionable",
         "detail": "Toe",
         "report_at": "2026-11-15T22:20Z"
+      },
+      "nfl:26:Abraham Lucas": {
+        "sport": "nfl",
+        "team": "Seattle Seahawks",
+        "player": "Abraham Lucas",
+        "status": "Questionable",
+        "detail": "Ankle",
+        "report_at": "2026-11-15T22:03Z"
       },
       "nfl:26:Emanuel Wilson": {
         "sport": "nfl",
@@ -5752,8 +5799,16 @@
         "team": "Tampa Bay Buccaneers",
         "player": "Baker Mayfield",
         "status": "Questionable",
-        "detail": "Lower Leg",
+        "detail": "Foot",
         "report_at": "2026-11-15T16:19Z"
+      },
+      "nfl:10:Carnell Tate": {
+        "sport": "nfl",
+        "team": "Tennessee Titans",
+        "player": "Carnell Tate",
+        "status": "Out",
+        "detail": "Shoulder",
+        "report_at": "2026-11-16T14:23Z"
       },
       "nfl:10:Gunnar Helm": {
         "sport": "nfl",
@@ -5818,14 +5873,6 @@
         "status": "Out",
         "detail": "Coach's Decision",
         "report_at": "2026-11-15T16:40Z"
-      },
-      "nfl:10:Carnell Tate": {
-        "sport": "nfl",
-        "team": "Tennessee Titans",
-        "player": "Carnell Tate",
-        "status": "Out",
-        "detail": "Shoulder",
-        "report_at": "2026-11-15T16:34Z"
       },
       "nfl:10:Anthony Hill Jr.": {
         "sport": "nfl",
@@ -5990,6 +6037,14 @@
     },
     "ncaaf": {},
     "mlb": {
+      "mlb:29:Jordan Lawlar": {
+        "sport": "mlb",
+        "team": "Arizona Diamondbacks",
+        "player": "Jordan Lawlar",
+        "status": "Out",
+        "detail": "Elbow",
+        "report_at": "2026-11-16T16:36Z"
+      },
       "mlb:9:Trevor Larnach": {
         "sport": "mlb",
         "team": "Minnesota Twins",
@@ -6044,17 +6099,17 @@
         "sport": "nhl",
         "team": "Dallas Stars",
         "player": "Tyler Myers",
-        "status": "Out",
+        "status": "Day-To-Day",
         "detail": "Upper Body",
-        "report_at": "2026-11-16T04:19Z"
+        "report_at": "2026-11-16T14:05Z"
       },
       "nhl:9:Miro Heiskanen": {
         "sport": "nhl",
         "team": "Dallas Stars",
         "player": "Miro Heiskanen",
-        "status": "Out",
+        "status": "Day-To-Day",
         "detail": "Upper Body",
-        "report_at": "2026-11-14T17:54Z"
+        "report_at": "2026-11-16T14:05Z"
       },
       "nhl:9:Kyle Capobianco": {
         "sport": "nhl",
@@ -6076,9 +6131,9 @@
         "sport": "nhl",
         "team": "Edmonton Oilers",
         "player": "Ryan Nugent-Hopkins",
-        "status": "Out",
+        "status": "Day-To-Day",
         "detail": "Undisclosed",
-        "report_at": "2026-11-15T23:26Z"
+        "report_at": "2026-11-16T14:05Z"
       },
       "nhl:8:Artemi Panarin": {
         "sport": "nhl",
@@ -6124,9 +6179,9 @@
         "sport": "nhl",
         "team": "Nashville Predators",
         "player": "Jonathan Marchessault",
-        "status": "Out",
+        "status": "Day-To-Day",
         "detail": "Lower Body",
-        "report_at": "2026-11-16T01:40Z"
+        "report_at": "2026-11-16T14:05Z"
       },
       "nhl:11:Brett Pesce": {
         "sport": "nhl",
@@ -6160,6 +6215,14 @@
         "detail": "Ankle",
         "report_at": "2026-11-13T18:44Z"
       },
+      "nhl:12:Logan Stanley": {
+        "sport": "nhl",
+        "team": "New York Islanders",
+        "player": "Logan Stanley",
+        "status": "Day-To-Day",
+        "detail": "Lower Body",
+        "report_at": "2026-11-16T17:00Z"
+      },
       "nhl:12:Jean-Gabriel Pageau": {
         "sport": "nhl",
         "team": "New York Islanders",
@@ -6176,29 +6239,37 @@
         "detail": "Undisclosed",
         "report_at": "2026-11-15T06:01Z"
       },
-      "nhl:12:Logan Stanley": {
-        "sport": "nhl",
-        "team": "New York Islanders",
-        "player": "Logan Stanley",
-        "status": "Day-To-Day",
-        "detail": "Lower Body",
-        "report_at": "2026-11-15T05:17Z"
-      },
       "nhl:14:Hayden Hodgson": {
         "sport": "nhl",
         "team": "Ottawa Senators",
         "player": "Hayden Hodgson",
-        "status": "Day-To-Day",
+        "status": "Out",
         "detail": "Groin",
-        "report_at": "2026-11-15T03:25Z"
+        "report_at": "2026-11-16T16:55Z"
+      },
+      "nhl:14:Warren Foegele": {
+        "sport": "nhl",
+        "team": "Ottawa Senators",
+        "player": "Warren Foegele",
+        "status": "Injured Reserve",
+        "detail": "Knee",
+        "report_at": "2026-11-16T16:53Z"
       },
       "nhl:15:Denver Barkey": {
         "sport": "nhl",
         "team": "Philadelphia Flyers",
         "player": "Denver Barkey",
-        "status": "Out",
+        "status": "Day-To-Day",
         "detail": "Illness",
-        "report_at": "2026-11-15T22:26Z"
+        "report_at": "2026-11-16T14:05Z"
+      },
+      "nhl:18:Alexander Wennberg": {
+        "sport": "nhl",
+        "team": "San Jose Sharks",
+        "player": "Alexander Wennberg",
+        "status": "Day-To-Day",
+        "detail": "Upper Body",
+        "report_at": "2026-11-16T14:05Z"
       },
       "nhl:18:Kiefer Sherwood": {
         "sport": "nhl",
@@ -6223,22 +6294,6 @@
         "status": "Injured Reserve",
         "detail": "Upper Body",
         "report_at": "2026-11-15T23:51Z"
-      },
-      "nhl:18:Alexander Wennberg": {
-        "sport": "nhl",
-        "team": "San Jose Sharks",
-        "player": "Alexander Wennberg",
-        "status": "Out",
-        "detail": "Upper Body",
-        "report_at": "2026-11-15T23:38Z"
-      },
-      "nhl:124292:Jacob Melanson": {
-        "sport": "nhl",
-        "team": "Seattle Kraken",
-        "player": "Jacob Melanson",
-        "status": "Injured Reserve",
-        "detail": "Chest",
-        "report_at": "2026-11-13T14:39Z"
       },
       "nhl:19:Jake Neighbours": {
         "sport": "nhl",
@@ -6319,14 +6374,6 @@
         "status": "Day-To-Day",
         "detail": "Undisclosed",
         "report_at": "2026-11-15T14:13Z"
-      },
-      "nhl:28:Dylan DeMelo": {
-        "sport": "nhl",
-        "team": "Winnipeg Jets",
-        "player": "Dylan DeMelo",
-        "status": "Injured Reserve",
-        "detail": "Lower Body",
-        "report_at": "2026-11-13T16:33Z"
       }
     }
   },
@@ -6471,54 +6518,54 @@
       "start": "2026-11-17T00:30:00+00:00",
       "away": {
         "name": "Jacob Fowler",
-        "status": "Unknown",
-        "confirmed": false,
+        "status": "Confirmed",
+        "confirmed": true,
         "stats": [],
-        "observed_at": "2026-11-16T07:12:57.883740+00:00",
-        "reported_at": null,
-        "source_url": "https://www.dailyfaceoff.com/starting-goalies",
+        "observed_at": "2026-11-16T17:26:26.389933+00:00",
+        "reported_at": "2026-11-16T17:16:22.111Z",
+        "source_url": "https://x.com/renlavoietva/status/2122377815232536734?a=FBP6tC6-ZmLOnx1J9gI&s=20",
         "source_name": "Daily Faceoff public starting-goalie page",
-        "note": "No confirmation supplied"
+        "note": "Fowler will start in New York on Monday. "
       },
       "home": {
-        "name": "Dylan Garand",
-        "status": "Unknown",
-        "confirmed": false,
+        "name": "Joonas Korpisalo",
+        "status": "Confirmed",
+        "confirmed": true,
         "stats": [],
-        "observed_at": "2026-11-16T07:12:57.883740+00:00",
-        "reported_at": null,
-        "source_url": "https://www.dailyfaceoff.com/starting-goalies",
+        "observed_at": "2026-11-16T17:26:26.389933+00:00",
+        "reported_at": "2026-11-16T15:49:57.406Z",
+        "source_url": "https://x.com/vzmercogliano/status/2122355892968423912?a=SCxs_CcPFggqu9OHvYU&s=20",
         "source_name": "Daily Faceoff public starting-goalie page",
-        "note": "No confirmation supplied"
+        "note": "Korpisalo will start vs. Montreal on Monday. "
       },
-      "published_at": "2026-11-16T07:13:00.159068+00:00"
+      "published_at": "2026-11-16T17:26:29.663930+00:00"
     },
     "nhl:2026020332": {
       "event": "VAN @ UTA",
       "start": "2026-11-17T02:30:00+00:00",
       "away": {
-        "name": "Leevi Merilainen",
+        "name": "Nikita Tolopilo",
         "status": "Unknown",
         "confirmed": false,
         "stats": [],
-        "observed_at": "2026-11-16T07:12:57.883740+00:00",
+        "observed_at": "2026-11-16T17:26:26.389933+00:00",
         "reported_at": null,
         "source_url": "https://www.dailyfaceoff.com/starting-goalies",
         "source_name": "Daily Faceoff public starting-goalie page",
         "note": "No confirmation supplied"
       },
       "home": {
-        "name": "Karel Vejmelka",
+        "name": "Sebastian Cossa",
         "status": "Unknown",
         "confirmed": false,
         "stats": [],
-        "observed_at": "2026-11-16T07:12:57.883740+00:00",
+        "observed_at": "2026-11-16T17:26:26.389933+00:00",
         "reported_at": null,
         "source_url": "https://www.dailyfaceoff.com/starting-goalies",
         "source_name": "Daily Faceoff public starting-goalie page",
         "note": "No confirmation supplied"
       },
-      "published_at": "2026-11-16T07:13:00.159068+00:00"
+      "published_at": "2026-11-16T17:26:29.663930+00:00"
     },
     "nhl:2026020333": {
       "event": "LA @ BOS",
@@ -6528,7 +6575,7 @@
         "status": "Unknown",
         "confirmed": false,
         "stats": [],
-        "observed_at": "2026-11-16T07:12:57.883740+00:00",
+        "observed_at": "2026-11-16T17:26:26.389933+00:00",
         "reported_at": null,
         "source_url": "https://www.dailyfaceoff.com/starting-goalies",
         "source_name": "Daily Faceoff public starting-goalie page",
@@ -6539,40 +6586,40 @@
         "status": "Unknown",
         "confirmed": false,
         "stats": [],
-        "observed_at": "2026-11-16T07:12:57.883740+00:00",
+        "observed_at": "2026-11-16T17:26:26.389933+00:00",
         "reported_at": null,
         "source_url": "https://www.dailyfaceoff.com/starting-goalies",
         "source_name": "Daily Faceoff public starting-goalie page",
         "note": "No confirmation supplied"
       },
-      "published_at": "2026-11-16T07:13:00.159068+00:00"
+      "published_at": "2026-11-16T17:26:29.663930+00:00"
     },
     "nhl:2026020335": {
       "event": "EDM @ FLA",
       "start": "2026-11-18T00:00:00+00:00",
       "away": {
-        "name": "Tristan Jarry",
+        "name": "Devon Levi",
         "status": "Unknown",
         "confirmed": false,
         "stats": [],
-        "observed_at": "2026-11-16T07:12:57.883740+00:00",
+        "observed_at": "2026-11-16T17:26:26.389933+00:00",
         "reported_at": null,
         "source_url": "https://www.dailyfaceoff.com/starting-goalies",
         "source_name": "Daily Faceoff public starting-goalie page",
         "note": "No confirmation supplied"
       },
       "home": {
-        "name": "Akira Schmid",
+        "name": "Jacob Markstrom",
         "status": "Unknown",
         "confirmed": false,
         "stats": [],
-        "observed_at": "2026-11-16T07:12:57.883740+00:00",
+        "observed_at": "2026-11-16T17:26:26.389933+00:00",
         "reported_at": null,
         "source_url": "https://www.dailyfaceoff.com/starting-goalies",
         "source_name": "Daily Faceoff public starting-goalie page",
         "note": "No confirmation supplied"
       },
-      "published_at": "2026-11-16T07:13:00.159068+00:00"
+      "published_at": "2026-11-16T17:26:29.663930+00:00"
     },
     "nhl:2026020336": {
       "event": "CBJ @ NYI",
@@ -6582,24 +6629,24 @@
         "status": "Unknown",
         "confirmed": false,
         "stats": [],
-        "observed_at": "2026-11-16T07:12:57.883740+00:00",
+        "observed_at": "2026-11-16T17:26:26.389933+00:00",
         "reported_at": null,
         "source_url": "https://www.dailyfaceoff.com/starting-goalies",
         "source_name": "Daily Faceoff public starting-goalie page",
         "note": "No confirmation supplied"
       },
       "home": {
-        "name": "Semyon Varlamov",
+        "name": "Ilya Sorokin",
         "status": "Unknown",
         "confirmed": false,
         "stats": [],
-        "observed_at": "2026-11-16T07:12:57.883740+00:00",
+        "observed_at": "2026-11-16T17:26:26.389933+00:00",
         "reported_at": null,
         "source_url": "https://www.dailyfaceoff.com/starting-goalies",
         "source_name": "Daily Faceoff public starting-goalie page",
         "note": "No confirmation supplied"
       },
-      "published_at": "2026-11-16T07:13:00.159068+00:00"
+      "published_at": "2026-11-16T17:26:29.663930+00:00"
     },
     "nhl:2026020337": {
       "event": "BUF @ PHI",
@@ -6609,7 +6656,7 @@
         "status": "Unknown",
         "confirmed": false,
         "stats": [],
-        "observed_at": "2026-11-16T07:12:57.883740+00:00",
+        "observed_at": "2026-11-16T17:26:26.389933+00:00",
         "reported_at": null,
         "source_url": "https://www.dailyfaceoff.com/starting-goalies",
         "source_name": "Daily Faceoff public starting-goalie page",
@@ -6620,13 +6667,13 @@
         "status": "Unknown",
         "confirmed": false,
         "stats": [],
-        "observed_at": "2026-11-16T07:12:57.883740+00:00",
+        "observed_at": "2026-11-16T17:26:26.389933+00:00",
         "reported_at": null,
         "source_url": "https://www.dailyfaceoff.com/starting-goalies",
         "source_name": "Daily Faceoff public starting-goalie page",
         "note": "No confirmation supplied"
       },
-      "published_at": "2026-11-16T07:13:00.159068+00:00"
+      "published_at": "2026-11-16T17:26:29.663930+00:00"
     },
     "nhl:2026020341": {
       "event": "OTT @ WPG",
@@ -6636,7 +6683,7 @@
         "status": "Unknown",
         "confirmed": false,
         "stats": [],
-        "observed_at": "2026-11-16T07:12:57.883740+00:00",
+        "observed_at": "2026-11-16T17:26:26.389933+00:00",
         "reported_at": null,
         "source_url": "https://www.dailyfaceoff.com/starting-goalies",
         "source_name": "Daily Faceoff public starting-goalie page",
@@ -6647,13 +6694,13 @@
         "status": "Unknown",
         "confirmed": false,
         "stats": [],
-        "observed_at": "2026-11-16T07:12:57.883740+00:00",
+        "observed_at": "2026-11-16T17:26:26.389933+00:00",
         "reported_at": null,
         "source_url": "https://www.dailyfaceoff.com/starting-goalies",
         "source_name": "Daily Faceoff public starting-goalie page",
         "note": "No confirmation supplied"
       },
-      "published_at": "2026-11-16T07:13:00.159068+00:00"
+      "published_at": "2026-11-16T17:26:29.663930+00:00"
     },
     "nhl:2026020334": {
       "event": "WSH @ TB",
@@ -6663,7 +6710,7 @@
         "status": "Unknown",
         "confirmed": false,
         "stats": [],
-        "observed_at": "2026-11-16T07:12:57.883740+00:00",
+        "observed_at": "2026-11-16T17:26:26.389933+00:00",
         "reported_at": null,
         "source_url": "https://www.dailyfaceoff.com/starting-goalies",
         "source_name": "Daily Faceoff public starting-goalie page",
@@ -6674,13 +6721,13 @@
         "status": "Unknown",
         "confirmed": false,
         "stats": [],
-        "observed_at": "2026-11-16T07:12:57.883740+00:00",
+        "observed_at": "2026-11-16T17:26:26.389933+00:00",
         "reported_at": null,
         "source_url": "https://www.dailyfaceoff.com/starting-goalies",
         "source_name": "Daily Faceoff public starting-goalie page",
         "note": "No confirmation supplied"
       },
-      "published_at": "2026-11-16T07:13:00.159068+00:00"
+      "published_at": "2026-11-16T17:26:29.663930+00:00"
     },
     "nhl:2026020338": {
       "event": "TOR @ CHI",
@@ -6690,7 +6737,7 @@
         "status": "Unknown",
         "confirmed": false,
         "stats": [],
-        "observed_at": "2026-11-16T07:12:57.883740+00:00",
+        "observed_at": "2026-11-16T17:26:26.389933+00:00",
         "reported_at": null,
         "source_url": "https://www.dailyfaceoff.com/starting-goalies",
         "source_name": "Daily Faceoff public starting-goalie page",
@@ -6701,23 +6748,23 @@
         "status": "Unknown",
         "confirmed": false,
         "stats": [],
-        "observed_at": "2026-11-16T07:12:57.883740+00:00",
+        "observed_at": "2026-11-16T17:26:26.389933+00:00",
         "reported_at": null,
         "source_url": "https://www.dailyfaceoff.com/starting-goalies",
         "source_name": "Daily Faceoff public starting-goalie page",
         "note": "No confirmation supplied"
       },
-      "published_at": "2026-11-16T07:13:00.159068+00:00"
+      "published_at": "2026-11-16T17:26:29.663930+00:00"
     },
     "nhl:2026020339": {
       "event": "ANA @ STL",
       "start": "2026-11-18T01:00:00+00:00",
       "away": {
-        "name": "Ville Husso",
+        "name": "Lukas Dostal",
         "status": "Unknown",
         "confirmed": false,
         "stats": [],
-        "observed_at": "2026-11-16T07:12:57.883740+00:00",
+        "observed_at": "2026-11-16T17:26:26.389933+00:00",
         "reported_at": null,
         "source_url": "https://www.dailyfaceoff.com/starting-goalies",
         "source_name": "Daily Faceoff public starting-goalie page",
@@ -6728,13 +6775,13 @@
         "status": "Unknown",
         "confirmed": false,
         "stats": [],
-        "observed_at": "2026-11-16T07:12:57.883740+00:00",
+        "observed_at": "2026-11-16T17:26:26.389933+00:00",
         "reported_at": null,
         "source_url": "https://www.dailyfaceoff.com/starting-goalies",
         "source_name": "Daily Faceoff public starting-goalie page",
         "note": "No confirmation supplied"
       },
-      "published_at": "2026-11-16T07:13:00.159068+00:00"
+      "published_at": "2026-11-16T17:26:29.663930+00:00"
     },
     "nhl:2026020340": {
       "event": "NSH @ MIN",
@@ -6744,7 +6791,7 @@
         "status": "Unknown",
         "confirmed": false,
         "stats": [],
-        "observed_at": "2026-11-16T07:12:57.883740+00:00",
+        "observed_at": "2026-11-16T17:26:26.389933+00:00",
         "reported_at": null,
         "source_url": "https://www.dailyfaceoff.com/starting-goalies",
         "source_name": "Daily Faceoff public starting-goalie page",
@@ -6755,23 +6802,23 @@
         "status": "Unknown",
         "confirmed": false,
         "stats": [],
-        "observed_at": "2026-11-16T07:12:57.883740+00:00",
+        "observed_at": "2026-11-16T17:26:26.389933+00:00",
         "reported_at": null,
         "source_url": "https://www.dailyfaceoff.com/starting-goalies",
         "source_name": "Daily Faceoff public starting-goalie page",
         "note": "No confirmation supplied"
       },
-      "published_at": "2026-11-16T07:13:00.159068+00:00"
+      "published_at": "2026-11-16T17:26:29.663930+00:00"
     },
     "nhl:2026020342": {
       "event": "DAL @ VGK",
       "start": "2026-11-18T03:00:00+00:00",
       "away": {
-        "name": "Casey DeSmith",
+        "name": "Jake Oettinger",
         "status": "Unknown",
         "confirmed": false,
         "stats": [],
-        "observed_at": "2026-11-16T07:12:57.883740+00:00",
+        "observed_at": "2026-11-16T17:26:26.389933+00:00",
         "reported_at": null,
         "source_url": "https://www.dailyfaceoff.com/starting-goalies",
         "source_name": "Daily Faceoff public starting-goalie page",
@@ -6782,13 +6829,13 @@
         "status": "Unknown",
         "confirmed": false,
         "stats": [],
-        "observed_at": "2026-11-16T07:12:57.883740+00:00",
+        "observed_at": "2026-11-16T17:26:26.389933+00:00",
         "reported_at": null,
         "source_url": "https://www.dailyfaceoff.com/starting-goalies",
         "source_name": "Daily Faceoff public starting-goalie page",
         "note": "No confirmation supplied"
       },
-      "published_at": "2026-11-16T07:13:00.159068+00:00"
+      "published_at": "2026-11-16T17:26:29.663930+00:00"
     },
     "nhl:2026020343": {
       "event": "CGY @ SJ",
@@ -6798,7 +6845,7 @@
         "status": "Unknown",
         "confirmed": false,
         "stats": [],
-        "observed_at": "2026-11-16T07:12:57.883740+00:00",
+        "observed_at": "2026-11-16T17:26:26.389933+00:00",
         "reported_at": null,
         "source_url": "https://www.dailyfaceoff.com/starting-goalies",
         "source_name": "Daily Faceoff public starting-goalie page",
@@ -6809,13 +6856,13 @@
         "status": "Unknown",
         "confirmed": false,
         "stats": [],
-        "observed_at": "2026-11-16T07:12:57.883740+00:00",
+        "observed_at": "2026-11-16T17:26:26.389933+00:00",
         "reported_at": null,
         "source_url": "https://www.dailyfaceoff.com/starting-goalies",
         "source_name": "Daily Faceoff public starting-goalie page",
         "note": "No confirmation supplied"
       },
-      "published_at": "2026-11-16T07:13:00.159068+00:00"
+      "published_at": "2026-11-16T17:26:29.663930+00:00"
     },
     "nhl:2026020344": {
       "event": "BOS @ DET",
@@ -6832,7 +6879,7 @@
         "confirmed": false,
         "stats": []
       },
-      "published_at": "2026-11-16T07:13:00.159068+00:00"
+      "published_at": "2026-11-16T17:26:29.663930+00:00"
     },
     "nhl:2026020345": {
       "event": "MTL @ NJ",
@@ -6849,7 +6896,7 @@
         "confirmed": false,
         "stats": []
       },
-      "published_at": "2026-11-16T07:13:00.159068+00:00"
+      "published_at": "2026-11-16T17:26:29.663930+00:00"
     },
     "nhl:2026020346": {
       "event": "COL @ UTA",
@@ -6866,7 +6913,7 @@
         "confirmed": false,
         "stats": []
       },
-      "published_at": "2026-11-16T07:13:00.159068+00:00"
+      "published_at": "2026-11-16T17:26:29.663930+00:00"
     },
     "nhl:2026020347": {
       "event": "LA @ TOR",
@@ -6883,7 +6930,7 @@
         "confirmed": false,
         "stats": []
       },
-      "published_at": "2026-11-16T07:13:00.159068+00:00"
+      "published_at": "2026-11-16T17:26:29.663930+00:00"
     },
     "nhl:2026020348": {
       "event": "PHI @ OTT",
@@ -6900,7 +6947,7 @@
         "confirmed": false,
         "stats": []
       },
-      "published_at": "2026-11-16T07:13:00.159068+00:00"
+      "published_at": "2026-11-16T17:26:29.663930+00:00"
     },
     "nhl:2026020350": {
       "event": "STL @ PIT",
@@ -6917,7 +6964,7 @@
         "confirmed": false,
         "stats": []
       },
-      "published_at": "2026-11-16T07:13:00.159068+00:00"
+      "published_at": "2026-11-16T17:26:29.663930+00:00"
     },
     "nhl:2026020351": {
       "event": "BUF @ WSH",
@@ -6934,7 +6981,7 @@
         "confirmed": false,
         "stats": []
       },
-      "published_at": "2026-11-16T07:13:00.159068+00:00"
+      "published_at": "2026-11-16T17:26:29.663930+00:00"
     },
     "nhl:2026020352": {
       "event": "MTL @ CAR",
@@ -6951,7 +6998,7 @@
         "confirmed": false,
         "stats": []
       },
-      "published_at": "2026-11-16T07:13:00.159068+00:00"
+      "published_at": "2026-11-16T17:26:29.663930+00:00"
     },
     "nhl:2026020354": {
       "event": "NYI @ WPG",
@@ -6968,7 +7015,7 @@
         "confirmed": false,
         "stats": []
       },
-      "published_at": "2026-11-16T07:13:00.159068+00:00"
+      "published_at": "2026-11-16T17:26:29.663930+00:00"
     },
     "nhl:2026020349": {
       "event": "EDM @ TB",
@@ -6985,7 +7032,7 @@
         "confirmed": false,
         "stats": []
       },
-      "published_at": "2026-11-16T07:13:00.159068+00:00"
+      "published_at": "2026-11-16T17:26:29.663930+00:00"
     },
     "nhl:2026020353": {
       "event": "CBJ @ CHI",
@@ -7002,7 +7049,7 @@
         "confirmed": false,
         "stats": []
       },
-      "published_at": "2026-11-16T07:13:00.159068+00:00"
+      "published_at": "2026-11-16T17:26:29.663930+00:00"
     },
     "nhl:2026020355": {
       "event": "MIN @ CGY",
@@ -7019,7 +7066,7 @@
         "confirmed": false,
         "stats": []
       },
-      "published_at": "2026-11-16T07:13:00.159068+00:00"
+      "published_at": "2026-11-16T17:26:29.663930+00:00"
     },
     "nhl:2026020356": {
       "event": "ANA @ COL",
@@ -7036,7 +7083,7 @@
         "confirmed": false,
         "stats": []
       },
-      "published_at": "2026-11-16T07:13:00.159068+00:00"
+      "published_at": "2026-11-16T17:26:29.663930+00:00"
     },
     "nhl:2026020357": {
       "event": "VAN @ SEA",
@@ -7053,7 +7100,7 @@
         "confirmed": false,
         "stats": []
       },
-      "published_at": "2026-11-16T07:13:00.159068+00:00"
+      "published_at": "2026-11-16T17:26:29.663930+00:00"
     },
     "nhl:2026020358": {
       "event": "DAL @ VGK",
@@ -7070,7 +7117,7 @@
         "confirmed": false,
         "stats": []
       },
-      "published_at": "2026-11-16T07:13:00.159068+00:00"
+      "published_at": "2026-11-16T17:26:29.663930+00:00"
     },
     "nhl:2026020359": {
       "event": "EDM @ CAR",
@@ -7087,7 +7134,7 @@
         "confirmed": false,
         "stats": []
       },
-      "published_at": "2026-11-16T07:13:00.159068+00:00"
+      "published_at": "2026-11-16T17:26:29.663930+00:00"
     },
     "nhl:2026020360": {
       "event": "CHI @ CGY",
@@ -7104,7 +7151,7 @@
         "confirmed": false,
         "stats": []
       },
-      "published_at": "2026-11-16T07:13:00.159068+00:00"
+      "published_at": "2026-11-16T17:26:29.663930+00:00"
     },
     "nhl:2026020361": {
       "event": "BUF @ FLA",
@@ -7121,7 +7168,7 @@
         "confirmed": false,
         "stats": []
       },
-      "published_at": "2026-11-16T07:13:00.159068+00:00"
+      "published_at": "2026-11-16T17:26:29.663930+00:00"
     },
     "nhl:2026020362": {
       "event": "PIT @ NSH",
@@ -7138,7 +7185,7 @@
         "confirmed": false,
         "stats": []
       },
-      "published_at": "2026-11-16T07:13:00.159068+00:00"
+      "published_at": "2026-11-16T17:26:29.663930+00:00"
     },
     "nhl:2026020363": {
       "event": "WSH @ BOS",
@@ -7155,7 +7202,7 @@
         "confirmed": false,
         "stats": []
       },
-      "published_at": "2026-11-16T07:13:00.159068+00:00"
+      "published_at": "2026-11-16T17:26:29.663930+00:00"
     },
     "nhl:2026020364": {
       "event": "CBJ @ TOR",
@@ -7172,7 +7219,7 @@
         "confirmed": false,
         "stats": []
       },
-      "published_at": "2026-11-16T07:13:00.159068+00:00"
+      "published_at": "2026-11-16T17:26:29.663930+00:00"
     },
     "nhl:2026020365": {
       "event": "PHI @ MTL",
@@ -7189,7 +7236,7 @@
         "confirmed": false,
         "stats": []
       },
-      "published_at": "2026-11-16T07:13:00.159068+00:00"
+      "published_at": "2026-11-16T17:26:29.663930+00:00"
     },
     "nhl:2026020366": {
       "event": "LA @ OTT",
@@ -7206,7 +7253,7 @@
         "confirmed": false,
         "stats": []
       },
-      "published_at": "2026-11-16T07:13:00.159068+00:00"
+      "published_at": "2026-11-16T17:26:29.663930+00:00"
     },
     "nhl:2026020367": {
       "event": "NYI @ DET",
@@ -7223,7 +7270,7 @@
         "confirmed": false,
         "stats": []
       },
-      "published_at": "2026-11-16T07:13:00.159068+00:00"
+      "published_at": "2026-11-16T17:26:29.663930+00:00"
     },
     "nhl:2026020368": {
       "event": "NJ @ STL",
@@ -7240,7 +7287,7 @@
         "confirmed": false,
         "stats": []
       },
-      "published_at": "2026-11-16T07:13:00.159068+00:00"
+      "published_at": "2026-11-16T17:26:29.663930+00:00"
     },
     "nhl:2026020369": {
       "event": "VGK @ WPG",
@@ -7257,7 +7304,7 @@
         "confirmed": false,
         "stats": []
       },
-      "published_at": "2026-11-16T07:13:00.159068+00:00"
+      "published_at": "2026-11-16T17:26:29.663930+00:00"
     },
     "nhl:2026020370": {
       "event": "ANA @ UTA",
@@ -7274,7 +7321,7 @@
         "confirmed": false,
         "stats": []
       },
-      "published_at": "2026-11-16T07:13:00.159068+00:00"
+      "published_at": "2026-11-16T17:26:29.663930+00:00"
     },
     "nhl:2026020371": {
       "event": "MIN @ VAN",
@@ -7291,7 +7338,7 @@
         "confirmed": false,
         "stats": []
       },
-      "published_at": "2026-11-16T07:13:00.159068+00:00"
+      "published_at": "2026-11-16T17:26:29.663930+00:00"
     },
     "nhl:2026020372": {
       "event": "SEA @ SJ",
@@ -7308,7 +7355,7 @@
         "confirmed": false,
         "stats": []
       },
-      "published_at": "2026-11-16T07:13:00.159068+00:00"
+      "published_at": "2026-11-16T17:26:29.663930+00:00"
     },
     "nhl:2026020373": {
       "event": "CAR @ NYR",
@@ -7325,7 +7372,7 @@
         "confirmed": false,
         "stats": []
       },
-      "published_at": "2026-11-16T07:13:00.159068+00:00"
+      "published_at": "2026-11-16T17:26:29.663930+00:00"
     },
     "nhl:2026020374": {
       "event": "BUF @ TB",
@@ -7342,7 +7389,7 @@
         "confirmed": false,
         "stats": []
       },
-      "published_at": "2026-11-16T07:13:00.159068+00:00"
+      "published_at": "2026-11-16T17:26:29.663930+00:00"
     },
     "nhl:2026020375": {
       "event": "EDM @ STL",
@@ -7359,7 +7406,7 @@
         "confirmed": false,
         "stats": []
       },
-      "published_at": "2026-11-16T07:13:00.159068+00:00"
+      "published_at": "2026-11-16T17:26:29.663930+00:00"
     },
     "nhl:2026020376": {
       "event": "PIT @ DAL",
@@ -7376,7 +7423,7 @@
         "confirmed": false,
         "stats": []
       },
-      "published_at": "2026-11-16T07:13:00.159068+00:00"
+      "published_at": "2026-11-16T17:26:29.663930+00:00"
     },
     "nhl:2026020377": {
       "event": "CHI @ VAN",
@@ -7393,7 +7440,7 @@
         "confirmed": false,
         "stats": []
       },
-      "published_at": "2026-11-16T07:13:00.159068+00:00"
+      "published_at": "2026-11-16T17:26:29.663930+00:00"
     },
     "nhl:2026020378": {
       "event": "CBJ @ NJ",
@@ -7410,7 +7457,7 @@
         "confirmed": false,
         "stats": []
       },
-      "published_at": "2026-11-16T07:13:00.159068+00:00"
+      "published_at": "2026-11-16T17:26:29.663930+00:00"
     },
     "nhl:2026020379": {
       "event": "LA @ MTL",
@@ -7427,7 +7474,7 @@
         "confirmed": false,
         "stats": []
       },
-      "published_at": "2026-11-16T07:13:00.159068+00:00"
+      "published_at": "2026-11-16T17:26:29.663930+00:00"
     },
     "nhl:2026020380": {
       "event": "CGY @ OTT",
@@ -7444,7 +7491,7 @@
         "confirmed": false,
         "stats": []
       },
-      "published_at": "2026-11-16T07:13:00.159068+00:00"
+      "published_at": "2026-11-16T17:26:29.663930+00:00"
     },
     "nhl:2026020381": {
       "event": "TOR @ NYI",
@@ -7461,7 +7508,7 @@
         "confirmed": false,
         "stats": []
       },
-      "published_at": "2026-11-16T07:13:00.159068+00:00"
+      "published_at": "2026-11-16T17:26:29.663930+00:00"
     },
     "nhl:2026020382": {
       "event": "UTA @ WPG",
@@ -7478,7 +7525,7 @@
         "confirmed": false,
         "stats": []
       },
-      "published_at": "2026-11-16T07:13:00.159068+00:00"
+      "published_at": "2026-11-16T17:26:29.663930+00:00"
     },
     "nhl:2026020383": {
       "event": "ANA @ SEA",
@@ -7495,7 +7542,7 @@
         "confirmed": false,
         "stats": []
       },
-      "published_at": "2026-11-16T07:13:00.159068+00:00"
+      "published_at": "2026-11-16T17:26:29.663930+00:00"
     },
     "nhl:2026020384": {
       "event": "MIN @ SJ",
@@ -7512,7 +7559,7 @@
         "confirmed": false,
         "stats": []
       },
-      "published_at": "2026-11-16T07:13:00.159068+00:00"
+      "published_at": "2026-11-16T17:26:29.663930+00:00"
     },
     "nhl:2026020385": {
       "event": "VGK @ EDM",
@@ -7529,7 +7576,7 @@
         "confirmed": false,
         "stats": []
       },
-      "published_at": "2026-11-16T07:13:00.159068+00:00"
+      "published_at": "2026-11-16T17:26:29.663930+00:00"
     }
   }
 }
