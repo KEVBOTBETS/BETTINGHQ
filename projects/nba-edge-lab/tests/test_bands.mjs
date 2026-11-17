@@ -20,3 +20,11 @@ assert.throws(()=>C.build([],meta,{now,format:'fake'}));
 console.log('NBA bands: probability mass, no percentage floor, 2–4 distinct games, formats, Toronto dates and stale/kickoff guards passed');
 
 const marginal=C.build([weak],meta,opts);assert.equal(marginal.all.length,1);assert.equal(marginal.pool.length,1);assert.equal(marginal.tickets.length,0);
+// Equal integer-width bins: a mean of six must favour 6–10 over 1–5.
+const boundary=game(7);boundary.projection={...boundary.projection,mu:6,p_home:C.cdf(.5)};
+assert.equal(C.candidate(boundary).bands[0].label,'6–10');
+const blowout=game(8);blowout.projection={...blowout.projection,mu:31,p_home:C.cdf(31/12)};
+assert.equal(C.candidate(blowout).bands[0].label,'26+');assert.equal(C.candidate(blowout).mean_band.label,'26+');
+boundary.quotes=[{market:'ATS',side:'home',line:-31,book:'Observed Book',observed_at:meta.generated_at}];
+assert.equal(C.candidate(boundary,'five',now).disagreement,true);assert.equal(C.candidate(boundary,'five',now).margin,6);
+assert.equal(C.candidate(boundary,'five',now+2*3600000).disagreement,false,'Expired spreads cannot imply a current disagreement');

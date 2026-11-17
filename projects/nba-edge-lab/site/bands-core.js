@@ -11,24 +11,28 @@
       game.state==='pre'&&!game.completed&&!game.canceled&&!game.postponed&&!game.source_stale&&start>now&&start-now<=48*3600000&&
       p.ratings_known===true&&finite(p.mu)&&finite(p.margin_sd)&&p.margin_sd>0&&finite(p.p_home)&&p.p_home>0&&p.p_home<1&&game.home?.abbr&&game.away?.abbr;
   }
-  function candidate(game,format='five'){
+  function candidate(game,format='five',now=Date.now()){
     if(!formats[format])throw Error('Unknown band format');
     const p=game.projection,side=p.p_home>=.5?'home':'away',win=side==='home'?p.p_home:1-p.p_home,mean=side==='home'?p.mu:-p.mu;
-    // The existing baseline uses a continuous final-margin distribution. The
-    // first integer band takes positive mass up to 5.5/10.5; no tie outcome is added.
-    const rawWin=cdf(mean/p.margin_sd),bands=formats[format].map(([lo,hi])=>{
-      const low=lo===1?0:lo-.5,high=hi===null?Infinity:hi+.5;
+    // Integer final scores cannot tie after overtime. Condition the positive
+    // margin distribution on >= 0.5, so every five-point bin has equal width.
+    const rawWin=1-cdf((.5-mean)/p.margin_sd),bands=formats[format].map(([lo,hi])=>{
+      const low=lo-.5,high=hi===null?Infinity:hi+.5;
       const mass=cdf((high-mean)/p.margin_sd)-cdf((low-mean)/p.margin_sd);
       return {lo,hi,label:hi===null?lo+'+':lo+'–'+hi,prob:mass/rawWin*win};
     }).sort((a,b)=>b.prob-a.prob);
+    const meanBand=bands.find(b=>Math.max(1,Math.round(mean))>=b.lo&&(b.hi===null||Math.max(1,Math.round(mean))<=b.hi));
+    const quotes=(game.quotes||[]).filter(q=>q.market==='ATS'&&q.side==='home'&&finite(q.line)&&q.book&&finite(time(q.observed_at))&&time(q.observed_at)<=now).sort((a,b)=>time(b.observed_at)-time(a.observed_at));
+    const q=quotes[0],market=q?{home_line:q.line,margin:side==='home'?-q.line:q.line,book:q.book,observed_at:q.observed_at,fresh:now-time(q.observed_at)<=90*60000}:null;
+    const disagreement=!!market&&market.fresh&&(Math.abs(mean-market.margin)>=10||market.margin<0);
     return {event_id:String(game.game_id),tipoff:game.tipoff,matchup:game.away.abbr+' @ '+game.home.abbr,
       team:game[side].abbr,team_name:game[side].name||game[side].abbr,win_prob:win,margin:mean,
-      home_points:p.proj_home_pts,away_points:p.proj_away_pts,bands,source_url:game.source_url};
+      home_points:p.proj_home_pts,away_points:p.proj_away_pts,bands,mean_band:meanBand,market,disagreement,margin_sd:p.margin_sd,basis:p.basis,team_inputs:game.team_model_inputs||null,fit:p.residual_fit,source_url:game.source_url};
   }
   function build(games,meta,{now=Date.now(),date=day(now),format='five'}={}){
     if(!formats[format])throw Error('Unknown band format');
     const seen=new Set(),pool=[],all=[];
-    for(const g of games){if(!eligible(g,meta,now)||day(g.tipoff)!==date||seen.has(String(g.game_id)))continue;seen.add(String(g.game_id));const c=candidate(g,format);all.push(c);pool.push(c);}
+    for(const g of games){if(!eligible(g,meta,now)||day(g.tipoff)!==date||seen.has(String(g.game_id)))continue;seen.add(String(g.game_id));const c=candidate(g,format,now);all.push(c);pool.push(c);}
     pool.sort((a,b)=>b.bands[0].prob-a.bands[0].prob||a.event_id.localeCompare(b.event_id));
     const tickets=[];
     // Twelve games bound the combination search. At most one team/band per event.

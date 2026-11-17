@@ -38,11 +38,11 @@ class RecoveryPolicy(unittest.TestCase):
             for name,relative in PUBLICATIONS.items():
                 p=root/relative;p.parent.mkdir(parents=True,exist_ok=True)
                 p.write_text(json.dumps({'generated_at':(now-dt.timedelta(minutes=80)).isoformat()}))
-            for sport in ('nba','nhl'):
+            for sport in ('nba','nhl','ncaab'):
                 p=root/f'projects/{sport}-edge-lab/site/data/games.json'
                 p.write_text(json.dumps([{'date':(now+dt.timedelta(hours=3)).isoformat(),'completed':False}]))
-            self.assertEqual(recovery_projects(root,[],now),['nba-edge-lab','nhl-edge-lab'])
+            self.assertEqual(recovery_projects(root,[],now),['ncaab-edge-lab','nba-edge-lab','nhl-edge-lab'])
             # No current slate retains the existing two-hour policy.
-            for sport in ('nba','nhl'):
+            for sport in ('nba','nhl','ncaab'):
                 (root/f'projects/{sport}-edge-lab/site/data/games.json').write_text('[]')
             self.assertEqual(recovery_projects(root,[],now),[])

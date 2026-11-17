@@ -11,9 +11,9 @@ PUBLICATIONS = {
 
 
 def publication_max_age(root, name, now):
-    # The NBA/NHL parlay labs expire observed leg prices after 90 minutes.
+    # The NBA/NHL/NCAAB pick and parlay pages expire observed leg prices after 90 minutes.
     # Start recovery at 60 minutes instead of waiting two hours.
-    if name not in ('nba-edge-lab','nhl-edge-lab'):return dt.timedelta(hours=2)
+    if name not in ('nba-edge-lab','nhl-edge-lab','ncaab-edge-lab'):return dt.timedelta(hours=2)
     try:
         games=json.loads((root/f'projects/{name}/site/data/games.json').read_text())
         for g in games:

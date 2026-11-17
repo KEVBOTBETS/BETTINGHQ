@@ -181,13 +181,19 @@ def main(argv=None, root=None):
     from .database import merge_players, residual_fit, market_lines
     players=merge_players(ROOT,players,season,now) if not college else players
     game_history.A.settle(pending,game_history.results(ordered))
-    fit=residual_fit(pending,now) if not college else None
+    if college:
+        from .margin_fit import fit_margins
+        fit=fit_margins(pending,now,season)
+    else:fit=residual_fit(pending,now)
     board=[]
     for g in ordered:
         if g in upcoming and not g['source_stale']:
             g['projection']=model.project(teams.get(g['home']['id'],{}),teams.get(g['away']['id'],{}),now,g['neutral'],fit=fit,college=college)
         else:g['projection']={'ratings_known':False,'reason':'No new forecast after tipoff'}
         g['p_home']=g['projection'].get('p_home')
+        g['team_model_inputs']={side:{'name':g[side].get('name'),'current':teams.get(g[side]['id'],{}).get('current',{}),'prior':teams.get(g[side]['id'],{}).get('prior',{})} for side in ('home','away')}
+        if college:
+            for offer in g['quotes']:offer['source_url']='https://www.espn.com/mens-college-basketball/odds'
         board.extend(model.candidates(g,now))
         # One original named-book bundle for independent market comparison history.
         ml=[q for q in g['quotes'] if q['market']=='ML']
@@ -223,7 +229,7 @@ def main(argv=None, root=None):
     near=[g for g in upcoming if model.instant(g['tipoff'])<=now+timedelta(hours=24)]
     coverage={g['game_id']:public_odds.covered_markets(g,now) for g in upcoming}
     priced=sum(bool(coverage[g['game_id']]) for g in near)
-    meta={'generated_at':stamp,'season':season,'season_label':f'{season-1}-{str(season)[-2:]}','league':league,'model_version':('ncaab-scoring-research-1.0' if college else model.VERSION),
+    meta={'generated_at':stamp,'season':season,'season_label':f'{season-1}-{str(season)[-2:]}','league':league,'model_version':(('ncaab-scoring-research-1.1' if fit and fit.get('active') else 'ncaab-scoring-research-1.0') if college else model.VERSION),
         'model_mode':'research','automatic_qualification':False,'residual_fit':fit,'database':{'player_game_rows':len(players),'completed_games':sum(g['completed'] for g in ordered),'current_team_games':{t['abbr']:t.get('games') for t in current.values()}},'college':college,'timezone':'America/Toronto','max_odds_age_hours':1.5,
         'source_status':'partial' if any(s['status'] in ('retained','unavailable') for s in health.values()) else 'live-data','sources':health,
         'public_odds_attempts':attempts,'counts':{'games':len(upcoming),'teams':len(teams),'qualified':0,'players':len(players),'forecast_games':sum(g['projection'].get('ratings_known',False) for g in upcoming)},

@@ -19,8 +19,19 @@
   // One option per game prevents opposite sides or duplicate correlated singles.
   const seen=new Set();return rows.filter(r=>{if(seen.has(r.game_id))return false;seen.add(r.game_id);return true;});
  }
+ function shortlist(system,evidence,config={}){
+  const now=config.now??Date.now(),date=config.date||day(now),sport=config.sport||'all',limit=config.limit??10;
+  const current=options(system,evidence,{...config,now,date,sport}).map(r=>({...r,bettable:true})),seen=new Set(current.map(r=>r.game_id)),forecasts=[];
+  for(const g of system?.games||[]){const p=V.number(g.p_home);
+   if(seen.has(g.id)||!sports.includes(g.sport)||sport!=='all'&&g.sport!==sport||!Number.isFinite(Date.parse(g.start))||Date.parse(g.start)<=now||day(g.start)!==date||!g.forecast_available||p===null||p<=0||p>=1||!V.fresh(g.publication_at,now,['ncaaf','ncaab'].includes(g.sport)?4:6))continue;
+   const side=p>=.5?'home':'away',probability=side==='home'?p:1-p,stressed=Math.max(0,probability-.03),row={game_id:g.id,event_id:g.event_id,sport:g.sport,matchup:g.matchup,start:g.start,publication_at:g.publication_at,market:'ML',side,pick:(g[side+'_name']||g[side]||side)+' to win',probability,stressed,price:null,book:null,decimal:null,qualified:false,bettable:false,model_version:g.model_version,target:V.american(1.02/stressed),reason:'Forecast only — no fresh preferred-price positive-value offer. Confirm a current price before building a ticket.'};
+   row.history=history(evidence,g,row);row.id='forecast|'+g.id;forecasts.push(row);
+  }
+  forecasts.sort((a,b)=>b.probability-a.probability||a.start.localeCompare(b.start)||a.game_id.localeCompare(b.game_id));
+  return [...current,...forecasts].slice(0,limit);
+ }
  function stake(row,{bankroll,budget=20,remaining=budget}={}){
-  if(!row.qualified)return {amount:0,reason:'Research only: no evidence-backed stake recommendation. A $5 preview is a planning amount.'};
+  if(row.bettable===false||!row.qualified)return {amount:0,reason:'Research only: no evidence-backed stake recommendation. A $5 preview is a planning amount.'};
   bankroll=V.number(bankroll);budget=V.number(budget);remaining=V.number(remaining);
   if(!(bankroll>0)||!(budget>=5)||!(remaining>=5))return {amount:0,reason:'Enter a bankroll and remaining daily budget of at least $5.'};
   const k=Math.max(0,(row.stressed*row.decimal-1)/(row.decimal-1))*.25;
@@ -29,9 +40,9 @@
  }
  function ticket(rows,amounts,{budget=20,now=Date.now()}={}){
   const seen=new Set(),errors=[];let risk=0,profit=0;
-  rows.forEach(r=>{const amount=Number(amounts[r.id]);if(!Number.isFinite(amount)||amount<5||amount>20)errors.push('Each single must be $5–$20.');else{risk+=amount;profit+=amount*(r.decimal-1);}if(seen.has(r.game_id))errors.push('Only one single per game.');seen.add(r.game_id);if(Date.parse(r.start)<=now||!V.fresh(r.observed_at,now,['nba','nhl','ncaab'].includes(r.sport)?1.5:4)||!V.fresh(r.publication_at,now,['ncaaf','ncaab'].includes(r.sport)?4:6))errors.push('A game started or its source/price expired. Refresh before exporting.');});
+  rows.forEach(r=>{if(r.bettable===false||V.decimal(r.price)===null)errors.push('A forecast without a usable current price cannot enter a ticket.');const amount=Number(amounts[r.id]);if(!Number.isFinite(amount)||amount<5||amount>20)errors.push('Each single must be $5–$20.');else{risk+=amount;profit+=amount*(r.decimal-1);}if(seen.has(r.game_id))errors.push('Only one single per game.');seen.add(r.game_id);if(Date.parse(r.start)<=now||!V.fresh(r.observed_at,now,['nba','nhl','ncaab'].includes(r.sport)?1.5:4)||!V.fresh(r.publication_at,now,['ncaaf','ncaab'].includes(r.sport)?4:6))errors.push('A game started or its source/price expired. Refresh before exporting.');});
   if(!rows.length)errors.push('Choose at least one single.');if(!Number.isFinite(Number(budget))||risk>Number(budget))errors.push('The selected stakes exceed the daily budget.');
   return {risk,profit,returnIfAllWin:risk+profit,errors:[...new Set(errors)],kind:'Separate singles, not a parlay'};
  }
- return {sports,day,options,stake,ticket,history};
+ return {sports,day,options,shortlist,stake,ticket,history};
 });

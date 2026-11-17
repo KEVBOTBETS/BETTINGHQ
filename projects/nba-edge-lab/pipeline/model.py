@@ -1,4 +1,4 @@
-"""NBA scoring-rate baseline. Research only; no automatic model promotion."""
+"""Basketball scoring-rate research models; no automatic bet qualification."""
 from datetime import datetime
 from statistics import NormalDist
 import math
@@ -30,12 +30,12 @@ def project(home,away,now,neutral=False,fit=None,college=False):
             return (n*c+prior_games*p)/(n+prior_games)
         return p
     hf,ha,af,aa=rate(home,'points_for'),rate(home,'points_against'),rate(away,'points_for'),rate(away,'points_against')
-    if None in (hf,ha,af,aa):return {'ratings_known':False,'reason':'Verified current/prior NBA scoring samples unavailable'}
+    if None in (hf,ha,af,aa):return {'ratings_known':False,'reason':'Verified current/prior '+('college basketball' if college else 'NBA')+' scoring samples unavailable'}
     h,a=(hf+aa)/2,(af+ha)/2
     # A disclosed baseline assumption, not a fitted or validated NBA parameter.
     if not neutral:h+=1.0;a-=1.0
-    raw_mu=h-a;bias=(fit or {}).get('bias',0);sigma=(fit or {}).get('margin_sd',12);mu=raw_mu+bias;total=h+a;h+=bias/2;a-=bias/2;p=NormalDist(0,sigma).cdf(mu)
-    return {'ratings_known':True,'raw_mu':round(raw_mu,3),'mu':round(mu,3),'model_version':'ncaab-scoring-research-1.0' if college else VERSION,'total':round(total,3),'proj_total':round(total,3),
+    raw_mu=h-a;bias=(fit or {}).get('bias',0);scale=(fit or {}).get('scale',1) if college and (fit or {}).get('active') else 1;sigma=(fit or {}).get('margin_sd',12);mu=raw_mu*scale+bias;total=h+a;adjustment=mu-raw_mu;h+=adjustment/2;a-=adjustment/2;p=NormalDist(0,sigma).cdf(mu)
+    return {'ratings_known':True,'raw_mu':round(raw_mu,3),'mu':round(mu,3),'model_version':('ncaab-scoring-research-1.1' if (fit or {}).get('active') else 'ncaab-scoring-research-1.0') if college else VERSION,'total':round(total,3),'proj_total':round(total,3),
         'proj_home_pts':round(h,2),'proj_away_pts':round(a,2),'p_home':round(p,6),'margin_sd':sigma,'total_sd':18,
         'prior_weight':round(prior_games/(prior_games+min(home.get('current',{}).get('games') or 0,away.get('current',{}).get('games') or 0)),3),
         'residual_fit':fit,'basis':'Previous regular-season scoring rates blended with current-season rates using a disclosed prior-game weight. No player injury adjustment.',
@@ -64,5 +64,5 @@ def candidates(game,now):
             'season':game['season'],'season_type':game['season_type'],'pick':label,'model_prob':conditional,'push_prob':push,
             'edge':(1-push)*(conditional*price-1) if conditional is not None else None,'odds_observed_at':q['observed_at'],
             'odds_verified':True,'model_version':p.get('model_version',VERSION),'tier':'RESEARCH','held':True,'stake':0,
-            'reasons':['New NBA baseline is uncalibrated; research only. Confirm injuries and the current sportsbook price.']})
+            'reasons':['Research scoring model; probabilities are not calibrated. Confirm availability and the current sportsbook price.']})
     return rows

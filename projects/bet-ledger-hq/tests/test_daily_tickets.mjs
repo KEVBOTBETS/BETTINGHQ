@@ -20,3 +20,7 @@ const t=C.ticket(r,{[r[0].id]:5},{budget:20,now});assert.equal(t.errors.length,0
 assert.ok(C.ticket(r,{[r[0].id]:5},{budget:20,now:Date.parse(start)}).errors.length);
 assert.equal(C.day('2026-11-18T02:00:00Z'),'2026-11-17');
 console.log('Daily tickets: exact fresh prices, preferred odds, version/season evidence, no invented ROI, sub-minimum pass, $5–$20 caps, daily budgets, duplicate games and kickoff expiry passed');
+const forecastGame={...game,forecast_available:true,p_home:.72,home:'HOME',away:'AWAY',selections:[{...q,fresh:false}]};
+const forecasts=C.shortlist({games:[forecastGame]},evidence,{now});assert.equal(forecasts.length,1);assert.equal(forecasts[0].bettable,false);assert.equal(forecasts[0].price,null);assert.equal(C.stake(forecasts[0],{bankroll:5000}).amount,0);assert.ok(C.ticket(forecasts,{[forecasts[0].id]:5},{now}).errors.length);
+assert.equal(C.shortlist({games:[{...forecastGame,publication_at:'2026-11-17T08:00Z'}]},evidence,{now}).length,0);
+assert.equal(C.shortlist({games:Array.from({length:14},(_,i)=>({...forecastGame,id:'nba|'+i}))},evidence,{now}).length,10);
