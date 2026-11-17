@@ -159,3 +159,66 @@
 :root[data-kb-sport=ncaaf] .kb-network{flex-wrap:wrap;gap:8px 14px}
 
 :root[data-kb-sport=ncaab]{--kb-code:'CBB';--kb-accent:#edc66e;--kb-secondary:#91bedb;--kb-art:url('assets/sports/court.svg')}
+
+/* A calmer matchday desk: keep the league colours, simplify the reading order. */
+:root[data-kb-page=index][data-kb-sport=hq] .shell{grid-template-columns:238px minmax(0,1fr)}
+:root[data-kb-page=index][data-kb-sport=hq] .board-link{font-family:var(--kb-sans),system-ui,sans-serif;font-size:13px;letter-spacing:0;text-transform:none;font-weight:600;border-radius:8px;min-height:42px;padding:10px 12px;line-height:1.35}
+:root[data-kb-page=index][data-kb-sport=hq] .nav-group{margin:5px 0;padding:5px 0;border-color:#26323f}
+:root[data-kb-page=index][data-kb-sport=hq] .nav-group>summary{padding:11px 10px;font-size:12px;letter-spacing:.03em;color:#acbaca}
+:root[data-kb-page=index][data-kb-sport=hq] .nav-group[open]{background:#ffffff03;border-radius:10px}
+:root[data-kb-page=index][data-kb-sport=hq] .topbar{padding:14px 24px}
+:root[data-kb-page=index][data-kb-sport=hq] .page-heading h1{font-family:var(--kb-sans),system-ui,sans-serif;font-size:21px;text-transform:none;letter-spacing:-.4px}
+:root[data-kb-page=index][data-kb-sport=hq] .kb-nav-options{padding:6px 0 10px}
+:root[data-kb-page=index][data-kb-sport=hq] .kb-nav-density{display:flex;align-items:center;justify-content:space-between;font-size:11px;color:var(--kb-muted)}
+:root[data-kb-page=index][data-kb-sport=hq] .kb-nav-density select{min-height:34px;font-size:11px}
+:root[data-kb-page=index][data-kb-sport=hq] .newsletter-tool{min-height:42px;background:#131d27;border-color:#2d3947;padding:10px!important}
+:root[data-kb-page=index][data-kb-sport=hq] .newsletter-tool strong{font:600 11px/1.4 var(--kb-sans),system-ui,sans-serif}
+:root[data-kb-page=index][data-kb-sport=hq] .newsletter-tool small{font-size:10px}
+:root[data-kb-page=index][data-kb-sport=hq] .ticket-tool{margin:12px 8px;min-height:48px;border-radius:8px;justify-content:space-between}
+:root[data-kb-page=index][data-kb-sport=hq] .ticket-tool strong{font-size:18px}
+:root[data-kb-page=today] .intro{min-height:0;padding:28px 30px;grid-template-columns:1.3fr 1fr;border-radius:12px;border-top-width:2px}
+:root[data-kb-page=today] .intro h1{font-size:clamp(48px,5vw,70px);line-height:.98;margin:16px 0}
+:root[data-kb-page=today] .intro>div>p:last-child{font-size:13px}
+:root[data-kb-page=today] .intro::after{opacity:.15}
+:root[data-kb-page=today] .matchday-brief{padding-left:24px}
+:root[data-kb-page=today] .brief-row{padding:11px 0}
+:root[data-kb-page=today] .brief-row strong{font-size:24px}
+:root[data-kb-page=today] .sports-rail{margin-bottom:18px;border-radius:0 0 10px 10px;overflow:hidden}
+:root[data-kb-page=today] .sports-rail a{font-size:18px;padding:12px}
+:root[data-kb-page=today] .page>section{margin-top:22px}
+:root[data-kb-page=today] .section-head h2{font-family:var(--kb-sans),system-ui,sans-serif;font-size:23px;font-style:normal;text-transform:none;letter-spacing:-.5px}
+:root[data-kb-page=today] .bands-shortcuts{display:flex;flex-wrap:wrap;gap:10px;margin:12px 0}
+:root[data-kb-page=today] .bands-shortcuts a{display:flex;align-items:center;gap:12px;border:1px solid var(--kb-line);border-radius:10px;padding:12px 16px;background:var(--kb-panel);text-decoration:none;flex:1 1 220px}
+:root[data-kb-page=today] .bands-shortcuts b{font-size:13px;color:var(--kb-ink)}
+:root[data-kb-page=today] .bands-shortcuts small{font-size:11px;color:var(--kb-muted)}
+:root[data-kb-page=today] .bands-shortcuts a:hover{border-color:var(--kb-accent)}
+:root[data-bands-sport] .band-ticket,:root[data-bands-sport] .band-game{border-color:var(--kb-line);background:var(--kb-panel);box-shadow:0 8px 24px #0002}
+:root[data-bands-sport] .band-ticket:first-child{border-color:var(--kb-accent);box-shadow:inset 0 3px var(--kb-accent)}
+:root[data-bands-sport] .band-ticket h3{font-family:var(--kb-sans),system-ui,sans-serif;font-size:19px;text-transform:none;letter-spacing:-.3px}
+:root[data-bands-sport] .band-game h3{font-family:var(--kb-sans),system-ui,sans-serif;font-size:18px;text-transform:none;line-height:1.3}
+:root[data-bands-sport] .band-chance{color:var(--kb-accent);font-variant-numeric:tabular-nums}
+:root[data-bands-sport] .band-badge{color:var(--kb-accent)}
+:root[data-bands-sport] .band-meter span{background:var(--kb-accent)}
+:root[data-bands-sport] .bands-leagues{border:0;margin:4px 0 8px;padding:0;gap:8px}
+:root[data-bands-sport] .bands-leagues a{padding:7px 13px;border:1px solid var(--kb-line);border-radius:20px;text-decoration:none;font-size:12px}
+:root[data-bands-sport] .bands-leagues a[aria-current=page]{background:var(--kb-accent);color:#111820;border-color:var(--kb-accent)}
+@media(max-width:760px){
+ :root[data-kb-page=index][data-kb-sport=hq] .shell{grid-template-columns:minmax(0,1fr)}
+ :root[data-kb-page=index][data-kb-sport=hq] .topbar{padding:6px 10px}
+ :root[data-kb-page=index][data-kb-sport=hq] .board-link{font-size:10px;min-height:54px;padding:6px 3px;line-height:1.2;flex-basis:76px}
+ :root[data-kb-page=index][data-kb-sport=hq] .ticket-tool{margin:0 3px;min-height:52px;padding:6px 4px}
+ :root[data-kb-page=index][data-kb-sport=hq] .ticket-tool strong{font-size:12px}
+ :root[data-kb-page=index][data-kb-sport=hq] .newsletter-tool{min-height:34px!important;padding:5px!important}
+ :root[data-kb-page=index][data-kb-sport=hq] .kb-nav-density{display:block}
+ :root[data-kb-page=today] .intro{padding:24px 20px;display:block}
+ :root[data-kb-page=today] .intro h1{font-size:52px;margin:18px 0 12px}
+ :root[data-kb-page=today] .matchday-brief{padding-left:0;display:grid;grid-template-columns:1fr 1fr;margin-top:16px;gap:10px}
+ :root[data-kb-page=today] .brief-row strong{font-size:20px}
+ :root[data-kb-page=today] .sports-rail a{font-size:16px;padding:10px}
+ :root[data-kb-page=today] .bands-shortcuts a{flex-basis:100%;padding:10px 12px}
+}
+
+:root[data-kb-page=daily-tickets] .daily-head h1{font:750 clamp(30px,4vw,46px)/1.15 var(--kb-sans),system-ui,sans-serif;text-transform:none;letter-spacing:-1px}
+:root[data-kb-page=daily-tickets] .daily-page h2{font:650 22px/1.3 var(--kb-sans),system-ui,sans-serif;text-transform:none;letter-spacing:-.4px}
+:root[data-kb-page=daily-tickets] .daily-page h3{font:650 18px/1.35 var(--kb-sans),system-ui,sans-serif;text-transform:none;letter-spacing:-.2px}
+:root[data-kb-page=daily-tickets] .daily-head{min-height:0;background:transparent;border:0;padding:0}

@@ -12,6 +12,7 @@ from validation import report as build_validation
 from system_report import build as build_system_report
 from college_research import build as build_college_research
 from moneyline_tracking import build as build_moneyline_tracking
+from daily_ticket_evidence import build as build_daily_evidence
 from research.insights import build as build_insights
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -61,7 +62,11 @@ def main():
     build_research(ROOT, target/'data/research/report.json')
     (target/'data/system.json').write_text(json.dumps(build_system_report(ROOT,staged=OUT),separators=(',',':'),allow_nan=False)+'\n')
     (target/'data/college-research.json').write_text(json.dumps(build_college_research(ROOT,archive=history),separators=(',',':'),allow_nan=False)+'\n')
-    (target/'data/moneyline-records.json').write_text(json.dumps(build_moneyline_tracking(ROOT,performance=performance),separators=(',',':'),allow_nan=False)+'\n')
+    moneyline_records=build_moneyline_tracking(ROOT,performance=performance)
+    (target/'data/moneyline-records.json').write_text(json.dumps(moneyline_records,separators=(',',':'),allow_nan=False)+'\n')
+    spreads_path=hub/'data/spreads/history.json'
+    spreads=json.loads(spreads_path.read_text()) if spreads_path.exists() else {'records':[]}
+    (target/'data/daily-performance.json').write_text(json.dumps(build_daily_evidence(performance,moneyline_records,spreads),separators=(',',':'),allow_nan=False)+'\n')
     (target/'data/model-insights.json').write_text(json.dumps(build_insights(ROOT,performance=performance),separators=(',',':'),allow_nan=False)+'\n')
     apply_sports_theme(OUT)
     (OUT/'.nojekyll').touch()

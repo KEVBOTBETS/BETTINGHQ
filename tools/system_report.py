@@ -1,5 +1,6 @@
 """One read-only cross-sport inventory. No network or private wagers in output."""
 from collections import Counter
+import ast
 from datetime import datetime,timezone,timedelta
 from pathlib import Path
 try:
@@ -8,6 +9,16 @@ except ImportError:
  from research.common import read,instant,number,decimal
 ROOT=Path(__file__).resolve().parents[1]
 SOURCES={'ncaab':('ncaab-edge-lab','site/data'),'nba':('nba-edge-lab','site/data'),'nfl':('nfl-edge-lab','site/data'),'ncaaf':('ncaaf-edge-lab','site/data'),'nhl':('nhl-edge-lab','site/data'),'wnba':('wnba-edge-lab','site/data'),'mlb':('mlb-edge','docs/data')}
+
+def forecast_version(root,repo,meta):
+ """Use the publisher's explicit recorder version; never guess from results."""
+ if meta.get('model_version'):return meta['model_version']
+ path=Path(root)/'projects'/repo/'pipeline/model_accuracy.py'
+ try:
+  for node in ast.parse(path.read_text()).body:
+   if isinstance(node,ast.Assign) and any(isinstance(t,ast.Name) and t.id=='VERSION' for t in node.targets) and isinstance(node.value,ast.Constant) and isinstance(node.value.value,str):return node.value.value
+ except (OSError,SyntaxError):pass
+ return None
 
 def label(g,side):
  r=g.get(side)
@@ -25,6 +36,7 @@ def build(root=ROOT,now=None,staged=None):
    meta=read(path/'latest.json',{});source=meta.get('games',[]);board=[]
   if not isinstance(source,list):source=[]
   if not isinstance(board,list):board=[]
+  version=forecast_version(root,repo,meta)
   publication=meta.get('generated_at');fresh=age(publication,now,4 if sport in ('ncaaf','ncaab') else 6);upcoming=[];priced=qualified=forecasts=0;book_set=set();reasons=Counter()
   for g in source:
    start=g.get('tipoff') or g.get('start') or g.get('date');at=instant(start)
@@ -52,7 +64,7 @@ def build(root=ROOT,now=None,staged=None):
     if sport in ('nfl','ncaaf','mlb') and r.get('market')=='ATS' and r.get('side')=='away' and selection_line is not None:selection_line=-selection_line
     record={'market':r.get('market'),'side':r.get('side'),'line':selection_line,'pick':r.get('pick') or r.get('selection'),'price':price,'book':book,'observed_at':stamp,
      'probability':number(r.get('model_prob',r.get('p_final'))),'push_prob':number(r.get('push_prob')) or 0,'edge':number(r.get('edge')),'tier':r.get('tier'),'qualified':bool(passed),'fresh':bool(quote_fresh and valid and fresh),
-     'reasons':r.get('reasons') or [r.get('value_reason') or r.get('filtered') or ('Source model has not qualified this selection' if not passed else 'Source model qualified; confirm current book offer')],'model_version':r.get('model_version') or meta.get('model_version')}
+     'reasons':r.get('reasons') or [r.get('value_reason') or r.get('filtered') or ('Source model has not qualified this selection' if not passed else 'Source model qualified; confirm current book offer')],'model_version':r.get('model_version') or version}
     observed.append(record)
     if valid and quote_fresh:book_set.add(book)
    projection=g.get('projection') or {};p=number(g.get('p_home',projection.get('p_home')))
@@ -87,7 +99,7 @@ def build(root=ROOT,now=None,staged=None):
    news=[{'title':n.get('headline') or n.get('title'),'url':n.get('url') or (n.get('links') or {}).get('web',{}).get('href'),'published_at':n.get('published') or n.get('published_at')} for n in news if isinstance(n,dict)] if isinstance(news,list) else []
    news=[n for n in news if n['title'] and str(n['url']).startswith('https://')][:5]
    context={k:g[k] for k in ['venue','broadcast','home_goalie','away_goalie','nhl_game_id'] if k in g}
-   games.append({'id':key,'sport':sport,'event_id':event,'start':start,'matchup':matchup,'home':home,'away':away,'p_home':p if ready else None,'margin':margin if fresh else None,'forecast_available':bool(ready),'score_projection':score_projection,'publication_at':publication,'publication_fresh':fresh,'selections':observed,'best':chosen,'qualified':bool(any(r['qualified'] for r in observed)),'context':context,'news':news,
+   games.append({'id':key,'sport':sport,'season':g.get('season') or meta.get('season'),'event_id':event,'start':start,'matchup':matchup,'home':home,'away':away,'p_home':p if ready else None,'margin':margin if fresh else None,'forecast_available':bool(ready),'score_projection':score_projection,'publication_at':publication,'publication_fresh':fresh,'selections':observed,'best':chosen,'qualified':bool(any(r['qualified'] for r in observed)),'context':context,'news':news,
     'board_url':'../'+repo+'/' if sport!='mlb' else '../mlb-edge/','model_version':meta.get('model_version'),'manual_available':True,
     'decision':{'why':('Published model leans '+str(home if p>=.5 else away)) if ready else 'Forecast unavailable; review the source board',
      'missing':([ 'Forecast publication stale or unavailable'] if not fresh else [])+(['No verified fresh book price'] if not any(r['fresh'] for r in observed) else []),

@@ -28,16 +28,15 @@
   function build(games,meta,{now=Date.now(),date=day(now),format='five'}={}){
     if(!formats[format])throw Error('Unknown band format');
     const seen=new Set(),pool=[],all=[];
-    for(const g of games){if(!eligible(g,meta,now)||day(g.tipoff)!==date||seen.has(String(g.game_id)))continue;seen.add(String(g.game_id));const c=candidate(g,format);all.push(c);if(c.win_prob>=.6)pool.push(c);}
+    for(const g of games){if(!eligible(g,meta,now)||day(g.tipoff)!==date||seen.has(String(g.game_id)))continue;seen.add(String(g.game_id));const c=candidate(g,format);all.push(c);pool.push(c);}
     pool.sort((a,b)=>b.bands[0].prob-a.bands[0].prob||a.event_id.localeCompare(b.event_id));
     const tickets=[];
     // Twelve games bound the combination search. At most one team/band per event.
     function search(start,legs,prob){
-      if(legs.length>=3)tickets.push({legs:[...legs],prob,signature:legs.map(l=>l.event_id+':'+l.band.label).sort().join('|')});
+      if(legs.length>=Math.min(3,pool.length)&&legs.length>=2)tickets.push({legs:[...legs],prob,signature:legs.map(l=>l.event_id+':'+l.band.label).sort().join('|')});
       if(legs.length===4)return;
       for(let i=start;i<Math.min(pool.length,12);i++){
         const g=pool[i];for(const band of g.bands.slice(0,2)){
-          if(band.prob<.1||band.prob<g.bands[0].prob*.7)continue;
           search(i+1,[...legs,{...g,band}],prob*band.prob);
         }
       }
@@ -45,7 +44,7 @@
     search(0,[],1);tickets.sort((a,b)=>b.prob-a.prob||a.signature.localeCompare(b.signature));
     const chosen=tickets.slice(0,3),four=tickets.find(t=>t.legs.length===4&&!chosen.includes(t));
     if(four)chosen.push(four);else if(tickets[3])chosen.push(tickets[3]);
-    return {pool,all,tickets:chosen,date,format,reason:pool.length<3?`Only ${pool.length} eligible teams meet the 60% win threshold. Three distinct upcoming games are required.`:chosen.length<3?'Fewer distinct combinations meet the band guards; no extra tickets were forced.':null};
+    return {pool,all,tickets:chosen,date,format,reason:pool.length<2?`Only ${pool.length} fresh upcoming game${pool.length===1?'':'s'} have supported forecasts. Two distinct games are required for a parlay; individual game bands are shown below.`:chosen.length<3?'Fewer distinct combinations meet the band guards; no extra tickets were forced.':null};
   }
   const api={formats,cdf,day,eligible,candidate,build};if(typeof module!=='undefined'&&module.exports)module.exports=api;else root.NBABands=api;
 })(typeof globalThis!=='undefined'?globalThis:this);

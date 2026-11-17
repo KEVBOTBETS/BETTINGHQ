@@ -3,6 +3,7 @@
 (() => {
   "use strict";
   const configs = {
+    "daily-tickets":{title:"Daily ticket builder",description:"Performance-led singles, $5–$20 planning stakes, clear prices and a daily risk budget.",url:"daily-tickets.html"},
     "nba-stats":{title:"NBA player stats",description:"Daily starter and rotation stat outlooks, team and position filters, sortable predictions.",url:"nba-stats.html"},
     "nhl-stats":{title:"NHL player stats",description:"Daily skater and starting-goalie stat outlooks, with availability and saved pregame history.",url:"nhl-stats.html"},
     "nfl-stats":{title:"NFL weekly player stats",description:"Weekly passing, rushing, receiving, defensive and specialist projections. All positions, team filters and sortable statistics.",url:"nfl-stats.html"},
@@ -22,7 +23,8 @@
     ncaab:{title:"NCAAB Courtside",description:"College hoops schedules, standings, model winners, spread and total research.",url:"../ncaab-edge-lab/"},
     "spread-accuracy":{title:"Spread accuracy",description:"Whole-sheet spread forecasts, cover records and quoted-price returns.",url:"spread-accuracy.html"},
     "nhl-props":{title:"NHL Props & Parlay Lab",description:"Hockey player research, goal scorers, payout targets and your parlay ledger.",url:"../props-edge/league-parlays.html?sport=NHL"},
-    "nba-bands":{title:"NBA Bands Parlay Lab",description:"Predicted winners, winning-margin bands and three-to-four-game nightly research tickets.",url:"../nba-edge-lab/bands.html"},
+    "ncaab-bands":{title:"NCAAB Winning Bands",description:"College basketball winners, estimated margins and ranked nightly band parlays. No minimum win-percentage cutoff.",url:"../ncaab-edge-lab/bands.html"},
+    "nba-bands":{title:"NBA Bands Parlay Lab",description:"Predicted winners, winning-margin bands and ranked nightly research tickets without a minimum win-percentage cutoff.",url:"../nba-edge-lab/bands.html"},
     "nba-props":{title:"NBA Props & Parlay Lab",description:"Basketball player history, observed lines, payout targets and your parlay ledger.",url:"../props-edge/league-parlays.html?sport=NBA"},
     "ncaaf-props":{title:"NCAAF Props",description:"College football player statistics and observed prop prices.",url:"../props-edge/multisport.html?sport=NCAAF"},
     accuracy:{title:"Performance Center",description:"Frozen forecasts, calibration and like-for-like market benchmarks.",url:"accuracy.html"},
@@ -39,10 +41,11 @@
     ncaaf:{title:"NCAAF Edge Lab",description:"College football schedules, edges and simulations.",url:"../ncaaf-edge-lab/"},
     props:{title:"NFL Props",description:"NFL player props, the parlay lab and your props ledger.",url:"../props-edge/"},
   };
+  for(const sport of ["nfl","ncaaf","nba","ncaab","nhl","mlb","wnba"])configs["daily-"+sport]={title:sport.toUpperCase()+" daily tickets",description:"Compare performance and prices, then plan separate singles within your $5–$20 limit.",url:"daily-tickets.html?sport="+sport};
   const links=[...document.querySelectorAll(".board-link")];
   const navGroups=[...document.querySelectorAll('.nav-group')],navEntries=navGroups.map(group=>({group,links:[...group.querySelectorAll('.board-link')]})),narrowNav=matchMedia('(max-width:760px)');function arrangeNav(){for(const entry of navEntries){const {group,links}=entry;if(narrowNav.matches){for(const link of links)group.before(link);group.open=false;}else{for(const link of links)group.append(link);group.hidden=false;group.open=!!group.querySelector('[aria-current=page]');}}}arrangeNav();narrowNav.addEventListener('change',arrangeNav);for(const group of navGroups)group.addEventListener('toggle',()=>{if(!narrowNav.matches&&group.open&&!document.querySelector('#kb-nav-search')?.value)for(const other of navGroups)if(other!==group)other.open=false;});
   const workspace=document.querySelector("#workspace"), frames=new Map();
-  let active="",ticketPending=false;
+  let active="";
   function activate(key){
     const record=frames.get(key);
     if(!record)return;
@@ -54,12 +57,7 @@
       const sync=record.frame.contentWindow.BetSync;
       if(sync?.loadConfig())sync.sync().catch(()=>{});
     }catch(_){/* Normal board timers remain available on a different origin. */}
-    if(key==="today"&&ticketPending)try{
-      if(typeof record.frame.contentWindow.makeKevbotTicket==="function"){
-        ticketPending=false;const button=document.querySelector('#top-ten-ticket');button.disabled=true;button.setAttribute('aria-busy','true');
-        Promise.resolve(record.frame.contentWindow.makeKevbotTicket()).catch(()=>{}).finally(()=>{button.disabled=false;button.removeAttribute('aria-busy');});
-      }
-    }catch(_){}
+
   }
   function requested(){let key=location.hash.slice(1).toLowerCase();if(!key)try{key=JSON.parse(localStorage.getItem('kevbot-last-page-v1')||'""').replace(/^#/,'');}catch(_){}if(key==="moneyling")key="moneyline";return Object.prototype.hasOwnProperty.call(configs,key)?key:"today";}
   function create(key){
@@ -98,10 +96,11 @@
     active=key;
     if(!frames.has(key))frames.set(key,create(key));
     frames.forEach((r,k)=>{r.panel.hidden=k!==key;});
-    links.find(link=>link.hash==='#'+key)?.closest('details.nav-group')?.setAttribute('open','');
-    links.forEach(link=>{if(link.hash==="#"+key)link.setAttribute("aria-current","page");else link.removeAttribute("aria-current");});
+    const navKey=key.startsWith("daily-")?"daily-tickets":key;
+    links.find(link=>link.hash==='#'+navKey)?.closest('details.nav-group')?.setAttribute('open','');
+    links.forEach(link=>{if(link.hash==="#"+navKey)link.setAttribute("aria-current","page");else link.removeAttribute("aria-current");});
     if(matchMedia('(max-width:760px)').matches){
-      const nav=document.querySelector('.boards'),selected=links.find(link=>link.hash==='#'+key);
+      const nav=document.querySelector('.boards'),selected=links.find(link=>link.hash==='#'+navKey);
       if(selected&&nav.contains(selected)){const a=selected.getBoundingClientRect(),b=nav.getBoundingClientRect();if(a.left<b.left)nav.scrollLeft-=b.left-a.left;else if(a.right>b.right)nav.scrollLeft+=a.right-b.right;}
     }
     document.querySelector("#board-title").textContent=configs[key].title;
@@ -115,8 +114,8 @@
   window.addEventListener("hashchange",select);
   document.querySelector("#reload-board").addEventListener("click",()=>frames.get(active).reload());
   document.querySelector("#top-ten-ticket").addEventListener("click",()=>{
-    ticketPending=true;
-    if(requested()!=="today")location.hash="today";else activate("today");
+    const current=requested(),sport=["nfl","ncaaf","nba","ncaab","nhl","mlb","wnba"].find(s=>current===s||current.startsWith(s+"-")||current==="daily-"+s);
+    const key=sport?"daily-"+sport:"daily-tickets";if(requested()!==key)location.hash=key;else activate(key);
   });
   const help=document.querySelector("#help-dialog");
   document.querySelector("#help").addEventListener("click",()=>help.showModal());

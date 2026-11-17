@@ -41,10 +41,9 @@ try{
     const today=new Intl.DateTimeFormat('en-CA',{timeZone:'America/Toronto',year:'numeric',month:'2-digit',day:'2-digit'}).format(new Date());
     if(width===393&&chosen===today){
       await page.getByRole('button',{name:/Make daily ticket/i}).click();
-      await frame.locator('#ticket-dialog').waitFor({state:'visible'});
-      assert.ok(!/^0 qualified/.test(await frame.locator('#ticket-note').textContent()),'Cold sidebar launch must wait for delayed published feeds');
-      await frame.getByRole('button',{name:'Close image preview'}).click();
-    }else await page.getByRole('link',{name:'Today',exact:true}).click();
+      await page.frameLocator('#frame-daily-tickets').getByRole('heading',{name:'Small stakes. Clear choices.',exact:true}).waitFor();
+    }
+    await page.getByRole('link',{name:'Today',exact:true}).click();
     await frame.locator('section[aria-labelledby="alerts-title"] details').evaluate(d=>{d.open=true;});
     await frame.getByRole('heading',{name:'Published odds changed',exact:true}).waitFor();
     await frame.locator('#alerts-read').click();assert.equal(await frame.locator('#alerts-count').textContent(),'0 unread');
@@ -58,7 +57,7 @@ try{
       const layout=await page.evaluate(()=>({nav:document.querySelector('.sidebar').getBoundingClientRect().height,workspace:document.querySelector('.workspace').getBoundingClientRect().height,direction:getComputedStyle(document.querySelector('.boards')).flexDirection}));
       assert.equal(layout.direction,'row');assert.ok(layout.nav<110);assert.ok(layout.workspace>650);
     }
-    await page.getByRole("button",{name:/Make daily ticket/i}).click();
+    await page.frames().find(f=>f.url().endsWith("today.html")).evaluate(()=>window.makeKevbotTicket());
     await frame.getByRole("heading",{name:"KEVBOT BETS Daily Top Picks"}).waitFor();
     assert.ok((await frame.locator("#ticket-preview").getAttribute("src")).startsWith("blob:"));
     if(width===393)await page.screenshot({path:"test-results/ticket-preview-393.png",fullPage:true});
@@ -78,7 +77,7 @@ try{
     await frame.getByRole("button",{name:"Exposure",exact:true}).click();
     await frame.getByText("Connect and sync in Ledger").waitFor();
     assert.deepEqual(await page.locator(".board-link").evaluateAll(links=>links.map(a=>a.hash).sort()),
-      ["#moneyline-records","#ncaaf-parlays","#thursday-night","#sunday-night","#monday-night","#model-lab","#opportunities","#desk","#today","#ledger","#accuracy","#football","#moneyline","#mlb","#nfl","#nfl-stats","#nba-stats","#nhl-stats","#ncaaf","#nhl","#wnba","#nba","#nba-bands","#nba-props","#ncaab","#props","#ladder","#archive","#nfl-newsletter","#ncaaf-newsletter","#ncaaf-props","#nhl-props","#all-spreads","#spread-accuracy"].sort());
+      ["#daily-tickets","#moneyline-records","#ncaaf-parlays","#thursday-night","#sunday-night","#monday-night","#model-lab","#opportunities","#desk","#today","#ledger","#accuracy","#football","#moneyline","#mlb","#nfl","#nfl-stats","#nba-stats","#nhl-stats","#ncaaf","#nhl","#wnba","#nba","#nba-bands","#ncaab-bands","#nba-props","#ncaab","#props","#ladder","#archive","#nfl-newsletter","#ncaaf-newsletter","#ncaaf-props","#nhl-props","#all-spreads","#spread-accuracy"].sort());
     assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth));
     const child=page.frames().find(f=>f.url().endsWith("today.html"));
     assert.ok(await child.evaluate(()=>document.documentElement.scrollWidth<=innerWidth));
@@ -97,7 +96,7 @@ try{
       assert.equal(await page.getByRole("link",{name,exact:true}).getAttribute("aria-current"),"page");
     }
     const bandsLink=page.getByRole('link',{name:'NBA Winning Bands',exact:true});
-    if(!await bandsLink.isVisible())await page.getByText('Props & more',{exact:true}).click();
+    if(!await bandsLink.isVisible())await page.getByText('Winning bands',{exact:true}).click();
     await bandsLink.click();
     await page.frameLocator('#frame-nba-bands').getByRole('heading',{name:'Bands Parlay Lab',exact:true}).waitFor();
     assert.equal(await bandsLink.getAttribute('aria-current'),'page');
