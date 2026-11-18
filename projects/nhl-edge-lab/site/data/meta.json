@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-17T20:37:01.984594+00:00",
+  "generated_at": "2026-11-18T01:06:53.901453+00:00",
   "model_version": "nhl-poisson-1.0",
   "season": 2027,
   "timezone": "America/Toronto",
@@ -26,22 +26,22 @@
     },
     "nhl-schedule-2026-11-17": {
       "status": "ok",
-      "observed_at": "2026-11-17T20:37:01.984594+00:00",
+      "observed_at": "2026-11-18T01:06:53.901453+00:00",
       "url": "https://api-web.nhle.com/v1/schedule/2026-11-17"
     },
     "nhl-schedule-2026-11-03": {
       "status": "ok",
-      "observed_at": "2026-11-17T20:37:01.984594+00:00",
+      "observed_at": "2026-11-18T01:06:53.901453+00:00",
       "url": "https://api-web.nhle.com/v1/schedule/2026-11-03"
     },
     "nhl-schedule-2026-11-10": {
       "status": "ok",
-      "observed_at": "2026-11-17T20:37:01.984594+00:00",
+      "observed_at": "2026-11-18T01:06:53.901453+00:00",
       "url": "https://api-web.nhle.com/v1/schedule/2026-11-10"
     },
     "nhl-schedule-2026-11-24": {
       "status": "ok",
-      "observed_at": "2026-11-17T20:37:01.984594+00:00",
+      "observed_at": "2026-11-18T01:06:53.901453+00:00",
       "url": "https://api-web.nhle.com/v1/schedule/2026-11-24"
     },
     "standings-2027": {
@@ -58,7 +58,7 @@
     },
     "nhl-official": {
       "status": "ok",
-      "observed_at": "2026-11-17T20:37:01.984594+00:00",
+      "observed_at": "2026-11-18T01:06:53.901453+00:00",
       "url": "https://api-web.nhle.com/v1/standings/now"
     },
     "nhl-team-summary-2026": {
@@ -72,37 +72,45 @@
       "url": "https://api.nhle.com/stats/rest/en/goalie/summary?isAggregate=false&isGame=false&start=0&limit=1000&cayenneExp=seasonId=20252026%20and%20gameTypeId=2"
     },
     "nhl-team-summary-2027": {
-      "status": "cached",
-      "observed_at": "2026-11-17T16:23:28.895420+00:00",
+      "status": "ok",
+      "observed_at": "2026-11-18T01:06:53.901453+00:00",
       "url": "https://api.nhle.com/stats/rest/en/team/summary?isAggregate=false&isGame=false&start=0&limit=100&cayenneExp=seasonId=20262027%20and%20gameTypeId=2"
     },
     "nhl-goalies-2027": {
-      "status": "cached",
-      "observed_at": "2026-11-17T16:23:28.895420+00:00",
+      "status": "ok",
+      "observed_at": "2026-11-18T01:06:53.901453+00:00",
       "url": "https://api.nhle.com/stats/rest/en/goalie/summary?isAggregate=false&isGame=false&start=0&limit=1000&cayenneExp=seasonId=20262027%20and%20gameTypeId=2"
     },
     "public-book-odds": {
       "status": "ok",
-      "observed_at": "2026-11-17T20:37:01.984594+00:00",
+      "observed_at": "2026-11-18T01:06:00+00:00",
       "url": "https://www.covers.com/sport/hockey/nhl/odds?countrycode=ca",
-      "quotes": 622,
+      "quotes": 226,
       "attempts": [
         {
           "url": "https://www.covers.com/sport/hockey/nhl/odds?countrycode=ca",
-          "checked_at": "2026-11-17T20:37:01.984594+00:00",
-          "observed_at": "2026-11-17T20:37:00+00:00",
+          "checked_at": "2026-11-18T01:06:53.901453+00:00",
+          "observed_at": "2026-11-18T01:06:00+00:00",
           "game_pages_checked": 0,
           "status": "ok",
-          "quotes": 582,
-          "matched_games": 13
+          "quotes": 226,
+          "matched_games": 5
         },
         {
           "url": "https://www.vegasinsider.com/nhl/odds/las-vegas/",
-          "checked_at": "2026-11-17T20:37:01.984594+00:00",
-          "observed_at": "2026-11-17T20:37:01.984594+00:00",
-          "status": "ok",
-          "quotes": 40,
-          "matched_games": 1
+          "checked_at": "2026-11-18T01:06:53.901453+00:00",
+          "observed_at": null,
+          "status": "no matched prices",
+          "quotes": 0,
+          "matched_games": 0
+        },
+        {
+          "url": "https://www.scoresandodds.com/nhl/odds",
+          "checked_at": "2026-11-18T01:06:53.901453+00:00",
+          "observed_at": null,
+          "status": "no matched prices",
+          "quotes": 0,
+          "matched_games": 0
         }
       ]
     },
@@ -121,23 +129,23 @@
   },
   "odds_health": {
     "status": "ok",
-    "upcoming_games": 67,
-    "priced_games": 14,
+    "upcoming_games": 58,
+    "priced_games": 5,
     "window_hours": 24,
-    "window_games": 11,
-    "window_priced_games": 11,
-    "window_complete_games": 11,
+    "window_games": 4,
+    "window_priced_games": 4,
+    "window_complete_games": 4,
     "window_markets": {
-      "ML": 11,
-      "ATS": 11,
-      "TOTAL": 11
+      "ML": 4,
+      "ATS": 4,
+      "TOTAL": 4
     },
-    "later_games": 56,
+    "later_games": 54,
     "later_unpriced_games": 53,
     "missing_games": []
   },
   "counts": {
-    "games": 67,
+    "games": 58,
     "qualified": 0,
     "teams": 32
   },
