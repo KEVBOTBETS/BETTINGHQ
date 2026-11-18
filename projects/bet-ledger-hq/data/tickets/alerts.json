@@ -1,29 +1,71 @@
 {
   "schema": 1,
-  "checked_at": "2026-11-18T15:51:54.395Z",
+  "checked_at": "2026-11-18T16:08:43.546Z",
   "coverage": {
+    "nhl": {
+      "status": "available",
+      "reports": 36,
+      "checked_at": "2026-11-18T16:08:43.546Z"
+    },
     "ncaaf": {
       "status": "empty",
       "reports": 0,
-      "checked_at": "2026-11-18T15:51:54.395Z"
-    },
-    "nfl": {
-      "status": "available",
-      "reports": 594,
-      "checked_at": "2026-11-18T15:51:54.395Z"
+      "checked_at": "2026-11-18T16:08:43.546Z"
     },
     "mlb": {
       "status": "available",
       "reports": 9,
-      "checked_at": "2026-11-18T15:51:54.395Z"
+      "checked_at": "2026-11-18T16:08:43.546Z"
     },
-    "nhl": {
+    "nfl": {
       "status": "available",
-      "reports": 36,
-      "checked_at": "2026-11-18T15:51:54.395Z"
+      "reports": 595,
+      "checked_at": "2026-11-18T16:08:43.546Z"
     }
   },
   "events": [
+    {
+      "id": "starter|nhl:nhl:2026020345:home|2026-11-18T16:08:43.546Z",
+      "kind": "starter",
+      "observed_at": "2026-11-18T16:08:43.546Z",
+      "sport": "nhl",
+      "event": "MTL @ NJ",
+      "start": "2026-11-19T00:30:00+00:00",
+      "title": "NHL starting goalie updated",
+      "before": "Connor Hellebuyck",
+      "after": "Connor Hellebuyck · confirmed",
+      "source_quote_at": "2026-11-18T16:05:36.775104+00:00",
+      "source": "NHL board",
+      "note": "Review the matchup after a starter change; the baseline does not price individual goalie talent."
+    },
+    {
+      "id": "injury|nfl:33:Lamar Jackson|2026-11-18T16:08:43.546Z",
+      "kind": "injury",
+      "observed_at": "2026-11-18T16:08:43.546Z",
+      "sport": "nfl",
+      "title": "New availability report",
+      "event": "Baltimore Ravens",
+      "pick": "Lamar Jackson",
+      "before": "Not in the previous dated report",
+      "after": "Injured Reserve · Thumb",
+      "source_quote_at": "2026-11-18T15:52Z",
+      "source": "ESPN injuries",
+      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
+    },
+    {
+      "id": "injury|nfl:10:Julius Chestnut|2026-11-18T16:08:43.546Z",
+      "kind": "injury",
+      "observed_at": "2026-11-18T16:08:43.546Z",
+      "sport": "nfl",
+      "title": "New availability report",
+      "event": "Tennessee Titans",
+      "pick": "Julius Chestnut",
+      "before": "Not in the previous dated report",
+      "after": "Active · Chestnut played all 25 of his snaps on special teams in Sunday's 40-23 win over the Jaguars.",
+      "source_quote_at": "2026-11-18T15:41Z",
+      "source": "ESPN injuries",
+      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
+    },
     {
       "id": "odds|props|401873072|2026-11-22T18:00Z|Rushing yards|Jared Goff|over|DraftKings|2026-11-18T15:51:54.395Z",
       "kind": "odds",
@@ -2798,48 +2840,6 @@
       "pick": "Kyle Dugger",
       "before": "Out · Quadriceps",
       "after": "Questionable · Quadriceps",
-      "source_quote_at": "2026-11-17T12:19Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:4:Myles Hinton|2026-11-17T16:25:55.645Z",
-      "kind": "injury",
-      "observed_at": "2026-11-17T16:25:55.645Z",
-      "sport": "nfl",
-      "title": "Player availability changed",
-      "event": "Cincinnati Bengals",
-      "pick": "Myles Hinton",
-      "before": "Out · Illness",
-      "after": "Questionable · Illness",
-      "source_quote_at": "2026-11-17T12:19Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:6:Juanyeh Thomas|2026-11-17T16:25:55.645Z",
-      "kind": "injury",
-      "observed_at": "2026-11-17T16:25:55.645Z",
-      "sport": "nfl",
-      "title": "Player availability changed",
-      "event": "Dallas Cowboys",
-      "pick": "Juanyeh Thomas",
-      "before": "Out · Ribs",
-      "after": "Questionable · Ribs",
-      "source_quote_at": "2026-11-17T12:19Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:6:P.J. Locke|2026-11-17T16:25:55.645Z",
-      "kind": "injury",
-      "observed_at": "2026-11-17T16:25:55.645Z",
-      "sport": "nfl",
-      "title": "Player availability changed",
-      "event": "Dallas Cowboys",
-      "pick": "P.J. Locke",
-      "before": "Out · Concussion",
-      "after": "Questionable · Concussion",
       "source_quote_at": "2026-11-17T12:19Z",
       "source": "ESPN injuries",
       "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."

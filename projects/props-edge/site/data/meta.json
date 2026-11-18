@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-18T15:49:49.208613+00:00",
+  "generated_at": "2026-11-18T16:05:30.345200+00:00",
   "provider_priority": [
     "Covers public comparison (no key)",
     "DraftKings Network public reference (no key)",
@@ -16,30 +16,32 @@
     "draftkings_network_keyless": true
   },
   "counts": {
-    "priced_quotes": 325,
-    "eligible_priced_quotes": 325,
-    "qualified_options": 57,
-    "held_options": 49,
-    "board": 151,
-    "actionable": 8,
+    "priced_quotes": 360,
+    "eligible_priced_quotes": 360,
+    "qualified_options": 0,
+    "held_options": 0,
+    "board": 186,
+    "actionable": 0,
     "best": 0,
     "good": 0,
-    "leans": 57,
+    "leans": 0,
     "projections": 5874,
     "injury_report": 762,
     "ruled_out": 85,
-    "book_lines": 1404,
-    "legs_on_book_lines": 869,
-    "legs": 3485,
-    "book_priced_legs": 151,
-    "parlays": 169
+    "book_lines": 1402,
+    "legs_on_book_lines": 835,
+    "legs": 3489,
+    "book_priced_legs": 185,
+    "parlays": 164
   },
   "source_by_sport": {
     "NFL": {
-      "source": "Covers public comparison + ESPN regular-season projections",
-      "priced_quotes": 325,
+      "source": "DraftKings Network public reference + ESPN regular-season projections",
+      "priced_quotes": 35,
       "projections": 5874,
-      "errors": []
+      "errors": [
+        "Covers public prop comparison request failed (no matchable NFL prop prices (100 cards, 72 recognized prop cards, 72 scheduled-player matches))"
+      ]
     }
   },
   "workflow_url": "https://github.com/KEVBOTBETS/BETTINGHQ/actions/workflows/release.yml",
@@ -52,7 +54,7 @@
     "window": {
       "NFL": {
         "next_kickoff": "2026-11-20T01:15Z",
-        "hours_to_kickoff": 33.4,
+        "hours_to_kickoff": 33.2,
         "window_hours": 36.0,
         "inside_window": true
       }
@@ -201,9 +203,9 @@
     },
     "calibration_shrink": 1.0,
     "calibration_active": false,
-    "updated_at": "2026-11-18T15:49:27.896242+00:00",
+    "updated_at": "2026-11-18T16:04:53.586148+00:00",
     "calibration_note": "Calibration is diagnostic only; no automatic refit.",
-    "total_logged": 93110,
+    "total_logged": 93142,
     "pending": 4850,
     "independent_events": 130,
     "legacy_excluded": 17,
@@ -212,39 +214,43 @@
   "parlay_record": {
     "Win": 880,
     "Loss": 31128,
-    "Pending": 1729,
+    "Pending": 1845,
     "Void": 0,
     "Review": 0,
-    "total": 33737,
+    "total": 33853,
     "hit_rate": 0.02749312671832042
   },
   "max_odds_age_hours": 12,
-  "price_source_status": "available",
+  "price_source_status": "retained",
   "quote_health": {
-    "observed": 325,
-    "retained": 0,
-    "reference": 0,
+    "observed": 0,
+    "retained": 325,
+    "reference": 35,
     "expired": 0,
     "rejected": 0,
     "max_age_hours": 4,
     "sources": {
       "Covers public prop comparison": {
-        "status": "available",
-        "quotes": 325,
-        "shape": "100 cards, 98 recognized prop cards, 92 scheduled-player matches",
-        "checked_at": "2026-11-18T15:48:55.766893+00:00",
+        "status": "unavailable",
+        "error": "Covers public prop comparison request failed (no matchable NFL prop prices (100 cards, 72 recognized prop cards, 72 scheduled-player matches))",
+        "shape": "100 cards, 72 recognized prop cards, 72 scheduled-player matches",
+        "quotes": 0,
+        "checked_at": "2026-11-18T16:04:14.982905+00:00",
         "source_url": "https://www.covers.com/sport/football/nfl/player-props"
       },
       "DraftKings Network public reference": {
-        "status": "standby",
-        "quotes": 0
+        "status": "reference",
+        "quotes": 35,
+        "tables": 1,
+        "rows": 50,
+        "unsupported": 6,
+        "unmatched": 9,
+        "source_url": "https://dknetwork.draftkings.com/draftkings-sportsbook-player-props/"
       }
     },
     "board_reasons": {
-      "qualified": 8,
-      "portfolio hold": 49,
-      "insufficient sample": 9,
-      "insufficient edge / model filters": 85
+      "retained / confirmation": 151,
+      "reference / confirmation": 35
     },
     "markets": {
       "Sacks": {
@@ -273,9 +279,9 @@
       },
       "Anytime touchdown": {
         "projections": 354,
-        "observed": 9,
-        "retained": 0,
-        "reference": 0,
+        "observed": 0,
+        "retained": 9,
+        "reference": 35,
         "expired": 0,
         "qualified": 0
       },
@@ -337,11 +343,11 @@
       },
       "Passing yards": {
         "projections": 38,
-        "observed": 39,
-        "retained": 0,
+        "observed": 0,
+        "retained": 39,
         "reference": 0,
         "expired": 0,
-        "qualified": 1
+        "qualified": 0
       },
       "Rush + receiving touchdowns": {
         "projections": 354,
@@ -377,11 +383,11 @@
       },
       "Rushing yards": {
         "projections": 161,
-        "observed": 132,
-        "retained": 0,
+        "observed": 0,
+        "retained": 132,
         "reference": 0,
         "expired": 0,
-        "qualified": 5
+        "qualified": 0
       },
       "Touchdowns scored": {
         "projections": 354,
@@ -401,11 +407,11 @@
       },
       "Receiving yards": {
         "projections": 303,
-        "observed": 145,
-        "retained": 0,
+        "observed": 0,
+        "retained": 145,
         "reference": 0,
         "expired": 0,
-        "qualified": 2
+        "qualified": 0
       },
       "Receptions": {
         "projections": 303,
@@ -468,7 +474,7 @@
   "estimated_prices": false,
   "weekly_nfl": {
     "status": "published",
-    "generated_at": "2026-11-18T15:48:52.889625+00:00",
+    "generated_at": "2026-11-18T16:03:53.502529+00:00",
     "rostered_players": 2566,
     "verified_roster_teams": 32,
     "missing_roster_teams": []
