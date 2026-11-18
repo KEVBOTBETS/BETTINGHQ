@@ -7,7 +7,7 @@
   const day=at=>new Intl.DateTimeFormat('en-CA',{timeZone:'America/Toronto',year:'numeric',month:'2-digit',day:'2-digit'}).format(new Date(at));
   function eligible(game,meta,now){
     const p=game.projection||{},start=time(game.tipoff),age=now-time(meta.generated_at),sourceAge=now-time(game.observed_at);
-    return finite(age)&&age>=0&&age<=4*3600000&&finite(sourceAge)&&sourceAge>=0&&sourceAge<=4*3600000&&
+    return (!p.market_anchor||(now>=time(p.market_anchor.observed_at)&&now-time(p.market_anchor.observed_at)<=90*60000))&&finite(age)&&age>=0&&age<=4*3600000&&finite(sourceAge)&&sourceAge>=0&&sourceAge<=4*3600000&&
       game.state==='pre'&&!game.completed&&!game.canceled&&!game.postponed&&!game.source_stale&&start>now&&start-now<=48*3600000&&
       p.ratings_known===true&&finite(p.mu)&&finite(p.margin_sd)&&p.margin_sd>0&&finite(p.p_home)&&p.p_home>0&&p.p_home<1&&game.home?.abbr&&game.away?.abbr;
   }
@@ -16,18 +16,21 @@
     const p=game.projection,side=p.p_home>=.5?'home':'away',win=side==='home'?p.p_home:1-p.p_home,mean=side==='home'?p.mu:-p.mu;
     // Integer final scores cannot tie after overtime. Condition the positive
     // margin distribution on >= 0.5, so every five-point bin has equal width.
-    const rawWin=1-cdf((.5-mean)/p.margin_sd),bands=formats[format].map(([lo,hi])=>{
+    const errors=p.band_history?.band_active?p.band_history.errors:[],orient=side==='home'?1:-1;
+    const dist=x=>(40*cdf((x-mean)/p.margin_sd)+errors.reduce((n,e)=>n+cdf((x-mean-orient*e)/3),0))/(40+errors.length);
+    const rawWin=1-dist(.5),bands=formats[format].map(([lo,hi])=>{
       const low=lo-.5,high=hi===null?Infinity:hi+.5;
-      const mass=cdf((high-mean)/p.margin_sd)-cdf((low-mean)/p.margin_sd);
+      const mass=dist(high)-dist(low);
       return {lo,hi,label:hi===null?lo+'+':lo+'–'+hi,prob:mass/rawWin*win};
     }).sort((a,b)=>b.prob-a.prob);
     const meanBand=bands.find(b=>Math.max(1,Math.round(mean))>=b.lo&&(b.hi===null||Math.max(1,Math.round(mean))<=b.hi));
     const quotes=(game.quotes||[]).filter(q=>q.market==='ATS'&&q.side==='home'&&finite(q.line)&&q.book&&finite(time(q.observed_at))&&time(q.observed_at)<=now).sort((a,b)=>time(b.observed_at)-time(a.observed_at));
     const q=quotes[0],market=q?{home_line:q.line,margin:side==='home'?-q.line:q.line,book:q.book,observed_at:q.observed_at,fresh:now-time(q.observed_at)<=90*60000}:null;
-    const disagreement=!!market&&market.fresh&&(Math.abs(mean-market.margin)>=10||market.margin<0);
+    const independentMean=finite(p.team_margin)?(side==='home'?p.team_margin:-p.team_margin):mean;
+    const disagreement=!!market&&market.fresh&&(Math.abs(independentMean-market.margin)>=10||independentMean*market.margin<0);
     return {event_id:String(game.game_id),tipoff:game.tipoff,matchup:game.away.abbr+' @ '+game.home.abbr,
       team:game[side].abbr,team_name:game[side].name||game[side].abbr,win_prob:win,margin:mean,
-      home_points:p.proj_home_pts,away_points:p.proj_away_pts,bands,mean_band:meanBand,market,disagreement,margin_sd:p.margin_sd,basis:p.basis,team_inputs:game.team_model_inputs||null,fit:p.residual_fit,source_url:game.source_url};
+      home_points:p.proj_home_pts,away_points:p.proj_away_pts,bands,mean_band:meanBand,market,disagreement,margin_sd:p.margin_sd,basis:p.basis,history:p.band_history,team_inputs:game.team_model_inputs||null,fit:p.residual_fit,source_url:game.source_url};
   }
   function build(games,meta,{now=Date.now(),date=day(now),format='five'}={}){
     if(!formats[format])throw Error('Unknown band format');

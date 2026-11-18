@@ -184,12 +184,17 @@ def main(argv=None, root=None):
     if college:
         from .margin_fit import fit_margins
         fit=fit_margins(pending,now,season)
+        from .college_history import fit as fit_college_history
+        college_history=fit_college_history(pending,now,season)
     else:fit=residual_fit(pending,now)
     board=[]
     for g in ordered:
         if g in upcoming and not g['source_stale']:
             g['projection']=model.project(teams.get(g['home']['id'],{}),teams.get(g['away']['id'],{}),now,g['neutral'],fit=fit,college=college)
         else:g['projection']={'ratings_known':False,'reason':'No new forecast after tipoff'}
+        if college:
+            from .college_market import project_market
+            g['projection']=project_market(g,now,college_history)
         g['p_home']=g['projection'].get('p_home')
         g['team_model_inputs']={side:{'name':g[side].get('name'),'current':teams.get(g[side]['id'],{}).get('current',{}),'prior':teams.get(g[side]['id'],{}).get('prior',{})} for side in ('home','away')}
         if college:
