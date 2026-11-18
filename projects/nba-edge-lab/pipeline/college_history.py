@@ -32,6 +32,10 @@ def fit(log,now,season):
         if not(event and event not in seen and r.get('league')=='NCAAB' and r.get('season')==season and r.get('kind')=='game' and r.get('result')=='Graded' and None not in (at,cap,start,end,t,s,y) and y!=0 and at<=cap<start<=end<=now and (cap-at).total_seconds()<=5400 and ''.join(str(src.get('book','')).lower().split())=='draftkings'):continue
         seen.add(event);rows.append((start,t,-s,y,end))
     rows.sort();days=sorted({r[0].astimezone(ZoneInfo('America/Toronto')).date() for r in rows});out={'games':len(rows),'weight':.2,'errors':[],'band_active':False}
+    # Descriptive replay is visible even before there are enough later dates for a test.
+    replay=[(max(masses(margin(t,m,.2),12,[]).items(),key=lambda pair:pair[1])[0],band(y)) for _,t,m,y,_ in rows]
+    cover=[(t-m)*(y-m) for _,t,m,y,_ in rows if t!=m and y!=m]
+    out.update(replay_band_hits=sum(a==b for a,b in replay),replay_spread_hits=sum(v>0 for v in cover),replay_spread_decisions=len(cover),game_dates=len(days))
     if len(days)<3:return out
     cutoff=days[max(1,2*len(days)//3)];test=[r for r in rows if r[0].astimezone(ZoneInfo('America/Toronto')).date()>=cutoff];train=[r for r in rows if r[4]<test[0][0]]
     if len(train)<15 or len(test)<8:return out
