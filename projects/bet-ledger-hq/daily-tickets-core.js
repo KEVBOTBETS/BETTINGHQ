@@ -4,7 +4,7 @@
  const key=r=>[r.game_id,r.market,r.side,r.line??'',r.book,r.price,r.model_version,r.probability,r.push_prob,r.qualified].join('|');
  function history(evidence,g,q){const version=q.model_version||'unversioned';return (evidence?.cohorts||[]).filter(r=>r.sport===g.sport&&r.market===q.market&&r.version===version&&(!g.season||Number(r.season)===Number(g.season))).sort((a,b)=>Number(b.season)-Number(a.season))[0]||null;}
  const evidenceRank=r=>{const h=r.history?.preferred;return h?.n>=30&&h?.dates>=10?(h.roi>0?1:-1):0;};
- function options(system,evidence,{sport='all',date=day(Date.now()),now=Date.now(),minDecimal=1+100/150,maxDecimal=3}={}){
+ function options(system,evidence,{sport='all',now=Date.now(),date=day(now),minDecimal=1+100/150,maxDecimal=3}={}){
   const rows=[];for(const g of system?.games||[]){if(sport!=='all'&&g.sport!==sport||!sports.includes(g.sport)||Date.parse(g.start)<=now||day(g.start)!==date||!V.fresh(g.publication_at,now,['ncaaf','ncaab'].includes(g.sport)?4:6))continue;
    const unique=new Map();for(const q of g.selections||[]){const d=V.decimal(q.price),p=V.number(q.probability),push=V.number(q.push_prob)??0;
     if(!['ML','ATS','TOTAL'].includes(q.market)||q.market!=='ML'&&V.number(q.line)===null||!(['ML','ATS'].includes(q.market)?['home','away']:['over','under']).includes(q.side)||!q.fresh||!q.book||/model|unknown|unavailable|unspecified/i.test(q.book)||q.price_source==='model'||q.reference_only||q.quote_status&&q.quote_status!=='observed'||d===null||d<minDecimal-1e-9||d>maxDecimal||!V.fresh(q.observed_at,now,['nba','nhl','ncaab'].includes(g.sport)?1.5:4)||Date.parse(q.observed_at)>=Date.parse(g.start)||p===null||p<=.5||p>=1||push<0||push>=1)continue;
