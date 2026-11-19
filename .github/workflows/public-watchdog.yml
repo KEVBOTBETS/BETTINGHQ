@@ -5,8 +5,8 @@ on:
     branches: [main]
     paths: ['tools/public_watchdog.py', '.github/workflows/public-watchdog.yml']
   schedule:
-    # Check after the noon / 6 pm refresh has had time to publish.
-    - cron: '45 12,18 * * *'
+    # Check ticket prices throughout the Toronto betting day.
+    - cron: '15,45 9-23 * * *'
       timezone: America/Toronto
 permissions:
   contents: read
