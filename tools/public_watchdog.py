@@ -45,6 +45,25 @@ def assess(health, runs, now):
             'latest_release_url': main_runs[0].get('html_url') if main_runs else None}
 
 
+def college_quote_gap(system, now):
+    from zoneinfo import ZoneInfo
+    zone = ZoneInfo('America/Toronto')
+    ages = []
+    for game in system['games']:
+        if game.get('sport') != 'ncaab':
+            continue
+        start = dt.datetime.fromisoformat(game['start'].replace('Z', '+00:00'))
+        if start <= now or start.astimezone(zone).date() != now.astimezone(zone).date():
+            continue
+        for quote in game.get('selections', []):
+            age = age_hours(quote.get('observed_at'), now)
+            if age is not None and age >= 0 and quote.get('book') and quote.get('price'):
+                ages.append(age)
+    # Recover previously priced slates before the 90-minute expiry. A lack
+    # of positive-value offers alone is not a data outage.
+    return bool(ages) and min(ages) >= 1.0
+
+
 def request(url, token=None, payload=None):
     headers = {'Accept': 'application/json', 'User-Agent': 'BETTINGHQ-public-watchdog'}
     if token:
@@ -77,7 +96,14 @@ def main():
     except Exception as exc:
         fetch_errors.append(f'Release status fetch failed ({type(exc).__name__}); recovery will not be dispatched blindly.')
     result = assess(health, runs or [], now)
+    try:
+        inventory = request('https://kevbotbets.github.io/BETTINGHQ/bet-ledger-hq/data/system.json?watchdog=' + str(int(now.timestamp())))
+        if college_quote_gap(inventory, now):
+            result['errors'].append('NCAAB: all observed prices for remaining games are at least one hour old; refresh before ticket expiry.')
+    except Exception as exc:
+        fetch_errors.append(f'Published ticket inventory unavailable ({type(exc).__name__}).')
     result['errors'].extend(fetch_errors)
+    result['request_refresh'] = bool(result['errors']) and runs is not None and not result['release_active']
     result['recovery'] = 'not needed'
     if result['errors']:
         if runs is None:
