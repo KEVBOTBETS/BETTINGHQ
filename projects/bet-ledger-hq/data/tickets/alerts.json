@@ -1,29 +1,43 @@
 {
   "schema": 1,
-  "checked_at": "2026-11-19T17:13:48.287Z",
+  "checked_at": "2026-11-19T17:21:02.996Z",
   "coverage": {
-    "mlb": {
+    "nfl": {
       "status": "available",
-      "reports": 12,
-      "checked_at": "2026-11-19T17:13:48.287Z"
+      "reports": 511,
+      "checked_at": "2026-11-19T17:21:02.996Z"
     },
     "ncaaf": {
       "status": "empty",
       "reports": 0,
-      "checked_at": "2026-11-19T17:13:48.287Z"
+      "checked_at": "2026-11-19T17:21:02.996Z"
+    },
+    "mlb": {
+      "status": "available",
+      "reports": 12,
+      "checked_at": "2026-11-19T17:21:02.996Z"
     },
     "nhl": {
       "status": "available",
       "reports": 36,
-      "checked_at": "2026-11-19T17:13:48.287Z"
-    },
-    "nfl": {
-      "status": "available",
-      "reports": 511,
-      "checked_at": "2026-11-19T17:13:48.287Z"
+      "checked_at": "2026-11-19T17:21:02.996Z"
     }
   },
   "events": [
+    {
+      "id": "injury|nfl:33:Marlon Humphrey|2026-11-19T17:21:02.996Z",
+      "kind": "injury",
+      "observed_at": "2026-11-19T17:21:02.996Z",
+      "sport": "nfl",
+      "title": "New availability report",
+      "event": "Baltimore Ravens",
+      "pick": "Marlon Humphrey",
+      "before": "Not in the previous dated report",
+      "after": "Out · Coach's Decision",
+      "source_quote_at": "2026-11-19T17:08Z",
+      "source": "ESPN injuries",
+      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
+    },
     {
       "id": "odds|ncaaf|401862830|2026-11-20T00:30Z|TOTAL||over|DraftKings|2026-11-19T17:13:48.287Z",
       "kind": "odds",
@@ -2841,20 +2855,6 @@
       "before": "Not in the previous dated report",
       "after": "Injured Reserve · Groin",
       "source_quote_at": "2026-11-18T20:03Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:7:Caleb Lohner|2026-11-18T20:50:10.719Z",
-      "kind": "injury",
-      "observed_at": "2026-11-18T20:50:10.719Z",
-      "sport": "nfl",
-      "title": "New availability report",
-      "event": "Denver Broncos",
-      "pick": "Caleb Lohner",
-      "before": "Not in the previous dated report",
-      "after": "Injured Reserve · Lower Body",
-      "source_quote_at": "2026-11-18T20:08Z",
       "source": "ESPN injuries",
       "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
     }
