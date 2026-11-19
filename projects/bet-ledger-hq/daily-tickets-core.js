@@ -32,19 +32,16 @@
   forecasts.sort((a,b)=>b.probability-a.probability||a.start.localeCompare(b.start)||a.game_id.localeCompare(b.game_id));
   return [...current,...forecasts].slice(0,limit);
  }
- function stake(row,{bankroll,budget=20,remaining=budget}={}){
-  if(row.bettable===false||!row.qualified)return {amount:0,reason:'Research only: no evidence-backed stake recommendation. A $5 preview is a planning amount.'};
-  bankroll=V.number(bankroll);budget=V.number(budget);remaining=V.number(remaining);
-  if(!(bankroll>0)||!(budget>=5)||!(remaining>=5))return {amount:0,reason:'Enter a bankroll and remaining daily budget of at least $5.'};
-  const k=Math.max(0,(row.stressed*row.decimal-1)/(row.decimal-1))*.25;
-  const cap=Math.min(20,budget,remaining,bankroll*.01,bankroll*k),amount=Math.floor(cap/5)*5;
-  return amount>=5?{amount,reason:'Quarter-Kelly planning cap, at most 1% of bankroll and $20; assumes the model estimate is usable.'}:{amount:0,reason:'The bankroll-based cap is below $5. Pass; do not round risk up to the minimum.'};
+ function strong(row){return !!row.qualified&&row.stressed>=.60&&row.history?.preferred?.priced>=100&&row.history?.preferred?.dates>=20&&row.history?.preferred?.roi>0&&(1-(row.push||0))*(row.stressed*row.decimal-1)>=.05;}
+ function stake(row,{budget=20,remaining=budget}={}){
+  if(row.bettable===false||V.decimal(row.price)===null||remaining<5||budget<5)return {amount:0,reason:'No priced single or insufficient remaining budget.'};
+  return {amount:5,reason:strong(row)?'$5 standard; optional $10 for this high-confidence qualified pick.':row.qualified?'Standard $5 single.':'$5 planning amount only; this price is not a qualified recommendation.'};
  }
  function ticket(rows,amounts,{budget=20,now=Date.now()}={}){
   const seen=new Set(),errors=[];let risk=0,profit=0;
-  rows.forEach(r=>{if(r.bettable===false||V.decimal(r.price)===null)errors.push('A forecast without a usable current price cannot enter a ticket.');const amount=Number(amounts[r.id]);if(!Number.isFinite(amount)||amount<5||amount>20)errors.push('Each single must be $5–$20.');else{risk+=amount;profit+=amount*(r.decimal-1);}if(seen.has(r.game_id))errors.push('Only one single per game.');seen.add(r.game_id);if(Date.parse(r.start)<=now||!V.fresh(r.observed_at,now,['nba','nhl','ncaab'].includes(r.sport)?1.5:4)||!V.fresh(r.publication_at,now,['ncaaf','ncaab'].includes(r.sport)?4:6))errors.push('A game started or its source/price expired. Refresh before exporting.');});
+  rows.forEach(r=>{if(r.bettable===false||V.decimal(r.price)===null)errors.push('A forecast without a usable current price cannot enter a ticket.');const amount=Number(amounts[r.id]);if(amount!==5&&!(amount===10&&strong(r)))errors.push('Use $5 per single; $10 requires a high-confidence qualified pick.');else{risk+=amount;profit+=amount*(r.decimal-1);}if(seen.has(r.game_id))errors.push('Only one single per game.');seen.add(r.game_id);if(Date.parse(r.start)<=now||!V.fresh(r.observed_at,now,['nba','nhl','ncaab'].includes(r.sport)?1.5:4)||!V.fresh(r.publication_at,now,['ncaaf','ncaab'].includes(r.sport)?4:6))errors.push('A game started or its source/price expired. Refresh before exporting.');});
   if(!rows.length)errors.push('Choose at least one single.');if(!Number.isFinite(Number(budget))||risk>Number(budget))errors.push('The selected stakes exceed the daily budget.');
   return {risk,profit,returnIfAllWin:risk+profit,errors:[...new Set(errors)],kind:'Separate singles, not a parlay'};
  }
- return {sports,day,options,shortlist,stake,ticket,history};
+ return {sports,day,options,shortlist,strong,stake,ticket,history};
 });

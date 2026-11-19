@@ -12,10 +12,10 @@ assert.equal(C.options({games:[{...game,season:2028}]},evidence,{now})[0].qualif
 assert.equal(C.options({games:[{...game,selections:[{...q,model_version:'v2'}]}]},evidence,{now})[0].qualified,false);
 assert.equal(C.options(system,{cohorts:[]},{now})[0].qualified,false);
 const short={cohorts:[{...evidence.cohorts[0],preferred:{n:10,priced:10,dates:5,roi:.5}}]};assert.equal(C.options(system,short,{now})[0].qualified,false);
-assert.equal(C.stake(r[0],{bankroll:200,budget:20}).amount,0,'Never round a sub-$5 cap upward');assert.equal(C.stake(r[0],{bankroll:500,budget:20}).amount,5);assert.equal(C.stake(r[0],{bankroll:750,budget:20}).amount,5);assert.equal(C.stake(r[0],{bankroll:10000,budget:100}).amount,20);assert.equal(C.stake({...r[0],qualified:false},{bankroll:10000,budget:20}).amount,0);
+assert.equal(C.stake(r[0]).amount,5);assert.equal(C.stake({...r[0],qualified:false}).amount,5);assert.ok(C.ticket(r,{[r[0].id]:10},{now}).errors.length);const high={...r[0],history:{preferred:{priced:100,dates:20,roi:.04}}};assert.equal(C.ticket([high],{[high.id]:10},{now}).errors.length,0);assert.equal(C.stake(high).amount,5);
 for(const amount of [1,4,21,75,NaN])assert.ok(C.ticket(r,{[r[0].id]:amount},{budget:100,now}).errors.length);
 assert.ok(C.ticket([...r,...r],{[r[0].id]:5},{budget:20,now}).errors.some(s=>s.includes('one single')));
-assert.ok(C.ticket(r,{[r[0].id]:20},{budget:10,now}).errors.some(s=>s.includes('budget')));
+assert.ok(C.ticket(r,{[r[0].id]:5},{budget:4,now}).errors.some(s=>s.includes('budget')));
 const t=C.ticket(r,{[r[0].id]:5},{budget:20,now});assert.equal(t.errors.length,0);assert.equal(t.risk,5);assert.ok(Math.abs(t.profit-5*100/110)<1e-10);
 assert.ok(C.ticket(r,{[r[0].id]:5},{budget:20,now:Date.parse(start)}).errors.length);
 assert.equal(C.day('2026-11-18T02:00:00Z'),'2026-11-17');
