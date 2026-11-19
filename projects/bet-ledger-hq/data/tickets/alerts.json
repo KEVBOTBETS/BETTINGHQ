@@ -1,29 +1,85 @@
 {
   "schema": 1,
-  "checked_at": "2026-11-18T23:37:26.542Z",
+  "checked_at": "2026-11-19T00:15:42.793Z",
   "coverage": {
-    "nhl": {
+    "nfl": {
       "status": "available",
-      "reports": 36,
-      "checked_at": "2026-11-18T23:37:26.542Z"
+      "reports": 568,
+      "checked_at": "2026-11-19T00:15:42.793Z"
     },
     "ncaaf": {
       "status": "empty",
       "reports": 0,
-      "checked_at": "2026-11-18T23:37:26.542Z"
+      "checked_at": "2026-11-19T00:15:42.793Z"
+    },
+    "nhl": {
+      "status": "available",
+      "reports": 34,
+      "checked_at": "2026-11-19T00:15:42.793Z"
     },
     "mlb": {
       "status": "available",
       "reports": 12,
-      "checked_at": "2026-11-18T23:37:26.542Z"
-    },
-    "nfl": {
-      "status": "available",
-      "reports": 571,
-      "checked_at": "2026-11-18T23:37:26.542Z"
+      "checked_at": "2026-11-19T00:15:42.793Z"
     }
   },
   "events": [
+    {
+      "id": "starter|nhl:nhl:2026020344:away|2026-11-19T00:15:42.793Z",
+      "kind": "starter",
+      "observed_at": "2026-11-19T00:15:42.793Z",
+      "sport": "nhl",
+      "event": "BOS @ DET",
+      "start": "2026-11-19T00:30:00+00:00",
+      "title": "NHL starting goalie updated",
+      "before": "Jeremy Swayman",
+      "after": "Jeremy Swayman · confirmed",
+      "source_quote_at": "2026-11-19T00:13:52.765107+00:00",
+      "source": "NHL board",
+      "note": "Review the matchup after a starter change; the baseline does not price individual goalie talent."
+    },
+    {
+      "id": "injury|nfl:22:Max Melton|2026-11-19T00:15:42.793Z",
+      "kind": "injury",
+      "observed_at": "2026-11-19T00:15:42.793Z",
+      "sport": "nfl",
+      "title": "New availability report",
+      "event": "Arizona Cardinals",
+      "pick": "Max Melton",
+      "before": "Not in the previous dated report",
+      "after": "Questionable · Knee",
+      "source_quote_at": "2026-11-18T23:45Z",
+      "source": "ESPN injuries",
+      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
+    },
+    {
+      "id": "injury|nfl:22:Walter Nolen III|2026-11-19T00:15:42.793Z",
+      "kind": "injury",
+      "observed_at": "2026-11-19T00:15:42.793Z",
+      "sport": "nfl",
+      "title": "New availability report",
+      "event": "Arizona Cardinals",
+      "pick": "Walter Nolen III",
+      "before": "Not in the previous dated report",
+      "after": "Questionable · Illness",
+      "source_quote_at": "2026-11-18T23:44Z",
+      "source": "ESPN injuries",
+      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
+    },
+    {
+      "id": "injury|nfl:22:Roy Lopez|2026-11-19T00:15:42.793Z",
+      "kind": "injury",
+      "observed_at": "2026-11-19T00:15:42.793Z",
+      "sport": "nfl",
+      "title": "New availability report",
+      "event": "Arizona Cardinals",
+      "pick": "Roy Lopez",
+      "before": "Not in the previous dated report",
+      "after": "Questionable · Toe",
+      "source_quote_at": "2026-11-18T23:44Z",
+      "source": "ESPN injuries",
+      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
+    },
     {
       "id": "odds|ncaaf|401866467|2026-11-19T00:00Z|ML||home|Draft Kings|2026-11-18T23:37:26.542Z",
       "kind": "odds",
@@ -2791,62 +2847,6 @@
       "before": "Not in the previous dated report",
       "after": "Active · Battle finished Sunday's 38-18 win over Pittsburgh with six tackles (four solo), one defensed pass and one forced fumble.",
       "source_quote_at": "2026-11-18T05:29Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:4:Demetrius Knight Jr.|2026-11-18T15:37:26.164Z",
-      "kind": "injury",
-      "observed_at": "2026-11-18T15:37:26.164Z",
-      "sport": "nfl",
-      "title": "New availability report",
-      "event": "Cincinnati Bengals",
-      "pick": "Demetrius Knight Jr.",
-      "before": "Not in the previous dated report",
-      "after": "Active · Knight finished with eight tackles (six solo) and a defensed pass against the Steelers in a 38-18 victory Sunday.",
-      "source_quote_at": "2026-11-18T05:22Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:4:Barrett Carter|2026-11-18T15:37:26.164Z",
-      "kind": "injury",
-      "observed_at": "2026-11-18T15:37:26.164Z",
-      "sport": "nfl",
-      "title": "New availability report",
-      "event": "Cincinnati Bengals",
-      "pick": "Barrett Carter",
-      "before": "Not in the previous dated report",
-      "after": "Active · Carter posted six tackles (two solo) and a defensed pass in Sunday's 38-18 win over Pittsburgh.",
-      "source_quote_at": "2026-11-18T05:18Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:4:Drew Sample|2026-11-18T15:37:26.164Z",
-      "kind": "injury",
-      "observed_at": "2026-11-18T15:37:26.164Z",
-      "sport": "nfl",
-      "title": "New availability report",
-      "event": "Cincinnati Bengals",
-      "pick": "Drew Sample",
-      "before": "Not in the previous dated report",
-      "after": "Active · Sample caught all three of his targets for 15 yards and a touchdown in Sunday's 38-18 win against Pittsburgh.",
-      "source_quote_at": "2026-11-18T02:03Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:5:Malachi Corley|2026-11-18T15:37:26.164Z",
-      "kind": "injury",
-      "observed_at": "2026-11-18T15:37:26.164Z",
-      "sport": "nfl",
-      "title": "New availability report",
-      "event": "Cleveland Browns",
-      "pick": "Malachi Corley",
-      "before": "Not in the previous dated report",
-      "after": "Active · Corley caught all three of his targets for 37 yards in addition to returning two kicks for 51 yards during Cleveland's win over the Texans on Sunday.",
-      "source_quote_at": "2026-11-18T02:17Z",
       "source": "ESPN injuries",
       "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
     }
