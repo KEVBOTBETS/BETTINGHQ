@@ -1,29 +1,57 @@
 {
   "schema": 1,
-  "checked_at": "2026-11-19T19:05:49.503Z",
+  "checked_at": "2026-11-19T19:22:35.917Z",
   "coverage": {
     "ncaaf": {
       "status": "empty",
       "reports": 0,
-      "checked_at": "2026-11-19T19:05:49.503Z"
+      "checked_at": "2026-11-19T19:22:35.917Z"
+    },
+    "nhl": {
+      "status": "available",
+      "reports": 38,
+      "checked_at": "2026-11-19T19:22:35.917Z"
     },
     "mlb": {
       "status": "available",
       "reports": 12,
-      "checked_at": "2026-11-19T19:05:49.503Z"
-    },
-    "nhl": {
-      "status": "available",
-      "reports": 37,
-      "checked_at": "2026-11-19T19:05:49.503Z"
+      "checked_at": "2026-11-19T19:22:35.917Z"
     },
     "nfl": {
       "status": "available",
-      "reports": 487,
-      "checked_at": "2026-11-19T19:05:49.503Z"
+      "reports": 464,
+      "checked_at": "2026-11-19T19:22:35.917Z"
     }
   },
   "events": [
+    {
+      "id": "starter|nhl:nhl:2026020356:away|2026-11-19T19:22:35.917Z",
+      "kind": "starter",
+      "observed_at": "2026-11-19T19:22:35.917Z",
+      "sport": "nhl",
+      "event": "ANA @ COL",
+      "start": "2026-11-20T02:00:00+00:00",
+      "title": "NHL starting goalie updated",
+      "before": "Lukas Dostal",
+      "after": "Lukas Dostal · confirmed",
+      "source_quote_at": "2026-11-19T19:20:32.079111+00:00",
+      "source": "NHL board",
+      "note": "Review the matchup after a starter change; the baseline does not price individual goalie talent."
+    },
+    {
+      "id": "injury|nhl:124292:Jacob Melanson|2026-11-19T19:22:35.917Z",
+      "kind": "injury",
+      "observed_at": "2026-11-19T19:22:35.917Z",
+      "sport": "nhl",
+      "title": "New availability report",
+      "event": "Seattle Kraken",
+      "pick": "Jacob Melanson",
+      "before": "Not in the previous dated report",
+      "after": "Injured Reserve · Chest",
+      "source_quote_at": "2026-11-19T19:03Z",
+      "source": "ESPN injuries",
+      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
+    },
     {
       "id": "starter|nhl:nhl:2026020347:away|2026-11-19T19:05:49.503Z",
       "kind": "starter",
@@ -2829,34 +2857,6 @@
       "source_quote_at": "2026-11-18T20:48:00.408608+00:00",
       "source": "NHL board",
       "note": "Review the matchup after a starter change; the baseline does not price individual goalie talent."
-    },
-    {
-      "id": "injury|nhl:9:Tyler Myers|2026-11-18T20:50:10.719Z",
-      "kind": "injury",
-      "observed_at": "2026-11-18T20:50:10.719Z",
-      "sport": "nhl",
-      "title": "Player availability changed",
-      "event": "Dallas Stars",
-      "pick": "Tyler Myers",
-      "before": "Day-To-Day · Upper Body",
-      "after": "Out · Upper Body",
-      "source_quote_at": "2026-11-18T20:37Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nhl:20:Zemgus Girgensons|2026-11-18T20:50:10.719Z",
-      "kind": "injury",
-      "observed_at": "2026-11-18T20:50:10.719Z",
-      "sport": "nhl",
-      "title": "Player availability changed",
-      "event": "Tampa Bay Lightning",
-      "pick": "Zemgus Girgensons",
-      "before": "Day-To-Day · Undisclosed",
-      "after": "Day-To-Day · Upper Body",
-      "source_quote_at": "2026-11-18T18:08Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
     }
   ]
 }
