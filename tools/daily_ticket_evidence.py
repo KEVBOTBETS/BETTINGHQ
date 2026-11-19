@@ -28,7 +28,7 @@ def build(performance,moneyline,spreads,now=None):
   # No postgame prices, no historical quote backfills, no double-counted sides.
   priced=bool(d and qt and qt<=capture and qt<start and (capture-qt).total_seconds()<=5400)
   old=samples.get(key)
-  row=dict(sport=sport,version=version,season=season,market=market,status=status,price=price if priced else None,decimal=d if priced else None,start=start,captured=capture)
+  row=dict(sport=sport,version=version,season=season,market=market,status=status,price=price if priced else None,decimal=d if priced else None,start=start,captured=capture,home_probability=number(r.get("p")))
   if not old or priced and old['decimal'] is None or capture<old['captured'] and not(old['decimal'] and not priced):samples[key]=row
  for r in performance.get('records',[]):
   sport=r.get('sport');event=str(r.get('id'));version=r.get('version') or 'unversioned';seasons[(sport,event,version)]=r.get('season')
@@ -53,5 +53,12 @@ def build(performance,moneyline,spreads,now=None):
  rows=[]
  for (sport,market,version,season),values in sorted(groups.items()):
   preferred=[r for r in values if r['decimal'] is not None and 1+100/150<=r['decimal']<=3]
-  rows.append(dict(sport=sport,market=market,version=version,season=season,all=metrics(values),preferred=metrics(preferred)))
+  buckets={}
+  if sport=='ncaab' and market=='ML':
+   for sample in preferred:
+    hp=sample['home_probability']
+    if hp is None or not 0<hp<1:continue
+    bucket=str(int(max(hp,1-hp)*10))+':'+str(int(sample['decimal']*4))
+    buckets.setdefault(bucket,[]).append(sample)
+  rows.append(dict(buckets={k:metrics(v) for k,v in buckets.items()},sport=sport,market=market,version=version,season=season,all=metrics(values),preferred=metrics(preferred)))
  return dict(schema=1,generated_at=now.isoformat(),cohorts=rows,policy='First pregame forecasts; one outcome per event, market, season and model version. ROI is simulated at original recorded prices, not actual wager returns. Preferred-price samples use -150 through +200. Missing prices cannot establish profitability. No automatic model promotion.')
