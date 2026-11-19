@@ -231,6 +231,20 @@ jobs:
       - uses: actions/deploy-pages@v5
         id: deploy
 
+  verify-public-tickets:
+    needs: publish
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: npm ci --ignore-scripts && npx playwright install --with-deps chromium
+        working-directory: projects/bet-ledger-hq
+      - run: node tests/public-college-ticket.mjs
+        working-directory: projects/bet-ledger-hq
+
   repository-backup:
     name: Verify and package repository backup
     needs: publish

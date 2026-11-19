@@ -101,7 +101,7 @@ def build(root=ROOT,now=None,staged=None):
    context={k:g[k] for k in ['venue','broadcast','home_goalie','away_goalie','nhl_game_id'] if k in g}
    games.append({'id':key,'sport':sport,'season':g.get('season') or meta.get('season'),'event_id':event,'start':start,'matchup':matchup,'home':home,'away':away,'home_name':g.get('home_name') or (g.get('home',{}).get('name') if isinstance(g.get('home'),dict) else home),'away_name':g.get('away_name') or (g.get('away',{}).get('name') if isinstance(g.get('away'),dict) else away),'p_home':p if ready else None,'margin':margin if fresh else None,'forecast_available':bool(ready),'score_projection':score_projection,'publication_at':publication,'publication_fresh':fresh,'selections':observed,'best':chosen,'qualified':bool(any(r['qualified'] for r in observed)),'context':context,'news':news,
     'board_url':'../'+repo+'/' if sport!='mlb' else '../mlb-edge/','model_version':projection.get('model_version') or meta.get('model_version'),'manual_available':True,
-    'decision':{'why':('Published model leans '+str(home if p>=.5 else away)) if ready else 'Forecast unavailable; review the source board',
+    'decision':{'why':('Published model leans '+str(home if p>=.5 else away)) if ready else ('Published model data expired' if not fresh else (projection.get('reason') or ('Team ratings unavailable for this matchup' if projection.get('ratings_known') is False else 'Source did not publish a usable winner probability'))),
      'missing':([ 'Forecast publication stale or unavailable'] if not fresh else [])+(['No verified fresh book price'] if not any(r['fresh'] for r in observed) else []),
      'basis':'Research selections remain available; qualification follows the source model and quote checks'}})
    upcoming.append(g)

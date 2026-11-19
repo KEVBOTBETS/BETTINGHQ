@@ -61,7 +61,7 @@ def start_time(text,now):
     try:return datetime(day.year,day.month,day.day,int(match[2]),int(match[3]),tzinfo=TORONTO)
     except ValueError:return None
 
-def parse(html,games,now):
+def parse(html,games,now,normalize=code):
     tree=Tree();tree.feed(html);result={}
     stamp=re.search(r'Last updated\s+([A-Za-z]{3} \d{1,2}, \d{4}, \d{1,2}:\d{2} [AP]M) ET',tree.root.text())
     if not stamp:return []
@@ -79,10 +79,10 @@ def parse(html,games,now):
             for side in ('home','away'):
                 cells=team_nodes[0].find(cls=side+'-cell')
                 strong=cells[0].find('strong') if len(cells)==1 else []
-                if len(strong)==1:names[side]=code(strong[0].text())
+                if len(strong)==1:names[side]=normalize(strong[0].text())
             start=start_time(times[0].text(),published)
             if not start or start<=now or len(names)!=2:continue
-            matches=[g for g in games if g.get('state')=='pre' and all(code(g.get(s))==names[s] for s in names) and instant(g.get('date')) and abs((instant(g['date'])-start).total_seconds())<=60]
+            matches=[g for g in games if g.get('state')=='pre' and all(normalize(g.get(s))==names[s] for s in names) and instant(g.get('date')) and abs((instant(g['date'])-start).total_seconds())<=60]
             if len(matches)!=1:continue
             game=matches[0]
             for cell in row.find('td','liveOddsCell'):
@@ -252,3 +252,16 @@ def fetch(games,now,health=None):
 def collect(games,now,health=None):
     adapted=[{**g,'home':g['home']['abbr'],'away':g['away']['abbr']} for g in games]
     return fetch(adapted,now,health)
+
+def collect_college(games,now,health):
+    url='https://www.covers.com/sport/basketball/ncaab/odds'
+    targets=[{**g,'home':g['home']['abbr'],'away':g['away']['abbr']} for g in games if covered_markets(g,now)!={'ML','ATS','TOTAL'}]
+    if not targets:return []
+    try:
+        rows=parse(download(url),targets,now,normalize=lambda x:x)
+        for _,q in rows:q['source_url']=url
+        health.append({'url':url,'checked_at':now.isoformat(),'status':'ok' if rows else 'no matched prices','quotes':len(rows)})
+        return rows
+    except (OSError,ValueError) as exc:
+        health.append({'url':url,'checked_at':now.isoformat(),'status':'unavailable','error':type(exc).__name__})
+        return []

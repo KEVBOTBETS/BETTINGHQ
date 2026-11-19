@@ -153,9 +153,9 @@ def main(argv=None, root=None):
     with ThreadPoolExecutor(max_workers=4) as pool:list(pool.map(context,wanted))
     attempts=[]
     upcoming=[g for g in ordered if g['state']=='pre' and not g['canceled'] and not g['postponed'] and model.instant(g['tipoff'])>now]
-    if not args.offline and not college:
+    if not args.offline:
         # A bounded public comparison page supplements missing markets.
-        offers=public_odds.collect([g for g in upcoming if model.instant(g['tipoff'])<=now+timedelta(hours=48)],now,attempts)
+        offers=(public_odds.collect_college if college else public_odds.collect)([g for g in upcoming if model.instant(g['tipoff'])<=now+timedelta(hours=48)],now,attempts)
         for gid,q in offers:
             if gid not in games:continue
             existing=games[gid]['quotes'];identity=lambda x:(x['market'],x['side'],x.get('line'),x['book'])
@@ -198,7 +198,7 @@ def main(argv=None, root=None):
         g['p_home']=g['projection'].get('p_home')
         g['team_model_inputs']={side:{'name':g[side].get('name'),'current':teams.get(g[side]['id'],{}).get('current',{}),'prior':teams.get(g[side]['id'],{}).get('prior',{})} for side in ('home','away')}
         if college:
-            for offer in g['quotes']:offer['source_url']='https://www.espn.com/mens-college-basketball/odds'
+            for offer in g['quotes']:offer.setdefault('source_url','https://www.espn.com/mens-college-basketball/odds')
         board.extend(model.candidates(g,now))
         # One original named-book bundle for independent market comparison history.
         ml=[q for q in g['quotes'] if q['market']=='ML']
