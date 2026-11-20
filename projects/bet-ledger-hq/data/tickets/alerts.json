@@ -1,29 +1,71 @@
 {
   "schema": 1,
-  "checked_at": "2026-11-20T22:17:02.786Z",
+  "checked_at": "2026-11-20T22:41:00.442Z",
   "coverage": {
-    "nhl": {
-      "status": "available",
-      "reports": 40,
-      "checked_at": "2026-11-20T22:17:02.786Z"
-    },
     "ncaaf": {
       "status": "empty",
       "reports": 0,
-      "checked_at": "2026-11-20T22:17:02.786Z"
+      "checked_at": "2026-11-20T22:41:00.442Z"
+    },
+    "mlb": {
+      "status": "available",
+      "reports": 11,
+      "checked_at": "2026-11-20T22:41:00.442Z"
+    },
+    "nhl": {
+      "status": "available",
+      "reports": 40,
+      "checked_at": "2026-11-20T22:41:00.442Z"
     },
     "nfl": {
       "status": "available",
       "reports": 363,
-      "checked_at": "2026-11-20T22:17:02.786Z"
-    },
-    "mlb": {
-      "status": "available",
-      "reports": 10,
-      "checked_at": "2026-11-20T22:17:02.786Z"
+      "checked_at": "2026-11-20T22:41:00.442Z"
     }
   },
   "events": [
+    {
+      "id": "injury|mlb:10:Fernando Cruz|2026-11-20T22:41:00.442Z",
+      "kind": "injury",
+      "observed_at": "2026-11-20T22:41:00.442Z",
+      "sport": "mlb",
+      "title": "New availability report",
+      "event": "New York Yankees",
+      "pick": "Fernando Cruz",
+      "before": "Not in the previous dated report",
+      "after": "Out · Elbow",
+      "source_quote_at": "2026-11-20T22:17Z",
+      "source": "ESPN injuries",
+      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
+    },
+    {
+      "id": "injury|nfl:22:Hjalte Froholdt|2026-11-20T22:41:00.442Z",
+      "kind": "injury",
+      "observed_at": "2026-11-20T22:41:00.442Z",
+      "sport": "nfl",
+      "title": "Player availability changed",
+      "event": "Arizona Cardinals",
+      "pick": "Hjalte Froholdt",
+      "before": "Questionable · Concussion",
+      "after": "Active · Froholdt (concussion) practiced fully Thursday.",
+      "source_quote_at": "2026-11-20T02:44Z",
+      "source": "ESPN injuries",
+      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
+    },
+    {
+      "id": "injury|nfl:2:Amani Hooker|2026-11-20T22:41:00.442Z",
+      "kind": "injury",
+      "observed_at": "2026-11-20T22:41:00.442Z",
+      "sport": "nfl",
+      "title": "Player availability changed",
+      "event": "Buffalo Bills",
+      "pick": "Amani Hooker",
+      "before": "Active",
+      "after": "Active · Hooker (knee) does not carry an injury designation into Sunday's game against the Dolphins.",
+      "source_quote_at": "2026-11-20T22:20Z",
+      "source": "ESPN injuries",
+      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
+    },
     {
       "id": "injury|nfl:22:Jon Gaines II|2026-11-20T22:17:02.786Z",
       "kind": "injury",
@@ -2815,48 +2857,6 @@
       "before": "Day-To-Day · Upper Body",
       "after": "Out · Upper Body",
       "source_quote_at": "2026-11-19T23:56Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:22:Walter Nolen III|2026-11-20T00:48:52.597Z",
-      "kind": "injury",
-      "observed_at": "2026-11-20T00:48:52.597Z",
-      "sport": "nfl",
-      "title": "Player availability changed",
-      "event": "Arizona Cardinals",
-      "pick": "Walter Nolen III",
-      "before": "Active · Nolen (illness) didn't participate in Wednesday's practice, Zach Gershman of the Cardinals' official site reports.",
-      "after": "Active · Nolen (illness) was a full participant in practice Thursday, Zach Gershman of the Cardinals' official site reports.",
-      "source_quote_at": "2026-11-20T00:25Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:34:Wyatt Teller|2026-11-20T00:48:52.597Z",
-      "kind": "injury",
-      "observed_at": "2026-11-20T00:48:52.597Z",
-      "sport": "nfl",
-      "title": "Player availability changed",
-      "event": "Houston Texans",
-      "pick": "Wyatt Teller",
-      "before": "Questionable · Back",
-      "after": "Out · Back",
-      "source_quote_at": "2026-11-20T00:20Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:34:Jake Hummel|2026-11-20T00:48:52.597Z",
-      "kind": "injury",
-      "observed_at": "2026-11-20T00:48:52.597Z",
-      "sport": "nfl",
-      "title": "Player availability changed",
-      "event": "Houston Texans",
-      "pick": "Jake Hummel",
-      "before": "Questionable · Groin",
-      "after": "Active · Hummel (groin) is active for Thursday Night Football against the Colts.",
-      "source_quote_at": "2026-11-20T00:16Z",
       "source": "ESPN injuries",
       "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
     }
