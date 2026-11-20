@@ -83,6 +83,12 @@ def parse_summary(raw,game,observed):
     header=raw.get('header') or {};comp=(header.get('competitions') or [{}])[0];tip=model.instant(comp.get('date'))
     identities={x.get('homeAway'):str(x.get('team',{}).get('id')) for x in comp.get('competitors',[])}
     if str(header.get('id'))!=game['game_id'] or tip!=model.instant(game['tipoff']) or any(identities.get(s)!=game[s]['id'] for s in ('home','away')):return [],[]
+    if game.get('state')=='pre' and model.instant(observed) and model.instant(observed)<tip:
+        pred=raw.get('predictor') or {}
+        pair=[pred.get(side+'Team') or {} for side in ('home','away')]
+        values=[model.number(t.get('gameProjection')) for t in pair]
+        if all(str(t.get('id'))==game[side]['id'] for t,side in zip(pair,('home','away'))) and all(v is not None and 0<v<100 for v in values) and abs(sum(values)-100)<=0.2:
+            game['espn_comparison']={'p_home':values[0]/100,'observed_at':observed,'source':'ESPN matchup predictor','mode':'comparison only'}
     from .quotes import parse_espn
     quotes=parse_espn(raw.get('pickcenter') or [],observed)
     players=[]
@@ -149,7 +155,15 @@ def main(argv=None, root=None):
     def context(g):
         key='summary-'+g['game_id'];raw=source(key,BASE+'summary?event='+g['game_id'],ttl=0 if g['state']!='post' else 1800)
         if health[key]['status'] not in ('ok','cached'):return
-        qs,ps=parse_summary(raw,g,health[key]['observed_at']);g['quotes']=qs or g['quotes'];players.extend(ps)
+        qs,ps=parse_summary(raw,g,health[key]['observed_at']);players.extend(ps)
+        # Replace markets as complete source bundles, retaining other books and markets.
+        if qs and college:
+            groups={}
+            for q in g['quotes']+qs:
+                k=(q['book'],q['market']);at=q['observed_at']
+                groups.setdefault(k,{}).setdefault(at,[]).append(q)
+            g['quotes']=[q for snapshots in groups.values() for q in { (r['side'],r.get('line')):r for r in snapshots[max(snapshots,key=model.instant)] }.values()]
+        elif qs:g['quotes']=qs
     with ThreadPoolExecutor(max_workers=4) as pool:list(pool.map(context,wanted))
     attempts=[]
     upcoming=[g for g in ordered if g['state']=='pre' and not g['canceled'] and not g['postponed'] and model.instant(g['tipoff'])>now]
