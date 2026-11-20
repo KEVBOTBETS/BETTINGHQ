@@ -2,6 +2,9 @@
  const markets={ML:'Moneyline',ATS:'Spread / puck line',TOTAL:'Total'},state={system:null,evidence:null,rows:[],displayRows:[],draft:new Map(),amounts:{},busy:false,failed:true,lastLoad:0,followToday:true};
  const query=new URLSearchParams(location.search),sport=query.get('sport');$('#daily-sport').value=C.sports.includes(sport)?sport:'all';$('#daily-date').value=C.day(Date.now());
  document.querySelector('.daily-leagues').innerHTML=['all',...C.sports].map(s=>`<a href="./#${s==='all'?'daily-tickets':'daily-'+s}" target="_top" data-daily-league="${s}" ${s===$('#daily-sport').value?'aria-current="page"':''}>${s==='all'?'All sports':s.toUpperCase()}</a>`).join('');
+ const visitKey='bhq-last-markets-v1',priorVisit=(()=>{try{return JSON.parse(localStorage.getItem(visitKey)||'{}')||{}}catch{return {}}})(),seenVisit={...priorVisit};
+ function signature(r){return [r.book,r.price,r.qualified,r.probability?.toFixed(3)].join('|');}
+ function ident(r){return [r.game_id,r.market,r.side,r.line].join('|');}
  function params(){return {sport:$('#daily-sport').value,date:$('#daily-date').value};}
  function validDraft(){const rows=[...state.draft.values()],audit=C.ticket(rows.map(r=>state.rows.find(q=>q.id===r.id)||r),state.amounts,{budget:Number($('#daily-budget').value)});if(state.failed)audit.errors.push('The latest publication could not be verified. Refresh before exporting.');for(const r of rows)if(!state.rows.some(q=>q.id===r.id))audit.errors.push('A draft quote changed, expired, or no longer matches these filters. Remove it and select a current option.');audit.errors=[...new Set(audit.errors)];return audit;}
  function analysisCard(r,g){
@@ -28,6 +31,9 @@
   if(mode==='qualified')state.displayRows=qualified.map(r=>({...r,bettable:true}));
   if(mode==='research'){state.rows=marketRows;state.displayRows=marketRows.filter(r=>!r.qualified).map(r=>({...r,bettable:true}));}
   if(mode==='forecast')state.displayRows=forecastRows;
+  if(mode==='changed'){state.rows=marketRows;state.displayRows=marketRows.filter(r=>signature(r)!==priorVisit[ident(r)]?.value).map(r=>({...r,bettable:true}));}
+  if(!state.failed){for(const r of marketRows)seenVisit[ident(r)]={value:signature(r),start:r.start};for(const k in seenVisit)if(Date.parse(seenVisit[k].start)<=now)delete seenVisit[k];try{localStorage.setItem(visitKey,JSON.stringify(seenVisit))}catch{}}
+  const pin=$('#qualified-preview');if(pin)pin.textContent=qualified.length?'Qualified shortlist: '+[...new Map(qualified.slice().reverse().map(r=>[r.game_id,r])).values()].sort((a,b)=>qualified.indexOf(a)-qualified.indexOf(b)).slice(0,3).map(r=>r.pick+' '+odd(r.price)+' at '+r.book+' · $5').join(' / '):'No qualified singles in this view. Choose Priced research only to explore current offers.';
   const byGame=new Map(games.map(g=>[g.id,g]));
   const supported=g=>g.forecast_available&&Number.isFinite(g.p_home)&&g.p_home>0&&g.p_home<1&&window.BetValue.fresh(g.publication_at,now,['ncaab','ncaaf'].includes(g.sport)?4:6);
   const gaps=games.filter(g=>!supported(g));
