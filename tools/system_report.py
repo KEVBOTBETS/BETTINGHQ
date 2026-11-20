@@ -99,6 +99,21 @@ def build(root=ROOT,now=None,staged=None):
    news=[{'title':n.get('headline') or n.get('title'),'url':n.get('url') or (n.get('links') or {}).get('web',{}).get('href'),'published_at':n.get('published') or n.get('published_at')} for n in news if isinstance(n,dict)] if isinstance(news,list) else []
    news=[n for n in news if n['title'] and str(n['url']).startswith('https://')][:5]
    context={k:g[k] for k in ['venue','broadcast','home_goalie','away_goalie','nhl_game_id'] if k in g}
+   if sport in ('ncaab','ncaaf','nfl') and ready:
+    from statistics import median
+    pairs={}
+    for q in observed:
+     if not q.get('fresh') or q['market']!='ML':continue
+     price=number(q.get('price'))
+     if price is None or abs(price)<100:continue
+     pairs.setdefault((q['book'],q['observed_at']),{})[q['side']]=100/(price+100) if price>0 else -price/(100-price)
+    latest={}
+    for (book,stamp),pair in sorted(pairs.items(),key=lambda item:str(item[0][1])):
+     if {'home','away'}<=pair.keys():
+      vig=pair['home']+pair['away']-1
+      latest[book]=(pair['home']/(1+vig),vig)
+    probs=[v[0] for v in latest.values()]
+    context['comparison']={'paired_books':len(probs),'fair_home':median(probs) if probs else None,'market_range':max(probs)-min(probs) if len(probs)>1 else None,'median_margin_charged':median([v[1] for v in latest.values()]) if probs else None,'model_market_difference':p-median(probs) if probs else None,'market_blend_shadow':.5*(p+median(probs)) if probs else None,'home_margin':margin,'margin_sd':number(projection.get('margin_sd')),'total_sd':number(projection.get('total_sd')),'espn_home':(g.get('espn_comparison') or {}).get('p_home')}
    games.append({'id':key,'sport':sport,'season':g.get('season') or meta.get('season'),'event_id':event,'start':start,'matchup':matchup,'home':home,'away':away,'home_name':g.get('home_name') or (g.get('home',{}).get('name') if isinstance(g.get('home'),dict) else home),'away_name':g.get('away_name') or (g.get('away',{}).get('name') if isinstance(g.get('away'),dict) else away),'p_home':p if ready else None,'margin':margin if fresh else None,'forecast_available':bool(ready),'score_projection':score_projection,'publication_at':publication,'publication_fresh':fresh,'selections':observed,'best':chosen,'qualified':bool(any(r['qualified'] for r in observed)),'context':context,'news':news,
     'board_url':'../'+repo+'/' if sport!='mlb' else '../mlb-edge/','model_version':projection.get('model_version') or meta.get('model_version'),'manual_available':True,
     'decision':{'why':('Published model leans '+str(home if p>=.5 else away)) if ready else ('Published model data expired' if not fresh else (projection.get('reason') or ('Team ratings unavailable for this matchup' if projection.get('ratings_known') is False else 'Source did not publish a usable winner probability'))),
