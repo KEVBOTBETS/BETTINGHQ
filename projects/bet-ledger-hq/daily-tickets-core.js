@@ -14,10 +14,13 @@
     const bucket=h?.buckets?.[Math.floor(p*10)+':'+Math.floor(d*4)],stamp=Date.parse(evidence?.generated_at);
     const tracked=g.sport==='ncaab'&&q.market==='ML'&&q.tier==='RESEARCH'&&q.model_version&&g.season&&g.forecast_available&&Number.isFinite(g.p_home)&&Math.abs(p-(q.side==='home'?g.p_home:1-g.p_home))<.00001&&p>.5&&Number.isFinite(stamp)&&stamp<=now&&now-stamp<=24*3600000&&bucket?.priced>=100&&bucket.n>=100&&bucket.dates>=20&&bucket.roi>0&&bucket.lower*d>=1.02&&stressEV>=.02;
     const priced=h?.preferred,qualified=tracked||!!q.qualified&&stressEV>=.02&&priced?.n>=30&&priced?.priced>=30&&priced?.dates>=10&&priced?.roi>0;
-    const r={...q,game_id:g.id,event_id:g.event_id,sport:g.sport,matchup:g.matchup,start:g.start,publication_at:g.publication_at,decimal:d,push,probability:p,stressed:tracked?Math.min(stressed,bucket.lower):stressed,ev,stressEV,target,history:h,tracked:!!tracked,qualified,source_qualified:!!q.qualified};r.id=key(r);
-    const contract=[q.market,q.side,q.line??''].join('|'),prior=unique.get(contract);if(!prior||d>prior.decimal)unique.set(contract,r);
+    const priority=['ncaab','ncaaf','nfl'].includes(g.sport),hist=h?.preferred;
+    // A ranking sensitivity check only: shrink the estimated edge toward break-even when evidence is thin.
+    const n=hist?.priced||0,weight=n/(n+50),minutes=Math.max(0,(now-Date.parse(q.observed_at))/60000),confidenceEV=stressEV*Math.max(.20,weight)-.01*Math.min(1,minutes/90);
+    const r={...q,priority,confidenceEV,minutes,game_id:g.id,event_id:g.event_id,sport:g.sport,matchup:g.matchup,start:g.start,publication_at:g.publication_at,decimal:d,push,probability:p,stressed:tracked?Math.min(stressed,bucket.lower):stressed,ev,stressEV,target,history:h,tracked:!!tracked,qualified,source_qualified:!!q.qualified};r.id=key(r);
+    const contract=[q.market,q.side,q.line??''].join('|'),prior=unique.get(contract);if(!prior||d>prior.decimal||d===prior.decimal&&Date.parse(r.observed_at)>Date.parse(prior.observed_at))unique.set(contract,r);
    }rows.push(...unique.values());}
-  rows.sort((a,b)=>Number(b.qualified)-Number(a.qualified)||evidenceRank(b)-evidenceRank(a)||(b.history?.all?.n>=30?b.history.all.lower:0)-(a.history?.all?.n>=30?a.history.all.lower:0)||b.stressEV-a.stressEV||a.start.localeCompare(b.start)||a.id.localeCompare(b.id));
+  rows.sort((a,b)=>Number(b.qualified)-Number(a.qualified)||evidenceRank(b)-evidenceRank(a)||(b.history?.all?.n>=30?b.history.all.lower:0)-(a.history?.all?.n>=30?a.history.all.lower:0)||(b.priority?b.confidenceEV:b.stressEV)-(a.priority?a.confidenceEV:a.stressEV)||b.stressEV-a.stressEV||a.start.localeCompare(b.start)||a.id.localeCompare(b.id));
   // One option per game prevents opposite sides or duplicate correlated singles.
   if(allMarkets)return rows;const seen=new Set();return rows.filter(r=>{if(seen.has(r.game_id))return false;seen.add(r.game_id);return true;});
  }
