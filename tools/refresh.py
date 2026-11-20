@@ -48,6 +48,28 @@ subprocess.run([sys.executable,'tools/build_site.py'],cwd=ROOT,check=True)
 subprocess.run([sys.executable,'tools/college_research.py','--capture'],cwd=ROOT,check=True,timeout=180)
 subprocess.run([sys.executable,'tools/moneyline_tracking.py','--capture'],cwd=ROOT,check=True,timeout=90)
 subprocess.run([sys.executable,'-m','tools.research.insights','--capture'],cwd=ROOT,check=True,timeout=90)
+
+# Preserve actual pregame observations for comparing intraday decisions.
+from datetime import datetime as _dt, timezone as _tz
+from zoneinfo import ZoneInfo
+_snapshot_now=_dt.now(_tz.utc)
+_snapshot_dir=ROOT/'projects/bet-ledger-hq/data/research/intraday'
+_snapshot_dir.mkdir(parents=True,exist_ok=True)
+_day=_snapshot_now.astimezone(ZoneInfo('America/Toronto')).date().isoformat()
+_path=_snapshot_dir/(_day+'.json')
+_archive=json.loads(_path.read_text()) if _path.exists() else {}
+for game in json.loads((ROOT/'_site/bet-ledger-hq/data/system.json').read_text())['games']:
+    if game['sport'] not in ('nfl','ncaaf','ncaab') or not game.get('start'):continue
+    minutes=(_dt.fromisoformat(game['start'].replace('Z','+00:00'))-_snapshot_now).total_seconds()/60
+    if not 0<minutes<=1440:continue
+    slot='final-hour' if minutes<=60 else 'two-hours' if minutes<=120 else 'early'
+    key=game['id']+'|'+slot
+    if key in _archive and slot!='final-hour':continue
+    quotes=[{k:q.get(k) for k in ('market','side','line','price','book','observed_at','probability','model_version')} for q in game.get('selections',[]) if q.get('fresh') and q.get('book') and q.get('price')]
+    if not quotes:continue
+    _archive[key]=dict(event=game['id'],start=game['start'],captured=_snapshot_now.isoformat(),minutes=round(minutes,1),slot=slot,forecast=game.get('p_home'),margin=game.get('margin'),version=game.get('model_version'),news=game.get('news',[])[:3],quotes=quotes)
+_path.write_text(json.dumps(_archive,separators=(',',':'))+'\n')
+
 env={**os.environ,'LOCAL_SITE_ROOT':str(ROOT/'_site')}
 subprocess.run(['node','scripts/refresh-tickets.mjs'],cwd=ROOT/'projects/bet-ledger-hq',env=env,check=True,timeout=600)
 health=json.loads((ROOT/'projects/bet-ledger-hq/data/tickets/health.json').read_text())
