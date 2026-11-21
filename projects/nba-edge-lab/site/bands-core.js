@@ -1,6 +1,6 @@
 (function(root){
   'use strict';
-  const formats={five:[[1,5],[6,10],[11,15],[16,20],[21,25],[26,null]],ten:[[1,10],[11,20],[21,null]],wide:[[1,10],[11,null]]};
+  const formats={detailed:Array.from({length:10},(_,i)=>[5*i+1,5*i+5]).concat([[51,null]]),five:[[1,5],[6,10],[11,15],[16,20],[21,25],[26,null]],ten:[[1,10],[11,20],[21,null]],wide:[[1,10],[11,null]]};
   const finite=x=>typeof x==='number'&&Number.isFinite(x);
   const time=x=>Date.parse(x);
   function cdf(x){if(x===Infinity)return 1;if(x===-Infinity)return 0;const z=Math.abs(x),t=1/(1+.2316419*z),v=1-Math.exp(-z*z/2)/Math.sqrt(2*Math.PI)*t*(.319381530+t*(-.356563782+t*(1.781477937+t*(-1.821255978+t*1.330274429))));return x>=0?v:1-v;}

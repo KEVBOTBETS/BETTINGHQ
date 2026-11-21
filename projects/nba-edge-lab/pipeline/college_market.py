@@ -19,8 +19,8 @@ def project_market(game, now, history=None):
     # Anchor to the observed market; cap influence of an uncalibrated early-season model.
     weight=(history or {}).get('weight',.2)
     margin = market + max(-3., min(3., weight * (team-market)))
-    sd = p['margin_sd']
+    sd = (history or {}).get('validated_sd',12) if p['margin_sd']==12 else p['margin_sd']
     return {**p, 'band_history':history, 'team_margin':team, 'market_anchor':lines['spread_home_source'], 'market_home_line':-market,
-            'mu':round(margin,3), 'p_home':round(NormalDist(0,sd).cdf(margin),6),
+            'margin_sd':sd,'mu':round(margin,3), 'p_home':round(NormalDist(0,sd).cdf(margin),6),
             'proj_home_pts':round((p['total']+margin)/2,2), 'proj_away_pts':round((p['total']-margin)/2,2),
-            'model_version':VERSION, 'basis':f'DraftKings implies a home margin of {market:+.1f}; team scoring history alone gives {team:+.1f}. The forecast moves {weight:.0%} toward the team estimate, capped at 3 points. Research rule; exact band chances are uncalibrated.'}
+            'model_version':VERSION if sd==p['margin_sd'] else VERSION+'-cal1', 'basis':f'DraftKings implies a home margin of {market:+.1f}; team scoring history alone gives {team:+.1f}. The forecast moves {weight:.0%} toward the team estimate, capped at 3 points. Research rule; exact band chances are uncalibrated.'}

@@ -50,11 +50,16 @@ def college_quote_gap(system, now):
     zone = ZoneInfo('America/Toronto')
     ages = []
     for game in system['games']:
-        if game.get('sport') != 'ncaab':
+        if game.get('sport') not in ('ncaab','ncaaf'):
+            continue
+        if game.get('sport') != 'ncaab' and not game.get('forecast_available'):
             continue
         start = dt.datetime.fromisoformat(game['start'].replace('Z', '+00:00'))
         if start <= now or start.astimezone(zone).date() != now.astimezone(zone).date():
             continue
+        publication_age=age_hours(game.get('publication_at'),now)
+        if game.get('forecast_available') and publication_age is not None and publication_age>=3.5:return True
+        if game.get('sport')!='ncaab':continue
         for quote in game.get('selections', []):
             age = age_hours(quote.get('observed_at'), now)
             if age is not None and age >= 0 and quote.get('book') and quote.get('price'):
@@ -99,7 +104,7 @@ def main():
     try:
         inventory = request('https://kevbotbets.github.io/BETTINGHQ/bet-ledger-hq/data/system.json?watchdog=' + str(int(now.timestamp())))
         if college_quote_gap(inventory, now):
-            result['errors'].append('NCAAB: all observed prices for remaining games are at least one hour old; refresh before ticket expiry.')
+            result['errors'].append('College slate needs a refresh: aging winner forecasts or NCAAB prices.')
     except Exception as exc:
         fetch_errors.append(f'Published ticket inventory unavailable ({type(exc).__name__}).')
     result['errors'].extend(fetch_errors)

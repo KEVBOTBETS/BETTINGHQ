@@ -1,20 +1,20 @@
 (() => {
   'use strict';
   const C=window.Moneyline,$=s=>document.querySelector(s),KEY='kevbot-moneyline-v1';
-  const LABEL={ncaab:'College basketball',nba:'NBA',nhl:'NHL',nfl:'NFL',ncaaf:'College football',mlb:'MLB'};
+  const LABEL={wnba:'WNBA',ncaab:'College basketball',nba:'NBA',nhl:'NHL',nfl:'NFL',ncaaf:'College football',mlb:'MLB'};
   const esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
   const time=v=>new Intl.DateTimeFormat('en-CA',{timeZone:'America/Toronto',month:'short',day:'numeric',hour:'numeric',minute:'2-digit'}).format(new Date(v));
-  let saved={},bundles={},loading=false,request=0,pendingSport=null;
+  let inventory=[],saved={},bundles={},loading=false,request=0,pendingSport=null;
   try{const value=JSON.parse(localStorage.getItem(KEY)||localStorage.getItem('kevbot-moneyling-v1')||'{}');if(value&&typeof value==='object'&&!Array.isArray(value))saved=Object.fromEntries(Object.entries(value).filter(([k,v])=>v&&v.key===k&&C.instant(v.start)!==null&&['home','away'].includes(v.side)&&LABEL[v.sport]));}
   catch(_){$('#storage-status').textContent='Saved selections could not be read. New picks will remain on this page until saving succeeds.';}
   const save=()=>{try{localStorage.setItem(KEY,JSON.stringify(saved));$('#storage-status').textContent='Selections saved in this browser.';}catch(_){$('#storage-status').textContent='Browser storage is unavailable. Keep this page open or print your card to preserve these picks.';}};
-  const forecastCards=()=>Object.entries(bundles).flatMap(([k,b])=>C.cards(k,b));
+  const forecastCards=()=>{const m=new Map(Object.entries(bundles).flatMap(([k,b])=>C.cards(k,b)).map(c=>[c.key,c]));for(const g of inventory){const k=g.sport+':'+g.event_id,old=m.get(k),when=C.instant(g.start),p=g.p_home;if(!LABEL[g.sport]||!when||when<=Date.now()||old?.locked||old?.predicted||!g.forecast_available||!Number.isFinite(p)||p<=0||p>=1||p===.5||C.freshness(g.publication_at,g.sport,Date.now())!=='recent')continue;m.set(k,{...old,key:k,id:String(g.event_id),sport:g.sport,start:g.start,when,day:C.day(when),home:g.home,away:g.away,homeName:g.home_name||g.home,awayName:g.away_name||g.away,stamp:g.publication_at,fresh:'recent',locked:false,selectable:true,predicted:p>.5?'home':'away',probability:Math.max(p,1-p),margin:g.margin,reason:'',notes:'Published hub forecast'});}return [...m.values()];};
   const allCards=()=>forecastCards().filter(c=>c.day===$('#date').value).sort((a,b)=>a.when-b.when||a.key.localeCompare(b.key));
   // Open games first, started/locked games after them; each group in kickoff order.
   const visible=()=>allCards().filter(c=>$('#sport').value==='all'||c.sport===$('#sport').value).sort((a,b)=>(isLocked(a)-isLocked(b))||a.when-b.when||a.key.localeCompare(b.key));
   const TV=window.TeamVisuals,tc=TV.color,badge=(c,side)=>TV.badge(c,side),winBar=TV.winBar;
   const marginNote=c=>c.margin==null||!c.predicted?'':' · projected margin '+Math.abs(c.margin).toFixed(1)+(c.sport==='nhl'?' goals':' pts');
-  const nextDay=sport=>forecastCards().filter(c=>c.sport===sport&&!c.locked&&c.day>=C.day(Date.now())).sort((a,b)=>a.when-b.when)[0]?.day;
+  const nextDay=sport=>forecastCards().filter(c=>c.sport===sport&&c.selectable&&c.predicted&&!isLocked(c)&&c.day>=C.day(Date.now())).sort((a,b)=>a.when-b.when)[0]?.day;
   const dateLabel=day=>new Intl.DateTimeFormat('en-CA',{timeZone:'UTC',weekday:'long',month:'short',day:'numeric'}).format(new Date(day+'T12:00:00Z'));
   const isLocked=c=>c.locked||(saved[c.key]&&C.instant(saved[c.key].start)<=Date.now());
   async function get(url){const response=await fetch(url,{cache:'no-store',signal:AbortSignal.timeout(20000)});if(!response.ok)throw new Error('Feed unavailable');return response.json();}
@@ -36,23 +36,23 @@
     const picks=Object.values(saved).filter(r=>r.day===$('#date').value&&($('#sport').value==='all'||r.sport===$('#sport').value)).sort((a,b)=>a.start.localeCompare(b.start));
     $('#selection-count').textContent=picks.length+' pick'+(picks.length===1?'':'s')+' selected';
     $('#saved').innerHTML=picks.length?picks.map(r=>'<div class="saved-row"><span>'+esc(LABEL[r.sport]+' · '+r.away+' at '+r.home)+'<small>'+esc(time(r.start))+' · '+(C.instant(r.start)<=Date.now()?'Locked':'Open')+'</small></span><b>'+esc(r.team)+' ✓</b></div>').join(''):'<p class="empty">Choose a team on each card, or use the predicted winners.</p>';
-    $('#use-picks').disabled=loading||!rows.some(c=>c.predicted&&c.selectable&&!isLocked(c));
+    $('#use-picks').disabled=!rows.some(c=>c.predicted&&c.selectable&&!isLocked(c));
     $('#clear').disabled=loading||!picks.some(r=>C.instant(r.start)>Date.now()&&!rows.find(c=>c.key===r.key)?.locked);
     $('#print').disabled=!picks.length;$('#make-card').disabled=!picks.length;
     $('#health').innerHTML=Object.entries(LABEL).map(([k,label])=>{const b=bundles[k],stamp=(k==='mlb'?b?.slate:b?.meta)?.generated_at,fresh=C.freshness(stamp,k,Date.now()),bad=!b||b.error||fresh!=='recent';return '<span class="health '+(bad?'bad':'')+'">'+esc(label)+' · '+esc(!b?'loading':b.error?'feed unavailable':fresh==='recent'?'updated '+time(stamp):'forecast '+fresh)+'</span>';}).join('');
   }
   async function refresh(){
     const token=++request,date=$('#date').value;if(!date)return;
-    loading=true;bundles={};$('#refresh').disabled=true;$('#status').textContent='Checking published forecasts…';render();
+    loading=true;$('#refresh').disabled=true;$('#status').textContent='Checking published forecasts…';render();
     const paths={ncaab:{meta:'../ncaab-edge-lab/data/meta.json',games:'../ncaab-edge-lab/data/games.json'},nba:{meta:'../nba-edge-lab/data/meta.json',games:'../nba-edge-lab/data/games.json'},nhl:{meta:'../nhl-edge-lab/data/meta.json',games:'../nhl-edge-lab/data/games.json'},mlb:{slate:'../mlb-edge/data/slate-'+date+'.json'},nfl:{meta:'../nfl-edge-lab/data/meta.json',games:'../nfl-edge-lab/data/games.json',details:'../nfl-edge-lab/data/games_detail.json'},ncaaf:{meta:'../ncaaf-edge-lab/data/meta.json',games:'../ncaaf-edge-lab/data/games.json'}};
-    await Promise.all(Object.entries(paths).map(async([sport,files])=>{try{const entries=await Promise.all(Object.entries(files).map(async([key,url])=>[key,key==='details'?await get(url).catch(()=>[]):await get(url)]));if(token===request)bundles[sport]=Object.fromEntries(entries);}catch(_){if(token===request)bundles[sport]={error:true};}}));
-    if(token!==request)return;
+    const inventoryJob=get('data/system.json').then(v=>{if(token===request)inventory=v.games||[]}).catch(()=>{});await Promise.all(Object.entries(paths).map(async([sport,files])=>{try{const entries=await Promise.all(Object.entries(files).map(async([key,url])=>[key,key==='details'?await get(url).catch(()=>[]):await get(url)]));if(token===request)bundles[sport]=Object.fromEntries(entries);}catch(_){if(token===request)bundles[sport]={error:true};}}));
+    await inventoryJob;if(token!==request)return;
     loading=false;$('#refresh').disabled=false;$('#status').textContent='Forecasts checked '+time(new Date().toISOString())+'. Only fresh pregame picks can be selected.';render();
     const jump=pendingSport;pendingSport=null;
-    if(jump&&jump===$('#sport').value&&!visible().length&&nextDay(jump))openNextDay(jump);
+    if(jump&&jump===$('#sport').value&&!visible().some(c=>c.predicted&&!isLocked(c))&&nextDay(jump))openNextDay(jump);
   }
   $('#cards').addEventListener('click',event=>{const b=event.target.closest('[data-key]');if(!b||loading)return;const c=visible().find(c=>c.key===b.dataset.key);if(c){saved=C.choose(saved,c,b.dataset.side);save();render();}});
-  $('#use-picks').addEventListener('click',()=>{if(loading)return;for(const c of visible())if(c.predicted)saved=C.choose(saved,c,c.predicted);save();render();});
+  $('#use-picks').addEventListener('click',()=>{for(const c of visible())if(c.predicted)saved=C.choose(saved,c,c.predicted);save();render();});
   $('#clear').addEventListener('click',()=>{const rows=visible();saved=Object.fromEntries(Object.entries(saved).filter(([key,r])=>r.day!==$('#date').value||($('#sport').value!=='all'&&r.sport!==$('#sport').value)||C.instant(r.start)<=Date.now()||rows.find(c=>c.key===key)?.locked));save();render();});
   /* ---------- card studio ---------- */
   const STYLE_KEY='kevbot-moneyline-card-style',SWATCH={gridiron:'linear-gradient(135deg,#ffd772,#8a5a12 55%,#111)',ballpark:'linear-gradient(135deg,#f6ecd6 50%,#0c1a2e 50%)',scoreboard:'radial-gradient(circle,#ffb000 30%,#050608 32%)',northern:'linear-gradient(90deg,#c8102e 28%,#fff 28% 72%,#c8102e 72%)',slip:'repeating-linear-gradient(0deg,#fff 0 4px,#ddd 4px 6px)'};
@@ -88,7 +88,7 @@
   $('#date').value=C.day(Date.now());$('#date').addEventListener('change',()=>{pendingSport=null;refresh();});$('#sport').addEventListener('change',()=>{
     const sport=$('#sport').value;
     pendingSport=loading&&['nfl','ncaaf','nhl','nba','ncaab'].includes(sport)?sport:null;
-    if(!loading&&['nfl','ncaaf','nhl','nba','ncaab'].includes(sport)&&!visible().length&&nextDay(sport))openNextDay(sport);
+    if(!loading&&['nfl','ncaaf','nhl','nba','ncaab'].includes(sport)&&!visible().some(c=>c.predicted&&!isLocked(c))&&nextDay(sport))openNextDay(sport);
     else render();
   });$('#refresh').addEventListener('click',refresh);$('#print').addEventListener('click',()=>window.print());
   window.addEventListener('message',e=>{if(e.origin===location.origin&&e.data?.type==='kevbotbets:activate')refresh();});

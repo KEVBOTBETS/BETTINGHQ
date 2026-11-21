@@ -42,6 +42,19 @@ def fit(log,now,season):
     def mae(part,w):return mean(abs(y-margin(t,m,w)) for _,t,m,y,_ in part)
     w=min((0,.1,.2,.3,.4),key=lambda v:mae(train,v)); out.update(test_games=len(test),train_games=len(train),spread_mae=round(mae(test,0),2),team_mae=round(mean(abs(y-t) for _,t,m,y,_ in test),2))
     if mae(test,w)<mae(test,.2)*.98:out['weight']=w
+    # Evaluate a variance-calibration challenger on later, previously unseen dates.
+    # Freeze the training-set blend here; never tune scale on test outcomes.
+    challenger=w
+    residuals=[y-margin(t,m,challenger) for _,t,m,y,_ in train]
+    scale=max(8.,min(20.,math.sqrt((sum(e*e for e in residuals)+40*12**2)/(len(train)+40))))
+    def metrics(sd):
+        predictions=[(NormalDist(0,sd).cdf(margin(t,m,challenger)),int(y>0)) for _,t,m,y,_ in test]
+        return (mean((p-y)**2 for p,y in predictions),mean(-math.log(max(1e-12,p if y else 1-p)) for p,y in predictions))
+    base,cal=metrics(12),metrics(scale)
+    out.update(calibration_test_games=len(test),baseline_brier=base[0],challenger_brier=cal[0],challenger_sd=scale)
+    # Compare against a known 12-point baseline only; preserve other fitted scales.
+    if len(train)>=100 and len(test)>=50 and len(days)>=15 and out['weight']==challenger and cal[0]<.99*base[0] and cal[1]<base[1]:
+        out['validated_sd']=scale
     w=out['weight']; ats=[(margin(t,m,w)-m)*(y-m) for _,t,m,y,_ in test if margin(t,m,w)!=m and y!=m];out.update(spread_hits=sum(a>0 for a in ats),spread_decisions=len(ats));errs=[y-margin(t,m,w) for _,t,m,y,_ in train];scores=[]
     for errors in ([],errs):
         probs=[(masses(margin(t,m,w),12,errors),band(y)) for _,t,m,y,_ in test];scores.append((mean(-math.log(max(1e-9,p[k])) for p,k in probs),sum(max(p,key=p.get)==k for p,k in probs)))

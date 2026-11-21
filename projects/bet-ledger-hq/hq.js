@@ -427,6 +427,7 @@
 
     main.innerHTML =
       (S.error ? '<div class="err">' + esc(S.error) + '</div>' : "") +
+      manualForm() +
       filters() +
       '<div style="margin-top:14px">' + kpis(rows) + '</div>' +
       '<h2>Bankroll</h2>' + (bankrollCurve(rows, S.settings.starting_bankroll) ||
@@ -440,6 +441,7 @@
       allBets(rows) +
       closingDetails(rows) + historyBlock() +
       settingsBlock()+'<section id="recovery"></section>';
+    wireManual();
     if(!S.error&&!S.busy)window.KevRecoveryView?.mount($('#recovery'),S,pull);
 
     // the curve needs its own points back to answer a hover
@@ -517,9 +519,12 @@
   }
   function logSettings(before,after){var patch={};if(hasAudit())return patch;D.observe(before,after,new Date().toISOString(),BS.deviceName()).forEach(function(e){Object.assign(patch,D.historySetting(e,crypto.randomUUID()));});return patch;}
 
+  function manualForm(){return '<details class="card"><summary>Record my own bet · any sport</summary><form id="manual-wager"><label>Sport <select name="sport">'+['NFL','NCAAF','NCAAB','NBA','WNBA','NHL','MLB','Other'].map(x=>'<option>'+x+'</option>').join('')+'</select></label> <label>Game <input name="event" required maxlength="150"></label> <label>Game date <input name="date" type="date" required></label> <label>Market <select name="market"><option>ML</option><option>ATS</option><option>Total</option><option>Band</option><option>Prop</option><option>Parlay</option><option>Other</option></select></label> <label>Pick / legs <input name="pick" required maxlength="350"></label> <label>Line if applicable <input type="number" step="any" name="line"></label> <label>Book <input name="book" required maxlength="80"></label> <label>American odds <input type="number" name="price" required></label> <label>Actual stake $ <input type="number" min=".01" step=".01" value="5" required name="stake"></label> <button type="submit">Log already placed bet</button><p>Records a wager in your connected ledger. No bet is sent to a sportsbook.</p></form></details>';}
+  function wireManual(){const form=document.getElementById('manual-wager');if(form)form.onsubmit=function(ev){ev.preventDefault();if(S.busy)return;const d=new FormData(form),price=Number(d.get('price')),stake=Number(d.get('stake'));if(!Number.isInteger(price)||Math.abs(price)<100||!Number.isFinite(stake)||stake<=0){alert('Use American odds of +100 or higher, or −100 or lower, and a positive stake.');return;}const stamp=new Date().toISOString();const row=BS.canonical({id:'manual:'+crypto.randomUUID(),app:'manual',sport:d.get('sport'),event:d.get('event'),event_date:d.get('date'),market:d.get('market'),selection:d.get('pick'),line:d.get('line'),price,stake,book:d.get('book'),placed_at:stamp,status:'Pending',tier:'Manual',notes:'User-entered; no model recommendation.'});if(BS.loadConfig())push(row);else{try{const records=localManual();records.push(row);localStorage.setItem('bhq-manual-wagers-v1',JSON.stringify(records));renderGate();}catch{alert('Could not save this wager in browser storage.');}}};}
+  function localManual(){const raw=JSON.parse(localStorage.getItem('bhq-manual-wagers-v1')||'[]');if(!Array.isArray(raw))throw Error('Invalid wager log');return raw;}
   function renderGate() {
     $("#sync").hidden = true;
-    main.innerHTML = '<div class="gate card">' +
+    let local=[];try{local=localManual();}catch{}main.innerHTML = manualForm().replace('in your connected ledger','in this browser only')+'<div class="card"><b>Local wager log</b>'+local.slice().reverse().map(r=>'<p>'+esc(r.sport+' · '+r.event+' · '+r.selection+' · '+r.price+' · $'+r.stake)+'</p>').join('')+'</div><div class="gate card">' +
       '<h2 style="margin-top:0">Connect to your sheet</h2>' +
       '<p class="note">The same web app URL and token your connected boards use. They ' +
       'are kept in this browser and go nowhere else.</p>' +
@@ -530,6 +535,7 @@
       '<button class="btn primary" id="connect">Connect</button>' +
       (S.error ? '<div class="err">' + esc(S.error) + '</div>' : "") +
       '</div>';
+    wireManual();
   }
 
   /* ------------------------------------------------------------ the wire -- */
