@@ -1,29 +1,73 @@
 {
   "schema": 1,
-  "checked_at": "2026-11-21T19:27:39.389Z",
+  "checked_at": "2026-11-21T19:37:37.973Z",
   "coverage": {
-    "ncaaf": {
-      "status": "empty",
-      "reports": 0,
-      "checked_at": "2026-11-21T19:27:39.389Z"
-    },
     "nhl": {
       "status": "available",
       "reports": 44,
-      "checked_at": "2026-11-21T19:27:39.389Z"
+      "checked_at": "2026-11-21T19:37:37.973Z"
     },
     "mlb": {
       "status": "available",
       "reports": 10,
-      "checked_at": "2026-11-21T19:27:39.389Z"
+      "checked_at": "2026-11-21T19:37:37.973Z"
+    },
+    "ncaaf": {
+      "status": "empty",
+      "reports": 0,
+      "checked_at": "2026-11-21T19:37:37.973Z"
     },
     "nfl": {
       "status": "available",
       "reports": 306,
-      "checked_at": "2026-11-21T19:27:39.389Z"
+      "checked_at": "2026-11-21T19:37:37.973Z"
     }
   },
   "events": [
+    {
+      "id": "odds|ncaaf|401860918|2026-11-22T00:30Z|TOTAL||over|Draft Kings|2026-11-21T19:37:37.973Z",
+      "kind": "odds",
+      "observed_at": "2026-11-21T19:37:37.973Z",
+      "sport": "ncaaf",
+      "event": "CSU @ FRES",
+      "start": "2026-11-22T00:30Z",
+      "pick": "Over 63.5",
+      "title": "Published odds changed",
+      "before": "-108 · line 66.5",
+      "after": "-112 · line 66.5",
+      "book": "Draft Kings",
+      "source_quote_at": "2026-11-21T19:34:15.121465+00:00",
+      "source": "Existing NCAAF board",
+      "note": "Your ticket keeps its original odds. Recheck the live book before placing a new wager."
+    },
+    {
+      "id": "starter|nhl:nhl:2026020371:away|2026-11-21T19:37:37.973Z",
+      "kind": "starter",
+      "observed_at": "2026-11-21T19:37:37.973Z",
+      "sport": "nhl",
+      "event": "MIN @ VAN",
+      "start": "2026-11-22T03:00:00+00:00",
+      "title": "NHL starting goalie updated",
+      "before": "Jesper Wallstedt",
+      "after": "Jesper Wallstedt · confirmed",
+      "source_quote_at": "2026-11-21T19:35:47.700140+00:00",
+      "source": "NHL board",
+      "note": "Review the matchup after a starter change; the baseline does not price individual goalie talent."
+    },
+    {
+      "id": "injury|nfl:22:Carson Beck|2026-11-21T19:37:37.973Z",
+      "kind": "injury",
+      "observed_at": "2026-11-21T19:37:37.973Z",
+      "sport": "nfl",
+      "title": "Player availability changed",
+      "event": "Arizona Cardinals",
+      "pick": "Carson Beck",
+      "before": "Questionable · Back",
+      "after": "Out · Back",
+      "source_quote_at": "2026-11-21T19:25Z",
+      "source": "ESPN injuries",
+      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
+    },
     {
       "id": "injury|nhl:9:Tyler Myers|2026-11-21T19:27:39.389Z",
       "kind": "injury",
@@ -2828,54 +2872,6 @@
       "before": "-110 · line 49.5",
       "after": "-113 · line 49.5",
       "book": "DraftKings",
-      "source_quote_at": "2026-11-20T20:36:57.810782+00:00",
-      "source": "Existing Props board",
-      "note": "Your ticket keeps its original odds. Recheck the live book before placing a new wager."
-    },
-    {
-      "id": "odds|props|401873076|2026-11-22T18:00Z|Receiving yards|Dallas Goedert|over|DraftKings|2026-11-20T20:40:09.241Z",
-      "kind": "odds",
-      "observed_at": "2026-11-20T20:40:09.241Z",
-      "sport": "props",
-      "event": "Pittsburgh Steelers @ Philadelphia Eagles",
-      "start": "2026-11-22T18:00Z",
-      "pick": "Dallas Goedert — Over 30.5 Receiving yards",
-      "title": "Published odds changed",
-      "before": "-114 · line 29.5",
-      "after": "-114 · line 28.5",
-      "book": "DraftKings",
-      "source_quote_at": "2026-11-20T20:36:57.810782+00:00",
-      "source": "Existing Props board",
-      "note": "Your ticket keeps its original odds. Recheck the live book before placing a new wager."
-    },
-    {
-      "id": "odds|props|401873076|2026-11-22T18:00Z|Receiving yards|Dallas Goedert|over|BetRivers|2026-11-20T20:40:09.241Z",
-      "kind": "odds",
-      "observed_at": "2026-11-20T20:40:09.241Z",
-      "sport": "props",
-      "event": "Pittsburgh Steelers @ Philadelphia Eagles",
-      "start": "2026-11-22T18:00Z",
-      "pick": "Dallas Goedert — Over 29.5 Receiving yards",
-      "title": "Published odds changed",
-      "before": "-120 · line 28.5",
-      "after": "-114 · line 27.5",
-      "book": "BetRivers",
-      "source_quote_at": "2026-11-20T20:36:57.810782+00:00",
-      "source": "Existing Props board",
-      "note": "Your ticket keeps its original odds. Recheck the live book before placing a new wager."
-    },
-    {
-      "id": "odds|props|401873070|2026-11-22T18:00Z|Rushing yards|Ollie Gordon II|over|BetMGM|2026-11-20T20:40:09.241Z",
-      "kind": "odds",
-      "observed_at": "2026-11-20T20:40:09.241Z",
-      "sport": "props",
-      "event": "Miami Dolphins @ Buffalo Bills",
-      "start": "2026-11-22T18:00Z",
-      "pick": "Ollie Gordon II — Over 54.5 Rushing yards",
-      "title": "Published odds changed",
-      "before": "-115 · line 54.5",
-      "after": "-115 · line 55.5",
-      "book": "BetMGM",
       "source_quote_at": "2026-11-20T20:36:57.810782+00:00",
       "source": "Existing Props board",
       "note": "Your ticket keeps its original odds. Recheck the live book before placing a new wager."
