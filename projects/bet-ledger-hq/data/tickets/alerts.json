@@ -1,29 +1,57 @@
 {
   "schema": 1,
-  "checked_at": "2026-11-21T19:14:55.292Z",
+  "checked_at": "2026-11-21T19:27:39.389Z",
   "coverage": {
-    "nhl": {
-      "status": "available",
-      "reports": 45,
-      "checked_at": "2026-11-21T19:14:55.292Z"
-    },
-    "nfl": {
-      "status": "available",
-      "reports": 308,
-      "checked_at": "2026-11-21T19:14:55.292Z"
-    },
     "ncaaf": {
       "status": "empty",
       "reports": 0,
-      "checked_at": "2026-11-21T19:14:55.292Z"
+      "checked_at": "2026-11-21T19:27:39.389Z"
+    },
+    "nhl": {
+      "status": "available",
+      "reports": 44,
+      "checked_at": "2026-11-21T19:27:39.389Z"
     },
     "mlb": {
       "status": "available",
       "reports": 10,
-      "checked_at": "2026-11-21T19:14:55.292Z"
+      "checked_at": "2026-11-21T19:27:39.389Z"
+    },
+    "nfl": {
+      "status": "available",
+      "reports": 306,
+      "checked_at": "2026-11-21T19:27:39.389Z"
     }
   },
   "events": [
+    {
+      "id": "injury|nhl:9:Tyler Myers|2026-11-21T19:27:39.389Z",
+      "kind": "injury",
+      "observed_at": "2026-11-21T19:27:39.389Z",
+      "sport": "nhl",
+      "title": "Player availability changed",
+      "event": "Dallas Stars",
+      "pick": "Tyler Myers",
+      "before": "Day-To-Day · Upper Body",
+      "after": "Out · Upper Body",
+      "source_quote_at": "2026-11-21T19:15Z",
+      "source": "ESPN injuries",
+      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
+    },
+    {
+      "id": "injury|nfl:6:DaRon Bland|2026-11-21T19:27:39.389Z",
+      "kind": "injury",
+      "observed_at": "2026-11-21T19:27:39.389Z",
+      "sport": "nfl",
+      "title": "New availability report",
+      "event": "Dallas Cowboys",
+      "pick": "DaRon Bland",
+      "before": "Not in the previous dated report",
+      "after": "Injured Reserve · Ankle",
+      "source_quote_at": "2026-11-21T19:12Z",
+      "source": "ESPN injuries",
+      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
+    },
     {
       "id": "odds|props|401873077|2026-11-23T01:20Z|Rushing yards|Brock Purdy|over|BetRivers|2026-11-21T19:14:55.292Z",
       "kind": "odds",
@@ -2851,34 +2879,6 @@
       "source_quote_at": "2026-11-20T20:36:57.810782+00:00",
       "source": "Existing Props board",
       "note": "Your ticket keeps its original odds. Recheck the live book before placing a new wager."
-    },
-    {
-      "id": "injury|nhl:13:Sean Durzi|2026-11-20T20:40:09.241Z",
-      "kind": "injury",
-      "observed_at": "2026-11-20T20:40:09.241Z",
-      "sport": "nhl",
-      "title": "New availability report",
-      "event": "New York Rangers",
-      "pick": "Sean Durzi",
-      "before": "Not in the previous dated report",
-      "after": "Injured Reserve · Lower Body",
-      "source_quote_at": "2026-11-20T19:51Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nhl:13:Joe Veleno|2026-11-20T20:40:09.241Z",
-      "kind": "injury",
-      "observed_at": "2026-11-20T20:40:09.241Z",
-      "sport": "nhl",
-      "title": "New availability report",
-      "event": "New York Rangers",
-      "pick": "Joe Veleno",
-      "before": "Not in the previous dated report",
-      "after": "Injured Reserve · Lower Body",
-      "source_quote_at": "2026-11-20T16:23Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
     }
   ]
 }
