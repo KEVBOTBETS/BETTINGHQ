@@ -1,29 +1,99 @@
 {
   "schema": 1,
-  "checked_at": "2026-11-22T19:58:00.278Z",
+  "checked_at": "2026-11-22T20:07:33.273Z",
   "coverage": {
+    "nhl": {
+      "status": "available",
+      "reports": 49,
+      "checked_at": "2026-11-22T20:07:33.273Z"
+    },
+    "nfl": {
+      "status": "available",
+      "reports": 351,
+      "checked_at": "2026-11-22T20:07:33.273Z"
+    },
     "ncaaf": {
       "status": "empty",
       "reports": 0,
-      "checked_at": "2026-11-22T19:58:00.278Z"
+      "checked_at": "2026-11-22T20:07:33.273Z"
     },
     "mlb": {
       "status": "available",
       "reports": 7,
-      "checked_at": "2026-11-22T19:58:00.278Z"
-    },
-    "nhl": {
-      "status": "available",
-      "reports": 49,
-      "checked_at": "2026-11-22T19:58:00.278Z"
-    },
-    "nfl": {
-      "status": "available",
-      "reports": 350,
-      "checked_at": "2026-11-22T19:58:00.278Z"
+      "checked_at": "2026-11-22T20:07:33.273Z"
     }
   },
   "events": [
+    {
+      "id": "injury|nfl:13:Folorunso Fatukasi|2026-11-22T20:07:33.273Z",
+      "kind": "injury",
+      "observed_at": "2026-11-22T20:07:33.273Z",
+      "sport": "nfl",
+      "title": "Player availability changed",
+      "event": "Las Vegas Raiders",
+      "pick": "Folorunso Fatukasi",
+      "before": "Questionable · Toe",
+      "after": "Questionable · Fatukasi (toe) is listed as questionable for Sunday's game against the Broncos, Paul Gutierrez of the Raiders' official site reports.",
+      "source_quote_at": "2026-11-21T00:31Z",
+      "source": "ESPN injuries",
+      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
+    },
+    {
+      "id": "injury|nfl:24:Charlie Kolar|2026-11-22T20:07:33.273Z",
+      "kind": "injury",
+      "observed_at": "2026-11-22T20:07:33.273Z",
+      "sport": "nfl",
+      "title": "Player availability changed",
+      "event": "Los Angeles Chargers",
+      "pick": "Charlie Kolar",
+      "before": "Active",
+      "after": "Active · Kolar (concussion) is active for Sunday's game versus the Jets.",
+      "source_quote_at": "2026-11-22T19:44Z",
+      "source": "ESPN injuries",
+      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
+    },
+    {
+      "id": "injury|nfl:15:Jonah Savaiinaea|2026-11-22T20:07:33.273Z",
+      "kind": "injury",
+      "observed_at": "2026-11-22T20:07:33.273Z",
+      "sport": "nfl",
+      "title": "Player availability changed",
+      "event": "Miami Dolphins",
+      "pick": "Jonah Savaiinaea",
+      "before": "Questionable · Savaiinaea (ankle) is questionable to return to Sunday's game against the Bills.",
+      "after": "Active · Savaiinaea (ankle) has been cleared to return to Sunday's game against the Bills, David Furones of the South Florida Sun Sentinel reports.",
+      "source_quote_at": "2026-11-22T19:54Z",
+      "source": "ESPN injuries",
+      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
+    },
+    {
+      "id": "injury|nfl:15:Chris Bell|2026-11-22T20:07:33.273Z",
+      "kind": "injury",
+      "observed_at": "2026-11-22T20:07:33.273Z",
+      "sport": "nfl",
+      "title": "Player availability changed",
+      "event": "Miami Dolphins",
+      "pick": "Chris Bell",
+      "before": "Questionable · questionable",
+      "after": "Active",
+      "source_quote_at": "2026-11-22T19:53Z",
+      "source": "ESPN injuries",
+      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
+    },
+    {
+      "id": "injury|nfl:10:Terrell Burgess|2026-11-22T20:07:33.273Z",
+      "kind": "injury",
+      "observed_at": "2026-11-22T20:07:33.273Z",
+      "sport": "nfl",
+      "title": "New availability report",
+      "event": "Tennessee Titans",
+      "pick": "Terrell Burgess",
+      "before": "Not in the previous dated report",
+      "after": "Questionable · Knee",
+      "source_quote_at": "2026-11-22T19:55Z",
+      "source": "ESPN injuries",
+      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
+    },
     {
       "id": "odds|props|401873074|2026-11-22T21:05Z|Rushing yards|Geno Smith|over|bet365|2026-11-22T19:58:00.278Z",
       "kind": "odds",
@@ -2817,76 +2887,6 @@
       "source_quote_at": "2026-11-21T23:47:33.192301+00:00",
       "source": "NHL board",
       "note": "Review the matchup after a starter change; the baseline does not price individual goalie talent."
-    },
-    {
-      "id": "starter|nhl:nhl:2026020368:home|2026-11-21T23:49:36.440Z",
-      "kind": "starter",
-      "observed_at": "2026-11-21T23:49:36.440Z",
-      "sport": "nhl",
-      "event": "NJ @ STL",
-      "start": "2026-11-22T00:00:00+00:00",
-      "title": "NHL starting goalie updated",
-      "before": "Joel Hofer",
-      "after": "Jordan Binnington · confirmed",
-      "source_quote_at": "2026-11-21T23:47:33.192301+00:00",
-      "source": "NHL board",
-      "note": "Review the matchup after a starter change; the baseline does not price individual goalie talent."
-    },
-    {
-      "id": "starter|nhl:nhl:2026020369:away|2026-11-21T23:49:36.440Z",
-      "kind": "starter",
-      "observed_at": "2026-11-21T23:49:36.440Z",
-      "sport": "nhl",
-      "event": "VGK @ WPG",
-      "start": "2026-11-22T00:00:00+00:00",
-      "title": "NHL starting goalie updated",
-      "before": "Carter Hart",
-      "after": "Carter Hart · confirmed",
-      "source_quote_at": "2026-11-21T23:47:33.192301+00:00",
-      "source": "NHL board",
-      "note": "Review the matchup after a starter change; the baseline does not price individual goalie talent."
-    },
-    {
-      "id": "starter|nhl:nhl:2026020375:home|2026-11-21T23:49:36.440Z",
-      "kind": "starter",
-      "observed_at": "2026-11-21T23:49:36.440Z",
-      "sport": "nhl",
-      "event": "EDM @ STL",
-      "start": "2026-11-23T00:00:00+00:00",
-      "title": "NHL starting goalie updated",
-      "before": "Joel Hofer",
-      "after": "Jordan Binnington · Unknown",
-      "source_quote_at": "2026-11-21T23:47:33.192301+00:00",
-      "source": "NHL board",
-      "note": "Review the matchup after a starter change; the baseline does not price individual goalie talent."
-    },
-    {
-      "id": "injury|nhl:3:Martin Pospisil|2026-11-21T23:49:36.440Z",
-      "kind": "injury",
-      "observed_at": "2026-11-21T23:49:36.440Z",
-      "sport": "nhl",
-      "title": "New availability report",
-      "event": "Calgary Flames",
-      "pick": "Martin Pospisil",
-      "before": "Not in the previous dated report",
-      "after": "Day-To-Day · Upper Body",
-      "source_quote_at": "2026-11-21T22:54Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nhl:4:Anton Frondell|2026-11-21T23:49:36.440Z",
-      "kind": "injury",
-      "observed_at": "2026-11-21T23:49:36.440Z",
-      "sport": "nhl",
-      "title": "New availability report",
-      "event": "Chicago Blackhawks",
-      "pick": "Anton Frondell",
-      "before": "Not in the previous dated report",
-      "after": "Day-To-Day · Undisclosed",
-      "source_quote_at": "2026-11-21T22:45Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
     }
   ]
 }
