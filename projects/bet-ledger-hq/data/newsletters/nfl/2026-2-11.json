@@ -6,10 +6,10 @@
   "phase": 2,
   "start": "2026-11-18T08:00:00+00:00",
   "end": "2026-11-25T07:59:00+00:00",
-  "generated_at": "2026-11-22T22:29:58.939203+00:00",
-  "model_generated_at": "2026-11-22T22:27:56+00:00",
+  "generated_at": "2026-11-23T01:17:00.370063+00:00",
+  "model_generated_at": "2026-11-23T01:14:31+00:00",
   "games_count": 13,
-  "completed": 8,
+  "completed": 11,
   "games": [
     {
       "game_id": "401873074",
@@ -24,10 +24,10 @@
       "home_rank": null,
       "venue": "SoFi Stadium",
       "broadcast": "Fox",
-      "status": "Halftime",
-      "completed": false,
-      "away_score": 17,
-      "home_score": 10,
+      "status": "Final",
+      "completed": true,
+      "away_score": 27,
+      "home_score": 24,
       "odds": {
         "book": "Draft Kings",
         "details": "LAC -3",
@@ -61,35 +61,7 @@
         "No earlier head-to-head result in this captured regular-season dataset. Historical advantage is unconfirmed."
       ],
       "playoff": "Regular-season result affects the overall record; no playoff probability is inferred.",
-      "weather": {
-        "venue": "SoFi Stadium",
-        "city": "Inglewood",
-        "roof": "canopy",
-        "observed_at": "2026-11-22T22:27:56.179242+00:00",
-        "roof_status": "open",
-        "coverage": "available",
-        "forecast": {
-          "time_utc": "2026-11-22T21:00",
-          "temp_f": 68.6,
-          "feels_f": 64.7,
-          "wind_mph": 6.6,
-          "gust_mph": 7.8,
-          "precip_prob": 0,
-          "precip_in": 0.0,
-          "snow_in": 0.0,
-          "cloud_pct": 100,
-          "code": 3,
-          "condition": "Overcast",
-          "source": "Open-Meteo",
-          "source_generated_at": null,
-          "source_observed_at": "2026-11-22T22:27:56.175520+00:00",
-          "kickoff_gap_hours": 0.08333333333333333
-        },
-        "total_adj": 0.0,
-        "margin_adj": 0.0,
-        "reasons": [],
-        "applied": false
-      },
+      "weather": {},
       "review_flags": []
     },
     {
@@ -143,91 +115,6 @@
       ],
       "playoff": "Regular-season result affects the overall record; no playoff probability is inferred.",
       "weather": {},
-      "review_flags": []
-    },
-    {
-      "game_id": "401873077",
-      "date": "2026-11-23T01:20Z",
-      "away": "MIN",
-      "home": "SF",
-      "away_name": "Minnesota Vikings",
-      "home_name": "San Francisco 49ers",
-      "away_logo": "https://a.espncdn.com/i/teamlogos/nfl/500/scoreboard/min.png",
-      "home_logo": "https://a.espncdn.com/i/teamlogos/nfl/500/scoreboard/sf.png",
-      "away_rank": null,
-      "home_rank": null,
-      "venue": "Estadio Banorte",
-      "broadcast": "NBC",
-      "status": "11/22 - 8:20 PM EST",
-      "completed": false,
-      "away_score": 0,
-      "home_score": 0,
-      "odds": {
-        "book": "DraftKings",
-        "spread_home": -3.5,
-        "spread_price_home": -112.0,
-        "spread_price_away": -107.0,
-        "total": 46.5,
-        "over_price": -105.0,
-        "under_price": -114.0,
-        "ml_home": -190.0,
-        "ml_away": 159.0,
-        "details": "SF -3.5",
-        "keyless": true,
-        "source": "ESPN public feed",
-        "priced_markets": [
-          "ML",
-          "ATS",
-          "TOTAL"
-        ],
-        "observed_at": "2026-11-22T22:27:50.445154+00:00"
-      },
-      "projection": {
-        "home": 23,
-        "away": 21,
-        "total": 43.2
-      },
-      "factors": [
-        "MIN: 2-1-0 over the last 3 captured regular-season games. Descriptive form, not an opponent-adjusted trend.",
-        "MIN: 7.3 days between scheduled kickoffs. Rest context, not an automatic edge.",
-        "SF: 2-1-0 over the last 3 captured regular-season games. Descriptive form, not an opponent-adjusted trend.",
-        "SF: 7.2 days between scheduled kickoffs. Rest context, not an automatic edge.",
-        "No earlier head-to-head result in this captured regular-season dataset. Historical advantage is unconfirmed.",
-        "Neutral venue: ordinary home-field assumptions need review."
-      ],
-      "playoff": "Regular-season result affects the overall record; no playoff probability is inferred.",
-      "weather": {
-        "venue": "Estadio Banorte",
-        "city": "Mexico City",
-        "roof": "open",
-        "observed_at": "2026-11-22T22:27:56.179866+00:00",
-        "roof_status": "open",
-        "coverage": "available",
-        "forecast": {
-          "time_utc": "2026-11-23T01:00",
-          "temp_f": 61.9,
-          "feels_f": 59.9,
-          "wind_mph": 6.6,
-          "gust_mph": 20.4,
-          "precip_prob": 58,
-          "precip_in": 0.012,
-          "snow_in": 0.0,
-          "cloud_pct": 70,
-          "code": 51,
-          "condition": "Light drizzle",
-          "source": "Open-Meteo",
-          "source_generated_at": null,
-          "source_observed_at": "2026-11-22T22:27:56.175555+00:00",
-          "kickoff_gap_hours": 0.3333333333333333
-        },
-        "total_adj": -1.8,
-        "margin_adj": 0.0,
-        "reasons": [
-          "Wind 7 mph (gusts 20)",
-          "58% chance of rain"
-        ],
-        "applied": true
-      },
       "review_flags": []
     },
     {
@@ -337,6 +224,72 @@
       "review_flags": []
     },
     {
+      "game_id": "401873077",
+      "date": "2026-11-23T01:20Z",
+      "away": "MIN",
+      "home": "SF",
+      "away_name": "Minnesota Vikings",
+      "home_name": "San Francisco 49ers",
+      "away_logo": "https://a.espncdn.com/i/teamlogos/nfl/500/scoreboard/min.png",
+      "home_logo": "https://a.espncdn.com/i/teamlogos/nfl/500/scoreboard/sf.png",
+      "away_rank": null,
+      "home_rank": null,
+      "venue": "Estadio Banorte",
+      "broadcast": "NBC",
+      "status": "11/22 - 8:20 PM EST",
+      "completed": false,
+      "away_score": 0,
+      "home_score": 0,
+      "odds": {
+        "book": "Draft Kings",
+        "spread_home": -4.5,
+        "spread_price_home": -103.0,
+        "spread_price_away": -116.0,
+        "total": 45.5,
+        "over_price": -104.0,
+        "under_price": -115.0,
+        "ml_home": -205.0,
+        "ml_away": 171.0,
+        "details": "SF -4.5",
+        "keyless": true,
+        "source": "ESPN public feed",
+        "priced_markets": [
+          "ML",
+          "ATS",
+          "TOTAL"
+        ],
+        "observed_at": "2026-11-23T01:13:31.223493+00:00"
+      },
+      "projection": {
+        "home": 23,
+        "away": 20,
+        "total": 43.1
+      },
+      "factors": [
+        "MIN: 2-1-0 over the last 3 captured regular-season games. Descriptive form, not an opponent-adjusted trend.",
+        "MIN: 7.3 days between scheduled kickoffs. Rest context, not an automatic edge.",
+        "SF: 2-1-0 over the last 3 captured regular-season games. Descriptive form, not an opponent-adjusted trend.",
+        "SF: 7.2 days between scheduled kickoffs. Rest context, not an automatic edge.",
+        "No earlier head-to-head result in this captured regular-season dataset. Historical advantage is unconfirmed.",
+        "Neutral venue: ordinary home-field assumptions need review."
+      ],
+      "playoff": "Regular-season result affects the overall record; no playoff probability is inferred.",
+      "weather": {
+        "venue": "Estadio Banorte",
+        "city": "Mexico City",
+        "roof": "open",
+        "observed_at": "2026-11-23T01:14:30.700255+00:00",
+        "roof_status": "open",
+        "coverage": "hourly forecast unavailable",
+        "forecast": null,
+        "total_adj": 0.0,
+        "margin_adj": 0.0,
+        "reasons": [],
+        "applied": false
+      },
+      "review_flags": []
+    },
+    {
       "game_id": "401873078",
       "date": "2026-11-24T01:15Z",
       "away": "CIN",
@@ -354,7 +307,7 @@
       "away_score": 0,
       "home_score": 0,
       "odds": {
-        "book": "DraftKings",
+        "book": "Draft Kings",
         "spread_home": 6.0,
         "spread_price_home": -107.0,
         "spread_price_away": -112.0,
@@ -371,12 +324,12 @@
           "ATS",
           "TOTAL"
         ],
-        "observed_at": "2026-11-22T22:27:50.445223+00:00"
+        "observed_at": "2026-11-23T01:13:31.223544+00:00"
       },
       "projection": {
-        "home": 22,
-        "away": 28,
-        "total": 50.3
+        "home": 23,
+        "away": 29,
+        "total": 51.1
       },
       "factors": [
         "CIN: 3-0-0 over the last 3 captured regular-season games. Descriptive form, not an opponent-adjusted trend.",
@@ -390,139 +343,53 @@
         "venue": "Northwest Stadium",
         "city": "Landover",
         "roof": "open",
-        "observed_at": "2026-11-22T22:27:56.180067+00:00",
+        "observed_at": "2026-11-23T01:14:30.700397+00:00",
         "roof_status": "open",
         "coverage": "available",
         "forecast": {
-          "time_utc": "2026-11-24T01:00",
-          "temp_f": 50.6,
-          "feels_f": 41.7,
-          "wind_mph": 13.3,
-          "gust_mph": 28.9,
-          "precip_prob": 2,
-          "precip_in": 0.0,
-          "snow_in": 0.0,
-          "cloud_pct": 76,
-          "code": 2,
-          "condition": "Partly cloudy",
-          "source": "Open-Meteo",
-          "source_generated_at": null,
-          "source_observed_at": "2026-11-22T22:27:56.175561+00:00",
+          "time_utc": "2026-11-24T01:00:00",
+          "temp_f": 54,
+          "feels_f": null,
+          "wind_mph": 10.0,
+          "gust_mph": null,
+          "precip_prob": 8,
+          "precip_in": null,
+          "snow_in": null,
+          "cloud_pct": null,
+          "code": null,
+          "condition": "Partly Cloudy",
+          "source": "National Weather Service",
+          "source_generated_at": "2026-11-23T00:30:29+00:00",
+          "source_observed_at": "2026-11-23T00:30:29+00:00",
           "kickoff_gap_hours": 0.25
         },
-        "total_adj": -3.0,
+        "total_adj": 0.0,
         "margin_adj": 0.0,
-        "reasons": [
-          "Wind 13 mph (gusts 29)"
-        ],
-        "applied": true
+        "reasons": [],
+        "applied": false
       },
       "review_flags": []
     }
   ],
   "headlines": [
     {
-      "headline": "Why this might be a good time for fantasy managers to trade Derrick Henry",
-      "published": "2026-11-22T22:11:33Z",
-      "url": "https://www.espn.com/video/clip/_/id/50565801/why-a-good-fantasy-managers-trade-derrick-henry",
-      "image": "https://espnmedia-cdn.akamaized.net/espn/media/common/2026/1122/dm_261122_Derrick_Henry_fantasy/dm_261122_Derrick_Henry_fantasy.jpg",
-      "teams": []
-    },
-    {
-      "headline": "NFL Week 11: Big takeaways, questions and fantasy spin from Sunday's games",
-      "published": "2026-11-22T22:17:39Z",
-      "url": "https://www.espn.com/nfl/story/_/id/50563342/week-11-sunday-games-takeaways-questions-2026",
-      "image": "https://a.espncdn.com/photo/2026/1122/r1749844_608x342_16-9.jpg",
+      "headline": "Judging overreactions to NFL Week 11: Joe Brady's Bills impact, Eagles' chances",
+      "published": "2026-11-23T01:08:32Z",
+      "url": "https://www.espn.com/nfl/story/_/id/50563318/week-11-overreactions-2026-graziano-bills-eagles-nfc-east",
+      "image": "https://a.espncdn.com/photo/2026/1122/r1749873_608x342_16-9.jpg",
       "teams": [
-        "ARI",
-        "BAL",
         "BUF",
         "CAR",
-        "CHI",
         "DAL",
-        "DET",
-        "KC",
-        "MIA",
-        "NO",
-        "PHI",
-        "PIT",
-        "TB",
-        "TEN"
-      ]
-    },
-    {
-      "headline": "Is Saquon Barkley back to must-start status in fantasy?",
-      "published": "2026-11-22T22:08:48Z",
-      "url": "https://www.espn.com/video/clip/_/id/50565751/is-saquon-barkley-back-start-status-fantasy",
-      "image": "https://espnmedia-cdn.akamaized.net/espn/media/common/2026/1122/dm_261122_Saquon_Barkley_Moody_fantasy/dm_261122_Saquon_Barkley_Moody_fantasy.jpg",
-      "teams": []
-    },
-    {
-      "headline": "Aaron Rodgers' 2026 NFL season: Tracking records, milestones",
-      "published": "2026-11-22T22:26:06Z",
-      "url": "https://www.espn.com/nfl/story/_/id/49907062/aaron-rodgers-2026-nfl-season-steelers-packers-jets-tracking-records-milestones",
-      "image": "https://a.espncdn.com/photo/2026/1122/r1749818_608x342_16-9.jpg",
-      "teams": [
-        "PIT"
-      ]
-    },
-    {
-      "headline": "Tampa Bay Buccaneers vs. Detroit Lions: Game Highlights",
-      "published": "2026-11-22T21:53:57Z",
-      "url": "https://www.espn.com/video/clip/_/id/50565430/game-highlights",
-      "image": "https://espnmedia-cdn.akamaized.net/espn/media/common/wsc/2026/1122/e00e71c3-755b-4a2c-853f-3367f6e4ff36/e00e71c3-755b-4a2c-853f-3367f6e4ff36.jpg",
-      "teams": [
-        "DET",
-        "TB"
-      ]
-    },
-    {
-      "headline": "Baltimore Ravens vs. Carolina Panthers: Game Highlights",
-      "published": "2026-11-22T21:40:55Z",
-      "url": "https://www.espn.com/video/clip/_/id/50565408/game-highlights",
-      "image": "https://espnmedia-cdn.akamaized.net/espn/media/common/wsc/2026/1122/52758d50-ef3b-458d-94bd-b1e783266396/52758d50-ef3b-458d-94bd-b1e783266396.jpg",
-      "teams": [
-        "BAL",
-        "CAR"
-      ]
-    },
-    {
-      "headline": "Fantasy buzz: Week 11's leading fantasy scorers through Sunday's early games",
-      "published": "2026-11-22T21:51:41Z",
-      "url": "https://www.espn.com/fantasy/football/story/_/id/40699880/fantasy-football-injuries-position-battles-nfl-news-analysis",
-      "image": "https://a.espncdn.com/photo/2026/1122/r1749796_2_1296x729_16-9.jpg",
-      "teams": [
-        "BAL",
-        "HOU",
-        "IND",
-        "LAC"
-      ]
-    },
-    {
-      "headline": "Pittsburgh Steelers vs. Philadelphia Eagles: Game Highlights",
-      "published": "2026-11-22T21:33:40Z",
-      "url": "https://www.espn.com/video/clip/_/id/50565318/game-highlights",
-      "image": "https://espnmedia-cdn.akamaized.net/espn/media/common/wsc/2026/1122/a64030ba-32d6-4958-a7a8-19757868d95a/a64030ba-32d6-4958-a7a8-19757868d95a.jpg",
-      "teams": [
-        "PHI",
-        "PIT"
-      ]
-    },
-    {
-      "headline": "Tennessee Titans vs. Dallas Cowboys: Game Highlights",
-      "published": "2026-11-22T21:27:39Z",
-      "url": "https://www.espn.com/video/clip/_/id/50565193/game-highlights",
-      "image": "https://espnmedia-cdn.akamaized.net/espn/media/common/wsc/2026/1122/9191508e-b592-45c3-aa57-2e1a32953f5b/9191508e-b592-45c3-aa57-2e1a32953f5b.jpg",
-      "teams": [
-        "DAL",
-        "TEN"
+        "LV",
+        "PHI"
       ]
     },
     {
       "headline": "Week 11 NFL highlights: Best plays, moments, touchdowns, more",
-      "published": "2026-11-22T21:20:56Z",
+      "published": "2026-11-23T01:07:44Z",
       "url": "https://www.espn.com/nfl/story/_/id/50562956/week-11-highlights-sunday-best-plays-touchdowns-2026",
-      "image": "https://a.espncdn.com/photo/2026/1122/r1749754_608x342_16-9.jpg",
+      "image": "https://a.espncdn.com/photo/2026/1123/r1749944_608x342_16-9.jpg",
       "teams": [
         "ARI",
         "BAL",
@@ -550,6 +417,119 @@
         "TB",
         "TEN",
         "WSH"
+      ]
+    },
+    {
+      "headline": "Mendoza throws 3 TDs, but Raiders fall to Broncos in Denver",
+      "published": "2026-11-23T00:50:54Z",
+      "url": "https://www.espn.com/video/clip/_/id/50567555/mendoza-throws-3-tds-raiders-fall-broncos-denver",
+      "image": "https://espnmedia-cdn.akamaized.net/espn/media/common/wsc/2026/1123/974cccdc-04cd-4e6a-b27b-7698ea742463/974cccdc-04cd-4e6a-b27b-7698ea742463.jpg",
+      "teams": [
+        "DEN",
+        "LV"
+      ]
+    },
+    {
+      "headline": "NFL Week 11 arrivals: George Kittle rocks luchador mask ahead of SNF in Mexico",
+      "published": "2026-11-23T01:00:32Z",
+      "url": "https://www.espn.com/nfl/story/_/id/50535179/nfl-week-11-fashionable-arrivals",
+      "image": "https://a.espncdn.com/photo/2026/1123/r1749927_608x342_16-9.jpg",
+      "teams": [
+        "ARI",
+        "ATL",
+        "BAL",
+        "BUF",
+        "CAR",
+        "CHI",
+        "CIN",
+        "CLE",
+        "DAL",
+        "DEN",
+        "DET",
+        "GB",
+        "HOU",
+        "IND",
+        "JAX",
+        "KC",
+        "LAC",
+        "LAR",
+        "LV",
+        "MIA",
+        "MIN",
+        "NE",
+        "NO",
+        "NYG",
+        "NYJ",
+        "PHI",
+        "PIT",
+        "SEA",
+        "SF",
+        "TB",
+        "TEN",
+        "WSH"
+      ]
+    },
+    {
+      "headline": "Chargers' Justin Herbert lands in concussion protocol",
+      "published": "2026-11-23T01:00:45Z",
+      "url": "https://www.espn.com/nfl/story/_/id/50567478/chargers-justin-herbert-lands-concussion-protocol",
+      "image": "https://a.espncdn.com/photo/2026/1123/r1749912_600x600_1-1.jpg",
+      "teams": [
+        "LAC"
+      ]
+    },
+    {
+      "headline": "Fantasy football Week 11 inactives: Who's in and who's out?",
+      "published": "2026-11-23T00:19:11Z",
+      "url": "https://www.espn.com/fantasy/football/story/_/page/FFSundayInactives-50530832/fantasy-football-injuries-nfl-week-11-inactive-active",
+      "image": "https://a.espncdn.com/photo/2026/1120/r1748613_576x324_16-9.jpg",
+      "teams": []
+    },
+    {
+      "headline": "Is Colston Loveland due for a fantasy breakout performance?",
+      "published": "2026-11-23T00:37:45Z",
+      "url": "https://www.espn.com/video/clip/_/id/50567249/is-colston-loveland-due-fantasy-breakout-performance",
+      "image": "https://espnmedia-cdn.akamaized.net/espn/media/common/2026/1122/ss_20261122_191618973_3757262/ss_20261122_191618973_3757262.jpg",
+      "teams": []
+    },
+    {
+      "headline": "Why fantasy managers should be excited about DJ Moore",
+      "published": "2026-11-23T00:33:08Z",
+      "url": "https://www.espn.com/video/clip/_/id/50567217/why-fantasy-managers-excited-dj-moore",
+      "image": "https://espnmedia-cdn.akamaized.net/espn/media/common/2026/1122/ss_20261122_191005684_3757247/ss_20261122_191005684_3757247.jpg",
+      "teams": []
+    },
+    {
+      "headline": "NFL Week 11: Big takeaways, questions and fantasy spin from Sunday's games",
+      "published": "2026-11-23T00:48:39Z",
+      "url": "https://www.espn.com/nfl/story/_/id/50563342/week-11-sunday-games-takeaways-questions-2026",
+      "image": "https://a.espncdn.com/photo/2026/1122/r1749880_608x342_16-9.jpg",
+      "teams": [
+        "ARI",
+        "BAL",
+        "BUF",
+        "CAR",
+        "CHI",
+        "DAL",
+        "DET",
+        "KC",
+        "LAC",
+        "MIA",
+        "NO",
+        "NYJ",
+        "PHI",
+        "PIT",
+        "TB",
+        "TEN"
+      ]
+    },
+    {
+      "headline": "Jeffery Simmons matches career high with 3 sacks in Bears' win",
+      "published": "2026-11-23T00:10:57Z",
+      "url": "https://www.espn.com/nfl/story/_/id/50567207/jeffery-simmons-matches-career-high-3-sacks-bears-win",
+      "image": "https://a.espncdn.com/photo/2026/1122/r1749864_1296x729_16-9.jpg",
+      "teams": [
+        "CHI"
       ]
     }
   ],
