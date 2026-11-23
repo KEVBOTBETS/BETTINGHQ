@@ -1,29 +1,105 @@
 {
   "schema": 1,
-  "checked_at": "2026-11-23T09:45:43.049Z",
+  "checked_at": "2026-11-23T13:24:28.149Z",
   "coverage": {
-    "ncaaf": {
-      "status": "empty",
-      "reports": 0,
-      "checked_at": "2026-11-23T09:45:43.049Z"
-    },
     "nhl": {
       "status": "available",
       "reports": 46,
-      "checked_at": "2026-11-23T09:45:43.049Z"
+      "checked_at": "2026-11-23T13:24:28.149Z"
+    },
+    "ncaaf": {
+      "status": "empty",
+      "reports": 0,
+      "checked_at": "2026-11-23T13:24:28.149Z"
     },
     "mlb": {
       "status": "available",
       "reports": 5,
-      "checked_at": "2026-11-23T09:45:43.049Z"
+      "checked_at": "2026-11-23T13:24:28.149Z"
     },
     "nfl": {
       "status": "available",
       "reports": 473,
-      "checked_at": "2026-11-23T09:45:43.049Z"
+      "checked_at": "2026-11-23T13:24:28.149Z"
     }
   },
   "events": [
+    {
+      "id": "odds|ncaaf|401858543|2026-11-28T20:30Z|ML||home|DraftKings|2026-11-23T13:24:28.149Z",
+      "kind": "odds",
+      "observed_at": "2026-11-23T13:24:28.149Z",
+      "sport": "ncaaf",
+      "event": "USC @ UCLA",
+      "start": "2026-11-28T20:30Z",
+      "pick": "UCLA ML",
+      "title": "Published odds changed",
+      "before": "+210",
+      "after": "+200",
+      "book": "DraftKings",
+      "source_quote_at": "2026-11-23T13:20:12.621363+00:00",
+      "source": "Existing NCAAF board",
+      "note": "Your ticket keeps its original odds. Recheck the live book before placing a new wager."
+    },
+    {
+      "id": "odds|ncaaf|401860926|2026-11-28T23:00Z|TOTAL||over|DraftKings|2026-11-23T13:24:28.149Z",
+      "kind": "odds",
+      "observed_at": "2026-11-23T13:24:28.149Z",
+      "sport": "ncaaf",
+      "event": "BOIS @ CSU",
+      "start": "2026-11-28T23:00Z",
+      "pick": "Over 77.5",
+      "title": "Published odds changed",
+      "before": "-112 · line 76.5",
+      "after": "-105 · line 77.5",
+      "book": "DraftKings",
+      "source_quote_at": "2026-11-23T13:20:20.996667+00:00",
+      "source": "Existing NCAAF board",
+      "note": "Your ticket keeps its original odds. Recheck the live book before placing a new wager."
+    },
+    {
+      "id": "odds|ncaaf|401866474|2026-11-28T17:00Z|TOTAL||over|DraftKings|2026-11-23T13:24:28.149Z",
+      "kind": "odds",
+      "observed_at": "2026-11-23T13:24:28.149Z",
+      "sport": "ncaaf",
+      "event": "CMU @ BALL",
+      "start": "2026-11-28T17:00Z",
+      "pick": "Over 46.5",
+      "title": "Published odds changed",
+      "before": "-108 · line 47.5",
+      "after": "-112 · line 47.5",
+      "book": "DraftKings",
+      "source_quote_at": "2026-11-23T13:20:20.996667+00:00",
+      "source": "Existing NCAAF board",
+      "note": "Your ticket keeps its original odds. Recheck the live book before placing a new wager."
+    },
+    {
+      "id": "injury|nfl:30:Bhayshul Tuten|2026-11-23T13:24:28.149Z",
+      "kind": "injury",
+      "observed_at": "2026-11-23T13:24:28.149Z",
+      "sport": "nfl",
+      "title": "Player availability changed",
+      "event": "Jacksonville Jaguars",
+      "pick": "Bhayshul Tuten",
+      "before": "Active · Tuten rushed 10 times for 33 yards and brought in all three targets for 20 yards in the Jaguars' 23-18 loss to the Giants on Sunday.",
+      "after": "Questionable · Undisclosed",
+      "source_quote_at": "2026-11-23T12:56Z",
+      "source": "ESPN injuries",
+      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
+    },
+    {
+      "id": "injury|nfl:30:Cam Little|2026-11-23T13:24:28.149Z",
+      "kind": "injury",
+      "observed_at": "2026-11-23T13:24:28.149Z",
+      "sport": "nfl",
+      "title": "Player availability changed",
+      "event": "Jacksonville Jaguars",
+      "pick": "Cam Little",
+      "before": "Active · Little went 4-for-4 on field-goal attempts during Sunday's 23-18 loss to the Giants.",
+      "after": "Questionable · Lower Body",
+      "source_quote_at": "2026-11-23T05:28Z",
+      "source": "ESPN injuries",
+      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
+    },
     {
       "id": "odds|ncaaf|401866474|2026-11-28T17:00Z|TOTAL||over|Draft Kings|2026-11-23T09:19:08.752Z",
       "kind": "odds",
@@ -2799,76 +2875,6 @@
       "before": "Not in the previous dated report",
       "after": "Active · Allen completed 27 of 45 passes for 304 yards, one touchdown and two interceptions in Sunday's 26-9 win over the Dolphins.",
       "source_quote_at": "2026-11-22T21:19Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:29:Jalen Coker|2026-11-22T22:31:51.789Z",
-      "kind": "injury",
-      "observed_at": "2026-11-22T22:31:51.789Z",
-      "sport": "nfl",
-      "title": "New availability report",
-      "event": "Carolina Panthers",
-      "pick": "Jalen Coker",
-      "before": "Not in the previous dated report",
-      "after": "Questionable · Concussion",
-      "source_quote_at": "2026-11-22T21:49Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:3:Luther Burden III|2026-11-22T22:31:51.789Z",
-      "kind": "injury",
-      "observed_at": "2026-11-22T22:31:51.789Z",
-      "sport": "nfl",
-      "title": "New availability report",
-      "event": "Chicago Bears",
-      "pick": "Luther Burden III",
-      "before": "Not in the previous dated report",
-      "after": "Active · Burden caught two of three targets for 10 yards and added three yards on his only carry in Sunday's 21-13 win over New Orleans.",
-      "source_quote_at": "2026-11-22T22:24Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:3:Caleb Williams|2026-11-22T22:31:51.789Z",
-      "kind": "injury",
-      "observed_at": "2026-11-22T22:31:51.789Z",
-      "sport": "nfl",
-      "title": "New availability report",
-      "event": "Chicago Bears",
-      "pick": "Caleb Williams",
-      "before": "Not in the previous dated report",
-      "after": "Active · Williams completed 15 of 23 passes for 181 yards and two touchdowns with one interception in Sunday's 21-13 win over the Saints. He added 11 rushing yards on four carries.",
-      "source_quote_at": "2026-11-22T22:20Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:3:Kyle Monangai|2026-11-22T22:31:51.789Z",
-      "kind": "injury",
-      "observed_at": "2026-11-22T22:31:51.789Z",
-      "sport": "nfl",
-      "title": "Player availability changed",
-      "event": "Chicago Bears",
-      "pick": "Kyle Monangai",
-      "before": "Active · Monangai (toe) doesn't have a designation for Sunday's game against the Saints.",
-      "after": "Active · Monangai carried the ball eight times for 18 yards and failed to catch his only target in Sunday's 21-13 win over the Saints.",
-      "source_quote_at": "2026-11-22T22:15Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:3:D'Andre Swift|2026-11-22T22:31:51.789Z",
-      "kind": "injury",
-      "observed_at": "2026-11-22T22:31:51.789Z",
-      "sport": "nfl",
-      "title": "Player availability changed",
-      "event": "Chicago Bears",
-      "pick": "D'Andre Swift",
-      "before": "Active · Swift will be rejoined in the Bears backfield by Kyle Monangai (toe) on Sunday against the Saints, Larry Mayer of the team's official site reports.",
-      "after": "Active · Swift carried the ball 13 times for 51 yards and caught both his targets for eight yards and a touchdown in Sunday's 21-13 win over the Saints.",
-      "source_quote_at": "2026-11-22T22:10Z",
       "source": "ESPN injuries",
       "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
     }
