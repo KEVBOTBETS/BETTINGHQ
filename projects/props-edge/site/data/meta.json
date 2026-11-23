@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-23T13:22:05.000135+00:00",
+  "generated_at": "2026-11-23T22:03:24.359935+00:00",
   "provider_priority": [
     "Covers public comparison (no key)",
     "DraftKings Network public reference (no key)",
@@ -16,32 +16,30 @@
     "draftkings_network_keyless": true
   },
   "counts": {
-    "priced_quotes": 15,
-    "eligible_priced_quotes": 15,
-    "qualified_options": 0,
-    "held_options": 0,
-    "board": 15,
-    "actionable": 0,
+    "priced_quotes": 257,
+    "eligible_priced_quotes": 257,
+    "qualified_options": 13,
+    "held_options": 7,
+    "board": 74,
+    "actionable": 6,
     "best": 0,
     "good": 0,
-    "leans": 0,
-    "projections": 7305,
-    "injury_report": 762,
-    "ruled_out": 219,
-    "book_lines": 743,
-    "legs_on_book_lines": 515,
-    "legs": 4311,
-    "book_priced_legs": 13,
-    "parlays": 95
+    "leans": 13,
+    "projections": 7302,
+    "injury_report": 763,
+    "ruled_out": 138,
+    "book_lines": 854,
+    "legs_on_book_lines": 566,
+    "legs": 4412,
+    "book_priced_legs": 74,
+    "parlays": 94
   },
   "source_by_sport": {
     "NFL": {
-      "source": "DraftKings Network public reference + ESPN regular-season projections",
-      "priced_quotes": 15,
-      "projections": 7305,
-      "errors": [
-        "Covers public prop comparison request failed (no matchable NFL prop prices (66 cards, 52 recognized prop cards, 52 scheduled-player matches))"
-      ]
+      "source": "Covers public comparison + DraftKings Network public reference + ESPN regular-season projections",
+      "priced_quotes": 257,
+      "projections": 7302,
+      "errors": []
     }
   },
   "workflow_url": "https://github.com/KEVBOTBETS/BETTINGHQ/actions/workflows/release.yml",
@@ -54,7 +52,7 @@
     "window": {
       "NFL": {
         "next_kickoff": "2026-11-24T01:15Z",
-        "hours_to_kickoff": 11.9,
+        "hours_to_kickoff": 3.2,
         "window_hours": 36.0,
         "inside_window": true
       }
@@ -71,7 +69,7 @@
     "line_source": "DraftKings lines via ESPN"
   },
   "accuracy": {
-    "legs": 15602,
+    "legs": 15630,
     "settled": 10186,
     "record": "7091-3095-14",
     "hit_rate": 0.6962,
@@ -203,10 +201,10 @@
     },
     "calibration_shrink": 1.0,
     "calibration_active": false,
-    "updated_at": "2026-11-23T13:21:35.285905+00:00",
+    "updated_at": "2026-11-23T22:02:53.545467+00:00",
     "calibration_note": "Calibration is diagnostic only; no automatic refit.",
-    "total_logged": 102649,
-    "pending": 5402,
+    "total_logged": 102858,
+    "pending": 5430,
     "independent_events": 145,
     "legacy_excluded": 17,
     "method": "One first pregame preferred leg per event/player/market. Full side/line audit retained separately. No wager ROI at estimated prices."
@@ -214,46 +212,48 @@
   "parlay_record": {
     "Win": 999,
     "Loss": 35359,
-    "Pending": 1779,
+    "Pending": 1852,
     "Void": 0,
     "Review": 0,
-    "total": 38137,
+    "total": 38210,
     "hit_rate": 0.02747675889762913
   },
   "max_odds_age_hours": 12,
-  "price_source_status": "reference",
+  "price_source_status": "available",
   "quote_health": {
-    "observed": 0,
+    "observed": 256,
     "retained": 0,
-    "reference": 15,
-    "expired": 234,
+    "reference": 1,
+    "expired": 0,
     "rejected": 0,
     "max_age_hours": 4,
     "sources": {
       "Covers public prop comparison": {
-        "status": "unavailable",
-        "error": "Covers public prop comparison request failed (no matchable NFL prop prices (66 cards, 52 recognized prop cards, 52 scheduled-player matches))",
-        "shape": "66 cards, 52 recognized prop cards, 52 scheduled-player matches",
-        "quotes": 0,
-        "checked_at": "2026-11-23T13:20:56.856918+00:00",
+        "status": "available",
+        "quotes": 256,
+        "shape": "76 cards, 60 recognized prop cards, 60 scheduled-player matches",
+        "checked_at": "2026-11-23T22:02:22.259549+00:00",
         "source_url": "https://www.covers.com/sport/football/nfl/player-props"
       },
       "DraftKings Network public reference": {
         "status": "reference",
-        "quotes": 15,
+        "quotes": 1,
         "tables": 1,
         "rows": 50,
-        "unsupported": 34,
-        "unmatched": 1,
+        "unsupported": 35,
+        "unmatched": 14,
         "source_url": "https://dknetwork.draftkings.com/draftkings-sportsbook-player-props/"
       }
     },
     "board_reasons": {
-      "reference / confirmation": 15
+      "portfolio hold": 7,
+      "qualified": 6,
+      "insufficient edge / model filters": 60,
+      "reference / confirmation": 1
     },
     "markets": {
       "Sacks": {
-        "projections": 955,
+        "projections": 954,
         "observed": 0,
         "retained": 0,
         "reference": 0,
@@ -261,7 +261,7 @@
         "qualified": 0
       },
       "Solo tackles": {
-        "projections": 955,
+        "projections": 954,
         "observed": 0,
         "retained": 0,
         "reference": 0,
@@ -269,7 +269,7 @@
         "qualified": 0
       },
       "Tackles + assists": {
-        "projections": 955,
+        "projections": 954,
         "observed": 0,
         "retained": 0,
         "reference": 0,
@@ -278,11 +278,11 @@
       },
       "Anytime touchdown": {
         "projections": 443,
-        "observed": 0,
+        "observed": 72,
         "retained": 0,
-        "reference": 15,
-        "expired": 65,
-        "qualified": 0
+        "reference": 1,
+        "expired": 0,
+        "qualified": 2
       },
       "Receiving touchdowns": {
         "projections": 377,
@@ -294,10 +294,10 @@
       },
       "Receiving yards": {
         "projections": 377,
-        "observed": 0,
+        "observed": 54,
         "retained": 0,
         "reference": 0,
-        "expired": 45,
+        "expired": 0,
         "qualified": 0
       },
       "Receptions": {
@@ -342,10 +342,10 @@
       },
       "Rush attempts": {
         "projections": 202,
-        "observed": 0,
+        "observed": 9,
         "retained": 0,
         "reference": 0,
-        "expired": 9,
+        "expired": 0,
         "qualified": 0
       },
       "Rushing touchdowns": {
@@ -358,11 +358,11 @@
       },
       "Rushing yards": {
         "projections": 202,
-        "observed": 0,
+        "observed": 36,
         "retained": 0,
         "reference": 0,
-        "expired": 27,
-        "qualified": 0
+        "expired": 0,
+        "qualified": 2
       },
       "Extra point attempts": {
         "projections": 34,
@@ -430,42 +430,42 @@
       },
       "Pass attempts": {
         "projections": 48,
-        "observed": 0,
+        "observed": 18,
         "retained": 0,
         "reference": 0,
-        "expired": 18,
+        "expired": 0,
         "qualified": 0
       },
       "Pass completions": {
         "projections": 48,
-        "observed": 0,
+        "observed": 16,
         "retained": 0,
         "reference": 0,
-        "expired": 17,
-        "qualified": 0
+        "expired": 0,
+        "qualified": 1
       },
       "Pass interceptions": {
         "projections": 48,
-        "observed": 0,
+        "observed": 18,
         "retained": 0,
         "reference": 0,
-        "expired": 18,
-        "qualified": 0
+        "expired": 0,
+        "qualified": 1
       },
       "Passing touchdowns": {
         "projections": 48,
-        "observed": 0,
+        "observed": 17,
         "retained": 0,
         "reference": 0,
-        "expired": 17,
+        "expired": 0,
         "qualified": 0
       },
       "Passing yards": {
         "projections": 48,
-        "observed": 0,
+        "observed": 16,
         "retained": 0,
         "reference": 0,
-        "expired": 18,
+        "expired": 0,
         "qualified": 0
       }
     }
@@ -473,8 +473,8 @@
   "estimated_prices": false,
   "weekly_nfl": {
     "status": "published",
-    "generated_at": "2026-11-23T13:20:39.358974+00:00",
-    "rostered_players": 2570,
+    "generated_at": "2026-11-23T22:02:17.943875+00:00",
+    "rostered_players": 2569,
     "verified_roster_teams": 32,
     "missing_roster_teams": []
   }
