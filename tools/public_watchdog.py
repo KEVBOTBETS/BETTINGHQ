@@ -48,25 +48,23 @@ def assess(health, runs, now):
 def college_quote_gap(system, now):
     from zoneinfo import ZoneInfo
     zone = ZoneInfo('America/Toronto')
-    ages = []
+    ages = {}
     for game in system['games']:
-        if game.get('sport') not in ('ncaab','ncaaf'):
-            continue
-        if game.get('sport') != 'ncaab' and not game.get('forecast_available'):
+        sport = game.get('sport')
+        if sport not in ('ncaab','ncaaf','nfl','nba','nhl','mlb','wnba'):
             continue
         start = dt.datetime.fromisoformat(game['start'].replace('Z', '+00:00'))
         if start <= now or start.astimezone(zone).date() != now.astimezone(zone).date():
             continue
         publication_age=age_hours(game.get('publication_at'),now)
-        if game.get('forecast_available') and publication_age is not None and publication_age>=3.5:return True
-        if game.get('sport')!='ncaab':continue
+        if game.get('forecast_available') and publication_age is not None and publication_age >= (3.5 if sport in ('ncaab','ncaaf') else 5.5):return True
         for quote in game.get('selections', []):
             age = age_hours(quote.get('observed_at'), now)
             if age is not None and age >= 0 and quote.get('book') and quote.get('price'):
-                ages.append(age)
+                ages.setdefault(sport, []).append(age)
     # Recover previously priced slates before the 90-minute expiry. A lack
     # of positive-value offers alone is not a data outage.
-    return bool(ages) and min(ages) >= 1.0
+    return any(min(values) >= (1.0 if sport in ('ncaab','nba','nhl') else 3.5) for sport, values in ages.items())
 
 
 def request(url, token=None, payload=None):
@@ -104,7 +102,7 @@ def main():
     try:
         inventory = request('https://kevbotbets.github.io/BETTINGHQ/bet-ledger-hq/data/system.json?watchdog=' + str(int(now.timestamp())))
         if college_quote_gap(inventory, now):
-            result['errors'].append('College slate needs a refresh: aging winner forecasts or NCAAB prices.')
+            result['errors'].append('Upcoming slate needs a refresh: aging forecasts or league prices.')
     except Exception as exc:
         fetch_errors.append(f'Published ticket inventory unavailable ({type(exc).__name__}).')
     result['errors'].extend(fetch_errors)
