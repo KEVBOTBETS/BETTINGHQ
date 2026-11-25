@@ -1,29 +1,99 @@
 {
   "schema": 1,
-  "checked_at": "2026-11-25T19:35:26.503Z",
+  "checked_at": "2026-11-25T20:10:34.352Z",
   "coverage": {
     "nhl": {
       "status": "available",
       "reports": 41,
-      "checked_at": "2026-11-25T19:35:26.503Z"
+      "checked_at": "2026-11-25T20:10:34.352Z"
     },
     "ncaaf": {
       "status": "empty",
       "reports": 0,
-      "checked_at": "2026-11-25T19:35:26.503Z"
+      "checked_at": "2026-11-25T20:10:34.352Z"
+    },
+    "nfl": {
+      "status": "available",
+      "reports": 590,
+      "checked_at": "2026-11-25T20:10:34.352Z"
     },
     "mlb": {
       "status": "empty",
       "reports": 0,
-      "checked_at": "2026-11-25T19:35:26.503Z"
-    },
-    "nfl": {
-      "status": "available",
-      "reports": 600,
-      "checked_at": "2026-11-25T19:35:26.503Z"
+      "checked_at": "2026-11-25T20:10:34.352Z"
     }
   },
   "events": [
+    {
+      "id": "starter|nhl:nhl:2026020398:away|2026-11-25T20:10:34.352Z",
+      "kind": "starter",
+      "observed_at": "2026-11-25T20:10:34.352Z",
+      "sport": "nhl",
+      "event": "SJ @ ANA",
+      "start": "2026-11-26T03:00:00+00:00",
+      "title": "NHL starting goalie updated",
+      "before": "Alex Nedeljkovic",
+      "after": "Alex Nedeljkovic · confirmed",
+      "source_quote_at": "2026-11-25T20:08:20.807101+00:00",
+      "source": "NHL board",
+      "note": "Review the matchup after a starter change; the baseline does not price individual goalie talent."
+    },
+    {
+      "id": "injury|nfl:22:Josh Johnson|2026-11-25T20:10:34.352Z",
+      "kind": "injury",
+      "observed_at": "2026-11-25T20:10:34.352Z",
+      "sport": "nfl",
+      "title": "Player availability changed",
+      "event": "Arizona Cardinals",
+      "pick": "Josh Johnson",
+      "before": "Active · Johnson completed 18 of 31 passes for 155 yards and a touchdown in Sunday's 34-7 loss to Kansas City. he added five yards on two carries.",
+      "after": "Active · Head coach Mike LaFleur said Wednesday that Johnson is preparing to start Sunday's game versus the Commanders due to Carson Beck's back injury, Dani Sureck of the Cardinals' offici",
+      "source_quote_at": "2026-11-25T19:27Z",
+      "source": "ESPN injuries",
+      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
+    },
+    {
+      "id": "injury|nfl:33:Derrick Henry|2026-11-25T20:10:34.352Z",
+      "kind": "injury",
+      "observed_at": "2026-11-25T20:10:34.352Z",
+      "sport": "nfl",
+      "title": "Player availability changed",
+      "event": "Baltimore Ravens",
+      "pick": "Derrick Henry",
+      "before": "Active · Henry cleared concussion protocol and was made available to the media following Sunday's 35-33 loss to the Panthers, Giana Han of the Baltimore Banner reports.",
+      "after": "Questionable · Concussion",
+      "source_quote_at": "2026-11-25T19:55Z",
+      "source": "ESPN injuries",
+      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
+    },
+    {
+      "id": "injury|nfl:25:Brock Purdy|2026-11-25T20:10:34.352Z",
+      "kind": "injury",
+      "observed_at": "2026-11-25T20:10:34.352Z",
+      "sport": "nfl",
+      "title": "Player availability changed",
+      "event": "San Francisco 49ers",
+      "pick": "Brock Purdy",
+      "before": "Active · Purdy completed 21 of 26 pass attempts for 255 yards and three touchdowns in Sunday's 35-10 win over the Vikings.",
+      "after": "Questionable · Ankle",
+      "source_quote_at": "2026-11-25T19:53Z",
+      "source": "ESPN injuries",
+      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
+    },
+    {
+      "id": "injury|nfl:25:Mike Evans|2026-11-25T20:10:34.352Z",
+      "kind": "injury",
+      "observed_at": "2026-11-25T20:10:34.352Z",
+      "sport": "nfl",
+      "title": "Player availability changed",
+      "event": "San Francisco 49ers",
+      "pick": "Mike Evans",
+      "before": "Active · Evans (Achilles) caught six of seven targets for 109 yards and a touchdown in Sunday's 35-10 win over the Vikings.",
+      "after": "Active · Achilles",
+      "source_quote_at": "2026-11-23T04:44Z",
+      "source": "ESPN injuries",
+      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
+    },
     {
       "id": "odds|ncaaf|401861969|2026-11-28T17:00Z|TOTAL||over|DraftKings|2026-11-25T19:35:26.503Z",
       "kind": "odds",
@@ -2793,76 +2863,6 @@
       "before": "Questionable · Shin",
       "after": "Active · The Eagles listed Goedert (shin) as a full participant in Tuesday's walkthrough practice.",
       "source_quote_at": "2026-11-24T23:12Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:21:Saquon Barkley|2026-11-24T23:40:23.017Z",
-      "kind": "injury",
-      "observed_at": "2026-11-24T23:40:23.017Z",
-      "sport": "nfl",
-      "title": "Player availability changed",
-      "event": "Philadelphia Eagles",
-      "pick": "Saquon Barkley",
-      "before": "Questionable · Neck",
-      "after": "Active · The Eagles listed Barkley (neck/illness) as a full participant in Tuesday's walkthrough practice.",
-      "source_quote_at": "2026-11-24T23:11Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:21:Tanner McKee|2026-11-24T23:40:23.017Z",
-      "kind": "injury",
-      "observed_at": "2026-11-24T23:40:23.017Z",
-      "sport": "nfl",
-      "title": "Player availability changed",
-      "event": "Philadelphia Eagles",
-      "pick": "Tanner McKee",
-      "before": "Questionable · Ribs",
-      "after": "Active · McKee (ribs) was estimated as a limited participant on Monday's injury report.",
-      "source_quote_at": "2026-11-24T00:14Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:23:Ben Skowronek|2026-11-24T23:40:23.017Z",
-      "kind": "injury",
-      "observed_at": "2026-11-24T23:40:23.017Z",
-      "sport": "nfl",
-      "title": "New availability report",
-      "event": "Pittsburgh Steelers",
-      "pick": "Ben Skowronek",
-      "before": "Not in the previous dated report",
-      "after": "Questionable · Calf",
-      "source_quote_at": "2026-11-24T22:47Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:23:Max Hurleman|2026-11-24T23:40:23.017Z",
-      "kind": "injury",
-      "observed_at": "2026-11-24T23:40:23.017Z",
-      "sport": "nfl",
-      "title": "Player availability changed",
-      "event": "Pittsburgh Steelers",
-      "pick": "Max Hurleman",
-      "before": "Active · Hurleman reverted to the Steelers' practice squad Monday, per the NFL's transaction log.",
-      "after": "Active · Hurleman reverted to the Steelers' practice squad Monday.",
-      "source_quote_at": "2026-11-24T01:15Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:10:Milo Eifler|2026-11-24T23:40:23.017Z",
-      "kind": "injury",
-      "observed_at": "2026-11-24T23:40:23.017Z",
-      "sport": "nfl",
-      "title": "New availability report",
-      "event": "Tennessee Titans",
-      "pick": "Milo Eifler",
-      "before": "Not in the previous dated report",
-      "after": "Questionable · Undisclosed",
-      "source_quote_at": "2026-11-24T21:12Z",
       "source": "ESPN injuries",
       "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
     }
