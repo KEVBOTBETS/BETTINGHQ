@@ -746,7 +746,7 @@
         !event.data || event.data.type !== "kevbotbets:activate") return;
     var editing = document.activeElement &&
       /^(INPUT|TEXTAREA|SELECT)$/.test(document.activeElement.tagName);
-    if (!editing && !S.busy && BS.loadConfig()) pull();
+    if (!editing && !S.busy) { if (BS.loadConfig()) pull(); else renderGate(); }
   });
   setInterval(function () {
     if (document.visibilityState === "visible" && BS.loadConfig()) pull();
