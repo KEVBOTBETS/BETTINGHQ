@@ -1,29 +1,73 @@
 {
   "schema": 1,
-  "checked_at": "2026-11-24T23:48:32.139Z",
+  "checked_at": "2026-11-25T00:05:57.132Z",
   "coverage": {
-    "ncaaf": {
-      "status": "empty",
-      "reports": 0,
-      "checked_at": "2026-11-24T23:48:32.139Z"
-    },
     "nhl": {
       "status": "available",
       "reports": 42,
-      "checked_at": "2026-11-24T23:48:32.139Z"
+      "checked_at": "2026-11-25T00:05:57.132Z"
     },
     "mlb": {
       "status": "empty",
       "reports": 0,
-      "checked_at": "2026-11-24T23:48:32.139Z"
+      "checked_at": "2026-11-25T00:05:57.132Z"
     },
     "nfl": {
       "status": "available",
-      "reports": 588,
-      "checked_at": "2026-11-24T23:48:32.139Z"
+      "reports": 587,
+      "checked_at": "2026-11-25T00:05:57.132Z"
+    },
+    "ncaaf": {
+      "status": "empty",
+      "reports": 0,
+      "checked_at": "2026-11-25T00:05:57.132Z"
     }
   },
   "events": [
+    {
+      "id": "odds|ncaaf|401866474|2026-11-28T17:00Z|TOTAL||over|Draft Kings|2026-11-25T00:05:57.132Z",
+      "kind": "odds",
+      "observed_at": "2026-11-25T00:05:57.132Z",
+      "sport": "ncaaf",
+      "event": "CMU @ BALL",
+      "start": "2026-11-28T17:00Z",
+      "pick": "Over 47.5",
+      "title": "Published odds changed",
+      "before": "-112 · line 48.5",
+      "after": "-115 · line 49.5",
+      "book": "Draft Kings",
+      "source_quote_at": "2026-11-25T00:01:53.727906+00:00",
+      "source": "Existing NCAAF board",
+      "note": "Your ticket keeps its original odds. Recheck the live book before placing a new wager."
+    },
+    {
+      "id": "starter|nhl:nhl:2026020385:home|2026-11-25T00:05:57.132Z",
+      "kind": "starter",
+      "observed_at": "2026-11-25T00:05:57.132Z",
+      "sport": "nhl",
+      "event": "VGK @ EDM",
+      "start": "2026-11-25T01:00:00+00:00",
+      "title": "NHL starting goalie updated",
+      "before": "Not announced",
+      "after": "Devon Levi · confirmed",
+      "source_quote_at": "2026-11-25T00:04:03.054078+00:00",
+      "source": "NHL board",
+      "note": "Review the matchup after a starter change; the baseline does not price individual goalie talent."
+    },
+    {
+      "id": "starter|nhl:nhl:2026020394:home|2026-11-25T00:05:57.132Z",
+      "kind": "starter",
+      "observed_at": "2026-11-25T00:05:57.132Z",
+      "sport": "nhl",
+      "event": "VAN @ DET",
+      "start": "2026-11-26T00:30:00+00:00",
+      "title": "NHL starting goalie updated",
+      "before": "Not announced",
+      "after": "Daniil Tarasov · confirmed",
+      "source_quote_at": "2026-11-25T00:04:03.054078+00:00",
+      "source": "NHL board",
+      "note": "Review the matchup after a starter change; the baseline does not price individual goalie talent."
+    },
     {
       "id": "odds|props|401873081|2026-11-26T18:00Z|Rushing yards|Jared Goff|over|bet365|2026-11-24T23:48:32.139Z",
       "kind": "odds",
@@ -2793,48 +2837,6 @@
       "before": "Not in the previous dated report",
       "after": "Active · Walker recorded 11 tackles (seven solo) in Sunday's 38-24 loss to the Broncos.",
       "source_quote_at": "2026-11-24T04:37Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:13:Nakobe Dean|2026-11-24T05:58:48.957Z",
-      "kind": "injury",
-      "observed_at": "2026-11-24T05:58:48.957Z",
-      "sport": "nfl",
-      "title": "New availability report",
-      "event": "Las Vegas Raiders",
-      "pick": "Nakobe Dean",
-      "before": "Not in the previous dated report",
-      "after": "Active · Dean recorded 12 tackles (six solo), including 1.0 sacks, and a pass breakup in Sunday's 38-24 loss to the Broncos.",
-      "source_quote_at": "2026-11-24T04:34Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:24:Elijah Molden|2026-11-24T05:58:48.957Z",
-      "kind": "injury",
-      "observed_at": "2026-11-24T05:58:48.957Z",
-      "sport": "nfl",
-      "title": "New availability report",
-      "event": "Los Angeles Chargers",
-      "pick": "Elijah Molden",
-      "before": "Not in the previous dated report",
-      "after": "Active · Molden recorded eight tackles (four solo) in Sunday's 27-24 loss to the Jets.",
-      "source_quote_at": "2026-11-24T03:53Z",
-      "source": "ESPN injuries",
-      "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
-    },
-    {
-      "id": "injury|nfl:24:Del'Shawn Phillips|2026-11-24T05:58:48.957Z",
-      "kind": "injury",
-      "observed_at": "2026-11-24T05:58:48.957Z",
-      "sport": "nfl",
-      "title": "New availability report",
-      "event": "Los Angeles Chargers",
-      "pick": "Del'Shawn Phillips",
-      "before": "Not in the previous dated report",
-      "after": "Active · Phillips finished with four tackles (two solo) in Sunday's 27-24 loss to the Jets.",
-      "source_quote_at": "2026-11-24T03:49Z",
       "source": "ESPN injuries",
       "note": "A report is not a confirmed lineup. Missing or removed reports do not confirm a player is healthy."
     }
