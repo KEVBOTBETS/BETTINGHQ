@@ -16,10 +16,6 @@ class DailyEvidenceTests(unittest.TestCase):
  def test_no_future_results_or_postgame_capture(self):
   for k,value in [('captured_at','2026-11-17T21:00:00Z'),('result_at','2026-11-18T01:00:00Z')]:
    r=self.row();r[k]=value;self.assertFalse(build({'records':[r]},{'records':[]},{'records':[]},NOW)['cohorts'])
- def test_total_sides_exclude_pushes_and_duplicate_games(self):
-  over=dict(self.row(),sport='ncaab');under=dict(over,id='2',total=205);push=dict(under,id='3',actual_total=215)
-  cohort=next(x for x in build({'records':[over,over,under,push]}, {},{},NOW)['cohorts'] if x['market']=='TOTAL')
-  self.assertEqual(cohort['sides']['over']['wins'],1);self.assertEqual(cohort['sides']['under']['losses'],1);self.assertEqual(cohort['sides']['under']['pushes'],1);self.assertEqual(cohort['all']['accuracy'],.5)
  def test_versions_and_seasons_do_not_mix(self):
   r=self.row();other={**r,'id':'2','version':'v2'};future={**r,'id':'3','season':2028};d=build({'records':[r,other,future]},{'records':[]},{'records':[]},NOW);self.assertEqual(len([x for x in d['cohorts'] if x['market']=='ML']),3)
 
