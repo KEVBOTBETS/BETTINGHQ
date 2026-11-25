@@ -26,15 +26,39 @@
     };
     dialog.showModal();
   }
+  async function startFresh(cfg,scope,onRefresh){
+    const connected=()=>{if(BS.loadConfig()?.url!==cfg.url)throw Error('Connection changed. Reopen the ledger.');};
+    connected();const read=async()=>{connected();const res=await BS.pullAll(cfg,'');if(!Array.isArray(res.rows)||!res.features?.includes('undo-v2'))throw Error('Enable the safe-undo sheet upgrade before clearing wagers.');return res.rows.map(BS.canonical).filter(r=>!r.deleted);};
+    const rows=await read();if(!rows.length)throw Error('Your connected ledger already has zero active bets.');
+    if(rows.some(r=>!r.id||!r.updated_at))throw Error('Some wagers are missing a revision. Nothing cleared.');
+    const dialog=document.createElement('dialog');dialog.className='recovery-dialog';dialog.setAttribute('aria-label','Start fresh');
+    dialog.innerHTML='<h2>Start fresh</h2><p>Clear all '+rows.length+' current bets across every sport, including settled and pending bets? Your connection and starting bankroll stay the same. Each cleared bet can be restored through Ledger audit history.</p><p data-message role="status"></p><button class="btn" data-close>Cancel</button> <button class="btn primary" data-confirm>Clear '+rows.length+' bets</button>';
+    const close=dialog.querySelector('[data-close]'),confirm=dialog.querySelector('[data-confirm]'),message=dialog.querySelector('[data-message]');
+    let busy=false;close.onclick=()=>dialog.close();dialog.oncancel=e=>{if(busy)e.preventDefault();};dialog.onclose=()=>dialog.remove();
+    confirm.onclick=async()=>{if(busy||confirm.disabled)return;busy=true;confirm.disabled=true;close.disabled=true;
+      try{
+        connected();download(R.create(rows,scope,new Date().toISOString()));let sent=0;
+        for(let i=0;i<rows.length;i+=10){connected();message.textContent='Clearing reviewed wagers: '+sent+' of '+rows.length+'…';
+          const batch=rows.slice(i,i+10).map(r=>({...r,base_rev:r.updated_at,deleted:true}));
+          const res=await BS.pushRows(cfg,batch);sent+=res.applied||0;
+          if(res.skipped||res.conflicts?.length||res.applied!==batch.length)break;
+        }
+        const live=await read(),ids=new Set(live.map(r=>r.id)),remaining=rows.filter(r=>ids.has(r.id)).length;
+        message.textContent=(rows.length-remaining)+' of '+rows.length+' reviewed bets cleared. '+live.length+' active bet'+(live.length===1?'':'s')+' verified on the sheet.'+(remaining?' Reopen Start fresh to review remaining bets.':'');
+      }catch(e){message.textContent='Reset stopped. Some bets may have been cleared. Refresh the ledger before retrying. '+BS.friendlyError(e);}
+      finally{busy=false;close.disabled=false;close.textContent='Close';await onRefresh();}
+    };document.body.append(dialog);dialog.showModal();
+  }
   window.KevRecoveryView={async mount(host,state,onRefresh){
     if(!host||!state.loaded||state.sourceUrl!==BS.loadConfig()?.url)return;
-    host.innerHTML='<h2>Ledger backups & recovery</h2><div class="card"><p class="note">Up to 10 distinct snapshots are saved on this browser after successful sheet reads. Download a dated copy to keep it outside this device. Backups contain personal wager history, not connection credentials. Imports always require a preview and confirmation.</p><div class="recovery-actions"><button class="btn" data-download-current>Download current ledger</button><label class="btn">Review backup file<input type="file" accept="application/json,.json" data-backup-file hidden></label></div><p class="note" data-backup-status role="status"></p><div data-local-backups></div></div>';
+    host.innerHTML='<h2>Ledger backups & recovery</h2><div class="card"><p class="note">Up to 10 distinct snapshots are saved on this browser after successful sheet reads. Download a dated copy to keep it outside this device. Backups contain personal wager history, not connection credentials. Imports always require a preview and confirmation.</p><div class="recovery-actions"><button class="btn" data-download-current>Download current ledger</button><button class="btn" data-start-fresh>Start fresh</button><label class="btn">Review backup file<input type="file" accept="application/json,.json" data-backup-file hidden></label></div><p class="note" data-backup-status role="status"></p><div data-local-backups></div></div>';
     const status=host.querySelector('[data-backup-status]');
     try{
       const cfg=BS.loadConfig(),scope=await scopeFor(cfg);
       if(state.sourceUrl!==cfg.url||BS.loadConfig()?.url!==cfg.url)return;
       const key='kevbot.ledger-backups.v1.'+scope,backup=R.create(state.rows,scope,state.lastSync||new Date().toISOString());
       if(!host.isConnected)return;
+      host.querySelector('[data-start-fresh]').onclick=async e=>{const b=e.currentTarget;b.disabled=true;try{await startFresh(cfg,scope,onRefresh);}catch(err){status.textContent=err.message;}finally{b.disabled=false;}};
       host.querySelector('[data-download-current]').onclick=()=>download(backup);
       host.querySelector('[data-backup-file]').onchange=async e=>{try{const file=e.target.files[0];if(!file)return;if(file.size>10000000)throw Error('Backup file exceeds 10 MB.');await review(JSON.parse(await file.text()),scope,onRefresh);}catch(err){status.textContent=err.message;}finally{e.target.value='';}};
       let saved=[];try{saved=R.remember(localStorage,key,backup);status.textContent='Last verified read: '+new Date(backup.created_at).toLocaleString()+'. '+saved.length+' local backup(s).';}catch(_){status.textContent='Browser backup storage is unavailable or full. Download the current ledger to keep a copy.';}
