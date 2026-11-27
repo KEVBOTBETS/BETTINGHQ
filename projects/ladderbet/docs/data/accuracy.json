@@ -1,91 +1,91 @@
 {
  "schema": 1,
- "generated_at": "2026-11-27T22:42:34.203941+00:00",
+ "generated_at": "2026-11-27T23:39:28.277280+00:00",
  "label": "Ladder screened-option accuracy",
  "method": "Every screened option is saved before the event, whether or not you choose it. Probabilities here are de-vigged market estimates, not an independent sports model. First pre-event snapshot, frozen line and price. All model picks, including PASS/AVOID and unstaked picks. One preferred side per event/market in pick statistics; the complete priced-side audit is separate. One hypothetical unit per pick; no actual wagers are created. Missing results remain pending.",
  "overall": {
   "logged": 699,
-  "wins": 248,
-  "losses": 134,
+  "wins": 249,
+  "losses": 135,
   "pushes": 1,
   "voids": 0,
-  "settled": 383,
-  "pending": 316,
-  "win_rate": 0.6492146596858639,
-  "units": -0.209,
-  "roi": -0.0005453759791122697,
-  "brier": 0.22787
+  "settled": 385,
+  "pending": 314,
+  "win_rate": 0.6484375,
+  "units": -0.606,
+  "roi": -0.001575244155844154,
+  "brier": 0.22817
  },
  "all_calls": {
   "logged": 699,
-  "wins": 248,
-  "losses": 134,
+  "wins": 249,
+  "losses": 135,
   "pushes": 1,
   "voids": 0,
-  "settled": 383,
-  "pending": 316,
-  "win_rate": 0.6492146596858639,
-  "units": -0.209,
-  "roi": -0.0005453759791122697,
-  "brier": 0.22787
+  "settled": 385,
+  "pending": 314,
+  "win_rate": 0.6484375,
+  "units": -0.606,
+  "roi": -0.001575244155844154,
+  "brier": 0.22817
  },
  "by_tier": {
   "SCREENED": {
    "logged": 699,
-   "wins": 248,
-   "losses": 134,
+   "wins": 249,
+   "losses": 135,
    "pushes": 1,
    "voids": 0,
-   "settled": 383,
-   "pending": 316,
-   "win_rate": 0.6492146596858639,
-   "units": -0.209,
-   "roi": -0.0005453759791122697,
-   "brier": 0.22787
+   "settled": 385,
+   "pending": 314,
+   "win_rate": 0.6484375,
+   "units": -0.606,
+   "roi": -0.001575244155844154,
+   "brier": 0.22817
   }
  },
  "by_market": {
   "ML": {
    "logged": 699,
-   "wins": 248,
-   "losses": 134,
+   "wins": 249,
+   "losses": 135,
    "pushes": 1,
    "voids": 0,
-   "settled": 383,
-   "pending": 316,
-   "win_rate": 0.6492146596858639,
-   "units": -0.209,
-   "roi": -0.0005453759791122697,
-   "brier": 0.22787
+   "settled": 385,
+   "pending": 314,
+   "win_rate": 0.6484375,
+   "units": -0.606,
+   "roi": -0.001575244155844154,
+   "brier": 0.22817
   }
  },
  "by_version": {
   "2026-09-06-ev2": {
    "logged": 699,
-   "wins": 248,
-   "losses": 134,
+   "wins": 249,
+   "losses": 135,
    "pushes": 1,
    "voids": 0,
-   "settled": 383,
-   "pending": 316,
-   "win_rate": 0.6492146596858639,
-   "units": -0.209,
-   "roi": -0.0005453759791122697,
-   "brier": 0.22787
+   "settled": 385,
+   "pending": 314,
+   "win_rate": 0.6484375,
+   "units": -0.606,
+   "roi": -0.001575244155844154,
+   "brier": 0.22817
   }
  },
  "calibration": [
   {
    "bucket": "50\u201360%",
-   "n": 138,
-   "predicted": 0.58738,
-   "actual": 0.57246
+   "n": 139,
+   "predicted": 0.58747,
+   "actual": 0.57554
   },
   {
    "bucket": "60\u201370%",
-   "n": 244,
-   "predicted": 0.64142,
-   "actual": 0.69262
+   "n": 245,
+   "predicted": 0.64143,
+   "actual": 0.6898
   }
  ],
  "games": {
@@ -1028,8 +1028,13 @@
    "selected": true,
    "id": "call:nfl:401873083::ML:away",
    "captured_at": "2026-11-25T23:07:00.278652+00:00",
-   "result": "Pending",
-   "version": "2026-09-06-ev2"
+   "result": "Loss",
+   "version": "2026-09-06-ev2",
+   "units": -1,
+   "actual": null,
+   "final_home": 27.0,
+   "final_away": 5.0,
+   "graded_at": "2026-11-27T23:39:28.269202+00:00"
   },
   {
    "kind": "call",
@@ -1049,8 +1054,13 @@
    "selected": true,
    "id": "call:ncaaf:401869930::ML:home",
    "captured_at": "2026-11-25T23:07:00.278652+00:00",
-   "result": "Pending",
-   "version": "2026-09-06-ev2"
+   "result": "Win",
+   "version": "2026-09-06-ev2",
+   "units": 0.60241,
+   "actual": null,
+   "final_home": 20.0,
+   "final_away": 13.0,
+   "graded_at": "2026-11-27T23:39:28.269202+00:00"
   },
   {
    "kind": "call",
